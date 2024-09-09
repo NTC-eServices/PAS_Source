@@ -1,0 +1,463 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">#{msg['common.upload.user.management.document.header']}</h1>
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmdoc">
+
+
+					<p:panelGrid id="searchPanel" columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Employee No."></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu style="margin-left:-3%; width:80%;"
+								id="searchPermit"
+								value="#{documentManagementBean.uploaddocumentManagementDTO.upload_empNo}"
+								filter="true" filterMatchMode="contains">
+
+								<f:selectItem itemLabel="--Select Employee No.--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{documentManagementBean.empNoList}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+
+						<br></br>
+					</p:panelGrid>
+					<center>
+						<p:commandButton value="Search" update="@form"
+							actionListener="#{documentManagementBean.searchUserManagementUpload}"
+							styleClass="mainActionbtn" class="mainActionbtn"></p:commandButton>
+
+						<p:commandButton value="Clear" update="@form"
+							styleClass="mainActionbtn" class="mainActionbtn"
+							actionListener="#{documentManagementBean.clearActionUserManagement}"></p:commandButton>
+
+					</center>
+
+					<br></br>
+					<p:accordionPanel>
+						<p:growl id="msgs" showDetail="false" />
+						<p:tab title="Mandatory Documents">
+
+
+							<h:panelGrid>
+								<p:dataTable id="abc" tableStyle="width:auto" var="docMandatory"
+									value="#{documentManagementBean.mandatoryUserManagementList}"
+									rows="5" paginator="true" sortOrder="ascending"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
+
+
+
+									<p:column headerText="Code"
+										style="width: 100px;text-align:left;">
+										<h:outputText value="#{docMandatory.doc_Code}" />
+									</p:column>
+									<p:column headerText="Description"
+										style="width: 300px;text-align:left;">
+										<h:outputText value="#{docMandatory.add_Doc_Description}" />
+									</p:column>
+									<p:column headerText="File Path"
+										style="width: 300px;text-align:left;">
+
+										<h:outputText value="#{docMandatory.uploadFilePath}" />
+									</p:column>
+
+									<p:column headerText="" style="width: 75px;">
+										<p:fileUpload
+											fileUploadListener="#{documentManagementBean.saveMandatoryUserManagementUploadDocuments}"
+											mode="advanced" dragDropSupport="false" multiple="true"
+											update="@form" auto="true" showButtons="false" fileLimit="1"
+											accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsl,.xlsm" allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx|xls|xlsx|xlsm)$/" sizeLimit="15728640"
+											fileLimitMessage="Please Upload Only One Document">
+											
+
+											<f:attribute name="uploadedObj" value="#{docMandatory}" />
+
+
+										</p:fileUpload>
+
+									</p:column>
+
+									<p:column headerText="" style="width: 75px;">
+
+										<p:commandLink
+											actionListener="#{documentManagementBean.viewAction}"
+											oncomplete="window.open('/InfoNTC/showUpload')">
+											<p:graphicImage library="images" name="view.png"
+												style="width:20px;height:20px;" title="view"></p:graphicImage>
+											<f:attribute name="documentPathMandatory"
+												value="#{docMandatory}" />
+										</p:commandLink>
+									</p:column>
+								</p:dataTable>
+							</h:panelGrid>
+						</p:tab>
+					</p:accordionPanel>
+
+					<br></br>
+					<br></br>
+
+					<p:accordionPanel>
+						<p:growl id="msgse" showDetail="false" />
+						<p:tab title="Optional Documents">
+
+							<h:panelGrid>
+								<p:dataTable id="abcd" tableStyle="width:auto" var="docOptional"
+									value="#{documentManagementBean.optionalUserManagementList}"
+									rows="5" paginator="true" sortOrder="ascending"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
+
+
+
+									<p:column headerText="Code"
+										style="width: 100px;text-align:left;">
+										<h:outputText value="#{docOptional.doc_Code}" />
+									</p:column>
+									<p:column headerText="Description"
+										style="width: 300px;text-align:left;">
+										<h:outputText value="#{docOptional.add_Doc_Description}" />
+									</p:column>
+									<p:column headerText="File Path"
+										style="width: 300px;text-align:left;">
+										<h:outputText value="#{docOptional.uploadOptionalFilePath}" />
+									</p:column>
+
+									<p:column headerText="" style="width: 75px;">
+										<p:fileUpload
+											fileUploadListener="#{documentManagementBean.saveOptionalUserManagementUploadDocuments}"
+											mode="advanced" dragDropSupport="false" multiple="true"
+											update="@form" auto="true" showButtons="false" fileLimit="1"
+											accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsl,.xlsm" allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx|xls|xlsx|xlsm)$/" sizeLimit="15728640"
+											fileLimitMessage="Please Upload Only One Document">
+											
+
+											<f:attribute name="uploadedOptionalObj"
+												value="#{docOptional}" />
+
+
+										</p:fileUpload>
+									</p:column>
+
+									<p:column headerText="" style="width: 75px;">
+										<p:commandLink
+											actionListener="#{documentManagementBean.viewOptionalDocAction}"
+											oncomplete="window.open('/InfoNTC/showUpload')">
+											<p:graphicImage library="images" name="view.png"
+												style="width:20px;height:20px;" title="view"></p:graphicImage>
+											<f:attribute name="documentPathOptional"
+												value="#{docOptional}" />
+										</p:commandLink>
+
+									</p:column>
+
+
+								</p:dataTable>
+							</h:panelGrid>
+						</p:tab>
+					</p:accordionPanel>
+
+					<br></br>
+					<br></br>
+
+				</h:form>
+
+				<p:dialog styleClass="" id="AddNewDocument" global="true"
+					modal="true" header="Add New Documents" width="40%" severity="info"
+					widgetVar="viewAddDoc" closeOnEscape="true" resizable="false"
+					position="center center">
+					<p:ajax event="close" listener="#{documentManagementBean.onCancel}"
+						update="AddNewDocument" />
+					<h:form id="newdoc">
+
+
+						<p:panelGrid columns="4">
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Document Code"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="inputDocCode"
+									value="#{documentManagementBean.newDocCode}" maxlength="5"></p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Document Description"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="inputDocDes"
+									value="#{documentManagementBean.newDocDes}"></p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+
+						</p:panelGrid>
+
+						<br></br>
+						<center>
+							<p:outputLabel id="errorLabel"
+								value="#{documentManagementBean.docErrorMsg}" style="color:red;"></p:outputLabel>
+							<br></br>
+							<p:commandButton value="Save" styleClass="mainActionbtn"
+								class="mainActionbtn"
+								actionListener="#{documentManagementBean.addNewDocumentSave}"
+								update="errorLabel,inputDocCode,inputDocDes"></p:commandButton>
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								class="mainActionbtn"
+								actionListener="#{documentManagementBean.clear}"
+								update="inputDocCode,inputDocDes,errorLabel"></p:commandButton>
+						</center>
+					</h:form>
+				</p:dialog>
+
+
+				<p:dialog styleClass="" id="successSveUploadDoc" global="true"
+					modal="true" header="#{msg['um.employeeprofile.dlsuccess']}"
+					width="30%" severity="info" widgetVar="successSveUploadDoc"
+					closeOnEscape="true" resizable="false">
+					<h:form id="frmsuccessSveUploadDoc">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+								<p:outputLabel value="#{documentManagementBean.successMsg}"></p:outputLabel>
+
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								update="frmdoc" process="frmsuccessSveUploadDoc"
+								value="#{msg['um.employeeprofile.dlsuccessclose']}"
+								onclick="PF('successSveUploadDoc').hide()">
+							</p:commandButton>
+
+						</center>
+					</h:form>
+				</p:dialog>
+
+
+				<p:dialog styleClass="" id="requiredFieldUploadDoc" global="true"
+					modal="true" header="#{msg['um.employeeprofile.dlmissing']}"
+					width="30%" severity="info" widgetVar="requiredFieldUploadDoc"
+					closeOnEscape="true" resizable="false">
+					<h:form id="frmrequiredFieldUploadDoc">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+								<p:outputLabel value="#{documentManagementBean.errorMsg}"></p:outputLabel>
+
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								process="frmrequiredFieldUploadDoc"
+								value="#{msg['um.employeeprofile.dlmissingclose']}"
+								onclick="PF('requiredFieldUploadDoc').hide()">
+							</p:commandButton>
+
+						</center>
+					</h:form>
+				</p:dialog>
+
+				<p:dialog styleClass="" id="warningField" global="true" modal="true"
+					header="#{msg['um.employeeprofile.dlwarning']}" width="30%"
+					severity="info" widgetVar="warningField" closeOnEscape="true"
+					resizable="false">
+					<h:form id="frmwarningField">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+								<p:outputLabel value="#{documentManagementBean.warningMsg}"></p:outputLabel>
+
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								process="frmwarningField"
+								value="#{msg['um.employeeprofile.dlmissingclose']}"
+								onclick="PF('warningField').hide()">
+							</p:commandButton>
+
+						</center>
+					</h:form>
+				</p:dialog>
+			</div>
+		</div>
+
+
+	</ui:define>
+</ui:composition>

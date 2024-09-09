@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2021-05-25T09:40:25 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BusOwnerControlSheet_Sub5" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6c550af-7e8a-4e28-aa1d-b326fa54c8ec">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW_DATAADAPTERUAT.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="P_trip" class="java.lang.String"/>
+	<parameter name="P_ref_no" class="java.lang.String"/>
+	<parameter name="P_group_no" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select start_time_slot,assigned_bus_no  from public.nt_m_timetable_generator_det where generator_ref_no= $P{P_ref_no} 
+and group_no= $P{P_group_no}     and trip_type= $P{P_trip}  and is_fixed_time='Y']]>
+	</queryString>
+	<field name="start_time_slot" class="java.lang.String"/>
+	<field name="assigned_bus_no" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="550" height="20" uuid="42fc1c70-6028-44b5-833c-df4135d90e23"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="550" height="20" isPrintWhenDetailOverflows="true" uuid="a2d51834-b6d9-4f63-9d4a-446b1a58dfeb"/>
+					<textElement markup="styled"/>
+					<textFieldExpression><![CDATA["<style forecolor='#006600'>"+$F{start_time_slot}+"</style>" +"  assign for  " +"<style forecolor='#006600'>"+$F{assigned_bus_no}+"</style>"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

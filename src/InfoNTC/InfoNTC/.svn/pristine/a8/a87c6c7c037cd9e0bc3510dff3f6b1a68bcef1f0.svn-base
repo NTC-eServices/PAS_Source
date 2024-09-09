@@ -1,0 +1,649 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-input {
+	margin-top: -20px;
+}
+</style>
+
+
+		<h:form id="form">
+			<div class="mainDiv">
+				<h1
+					style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+					class="common_form_header">SIM Registration Voucher Approval</h1>
+				<div style="width: 95%;" class="subDiv">
+
+
+					<p:panel id="panelOne">
+
+						<p:panelGrid columns="4" style="margin-left:115px"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+							layout="grid">
+
+
+							<p:panelGrid>
+								<p:outputLabel value="SIM Reg. No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="SIMRegNoId" style="width:85%"
+									value="#{simRegistrationVoucherApproval.simregDTO.simRegNo}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+
+									<f:selectItem itemLabel="--Select SIM Reg. No.--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{simRegistrationVoucherApproval.simRegNoList}" var="t"
+										itemLabel="#{t.simRegNo}" itemValue="#{t.simRegNo}" />
+
+									<p:ajax update="@form"
+										listener="#{simRegistrationVoucherApproval.filterDataBySimReg}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="SIM No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+
+								<p:selectOneMenu id="simNoID" style="width:85%"
+									value="#{simRegistrationVoucherApproval.simregDTO.simNo}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+
+									<f:selectItem itemLabel="-- Select SIM  No.--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{simRegistrationVoucherApproval.simRegNoList}" var="d"
+										itemLabel="#{d.simNo}" itemValue="#{d.simNo}" />
+									<p:ajax update="@form"
+										listener="#{simRegistrationVoucherApproval.filterDataBySimNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="SIM Renewal No. "></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="simRenewId" style="width:85%"
+									value="#{driverConductorVoucherApproval.driverConducPaymentApprovalDTO.nic}"
+									disabled="#{driverConductorVoucherApproval.disableIdNoList}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+
+									<f:selectItem itemLabel="--Select SIM Renewal No. --"
+										itemValue="" noSelectionOption="true" />
+									<f:selectItems
+										value="#{driverConductorVoucherApproval.idNoList}" var="d"
+										itemLabel="#{d.nic}" itemValue="#{d.nic}" />
+									<p:ajax update="@form"
+										listener="#{simRegistrationVoucherApproval.filterDataBySimNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Bus No."></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+
+								<p:selectOneMenu id="busNoId" style="width:85%"
+									value="#{simRegistrationVoucherApproval.simregDTO.emiBusNo}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+
+									<f:selectItem itemLabel="--Select Bus No. --" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{simRegistrationVoucherApproval.simRegNoList}" var="d"
+										itemLabel="#{d.emiBusNo}" itemValue="#{d.emiBusNo}" />
+									<p:ajax update="@form"
+										listener="#{simRegistrationVoucherApproval.filterDataByBusNo}" />
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Permit No."></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="permitNoId" style="width:85%"
+									value="#{simRegistrationVoucherApproval.simregDTO.permitNo}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+
+									<f:selectItem itemLabel="--Select Permit No.--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{simRegistrationVoucherApproval.simRegNoList}" var="r"
+										itemLabel="#{r.permitNo}" itemValue="#{r.permitNo}" />
+
+									<p:ajax update="@form"
+										listener="#{simRegistrationVoucherApproval.filterDataPermitNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Voucher No."></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="voucherNoId" style="width:85%"
+									value="#{simRegistrationVoucherApproval.simregDTO.vouNo}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+
+									<f:selectItem itemLabel="--Select Voucher No.--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{simRegistrationVoucherApproval.simRegNoList}" var="r"
+										itemLabel="#{r.vouNo}" itemValue="#{r.vouNo}" />
+
+									<p:ajax update="@form"
+										listener="#{simRegistrationVoucherApproval.filterDataByVoucher}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+						</p:panelGrid>
+						<br />
+						<center>
+
+
+							<p:commandButton value="Search" styleClass="mainActionbtn"
+								id="cmdBtnSearch"
+								action="#{simRegistrationVoucherApproval.search}"
+								process="@form"
+								update="frmError,dataTable,panelOne,panelTwo,panelThree,frmAlert" />
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								action="#{simRegistrationVoucherApproval.clearSearchingData}"
+								update="panelOne" />
+
+						</center>
+					</p:panel>
+
+
+					<br />
+
+					<p:panel id="panelTwo">
+
+						<p:dataTable id="dataTable" var="p" rows="5" paginator="true"
+							value="#{simRegistrationVoucherApproval.dataGridList}"
+							selection="#{simRegistrationVoucherApproval.simSelectDTO}"
+							rowKey="#{p.vouNo}" selectionMode="single"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,20" resizableColumns="false"
+							liveResize="true" tableStyle="width:100%;font-size:12px;"
+							rowIndexVar="index" styleClass="myTable"
+							emptyMessage="No Records Available." widgetVar="hello">
+
+							<p:ajax event="rowSelect"
+								listener="#{simRegistrationVoucherApproval.selectRow}"
+								process="@form" update="@form" />
+
+
+
+
+							<p:column visible="false">
+
+								<h:outputText value="#{p.permitNo}" />
+							</p:column>
+
+							<p:column visible="false">
+
+
+							</p:column>
+
+							<p:column headerText="Voucher No." sortBy="#{p.vouNo}"
+								style="text-align:left;width:12%;">
+								<h:outputText value="#{p.vouNo}" />
+							</p:column>
+
+							<p:column headerText="SIM No." style="text-align:left;width:12%;">
+								<h:outputText value="#{p.simNo}" />
+							</p:column>
+
+							<p:column headerText="SIM Reg No. "
+								style="text-align:left;width:15%;">
+								<h:outputText value="#{p.simRegNo}" />
+							</p:column>
+
+
+							<p:column headerText="SIM Renewal No." rendered="false"
+								style="text-align:left;width:12%;">
+								<h:outputText value="#{p.simRegNo}" />
+							</p:column>
+							<p:column headerText="Permit No."
+								style="text-align:left;width:12%;">
+								<h:outputText value="#{p.permitNo}" />
+							</p:column>
+
+							<p:column headerText="Receipt No."
+								style="text-align:left;width:12%;">
+								<h:outputText value="#{p.receiptNo}" />
+							</p:column>
+
+							<p:column headerText="Status"
+								style="text-align:center;width:10%;">
+								<h:outputText value="#{p.emiStatus}" />
+							</p:column>
+
+							<p:column headerText="Date" style="text-align:left;width:10%">
+								<h:outputText value="#{p.createdDateString}" />
+							</p:column>
+
+							<p:column headerText="Total Amount"
+								style="text-align:right;width:12%;">
+								<h:outputText value="#{p.vouTotalAmount}">
+									<f:convertNumber pattern="##,###.00" />
+								</h:outputText>
+							</p:column>
+							<p:column width="5%">
+
+
+								<p:commandLink
+									action="#{simRegistrationVoucherApproval.viewAction()}"
+									update="@form">
+
+									<f:setPropertyActionListener value="#{p}"
+										target="#{simRegistrationVoucherApproval.viewSelect}" />
+
+									<p:graphicImage library="images" name="view1.png"
+										style="width:24px;height:24px;" title="view"></p:graphicImage>
+								</p:commandLink>
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+
+					<br />
+
+					<p:panel>
+
+						<p:outputLabel style="margin-left:10%" value="Reject Reason"></p:outputLabel>
+						<p:inputTextarea style="width:50%; margin-left:5%; height:30px"
+							value="#{simRegistrationVoucherApproval.rejectReason}"
+							id="reject" rows="5" cols="30" maxlength="100" autoResize="false">
+						</p:inputTextarea>
+						<p:outputLabel id="display" style="margin-left:24%" />
+					</p:panel>
+
+					<p:panel id="panelThree">
+
+						<center>
+
+							<p:commandButton value="Approve" styleClass="mainActionbtn"
+								id="btnApprove"
+								action="#{simRegistrationVoucherApproval.approvePayment}"
+								disabled="#{simRegistrationVoucherApproval.disableApprovebtn}"
+								update="frmsuccess,frmError,dataTable,reject" />
+
+							<p:commandButton value="Reject" styleClass="mainActionbtn"
+								id="btnReject" action="#{simRegistrationVoucherApproval.reject}"
+								disabled="#{simRegistrationVoucherApproval.disableRejectbtn}"
+								update="frmsuccess,frmError,dataTable,reject" />
+
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								disabled="#{simRegistrationVoucherApprovall.disableClear}"
+								action="#{simRegistrationVoucherApproval.clearTwo}"
+								update="panelThree,panelTwo,panelOne,reject" />
+
+						</center>
+
+					</p:panel>
+				</div>
+			</div>
+		</h:form>
+
+
+
+		<p:dialog header=" SIM Registration Details "
+			widgetVar="dialogForSimReg" modal="true" id="dialogSimReg"
+			resizable="false" height="100%" width="80%">
+
+
+			<h:form>
+
+
+				<p:panel>
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4,"
+						layout="grid">
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Service Category"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{simRegistrationVoucherApproval.viewSelect.serviceCategory}"
+								style="width:66%" id="transactionTypevoucherPayment"
+								readonly="true" />
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:outputLabel value="EMI No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:inputText
+							value="#{simRegistrationVoucherApproval.viewSelect.emiNo}"
+							readonly="true" style="width:66%" />
+
+
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Receivers Name"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText
+								value="#{simRegistrationVoucherApproval.viewSelect.receiversName}"
+								readonly="true" style="width:66%" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="NIC No."></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText
+								value="#{simRegistrationVoucherApproval.viewSelect.nicNo}"
+								readonly="true" style="width:66%" />
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Issue Date"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText
+								value="#{simRegistrationVoucherApproval.viewSelect.issueDateN}"
+								readonly="true" style="width:66%" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Valid Date"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText
+								value="#{simRegistrationVoucherApproval.viewSelect.validN}"
+								readonly="true" style="width:66%" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+
+				</p:panel>
+
+
+				<p:panel id="panelGridViewA" header="EMI Details"
+					style="border:1px solid #b1cbef;">
+					<p:dataTable id="dtemiPanel" var="emiDet"
+						value="#{simRegistrationVoucherApproval.emiDetViewList}"
+						emptyMessage="No EMI details" paginator="true" rows="5"
+						rowsPerPageTemplate="5,6"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						reflow="true">
+
+						<p:column headerText="Bus No." width="30%" style="text-align:left">
+							<h:outputLabel value="#{emiDet.emiBusNo}" />
+						</p:column>
+						<p:column headerText="Status" style="text-align:left">
+							<h:outputLabel value="#{emiDet.emiStatus}" style="width:35%" />
+						</p:column>
+						<p:column headerText="Transaction Date" style="text-align:left">
+							<h:outputLabel value="#{emiDet.emiReIssueDate}" style="width:35%" />
+
+
+						</p:column>
+
+
+					</p:dataTable>
+
+
+
+				</p:panel>
+			</h:form>
+
+
+		</p:dialog>
+
+
+
+
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="#{simRegistrationVoucherApproval.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="#{simRegistrationVoucherApproval.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Alert" width="30%" severity="info" widgetVar="alertMSG"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAlert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="#{simRegistrationVoucherApproval.alertMSG}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmAlert" onclick="PF('alertMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+
+
+
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Permit Suspend Letter" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="15047587-d7e6-4a30-a45f-955b7197cea4">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="-11" width="280" height="21" uuid="a759e0ab-dd04-45a9-82cf-4477eeabf72c"/>
+				<textElement>
+					<font fontName="IskoolaPotha" size="11"/>
+				</textElement>
+				<text><![CDATA[................................................................................. මහතා / මිය,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="-20" width="220" height="18" uuid="9a74fcdd-e69b-489d-a789-9fb383d4ae4f"/>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="-23" width="571" height="21" uuid="61a06435-c972-43ec-a3fc-df29884cf6f4"/>
+				<textElement textAlignment="Center">
+					<font fontName="IskoolaPotha" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[NTC ............................ මගීසේවා අවසර පත්‍රයේ ගමන් වාර අත්හිටුවීම සම්බන්ධයෙනි,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="-23" width="100" height="10" uuid="a306101c-e286-443d-af65-fc594faba6e4"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="-53" width="550" height="30" uuid="9510772f-78b2-4889-9ee4-b8da864315c9"/>
+				<textElement>
+					<font fontName="IskoolaPotha" size="10"/>
+				</textElement>
+				<text><![CDATA[ඔබට අයත් ලියාපදිංචි ............................ දරණ බස් රථය සඳහා NTC ............................ මගීසේවා අවසර පත්‍රය යටතේ ............................ සිට ............................ මාර්ගයේ ධාවනය සඳහා මගීසේවා අවසර පත්‍රයක් ජාතික ගමනාගමන කොමිෂන් සභාව මගින් නිකුත් කර ඇත.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="-17" width="548" height="30" uuid="d6386166-e946-4daf-bc49-032c1188a67f"/>
+				<textElement>
+					<font fontName="IskoolaPotha" size="10"/>
+				</textElement>
+				<text><![CDATA[............................ දින ජාතික ගමනාගමන කොමිෂන් සභා ජංගම පරීක්ෂණ නිළධාරීන් විසින් සිදු කරන ලද පරීක්ෂණයේදී ඔබ බස්රථයේ සේවක කණ්ඩායම් විසින් පහත සඳහන් කොන්දේසි උල්ලංඝණය කර ඇති බවට වාර්තා කර ඇත.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="13" width="480" height="24" uuid="028f7c2d-066d-4d44-a812-a67eff43b133"/>
+				<textElement>
+					<font fontName="IskoolaPotha"/>
+				</textElement>
+				<text><![CDATA[1. .........................................................................................................................................................................
+2. .........................................................................................................................................................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="61" y="12" width="420" height="10" uuid="a96824a7-9cec-4f43-a952-e2f52421418a"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="61" y="23" width="420" height="10" uuid="6aa975ef-311a-47d8-a4bc-2454af35148c"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="93" y="-53" width="70" height="10" uuid="23c73cd2-422c-4957-87a4-bf6e6b914cd1"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="-53" width="70" height="8" uuid="2a6f5cd8-9be6-4bb5-8c2d-5762813ad4d9"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="-54" width="70" height="10" uuid="a2d72da4-4e08-42cc-bf56-abe7659e0339"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="-43" width="70" height="10" uuid="1ef99813-6a7a-47d5-9701-96e8c11441c9"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="-18" width="70" height="10" uuid="443301fc-0a24-4239-b6c2-90ba42b3991e"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="314" y="43" width="70" height="19" uuid="14642a8e-f88a-4f4a-b10a-ae7aeb82c837"/>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="-93" width="552" height="40" uuid="2dc5b9b0-8d2a-4cbd-902e-db2694ddf612"/>
+				<textElement>
+					<font fontName="IskoolaPotha" size="10"/>
+				</textElement>
+				<text><![CDATA[එම කොන්දේසි උල්ලංඝණය සිව්වන වතාවටත් සිදුකර ඇති බැවින් ඔබගේ NTC ............................ අංක දරණ මගීසේවා අවසර පත්‍රයේ ගමන් වාර ............................ සිට ............................ දින දක්වා ( දින .................. ක් ) ජාතික ගමනාගමන කොමිෂන් සභාවේ අධ්‍යක්ෂ මණ්ඩලය විසින් ගන්නා ලද තීරණයකට අනුව අත්හිටුවා ඇති බව කාරුණිකව දන්වා සිටිමි.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="-82" width="70" height="10" uuid="7f2aa635-e481-4715-a563-83356665decb"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="-83" width="70" height="10" uuid="c22a1e03-8168-488e-b1c2-e4e4380717e1"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="-84" width="40" height="12" uuid="793e15f7-a99a-4372-b1e9-10b969e54055"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="160" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="-93" width="552" height="40" uuid="85d83560-d9cf-4768-ba36-e3817f60db89"/>
+				<textElement>
+					<font fontName="IskoolaPotha" size="10"/>
+				</textElement>
+				<text><![CDATA[ ..............................................
+සහකාර අධ්‍යක්ෂ ( තත්ත්ව ආරක්ෂණ හා බාහිර සම්බන්ධතා )
+ජාතික ගමනාගමන කොමිෂන් සභාව]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="-43" width="552" height="20" uuid="412cb204-4f8b-415a-ace6-c0d56d30f9af"/>
+				<textElement>
+					<font fontName="IskoolaPotha"/>
+				</textElement>
+				<text><![CDATA[පිටපත - :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="-23" width="290" height="130" uuid="d880cb9e-e3b8-491b-a3fa-a89e70fa0f3c"/>
+				<textElement>
+					<font fontName="IskoolaPotha"/>
+				</textElement>
+				<text><![CDATA[(1) අධ්‍යක්ෂ ( ධාවන සහ සේවා අධීක්ෂණ )	-
+
+
+
+
+(2) කළමණාකරු				-
+     (බැස්ටියන් මාවත කාර්යාලය )    
+
+(3) ඒකක ප්‍රධානී				-
+      ජංගම පරීක්ෂණ ඒකකය]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="-95" width="120" height="10" uuid="0920b9dd-810e-4eb4-9835-9dfc0d03e1ed"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="253" y="-23" width="308" height="110" uuid="9970c518-995d-4cc6-a546-4d321bf865c1"/>
+				<textElement>
+					<font fontName="IskoolaPotha"/>
+				</textElement>
+				<text><![CDATA[අංක NTC ............................ දරණ මගීසේවා අවසර පත්‍රය ............................ දින සිට ............................ දක්වා තාවකාලිකව ගමන් වාර අත්හිටුවීමට අධයක්ෂ මණ්ඩල තීරණයකට යටත්ව අනුමැතිය ලැබී ඇත. අවශ‍ය ක්‍රියාමාර්ග ගැනීම සඳහා ඔබ වෙත යොමු කරමි.
+
+ඔබගේ දැන ගැනීමට සහ අවශ‍ය ක්‍රියාමාර්ග ගැනීම සඳහා
+
+
+දැ.ගැ.පි]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="295" y="-24" width="70" height="10" uuid="ff290aab-8ae0-4854-8156-1f1e5dc1920c"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="481" y="30" width="70" height="10" uuid="e8e1b694-e20f-41a7-9802-d6fc8d5ce979"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="-13" width="70" height="10" uuid="d6ea0576-0682-4396-9c91-a0c41df91560"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

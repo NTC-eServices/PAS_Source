@@ -1,0 +1,521 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 4em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.viewActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 180px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.viewActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+		<div class="mainDiv">
+
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Assign User Roles</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmManageUser">
+					<br></br>
+					<p:panel id="details">
+						<p:panelGrid columns="5"
+							columnClasses="ui-grid-col-3,ui-grid-col-4,ui-grid-col-3,ui-grid-col-4,ui-grid-col-1"
+							layout="grid">
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['emp.user_id']}"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText readonly="true" style="width:78%"
+									value="#{assignUserRolesBackingBean.userId}">
+								</p:inputText>
+
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Username"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="username"
+									value="#{assignUserRolesBackingBean.userId}" readonly="true">
+								</p:inputText>
+
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Role"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+
+								<p:selectOneMenu id="txtRole" style="width:80%;"
+									value="#{assignUserRolesBackingBean.strSelectedRoleCode}"
+									effect="fold"
+									disabled="#{assignUserRolesBackingBean.disableRoleCodeField}">
+									<p:ajax listener="#{assignUserRolesBackingBean.onroleChange}" />
+									<f:selectItem itemLabel="-- All --" itemValue="" />
+									<f:selectItems value="#{assignUserRolesBackingBean.roleList}"
+										var="roleList" itemValue="#{roleList.roleCode}"
+										itemLabel="#{roleList.roleName}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Start Date"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:calendar id="inptAppDate"
+									value="#{assignUserRolesBackingBean.manageUserDTO.startDateVal}"
+									style="width:25%;height:18px;" maxdate="today" navigator="true"
+									locale="en_US" showOn="button" pattern="dd/MM/yyyy"
+									placeholder="DD/MM/YYYY" yearRange="c-100:c+100"
+									readonlyInput="true"
+									disabled="#{assignUserRolesBackingBean.disableStartDateField}"></p:calendar>
+
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Status"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="console" style="width:125px"
+									value="#{assignUserRolesBackingBean.strSelectedStatus}">
+									<f:selectItem itemLabel="-- All --" itemValue="" />
+									<f:selectItem itemLabel="Active" itemValue="A" />
+									<f:selectItem itemLabel="Inactive" itemValue="I" />
+									<f:selectItem itemLabel="Temporary" itemValue="T" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="End Date"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:calendar id="inpenddate"
+									value="#{assignUserRolesBackingBean.manageUserDTO.endDateVal}"
+									style="width:25%;height:18px;" navigator="true" locale="en_US"
+									showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+									yearRange="c-100:c+100" readonlyInput="true"
+									disabled="#{assignUserRolesBackingBean.disableEndDateField}"
+									mindate=""></p:calendar>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+
+
+							</p:panelGrid>
+						</p:panelGrid>
+					</p:panel>
+					<p:panel>
+						<center>
+
+
+							<p:panelGrid>
+								<p:row>
+									<center>
+
+										<p:column>
+											<p:column>
+												<p:commandButton id="cmdbtnAdd" value="Save"
+													class="mainActionbtn" ajax="false"
+													action="#{assignUserRolesBackingBean.saveAsssignUserRoles}"
+													update="rolesTable,frmManageUser"
+													process="rolesTable,frmManageUser"
+													rendered="#{assignUserRolesBackingBean.showbtnAddBeforeEdit}">
+												</p:commandButton>
+												<p:commandButton id="cmdbtnAddAfterEdit" value="Save"
+													class="mainActionbtn" ajax="false"
+													action="#{assignUserRolesBackingBean.editDb}"
+													update="frmManageUser"
+													rendered="#{assignUserRolesBackingBean.showbtnAddAfterEdit}">
+												</p:commandButton>
+												<p:commandButton value="Clear" styleClass="mainActionbtn"
+													id="btnClearFields" update="frmManageUser"
+													action="#{assignUserRolesBackingBean.clearDetails}"></p:commandButton>
+											</p:column>
+
+										</p:column>
+									</center>
+
+								</p:row>
+							</p:panelGrid>
+						</center>
+					</p:panel>
+					<br></br>
+					<p:panel>
+
+						<p:growl id="msgs" showDetail="true" />
+
+						<p:dataTable id="rolesTable" var="e" paginator="true" rows="10"
+							value="#{assignUserRolesBackingBean.empolyeeDetails}"
+							rowKey="#{e.roleCode}" style="width:90%"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,20" resizableColumns="false"
+							liveResize="false" rowIndexVar="index"
+							emptyMessage="No Roles are available">
+
+
+
+							<p:column headerText="Role" style="text-align:left;">
+								<h:outputText value="#{e.roleCode}" />
+							</p:column>
+
+							<p:column headerText="Start Date" style="text-align:left;">
+								<h:outputText value="#{e.startDate}" />
+							</p:column>
+
+							<p:column headerText="End Date" style="text-align:left;">
+								<h:outputText value="#{e.endDate}" />
+							</p:column>
+
+							<p:column headerText="Status" style="text-align:left;">
+								<h:outputText value="#{e.tableStatus}" />
+							</p:column>
+
+							<p:column style="width:7%">
+								<p:commandLink id="cmdbtnView"
+									action="#{assignUserRolesBackingBean.showFuncDetails}"
+									update="frmManageUser" ajax="false">
+									<f:setPropertyActionListener value="#{e}"
+										target="#{assignUserRolesBackingBean.strSelectedRoleSeq}" />
+									<p:graphicImage library="images" name="view1.png"
+										style="width:24px;height:24px;" title="view functions"></p:graphicImage>
+								</p:commandLink>
+							</p:column>
+							<p:column style="width:7%">
+								<h:commandLink
+									action="#{assignUserRolesBackingBean.showEditDetails}"
+									update="details">
+									<f:setPropertyActionListener value="#{e}"
+										target="#{assignUserRolesBackingBean.strSelectedRoleSeq}" />
+									<p:graphicImage library="images" name="edit.png"
+										style="width:24px;height:24px;" title="edit"></p:graphicImage>
+								</h:commandLink>
+							</p:column>
+
+						</p:dataTable>
+						<br></br>
+						<br></br>
+						<p:dataTable var="f" paginator="true" rows="10" id="functabel"
+							style="width:90%"
+							value="#{assignUserRolesBackingBean.functiondetails}"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,20" resizableColumns="false"
+							liveResize="false" rowIndexVar="index"
+							emptyMessage="No Functions are available for selected role">
+							<p:column headerText="Role" style="text-align:left;width:5%">
+								<h:outputText style="text-align:left;"
+									value="#{assignUserRolesBackingBean.selectRole}" />
+							</p:column>
+							<p:column headerText="Function ID"
+								style="text-align:left;width:8%">
+								<h:outputText style="text-align:left;" value="#{f.code}" />
+							</p:column>
+							<p:column headerText="Function Name"
+								style="text-align:left;width:15%">
+								<h:outputText style="text-align:left;" value="#{f.description}" />
+							</p:column>
+
+						</p:dataTable>
+
+						<center>
+							<p:panelGrid>
+								<p:row>
+									<center>
+
+										<p:column>
+											<p:column>
+												<p:commandButton id="cmdbtnBack" value="Back"
+													class="mainActionbtn" process="@all"
+													action="#{assignUserRolesBackingBean.backMethod}"
+													update="frmManageUser"></p:commandButton>
+
+												<p:commandButton value="Clear" styleClass="mainActionbtn"
+													id="btnClearAll" update="frmManageUser"
+													action="#{assignUserRolesBackingBean.clearAllDetails}"></p:commandButton>
+											</p:column>
+
+										</p:column>
+									</center>
+
+								</p:row>
+							</p:panelGrid>
+						</center>
+
+					</p:panel>
+
+					<br />
+				</h:form>
+
+			</div>
+		</div>
+
+		<p:dialog styleClass="" id="SaveSuccess" global="true" modal="true"
+			header="Success" width="30%" severity="info" widgetVar="SaveSuccess"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{assignUserRolesBackingBean.sucessMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSve" value="OK"
+						onclick="PF('SaveSuccess').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="errorMsge" global="true" modal="true"
+			header="Error." width="30%" severity="info" widgetVar="errorMsge"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmerrorMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{assignUserRolesBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmerrorMsge"
+						value="#{msg['um.employeeprofile.dlcommerrorclose']}"
+						onclick="PF('errorMsge').hide()" update="@all">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{assignUserRolesBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="warningrMsge" global="true" modal="true"
+			header="Warning." width="30%" severity="info"
+			widgetVar="warningrMsge" closeOnEscape="true" resizable="false">
+			<h:form id="frmwarningMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{assignUserRolesBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmerrorMsge"
+						value="#{msg['um.employeeprofile.dlcommerrorclose']}"
+						onclick="PF('errorMsge').hide()" update="@all">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

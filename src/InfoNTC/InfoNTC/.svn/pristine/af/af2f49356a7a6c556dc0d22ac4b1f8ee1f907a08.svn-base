@@ -1,0 +1,991 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+#frmviewRouteMaintenance:j_idt81 {
+	background-color: blue !important;
+	font-weight: bold;
+}
+
+.old {
+	background-color: #ffb3b3 !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Setup Schedule for Flying Squad
+				Officers</h1>
+
+			<div style="width: 100%;" class="subDiv">
+				<h:form id="frmSquad">
+					<br></br>
+					<div style="width: 100%;">
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Year" for="year"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="year"
+									value="#{flyingSquadScheduleBackingBean.selectedyearn}"
+									effect="fold" editable="true">
+									<f:selectItems
+										value="#{flyingSquadScheduleBackingBean.yearList}" />
+								</p:selectOneMenu>
+
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<h:commandButton id="cmdbtnsearch" value="Search"
+									update="@frmSquadGrid" style="width:100px" ajax="false"
+									styleClass="mainLinkButton"
+									actionListener="#{flyingSquadScheduleBackingBean.search}">
+								</h:commandButton>
+
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Month" for="month"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="month"
+									value="#{flyingSquadScheduleBackingBean.selectedMonthn}"
+									effect="fold" style="width:54.5%">
+									<f:selectItem itemLabel="JANUARY" itemValue="0" />
+									<f:selectItem itemLabel="FEBRUARY" itemValue="1" />
+									<f:selectItem itemLabel="MARCH" itemValue="2" />
+									<f:selectItem itemLabel="APRIL" itemValue="3" />
+									<f:selectItem itemLabel="MAY" itemValue="4" />
+									<f:selectItem itemLabel="JUNE" itemValue="5" />
+									<f:selectItem itemLabel="JULY" itemValue="6" />
+									<f:selectItem itemLabel="AUGUST" itemValue="7" />
+									<f:selectItem itemLabel="SEPTEMBER" itemValue="8" />
+									<f:selectItem itemLabel="OCTOBER" itemValue="9" />
+									<f:selectItem itemLabel="NOVEMBER" itemValue="10" />
+									<f:selectItem itemLabel="DECEMBER" itemValue="11" />
+								</p:selectOneMenu>
+
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<h:commandButton id="cmdbtnCancel" value="Clear"
+									update="@frmSquadGrid,@frmSquad" style="width:100px"
+									ajax="false" styleClass="mainLinkButton"
+									actionListener="#{flyingSquadScheduleBackingBean.clear}">
+								</h:commandButton>
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+						<br></br>
+					</div>
+				</h:form>
+				<h:form id="frmSquadGrid">
+					<p:dataTable id="schedule" var="det"
+						value="#{flyingSquadScheduleBackingBean.detailList}"
+						editable="true" editMode="cell" widgetVar="cellCars">
+
+						<p:ajax event="cellEdit"
+							listener="#{flyingSquadScheduleBackingBean.onCellEdit}" />
+
+						<p:column headerText="Group Name" style="width:70px;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.groupDes}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="modelInput" value="#{det.groupDes}"
+										style="width:100px;" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="1"
+							styleClass="#{flyingSquadScheduleBackingBean.day1n ? 'old' : null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day1}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day1}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="2"
+							styleClass="#{flyingSquadScheduleBackingBean.day2n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day2}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day2}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="3"
+							styleClass="#{flyingSquadScheduleBackingBean.day3n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day3}" />
+								</f:facet>
+								<f:facet name="input">
+
+									<h:selectOneMenu value="#{det.day3}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="4"
+							styleClass="#{flyingSquadScheduleBackingBean.day4n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day4}" />
+								</f:facet>
+								<f:facet name="input">
+
+									<h:selectOneMenu value="#{det.day4}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="5"
+							styleClass="#{flyingSquadScheduleBackingBean.day5n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day5}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day5}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="6"
+							styleClass="#{flyingSquadScheduleBackingBean.day6n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day6}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day6}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="7"
+							styleClass="#{flyingSquadScheduleBackingBean.day7n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day7}" />
+								</f:facet>
+								<f:facet name="input">
+
+									<h:selectOneMenu value="#{det.day7}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="8"
+							styleClass="#{flyingSquadScheduleBackingBean.day8n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day8}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day8}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="9"
+							styleClass="#{flyingSquadScheduleBackingBean.day9n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day9}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day9}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="10"
+							styleClass="#{flyingSquadScheduleBackingBean.day10n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day10}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day10}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="11"
+							styleClass="#{flyingSquadScheduleBackingBean.day11n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day11}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day11}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="12"
+							styleClass="#{flyingSquadScheduleBackingBean.day12n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day12}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day12}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="13"
+							styleClass="#{flyingSquadScheduleBackingBean.day13n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day13}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day13}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="14"
+							styleClass="#{flyingSquadScheduleBackingBean.day14n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day14}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day14}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="15"
+							styleClass="#{flyingSquadScheduleBackingBean.day15n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day15}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day15}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="16"
+							styleClass="#{flyingSquadScheduleBackingBean.day16n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day16}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day16}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="17"
+							styleClass="#{flyingSquadScheduleBackingBean.day17n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day17}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day17}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="18"
+							styleClass="#{flyingSquadScheduleBackingBean.day18n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day18}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day18}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="19"
+							styleClass="#{flyingSquadScheduleBackingBean.day19n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day19}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day19}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="20"
+							styleClass="#{flyingSquadScheduleBackingBean.day20n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day20}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day20}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="21"
+							styleClass="#{flyingSquadScheduleBackingBean.day21n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day21}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day21}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="22"
+							styleClass="#{flyingSquadScheduleBackingBean.day22n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day22}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day22}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="23"
+							styleClass="#{flyingSquadScheduleBackingBean.day23n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day23}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day23}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="24"
+							styleClass="#{flyingSquadScheduleBackingBean.day24n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day24}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day24}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="25"
+							styleClass="#{flyingSquadScheduleBackingBean.day25n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day25}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day25}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="26"
+							styleClass="#{flyingSquadScheduleBackingBean.day26n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day26}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day26}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="27"
+							styleClass="#{flyingSquadScheduleBackingBean.day27n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day27}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day27}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="28"
+							styleClass="#{flyingSquadScheduleBackingBean.day28n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day28}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day28}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="29"
+							rendered="#{flyingSquadScheduleBackingBean.allowday29}"
+							styleClass="#{flyingSquadScheduleBackingBean.day29n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day29}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day29}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="30"
+							rendered="#{flyingSquadScheduleBackingBean.allowday30}"
+							styleClass="#{flyingSquadScheduleBackingBean.day30n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day30}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day30}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="31"
+							rendered="#{flyingSquadScheduleBackingBean.allowday31}"
+							styleClass="#{flyingSquadScheduleBackingBean.day31n ? 'old' :null}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{det.day31}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{det.day31}" style="width:100%">
+										<f:selectItem itemLabel="--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{flyingSquadScheduleBackingBean.rosterList}"
+											var="roster" itemLabel="#{roster.rostercd}"
+											itemValue="#{roster.rostercd}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+					</p:dataTable>
+
+					<p:panel>
+						<center>
+							<p:panelGrid columns="6">
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+
+								<p:panelGrid>
+									<h:commandButton id="cmdbtnAdd" value="Save"
+										update="grouptable" style="width:100px" ajax="false"
+										styleClass="mainLinkButton"
+										action="#{flyingSquadScheduleBackingBean.save}">
+									</h:commandButton>
+								</p:panelGrid>
+								<p:panelGrid>
+									<h:commandButton id="cmdbtnCancel" value="Clear"
+										update="@frmSquadGrid" style="width:100px" ajax="false"
+										styleClass="mainLinkButton"
+										actionListener="#{flyingSquadScheduleBackingBean.clean}">
+									</h:commandButton>
+
+								</p:panelGrid>
+
+
+							</p:panelGrid>
+						</center>
+						<br></br>
+
+						<p:dataTable var="servivetable" paginator="true" update="@form"
+							rows="7" id="dtservice"
+							value="#{flyingSquadScheduleBackingBean.serviceList}"
+							style="width:60%" resizableColumns="false" liveResize="false"
+							rowIndexVar="index">
+							<p:column headerText="" style="text-align:center;width:8%">
+								<f:facet name=" header">
+									<h:outputText value="index" />
+								</f:facet>
+								<h:outputText value="#{index + 1}"></h:outputText>
+							</p:column>
+							<p:column headerText="Service Code"
+								style="text-align:left;width:10%">
+								<h:outputText style="text-align:left;"
+									value="#{servivetable.groupCd}" />
+							</p:column>
+							<p:column headerText="Service Description"
+								style="text-align:left;width:30%">
+								<h:outputText style="text-align:left;"
+									value="#{servivetable.groupName}" />
+							</p:column>
+
+						</p:dataTable>
+
+					</p:panel>
+
+
+				</h:form>
+			</div>
+		</div>
+
+
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{assignAccessPermissionsBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="successSve" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlsuccess']}" width="30%"
+			severity="info" widgetVar="successSve" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{flyingSquadScheduleBackingBean.savemsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSve"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="errorMsge" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMsge"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmerrorMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{assignAccessPermissionsBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmerrorMsge" value="OK" onclick="PF('errorMsge').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

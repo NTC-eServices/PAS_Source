@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+
+		<link rel="shortcut icon" type="image/x-icon"
+			href="#{resource['images/favicon.ico']}" />
+
+	</f:facet>
+	<title>National Transport Commission</title>
+
+	<h:outputScript name="js/nanoscroller.js" library="theme-layout" />
+	<h:outputScript name="js/layout.js" library="theme-layout" />
+
+	<ui:insert name="head" />
+
+
+	<script>
+	        (function (global) {
+	
+	        	if(typeof (global) === "undefined")
+	        	{
+	        		throw new Error("window is undefined");
+	        	}
+	
+	            var _hash = "!";
+	            var noBackPlease = function () {
+	                global.location.href += "#";
+	                global.setTimeout(function () {
+	                    global.location.href += "!";
+	                }, 50);
+	            };
+	        	
+	            global.onhashchange = function () {
+	                if (global.location.hash !== _hash) {
+	                    global.location.hash = _hash;
+	                }
+	            };
+	
+	            global.onload = function () {
+	                
+	        		noBackPlease();
+
+	        		document.body.onkeydown = function (e) {
+	                    var elm = e.target.nodeName.toLowerCase();
+	                    if (e.which === 8 &amp;&amp; (elm !== 'input' &amp;&amp; elm  !== 'textarea')) {
+	                        e.preventDefault();
+	                    }
+	                    e.stopPropagation();
+	                };
+	        		
+	            };
+	
+	        })(window);
+        
+        </script>
+</h:head>
+
+<h:body styleClass="main-body">
+
+	<div class="wrapper" style="background-color: #f1f1f1;">
+		<ui:include src="topbar.xhtml" />
+		<div class="ui-g">
+			<div class="ui-g-3"
+				style="background-color: #404d6f; margin-top: 10px; height: 100%; overflow: auto; width: 23%;">
+
+				<h:form style="margin-top: 5px;width:100%;">
+					<p:growl>
+						<p:autoUpdate />
+					</p:growl>
+
+					<p:panelMenu style="width:90%; margin-left: 10%;margin:2%; ">
+						<p:submenu label="Home">
+							<p:menuitem value="Home" url="/pages/home/welcomePage.xhtml"
+								icon="ui-icon-home" style="margin-left:5%;" />
+							<p:menuitem value="Change Password"
+								url="/pages/home/changePassword.xhtml"
+								icon="ui-icon-arrowrefresh-1-w" style="margin-left:5%;" />
+						</p:submenu>
+						<p:submenu label="User Management">
+							<p:submenu label="Manage User Role" style="margin-left:5%;">
+								<p:submenu label="Maintain Roles">
+									<p:menuitem value="Create Roles" icon="ui-icon-plus"
+										url="/pages/CreateRoles/createNewRoleDetails.xhtml"
+										rendered="#{sessionBackingBean.FN1_4}" />
+									<p:menuitem value="Edit Roles" icon="ui-icon-pencil"
+										url="/pages/CreateRoles/editRole.xhtml"
+										rendered="#{sessionBackingBean.FN1_8}" />
+									<p:menuitem value="View Roles" icon="ui-icon-search"
+										url="/pages/CreateRoles/viewRoles.xhtml"
+										rendered="#{sessionBackingBean.FN1_5}" />
+								</p:submenu>
+								<p:submenu label="Access Permission">
+									<p:menuitem value="Assign Access Permission"
+										icon="ui-icon-circle-check"
+										url="/pages/assignAccessPermissions/assignFunctionsToRole.xhtml"
+										rendered="#{sessionBackingBean.FN1_6}" />
+									<p:menuitem value="View Assigned Access Permission"
+										icon="ui-icon-search"
+										url="/pages/assignAccessPermissions/viewAssignAccessPermission.xhtml"
+										rendered="#{sessionBackingBean.FN1_7}" />
+								</p:submenu>
+							</p:submenu>
+							<p:submenu label="Manage User Account" style="margin-left:5%;">
+								<p:menuitem value="Create User"
+									url="/pages/um/employeeProfile.xhtml" style="margin-left:5%;"
+									icon="ui-icon-person" rendered="#{sessionBackingBean.FN1_1}">
+								</p:menuitem>
+								<p:menuitem value="Search User"
+									url="/pages/searchEmployee/searchEmployee.xhtml"
+									style="margin-left:5%;" icon="ui-icon-search"
+									rendered="#{sessionBackingBean.FN1_2}" />
+								<p:menuitem value="Approve Employee"
+									url="/pages/um/approveEmployeeProfile.xhtml"
+									style="margin-left:5%;" icon="ui-icon-circle-check"
+									rendered="#{sessionBackingBean.FN1_3}" />
+								<p:menuitem value="Manage User"
+									url="/pages/manageUser/manageUser.xhtml"
+									style="margin-left:5%;" icon="ui-icon-lightbulb"
+									rendered="#{sessionBackingBean.FN1_3}" />
+								<p:menuitem value="Unblock User"
+									url="/pages/manageUser/unblockUser.xhtml"
+									style="margin-left:5%;" icon="ui-icon-circle-check"
+									rendered="#{sessionBackingBean.FN1_11}" />
+							</p:submenu>
+							<p:submenu label="Document Upload for User"
+								style="margin-left:5%;">
+								<p:menuitem value="Upload Documents"
+									url="/pages/common/uploadUserManagement.xhtml"
+									style="margin-left:5%;" icon="ui-icon-plus"
+									rendered="#{sessionBackingBean.FN6_1}" />
+								<p:menuitem value="View Documents"
+									url="/pages/common/viewUserManagement.xhtml"
+									style="margin-left:5%;" icon="ui-icon-search"
+									rendered="#{sessionBackingBean.FN6_2}" />
+							</p:submenu>
+
+						</p:submenu>
+						<p:submenu label="Queue Management">
+							<p:menuitem value="Generate Main Queue Number"
+								style="margin-left:5%;" icon="ui-icon-image"
+								url="/pages/queueManagement/generateMainQueueNumber.xhtml"
+								rendered="#{sessionBackingBean.FN001}" />
+
+							<p:menuitem value="Queue Management User Console"
+								style="margin-left:5%;" icon="ui-icon-person"
+								url="/pages/queueManagement/queueManagementUserConsole.xhtml"
+								rendered="#{sessionBackingBean.FN002}" />
+
+							<p:menuitem value="Generate Queue Number - New"
+								style="margin-left:5%;" icon="ui-icon-star"
+								url="/pages/queueManagement/queueNoGenerate.xhtml"
+								rendered="#{sessionBackingBean.FN004}" />
+
+							<!-- commented the old generate queue no. page -->
+							<!-- <p:menuitem value="Generate Queue Number - Old" style="margin-left:5%; color:red;"
+								icon="ui-icon-star"
+								url="/pages/queueManagement/queueNumberGenerate.xhtml"
+								rendered="#{sessionBackingBean.FN1_9}" /> 
+ 							-->
+
+							<p:menuitem value="User Closed Console" style="margin-left:5%;"
+								icon="ui-icon-closethick"
+								url="/pages/queueManagement/userClosedConsole.xhtml"
+								rendered="#{sessionBackingBean.FN003}" />
+
+
+						</p:submenu>
+
+						<p:submenu label="Inspection Management">
+							<!-- <p:menuitem value="Vehicle Inspection " style="margin-left:5%;"
+								icon="ui-icon-plus"
+								url="/pages/vehicleInspectionSet/vehicleInspectionInfo.xhtml"
+								rendered="#{sessionBackingBean.FN2_4}" />
+							<p:menuitem value="Edit/View Vehicle Inspection / Upload Photos "
+								style="margin-left:5%;" icon="ui-icon-search"
+								url="/pages/vehicleInspectionSet/viewVehicleInspection.xhtml"
+								rendered="#{sessionBackingBean.FN2_5}" />	 -->
+
+							<p:menuitem value="Normal Inspection "
+								style="margin-left:5%; color:green;" icon="ui-icon-plus"
+								url="/pages/vehicleInspectionSet/normalVehicleInspectionInfoNew.xhtml"
+								rendered="#{sessionBackingBean.FN211}" />
+
+							<p:menuitem value="Edit/View Normal Inspection / Upload Photos "
+								style="margin-left:5%;color:green;" icon="ui-icon-search"
+								url="/pages/vehicleInspectionSet/normalVehicleInspectionEditView.xhtml"
+								rendered="#{sessionBackingBean.FN212}" />
+
+							<p:menuitem value="Other Inspection "
+								style="margin-left:5%;color:#bd672a;" icon="ui-icon-plus"
+								url="/pages/vehicleInspectionSet/otherVehicleInspection.xhtml"
+								rendered="#{sessionBackingBean.FN213}" />
+
+							<p:menuitem value="Edit/View Other Inspection / Upload Photos "
+								style="margin-left:5%;color:#bd672a;" icon="ui-icon-search"
+								url="/pages/vehicleInspectionSet/otherInspectionEditView.xhtml"
+								rendered="#{sessionBackingBean.FN214}" />
+
+							<p:menuitem value="Incomplete Approval" style="margin-left:5%;"
+								icon="ui-icon-circle-check"
+								url="/pages/vehicleInspectionSet/incompleteApproval.xhtml"
+								rendered="#{sessionBackingBean.FN215}" />
+
+							<p:menuitem value="Print Vehicle Inspection Report "
+								style="margin-left:5%;" icon="ui-icon-print"
+								url="/pages/vehicleInspectionSet/printInspectionReport.xhtml"
+								rendered="#{sessionBackingBean.FN2_6}" />
+
+							<p:menuitem value="Temporary Hold" style="margin-left:5%;"
+								icon="ui-icon-arrow-4-diag"
+								url="/pages/vehicleInspectionSet/temporaryHold.xhtml"
+								rendered="#{sessionBackingBean.FN216}" />
+						</p:submenu>
+
+						<p:submenu label="Permit Management">
+
+							<p:menuitem value="Issue New Permit" style="margin-left:5%;"
+								icon="ui-icon-plus"
+								url="/pages/issueNewPermit/newPermitIssuance.xhtml"
+								rendered="#{sessionBackingBean.FN2_1}" />
+							<p:menuitem value="Edit New Permit" style="margin-left:5%;"
+								icon="ui-icon-pencil"
+								url="/pages/issueNewPermit/editPermitIssuance.xhtml"
+								rendered="#{sessionBackingBean.FN2_7}" />
+							<p:menuitem value="View New Permit" style="margin-left:5%;"
+								icon="ui-icon-search"
+								url="/pages/issueNewPermit/viewNewPermit.xhtml"
+								rendered="#{sessionBackingBean.FN2_3}" />
+							<p:menuitem value="New Permit Printing" style="margin-left:5%;"
+								icon="ui-icon-print"
+								url="/pages/viewPermitRenewals/newPermitPrintingNew.xhtml"
+								rendered="#{sessionBackingBean.FN2_2}" />
+
+
+						</p:submenu>
+						<p:submenu label="Permit Renewal Management">
+							<p:menuitem value="Create Permit Renewals"
+								style="margin-left:5%;" icon="ui-icon-plus"
+								url="/pages/Renewal/permitRenewals.xhtml"
+								rendered="#{sessionBackingBean.FN3_1}" />
+							<p:menuitem value="Edit Permit Renewals" style="margin-left:5%;"
+								icon="ui-icon-pencil"
+								url="/pages/Renewal/editPermitRenewal.xhtml"
+								rendered="#{sessionBackingBean.FN2_8}" />
+							<p:menuitem value="Permit Renewal Approval"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								url="/pages/Renewal/permitRenewalApproval.xhtml"
+								rendered="#{sessionBackingBean.FN3_2}" />
+							<p:menuitem value="View Permit Renewal" style="margin-left:5%;"
+								icon="ui-icon-search"
+								url="/pages/viewPermitRenewals/viewPermitRenewalsNew.xhtml"
+								rendered="#{sessionBackingBean.FN3_3}" />
+
+							<p:menuitem value="Permit Cancellations" style="margin-left:5%;"
+								icon="ui-icon-pencil"
+								url="/pages/Renewal/permitCancellations.xhtml"
+								rendered="#{sessionBackingBean.FN2_9}" />
+							<p:menuitem value="Activate Cancelled Permits"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								url="/pages/Renewal/activateCancelledPermits.xhtml"
+								rendered="#{sessionBackingBean.FN2_0}" />
+						</p:submenu>
+						<p:submenu label="Amendments Management">
+							<p:menuitem
+								value="Amendments (Owner Change/Bus Change/Service Change)"
+								url="/pages/amendmentsToBusOrOwner/busOwnerServiceAmendment.xhtml"
+								style="margin-left:5%;" icon="ui-icon-plus"
+								rendered="#{sessionBackingBean.FN3_4}">
+							</p:menuitem>
+							<p:menuitem
+								value="Edit Amendments (Owner Change/Bus Change/Service Change)"
+								url="/pages/amendmentsToBusOrOwner/editBusOwnerServiceAmendment.xhtml"
+								style="margin-left:5%;" icon="ui-icon-pencil"
+								rendered="#{sessionBackingBean.FN3_0}">
+							</p:menuitem>
+
+							<p:menuitem
+								value="Bus Changes for Ongoing Amendment Transactions (Owner Change/Service Changes)"
+								url="/pages/amendmentsToBusOrOwner/amedmentBusChange.xhtml"
+								style="margin-left:5%;" icon="ui-icon-pencil"
+								rendered="#{sessionBackingBean.FN317}">
+							</p:menuitem>
+							<p:menuitem
+								value="View Amendments (Owner Change/Bus Change/Service Change)"
+								url="/pages/amendmentsToBusOrOwner/viewBusOwnerServiceAmendment.xhtml"
+								style="margin-left:5%;" icon="ui-icon-search"
+								rendered="#{sessionBackingBean.FN0_1}">
+							</p:menuitem>
+							<p:menuitem value="Grant Approval for Ammendments"
+								url="/pages/amendmentsToBusOrOwner/grantApprovalAmendments.xhtml"
+								style="margin-left:5%;" icon="ui-icon-search"
+								rendered="#{sessionBackingBean.FN0_2}">
+							</p:menuitem>
+							<p:menuitem
+								value="Higher Authorization for (Owner Change/Bus Change/Service Change)"
+								url="/pages/amendmentsToBusOrOwner/amendmentsAuthorization.xhtml"
+								style="margin-left:5%;" icon="ui-icon-search"
+								rendered="#{sessionBackingBean.FN310}">
+							</p:menuitem>
+							<p:menuitem value="View Approved and Pending Time Approval"
+								url="/pages/amendmentsToBusOrOwner/viewApproveAndPendingTimeApproval.xhtml"
+								style="margin-left:5%;" icon="ui-icon-star"
+								rendered="#{sessionBackingBean.FN316}">
+							</p:menuitem>
+						</p:submenu>
+						<p:submenu label="Payments Management">
+							<p:submenu label="Payment Voucher" style="margin-left:5%;">
+								<p:submenu label="Payment Types" style="margin-left:5%;">
+									<p:menuitem value="Create Payment Type" icon="ui-icon-plus"
+										url="/pages/common/createPaymentTypeMaintenance.xhtml"
+										rendered="#{sessionBackingBean.FN4_8}" />
+									<p:menuitem value="Edit/View Payment Type"
+										icon="ui-icon-pencil"
+										url="/pages/common/paymentTypeMaintenance.xhtml"
+										rendered="#{sessionBackingBean.FN4_7}" />
+								</p:submenu>
+								<p:submenu label="Payment Voucher" style="margin-left:5%;">
+									<p:menuitem value="Create Payment Voucher" icon="ui-icon-plus"
+										url="/pages/payment/createPaymentVoucher.xhtml"
+										rendered="#{sessionBackingBean.FN4_1}" />
+									<p:menuitem value="View Payment Voucher" icon="ui-icon-search"
+										url="/pages/payment/viewPaymentVoucher.xhtml"
+										rendered="#{sessionBackingBean.FN4_4}" />
+								</p:submenu>
+								<p:submenu label="Advanced Payment Voucher"
+									style="margin-left:5%;">
+									<p:menuitem value="Create Advanced Payment Voucher"
+										icon="ui-icon-plus"
+										url="/pages/payment/createAdvancedPaymentVoucher.xhtml"
+										rendered="#{sessionBackingBean.FN4_2}" />
+									<p:menuitem value="View Advanced Payment Voucher"
+										icon="ui-icon-search"
+										url="/pages/payment/viewAdvancedPaymentVoucher.xhtml"
+										rendered="#{sessionBackingBean.FN4_3}" />
+								</p:submenu>
+								<p:menuitem value="Approval for Voucher / Advanced Payments"
+									icon="ui-icon-circle-check"
+									url="/pages/payment/paymentVoucherApproval.xhtml"
+									rendered="#{sessionBackingBean.FN4_5}" />
+								<p:menuitem value="Generate Receipt" icon="ui-icon-circle-check"
+									url="/pages/generateReceipt/generateReceipt.xhtml"
+									rendered="#{sessionBackingBean.FN4_6}" />
+								<p:menuitem value="New Generate Receipt"
+									icon="ui-icon-circle-check"
+									url="/pages/generateReceipt/generateReceiptForNormalAndDriverConductor.xhtml"
+									rendered="#{sessionBackingBean.FN408}" />
+							</p:submenu>
+						</p:submenu>
+
+						<p:submenu label="Survey Management">
+							<p:submenu label="Initiate Survey Request"
+								style="margin-left:5%;">
+								<p:menuitem value="Initiate Survey Request"
+									url="/pages/surveyManagement/initiateSurveyRequest.xhtml"
+									style="margin-left:5%;" icon="ui-icon-plus"
+									rendered="#{sessionBackingBean.FN3_5}"></p:menuitem>
+								<p:menuitem value="Edit Initiate Survey Request"
+									url="/pages/surveyManagement/editIntiateSurveyRequest.xhtml"
+									style="margin-left:5%;" icon="ui-icon-pencil"
+									rendered="#{sessionBackingBean.FN5_1}"></p:menuitem>
+							</p:submenu>
+							<p:submenu label="Initiate Survey Process"
+								style="margin-left:5%;">
+								<p:menuitem value="Initiate Survey Process"
+									url="/pages/surveyManagement/initiateSurveyProcess.xhtml"
+									style="margin-left:5%;" icon="ui-icon-plus"
+									rendered="#{sessionBackingBean.FN3_6}"></p:menuitem>
+								<p:menuitem value="Edit Initiate Survey Process"
+									url="/pages/surveyManagement/editInitiateSurveyProcess.xhtml"
+									style="margin-left:5%;" icon="ui-icon-pencil"
+									rendered="#{sessionBackingBean.FN3_8}"></p:menuitem>
+							</p:submenu>
+							<p:submenu label="Approve Survey Process" style="margin-left:5%;">
+								<p:menuitem value="Approve Survey Process Request"
+									url="/pages/surveyManagement/approveSurveyProcessRequest.xhtml"
+									style="margin-left:5%;" icon="ui-icon-circle-check"
+									rendered="#{sessionBackingBean.FN3_7}"></p:menuitem>
+								<p:menuitem value="View Approved Survey Process Request"
+									url="/pages/surveyManagement/editApproveSurveyProcessRequest.xhtml"
+									style="margin-left:5%;" icon="ui-icon-search"
+									rendered="#{sessionBackingBean.FN3_9}"></p:menuitem>
+							</p:submenu>
+
+							<p:submenu label="Survey Form" style="margin-left:5%;">
+								<p:menuitem value="Generate Survey Form"
+									url="/pages/surveyManagement/generateSurveyForm.xhtml"
+									style="margin-left:5%;" icon="ui-icon-plus"
+									rendered="#{sessionBackingBean.FN5_6}"></p:menuitem>
+								<p:menuitem value="Generate Draft Survey Form"
+									url="/pages/surveyManagement/generateDraftSurvey.xhtml"
+									rendered="#{sessionBackingBean.FN5_9}" style="margin-left:5%;"
+									icon="ui-icon-plus"></p:menuitem>
+								<!-- <p:menuitem value="Enter Survey Data Form"
+								url="/pages/surveyManagement/enterSurveyDataForm.xhtml"
+								rendered="#{sessionBackingBean.FN6_3}"
+								style="margin-left:5%;" icon="ui-icon-plus">
+								</p:menuitem> -->
+							</p:submenu>
+							<p:submenu label="Survey Management" style="margin-left:5%;">
+								<p:menuitem value="Survey Management"
+									url="/pages/surveyManagement/surveyLocationAndTeam.xhtml"
+									style="margin-left:5%;" icon="ui-icon-plus"
+									rendered="#{sessionBackingBean.FN5_4}"></p:menuitem>
+								<p:menuitem value="Enter Survey Data Form"
+									url="/pages/surveyManagement/enterSurveyDataForm.xhtml"
+									rendered="#{sessionBackingBean.FN6_3}" style="margin-left:5%;"
+									icon="ui-icon-plus">
+								</p:menuitem>
+							</p:submenu>
+							<p:submenu label="Analyze Survey" style="margin-left:5%;">
+								<p:menuitem value="Analyze Survey Data"
+									url="/pages/surveyManagement/analyzeSurveyData.xhtml"
+									style="margin-left:5%;" icon="ui-icon-search"
+									rendered="#{sessionBackingBean.FN5_7}"></p:menuitem>
+								<p:menuitem value="Create Survey Summary"
+									url="/pages/surveyManagement/surveySummaryDetails.xhtml"
+									style="margin-left:5%;" icon="ui-icon-plus"
+									rendered="#{sessionBackingBean.FN5_8}"></p:menuitem>
+
+							</p:submenu>
+							<p:menuitem value="Generate Traffic Proposal"
+								url="/pages/surveyManagement/generateTrafficPropasal.xhtml"
+								style="margin-left:5%;" icon="ui-icon-plus"
+								rendered="#{sessionBackingBean.FN5_5}"></p:menuitem>
+
+
+						</p:submenu>
+						<p:submenu label="Tender Management">
+							<p:menuitem value="Initiate Tender Process - Create Tender"
+								url="/pages/tenderManagement/createTender.xhtml"
+								style="margin-left:5%;" icon="ui-icon-plus"
+								rendered="#{sessionBackingBean.FN9_1}"></p:menuitem>
+							<p:submenu label="Tender Advertisement" style="margin-left:5%;">
+								<p:menuitem value="Generate Tender Advertisement"
+									url="/pages/tenderManagement/tenderAdvertisement.xhtml"
+									style="margin-left:5%;" icon="ui-icon-plus"
+									rendered="#{sessionBackingBean.FN9_3}"></p:menuitem>
+								<p:menuitem value="Approve Tender Advertisement"
+									url="/pages/tenderManagement/approveAdvertisement.xhtml"
+									style="margin-left:5%;" icon="ui-icon-circle-check"
+									rendered="#{sessionBackingBean.FN9_4}"></p:menuitem>
+							</p:submenu>
+							<p:menuitem value="Published Tender Management"
+								url="/pages/tenderManagement/publishTenderManagment.xhtml"
+								style="margin-left:5%;" icon="ui-icon-star"
+								rendered="#{sessionBackingBean.FN9_5}"></p:menuitem>
+							<p:menuitem value="Issue Tender Application"
+								url="/pages/tenderManagement/issueTender.xhtml"
+								style="margin-left:5%;" icon="ui-icon-plus"
+								rendered="#{sessionBackingBean.FN9_2}"></p:menuitem>
+							<p:menuitem value="Open Tender Application"
+								url="/pages/tenderManagement/openTenderApplications.xhtml"
+								style="margin-left:5%;" icon="ui-icon-folder-open"
+								rendered="#{sessionBackingBean.FN9_6}"></p:menuitem>
+							<p:menuitem value="Tender Evaluation process"
+								style="margin-left:5%;" icon="ui-icon-arrow-4-diag"
+								rendered="#{sessionBackingBean.FN6_5}"
+								url="/pages/tenderManagement/tenderEvaluation.xhtml"></p:menuitem>
+							<p:menuitem value="Approve Elected Bidder"
+								url="/pages/tenderManagement/approveElectedBidder.xhtml"
+								rendered="#{sessionBackingBean.FN0_3}" style="margin-left:5%;"
+								icon="ui-icon-circle-check"></p:menuitem>
+							<p:submenu label="Print Letters/ Agreements"
+								style="margin-left:5%;">
+								<p:menuitem
+									value="Inform the Elected Bidder (Print Offer Letter)"
+									url="/pages/tenderManagement/printOfferLetter.xhtml"
+									rendered="#{sessionBackingBean.FN9_8}" style="margin-left:5%;"
+									icon="ui-icon-print"></p:menuitem>
+								<p:menuitem value="Print Agreement"
+									url="/pages/tenderManagement/printAgreement.xhtml"
+									rendered="#{sessionBackingBean.FN9_9}" style="margin-left:5%;"
+									icon="ui-icon-print"></p:menuitem>
+							</p:submenu>
+							<p:submenu label="Refundings" style="margin-left:5%;">
+								<p:menuitem value="Refunding Non-Elected Bidders"
+									url="/pages/tenderManagement/notificationForRefundableDeposit.xhtml"
+									rendered="#{sessionBackingBean.FN9_7}" style="margin-left:5%;"
+									icon="ui-icon-circle-check"></p:menuitem>
+								<p:menuitem value="Generate Refund Voucher"
+									url="/pages/tenderManagement/createRefundVoucher.xhtml"
+									rendered="#{sessionBackingBean.FN9_8}" style="margin-left:5%;"
+									icon="ui-icon-plus"></p:menuitem>
+							</p:submenu>
+						</p:submenu>
+
+						<p:submenu label="Subsidy Management">
+							<p:submenu label="Sisu Sariya" style="margin-left:5%;">
+								<p:submenu label="Initiate Sisu Sariya Request">
+
+									<p:menuitem value="Initiate Sisu Sariya Request"
+										icon="ui-icon-plus"
+										url="/pages/sisuSeriya/requestForSisuSariya.xhtml"
+										rendered="#{sessionBackingBean.FN100}" />
+									<p:menuitem value="Edit/View Sisu Sariya Permit"
+										icon="ui-icon-pencil"
+										url="/pages/sisuSeriya/viewEditRequestForSisuSariya.xhtml"
+										rendered="#{sessionBackingBean.FN101}" />
+								</p:submenu>
+
+								<p:menuitem value="Sisu Sariya Agreement Holder Information"
+									icon="ui-icon-plus"
+									url="/pages/sisuSeriya/ssPermitHolderInformation.xhtml"
+									rendered="#{sessionBackingBean.FN102}" />
+
+								<p:menuitem
+									value="Edit Sisu Sariya Agreement Holder Information"
+									icon="ui-icon-plus"
+									url="/pages/sisuSeriya/editPermitHolderInfromation.xhtml"
+									rendered="#{sessionBackingBean.FN117}" />
+
+								<p:menuitem
+									value="High Authorized - Sisu Sariya Agreement Holder Information"
+									icon="ui-icon-plus"
+									url="/pages/sisuSeriya/heighauthorizedEditPermitHolderInfromation.xhtml"
+									rendered="#{sessionBackingBean.FN119}" />
+
+								<p:menuitem
+									value="Sisu Sariya Service Authorization / Print Service Agreement"
+									icon="ui-icon-circle-check"
+									url="/pages/sisuSeriya/sisuSeriyaAuthorizedAndPrintingServiceAgreement.xhtml"
+									rendered="#{sessionBackingBean.FN103}" />
+
+								<p:menuitem value="Sisu Sariya Voucher Creation"
+									icon="ui-icon-plus"
+									url="/pages/sisuSeriya/sisuSeriyaVoucherCreation.xhtml"
+									rendered="#{sessionBackingBean.FN104}" />
+
+								<p:menuitem
+									value="Issue Service Agreement / Permit Sticker / Log Sheets"
+									icon="ui-icon-circle-check"
+									url="/pages/sisuSeriya/issueServiceAgreementPermitStickerLogSheet.xhtml"
+									rendered="#{sessionBackingBean.FN105}" />
+
+								<p:menuitem
+									value="Edit Issue Service Agreement / Permit Sticker / Log Sheets"
+									icon="ui-icon-pencil"
+									url="/pages/sisuSeriya/editModeIssueServiceAgreementPermitStikerLogSheet.xhtml"
+									rendered="#{sessionBackingBean.FN115}" />
+
+								<p:menuitem
+									value="Sisu Sariya Renewals / Amendment / Cancellation Agreement"
+									icon="ui-icon-circle-check"
+									url="/pages/sisuSeriya/serviceAgreementRenewals.xhtml"
+									rendered="#{sessionBackingBean.FN107}" />
+
+								<p:menuitem
+									value="Sisu Sariya Renewals / Amendment / Cancellation Authorization"
+									icon="ui-icon-circle-check"
+									url="/pages/sisuSeriya/serviceRenewalAgreementAuthorization_PrintServiceAgreement.xhtml"
+									rendered="#{sessionBackingBean.FN108}" />
+
+								<p:menuitem value="Sisu Sariya Authorization Team Maintenance"
+									icon="ui-icon-circle-check"
+									url="/pages/sisuSeriya/sisuSariyaAuthorizationTeamMaintenance.xhtml"
+									rendered="#{sessionBackingBean.FN109}" />
+
+								<p:menuitem value="Sisu Sariya Information Search"
+									icon="ui-icon-arrow-4-diag"
+									url="/pages/common/commonSisuSeriyaInquiry.xhtml"
+									rendered="#{sessionBackingBean.FN116}" />
+
+							</p:submenu>
+							<p:submenu label="Gami Sariya" style="margin-left:5%;">
+								<p:submenu label="Gami Sariya Request" style="margin-left:5%;">
+									<p:menuitem value="Request for Gami Sariya" icon="ui-icon-plus"
+										url="/pages/gamiSariya/requestForGamiSariya.xhtml"
+										rendered="#{sessionBackingBean.FN130}" />
+
+									<p:menuitem value="Edit/View Request for Gami Sariya"
+										icon="ui-icon-pencil"
+										url="/pages/gamiSariya/viewEditRequestForGamiSariya.xhtml"
+										rendered="#{sessionBackingBean.FN131}" />
+								</p:submenu>
+								<p:submenu label="Survey Request" style="margin-left:5%;">
+									<p:menuitem value="Initiate Survey Request" icon="ui-icon-plus"
+										url="/pages/gamiSariya/gamiSeriyaInitiateSurveyRequest.xhtml"
+										rendered="#{sessionBackingBean.FN132}" />
+								</p:submenu>
+
+								<p:submenu label="Survey Process" style="margin-left:5%;">
+									<p:menuitem value="Initiate Survey Process" icon="ui-icon-plus"
+										url="/pages/gamiSariya/gamiSeriyaInitiateSurveyProcess.xhtml"
+										rendered="#{sessionBackingBean.FN133}" />
+
+									<!-- <p:menuitem value="Edit/View Initiate Survey Process"
+									icon="ui-icon-pencil"
+									url="/pages/gamiSariya/editInitiateSurveyRequest.xhtml"
+									rendered="#{sessionBackingBean.FN134}" /> -->
+								</p:submenu>
+								<p:submenu label="Survey Approval Process"
+									style="margin-left:5%;">
+									<p:menuitem value="Grant Approval for Survey Process"
+										icon="ui-icon-plus"
+										url="/pages/gamiSariya/gamiSeriyaGrantApprovalForSurveyProcess.xhtml"
+										rendered="#{sessionBackingBean.FN135}" />
+								</p:submenu>
+
+								<p:menuitem value="Generate Survey Form" icon="ui-icon-plus"
+									style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaGenerateSurveyForm.xhtml"
+									rendered="#{sessionBackingBean.FN137}" />
+
+								<p:menuitem value="Gami Sariya Survey Management"
+									icon="ui-icon-plus" style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSariyaSurveyManagement.xhtml"
+									rendered="#{sessionBackingBean.FN136}" />
+
+								<p:menuitem value="Generate Draft Survey Form"
+									icon="ui-icon-plus" style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaGenerateDraftSurveyForm.xhtml"
+									rendered="#{sessionBackingBean.FN138}" />
+
+								<p:menuitem value="Enter Survey Data Form" icon="ui-icon-plus"
+									style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaEnterSurveyDataForm.xhtml"
+									rendered="#{sessionBackingBean.FN145}" />
+
+								<p:menuitem value="Analyze Survey Data Form" icon="ui-icon-plus"
+									style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaAnalyzeSurveyData.xhtml"
+									rendered="#{sessionBackingBean.FN146}" />
+
+								<p:menuitem value="Verify Survey Information"
+									icon="ui-icon-circle-check" style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaVerifySurveyInformation.xhtml"
+									rendered="#{sessionBackingBean.FN139}" />
+
+								<p:menuitem value="Generate Traffic Proposal"
+									icon="ui-icon-plus" style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaGenerateTrafficProposal.xhtml"
+									rendered="#{sessionBackingBean.FN140}" />
+
+								<p:menuitem value="Create Tender Process" icon="ui-icon-plus"
+									style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaCreateTenderProcess.xhtml"
+									rendered="#{sessionBackingBean.FN141}" />
+
+								<p:menuitem value="Permit Holder Information"
+									icon="ui-icon-print" style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaPermitHolderInformation.xhtml"
+									rendered="#{sessionBackingBean.FN142}" />
+
+								<p:menuitem value="View/Edit Permit Holder Information"
+									icon="ui-icon-pencil" style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaViewEditPermitHolderInformation.xhtml"
+									rendered="#{sessionBackingBean.FN143}" />
+
+								<p:menuitem value="Service Authorization"
+									icon="ui-icon-circle-check" style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiSeriyaServiceAuthorization.xhtml"
+									rendered="#{sessionBackingBean.FN144}" />
+
+								<p:menuitem
+									value="Issue Service Agreement / Permit Sticker / Log Sheets"
+									icon="ui-icon-circle-check" style="margin-left:5%;"
+									url="/pages/gamiSariya/gmaiIssueServiceAgreementPermitStickerLogSheet.xhtml"
+									rendered="#{sessionBackingBean.FN147}" />
+
+								<p:menuitem
+									value="Edit Issue Service Agreement / Permit Sticker / Log Sheets"
+									icon="ui-icon-pencil" style="margin-left:5%;"
+									url="/pages/gamiSariya/gamiEditModeIssueServiceAgreementPermitStikerLogSheet.xhtml"
+									rendered="#{sessionBackingBean.FN148}" />
+
+								<p:menuitem value="Organization Maintenance"
+									style="margin-left:5%;" icon="ui-icon-circle-triangle-e"
+									rendered="#{sessionBackingBean.FN149}"
+									url="/pages/gamiSariya/organization.xhtml" />
+
+							</p:submenu>
+							<p:submenu label="Nisi Seriya" style="margin-left:5%;">
+								<p:menuitem value="Nisi Seriya Permit Holder Information Create"
+									icon="ui-icon-plus"
+									url="/pages/nisiSariya/nisiSeriyaPermitHolderInformationCreate.xhtml"
+									rendered="#{sessionBackingBean.FN161}" />
+								<p:menuitem
+									value="Edit/View Nisi Seriya Permit Holder Information"
+									icon="ui-icon-pencil"
+									url="/pages/nisiSariya/nisiSeriyaPermitHolderInformationEdit.xhtml"
+									rendered="#{sessionBackingBean.FN162}" />
+								<p:menuitem
+									value="Nisi Seriya Service Confirmation / Authorization / Print Service Agreement"
+									icon="ui-icon-plus"
+									url="/pages/nisiSariya/nisiSeriyaServiceConfirmation.xhtml"
+									rendered="#{sessionBackingBean.FN163}" />
+								<p:menuitem
+									value="Nisi Seriya Issue Service Agreement / Permit Sticker / Log Sheets"
+									icon="ui-icon-plus"
+									url="/pages/nisiSariya/nisiIssueServiceAgreementPermitStickerLogSheet.xhtml"
+									rendered="#{sessionBackingBean.FN164}" />
+
+								<p:submenu label="Route Maintenance">
+									<p:menuitem value="Nisi Sariya Route Maintenance"
+										icon="ui-icon-plus"
+										url="/pages/nisiSariya/nisiRouteMaintenance.xhtml"
+										rendered="#{sessionBackingBean.FN318}" />
+									<p:menuitem value="Nisi Sariya Edit/View Route Maintenance"
+										icon="ui-icon-pencil"
+										url="/pages/nisiSariya/nisiViewrouteMaintenance.xhtml"
+										rendered="#{sessionBackingBean.FN319}" />
+								</p:submenu>
+							</p:submenu>
+
+							<p:menuitem value="Issue Log Sheets" icon="ui-icon-circle-check"
+								url="/pages/sisuSeriya/issueLogSheets.xhtml"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN106}" />
+
+							<p:menuitem value="Log Sheet Receive Maintenance"
+								icon="ui-icon-print" style="margin-left:5%;"
+								url="/pages/sisuSeriya/logSheetReceivedMaintenance.xhtml"
+								rendered="#{sessionBackingBean.FN110}" />
+
+							<p:menuitem value="Log Sheet Maintenance"
+								icon="ui-icon-circle-check" style="margin-left:5%;"
+								url="/pages/sisuSeriya/logSheetMaintenanceNew.xhtml"
+								rendered="#{sessionBackingBean.FN111}" />
+
+							<p:menuitem value="Log Sheet Maintenance - Check By"
+								icon="ui-icon-circle-check" style="margin-left:5%;"
+								url="/pages/sisuSeriya/logSheetMaintenanceCheckBy.xhtml"
+								rendered="#{sessionBackingBean.FN123}" />
+
+							<p:menuitem value="Bulk Payment" icon="ui-icon-plus"
+								url="/pages/sisuSeriya/sisuSariyaBulkPayment.xhtml"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN112}" />
+
+							<p:menuitem value="Payment Approval" icon="ui-icon-circle-check"
+								url="/pages/sisuSeriya/subsidyPaymentApproval.xhtml"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN113}" />
+
+
+							<p:menuitem value="Payment Update" icon="ui-icon-pencil"
+								style="margin-left:5%;"
+								url="/pages/sisuSeriya/subSidyPaymentUpdate.xhtml"
+								rendered="#{sessionBackingBean.FN114}" />
+
+							<p:menuitem value="Subsidy Management Information"
+								icon="ui-icon-arrow-4-diag" style="margin-left:5%;"
+								url="/pages/sisuSeriya/subsidyManagementInformation.xhtml"
+								rendered="#{sessionBackingBean.FN118}" />
+						</p:submenu>
+						<p:submenu label="Bus Fare Management">
+							<p:menuitem value="Bus Fare Calculator" icon="ui-icon-plus"
+								style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/busFaresRates.xhtml"
+								rendered="#{sessionBackingBean.FN200}" />
+							<p:menuitem value="Edit/View Bus Fare Calculator"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/editViewBusFareRates.xhtml"
+								rendered="#{sessionBackingBean.FN209}" />
+							<p:menuitem value="Bus Fare Approval" icon="ui-icon-circle-check"
+								style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/fareTableApproval.xhtml"
+								rendered="#{sessionBackingBean.FN208}" />
+							<p:menuitem value="Station Details" icon="ui-icon-plus"
+								style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/stationDetails.xhtml"
+								rendered="#{sessionBackingBean.FN201}" />
+							<p:menuitem value="Edit/View Station Details"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/stationDetailsView.xhtml"
+								rendered="#{sessionBackingBean.FN202}" />
+							<p:menuitem value="Route Creation" icon="ui-icon-plus"
+								style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/routeCreation.xhtml"
+								rendered="#{sessionBackingBean.FN203}" />
+							<p:menuitem value="Edit/View Route Creation"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/editRouteCreation.xhtml"
+								rendered="#{sessionBackingBean.FN204}" />
+							<!-- <p:menuitem value="Assign Station To Routes"
+								icon="ui-icon-circle-check" style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/assignStationToRouteCreate.xhtml"
+								rendered="#{sessionBackingBean.FN205}" /> -->
+							<p:menuitem value="Assign Station To Routes"
+								icon="ui-icon-circle-check" style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/assignStationToRoutes.xhtml"
+								rendered="#{sessionBackingBean.FN205}" />
+							<p:menuitem value="View Assign Station To Routes "
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/assignStationToRoutesView.xhtml"
+								rendered="#{sessionBackingBean.FN206}" />
+
+							<p:menuitem value="Bus Assign on Routes"
+								icon="ui-icon-circle-check" style="margin-left:5%;"
+								url="/pages/busFareDeterminationProcess/bussesAssignOnRoutes.xhtml"
+								rendered="#{sessionBackingBean.FN207}" />
+						</p:submenu>
+						<!-- 	<p:submenu label="Time Table Management">
+
+							<p:menuitem value="Panel Generator Parameter" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTable/panelGeneratorParameter.xhtml" />
+							<p:menuitem value="Edit Panel Generator Parameter"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN301}"
+								url="/pages/timeTable/editPanelGeneratorParameter.xhtml" />
+
+							<p:menuitem value="No. of Trips Generator" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN302}"
+								url="/pages/timeTable/noOfTripsGenerator.xhtml" />
+
+
+							<p:menuitem value="Panel Generator" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN303}"
+								url="/pages/timeTableManagement/panelGeneratorNew.xhtml" />
+
+							<p:menuitem value="Edit Panel Generator" icon="ui-icon-pencil"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN303}"
+								url="/pages/timeTableManagement/editPanelGeneratorNew.xhtml" />
+
+							<p:menuitem value="Panel Generator With Fixed Time"
+								icon="ui-icon-plus" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN303}"
+								url="/pages/timeTable/panelGeneratorWithFixedTime.xhtml" />
+							<p:menuitem value="View/Edit Panel Generator With Fixed Time"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN304}"
+								url="/pages/timeTable/editViewpanelGeneratorWithFixedTime.xhtml" />
+
+							<p:menuitem value="Panel Generator Without Fixed Time"
+								icon="ui-icon-plus" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN305}"
+								url="/pages/timeTable/panelGeneratorWithoutFixedTime.xhtml" />
+							<p:menuitem value="Panel Generator With Fixed Buses"
+								icon="ui-icon-plus" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN306}"
+								url="/pages/timeTable/panelGeneratorWithFixedBuses.xhtml" />
+
+							<p:menuitem value="Route Schedule Generator" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN307}"
+								url="/pages/timeTable/routeScheduleGenerator.xhtml" />
+
+							<p:menuitem value="Bus Assigner" icon="ui-icon-circle-check"
+								style="margin-left:5%;"
+								url="/pages/timeTable/busesAssignedForAbbreviation.xhtml"
+								rendered="#{sessionBackingBean.FN308}" />
+
+							<p:menuitem value="Initiate Combine Time Table Generator"
+								icon="ui-icon-plus" style="margin-left:5%;"
+								url="/pages/timeTable/initiateCombineTimeTableGenerator.xhtml"
+								rendered="#{sessionBackingBean.FN309}" />
+							<p:menuitem value="Combine Time Table Generator"
+								icon=" ui-icon-arrow-4-diag" style="margin-left:5%;"
+								url="/pages/timeTable/combineTimeTableGenerator.xhtml"
+								rendered="#{sessionBackingBean.FN311}" />
+							<p:menuitem value="Route Verification"
+								icon="ui-icon-circle-check" style="margin-left:5%;"
+								url="/pages/timeTable/routeVerification.xhtml"
+								rendered="#{sessionBackingBean.FN312}" />
+							<p:menuitem value="Edit Time Table Management"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								url="/pages/timeTable/editTimeTableManagement.xhtml"
+								rendered="#{sessionBackingBean.FN313}" />
+
+							Route setup
+							<p:menuitem value="Route Set-up for Time Table Purpose"
+								icon="ui-icon-plus" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTableManagement/routeSetupForTimeTablePurpose.xhtml" />
+
+							<p:menuitem value="Edit/View Route Set-up for Time Table Purpose"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN301}"
+								url="/pages/timeTableManagement/editRouteSetupForTimeTablePurpose.xhtml" />
+
+							<p:menuitem value="Combine Panel Generator"
+								icon="ui-icon-arrow-4-diag" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTableManagement/combinePanelGenarator.xhtml" />
+
+							mid points
+							<p:menuitem value="Set-Up Mid Points" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTableManagement/setUpMidPoints.xhtml" />
+
+
+							<p:submenu label="Reports">
+								<p:menuitem value="Control Sheet" icon="ui-icon-print"
+									style="margin-left:5%;"
+									url="/pages/timeTableReports/generateControlSheetForTimeTable.xhtml"
+									rendered="#{sessionBackingBean.FN314}" />
+								<p:menuitem value="Running Sheet" icon="ui-icon-print"
+									style="margin-left:5%;"
+									url="/pages/timeTableReports/runningSheet.xhtml"
+									rendered="#{sessionBackingBean.FN315}" />
+							</p:submenu>
+
+						</p:submenu> -->
+
+						<p:submenu label="Time Table Management">
+
+							<p:menuitem value="Route Set-up for Time Table Purpose"
+								icon="ui-icon-plus" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTableManagement/routeSetupForTimeTablePurpose.xhtml" />
+
+							<p:menuitem value="Edit/View Route Set-up for Time Table Purpose"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN301}"
+								url="/pages/timeTableManagement/editRouteSetupForTimeTablePurpose.xhtml" />
+
+							<p:menuitem value="Panel Generator Parameter" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTable/panelGeneratorParameter.xhtml" />
+
+							<p:menuitem value="Edit Panel Generator Parameter"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN301}"
+								url="/pages/timeTable/editPanelGeneratorParameter.xhtml" />
+
+							<p:menuitem value="Panel Generator" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN303}"
+								url="/pages/timeTableManagement/panelGeneratorNew.xhtml" />
+							
+						<!-- 	<p:menuitem value="Panel Generator Without Template Change" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN303}"
+								url="/pages/timeTableManagement/panelGeneratorNewWithoutTemplateChange.xhtml" /> -->
+
+							<p:menuitem value="Edit Panel Generator" icon="ui-icon-pencil"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN303}"
+								url="/pages/timeTableManagement/editPanelGeneratorNew.xhtml" />
+							
+						<!-- 	<p:menuitem value="Edit Panel Generator Without Template Change" icon="ui-icon-pencil"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN303}"
+								url="/pages/timeTableManagement/editPanelGeneratorNewWithoutTemplateChange.xhtml" /> -->
+
+							<p:menuitem value="Set-Up Mid Points" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTableManagement/setUpMidPoints.xhtml" />
+
+							<p:menuitem value="Route Schedule Generator" icon="ui-icon-plus"
+								style="margin-left:5%;" rendered="#{sessionBackingBean.FN307}"
+								url="/pages/timeTable/routeScheduleGenerator.xhtml" />
+
+							<p:menuitem value="Control Sheet" icon="ui-icon-print"
+								style="margin-left:5%;"
+								url="/pages/timeTableReports/generateControlSheetForTimeTable.xhtml"
+								rendered="#{sessionBackingBean.FN314}" />
+
+							<p:menuitem value="Combine Panel Generator"
+								icon="ui-icon-arrow-4-diag" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTableManagement/combinePanelGenarator.xhtml" />
+								
+								
+							<p:menuitem value="Combine Control Sheet"
+								icon="ui-icon-print" style="margin-left:5%;"
+								rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTableManagement/combineControlSheet.xhtml" />
+
+							<p:menuitem value="Remove Time Table" 
+								rendered="#{sessionBackingBean.FN300}"
+								url="/pages/timeTableManagement/timeTableDataRemove.xhtml"
+								style="margin-left:5%;" icon="ui-icon-trash" />
+
+
+						</p:submenu>
+
+
+						<p:submenu label="Terminal Management">
+							<p:menuitem value="Create Bus Terminal" icon="fa fa-plus fa-1x"
+								style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/createBusTerminal.xhtml"
+								rendered="#{sessionBackingBean.FN330}" />
+							<p:menuitem value="Create Bus Terminal Blocks"
+								icon="fa fa-plus fa-1x" style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/createBusTerminalBlocks.xhtml"
+								rendered="#{sessionBackingBean.FN331}" />
+							<p:menuitem value="Assign Bus Routes to Terminal Blocks"
+								icon="fa fa-th fa-1x" style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/assignBusRoutesToBlock.xhtml"
+								rendered="#{sessionBackingBean.FN332}" />
+							<!-- <p:menuitem value="Terminal Payment"
+								icon="fa fa-credit-card fa-1x" style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/acceptPayments.xhtml"
+								rendered="#{sessionBackingBean.FN333}" /> -->
+							<p:menuitem value="Terminal Payment"
+								icon="fa fa-credit-card fa-1x" style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/newTerminalPayment.xhtml"
+								rendered="#{sessionBackingBean.FN333}" />
+							<p:menuitem value="Terminal Payment Edit"
+								icon="ui-icon-pencil" style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/editTerminalPayment.xhtml"
+								rendered="#{sessionBackingBean.FN339}" />
+							<p:menuitem value="Terminal Payment View"
+								icon="fa fa-credit-card fa-1x" style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/acceptPaymentsView.xhtml"
+								rendered="#{sessionBackingBean.FN337}" />
+							<p:menuitem value="Accept Payment Cancellation"
+								icon="fa fa-credit-card fa-1x" style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/acceptPaymentCancellation.xhtml"
+								rendered="#{sessionBackingBean.FN334}" />
+							<p:menuitem value="Arrival Authorization"
+								icon="fa fa-subway fa-1x" style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/arrivalAuthorization.xhtml"
+								rendered="#{sessionBackingBean.FN335}" />
+							<p:menuitem value="Departure Authorization"
+								icon="fa fa-subway fa-1x" style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/departureAuthorization.xhtml"
+								rendered="#{sessionBackingBean.FN336}" />
+
+
+
+							<p:menuitem value="Change Service Amounts" icon="fa fa-usd fa-1x"
+								style="margin-left:5%;"
+								url="/pages/terminalOperationManagement/serviceAmounts.xhtml"
+								rendered="#{sessionBackingBean.FN338}" />
+						</p:submenu>
+
+						<p:submenu label="Flying Squad Management">
+							<p:menuitem value="Manage Group" style="margin-left:5%;"
+								icon="ui-icon-plus" url="/pages/flyingSquad/addGroup.xhtml"
+								rendered="#{sessionBackingBean.FN350}" />
+							<p:menuitem value="Setup Flying Squad" style="margin-left:5%;"
+								icon="ui-icon-arrow-4-diag"
+								url="/pages/flyingSquad/SteupFlyingSquad.xhtml"
+								rendered="#{sessionBackingBean.FN351}" />
+							<p:menuitem value="Maintain Action Points"
+								style="margin-left:5%;" icon="  ui-icon-bookmark"
+								url="/pages/flyingSquad/maintainActionPoints.xhtml"
+								rendered="#{sessionBackingBean.FN352}" />
+							<p:menuitem value="Offence Management" style="margin-left:5%;"
+								icon="  ui-icon-calendar"
+								url="/pages/flyingSquad/offenceManagement.xhtml"
+								rendered="#{sessionBackingBean.FN353}" />
+							<p:menuitem value="Setup Schedule for Flying Squad Officers"
+								style="margin-left:5%;" icon=" ui-icon-calculator"
+								url="/pages/flyingSquad/FlyingSquadSchedule.xhtml"
+								rendered="#{sessionBackingBean.FN354}" />
+
+							<p:menuitem value="Initiate Flying Squad Investigation"
+								style="margin-left:5%;" icon=" ui-icon-arrow-4"
+								url="/pages/flyingSquad/InitiateFlyingSquadInvestigation.xhtml"
+								rendered="#{sessionBackingBean.FN355}" />
+
+							<p:menuitem value="Edit Initiate Flying Squad Investigation"
+								style="margin-left:5%;" icon="ui-icon-pencil"
+								url="/pages/flyingSquad/EditInitiateFlyingSquadInvestigation.xhtml"
+								rendered="#{sessionBackingBean.FN356}" />
+
+							<p:menuitem value="View Initiate Flying Squad Investigation"
+								style="margin-left:5%;" icon="ui-icon-search"
+								url="/pages/flyingSquad/ViewInitiateFlyingSquadInvestigation.xhtml"
+								rendered="#{sessionBackingBean.FN357}" />
+
+							<p:menuitem value="Approval for Investigation"
+								style="margin-left:5%;" icon="ui-icon-search"
+								url="/pages/flyingSquad/ApprovalForInvestigation.xhtml"
+								rendered="#{sessionBackingBean.FN358}" />
+
+
+							<p:menuitem value="Manage Investigation Log"
+								style="margin-left:5%;" icon=" ui-icon-contact"
+								url="/pages/flyingSquad/manageInvestigationLog.xhtml"
+								rendered="#{sessionBackingBean.FN359}" />
+							<p:menuitem value="Attendance Management" style="margin-left:5%;"
+								icon=" ui-icon-calendar"
+								url="/pages/flyingSquad/attendanceManagement.xhtml"
+								rendered="#{sessionBackingBean.FN360}" />
+							<p:menuitem value="Offence Tracking Sheet"
+								style="margin-left:5%;" icon=" ui-icon-gear"
+								url="/pages/flyingSquad/manageInvestigationChargeSheet.xhtml"
+								rendered="#{sessionBackingBean.FN361}" />
+
+							<p:menuitem value="Manage Investigation Summary"
+								style="margin-left:5%;" icon="ui-icon-star"
+								url="/pages/flyingSquad/manageInvestigationLogSummary.xhtml"
+								rendered="#{sessionBackingBean.FN363}" />
+
+							<p:menuitem value="Release Document Investigation"
+								style="margin-left:5%;" icon=" ui-icon-document-b"
+								url="/pages/flyingSquad/releaseDocumentInvestigation.xhtml"
+								rendered="#{sessionBackingBean.FN364}" />
+
+							<p:menuitem value="Manage Court Cases" style="margin-left:5%;"
+								icon=" ui-icon-flag"
+								url="/pages/flyingSquad/manageCourtCasesN.xhtml"
+								rendered="#{sessionBackingBean.FN362}" />
+							<p:menuitem value="Edit/View Manage Court Cases"
+								style="margin-left:5%;" icon="ui-icon-pencil"
+								url="/pages/flyingSquad/editmanageCourtCasesN.xhtml"
+								rendered="#{sessionBackingBean.FN362}" />
+							<p:menuitem value="Flying Squad Court Information Status"
+								style="margin-left:5%;" icon=" ui-icon-flag"
+								url="/pages/flyingSquad/flyingSquadCourtInformationStatus.xhtml"
+								rendered="#{sessionBackingBean.FN366}" />
+
+							<p:menuitem value="Flying Squad Summary Report"
+								style="margin-left:5%;" icon=" ui-icon-flag"
+								url="/pages/flyingSquad/flyingSquadSummaryReport.xhtml"
+								rendered="#{sessionBackingBean.FN367}" />
+							<p:menuitem value="Flying Squad Progress Report"
+								style="margin-left:5%;" icon=" ui-icon-flag"
+								url="/pages/flyingSquad/flyingSquadProgressReport.xhtml"
+								rendered="#{sessionBackingBean.FN368}" />
+
+						</p:submenu>
+						<p:submenu label="Grievance Management">
+							<p:menuitem value="Initiate Complaint Request"
+								style="margin-left:5%;" icon="fa fa-flag fa-1x"
+								url="/pages/grievanceManagement/initiateComplaintRequest.xhtml"
+								rendered="#{sessionBackingBean.FN450}" />
+							<p:menuitem value="View/Edit Complaint Request"
+								style="margin-left:5%;" icon="fa fa-eye fa-1x"
+								url="/pages/grievanceManagement/viewEditComplaintRequest.xhtml"
+								rendered="#{sessionBackingBean.FN451}" />
+							<p:menuitem value="Manage Inquiry" style="margin-left:5%;"
+								icon="ui-icon-arrow-4-diag"
+								url="/pages/grievanceManagement/manageInquiry.xhtml"
+								rendered="#{sessionBackingBean.FN452}" />
+							<p:menuitem value="Inquiry Process" style="margin-left:5%;"
+								icon="fa fa-list-alt fa-1x"
+								url="/pages/grievanceManagement/inquiryProcess.xhtml"
+								rendered="#{sessionBackingBean.FN453}" />
+							<p:menuitem value="Grievance Payment Voucher Approval"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								url="/pages/grievanceManagement/grievancePaymentVoucherApproval.xhtml"
+								rendered="#{sessionBackingBean.FN455}" />
+							<p:menuitem value="Grievance Management Report"
+								icon="ui-icon-print" style="margin-left:5%;"
+								url="/pages/grievanceManagement/grievanceManagmentReport.xhtml"
+								rendered="#{sessionBackingBean.FN454}" />
+							<p:menuitem value="Grievance Management Dashboard"
+								icon="fa fa-dashboard fa-1x" style="margin-left:5%;"
+								url="/pages/grievanceManagement/grievanceManagementDashboard.xhtml"
+								rendered="#{sessionBackingBean.FN456}" />
+							<p:menuitem
+								value="Grant Permission To Proceed Active Application"
+								icon="fa fa-check fa-1x" style="margin-left:5%;"
+								url="/pages/grievanceManagement/grantPermissionToProceedActiveApplication.xhtml"
+								rendered="#{sessionBackingBean.FN457}" />
+
+						</p:submenu>
+						<p:submenu label="Driver/Conductor Management">
+							<p:menuitem value="Driver/Conductor Registration"
+								style="margin-left:5%;" icon="ui-icon-plus"
+								url="/pages/driverConductorTraining/driverConductorRegistration.xhtml"
+								rendered="#{sessionBackingBean.FN400}" />
+							<p:menuitem value="Edit - Driver/Conductor Registration"
+								style="margin-left:5%;" icon="ui-icon-pencil"
+								url="/pages/driverConductorTraining/vieweditdriverConductorRegistration.xhtml"
+								rendered="#{sessionBackingBean.FN401}" />
+							<p:menuitem value="View - Driver/Conductor Registration"
+								style="margin-left:5%;" icon="ui-icon-search"
+								url="/pages/driverConductorTraining/viewDriverConductorRegistration2.xhtml"
+								rendered="#{sessionBackingBean.FN416}" />
+							<p:menuitem value="Edit Driver/Conductor Details- Authorized"
+								style="margin-left:5%;" icon="ui-icon-pencil"
+								url="/pages/driverConductorTraining/editDriverConductorRegistrationHighAuth.xhtml"
+								rendered="#{sessionBackingBean.FN417}" />
+							<p:menuitem value="Driver/Conductor Re-Registration"
+								style="margin-left:5%;" icon="fa fa-user fa-1x"
+								url="/pages/driverConductorTraining/newRegistrationDriverConductor.xhtml"
+								rendered="#{sessionBackingBean.FN402}" />
+							<p:menuitem value="Upload Driver/Conductor Photo"
+								style="margin-left:5%;" icon="fa fa-camera fa-1x"
+								url="/pages/driverConductorTraining/uploadDriverConductorPhotos.xhtml"
+								rendered="#{sessionBackingBean.FN403}" />
+
+							<p:menuitem value="Create Payment Voucher"
+								style="margin-left:5%;" icon="ui-icon-plus"
+								url="/pages/driverConductorTraining/driverRegisterPaymentVoucherCreate.xhtml"
+								rendered="#{sessionBackingBean.FN406}" />
+							<p:menuitem value="Payment Voucher Approval"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								url="/pages/driverConductorTraining/driverConductoPaymentVoucherApproval.xhtml"
+								rendered="#{sessionBackingBean.FN407}" />
+
+
+							<p:menuitem value="Setup Temporary Period - Driver/Conductor"
+								style="margin-left:5%;" icon="fa fa-camera fa-1x"
+								url="/pages/driverConductorTraining/setupTemporaryPeriod.xhtml"
+								rendered="#{sessionBackingBean.FN414}" />
+							<p:menuitem
+								value="Setup Temporary Period Edit/View - Driver/Conductor"
+								style="margin-left:5%;" icon="ui-icon-pencil"
+								url="/pages/driverConductorTraining/setupTemporaryPeriodEdit.xhtml"
+								rendered="#{sessionBackingBean.FN415}" />
+							<p:menuitem value="Maintain Driver / Conductor Training Dates"
+								style="margin-left:5%;" icon="fa fa-calendar fa-1x"
+								url="/pages/driverConductorTraining/driverConductorTraining.xhtml"
+								rendered="#{sessionBackingBean.FN405}" />
+							<p:menuitem value="Maintain Training Schedule"
+								style="margin-left:5%;" icon="fa fa-calendar fa-1x"
+								url="/pages/driverConductorTraining/maintainTrainingSchedule.xhtml"
+								rendered="#{sessionBackingBean.FN404}" />
+							<p:menuitem value="Maintain Attendance" style="margin-left:5%;"
+								icon="fa fa-calendar-check-o fa-1x"
+								url="/pages/driverConductorTraining/maintainAttendance.xhtml"
+								rendered="#{sessionBackingBean.FN409}" />
+							<p:menuitem value="Printing Driver-Conductor ID Cards"
+								style="margin-left:5%;" icon="fa fa-id-card-o fa-1x"
+								url="/pages/driverConductorTraining/printDriverConductorIDs.xhtml"
+								rendered="#{sessionBackingBean.FN410}" />
+							<p:submenu label="Blacklisting Details">
+								<p:menuitem value="Blacklist Driver/ Conductor"
+									style="margin-left:5%;" icon="fa fa-ban fa-1x"
+									url="/pages/driverConductorTraining/blacklistDriverConductor.xhtml"
+									rendered="#{sessionBackingBean.FN411}" />
+								<p:menuitem value="Approval - Blacklist Driver/ Conductor"
+									style="margin-left:5%;" icon="fa fa-check-circle fa-1x"
+									url="/pages/driverConductorTraining/blacklistApproval.xhtml"
+									rendered="#{sessionBackingBean.FN412}" />
+								<p:menuitem value="Blacklist Driver/ Conductor - Clearance"
+									style="margin-left:5%;" icon="fa fa-rotate-left fa-1x"
+									url="/pages/driverConductorTraining/blacklistClearance.xhtml"
+									rendered="#{sessionBackingBean.FN413}" />
+							</p:submenu>
+						</p:submenu>
+						<p:submenu label="Awareness Management">
+							<p:menuitem value="School Awareness Program"
+								style="margin-left:5%;" icon="fa fa-bullhorn fa-1x"
+								url="/pages/awarenessManagement/schoolAwarenessProgram.xhtml"
+								rendered="#{sessionBackingBean.FN500}" />
+						</p:submenu>
+
+						<p:submenu label="Investigation Management">
+
+							<p:menuitem value="Manage Investigation / Charges"
+								style="margin-left:5%;" icon="fa fa-list-alt fa-1x"
+								url="/pages/investigationManagement/manageInvestigationCharges.xhtml"
+								rendered="#{sessionBackingBean.FN520}" />
+
+							<p:menuitem value="Approve Action / Charges"
+								style="margin-left:5%;" icon="fa fa-check fa-1x"
+								url="/pages/investigationManagement/approveActionCharges.xhtml"
+								rendered="#{sessionBackingBean.FN521}" />
+
+							<p:menuitem value="Manage Retain Documents"
+								style="margin-left:5%;" icon="fa fa-list-alt fa-1x"
+								url="/pages/investigationManagement/manageRetainDocuments.xhtml"
+								rendered="#{sessionBackingBean.FN524}" />
+
+							<p:menuitem value="Suspend Permit / Driver / Conductor"
+								style="margin-left:5%;" icon="fa fa-flag fa-1x"
+								url="/pages/investigationManagement/suspendPermitDriverConductor.xhtml"
+								rendered="#{sessionBackingBean.FN522}" />
+
+							<p:menuitem value="Approval Suspend Permit / Driver / Conductor"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								url="/pages/investigationManagement/approveSuspendRecords.xhtml"
+								rendered="#{sessionBackingBean.FN523}" />
+
+							<p:menuitem value="Investigation Report" style="margin-left:5%;"
+								icon="ui-icon-print"
+								url="/pages/investigationManagement/investigationReport.xhtml"
+								rendered="#{sessionBackingBean.FN525}" />
+
+
+						</p:submenu>
+						<p:submenu label="GPS">
+							<p:menuitem value="SIM Registration" style="margin-left:5%;"
+								icon="ui-icon-plus"
+								url="/pages/simRegistration/SimRegistration.xhtml"
+								rendered="#{sessionBackingBean.FN550}" />
+							<p:menuitem value="SIM Renewal" style="margin-left:5%;"
+								icon="ui-icon-plus"
+								url="/pages/simRegistration/SimRenewal.xhtml"
+								rendered="#{sessionBackingBean.FN552}" />
+							<p:menuitem value="View/Edit SIM Details" style="margin-left:5%;"
+								icon="ui-icon-pencil"
+								url="/pages/simRegistration/ViewEditSimRegistration.xhtml"
+								rendered="#{sessionBackingBean.FN551}" />
+							<p:menuitem value="SIM Registration Voucher Approval"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								url="/pages/simRegistration/simRegistrationVoucherApproval.xhtml"
+								rendered="#{sessionBackingBean.FN553}" />
+							<p:menuitem value="SIM Transfer" style="margin-left:5%;"
+								icon="ui-icon-transfer-e-w"
+								url="/pages/simRegistration/SimTransfer.xhtml"
+								rendered="#{sessionBackingBean.FN554}" />
+
+						</p:submenu>
+						<p:submenu label="Administration">
+							<p:submenu label="Reference Data" style="margin-left:5%;">
+								<p:menuitem value="Address Types"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/addressTypes.xhtml" />
+								<p:menuitem value="Activities" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/activity.xhtml" />
+								<p:menuitem value="Accident Types"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/accidentType.xhtml" />
+								<p:menuitem value="Banks" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/bank.xhtml" />
+								<!-- <p:menuitem value="Branches"  icon="ui-icon-circle-triangle-e"
+								url="/pages/admin/branch.xhtml" /> -->
+
+								<p:menuitem value="Assign Branches"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/assignBranches.xhtml" />
+
+								<p:menuitem value="Carder Types"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/carderType.xhtml" />
+								<p:menuitem value="Charge Type" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/chargeType.xhtml" />
+								<p:menuitem value="Departments" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/departmentTypes.xhtml" />
+								<p:menuitem value="Designations"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/designation.xhtml" />
+								<p:menuitem value="District" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/district.xhtml" />
+								<p:menuitem value="Assign D.S. Divisions"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/assignDivSec.xhtml" />
+								<p:menuitem value="Document Type"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/documentType.xhtml" />
+								<p:menuitem value="Employee Status"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/employeeStatus.xhtml" />
+								<p:menuitem value="Employee Grade"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/employeeGrade.xhtml" />
+								<p:menuitem value="Functions" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/functionMaintenance.xhtml" />
+								<p:menuitem value="Gender" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/gender.xhtml" />
+								<p:menuitem value="Language" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/language.xhtml" />
+								<p:menuitem value="Location" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/location.xhtml" />
+
+								<p:menuitem value="Make Maintenance"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/makeMaintenance.xhtml" />
+								<p:menuitem value="Assign Model"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/assignModels.xhtml" />
+
+
+								<p:menuitem value="Marital Status"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/maritalStatus.xhtml" />
+								<p:menuitem value="Organization"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/organization.xhtml" />
+								<p:menuitem value="Owner Type Change"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/ownerTypeChange.xhtml" />
+
+								<!-- <p:menuitem value="Payment Mode"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/paymentMode.xhtml" /> -->
+
+								<p:menuitem value="Postal Code" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/postalCode.xhtml" />
+								<p:menuitem value="Province" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/province.xhtml" />
+								<p:menuitem value="Qualifications"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/qualificationMaintenance.xhtml" />
+								<p:menuitem value="Relationships"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/relationships.xhtml" />
+								<p:menuitem value="Request Types"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/requestTypes.xhtml" />
+								<p:menuitem value="Responsibilities"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/responsibilities.xhtml" />
+								<p:menuitem value="Service Types"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/serviceType.xhtml" />
+								<p:menuitem value="Sub Units" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/subUnit.xhtml" />
+								<p:menuitem value="Salary Categories"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/salaryCategory.xhtml" />
+								<p:menuitem value="Sections" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/sections.xhtml" />
+								<p:menuitem value="Survey Cost" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/surveyCost.xhtml" />
+								<p:menuitem value="Survey Methods"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/surveyMethods.xhtml" />
+								<p:menuitem value="Survey Types"
+									icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/surveyTypes.xhtml" />
+								<p:menuitem value="Titles" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/titleMaintenance.xhtml" />
+								<p:menuitem value="Route Types" icon="ui-icon-circle-triangle-e"
+									url="/pages/admin/routeTypes.xhtml" />
+								<!-- <p:menuitem value="Tasks"  icon="ui-icon-circle-triangle-e"
+								url="/pages/admin/task.xhtml" />
+							<p:menuitem value="Transaction Type"  icon="ui-icon-circle-triangle-e"
+								url="/pages/admin/transactionType.xhtml" />								 -->
+								<!-- <p:menuitem value="Vehicle Makes"  icon="ui-icon-circle-triangle-e"
+								url="/pages/admin/makeMaintenance.xhtml" /> -->
+
+							</p:submenu>
+						</p:submenu>
+						<p:submenu label="Reports">
+							<p:submenu label="Fare Table Management" style="margin-left:5%;">
+								<p:menuitem value="Bus Fare Report (L/SM/SU/EX)"
+									icon="ui-icon-print" style="margin-left:5%;"
+									url="/pages/reports/fareofSemiLuxuryReport.xhtml"
+									rendered="#{sessionBackingBean.FN230}" />
+								<p:menuitem value="Fare Table Report" icon="ui-icon-print"
+									style="margin-left:5%;"
+									url="/pages/reports/fareTableReport.xhtml"
+									rendered="#{sessionBackingBean.FN231}" />
+								<p:menuitem value="Normal Bus Fare Report" icon="ui-icon-print"
+									style="margin-left:5%;"
+									url="/pages/reports/normalBusFareReport.xhtml"
+									rendered="#{sessionBackingBean.FN232}" />
+							</p:submenu>
+							<p:submenu label="Subsidy Management" style="margin-left:5%;">
+								<p:menuitem value="Sisu Sariya Report" icon="ui-icon-print"
+									style="margin-left:5%;"
+									url="/pages/reports/sisuSariyaReport.xhtml"
+									rendered="#{sessionBackingBean.FN233}" />
+
+								<p:menuitem value="Sisu sariya Number of Students report"
+									icon="ui-icon-print" style="margin-left:5%;"
+									url="/pages/subsidyManagmentReports/sisuSariyaBusWiseSchoolReport.xhtml"
+									rendered="#{sessionBackingBean.FN270}" />
+								<p:menuitem value="Sisu Sariya School Wise Bus Info"
+									icon="ui-icon-print" style="margin-left:5%;"
+									url="/pages/subsidyManagmentReports/sisusariyaSchoolWiseBusInfo.xhtml"
+									rendered="#{sessionBackingBean.FN271}" />
+								<p:menuitem value="Subsidy Buses Infomation Report"
+									icon="ui-icon-print" style="margin-left:5%;"
+									url="/pages/subsidyManagmentReports/subsidyBusesInfo.xhtml"
+									rendered="#{sessionBackingBean.FN272}" />
+								<p:menuitem value="Subsidy Payment Report" icon="ui-icon-print"
+									style="margin-left:5%;"
+									url="/pages/subsidyManagmentReports/subsidyPaymentReport.xhtml"
+									rendered="#{sessionBackingBean.FN273}" />
+								<p:menuitem value="Sisu Sariya Monthly Operated (KM) Report"
+									icon="ui-icon-print" style="margin-left:5%;"
+									url="/pages/subsidyManagmentReports/sisuSariyaMOnthlyOperatedKMRpt.xhtml"
+									rendered="#{sessionBackingBean.FN274}" />
+								<p:menuitem value="Sisu Sariya Running Percentage Report"
+									icon="ui-icon-print" style="margin-left:5%;"
+									url="/pages/subsidyManagmentReports/sisuSariyaRunningPercentageReport.xhtml"
+									rendered="#{sessionBackingBean.FN275}" />
+							</p:submenu>
+
+						</p:submenu>
+						<p:submenu label="Common">
+							<p:menuitem value="Windscreen Label Printing"
+								icon="ui-icon-print" style="margin-left:5%;"
+								url="/pages/common/windscreenLabelPrint.xhtml"
+								rendered="#{sessionBackingBean.FN250}" />
+							<p:submenu label="Route Maintenance" style="margin-left:5%;">
+								<p:menuitem value="Create Route" icon="ui-icon-plus"
+									url="/pages/common/routeMaintenance.xhtml"
+									rendered="#{sessionBackingBean.FN7_1}" />
+								<p:menuitem value="Edit/View Route" icon="ui-icon-pencil"
+									url="/pages/common/viewrouteMaintenance.xhtml"
+									rendered="#{sessionBackingBean.FN7_2}" />
+								<p:menuitem value="New Route Request"
+									url="/pages/common/newRouteRequest.xhtml"
+									style="margin-left:5%;" icon="ui-icon-circle-check"
+									rendered="#{sessionBackingBean.FN121}">
+								</p:menuitem>
+
+							</p:submenu>
+							<p:submenu label="Backlog Management" style="margin-left:5%;">
+								<p:menuitem value=" Create Permit Data" icon="ui-icon-plus"
+									url="/pages/common/backlogPermitData.xhtml"
+									rendered="#{sessionBackingBean.FN7_3}" />
+								<p:menuitem value=" Edit Permit Data" icon="ui-icon-pencil"
+									url="/pages/common/editViewBacklogPermitData.xhtml"
+									rendered="#{sessionBackingBean.FN7_4}" />
+								<p:menuitem value=" View Permit Data" icon="ui-icon-search"
+									url="/pages/common/viewBacklogPermitData.xhtml"
+									rendered="#{sessionBackingBean.FN6_4}" />
+								<p:menuitem value=" Backlog Permit Report" icon="ui-icon-print"
+									url="/pages/common/backlogTransactionView.xhtml"
+									rendered="#{sessionBackingBean.FN8_3}" />
+							</p:submenu>
+							<p:submenu label="Power of Attorney" style="margin-left:5%;">
+								<p:menuitem value="Create An Attorney Holder"
+									icon="ui-icon-person" url="/pages/common/attorneyHolder.xhtml"
+									rendered="#{sessionBackingBean.FN7_5}" />
+								<p:menuitem value="Edit/View An Attorney Holder"
+									icon="ui-icon-pencil"
+									url="/pages/common/editViewAttorneyHolder.xhtml"
+									rendered="#{sessionBackingBean.FN7_6}" />
+							</p:submenu>
+							<p:submenu label="Vehicle Inspection Action Point Management"
+								style="margin-left:5%;">
+								<p:menuitem value="Create Action Points" style="margin-left:5%;"
+									icon="ui-icon-plus"
+									url="/pages/vehicleInspectionSet/vehicleActionPointPage.xhtml"
+									rendered="#{sessionBackingBean.FN7_7}" />
+								<p:menuitem value=" Edit/View Action Points"
+									style="margin-left:5%;" icon="ui-icon-pencil"
+									url="/pages/vehicleInspectionSet/viewAndEditVehicleActionPointPage.xhtml"
+									rendered="#{sessionBackingBean.FN7_8}" />
+							</p:submenu>
+							<p:submenu label="Document Management" style="margin-left:5%;">
+								<p:menuitem value="Add New Document Types"
+									style="margin-left:5%;" icon="ui-icon-plus"
+									url="/pages/common/addDocument.xhtml"
+									rendered="#{sessionBackingBean.FN7_9}" />
+								<p:menuitem value="Upload Documents" style="margin-left:5%;"
+									icon=" ui-icon-circle-arrow-n"
+									url="/pages/common/documentUpload.xhtml"
+									rendered="#{sessionBackingBean.FN8_1}" />
+								<p:menuitem value="View Upload Documents"
+									style="margin-left:5%;" icon="ui-icon-search"
+									url="/pages/common/viewUploadDocumentsNew.xhtml"
+									rendered="#{sessionBackingBean.FN8_2}" />
+							</p:submenu>
+
+							<p:submenu label="Committee/Board Setup" style="margin-left:5%;">
+								<p:menuitem value="Create Committee/Board" icon="ui-icon-plus"
+									url="/pages/amendmentsToBusOrOwner/setupCommitteeBoard.xhtml"
+									rendered="#{sessionBackingBean.FN8_5}" />
+								<p:menuitem value="Edit Committee/Board" icon="ui-icon-pencil"
+									url="/pages/amendmentsToBusOrOwner/editCommitteeBoard.xhtml"
+									rendered="#{sessionBackingBean.FN8_6}" />
+								<p:menuitem value="View Committee/Board" icon="ui-icon-search"
+									url="/pages/amendmentsToBusOrOwner/viewCommitteeBoard.xhtml"
+									rendered="#{sessionBackingBean.FN8_7}" />
+								<p:menuitem value="Approve Committee/Board"
+									icon="ui-icon-circle-check"
+									url="/pages/amendmentsToBusOrOwner/authorizeCommitteeBoard.xhtml"
+									rendered="#{sessionBackingBean.FN8_8}" />
+							</p:submenu>
+							<p:menuitem value="Committee/Board Approval"
+								style="margin-left:5%;"
+								url="/pages/surveyManagement/CommitteeBoardApproval.xhtml"
+								icon="ui-icon-circle-check"
+								rendered="#{sessionBackingBean.FN7_0}">
+							</p:menuitem>
+							<p:menuitem value="View Committee/Board Approval"
+								style="margin-left:5%;"
+								url="/pages/surveyManagement/viewCommitteeBoardApproval.xhtml"
+								icon="ui-icon-search" rendered="#{sessionBackingBean.FN8_9}">
+							</p:menuitem>
+
+							<p:menuitem value="Modify Permit Data"
+								rendered="#{sessionBackingBean.FN210}"
+								url="/pages/common/EditPrevPermitDetails.xhtml"
+								style="margin-left:5%;" icon="ui-icon-pencil">
+							</p:menuitem>
+							<p:menuitem value="Bus Removal Process"
+								rendered="#{sessionBackingBean.FN501}"
+								url="/pages/common/busRemovealProces.xhtml"
+								style="margin-left:5%;" icon="ui-icon-trash">
+							</p:menuitem>
+							
+							<p:menuitem value="Remove NFC Card Print Details"
+								rendered="#{sessionBackingBean.FN501}"
+								url="/pages/common/removeNFCCardPrintDetails.xhtml"
+								style="margin-left:5%;" icon="ui-icon-trash">
+							</p:menuitem>
+
+							<p:menuitem value="Inquiry" url="/pages/common/inquiry.xhtml"
+								style="margin-left:5%;" icon="ui-icon-arrow-4-diag"
+								rendered="#{sessionBackingBean.FN8_4}">
+							</p:menuitem>
+							<p:menuitem value="Common Inquiry"
+								url="/pages/common/inquiryDetails.xhtml" style="margin-left:5%;"
+								icon="ui-icon-arrow-4-diag"
+								rendered="#{sessionBackingBean.FN251}">
+							</p:menuitem>
+							<p:menuitem value="Inquiry for Admin"
+								url="/pages/common/inquiryAdmin.xhtml" style="margin-left:5%;"
+								icon="ui-icon-arrow-4-diag"
+								rendered="#{sessionBackingBean.FN0_4}">
+							</p:menuitem>
+							<p:menuitem value="Generate OmniBus Request Letter"
+								url="/pages/common/generateOmniBusRequest.xhtml"
+								style="margin-left:5%;" icon="ui-icon-print"
+								rendered="#{sessionBackingBean.FN8_0}">
+							</p:menuitem>
+							<p:menuitem value="Time Approval Request"
+								url="/pages/common/timeApprovalRequest.xhtml"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								rendered="#{sessionBackingBean.FN120}">
+							</p:menuitem>
+							<p:menuitem value="Removed Unprocessed Token for Current Date"
+								url="/pages/common/removedUnprocessedToken.xhtml"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								rendered="#{sessionBackingBean.FN122}">
+							</p:menuitem>
+							<p:menuitem value="Generate Transaction Report"
+								url="/pages/common/transactionReport.xhtml"
+								style="margin-left:5%;" icon="ui-icon-print"
+								rendered="#{sessionBackingBean.FN252}">
+							</p:menuitem>
+							<p:menuitem
+								value="Generate Application Transaction Status Report"
+								url="/pages/common/applicationTaskDetailReport.xhtml"
+								style="margin-left:5%;" icon="ui-icon-print"
+								rendered="#{sessionBackingBean.FN253}">
+							</p:menuitem>
+							<p:menuitem
+								value="Active Previous Renewal Application and Removed Current Renewal Application"
+								url="/pages/common/activePrvAppandRemovedCurApp.xhtml"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								rendered="#{sessionBackingBean.FN254}">
+							</p:menuitem>
+							<p:menuitem value="Encrypting Credentials"
+								url="/pages/common/setupDbCredentional.xhtml"
+								style="margin-left:5%;" icon="ui-icon-circle-check"
+								rendered="#{sessionBackingBean.FN600}">
+							</p:menuitem>
+
+						</p:submenu>
+					</p:panelMenu>
+
+				</h:form>
+
+
+
+			</div>
+			<div class="ui-g-9" style="width: 77%;">
+				<div class="main">
+					<ui:insert name="content" />
+				</div>
+
+			</div>
+		</div>
+
+
+		<ui:include src="footer.xhtml" />
+		<ui:include src="dialogs.xhtml" />
+	</div>
+	<p:ajaxStatus
+		style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+		<f:facet name="start">
+			<p:graphicImage name="images/preloader.gif" library="theme-layout"
+				style="width: 32px;" />
+		</f:facet>
+
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+
+
+
+	<f:facet name="last">
+		<h:outputStylesheet name="styles.css" library="css" />
+		<h:outputStylesheet name="forms.css" library="css" />
+		<h:outputStylesheet name="css/animate.css" library="theme-layout" />
+		<h:outputStylesheet name="css/nanoscroller.css" library="theme-layout" />
+		<h:outputStylesheet name="css/layout.css" library="theme-layout" />
+	</f:facet>
+
+	<p:idleMonitor timeout="7200000">
+		<!-- 7200000 = 2 HRS -->
+		<!-- 30 mins -->
+		<!-- 900000 = 15 minutes -->
+		<p:ajax event="idle" listener="#{loginBean.onIdle}" />
+
+	</p:idleMonitor>
+	<h:form>
+		<p:dialog id="dlgSessionTimeout" widgetVar="dlgSessionTimeout"
+			dynamic="true" hideEffect="fade" modal="true" showEffect="fade"
+			closeOnEscape="false" closable="false" resizable="false">
+			<f:facet name="header">
+				<h:outputText value="Session Expired" />
+			</f:facet>
+			<p:panelGrid columns="1" styleClass="ui-noborder">
+				<h:panelGrid columns="2"
+					columnClasses="msg-box-icon-col msg-box-msg-col">
+					<h:outputText id="txt_count"
+						value="Your session will expire in #{loginBean.number} seconds. Do you want to extend the session?"
+						styleClass="common_lable_h3" />
+					<p:poll interval="3" listener="#{loginBean.increment}"
+						update="txt_count" />
+				</h:panelGrid>
+
+				<h:panelGroup style="display:block; text-align:center">
+					<p:commandButton value="Yes" action="#{loginBean.increaseNumber}"
+						style="margin:0 auto !important;" />
+					<p:commandButton value="No" action="#{loginBean.goToLoginPage}"
+						oncomplete="PF('dlgSessionTimeout').hide()"
+						style="margin:0 auto !important;" />
+				</h:panelGroup>
+			</p:panelGrid>
+		</p:dialog>
+
+
+
+	</h:form>
+
+
+</h:body>
+
+</html>

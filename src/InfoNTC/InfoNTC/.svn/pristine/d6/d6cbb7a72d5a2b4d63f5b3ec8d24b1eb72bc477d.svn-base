@@ -1,0 +1,832 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<style>
+.dateTimeField input {
+	width: 100px;
+}
+
+.dateTimeField img {
+	vertical-align: right;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-input {
+	margin-top: -20px;
+}
+
+.ui-inputfield ui-widget ui-state-default ui-corner-all {
+	width: 10%;
+}
+</style>
+
+		<h:form id="frm-generateSurveyForm">
+
+			<div class="mainDiv">
+				<h1
+					style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+					class="common_form_header">Gami Seriya Generate Survey Form</h1>
+				<div style="width: 96%;" class="subDiv">
+					<p:panel id="pnl-search">
+						<br></br>
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-4"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid>
+								<p:outputLabel value="Survey No."></p:outputLabel>
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-surveyNo" style="width:92%"
+									value="#{gsGenerateSurveyFormBean.generateSurveyFormDTO.surveyNo}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax
+										listener="#{gsGenerateSurveyFormBean.onSurveyNoChange}"
+										update="@form" />
+									<f:selectItem itemLabel="--Select Survey No.--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{gsGenerateSurveyFormBean.drpdSurveyNoList}"
+										var="surveyNoList" itemLabel="#{surveyNoList.surveyNo}"
+										itemValue="#{surveyNoList.surveyNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid>
+								<p:outputLabel value="Survey Type"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="txt-surveyType"
+									value="#{gsGenerateSurveyFormBean.generateSurveyFormDTO.surveyType_des}"
+									readonly="true" style="width:100%;">
+								</p:inputText>
+							</p:panelGrid>
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid>
+								<p:outputLabel value="Survey Method"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="txt-surveyMethod"
+									value="#{gsGenerateSurveyFormBean.generateSurveyFormDTO.surveyMethod_des}"
+									readonly="true" style="width:100%;">
+								</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+
+						<br />
+						<center>
+							<p:commandButton value="Search" styleClass="mainActionbtn"
+								id="btn-search" action="#{gsGenerateSurveyFormBean.btnSearch}"
+								update="@form" />
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								id="btn-clear" update="@form"
+								action="#{gsGenerateSurveyFormBean.BtnClear}"></p:commandButton>
+						</center>
+						<p:panel style="border-bottom:5px solid #404d6f;" />
+					</p:panel>
+
+					<p:panel id="pnl-one"
+						rendered="#{gsGenerateSurveyFormBean.pnlContent}">
+						<br></br>
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+
+							<p:panelGrid>
+								<p:outputLabel value="Form ID"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="txt-formId"
+									value="#{gsGenerateSurveyFormBean.generateSurveyFormDTO.formID}"
+									disabled="#{gsGenerateSurveyFormBean.disabledTxtFormId}"
+									onkeyup="this.value=this.value.toUpperCase();"
+									onblur="this.value=this.value.toUpperCase();" maxlength="20"
+									style="width:80%;">
+								
+									<p:ajax update="txt-formId,errorMSG"
+										listener="#{gsGenerateSurveyFormBean.onFormIdValidate}" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Copy Template ID"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-copyTemplateId" style="width:74%"
+									disabled="#{gsGenerateSurveyFormBean.disableDrpdTemplateId}"
+									value="#{gsGenerateSurveyFormBean.generateSurveyFormDTO.copyTemplateID}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax listener="#{gsGenerateSurveyFormBean.onTempIdChange}"
+										update="@form" />
+									<f:selectItem itemLabel="--Select Copy Template ID--"
+										itemValue="" noSelectionOption="true" />
+									<f:selectItems
+										value="#{gsGenerateSurveyFormBean.drpdFormIdList}"
+										var="formIdList"
+										itemLabel="#{formIdList.formID} - #{formIdList.formDescription}"
+										itemValue="#{formIdList.formID}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Form Description"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="formDescription" maxlength="200"
+									value="#{gsGenerateSurveyFormBean.generateSurveyFormDTO.formDescription}"
+									style="width:80%;">
+								
+								</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+
+
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+							<p:outputLabel>Header Label<p:outputLabel
+									value=" *" style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+							<p:inputText id="txt-headerLabel" maxlength="200"
+								value="#{gsGenerateSurveyFormBean.generateSurveyFormDTO.headerLabel}"
+								readonly="false" style="width:95%;">
+								
+							</p:inputText>
+
+
+							<p:outputLabel>Header Label (Sinhala)</p:outputLabel>
+							<p:inputText id="txt-headerLabelSinhala" maxlength="200"
+								value="#{gsGenerateSurveyFormBean.generateSurveyFormDTO.headerLabel_sinhala}"
+								readonly="false" style="width:95%;">
+							</p:inputText>
+
+
+							<p:outputLabel>Header Label (Tamil)</p:outputLabel>
+							<p:inputText id="txt-headerLabelTamil" maxlength="200"
+								value="#{gsGenerateSurveyFormBean.generateSurveyFormDTO.headerLabel_tamil}"
+								readonly="false" style="width:95%;">
+							</p:inputText>
+						</p:panelGrid>
+
+						<p:panel style="border-bottom:5px solid #404d6f;" />
+					</p:panel>
+
+
+					<p:panel id="pnl-two"
+						rendered="#{gsGenerateSurveyFormBean.pnlContent}">
+						<br></br>
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Field Name"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="txt-fieldName" maxlength="100"
+									value="#{gsGenerateSurveyFormBean.indicatorsDTO.fieldName}"
+									readonly="false" style="width:80%;">
+								
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Validation Method"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-ValidationMethod" style="width:80%"
+									value="#{gsGenerateSurveyFormBean.indicatorsDTO.validationMethod}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax
+										listener="#{gsGenerateSurveyFormBean.onValidationMethodChange}" />
+									<f:selectItem itemLabel="--Select Validation Method--"
+										itemValue="" noSelectionOption="true" />
+									<f:selectItems
+										value="#{gsGenerateSurveyFormBean.drpdValidationMethodList}"
+										var="validationMethodList"
+										itemLabel="#{validationMethodList.validationMethod_des}"
+										itemValue="#{validationMethodList.validationMethod}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Field Name (Sinhala)"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="txt-fieldNameSinhala" maxlength="100"
+									value="#{gsGenerateSurveyFormBean.indicatorsDTO.fieldName_sinhala}"
+									readonly="false" style="width:80%;">
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Display After"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<!-- drpdIndicatorOrderList -->
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-displayAfter" style="width:80%"
+									value="#{gsGenerateSurveyFormBean.indicatorsDTO.displayAfter}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+`									
+									<f:selectItem itemLabel="--Select Display After--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{gsGenerateSurveyFormBean.drpdIndicatorOrderList}"
+										var="indicatorOrderList"
+										itemLabel="#{indicatorOrderList.fieldName}"
+										itemValue="#{indicatorOrderList.fieldName}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Field Name (Tamil)"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="txt-fielNameTamil" maxlength="100"
+									value="#{gsGenerateSurveyFormBean.indicatorsDTO.fieldName_tamil}"
+									readonly="false" style="width:80%;">
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Field Definition"></p:outputLabel>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-fieldDefinition" style="width:80%"
+									disabled="#{gsGenerateSurveyFormBean.disableDrpdFieldDefiniton}"
+									value="#{gsGenerateSurveyFormBean.indicatorsDTO.fieldDefinition}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax
+										listener="#{gsGenerateSurveyFormBean.onFieldDefinitionChange}" />
+									<f:selectItem itemLabel="--Select Field Definition--"
+										itemValue="" noSelectionOption="true" />
+									<f:selectItems
+										value="#{gsGenerateSurveyFormBean.drpdFieldDefinitionList}"
+										var="fieldDefinitionList"
+										itemLabel="#{fieldDefinitionList.fieldDefinition_des}"
+										itemValue="#{fieldDefinitionList.fieldDefinition}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Field Type"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-fieldType" style="width:72%"
+									value="#{gsGenerateSurveyFormBean.indicatorsDTO.fieldType}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax
+										listener="#{gsGenerateSurveyFormBean.onFieldTypeChange}"
+										update="btn-lovValues,drpd-fieldDefinition,txt-fieldLength" />
+
+									<f:selectItem itemLabel="--Select Field Type--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{gsGenerateSurveyFormBean.drpdFieldTypeList}"
+										var="fieldTypeList" itemLabel="#{fieldTypeList.fieldType_des}"
+										itemValue="#{fieldTypeList.fieldType}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Field Length"></p:outputLabel>
+								<p:outputLabel id="fieldLength_asterix" value=" *"
+									style="color:red;">
+								</p:outputLabel>
+							</p:panelGrid>
+
+
+
+							<p:panelGrid>
+								<p:inputText id="txt-fieldLength"
+									disabled="#{gsGenerateSurveyFormBean.disableTxtFieldLength}"
+									value="#{gsGenerateSurveyFormBean.indicatorsDTO.fieldLength}"
+									maxlength="20" readonly="false"
+									style="width:89% !important;text-align:right">
+									<p:keyFilter regEx="/[\d]/i" />
+								</p:inputText>
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:outputLabel>Active</p:outputLabel>
+							<p:selectBooleanCheckbox
+								value="#{gsGenerateSurveyFormBean.indicatorsDTO.active}">
+
+							</p:selectBooleanCheckbox>
+							<p:outputLabel>Mandatory Field</p:outputLabel>
+							<p:selectBooleanCheckbox
+								value="#{gsGenerateSurveyFormBean.indicatorsDTO.mandatoryField}">
+							</p:selectBooleanCheckbox>
+
+							<p:outputLabel></p:outputLabel>
+							<p:commandButton value="LOV Values" styleClass="mainActionbtn"
+								style="width:auto;" id="btn-lovValues"
+								action="#{gsGenerateSurveyFormBean.btnLovValues}"
+								disabled="#{gsGenerateSurveyFormBean.disableBtnLovValues}" />
+
+							<p:outputLabel></p:outputLabel>
+
+						</p:panelGrid>
+
+						<br></br>
+						<center>
+							<p:commandButton value="Add" styleClass="mainActionbtn"
+								id="btn-add" action="#{gsGenerateSurveyFormBean.btnAdd}"
+								rendered="#{!gsGenerateSurveyFormBean.renderBtnUpdate}"
+								update="@form" />
+							<p:commandButton value="Update" styleClass="mainActionbtn"
+								id="btn-update" action="#{gsGenerateSurveyFormBean.btnUpdate}"
+								rendered="#{gsGenerateSurveyFormBean.renderBtnUpdate}"
+								update="@form"></p:commandButton>
+
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								id="btnClearTwo" update="@form"
+								action="#{gsGenerateSurveyFormBean.btnClearTwo}"></p:commandButton>
+
+							<p:panel style="border-bottom:5px solid #404d6f;" />
+						</center>
+					</p:panel>
+
+
+					<p:panel id="pnlThree"
+						rendered="#{gsGenerateSurveyFormBean.pnlContent}">
+
+						<!-- tblIndicatorsList -->
+						<center>
+							<p:dataTable id="tbl-indicators" var="indicatorsList"
+								value="#{gsGenerateSurveyFormBean.tblIndicatorsList}"
+								resizableColumns="false" liveResize="true"
+								sortBy="#{indicatorsList.displayOrder}" tableStyle="width:100%"
+								styleClass="myTable" rowsPerPageTemplate="5,10,15"
+								emptyMessage="No records available." rows="10" paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+								<p:column headerText="#"
+									style="text-align:left;width:5%;font-size:95%;">
+									<h:outputText style="float:left;" escape="false"
+										value="#{indicatorsList.displayOrder}" />
+								</p:column>
+
+								<p:column headerText="Field Name"
+									style="text-align:left;font-size:95%;">
+									<h:outputText style="float:left;" escape="false"
+										value="#{indicatorsList.fieldName} &lt;br/&gt; #{p.fieldName_sinhala} &lt;br/&gt; #{p.fieldName_tamil}" />
+								</p:column>
+
+								<p:column headerText="Field Type"
+									style="text-align:left;width:8%;font-size:95%;">
+									<h:outputText style="float:left;"
+										value="#{indicatorsList.fieldType_des}" />
+								</p:column>
+
+								<p:column headerText="Field Definition" rendered="false"
+									style="text-align:left;width:8%;font-size:95%;">
+									<h:outputText style="float:left;"
+										value="#{indicatorsList.fieldDefinition_des}" />
+								</p:column>
+
+								<p:column headerText="Validation Method"
+									style="text-align:left;width:8%;font-size:95%;">
+									<h:outputText style="float:left;"
+										value="#{indicatorsList.validationMethod_des}" />
+								</p:column>
+
+								<p:column headerText="Field Length"
+									style="text-align:left;width:6%;font-size:95%;">
+									<h:outputText style="float:left;"
+										value="#{indicatorsList.fieldLength}" />
+								</p:column>
+
+								<p:column headerText="Display After"
+									style="text-align:left;width:10%;font-size:95%;">
+									<h:outputText style="float:left;"
+										value="#{indicatorsList.displayAfter}" />
+								</p:column>
+
+								<p:column headerText="Mandatory"
+									style="text-align:center;width:9%;font-size:95%;">
+									<p:selectBooleanCheckbox
+										value="#{indicatorsList.mandatoryField}" disabled="true" />
+								</p:column>
+
+								<p:column headerText="Active"
+									style="text-align:center;width:6%;font-size:95%;">
+									<p:selectBooleanCheckbox value="#{indicatorsList.active}"
+										disabled="true" />
+								</p:column>
+
+								<p:column headerText=""
+									style="width:10%;text-align:center;padding-top :1px !important;padding-bottom :1px !important;width:6%;">
+									<p:commandLink
+										action="#{gsGenerateSurveyFormBean.linkEditIndicators(indicatorsList)}"
+										update="@form">
+										<p:graphicImage library="images" name="edit.png"
+											style="width:20px;height:20px;" title="Edit"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+
+								<p:column headerText=""
+									style="width:10%;text-align:center;padding-top :1px !important;padding-bottom :1px !important;width:6%;">
+									<p:commandLink
+										action="#{sessionBackingBean.showMessage(null,null,'CONFIRM_DIALOG')}"
+										ajax="true" update="@form">
+										<ui:param name="bean" value="#{gsGenerateSurveyFormBean}" />
+										<ui:param name="method" value="removeIndicators" />
+										<f:setPropertyActionListener
+											target="#{gsGenerateSurveyFormBean.removeIndicatorsDTO}"
+											value="#{indicatorsList}" />
+										<p:graphicImage library="images" name="delete.png"
+											style="padding-top :10px;width:20px;height:20px;"
+											title="Delete"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</center>
+						<br></br>
+						<center>
+							<p:commandButton value="Update" styleClass="mainActionbtn"
+								id="btn-updateForm"
+								rendered="#{gsGenerateSurveyFormBean.renderBtnUpdateForm}"
+								action="#{gsGenerateSurveyFormBean.btnUpdateForm}"
+								update="@form" />
+							<p:commandButton value="Save" styleClass="mainActionbtn"
+								rendered="#{!gsGenerateSurveyFormBean.renderBtnUpdateForm}"
+								id="btn-save" action="#{gsGenerateSurveyFormBean.btnSave}"
+								update="@form" />
+							<p:commandButton value="Cancel" styleClass="mainActionbtn"
+								id="btn-cancel" update="@form"
+								action="#{gsGenerateSurveyFormBean.btnCancel}"></p:commandButton>
+							<p:commandButton value="Generate Form" styleClass="mainActionbtn"
+								style="width:auto" id="btn-generateForm"
+								action="#{gsGenerateSurveyFormBean.btnGenerateForm}" update="" />
+						</center>
+						<br></br>
+					</p:panel>
+
+
+					<p:dialog id="LOV_values" modal="true" position="center"
+						header="LOV Values" width="70%" severity="info"
+						widgetVar="LOV_values_Dialog" closeOnEscape="true"
+						background-color="#404d6f !important" resizable="false">
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel value="Code">
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+							<p:inputText id="LOV_code"
+								value="#{gsGenerateSurveyFormBean.LOVvaluesDTO.LOV_code}"
+								onkeyup="this.value=this.value.toUpperCase();"
+								onblur="this.value=this.value.toUpperCase();" maxlength="5"
+								style="width:100%;">
+								
+								<p:ajax update="LOV_code"
+									listener="#{gsGenerateSurveyFormBean.check_LOV_code}" />
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel value="Description (English)">
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+							<p:inputText id="LOV_description"
+								value="#{gsGenerateSurveyFormBean.LOVvaluesDTO.LOV_description}"
+								maxlength="100" style="width:100%;">
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel value="Description (Sinhala)">
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+							<p:inputText id="LOV_description_sinhala"
+								value="#{gsGenerateSurveyFormBean.LOVvaluesDTO.LOV_description_sinhala}"
+								maxlength="100" style="width:100%;">
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel value="Description (Tamil)">
+								<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+							<p:inputText id="LOV_description_tamil"
+								value="#{gsGenerateSurveyFormBean.LOVvaluesDTO.LOV_description_tamil}"
+								maxlength="100" style="width:100%;">
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+
+						</p:panelGrid>
+						<br></br>
+						<center>
+							<p:commandButton value="Add" styleClass="mainActionbtn"
+								action="#{gsGenerateSurveyFormBean.addLOV_values}"
+								update="tbl-lovValues,LOV_description_sinhala,LOV_description_tamil,LOV_code,LOV_description">
+							</p:commandButton>
+						</center>
+
+
+						<p:panel>
+							<center>
+								<p:dataTable id="tbl-lovValues" var="p"
+									value="#{gsGenerateSurveyFormBean.tblLovValuesList}"
+									sortBy="#{1}" resizableColumns="false" liveResize="true"
+									tableStyle="width:100%" styleClass="myTable"
+									emptyMessage="No records available." rows="5" paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+									<p:column headerText="Code" style="text-align:left;width:10%">
+										<h:outputText style="float:left;" value="#{p.LOV_code}" />
+									</p:column>
+
+									<p:column headerText="Description"
+										style="text-align:left;width:30%">
+										<h:outputText style="float:left;" value="#{p.LOV_description}" />
+									</p:column>
+
+									<p:column headerText="Description (Sinhala)"
+										style="text-align:left;width:30%">
+										<h:outputText style="float:left;"
+											value="#{p.LOV_description_sinhala}" />
+									</p:column>
+
+									<p:column headerText="Description (Tamil)"
+										style="text-align:left;width:30%">
+										<h:outputText style="float:left;"
+											value="#{p.LOV_description_tamil}" />
+									</p:column>
+
+									<p:column headerText="Remove"
+										style="width:10%;text-align:center;padding-top :1px !important;padding-bottom :1px !important;width:50px">
+										<p:commandLink
+											action="#{gsGenerateSurveyFormBean.removeLOV_values}"
+											ajax="true" update="tbl-lovValues">
+											<f:setPropertyActionListener
+												target="#{gsGenerateSurveyFormBean.removeLOVvaluesDTO}"
+												value="#{p}" />
+											<p:graphicImage library="images" name="delete.png"
+												style="padding-top :10px;width:20px;height:20px;"
+												title="Delete"></p:graphicImage>
+										</p:commandLink>
+									</p:column>
+								</p:dataTable>
+							</center>
+						</p:panel>
+						<center>
+							<p:commandButton styleClass="mainActionbtn" value="Back"
+								action="#{gsGenerateSurveyFormBean.cancelLOV_values}" update="">
+							</p:commandButton>
+						</center>
+						<br></br>
+
+					</p:dialog>
+
+				</div>
+			</div>
+		</h:form>
+
+		<p:dialog id="errorMSG" global="true" modal="true" header="Error"
+			width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{gsGenerateSurveyFormBean.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="successMSG" global="true" modal="true" header="Success"
+			width="30%" severity="info" widgetVar="successMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{gsGenerateSurveyFormBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="infoMSG" global="true" modal="true" header="Alert"
+			width="30%" severity="info" widgetVar="infoMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmInfo">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{gsGenerateSurveyFormBean.infoMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmInfo" onclick="PF('infoMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

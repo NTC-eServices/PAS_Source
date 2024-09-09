@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PermitTransferOnRelationshipNew" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea4b228b-fa0e-4d09-8c17-4a21efd88184">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="P_Permit_No" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+distinct pmo_vehicle_regno,
+pmo_full_name_sinhala,
+pmo_address1_sinhala,
+pmo_address2_sinhala,
+pmo_address3_sinhala,
+ pmo_city_sinhala 
+from
+nt_t_pm_vehi_owner,nt_t_pm_application a
+where
+a.pm_application_no = nt_t_pm_vehi_owner.pmo_application_no
+and a.pm_status in ('P') 
+and pmo_permit_no = $P{P_Permit_No}]]>
+	</queryString>
+	<field name="pmo_vehicle_regno" class="java.lang.String"/>
+	<field name="pmo_full_name_sinhala" class="java.lang.String"/>
+	<field name="pmo_address1_sinhala" class="java.lang.String"/>
+	<field name="pmo_address2_sinhala" class="java.lang.String"/>
+	<field name="pmo_address3_sinhala" class="java.lang.String"/>
+	<field name="pmo_city_sinhala" class="java.lang.String"/>
+	<pageHeader>
+		<band height="267" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField pattern=" yyyy-MM-dd">
+				<reportElement x="443" y="110" width="107" height="30" uuid="92d0c7bf-ddcf-40b1-b7d0-5bd024d07c0f"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="167" width="520" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="9609cdfd-18e3-45a0-a2b7-51ab68fc2e91"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_full_name_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="" x="30" y="187" width="520" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="204cd659-575c-40fc-9e5e-001fc295889d"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address1_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="207" width="520" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="91d270a8-9b6b-4436-8f46-3f5ea9422c68"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address2_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="227" width="520" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="da48d019-7171-46b8-b920-dca63eae9204"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address3_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="247" width="520" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="b8833d78-acfe-437f-a867-1f04fa0b8bf5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_city_sinhala}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="520" height="37" isPrintWhenDetailOverflows="true" uuid="41547365-858d-46c3-b70e-94b703c2d57b"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["අවසරපත්‍ර අංක​: "+$P{P_Permit_No}+"  ඟාතීත්වය මත අයිතිය පැවරීම- බස් රථ අංක :​​"+ $F{pmo_vehicle_regno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="361" splitType="Stretch">
+			<staticText>
+				<reportElement key="" positionType="Float" x="30" y="-11" width="520" height="80" uuid="b43cd904-103e-424e-b95f-2a0f0e687080"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="12.0" leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ඉහත අංක දරන මගී සේවා අවසරපත්‍රයේ අයිතිය සංශෝධනය සදහා ඔබ විසින් ඉදිරිපත් කරන ලද අයදුම්පත්‍රයට   අනුව එම මගීසේවා අවසරපත්‍රය ඔබගේ  නමින්  අයිතිය විධිමත් කිරීම සඳහා අනුමත වී ඇත​.ඒ සඳහා පහත සඳහන් ලිපිලේඛනයන් වල ඡායා පිටපත් ද සමග..........................................දින හෝ ඊට පෙර පෙ.ව​. 9.00 ට ජාතික ගමනාගමන කොමිෂන් සභාව වෙත පැමිණෙන ලෙස දන්වා සිටිමු.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="30" y="73" width="520" height="22" uuid="3d3aa951-a66e-48f5-90a5-7536cf8b8683"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[මෙම දිනට පැමිණීමට නොහැකි නම් ඒ බව ලිඛිතව  අදාල දිනයට ප්‍රථමව දැනුම් දී වෙනත් දිනයක් ලබා ගත යුතුය​.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="90" width="15" height="20" uuid="2b41d653-03b6-42f5-96d8-450d381108fa">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[1.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="200" width="15" height="20" uuid="2af04e35-a048-4bea-a66b-c189a355f633">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[9.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="147" width="15" height="20" uuid="b0cfb800-19a0-4623-a6e3-9f2bb6107f73">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[5.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="133" width="15" height="20" uuid="fbb8dde0-4b08-4ffa-aad3-88cfdda62281">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[4.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="119" width="15" height="20" uuid="297eb1f6-0386-4319-890b-7cb00241b4bc"/>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[3.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="105" width="15" height="20" uuid="a74421cb-ad18-443a-ac34-6f2fb85cbf51">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="188" width="15" height="20" uuid="92554109-0f0e-445b-a8a4-a656bfba11ce">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[8.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="160" width="15" height="20" uuid="46a4541b-f994-462b-839f-6a6c8efbe26b"/>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[6.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="175" width="15" height="20" uuid="b2e27a41-be73-49a4-af1c-9eccbc25949e">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[7.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="49" y="90" width="485" height="20" uuid="2703260f-d03f-4e6c-9b8e-8eea01901741">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[බස් රථය. ​(පසුගිය මාස 3ක් තුළ ජා.ග​.කො.ස​. වෙත ඉදිරිපත්  කර නොමැති නම් අනිවාර්‍යයි.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="50" y="105" width="484" height="20" uuid="c80e9944-01aa-4074-8006-ac5436ca8951">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[මගී සේවා අවසර පත්‍රය​.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="49" y="119" width="485" height="20" uuid="bad0a9cc-199e-4a21-92fe-08986fedc1f8">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[බස් රථය පවරාගෙන එහි  ලියාපදිංචි කිරීමේ සහතිකය​.(ඔමිනි නිර්දේශ සහිත​) (ඡායා පිටපත් අවශ්‍යයි.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="49" y="133" width="485" height="20" uuid="59cd5e3c-0100-4f25-83bb-9d05b0184811">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[රක්‍ෂණ සහතිකය​. (ඡායා පිටපත් අවශ්‍යයි.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="49" y="175" width="485" height="20" uuid="676fa5dc-a1cd-4dae-a409-be8bd8ae8b07">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[බස් රථයේ යෝග්‍යතා සහතිකය​.(බස් රථය වසර 1ට වඩා පැරණි නම් පමණි) (ඡායා පිටපත් අවශ්‍යයි)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="49" y="147" width="485" height="20" uuid="512f817f-640f-4200-9b55-2247137b6709">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[අසීමිත​ රක්‍ෂණ සහතිකය​. (මුල් පිටපත් අවශ්‍යයි)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="49" y="160" width="484" height="20" uuid="7c000737-e5ac-4ccf-aa8c-e1f11bf69d57">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[අදායම් බලපත්‍රය​/දුම් පරීක්‍ෂන සහතිකය.​ (ඡායා පිටපත් අවශ්‍යයි)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="49" y="200" width="485" height="20" uuid="5f08496f-41bb-402e-ae9d-223d94e068ed">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[ගාස්තු :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="49" y="188" width="434" height="20" uuid="9097c8f2-b43c-4c7f-bd87-46933e95788c">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[ජාතික හැඳුනුම්පත.​(ඡායා පිටපත් අවශ්‍යයි)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="106" y="209" width="15" height="20" uuid="61e4cf82-bf64-4c49-88fd-6a15ffd3c73c"/>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[a.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="106" y="223" width="15" height="20" uuid="a7ac2f20-b0ef-4a58-bb7e-1deab20239d2"/>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[b.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="106" y="237" width="15" height="20" uuid="a199b755-f069-46b3-bb87-20742e5d0767"/>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[c.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" positionType="Float" x="106" y="253" width="15" height="20" uuid="823fb9ce-13d8-4406-b5cf-4030a10bf3b8"/>
+				<textElement>
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[d.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="121" y="209" width="189" height="20" uuid="19aa46cc-ffab-4109-b936-585468743ac8">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[අයිතිය විධිමත් කිරීමේ ගාස්තුව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="121" y="223" width="229" height="20" uuid="80dcc2a1-059a-4164-a7b7-5ffea0a23a79">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[මගීසේවා අවසරපත්‍ ඉල්ලුම් පත්‍ර ගාස්තුව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="121" y="237" width="189" height="20" uuid="30b59351-2305-4828-8734-657df5fd9509">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[මගීසේවා අවසරපත්‍ර ගාස්තුව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" positionType="Float" x="121" y="253" width="189" height="20" uuid="6c89ec09-b2c5-46e5-9945-9be201c0d5d2">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[බස් රථ ආදේශන ගාස්තුව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="313" y="209" width="165" height="20" uuid="34a4d24e-0871-4bb0-ba93-18645f983dc1">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[රු.15,000.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="313" y="223" width="165" height="20" uuid="bb1ee84d-eabb-40df-a410-9fe56cfe91c7">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[රු.500.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="313" y="237" width="165" height="20" uuid="92ea3820-fb6b-4882-b384-b2446c613703">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[රු.15,000.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" positionType="Float" x="313" y="253" width="165" height="20" uuid="026f30e1-f76c-4167-9d0f-a90017de0f45">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[රු.25,000.00   ගෙවිය යුතුය​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" positionType="Float" x="51" y="266" width="491" height="12" uuid="135f5851-c0bd-4dd6-9494-b5737db5ed10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[(එසේම එම යොදවනු ලබන බස්‍ රථය පැවති බස් රථයට වඩා ප්‍රථම ලියාපදිංචියෙන් අළුත් විය යුතුය​.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="316" width="190" height="15" uuid="378ac5ce-ea09-42c3-85ab-dae12c1ee081">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[අධ්‍යක්‍ෂක ,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="331" width="190" height="15" uuid="b99abf8a-bb38-44e3-b6d9-74c4c36ff773">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[(ධාවන හා සේවා අධීක්‍ෂණ​)වෙනුවට​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="34" y="346" width="190" height="15" uuid="aa50d871-51fa-4a24-b2d8-36de4e6d0276">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

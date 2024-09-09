@@ -1,0 +1,127 @@
+* {
+     margin: 0;
+     padding: 0;
+     border: 0;
+     outline: 0;
+     vertical-align: baseline;
+     background: transparent;
+ }
+ 
+    
+   .ui-widget-content {
+	border: 0px solid #39F;
+	background: #f1f1f1 none repeat scroll 0% 0%;
+	color: #07295b;
+	
+}
+
+
+.ui-panelgrid .ui-panelgrid-cell {
+	border-width: 0px;
+	border-style: none;
+	border-color: inherit;
+	padding: 2px 10px;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    padding: .4em .4em .4em 1em;
+    position: relative;
+    background: #07295b !important;
+	padding: 0px 5px 5px 20px;
+	margin: 0px 0px 0px 0px;    
+	color: #ffffff;
+}
+
+
+.main-body {
+    font-family: "latoregular", "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff !important; 
+}
+
+
+.nano > .nano-content {
+    /* position: absolute; */
+    overflow: scroll;
+    overflow-x: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: red;
+    left: 0;
+    background-color: #3385ff !important; 
+}
+
+
+.wrapper .sidebar ul li > a {
+    position: relative;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight:bold;
+    padding: 15px;
+    display: block;
+    box-sizing: border-box;
+    border-top: 1px solid #4e5159;
+    -moz-transition: padding-left 0.3s;
+    -o-transition: padding-left 0.3s;
+    -webkit-transition: padding-left 0.3s;
+    transition: padding-left 0.3s;
+}
+
+
+  
+.fa-signal:before {
+    color: red;
+    font-size: 150%;
+}
+
+i {
+  margin-right: 10px;
+}
+ 
+.fa-pencil:before {
+    color: red;
+    font-size: 150%;
+} 
+
+ .fa-user:before {
+    color: red;
+    font-size: 150%;
+} 
+ 
+ 
+  .fa-money:before {
+    color: red;
+    font-size: 150%;
+} 
+ 
+  .fa-institution:before {
+    color: red;
+    font-size: 150%;
+} 
+ 
+ 
+ 
+ .fa-chevron-circle-right{
+   color:red !important;
+ }
+ 
+  .fa-adjust{
+   color:red !important;
+ }
+ 
+ 
+ 
+ .ui-inputfield {
+    margin: 0;
+    outline: medium none;
+    padding: 4px;
+    font-weight: normal;
+    height:20px;
+    border-radius: 5px;
+}
+
+ 

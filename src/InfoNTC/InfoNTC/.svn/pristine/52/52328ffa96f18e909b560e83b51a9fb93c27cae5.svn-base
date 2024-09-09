@@ -1,0 +1,5224 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn2 {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 100%;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn2:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.calendarClass input {
+	width: 73% !important
+}
+
+#dd {
+	width: 73% !important;
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Amendments (Owner Change/Bus
+				Change/Service Change)</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form>
+
+
+					<p:dialog closable="false" header="Select Counter"
+						visible="#{amendmentBackingBean.localcheckcounter}"
+						widgetVar="dlg2" modal="true" height="120" width="420"
+						resizable="false" update="@all">
+
+						<br> </br>
+
+						<p:panelGrid columns="2" id="dialoggrid"
+							columnClasses="ui-grid-col-5,ui-grid-col-5">
+
+							<p:panelGrid>
+
+								<p:outputLabel value="Select Counter No. :- "></p:outputLabel>
+
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:selectOneMenu style="width:171px" id="counter"
+									value="#{amendmentBackingBean.commonDTO.counterId}">
+									<p:ajax listener="#{amendmentBackingBean.onCounterSelect}"
+										onClose="#{amendmentBackingBean.handleClose}">
+									</p:ajax>
+									<f:selectItem itemLabel="--Select Counter--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{amendmentBackingBean.counterList}"
+										var="counterList" itemLabel="#{counterList.counter}"
+										itemValue="#{counterList.counterId}" />
+
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+
+							<center>
+								<p:panel>
+									<p:commandButton id="Exit" value="Exit"
+										action="#{amendmentBackingBean.handleClose}"
+										class="mainActionbtn" ajax="true" update="@all">
+									</p:commandButton>
+								</p:panel>
+							</center>
+
+						</p:panelGrid>
+
+					</p:dialog>
+					<!-- Search box start -->
+					<p:panel>
+						<p:panelGrid columns="3" style="text-align:center;"
+							columnClasses="ui-grid-col-3,ui-grid-col-6,ui-grid-col-3"
+							layout="grid">
+							<!-- Amendment Type -->
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel
+								style="width:100%;height:18px;text-align:center;color:#404d6f;font-weight: bold;"
+								value="#{amendmentBackingBean.strAmendmentType}">
+							</p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+
+						</p:panelGrid>
+						<br></br>
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+							layout="grid">
+
+
+							<!-- _Bus Registration No. -->
+							<p:outputLabel>Vehicle No.</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								readonly="true" value="#{amendmentBackingBean.strVehicleNo}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+							<!-- _Queue No. -->
+							<p:outputLabel>Queue No.</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								value="#{amendmentBackingBean.strQueueNo}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+
+
+						</p:panelGrid>
+						<!-- Search panel buttons -->
+						<center>
+							<p:panel>
+								<!-- _Search -->
+								<p:commandButton styleClass="mainActionbtn" value="Search"
+									ajax="false" update="@form"
+									action="#{amendmentBackingBean.searchByQueueNo}"
+									disabled="{amendmentBackingBean.callNext==true}"></p:commandButton>
+								<!-- _Call Next -->
+								<p:commandButton styleClass="mainActionbtn" value="Call Next"
+									ajax="false" update="@form"
+									action="#{amendmentBackingBean.callNext}"
+									disabled="#{amendmentBackingBean.callNext==true}"></p:commandButton>
+								<!-- _Skip -->
+								<p:commandButton styleClass="mainActionbtn" value="Skip"
+									ajax="false" update="@form"
+									action="#{amendmentBackingBean.skip}"
+									disabled="#{amendmentBackingBean.skip==true}"></p:commandButton>
+								<!-- _Clear -->
+								<p:commandButton styleClass="mainActionbtn" value="Cancel"
+									ajax="false" update="@form"
+									action="#{amendmentBackingBean.clearAll}"></p:commandButton>
+							</p:panel>
+
+
+
+						</center>
+					</p:panel>
+					<!-- Search box end -->
+
+
+				</h:form>
+				<!-- Start tab view section -->
+
+				<p:tabView id="tabviewId">
+
+
+					<!-- ***********************************      Tab 01       ******************************************************************* -->
+					<p:tab title="Particulars of Bus Owner"
+						activeIndex="#{amendmentBackingBean.activeTabIndex}"
+						rendered="#{amendmentBackingBean.oldOwner}">
+
+						<h:form id="frmCaptureBusOwner">
+
+							<!-- Tab 01 : First row  -->
+							<p:panel>
+
+								<!-- Tab 01 > panel 01 : Bus details -->
+								<p:panel>
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<!-- Tab 01 > panel 01 : row 01 -->
+										<p:outputLabel>
+											Permit No.
+										</p:outputLabel>
+
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.permitNo}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+
+										<!-- Tab 01 > panel 01 : row 02 -->
+										<p:outputLabel>Application No.</p:outputLabel>
+
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.applicationNo}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+
+
+										<!-- Tab 01 > panel 01 : row 01-->
+										<p:outputLabel>Service Type</p:outputLabel>
+
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.serviceType}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+
+										<!-- Tab 01 > panel 01 : row 04 -->
+										<p:outputLabel>Existing Bus No.</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.busRegNo}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+
+										<!-- Tab 01 > panel 01 : row 05 -->
+
+
+										<p:outputLabel>Tender Permit? Yes</p:outputLabel>
+										<p:selectBooleanCheckbox
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.tenderPermit}"
+											disabled="true" />
+
+										<!-- Tab 01 > panel 01 : row 06 -->
+										<p:outputLabel>Permit Expiry Date</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.expireDate}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+
+										<p:outputLabel>Remarks</p:outputLabel>
+										<p:inputTextarea rows="5" cols="87"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.finalRemark}"
+											readonly="true" queryDelay="750" minQueryLength="4" />
+
+									</p:panelGrid>
+									<!-- Tab 01 > panel 01 : Buttons -->
+								</p:panel>
+
+								<!-- Tab 01 > panel 02 : Bus owner details -->
+								<p:panel>
+									<p:panelGrid columns="2"
+										columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+										<!-- Tab 01 > panel 02 : row 01 -->
+										<p:outputLabel>Name in Full</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.fullName}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+										<p:outputLabel>Telephone No.</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.telephoneNo}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<!-- Tab 01 > panel 02 : row 02 -->
+										<p:outputLabel>Address 1</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.address1}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>Mobile No.</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.mobileNo}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<!-- Tab 01 > panel 02 : row 03 -->
+										<p:outputLabel>Address 2</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.address2}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>Province</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.province}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<!-- Tab 01 > panel 02 : row 04 -->
+										<p:outputLabel>City</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.city}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>District</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.district}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<!-- Tab 01 > panel 02 : row 05 -->
+										<!-- panel 02 : row 4 -->
+										<p:outputLabel>NIC No.</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.nicNo}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>Divisional Secretariat Division</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.amendmentBusOwnerDTO.divSec}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+
+									</p:panelGrid>
+									<!-- Tab 01 > panel 02 : Buttons -->
+								</p:panel>
+
+							</p:panel>
+						</h:form>
+					</p:tab>
+
+					<!-- ***********************************      Tab 02       ******************************************************************* -->
+					<p:tab title="Particulars of Existing Bus"
+						activeIndex="#{amendmentBackingBean.activeTabIndex}"
+						rendered="#{amendmentBackingBean.oldBus}">
+
+						<h:form id="frmParticularsOfBusOwner">
+
+							<p:panel>
+
+								<!-- Tab 02 > panel 02 : Bus owner details -->
+								<p:panel>
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<!-- Tab 02 > panel 02 : row 01 -->
+										<p:outputLabel>Registration No. of the Bus</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.vehicleRegNo}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>Permit No.</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.permitNo}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<!-- Tab 02 > panel 02 : row 02 -->
+										<p:outputLabel>Seating Capacity</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.seating}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>Manufacture Year</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.manufactureDate}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<!-- Tab 02 > panel 02 : row 03 -->
+										<p:outputLabel>No. of Doors </p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.noofDoors}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>Weight (Kg)</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.weight}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<!-- Tab 02 > panel 02 : row 04 -->
+										<p:outputLabel>Service Type</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.serviceTypeDesc}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>Route No.</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.routeNo}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+
+
+										<!-- Tab 02 > panel 02 : row 05 -->
+
+										<p:outputLabel>Service Origin</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.origin}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>Service Destination</p:outputLabel>
+										<p:inputText style="width:100%;height:18px;" maxlength="50"
+											readonly="true"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.destination}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel>Date of Registration</p:outputLabel>
+										<p:calendar styleClass="calendarClass"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.dateOfFirstReg}"
+											maxdate="today" yearRange="c-100:c+100" navigator="true"
+											locale="en_US" showOn="button" readonlyInput="true"
+											disabled="true" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+										</p:calendar>
+
+									</p:panelGrid>
+									<!-- Tab 02 > panel 02 : row 06 -->
+									<p:panelGrid columns="2"
+										columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+										<p:outputLabel rowspan="2">Remarks</p:outputLabel>
+										<p:inputTextarea rows="5" cols="90" rowspan="2"
+											style="width:99.75%;"
+											value="#{amendmentBackingBean.amendmentOminiBusDTO.remarks}"
+											readonly="true" queryDelay="750" minQueryLength="4" />
+
+									</p:panelGrid>
+								</p:panel>
+
+							</p:panel>
+
+						</h:form>
+					</p:tab>
+
+					<!-- ***********************************      Tab 03       ******************************************************************* -->
+
+					<p:tab title="Relation/Non-Relation Info"
+						activeIndex="#{amendmentBackingBean.activeTabIndex}"
+						rendered="#{amendmentBackingBean.newOwner}">
+
+						<h:form id="frmRelationOfInformation">
+
+							<h1>New Owner Information</h1>
+
+
+							<!-- panel 02 start -->
+							<p:panel style="border-bottom:5px solid #404d6f;">
+								<!-- T01_panel grid 01 start -->
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+									<!-- T01r01_prefered language -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.prelanguage']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu effect="fold" style="width:59%;"
+										value="#{amendmentBackingBean.busOwnerDTO.perferedLanguage}">
+										<f:selectItem itemLabel="ENGLISH" itemValue="E" />
+										<f:selectItem itemLabel="SINHALA" itemValue="S" />
+										<f:selectItem itemLabel="TAMIL" itemValue="T" />
+									</p:selectOneMenu>
+									<!-- T01r01_permit no -->
+									<p:panelGrid>
+										<p:outputLabel value="Application No."></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText
+										style="width:90%;height:18px;color:red;font-weight: bold;"
+										maxlength="20" readonly="true"
+										value="#{amendmentBackingBean.generatedApplicationNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<!-- T01r02_title -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.title']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="txtTitle" style="width:59%;" effect="fold"
+										value="#{amendmentBackingBean.busOwnerDTO.title}">
+										<p:ajax update="txtGender,Dob"
+											listener="#{amendmentBackingBean.onChangeTitle}" />
+										<f:selectItem itemLabel="-- Select --"
+											itemValue="#{editPermitIssuanceBackingBean.strSelectedTitle}" />
+										<f:selectItems value="#{amendmentBackingBean.titleList}"
+											var="titleList" itemValue="#{titleList.code}"
+											itemLabel="#{titleList.description}" />
+									</p:selectOneMenu>
+									<!-- T01r02_gender -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.gender']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="txtGender" style="width:80%;"
+										effect="fold"
+										value="#{amendmentBackingBean.busOwnerDTO.gender}"
+										disabled="#{amendmentBackingBean.disabledGender}">
+										<f:selectItem itemLabel="-- Select --"
+											itemValue="#{editPermitIssuanceBackingBean.strSelectedTitle}" />
+										<f:selectItems value="#{amendmentBackingBean.genderList}"
+											var="genderList" itemValue="#{genderList.code}"
+											itemLabel="#{genderList.description}" />
+									</p:selectOneMenu>
+									<!-- T01r03_date of birth -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.dob']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<div style="width: 84%">
+											<p:calendar id="Dob" navigator="true" locale="en_US"
+												styleClass="calendarClass"
+												value="#{amendmentBackingBean.busOwnerDTO.dob}"
+												maxdate="today" showOn="button" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY" yearRange="c-100:c+100"
+												readonlyInput="true"
+												disabled="#{amendmentBackingBean.disabledDOB}"></p:calendar>
+										</div>
+									</p:panelGrid>
+									<!--T01r03_nic no -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.nic']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText style="width:90%;height:18px;" maxlength="12"
+										value="#{amendmentBackingBean.busOwnerDTO.nicNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+								</p:panelGrid>
+								<!-- T01_panel grid 01 end -->
+								<!-- T01_panel grid 02 start -->
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+
+									<!--T01r04_name in full -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.name']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText style="width:97%;height:18px;" id="txtFullName"
+										maxlength="200"
+										value="#{amendmentBackingBean.busOwnerDTO.fullName}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel value="Name in Full"></p:outputLabel>
+										<div>
+											<b>(Sinhala)</b>
+										</div>
+									</p:panelGrid>
+
+									<p:inputText style="width:97%;height:18px;"
+										id="txtFullNameSinhala" maxlength="200"
+										value="#{amendmentBackingBean.busOwnerDTO.fullNameSinhala}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<!--T01r06_name in full tamil -->
+									<p:panelGrid>
+										<p:outputLabel value="Name in Full"></p:outputLabel>
+										<div>
+											<b>(Tamil)</b>
+										</div>
+									</p:panelGrid>
+
+									<p:inputText style="width:97%;height:18px;"
+										id="txtFullNameTamil" maxlength="200"
+										value="#{amendmentBackingBean.busOwnerDTO.fullNameTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<!--T01r07_name with initials -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.namewithinitials']}"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText style="width:97%;height:18px;"
+										id="txtNamewithInitials" maxlength="200"
+										value="#{amendmentBackingBean.busOwnerDTO.nameWithInitials}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+								</p:panelGrid>
+								<!-- T01_panel grid 02 end -->
+								<!-- T01_panel grid 03 start -->
+								<p:panelGrid columns="4" style="margin-top: 1%;margin-bottom:1%"
+									columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+									layout="grid">
+									<!--T01r08_address in -->
+									<p:outputLabel value="Address in" style="font-weight: bold;"></p:outputLabel>
+									<p:outputLabel value="Address Line 1"
+										style="font-weight: bold;"></p:outputLabel>
+									<p:outputLabel value="Address Line 2"
+										style="font-weight: bold;"></p:outputLabel>
+									<p:outputLabel value="City" style="font-weight: bold;"></p:outputLabel>
+									<!--T01r09_engish address-->
+									<p:panelGrid>
+										<p:outputLabel value="English"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText style="width:90%;height:18px;" id="txtAddress1"
+										maxlength="50"
+										value="#{amendmentBackingBean.busOwnerDTO.address1}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:90%;height:18px;" id="txtAddress2"
+										maxlength="50"
+										value="#{amendmentBackingBean.busOwnerDTO.address2}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:90%;height:18px;" id="txtCity"
+										maxlength="50"
+										value="#{amendmentBackingBean.busOwnerDTO.city}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<!--T01r10_sinhala address-->
+									<p:outputLabel value="Sinhala"></p:outputLabel>
+
+									<p:inputText style="width:90%;height:18px;"
+										id="txtAddress1Sinhala" maxlength="50"
+										value="#{amendmentBackingBean.busOwnerDTO.address1Sinhala}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:90%;height:18px;"
+										id="txtAddress2Sinhala" maxlength="50"
+										value="#{amendmentBackingBean.busOwnerDTO.address2Sinhala}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:90%;height:18px;" id="txtCitySinhala"
+										maxlength="50"
+										value="#{amendmentBackingBean.busOwnerDTO.citySinhala}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<!--T01r11_tamil address-->
+									<p:outputLabel value="Tamil"></p:outputLabel>
+
+									<p:inputText style="width:90%;height:18px;"
+										id="txtAddress1Tamil" maxlength="50"
+										value="#{amendmentBackingBean.busOwnerDTO.address1Tamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:90%;height:18px;"
+										id="txtAddress2Tamil" maxlength="50"
+										value="#{amendmentBackingBean.busOwnerDTO.address2Tamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:90%;height:18px;" id="txtCityTamil"
+										maxlength="50"
+										value="#{amendmentBackingBean.busOwnerDTO.cityTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+								</p:panelGrid>
+								<!-- T01_panel grid 03 end -->
+								<!-- T01_panel grid 04 start -->
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<!-- T01r12_marital status-->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.marital']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu style="width:59%;" effect="fold"
+										value="#{amendmentBackingBean.busOwnerDTO.maritalStatus}">
+										<f:selectItem itemLabel="-- Select --"
+											itemValue="#{editPermitIssuanceBackingBean.strSelectedTitle}" />
+										<f:selectItems value="#{amendmentBackingBean.martialList}"
+											var="martialList" itemValue="#{martialList.code}"
+											itemLabel="#{martialList.description}" />
+									</p:selectOneMenu>
+									<!-- T01r12_province -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.province']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="txtProvince" style="width:80%;"
+										effect="fold"
+										value="#{amendmentBackingBean.busOwnerDTO.province}">
+										<p:ajax listener="#{amendmentBackingBean.onProvinceChange}"
+											update="txtDistrict" />
+										<f:selectItem itemLabel="-- Select --"
+											itemValue="#{editPermitIssuanceBackingBean.strSelectedTitle}" />
+										<f:selectItems value="#{amendmentBackingBean.provincelList}"
+											var="provincelList" itemValue="#{provincelList.code}"
+											itemLabel="#{provincelList.description}" />
+									</p:selectOneMenu>
+									<!-- T01r13_telephone no -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.tel']}"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText style="width:66%;height:18px;" id="txtTel"
+										maxlength="10"
+										value="#{amendmentBackingBean.busOwnerDTO.telephoneNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+										<p:ajax update="txtTel"
+											listener="#{amendmentBackingBean.phoneNumberValidator}" />
+									</p:inputText>
+									<!-- T01r13_district -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.district']}"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="txtDistrict" style="width:80%;"
+										effect="fold"
+										value="#{amendmentBackingBean.busOwnerDTO.district}">
+										<p:ajax listener="#{amendmentBackingBean.onDistrictChange}"
+											update="txtDs" />
+
+										<f:selectItem itemLabel="-- Select --"
+											itemValue="#{editPermitIssuanceBackingBean.strSelectedTitle}" />
+										<f:selectItems value="#{amendmentBackingBean.districtList}"
+											var="districtList" itemValue="#{districtList.code}"
+											itemLabel="#{districtList.description}" />
+									</p:selectOneMenu>
+
+									<!-- T01r14_mobile no -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.mobile']}"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText style="width:66%;height:18px;" id="txtMobile"
+										maxlength="10"
+										value="#{amendmentBackingBean.busOwnerDTO.mobileNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+										<p:ajax update="txtMobile"
+											listener="#{amendmentBackingBean.phoneNumberValidator}" />
+									</p:inputText>
+
+									<!-- T01r14_devisional -->
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.ds']}"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="txtDs" style="width:80%; " effect="fold"
+										value="#{amendmentBackingBean.busOwnerDTO.divSec}">
+
+										<f:selectItem itemLabel="-- Select --"
+											itemValue="#{editPermitIssuanceBackingBean.strSelectedTitle}" />
+										<f:selectItems value="#{amendmentBackingBean.divSecList}"
+											var="divSecList" itemValue="#{divSecList.code}"
+											itemLabel="#{divSecList.description}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel>Reson for owner change</p:outputLabel>
+									<p:inputTextarea rows="5" cols="98" width="95%"
+										value="#{amendmentBackingBean.amendmentDTO.reasonForOwnerChange}"
+										queryDelay="750" minQueryLength="4" />
+
+
+								</p:panelGrid>
+
+							</p:panel>
+
+							<!-- Tab 03 > panel 02 : row 13 -->
+							<p:panel>
+
+								<h1>Relationship Information</h1>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-2,ui-grid-col-4" layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Realationship with transferor"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="realation" style="width:100%; "
+										effect="fold"
+										value="#{amendmentBackingBean.amendmentDTO.relationshipWithTransferor}">
+										<f:selectItem itemLabel="-- All --"
+											itemValue="#{editPermitIssuanceBackingBean.strSelectedTitle}" />
+										<f:selectItems
+											value="#{amendmentBackingBean.relationshipList}"
+											var="relationshipList" itemValue="#{relationshipList.code}"
+											itemLabel="#{relationshipList.description}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel>Remarks</p:outputLabel>
+									<p:inputTextarea rows="5" cols="98" width="95%"
+										value="#{amendmentBackingBean.amendmentDTO.relationshipWithTransferorRemarks}"
+										queryDelay="750" minQueryLength="4" />
+								</p:panelGrid>
+							</p:panel>
+
+							<!-- Tab 03 : Buttons -->
+							<center>
+								<p:panel>
+									<p:commandButton styleClass="mainActionbtn" value="Save"
+										action="#{amendmentBackingBean.busOwnerSave}"
+										rendered="#{amendmentBackingBean.busOwnerDTO.seq == 0}"
+										id="cmdbtnOwnerSave" process="@form" update="@form tabviewId"></p:commandButton>
+
+									<p:commandButton styleClass="mainActionbtn" value="Update"
+										action="#{amendmentBackingBean.busOwnerSave}"
+										rendered="#{amendmentBackingBean.busOwnerDTO.seq != 0}"
+										id="cmdbtnOwnerUpdate" process="@form"
+										update="@form tabviewId"></p:commandButton>
+
+									<p:commandButton styleClass="mainActionbtn"
+										rendered="#{amendmentBackingBean.busOwnerDTO.seq == 0}"
+										value="Cancel"
+										action="#{amendmentBackingBean.clearOwnerAndAmendmentDetails}"
+										id="cmdbtnBusSaveClear" process="@form"
+										update="@form tabviewId"></p:commandButton>
+
+									<p:commandButton styleClass="mainActionbtn"
+										rendered="#{amendmentBackingBean.busOwnerDTO.seq != 0}"
+										value="Cancel"
+										action="#{amendmentBackingBean.getOwnerAndAmendmentDetails}"
+										id="cmdbtnBusUpdateClear" process="@form"
+										update="@form tabviewId"></p:commandButton>
+
+								</p:panel>
+							</center>
+						</h:form>
+					</p:tab>
+
+
+					<!-- ***********************************      Tab 03       ******************************************************************* -->
+
+					<p:tab title="Service/Route/End Change"
+						activeIndex="#{amendmentBackingBean.activeTabIndex}"
+						rendered="#{amendmentBackingBean.serviceChange}">
+
+						<h:form id="frmChangeInformation">
+
+							<p:panel>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+									<!-- Tab 03 : row 01 -->
+
+									<p:panelGrid>
+										<p:outputLabel value="Application No."
+											style="text-align: left;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="applicationNo"
+											value="#{amendmentBackingBean.generatedApplicationNo}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:100%;color:red;font-weight: bold;"
+											maxlength="20" readonly="true">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Service Change Type"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu style="width:100%"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{amendmentBackingBean.amendmentDTO.serviceChangeType}">
+											<p:ajax event="change" update="frmChangeInformation" />
+											<f:selectItem itemLabel="--Select Service Change Type--"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItem itemLabel="Service Type Change" itemValue="S" />
+											<f:selectItem itemLabel="Route Change" itemValue="R" />
+											<f:selectItem itemLabel="End Change" itemValue="E" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+								</p:panelGrid>
+							</p:panel>
+
+
+
+							<p:panel
+								rendered="#{amendmentBackingBean.amendmentDTO.serviceChangeType == 'S'}">
+								<h1>Service Type Change</h1>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+									<!-- Tab 03 : row 01 -->
+
+									<p:panelGrid>
+										<p:outputLabel value="New Service Type"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="service" style="width:100%"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{amendmentBackingBean.amendmentServiceDTO.serviceType}">
+
+											<f:selectItem itemLabel="--Select Service Type--"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItems value="#{vehicleBackingBean.servicelist}"
+												var="servicelist"
+												itemLabel="#{servicelist.serviceTypeDescription}"
+												itemValue="#{servicelist.serviceTypeCode}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+
+								</p:panelGrid>
+								<center>
+									<p:panel>
+										<p:commandButton styleClass="mainActionbtn" value="Save"
+											action="#{amendmentBackingBean.saveServiceChange}"
+											process="@form" update="@form tabviewId"></p:commandButton>
+										<!-- disabled="#{amendmentBackingBean.disabledSaveServiceChangeBtn}" -->
+
+										<p:commandButton styleClass="mainActionbtn" value="Cancel"
+											action="#{editPermitIssuanceBackingBean.clearOwnerDetails}"
+											process="@form" update="@form tabviewId"></p:commandButton>
+										<!-- disabled="#{amendmentBackingBean.disabledClearServiceChangeBtn}" -->
+									</p:panel>
+								</center>
+							</p:panel>
+
+							<!-- Tab 03 > panel 02 : row 13 -->
+							<p:panel
+								rendered="#{amendmentBackingBean.amendmentDTO.serviceChangeType == 'R'}">
+
+								<h1>Route Change</h1>
+								<p:panelGrid columns="2"
+									style="border-bottom:5px solid #404d6f;"
+									columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Route No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+
+									<p:selectOneMenu id="txtRouteNo" style="width:100%; "
+										effect="fold" disabled="false"
+										value="#{amendmentBackingBean.amendmentServiceDTO.routeNo}">
+										<p:ajax listener="#{amendmentBackingBean.onNewRouteChange}"
+											update="txtOrigin,txtDestination,txtVia,txtDistance" />
+										<f:selectItem itemLabel="-- Select --" itemValue="" />
+										<f:selectItems
+											value="#{amendmentBackingBean.routefordropdownList}"
+											var="routefordropdownList"
+											itemValue="#{routefordropdownList.code}"
+											itemLabel="#{routefordropdownList.code}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel>Place of Origin of the Service</p:outputLabel>
+									<p:inputText style="width:100%;height:18px;" id="txtOrigin"
+										value="#{amendmentBackingBean.amendmentServiceDTO.origin}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+
+									<p:outputLabel>Destination</p:outputLabel>
+									<p:inputText style="width:100%;height:18px;"
+										id="txtDestination"
+										value="#{amendmentBackingBean.amendmentServiceDTO.destination}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:outputLabel>Via</p:outputLabel>
+									<p:panelGrid>
+										<p:inputTextarea style="width:100%;height:36px;" id="txtVia"
+											readonly="true" rows="5"
+											value="#{amendmentBackingBean.amendmentServiceDTO.via}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputTextarea>
+									</p:panelGrid>
+									<p:outputLabel>Route Distance (Km)</p:outputLabel>
+									<p:inputText style="width:100%;height:18px;" id="txtDistance"
+										value="#{amendmentBackingBean.amendmentServiceDTO.distance}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:outputLabel value="Swap Origin and Destination"></p:outputLabel>
+									<p:panelGrid>
+
+										<p:selectBooleanButton id="routeFlagX"
+											value="#{amendmentBackingBean.amendmentServiceDTO.theRouteFlag}"
+											onLabel="Yes" offLabel="No" onIcon="ui-icon-check"
+											offIcon="ui-icon-close" style="width:60px">
+											<p:ajax
+												listener="#{amendmentBackingBean.newRouteFlagListener}"
+												update="txtOrigin,txtDestination" />
+										</p:selectBooleanButton>
+
+									</p:panelGrid>
+
+									<p:outputLabel>Remarks</p:outputLabel>
+									<p:inputTextarea rows="5" cols="59" queryDelay="750"
+										width="100%" minQueryLength="4"
+										value="#{amendmentBackingBean.amendmentDTO.remarks}" />
+								</p:panelGrid>
+
+
+								<h1>New Route Request</h1>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+
+
+
+									<p:outputLabel>Place of Origin of the Service</p:outputLabel>
+									<p:inputText style="width:100%;height:18px;"
+										value="#{amendmentBackingBean.tempNewRouteDTO.origin}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+
+									<p:outputLabel>Destination</p:outputLabel>
+									<p:inputText style="width:100%;height:18px;"
+										value="#{amendmentBackingBean.tempNewRouteDTO.destination}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:outputLabel>Via</p:outputLabel>
+									<p:panelGrid>
+										<p:inputTextarea style="width:100%;height:36px;" rows="5"
+											value="#{amendmentBackingBean.tempNewRouteDTO.via}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputTextarea>
+									</p:panelGrid>
+
+								</p:panelGrid>
+
+
+								<center>
+									<p:panel>
+										<p:commandButton styleClass="mainActionbtn" value="Save"
+											action="#{amendmentBackingBean.saveServiceChange}"
+											process="@form" update="@form tabviewId"></p:commandButton>
+
+										<p:commandButton styleClass="mainActionbtn" value="Cancel"
+											action="#{editPermitIssuanceBackingBean.clearOwnerDetails}"
+											process="@form" update="@form tabviewId"></p:commandButton>
+									</p:panel>
+								</center>
+							</p:panel>
+
+							<!-- Tab 03 > panel 02 : row 13 -->
+							<p:panel
+								rendered="#{amendmentBackingBean.amendmentDTO.serviceChangeType == 'E'}"
+								update="txtOrigin2,txtDestination2,txtVia2,txtDistance2">
+
+								<h1>End Change</h1>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Route No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+
+									<p:inputText style="width:100%;height:18px;" id="txtRouteNo2"
+										rendered="#{amendmentBackingBean.showEndChangeSave}"
+										value="#{amendmentBackingBean.selectedRoute}" readonly="true"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:100%;height:18px;" id="txtRouteNoS2"
+										rendered="#{amendmentBackingBean.showEndChangeSearch}"
+										value="#{amendmentBackingBean.amendmentDTO.routeNo}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+
+									<p:outputLabel>Place of Origin of the Service</p:outputLabel>
+									<p:inputText style="width:100%;height:18px;" id="txtOrigin2"
+										value="#{amendmentBackingBean.selectedOrgin}"
+										rendered="#{amendmentBackingBean.showEndChangeSave}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:inputText style="width:100%;height:18px;" id="txtOriginS2"
+										value="#{amendmentBackingBean.amendmentDTO.origin}"
+										rendered="#{amendmentBackingBean.showEndChangeSearch}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+
+
+									<p:outputLabel>Destination</p:outputLabel>
+									<p:inputText style="width:100%;height:18px;"
+										id="txtDestination2"
+										rendered="#{amendmentBackingBean.showEndChangeSave}"
+										value="#{amendmentBackingBean.selectedDestination}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:100%;height:18px;"
+										id="txtDestinationS2"
+										rendered="#{amendmentBackingBean.showEndChangeSearch}"
+										value="#{amendmentBackingBean.amendmentDTO.destination}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:outputLabel>Via</p:outputLabel>
+									<p:panelGrid>
+										<p:inputTextarea style="width:100%;height:36px;" id="txtVia2"
+											readonly="true" rows="5"
+											rendered="#{amendmentBackingBean.showEndChangeSearch}"
+											value="#{amendmentBackingBean.amendmentDTO.via}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputTextarea>
+										<p:inputTextarea style="width:100%;height:36px;" id="txtViaS2"
+											readonly="true" rows="5"
+											rendered="#{amendmentBackingBean.showEndChangeSave}"
+											value="#{amendmentBackingBean.selectedVia}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputTextarea>
+									</p:panelGrid>
+									<p:outputLabel>Route Distance (Km)</p:outputLabel>
+									<p:inputText style="width:100%;height:18px;" id="txtDistance2"
+										value="#{amendmentBackingBean.amendmentDTO.distance}"
+										rendered="#{amendmentBackingBean.showEndChangeSearch}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:100%;height:18px;" id="txtDistanceS2"
+										rendered="#{amendmentBackingBean.showEndChangeSave}"
+										value="#{amendmentBackingBean.selectedDistance}"
+										readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:outputLabel value="Swap Origin and Destination"></p:outputLabel>
+									<p:panelGrid>
+
+										<p:selectBooleanButton id="routeFlag"
+											value="#{amendmentBackingBean.routeFlag}" onLabel="Yes"
+											offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"
+											style="width:60px">
+											<p:ajax listener="#{amendmentBackingBean.endChangeListener}"
+												update="txtOriginS2,txtDestinationS2" />
+										</p:selectBooleanButton>
+
+									</p:panelGrid>
+
+									<p:outputLabel>Remarks</p:outputLabel>
+									<p:inputTextarea rows="5" cols="59" queryDelay="750"
+										width="100%" minQueryLength="4"
+										value="#{amendmentBackingBean.amendmentDTO.remarks}" />
+								</p:panelGrid>
+
+								<center>
+									<p:panel>
+										<p:commandButton styleClass="mainActionbtn" value="Save"
+											action="#{amendmentBackingBean.saveServiceChange}"
+											process="@form"
+											update="@form tabviewId,txtOrigin2,txtDestination2,txtVia2,txtDistance2"></p:commandButton>
+
+										<p:commandButton styleClass="mainActionbtn" value="Cancel"
+											action="#{editPermitIssuanceBackingBean.clearOwnerDetails}"
+											process="@form" update="@form tabviewId"></p:commandButton>
+									</p:panel>
+								</center>
+							</p:panel>
+
+
+
+						</h:form>
+					</p:tab>
+
+
+
+					<!-- ***********************************      Tab 04       ******************************************************************* -->
+
+					<p:tab title="Particulars of New Omnibus"
+						activeIndex="#{amendmentBackingBean.activeTabIndex}"
+						rendered="#{amendmentBackingBean.newBus}">
+
+						<h:form id="frmNewOmnibus1">
+
+							<p:panel>
+								<!-- Tab 04 > panel 01 -->
+
+
+								<p:panel style="border-bottom:5px solid #404d6f;">
+
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<!-- Tab 04 > panel 01 : row 01 -->
+										<p:panelGrid>
+											<p:outputLabel value="Application No."></p:outputLabel>
+
+										</p:panelGrid>
+										<p:inputText
+											style="width:86%;height:18px;color:red;font-weight: bold;"
+											maxlength="20" readonly="true"
+											value="#{amendmentBackingBean.generatedApplicationNo}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel></p:outputLabel>
+										<p:outputLabel></p:outputLabel>
+
+										<!-- Tab 04 > panel 01 : row 01 -->
+										<p:panelGrid>
+											<p:outputLabel value="Registration No. of the Bus"></p:outputLabel>
+											<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputText
+											value="#{amendmentBackingBean.ominiBusDTO.vehicleRegNo}"
+											readonly="#{amendmentBackingBean.ominiBusDTO.seq != 0}"
+											maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+											style="width:86%;">
+											<p:ajax listener="#{amendmentBackingBean.busNoValidator}"
+												update="@form" />
+
+										</p:inputText>
+
+
+										<p:panelGrid>
+											<p:outputLabel value="Manufacture Year"></p:outputLabel>
+											<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputText style="width:86%;height:18px;" id="clManufacture"
+											value="#{amendmentBackingBean.ominiBusDTO.manufactureDate}"
+											padControl="false" maxlength="4" maxValue="9999"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:keyFilter regEx="/[\d]/i" />
+											<p:ajax update="clManufacture"
+												listener="#{amendmentBackingBean.manufactureYearValidator}" />
+										</p:inputText>
+
+										<!-- Tab 04 > panel 01 : row 02 -->
+										<p:panelGrid>
+											<p:outputLabel value="Seating Capacity"></p:outputLabel>
+											<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputNumber style="width:100%;height:18px;" id="txtSeat"
+											value="#{amendmentBackingBean.ominiBusDTO.seating}"
+											padControl="false" maxlength="2" maxValue="99"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:keyFilter regEx="/[\d]/i" />
+											<p:ajax update="txtSeat"
+												listener="#{amendmentBackingBean.seatingCapacityValidation}" />
+										</p:inputNumber>
+										<p:panelGrid>
+											<p:outputLabel value="Weight (Kg)"></p:outputLabel>
+											<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputNumber style="width:100%;height:18px;" id="txtWeight"
+											value="#{amendmentBackingBean.ominiBusDTO.weight}"
+											maxlength="5" maxValue="99999" padControl="false"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:keyFilter regEx="/[\d]/i" />
+											<p:ajax update="txtWeight"
+												listener="#{amendmentBackingBean.weightValidation}" />
+										</p:inputNumber>
+
+										<!-- Tab 04 > panel 01 : row 03 -->
+										<p:panelGrid>
+											<p:outputLabel value="No. of Doors"></p:outputLabel>
+											<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputNumber style="width:100%;height:18px;" id="txtDoors"
+											value="#{amendmentBackingBean.ominiBusDTO.noofDoors}"
+											padControl="false" maxlength="1" maxValue="9"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:keyFilter regEx="/[\d]/i" />
+											<p:ajax update="txtDoors"
+												listener="#{amendmentBackingBean.noOfDoorsValidation}" />
+										</p:inputNumber>
+
+
+										<p:panelGrid>
+											<p:outputLabel value="Height (Meters)"></p:outputLabel>
+											<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputNumber style="width:110%;height:18px;" id="txtHeight"
+											value="#{amendmentBackingBean.ominiBusDTO.height}"
+											maxlength="5" maxValue="99999" padControl="false"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:keyFilter regEx="/[\d]/i" />
+											<p:ajax update="txtHeight"
+												listener="#{amendmentBackingBean.weightValidation}" />
+										</p:inputNumber>
+									</p:panelGrid>
+
+
+								</p:panel>
+
+
+
+								<p:panel style="border-bottom:5px solid #404d6f;">
+									<h1>Fitness Certificate of Omnibus</h1>
+
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<!-- Tab 04 > panel 02 : row 01 -->
+										<p:outputLabel>Serial No.</p:outputLabel>
+										<p:inputText
+											value="#{amendmentBackingBean.permitRenewalsDTO.serialNo}"
+											maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+											style="width:86%;">
+										</p:inputText>
+
+										<p:outputLabel>Garage Registered No.</p:outputLabel>
+										<p:inputText
+											value="#{amendmentBackingBean.permitRenewalsDTO.garageRegNo}"
+											maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+											style="width:86%;">
+										</p:inputText>
+										<!-- Tab 04 > panel 02 : row 02 -->
+										<p:panelGrid>
+											<p:outputLabel>Fitness Expired Date</p:outputLabel>
+											<p:outputLabel value="" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:calendar styleClass="calendarClass"
+												value="#{amendmentBackingBean.permitRenewalsDTO.fitnessCertiDate}"
+												yearRange="c-100:c+100" navigator="true" locale="en_US"
+												showOn="button" readonlyInput="true" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY">
+
+											</p:calendar>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel>Garage Name</p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText
+												value="#{amendmentBackingBean.permitRenewalsDTO.garageName}"
+												maxlength="50"
+												onkeyup="this.value=this.value.toUpperCase();"
+												style="width:86%;">
+											</p:inputText>
+										</p:panelGrid>
+									</p:panelGrid>
+								</p:panel>
+
+								<p:panel style="border-bottom:5px solid #404d6f;">
+									<h1>Emission Test/Revenue Licence Details</h1>
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<p:panelGrid>
+											<p:outputLabel>Emission Test Expiry Date</p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:calendar styleClass="calendarClass"
+												value="#{amendmentBackingBean.permitRenewalsDTO.emissionExpDate}"
+												yearRange="c-100:c+100" navigator="true" locale="en_US"
+												showOn="button" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY">
+
+											</p:calendar>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:outputLabel>Revenue Licence Expiry Date</p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:calendar styleClass="calendarClass"
+												value="#{amendmentBackingBean.permitRenewalsDTO.revenueExpDate}"
+												yearRange="c-100:c+100" navigator="true" locale="en_US"
+												showOn="button" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY">
+
+											</p:calendar>
+										</p:panelGrid>
+
+									</p:panelGrid>
+								</p:panel>
+
+								<!-- Tab 05 > panel 01 -->
+								<p:panel style="border-bottom:5px solid #404d6f;">
+									<h1>Insurance Cover Details</h1>
+
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<p:panelGrid>
+											<p:outputLabel value="Insurance Company/Corporation Name"></p:outputLabel>
+											<p:outputLabel value="" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputText
+											value="#{amendmentBackingBean.permitRenewalsDTO.insuCompName}"
+											maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+											style="width:86%;">
+										</p:inputText>
+
+										<p:panelGrid>
+											<p:outputLabel value="Expiry Date"></p:outputLabel>
+											<p:outputLabel value="" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:calendar styleClass="calendarClass"
+												value="#{amendmentBackingBean.permitRenewalsDTO.insuExpDate}"
+												mindate="today" yearRange="c-100:c+100" navigator="true"
+												locale="en_US" showOn="button" readonlyInput="true"
+												pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+
+											</p:calendar>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Category of Insurance"></p:outputLabel>
+											<p:outputLabel value="" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputText
+											value="#{amendmentBackingBean.permitRenewalsDTO.insuCat}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:86%;">
+										</p:inputText>
+
+										<p:panelGrid></p:panelGrid>
+										<p:panelGrid></p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Policy Number"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText
+												value="#{amendmentBackingBean.permitRenewalsDTO.policyNo}"
+												onkeyup="this.value=this.value.toUpperCase();"
+												style="width:86%;">
+											</p:inputText>
+										</p:panelGrid>
+
+									</p:panelGrid>
+								</p:panel>
+
+								<!-- Tab 05 > panel 02 -->
+
+								<p:panel style="border-bottom:5px solid #404d6f;">
+
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<!-- Tab 05 > panel 02 : row 01 -->
+										<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+											styleClass="internalPanel"
+											columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid">
+
+											<p:panelGrid>
+												<p:outputLabel value="Price value of the Bus"></p:outputLabel>
+											</p:panelGrid>
+
+											<p:outputLabel value="Rs." styleClass="internalInput"
+												style="text-align:right;margin: auto;padding-right:0px;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputNumber id="priceValOfBus"
+											inputStyle="text-align: right;width:86%;"
+											value="#{amendmentBackingBean.ominiBusDTO.priceValOfBus}"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:ajax update="priceValOfBus"
+												listener="#{amendmentBackingBean.priceValOfBusValidation}" />
+										</p:inputNumber>
+
+										<p:outputLabel>Loan Obtained</p:outputLabel>
+										<p:selectBooleanCheckbox
+											value="#{amendmentBackingBean.loanObtained}">
+											<p:ajax update="@form" process="@form"></p:ajax>
+										</p:selectBooleanCheckbox>
+
+										<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+											styleClass="internalPanel"
+											columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid"
+											rendered="#{amendmentBackingBean.loanObtained}">
+
+											<p:panelGrid styleClass="internalPanel">
+												<p:outputLabel value="Bank Loan"></p:outputLabel>
+											</p:panelGrid>
+
+											<p:outputLabel value="Rs." styleClass="internalInput"
+												style="text-align:right;margin: auto;padding-right:0px;"></p:outputLabel>
+										</p:panelGrid>
+										<p:inputNumber id="bankLoan"
+											inputStyle="text-align: right;width:86%;"
+											rendered="#{amendmentBackingBean.loanObtained}"
+											value="#{amendmentBackingBean.ominiBusDTO.bankLoan}"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:ajax update="bankLoan"
+												listener="#{amendmentBackingBean.bankLoanValidation}" />
+										</p:inputNumber>
+
+
+
+										<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+											styleClass="internalPanel"
+											columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid"
+											rendered="#{amendmentBackingBean.loanObtained}">
+
+											<p:panelGrid styleClass="internalPanel">
+												<p:outputLabel value="Due amount at present"></p:outputLabel>
+											</p:panelGrid>
+
+											<p:outputLabel value="Rs." styleClass="internalInput"
+												style="text-align:right;margin: auto;padding-right:0px;"></p:outputLabel>
+										</p:panelGrid>
+
+										<p:inputNumber id="dueAmount"
+											inputStyle="text-align: right;width:86%;"
+											rendered="#{amendmentBackingBean.loanObtained}"
+											value="#{amendmentBackingBean.ominiBusDTO.dueAmount}"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:ajax update="dueAmount"
+												listener="#{amendmentBackingBean.dueAmountValidation}" />
+										</p:inputNumber>
+
+
+
+										<p:outputLabel rendered="#{amendmentBackingBean.loanObtained}">Name of Finance Company / Loan Obtained from</p:outputLabel>
+										<p:inputText rendered="#{amendmentBackingBean.loanObtained}"
+											value="#{amendmentBackingBean.ominiBusDTO.financeCompany}"
+											maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+											style="width:86%;">
+										</p:inputText>
+
+
+										<p:outputLabel rendered="#{amendmentBackingBean.loanObtained}">Date Obtained</p:outputLabel>
+										<p:calendar id="dateObtained" styleClass="calendarClass"
+											rendered="#{amendmentBackingBean.loanObtained}"
+											value="#{amendmentBackingBean.ominiBusDTO.dateObtained}"
+											maxdate="today" yearRange="c-100:c+100" navigator="true"
+											locale="en_US" showOn="button" readonlyInput="true"
+											pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+
+											<p:ajax event="dateSelect"
+												listener="#{amendmentBackingBean.regDateExpireDateValidator}"
+												update="dateObtained dateOfFirstReg expiryDateRevLic" />
+
+										</p:calendar>
+
+
+										<p:outputLabel rendered="#{amendmentBackingBean.loanObtained}">Lapsed Installments</p:outputLabel>
+										<p:inputText rendered="#{amendmentBackingBean.loanObtained}"
+											style="width:86%;height:18px;"
+											value="#{amendmentBackingBean.ominiBusDTO.lapsedInstall}"
+											padControl="false" maxlength="3" maxValue="999"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:keyFilter regEx="/[\d]/i" />
+
+										</p:inputText>
+
+										<p:outputLabel rendered="#{amendmentBackingBean.loanObtained}"></p:outputLabel>
+
+										<p:outputLabel rendered="#{amendmentBackingBean.loanObtained}"></p:outputLabel>
+
+
+										<p:panelGrid>
+											<p:outputLabel value="Expiry Date of Revenue License"></p:outputLabel>
+											<p:outputLabel value="" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:calendar id="expiryDateRevLic" styleClass="calendarClass"
+												value="#{amendmentBackingBean.ominiBusDTO.expiryDateRevLic}"
+												mindate="today" yearRange="c-100:c+100" navigator="true"
+												locale="en_US" showOn="button" readonlyInput="true"
+												pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+
+												<p:ajax event="dateSelect"
+													listener="#{amendmentBackingBean.regDateExpireDateValidator}"
+													update="dateObtained dateOfFirstReg expiryDateRevLic" />
+
+											</p:calendar>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:outputLabel
+												value="Date of First Registration in Sri Lanka"></p:outputLabel>
+											<p:outputLabel value="" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:calendar id="dateOfFirstReg" styleClass="calendarClass"
+												value="#{amendmentBackingBean.ominiBusDTO.dateOfFirstReg}"
+												maxdate="today" yearRange="c-100:c+100" navigator="true"
+												locale="en_US" showOn="button" readonlyInput="true"
+												pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+
+												<p:ajax event="dateSelect"
+													listener="#{amendmentBackingBean.regDateExpireDateValidator}"
+													update="dateObtained dateOfFirstReg expiryDateRevLic" />
+
+											</p:calendar>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel>Emission Test Expiry Date</p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:calendar styleClass="calendarClass"
+												value="#{amendmentBackingBean.ominiBusDTO.emissionExpDate}"
+												yearRange="c-100:c+100" navigator="true" locale="en_US"
+												showOn="button" readonlyInput="true" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY">
+
+											</p:calendar>
+										</p:panelGrid>
+										<p:panelGrid></p:panelGrid>
+										<p:panelGrid></p:panelGrid>
+
+									</p:panelGrid>
+
+									<!-- Tab 05 > panel 02 : Buttons -->
+
+
+								</p:panel>
+
+
+								<p:panel>
+									<p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+										layout="grid">
+										<p:panelGrid>
+											<p:outputLabel>Is Omini Bus ? Yes </p:outputLabel>
+											<p:selectBooleanCheckbox
+												value="#{amendmentBackingBean.amendmentDTO.isOminiBus}" />
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:outputLabel>Is the Bus currently running ? Yes </p:outputLabel>
+											<p:selectBooleanCheckbox
+												value="#{amendmentBackingBean.amendmentDTO.isBusRunning}" />
+										</p:panelGrid>
+										<p:panelGrid>
+											<!-- Tab 04 > panel 03 : row 05 -->
+											<p:outputLabel>Is there any legal case for this Omnibus? Yes </p:outputLabel>
+											<p:selectBooleanCheckbox
+												value="#{amendmentBackingBean.amendmentDTO.haveLegalCase}">
+												<p:ajax update="@form" process="@form"></p:ajax>
+											</p:selectBooleanCheckbox>
+
+										</p:panelGrid>
+
+
+
+									</p:panelGrid>
+
+									<p:panelGrid columns="2"
+										columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid"
+										rendered="#{amendmentBackingBean.amendmentDTO.haveLegalCase}">
+
+										<p:outputLabel>If any,Details of the Case </p:outputLabel>
+										<p:inputTextarea rows="5" cols="80" rowspan="2"
+											style="width:100%;" queryDelay="750" minQueryLength="4"
+											value="#{amendmentBackingBean.amendmentDTO.legalCaseDetails}" />
+									</p:panelGrid>
+
+									<center>
+										<p:panel>
+											<p:commandButton styleClass="mainActionbtn"
+												rendered="#{amendmentBackingBean.ominiBusDTO.seq == 0}"
+												value="#{msg['common.backlog.tbbusownerinfo.save']}"
+												action="#{amendmentBackingBean.ominiBusSave}"
+												id="cmdbtnBusSave" process="@form" update="@form tabviewId"></p:commandButton>
+
+											<p:commandButton styleClass="mainActionbtn"
+												rendered="#{amendmentBackingBean.ominiBusDTO.seq != 0}"
+												value="Update" action="#{amendmentBackingBean.ominiBusSave}"
+												id="cmdbtnBusUpdate" process="@form"
+												update="@form tabviewId"></p:commandButton>
+
+											<p:commandButton styleClass="mainActionbtn"
+												rendered="#{amendmentBackingBean.ominiBusDTO.seq == 0}"
+												value="Cancel"
+												action="#{amendmentBackingBean.clearBusDetails}"
+												id="cmdbtnBusSaveClear" process="@form"
+												update="@form tabviewId"></p:commandButton>
+
+											<p:commandButton styleClass="mainActionbtn"
+												rendered="#{amendmentBackingBean.ominiBusDTO.seq != 0}"
+												value="Cancel"
+												action="#{amendmentBackingBean.getOminiBusDetails}"
+												id="cmdbtnBusUpdateClear" process="@form"
+												update="@form tabviewId"></p:commandButton>
+
+											<p:commandButton id="printBtn" value="Print"
+												class="mainActionbtn"
+												rendered="#{amendmentBackingBean.ominiBusDTO.seq != 0}"
+												actionListener="#{amendmentBackingBean.print}"
+												oncomplete="window.open('/InfoNTC/showUpload?reportName=Omni Bus Registration')"
+												update="@form">
+												<f:attribute name="vehicelNo"
+													value="#{amendmentBackingBean.ominiBusDTO.vehicleRegNo}"></f:attribute>
+											</p:commandButton>
+										</p:panel>
+									</center>
+
+								</p:panel>
+
+
+								<!-- Tab 04 > panel 02 -->
+								<p:panel rendered="false" style="border-top:5px solid #404d6f;">
+									<p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+										layout="grid">
+
+										<p:panelGrid>
+											<p:outputLabel>Is there any permit from other institute for this Bus? Yes </p:outputLabel>
+											<p:selectBooleanCheckbox
+												value="#{amendmentBackingBean.otherPermits}">
+												<p:ajax update="@form" process="@form"></p:ajax>
+											</p:selectBooleanCheckbox>
+										</p:panelGrid>
+
+									</p:panelGrid>
+								</p:panel>
+
+								<!-- Tab 04 > panel 03 -->
+								<p:panel id="otherPermits" style="border-top:5px solid #404d6f;"
+									rendered="#{amendmentBackingBean.ominiBusDTO.seq != 0}">
+									<h1>Permits from Other Institutes for this Bus</h1>
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<!-- Tab 04 > panel 03 : row 02 -->
+										<p:outputLabel>Organization</p:outputLabel>
+
+										<p:selectOneMenu id="txtOrgani"
+											value="#{amendmentBackingBean.organizationDTO.organization}"
+											style="width:90%">
+											<f:selectItem itemLabel="--Select Organization--"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItems
+												value="#{amendmentBackingBean.organizationList}" var="d"
+												itemLabel="#{d.organizationDes}"
+												itemValue="#{d.organizationCode}" />
+
+										</p:selectOneMenu>
+
+										<p:outputLabel>Expiry Date</p:outputLabel>
+										<p:panelGrid>
+											<p:calendar styleClass="calendarClass"
+												value="#{amendmentBackingBean.organizationDTO.expiryDate}"
+												maxdate="today" yearRange="c-100:c+100" navigator="true"
+												locale="en_US" showOn="button" readonlyInput="true"
+												pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+											</p:calendar>
+										</p:panelGrid>
+
+										<!-- Tab 04 > panel 03 : row 03 -->
+										<p:outputLabel>Route No.</p:outputLabel>
+										<p:selectOneMenu id="routeNo" style="width:90%; "
+											effect="fold" disabled="false"
+											value="#{amendmentBackingBean.organizationDTO.routeNo}">
+
+											<f:selectItem itemLabel="-- All --" itemValue="" />
+											<f:selectItems
+												value="#{amendmentBackingBean.routefordropdownList}"
+												var="routefordropdownList"
+												itemValue="#{routefordropdownList.code}"
+												itemLabel="#{routefordropdownList.code}" />
+										</p:selectOneMenu>
+
+										<p:outputLabel>Permit No.</p:outputLabel>
+										<p:inputText style="width:90%;height:18px;" maxlength="50"
+											value="#{amendmentBackingBean.organizationDTO.permitNo}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+									</p:panelGrid>
+
+
+									<!-- Tab 04 > panel 03 : row 04 -->
+									<p:panelGrid columns="2"
+										columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+										<p:outputLabel>Reason for not Renewed</p:outputLabel>
+										<p:inputTextarea rows="3" cols="85" queryDelay="750"
+											minQueryLength="4"
+											value="#{amendmentBackingBean.organizationDTO.reason}" />
+									</p:panelGrid>
+
+									<center>
+										<p:panel>
+											<p:commandButton styleClass="mainActionbtn" value="Add"
+												action="#{amendmentBackingBean.addOtherOrg}" process="@form"
+												update="otherPermits,otherOrgList"></p:commandButton>
+
+											<p:commandButton styleClass="mainActionbtn" value="Cancel"
+												action="#{amendmentBackingBean.clearOtherOrg}"
+												process="@form" update="otherPermits,otherOrgList"></p:commandButton>
+										</p:panel>
+									</center>
+
+
+
+									<!-- Tab 04 > Data table -->
+									<p:dataTable style="margin: 2%;" id="otherOrgList"
+										var="otherOrgList"
+										value="#{amendmentBackingBean.otherOrgList}">
+
+										<p:column headerText="Organization">
+											<h:outputText value="#{otherOrgList.organization}" />
+										</p:column>
+
+										<p:column headerText="Route No.">
+											<h:outputText value="#{otherOrgList.routeNo}" />
+										</p:column>
+
+										<p:column headerText="Permit No.">
+											<h:outputText value="#{otherOrgList.permitNo}" />
+										</p:column>
+
+										<p:column headerText="Expired Date">
+											<h:outputText value="#{otherOrgList.strExpiryDate}" />
+										</p:column>
+
+										<p:column headerText="Reason for not renewed">
+											<h:outputText value="#{otherOrgList.reason}" />
+										</p:column>
+
+										<p:column headerText="">
+
+											<p:commandLink
+												action="#{amendmentBackingBean.removeOtherOrg}"
+												update="otherOrgList" process="otherOrgList">
+												<f:setPropertyActionListener value="#{otherOrgList.seq}"
+													target="#{amendmentBackingBean.selectedOtherOrg}" />
+												<p:graphicImage library="images" name="delete.png"
+													style="width:24px;height:24px;" title="delete"></p:graphicImage>
+											</p:commandLink>
+										</p:column>
+									</p:dataTable>
+
+								</p:panel>
+
+
+
+							</p:panel>
+						</h:form>
+					</p:tab>
+
+
+					<!-- ***********************************  Tab 06  ******************************************************************* -->
+
+					<p:tab title="Accident Details"
+						activeIndex="#{amendmentBackingBean.activeTabIndex}"
+						rendered="#{amendmentBackingBean.newBus}"
+						disabled="#{amendmentBackingBean.ominiBusDTO.seq == 0}">
+						<h:form id="frmtab0lojb89">
+							<p:panel style="border-bottom:5px solid #404d6f;">
+
+								<h1>Accident Details In Last 3 Years</h1>
+
+								<!-- Tab 06 > panel 01  -->
+								<p:panel style="margin-top:2px;border-bottom:5px solid #404d6f;">
+
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<!-- Tab 04 > panel 03 : row 02 -->
+										<p:outputLabel>Accident Type</p:outputLabel>
+										<p:selectOneMenu id="routeNo" style="width:90%; "
+											effect="fold" disabled="false"
+											value="#{amendmentBackingBean.accidentDTO.accidentType}">
+
+											<f:selectItem itemLabel="-- All --" itemValue="" />
+											<f:selectItems
+												value="#{amendmentBackingBean.accidentTypesList}"
+												var="accidentTypesList"
+												itemValue="#{accidentTypesList.code}"
+												itemLabel="#{accidentTypesList.description}" />
+										</p:selectOneMenu>
+
+										<p:outputLabel>Date</p:outputLabel>
+										<p:panelGrid>
+											<p:calendar id="Dob" navigator="true" locale="en_US"
+												styleClass="calendarClass"
+												value="#{amendmentBackingBean.accidentDTO.accidentDate}"
+												maxdate="today" showOn="button" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY" yearRange="c-100:c+100"
+												readonlyInput="true"></p:calendar>
+										</p:panelGrid>
+
+									</p:panelGrid>
+
+
+									<!-- Tab 04 > panel 03 : row 04 -->
+									<p:panelGrid columns="2"
+										columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+										<p:outputLabel>Description</p:outputLabel>
+										<p:inputTextarea rows="3" cols="85" queryDelay="750"
+											minQueryLength="4"
+											value="#{amendmentBackingBean.accidentDTO.accidentDesc}" />
+									</p:panelGrid>
+
+									<center>
+										<p:panel>
+											<p:commandButton styleClass="mainActionbtn" value="Add"
+												action="#{amendmentBackingBean.addAccident}" process="@form"
+												update="@form,accidentList"></p:commandButton>
+
+											<p:commandButton styleClass="mainActionbtn" value="Cancel"
+												action="#{amendmentBackingBean.clearAccident}"
+												process="@form" update="@form"></p:commandButton>
+										</p:panel>
+									</center>
+
+									<!-- Tab 06 > panel 01 : data table -->
+									<p:dataTable style="margin: 2%;" id="accidentList"
+										var="accidentList"
+										value="#{amendmentBackingBean.accidentList}">
+										<p:column headerText="Date">
+											<h:outputText value="#{accidentList.strAccidentDate}" />
+										</p:column>
+										<p:column headerText="Accident Type">
+											<h:outputText value="#{accidentList.accidentType}" />
+										</p:column>
+										<p:column headerText="Description of the Accident">
+											<h:outputText value="#{accidentList.accidentDesc}" />
+										</p:column>
+
+										<p:column headerText="">
+
+											<p:commandLink
+												action="#{amendmentBackingBean.removeAccident}"
+												update="accidentList" process="accidentList">
+												<f:setPropertyActionListener value="#{accidentList.seq}"
+													target="#{amendmentBackingBean.selectedAccident}" />
+												<p:graphicImage library="images" name="delete.png"
+													style="width:24px;height:24px;" title="delete"></p:graphicImage>
+											</p:commandLink>
+										</p:column>
+									</p:dataTable>
+
+								</p:panel>
+
+
+								<!-- Tab 06 > panel 02  -->
+								<p:panel style="margin-top:2px;">
+
+									<h1>More Accident Details</h1>
+
+									<p:panel>
+										<p:panelGrid columns="4"
+											columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+											layout="grid">
+
+											<!-- Tab 06 > panel 02 : row 02 -->
+											<p:outputLabel>Date of Accident</p:outputLabel>
+											<p:panelGrid>
+												<p:calendar styleClass="calendarClass" navigator="true"
+													style="width:100%;" locale="en_US"
+													value="#{amendmentBackingBean.accidentDTO.dateOfAccident}"
+													maxdate="today" showOn="button" pattern="dd/MM/yyyy"
+													placeholder="DD/MM/YYYY" yearRange="c-100:c+100"
+													readonlyInput="true"></p:calendar>
+											</p:panelGrid>
+
+											<p:outputLabel>No. of Injured</p:outputLabel>
+											<p:inputText style="width:100%;height:18px;" maxlength="50"
+												value="#{amendmentBackingBean.accidentDTO.noOfInjured}"
+												onkeyup="this.value=this.value.toUpperCase();">
+											</p:inputText>
+
+											<!-- Tab 06 > panel 02 : row 03 -->
+											<p:outputLabel>Nature of Accident</p:outputLabel>
+											<p:selectOneMenu id="ugbycrtr" style="width:90%;"
+												effect="fold"
+												value="#{amendmentBackingBean.accidentDTO.natureOfAccident}">
+
+												<f:selectItem itemLabel="-- All --" itemValue="" />
+												<f:selectItems
+													value="#{amendmentBackingBean.accidentTypesList}"
+													var="accidentTypesList"
+													itemValue="#{accidentTypesList.code}"
+													itemLabel="#{accidentTypesList.description}" />
+											</p:selectOneMenu>
+
+											<p:outputLabel>No. of Deaths</p:outputLabel>
+											<p:inputText style="width:100%;height:18px;" maxlength="50"
+												value="#{amendmentBackingBean.accidentDTO.noOfDeaths}"
+												onkeyup="this.value=this.value.toUpperCase();">
+											</p:inputText>
+
+											<!-- Tab 06 > panel 02 : row 04 -->
+
+											<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+												styleClass="internalPanel"
+												columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid">
+
+												<p:panelGrid>
+													<p:outputLabel value="Value of Property Damaged"></p:outputLabel>
+												</p:panelGrid>
+
+												<p:outputLabel value="Rs." styleClass="internalInput"
+													style="text-align:right;margin: auto;padding-right:0px;"></p:outputLabel>
+											</p:panelGrid>
+											<p:inputNumber id="priceValOfProperty"
+												inputStyle="text-align: right;width:86%;"
+												value="#{amendmentBackingBean.accidentDTO.valueOfPropertyDamaged}"
+												onkeyup="this.value=this.value.toUpperCase();">
+												<p:ajax update="priceValOfProperty"
+													listener="#{amendmentBackingBean.priceValOfPropertyValidation}" />
+											</p:inputNumber>
+
+
+
+											<p:outputLabel></p:outputLabel>
+										</p:panelGrid>
+									</p:panel>
+									<center>
+										<p:panel>
+											<p:commandButton styleClass="mainActionbtn" value="Add"
+												action="#{amendmentBackingBean.addMoreAccident}"
+												id="cmdbnOcwUpdate" process="@form"
+												update="@form,moreAccidentList"></p:commandButton>
+
+											<p:commandButton styleClass="mainActionbtn" value="Cancel"
+												action="#{amendmentBackingBean.clearMoreAccident}"
+												id="cmdbtncaveClear" process="@form" update="@form"></p:commandButton>
+										</p:panel>
+									</center>
+
+									<!-- Tab 06 > panel 02 : data table -->
+
+									<p:dataTable style="margin: 2%;" id="moreAccidentList"
+										var="moreAccidentList"
+										value="#{amendmentBackingBean.moreAccidentList}">
+										<p:column headerText="Date of Accident">
+											<h:outputText value="#{moreAccidentList.strDateOfAccident}" />
+										</p:column>
+										<p:column headerText="Nature of Accident">
+											<h:outputText value="#{moreAccidentList.natureOfAccident}" />
+										</p:column>
+										<p:column headerText="Number of Injured">
+											<h:outputText value="#{moreAccidentList.noOfInjured}" />
+										</p:column>
+
+										<p:column headerText="Number of Deaths">
+											<h:outputText value="#{moreAccidentList.noOfDeaths}" />
+										</p:column>
+
+										<p:column headerText="Value of Property Damaged Rs.">
+											<h:outputText
+												value="#{moreAccidentList.valueOfPropertyDamaged}" />
+										</p:column>
+
+										<p:column headerText="">
+
+											<p:commandLink
+												action="#{amendmentBackingBean.removeMoreAccident}"
+												update="moreAccidentList" process="moreAccidentList">
+												<f:setPropertyActionListener value="#{moreAccidentList.seq}"
+													target="#{amendmentBackingBean.selectedMoreAccident}" />
+												<p:graphicImage library="images" name="delete.png"
+													style="width:24px;height:24px;" title="delete"></p:graphicImage>
+											</p:commandLink>
+										</p:column>
+									</p:dataTable>
+
+								</p:panel>
+
+							</p:panel>
+							<p:panel>
+								<h1>After Accident</h1>
+
+								<!-- Tab 06 > panel 02 : check box -->
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-6,ui-grid-col-1,ui-grid-col-2,ui-grid-col-3"
+									layout="grid" id="afterAccident">
+
+									<p:outputLabel>(a) Is there any legal case still not closed? Yes </p:outputLabel>
+									<p:selectBooleanCheckbox
+										value="#{amendmentBackingBean.afterAccidentDTO.anyLegalCaseNotClosed}" />
+									<p:outputLabel></p:outputLabel>
+									<p:outputLabel></p:outputLabel>
+									<p:outputLabel>(b) Did the driver face for the medical test? Yes</p:outputLabel>
+									<p:selectBooleanCheckbox
+										value="#{amendmentBackingBean.afterAccidentDTO.isFacedMediTest}" />
+									<p:outputLabel></p:outputLabel>
+									<p:outputLabel></p:outputLabel>
+
+									<p:outputLabel>(c) Did he participate for the training program? Yes</p:outputLabel>
+									<p:selectBooleanCheckbox
+										value="#{amendmentBackingBean.afterAccidentDTO.isParicipateTraining}" />
+									<p:outputLabel></p:outputLabel>
+									<p:outputLabel></p:outputLabel>
+
+									<p:outputLabel>(d) Driving License has been suspended/cancelled? Yes</p:outputLabel>
+									<p:selectBooleanCheckbox
+										value="#{amendmentBackingBean.afterAccidentDTO.isLicenseCancelled}" />
+									<p:outputLabel></p:outputLabel>
+									<p:outputLabel></p:outputLabel>
+
+									<p:outputLabel>(e) If so what is the period?</p:outputLabel>
+									<p:inputText style="width:100%;height:18px;" maxlength="3"
+										value="#{amendmentBackingBean.afterAccidentDTO.cancelPeriod}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:outputLabel></p:outputLabel>
+									<p:outputLabel></p:outputLabel>
+
+								</p:panelGrid>
+
+								<!-- Tab 06 > panel 02 : Buttons -->
+								<center>
+									<p:panel>
+										<p:commandButton styleClass="mainActionbtn"
+											rendered="#{amendmentBackingBean.afterAccidentDTO.seq == 0}"
+											value="Save"
+											action="#{amendmentBackingBean.saveAfterAccident}"
+											id="cmdbfdfsnOwUpdate" process="@form"
+											update="@form tabviewId"></p:commandButton>
+
+										<p:commandButton styleClass="mainActionbtn"
+											rendered="#{amendmentBackingBean.afterAccidentDTO.seq != 0}"
+											value="Update"
+											action="#{amendmentBackingBean.updateAfterAccident}"
+											id="cmdbtnBfvusUpdate" process="@form"
+											update="@form tabviewId"></p:commandButton>
+
+										<p:commandButton styleClass="mainActionbtn"
+											rendered="#{amendmentBackingBean.afterAccidentDTO.seq == 0}"
+											value="Cancel"
+											action="#{amendmentBackingBean.clearAfterAccident}"
+											id="cmdbtnavsdfseClear" process="@form"
+											update="@form tabviewId"></p:commandButton>
+
+										<p:commandButton styleClass="mainActionbtn"
+											rendered="#{amendmentBackingBean.afterAccidentDTO.seq != 0}"
+											value="Cancel"
+											action="#{amendmentBackingBean.clearUpdateAfterAccident}"
+											id="cmdbtnavsdfcdseClear" process="@form"
+											update="@form tabviewId"></p:commandButton>
+									</p:panel>
+								</center>
+
+
+							</p:panel>
+
+							<!-- tab main -->
+						</h:form>
+					</p:tab>
+
+					<p:tab title="Permit Renewals"
+						activeIndex="#{amendmentBackingBean.activeTabIndex}"
+						rendered="#{amendmentBackingBean.finalCheckList}"
+						disabled="#{amendmentBackingBean.generatedApplicationNo == NULL}">
+						<h:form id="frmRenewalInfo">
+							<p:panel>
+								<h1>Renewal Details</h1>
+								<p:panelGrid id="shwDetail" columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Permit Expiry Date" for="expiryId"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:96%;height:18px;" tabindex="13"
+											value="#{amendmentBackingBean.permitRenewalsDTO.permitExpiryDate}"
+											maxlength="10" id="expiryId" readonly="true">
+										</p:inputText>
+
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Permit Expired Date Valid from"
+											rendered="#{amendmentBackingBean.showbacklogvalue12}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"
+											rendered="#{amendmentBackingBean.showbacklogvalue12}"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:calendar id="validFromDateId" tabindex="12"
+											value="#{amendmentBackingBean.permitRenewalsDTO.permitExpiredFromDateObj}"
+											style="width:60%;height:18px;" yearRange="c-100:c+100"
+											navigator="true" locale="en_US" showOn="button"
+											readonlyInput="true" pattern="dd/MM/yyyy"
+											placeholder="DD/MM/YYYY"
+											rendered="#{amendmentBackingBean.showbacklogvalue}">
+											<p:ajax event="dateSelect"
+												listener="#{amendmentBackingBean.onFromDateChange}"
+												update="validFromDateId" />
+										</p:calendar>
+										<p:inputText style="width:96%;height:18px; " tabindex="13"
+											value="#{amendmentBackingBean.permitRenewalsDTO.fromToDate}"
+											id="validFromDateId1"
+											rendered="#{amendmentBackingBean.showbacklogvalueLoad}"
+											readonly="true"></p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value=" to "
+											rendered="#{amendmentBackingBean.showbacklogvalue12}"></p:outputLabel>
+
+										<p:calendar id="validToDateId" tabindex="12"
+											value="#{amendmentBackingBean.permitRenewalsDTO.permitExpiredValidToDateObj}"
+											style="width:55%;height:18px;" mindate="today"
+											yearRange="c-100:c+100" navigator="true" locale="en_US"
+											showOn="button" readonlyInput="true" pattern="dd/MM/yyyy"
+											placeholder="DD/MM/YYYY"
+											rendered="#{amendmentBackingBean.showbacklogvalue}">
+											<p:ajax event="dateSelect"
+												listener="#{amendmentBackingBean.onValidDateChange}"
+												update="validToDateId,renewPeriodId,newExpiryDateId" />
+										</p:calendar>
+										<p:inputText style="width:87%;height:18px; " tabindex="13"
+											value="#{amendmentBackingBean.permitRenewalsDTO.validToDate}"
+											id="validToDateId1"
+											rendered="#{amendmentBackingBean.showbacklogvalueLoad}"
+											readonly="true"></p:inputText>
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Request Renew Period"
+											for="renewPeriodId"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:45%;height:18px; " tabindex="13"
+											value="#{amendmentBackingBean.permitRenewalsDTO.requestRenewPeriod}"
+											id="renewPeriodId" maxlength="2"
+											readonly="#{amendmentBackingBean.requestNewPeriodReadOnly}"
+											disabled="#{amendmentBackingBean.disabledReqPeriodInput}">
+											<p:ajax
+												listener="#{amendmentBackingBean.onNewPermitDateChange}"
+												update="newExpiryDateId" />
+											<p:keyFilter regEx="/[0-9]/i" />
+										</p:inputText>
+										<p:outputLabel value="(Months)"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="New Permit Expiry Date"
+											rendered="#{amendmentBackingBean.showNewPermitDateInput}"
+											for="newExpiryDateId"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:96%;height:18px;" tabindex="13"
+											value="#{amendmentBackingBean.permitRenewalsDTO.newPermitExpirtDate}"
+											id="newExpiryDateId" readonly="true"
+											disabled="#{amendmentBackingBean.disabledReqPeriodInput}"
+											rendered="#{amendmentBackingBean.showNewPermitDateInput}">
+
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+								</p:panelGrid>
+
+								<p:panelGrid id="shwDetail1" columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Special Remark" for="specialRemarkId"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputTextarea style="width:320%;height:48px; "
+											value="#{amendmentBackingBean.permitRenewalsDTO.specialRemark}"
+											maxlength="200" id="specialRemarkId" rows="3" cols="12"></p:inputTextarea>
+									</p:panelGrid>
+
+
+								</p:panelGrid>
+							</p:panel>
+							
+								<p:panel rendered="#{!amendmentBackingBean.newBus}" 
+								style="border-bottom:5px solid #404d6f;
+								border-top:5px solid #404d6f;">
+									<h1>Fitness Certificate of Omnibus</h1>
+
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+										<!-- Tab 04 > panel 02 : row 01 -->
+										<p:outputLabel>Serial No.</p:outputLabel>
+										<p:inputText
+											value="#{amendmentBackingBean.permitRenewalsDTO.serialNo}"
+											maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+											style="width:86%;">
+										</p:inputText>
+
+										<p:outputLabel>Garage Registered No.</p:outputLabel>
+										<p:inputText
+											value="#{amendmentBackingBean.permitRenewalsDTO.garageRegNo}"
+											maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+											style="width:86%;">
+										</p:inputText>
+										<!-- Tab 04 > panel 02 : row 02 -->
+										<p:panelGrid>
+											<p:outputLabel>Fitness Expired Date</p:outputLabel>
+											<p:outputLabel value="" style="color:red;"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:calendar styleClass="calendarClass"
+												value="#{amendmentBackingBean.permitRenewalsDTO.fitnessCertiDate}"
+												yearRange="c-100:c+100" navigator="true" locale="en_US"
+												showOn="button" readonlyInput="true" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY">
+
+											</p:calendar>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel>Garage Name</p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText
+												value="#{amendmentBackingBean.permitRenewalsDTO.garageName}"
+												maxlength="50"
+												onkeyup="this.value=this.value.toUpperCase();"
+												style="width:86%;">
+											</p:inputText>
+										</p:panelGrid>
+									</p:panelGrid>
+								</p:panel>
+							<!--newly added 2021-01-12  -->
+							<p:panel rendered="#{!amendmentBackingBean.newBus}"
+								style="border-bottom:5px solid #404d6f;">
+								
+						
+								
+								<h1>Emission Test/Revenue Licence Details</h1>
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<p:panelGrid>
+											<p:outputLabel>Emission Test Expiry Date</p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:calendar styleClass="calendarClass"
+												value="#{amendmentBackingBean.permitRenewalsDTO.emissionExpDate}"
+												yearRange="c-100:c+100" navigator="true" locale="en_US"
+												showOn="button" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY">
+
+											</p:calendar>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:outputLabel>Revenue Licence Expiry Date</p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:calendar styleClass="calendarClass"
+												value="#{amendmentBackingBean.permitRenewalsDTO.revenueExpDate}"
+												yearRange="c-100:c+100" navigator="true" locale="en_US"
+												showOn="button" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY">
+
+											</p:calendar>
+										</p:panelGrid>
+
+								</p:panelGrid>
+							</p:panel>
+
+							<p:panel style="border-bottom:5px solid #404d6f;"
+								rendered="#{!amendmentBackingBean.newBus}">
+								<h1>Insurance Cover Details</h1>
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+									<p:panelGrid>
+										<p:outputLabel value="Insurance Company/Corporation Name"></p:outputLabel>
+										<!-- <p:outputLabel value="*" style="color:red;"></p:outputLabel> -->
+									</p:panelGrid>
+
+									<p:inputText
+										value="#{amendmentBackingBean.permitRenewalsDTO.insuCompName}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										style="width:80%;">
+									</p:inputText>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Expiry Date"></p:outputLabel>
+
+									</p:panelGrid>
+
+									<p:calendar styleClass="calendarClass"
+										value="#{amendmentBackingBean.permitRenewalsDTO.insuExpDate}"
+										mindate="today" yearRange="c-100:c+100" navigator="true"
+										locale="en_US" showOn="button" readonlyInput="true"
+										pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+
+									</p:calendar>
+
+									<p:panelGrid>
+										<p:outputLabel value="Category of Insurance"></p:outputLabel>
+
+									</p:panelGrid>
+
+									<p:inputText
+										value="#{amendmentBackingBean.permitRenewalsDTO.insuCat}"
+										onkeyup="this.value=this.value.toUpperCase();"
+										style="width:80%;">
+									</p:inputText>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Policy Number"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText
+											value="#{amendmentBackingBean.permitRenewalsDTO.policyNo}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:80%;">
+										</p:inputText>
+									</p:panelGrid>
+
+								</p:panelGrid>
+
+
+							</p:panel>
+							<!-- newly added 2021-01-12 end  -->
+							<p:panel>
+								<center>
+									<p:panel>
+										<p:commandButton styleClass="mainActionbtn"
+											update="tabviewId:frmRenewalInfo"
+											value="#{msg['common.backlog.tbpaymentinfo.save']}"
+											process="tabviewId:frmRenewalInfo"
+											action="#{amendmentBackingBean.renewalSave}"
+											id="cmdbtnPaymentSave"
+											disabled="#{editPrevPermitDetailsBackingBean.disableMode}"></p:commandButton>
+
+										<p:commandButton styleClass="mainActionbtn"
+											update="tabviewId:frmRenewalInfo"
+											value="#{msg['common.backlog.tbpaymentinfo.clear']}"
+											process="tabviewId:frmRenewalInfo"
+											action="#{amendmentBackingBean.renewalClear}"
+											id="cmdbtnPaymentClear"
+											disabled="#{editPrevPermitDetailsBackingBean.disableMode}"></p:commandButton>
+									</p:panel>
+								</center>
+							</p:panel>
+							<!-- tab main -->
+						</h:form>
+
+
+					</p:tab>
+
+					<!-- ***********************************  Tab 06  ******************************************************************* -->
+
+					<p:tab title="Final Check List"
+						activeIndex="#{amendmentBackingBean.activeTabIndex}"
+						rendered="#{amendmentBackingBean.finalCheckList}"
+						disabled="#{amendmentBackingBean.generatedApplicationNo == NULL}">
+						<h:form id="frmtab07">
+							<p:panel>
+
+								<h1>Check Documents</h1>
+
+
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-9,ui-grid-col-3" layout="grid">
+
+									<!-- panel 01 -->
+									<p:dataTable id="checkDocumentsTable" var="checkDocumentsTable"
+										rows="5" paginator="true"
+										value="#{amendmentBackingBean.dataList}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15" resizableColumns="false"
+										liveResize="true" rowIndexVar="index"
+										emptyMessage="No Documents Available">
+
+										<p:column headerText="Code" style="text-align:left;width:8%">
+											<h:outputText value="#{checkDocumentsTable.documentCode}"></h:outputText>
+										</p:column>
+										<p:column headerText="Description"
+											style="text-align:left;width:15%">
+											<h:outputText
+												value="#{checkDocumentsTable.documentDescription}"></h:outputText>
+										</p:column>
+										<p:column headerText="Is Mandatory"
+											style="text-align:center;width:8%">
+											<p:selectBooleanCheckbox
+												value="#{checkDocumentsTable.mandatory}" disabled="true" />
+										</p:column>
+
+										<p:column headerText="Uploaded"
+											style="text-align:center;width:8%">
+											<p:selectBooleanCheckbox
+												value="#{checkDocumentsTable.exists}" disabled="true" />
+										</p:column>
+
+										<p:column headerText="Physically Exit"
+											style="text-align:center;width:8%">
+											<p:selectBooleanCheckbox
+												value="#{checkDocumentsTable.physicallyExists}">
+
+												<p:ajax update="@form"
+													listener="#{amendmentBackingBean.ajaxInsertPhysicalExitRecord}" />
+
+											</p:selectBooleanCheckbox>
+										</p:column>
+										<p:column headerText="Remarks"
+											style="text-align:left;width:15%">
+											<p:inputText value="#{checkDocumentsTable.remark}"
+												style="width:90%;height:18px;" id="remarkTxtId"
+												maxlength="200"
+												onkeyup="this.value=this.value.toUpperCase();">
+											</p:inputText>
+										</p:column>
+									</p:dataTable>
+
+									<!-- panel 02 -->
+									<p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+										layout="grid" rendered="true">
+										<p:commandButton rendered="false" styleClass="mainActionbtn"
+											style="width:100%" value="Vehicle Inspection"
+											action="#{amendmentBackingBean.viewVehicleInspectionAct}"></p:commandButton>
+										<p:commandButton disabled="false" styleClass="mainActionbtn"
+											style="width:100%" value="Public Complain"
+											action="#{amendmentBackingBean.viewPublicComplain}"></p:commandButton>
+										<p:commandButton disabled="false" styleClass="mainActionbtn"
+											style="width:100%" value="Investigation"
+											action="#{amendmentBackingBean.viewInvestigationPopUp}"></p:commandButton>
+										<p:commandButton disabled="false" styleClass="mainActionbtn"
+											style="width:100%" value="GPS SIM Details"
+											action="#{amendmentBackingBean.viewGpsDetails}"></p:commandButton>
+
+										<p:commandButton styleClass="mainActionbtn"
+											style="width:100%;" value="GPS Check"
+											action="#{amendmentBackingBean.redirectGPS}" ajax="false"
+											onclick="form.target='_blank'" />
+
+										<p:commandButton rendered="false" styleClass="mainActionbtn"
+											style="width:100%" value="RMV"></p:commandButton>
+									</p:panelGrid>
+								</p:panelGrid>
+
+
+								<!-- Tab 06 > Buttons -->
+								<center>
+									<p:panel>
+										<p:commandButton styleClass="mainActionbtn" value="Save"
+											action="#{amendmentBackingBean.saveFinal}" ajax="false"
+											update="@form"></p:commandButton>
+										<p:commandButton styleClass="mainActionbtn" value="Cancel"
+											action="#{amendmentBackingBean.clearCheckDocumentsTable}"
+											update="@form,checkDocumentsTable"></p:commandButton>
+									</p:panel>
+								</center>
+
+
+
+
+							</p:panel>
+							<!-- tab main -->
+						</h:form>
+
+						<h:form id="frmBucdsdcfv">
+
+							<center>
+								<p:panel>
+
+									<p:commandButton styleClass="mainLinkButton"
+										value="Documents Management"
+										action="#{amendmentBackingBean.documentManagement}"
+										id="cmdbtnDocumentManagement" process="@form"
+										update="@form,frmdoc"></p:commandButton>
+
+									<p:commandButton styleClass="mainLinkButton" rendered="false"
+										value="Generate Voucher"
+										action="#{amendmentBackingBean.generateVoucher}"
+										id="cmdbtnGenerateVoucher" process="@form"
+										update="@form,frmGenerateVoucher"></p:commandButton>
+
+
+
+								</p:panel>
+							</center>
+
+
+
+						</h:form>
+					</p:tab>
+
+				</p:tabView>
+				<!-- End of tabs -->
+
+
+
+			</div>
+		</div>
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="requiredField" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlmissing']}" width="30%"
+			severity="info" widgetVar="requiredField" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{amendmentBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="successSve" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlsuccess']}" width="30%"
+			severity="info" widgetVar="successSve" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{msg['um.employeeprofile.dlsuccessmsg']}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSve"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="uploadDocumentsDialog" global="true" modal="true"
+			header="Upload Documents" width="80%" height="400px" severity="info"
+			widgetVar="uploadDocument" closeOnEscape="true" resizable="false"
+			style="postion: absolute;">
+			<p:ajax event="close"
+				listener="#{amendmentBackingBean.clearCheckDocumentsTable}"
+				update="tabviewId:frmtab07:checkDocumentsTable" />
+
+			<h:form id="frmdoc">
+
+				<p:tabView>
+					<p:tab title="Upload Documents">
+
+						<p:accordionPanel>
+							<p:growl id="msgs" showDetail="false" />
+							<p:tab title="Mandatory Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abc" tableStyle="width:auto"
+										var="docMandatory"
+										value="#{amendmentBackingBean.mandatoryList}" rows="5"
+										paginator="true" sortOrder="ascending"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docMandatory.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docMandatory.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+
+											<h:outputText value="#{docMandatory.uploadFilePath}" />
+										</p:column>
+
+										<p:column
+											headerText="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+											style="width: 150px !important;">
+
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveAmendmentsMandatoryUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx)$/"
+												sizeLimit="15728640">
+
+
+												<f:attribute name="uploadedObj" value="#{docMandatory}" />
+												<f:attribute name="permitNo"
+													value="#{amendmentBackingBean.strPermitNo}" />
+												<f:attribute name="applicationNo"
+													value="#{amendmentBackingBean.generatedApplicationNo}" />
+												<f:attribute name="transactionCode"
+													value="#{amendmentBackingBean.strTrnDesc}" />
+											</p:fileUpload>
+
+										</p:column>
+
+									</p:dataTable>
+								</h:panelGrid>
+
+							</p:tab>
+						</p:accordionPanel>
+
+						<br></br>
+						<br></br>
+
+						<p:accordionPanel>
+							<p:growl id="msgse" showDetail="false" />
+							<p:tab title="Optional Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abcd" tableStyle="width:auto"
+										var="docOptional" value="#{amendmentBackingBean.optionalList}"
+										rows="5" paginator="true" sortOrder="ascending"
+										scrollable="true" scrollHeight="100%" liveResize="true"
+										liveScroll="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docOptional.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docOptional.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+											<h:outputText value="#{docOptional.uploadOptionalFilePath}" />
+										</p:column>
+
+										<p:column
+											headerText="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+											style="width: 75px;">
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveAmendmentsOptionalUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx)$/"
+												sizeLimit="15728640"
+												fileLimitMessage="Please Upload Only One Document">
+
+
+												<f:attribute name="uploadedOptionalObj"
+													value="#{docOptional}" />
+
+												<f:attribute name="permitNo"
+													value="#{amendmentBackingBean.strPermitNo}" />
+												<f:attribute name="applicationNo"
+													value="#{amendmentBackingBean.generatedApplicationNo}" />
+												<f:attribute name="transactionCode"
+													value="#{amendmentBackingBean.strTrnDesc}" />
+
+											</p:fileUpload>
+
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+
+					</p:tab>
+
+					<p:tab title="Upload History">
+
+
+						<p:accordionPanel multiple="true">
+							<p:growl showDetail="false" />
+							<p:tab title="New Permit" closable="true">
+
+
+								<p:accordionPanel id="dkfj">
+									<p:growl id="NP" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryNP" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.newPermitMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=UploadDOcument')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalNP" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.newPermitOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+
+							<br></br>
+							<br></br>
+
+
+							<p:tab title="Permit Renewal" closable="false">
+
+
+								<p:accordionPanel>
+									<p:growl id="PR" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryPR" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.permitRenewalMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalPR" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.permitRenewalOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+
+							<br></br>
+							<br></br>
+
+
+							<p:tab title="Backlog Management" closable="false">
+
+
+
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalBM" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.backlogManagementOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+							<br></br>
+							<br></br>
+
+							<p:tab title="Amendment To Bus Owner" closable="false">
+
+
+								<p:accordionPanel>
+									<p:growl id="ABO" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryABO" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.amendmentToBusOwnerMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalABO" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.amendmentToBusOwnerOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+							<br></br>
+							<br></br>
+
+							<p:tab title="Amendment To Bus" closable="false">
+
+
+								<p:accordionPanel>
+									<p:growl id="AB" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryAB" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.amendmentToBusMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalAB" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.amendmentToBusOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+							<br></br>
+							<br></br>
+
+
+							<p:tab title="Amendment To Service" closable="false">
+
+
+								<p:accordionPanel>
+									<p:growl id="AS" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryAS" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.amendmentToServiceMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalAS" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.amendmentToServiceOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+							<br></br>
+							<br></br>
+
+
+							<p:tab title="Amendment To Owner Bus" closable="false">
+
+
+								<p:accordionPanel>
+									<p:growl id="AOB" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryAOB" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.amendmentToOwnerBusMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalAOB" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.amendmentToOwnerBusOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+							<br></br>
+							<br></br>
+
+
+
+							<p:tab title="Amendment To Service Bus" closable="false">
+
+
+								<p:accordionPanel>
+									<p:growl id="ASB" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryASB" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.amendmentToServiceBusMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalASB" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.amendmentToServiceBusOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+							<br></br>
+							<br></br>
+
+							<p:tab title="Tender Management" closable="false">
+
+
+								<p:accordionPanel>
+									<p:growl id="TM" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryTM" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.tenderMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalTM" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.tenderOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+
+
+
+						</p:accordionPanel>
+					</p:tab>
+
+				</p:tabView>
+
+
+
+
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="AddNewDocument" global="true" modal="true"
+			header="Add New Documents" width="40%" severity="info"
+			widgetVar="viewAddDoc" closeOnEscape="true" resizable="false"
+			position="center center">
+			<p:ajax event="close" listener="#{documentManagementBean.onCancel}"
+				update="AddNewDocument" />
+			<h:form id="newdoc">
+
+				<p:panelGrid columns="4">
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Document Code"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText id="inputDocCode"
+							value="#{documentManagementBean.newDocCode}" maxlength="5"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+
+
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Document Description"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText id="inputDocDes"
+							value="#{documentManagementBean.newDocDes}"></p:inputText>
+
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+
+				</p:panelGrid>
+
+				<br></br>
+				<center>
+					<p:outputLabel id="errorLabel"
+						value="#{documentManagementBean.docErrorMsg}" style="color:red;"></p:outputLabel>
+					<br></br>
+					<p:commandButton value="Save" styleClass="mainActionbtn"
+						class="mainActionbtn"
+						actionListener="#{documentManagementBean.addNewDocumentSave}"
+						update="@all,errorLabel,inputDocCode,inputDocDes"></p:commandButton>
+					<p:commandButton value="Cancel" styleClass="mainActionbtn"
+						class="mainActionbtn"
+						actionListener="#{documentManagementBean.clear}"
+						update="@all,inputDocCode,inputDocDes,errorLabel"></p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="successSveUploadDoc" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlsuccess']}" width="30%"
+			severity="info" widgetVar="successSveUploadDoc" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmsuccessSveUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.successMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						update="frmdoc" process="frmsuccessSveUploadDoc"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSveUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="requiredFieldUploadDoc" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlmissing']}" width="30%"
+			severity="info" widgetVar="requiredFieldUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredFieldUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredFieldUploadDoc"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredFieldUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="generateVoucherDialog" global="true" modal="true"
+			header="Create Payment Voucher" width="80%" severity="info"
+			widgetVar="generateVoucher" closeOnEscape="true" resizable="false"
+			style="postion: absolute;">
+
+			<h:form id="frmGenerateVoucher">
+
+				<p:panel id="panelOne">
+
+					<p:panelGrid columns="4" style="margin-left:115px"
+						columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+						layout="grid">
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Transaction Type"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:inputText id="transactionType"
+								value="#{amendmentBackingBean.paymentVoucherDTO.transactionDescription}"
+								onkeyup="this.value=this.value.toUpperCase();" style="width:66%"
+								readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Department"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="department" style="width:59%"
+								value="#{createPaymentVoucher.paymentVoucherDTO.departmentCode}"
+								filter="true" filterMatchMode="contains" tabindex="1">
+
+								<f:selectItem itemLabel="--Select Department--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{createPaymentVoucher.deaprtmentList}"
+									var="d" itemLabel="#{d.deaprtmentDiscription}"
+									itemValue="#{d.departmentCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Application No." style="text-align: left;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="applicationNo"
+								value="#{amendmentBackingBean.generatedApplicationNo}"
+								onkeyup="this.value=this.value.toUpperCase();"
+								style="width:66%;color:red;font-weight: bold;" maxlength="20"
+								readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+
+
+						<!-- 			********************************************************************************************* -->
+
+						<p:panelGrid>
+							<p:outputLabel value="Permit No."></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="permitNo"
+								value="#{amendmentBackingBean.strPermitNo}"
+								onkeyup="this.value=this.value.toUpperCase();" style="width:66%"
+								maxlength="12" readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Voucher No." style="text-align: left;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="voucherNo"
+								onkeyup="this.value=this.value.toUpperCase();"
+								style="width:66%; color:red;font-weight: bold;" maxlength="12"
+								readonly="true" value="#{createPaymentVoucher.value}">
+							</p:inputText>
+						</p:panelGrid>
+
+
+						<!-- 			********************************************************************************************* -->
+						<p:panelGrid>
+							<p:outputLabel value="Date"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+
+							<p:inputText value="#{createPaymentVoucher.date1}"
+								style="width:66%" disabled="true" />
+
+
+						</p:panelGrid>
+
+
+					</p:panelGrid>
+
+
+					<!-- 			********************************************************************************************* -->
+
+				</p:panel>
+
+				<center>
+
+					<p:commandButton value="Search" styleClass="mainActionbtn"
+						id="cmdBtnSearch" action="#{createPaymentVoucher.searchVoucher}"
+						process="@all"
+						update="mainTable,addbutton,clearButton,generateButton"
+						style="width:20%" />
+
+				</center>
+
+
+				<p:panel id="panelTwo">
+
+					<p:panelGrid columns="4" style="margin-left:115px"
+						columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+						layout="grid">
+
+
+						<!--  ************************************************************************************************ -->
+						<p:panelGrid>
+							<p:outputLabel value="Charge Type"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+
+							<p:selectOneMenu id="chargeType" style="width:59%"
+								value="#{createPaymentVoucher.paymentVoucherDTO.chargeDescription}"
+								filter="true" filterMatchMode="contains" tabindex="1">
+								<f:selectItem itemLabel="--Select charge Type--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{createPaymentVoucher.chargeTypeList}" />
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Account No."></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+
+							<p:selectOneMenu id="accountNo" style="width:59%"
+								value="#{createPaymentVoucher.paymentVoucherDTO.accountNO}"
+								filter="true" filterMatchMode="contains" tabindex="1">
+								<f:selectItem itemLabel="--Select Account No.--"
+									itemValue="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+									noSelectionOption="true" />
+								<f:selectItems value="#{createPaymentVoucher.accountNoList}" />
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+
+
+						<!--  ************************************************************************************************ -->
+
+
+
+						<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+							styleClass="internalPanel"
+							columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid">
+
+							<p:panelGrid styleClass="internalPanel">
+								<p:outputLabel value="Amount"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;text-align:left"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:outputLabel value="Rs." styleClass="internalInput"
+								style="text-align:right;margin: auto;padding-right:0px;"></p:outputLabel>
+
+						</p:panelGrid>
+
+						<p:panelGrid>
+
+							<p:inputNumber id="amount"
+								value="#{createPaymentVoucher.paymentVoucherDTO.amount}"
+								inputStyle="text-align: right;width:66%" maxlength="12">
+							</p:inputNumber>
+
+						</p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+
+						<!--  ************************************************************************************************ -->
+
+					</p:panelGrid>
+				</p:panel>
+
+				<center>
+					<p:commandButton value="Add" styleClass="mainActionbtn"
+						action="#{createPaymentVoucher.addNewCharge}"
+						disabled="#{createPaymentVoucher.disableAdd}" id="addbutton"
+						update="mainTable,panelTwo" process="@all">
+
+						<f:setPropertyActionListener value="#{true}"
+							target="#{createPaymentVoucher.disableAdd}" />
+
+					</p:commandButton>
+
+
+					<p:commandButton value="Cancel" styleClass="mainActionbtn"
+						id="clearButton" action="#{createPaymentVoucher.clearTwo}"
+						update="panelTwo"
+						disabled="#{createPaymentVoucher.disableClearTwo}" process="@all">
+
+						<f:setPropertyActionListener value="#{true}"
+							target="#{createPaymentVoucher.disableClearTwo}" />
+					</p:commandButton>
+				</center>
+
+
+				<p:panel>
+					<center>
+						<p:dataTable var="e" scrollable="true" scrollHeight="105"
+							value="#{createPaymentVoucher.voucherDetails}" id="mainTable"
+							tableStyle="text-align:center;" rowKey="e.chargeDescription"
+							style="width:98%;">
+
+
+							<p:columnGroup type="header">
+								<p:row>
+
+									<p:column headerText="Charge Type" style="text-align:left;" />
+									<p:column headerText="Account No." style="text-align:left;" />
+									<p:column headerText="Amount Rs." style="text-align:right;" />
+									<p:column
+										headerText="#{editPermitIssuanceBackingBean.strSelectedTitle}" />
+								</p:row>
+							</p:columnGroup>
+
+							<p:column style="text-align:left">
+								<h:outputText value="#{e.chargeDescription}"
+									style="text-align:left;" />
+							</p:column>
+							<p:column style="text-align:left">
+								<h:outputText value="#{e.accountNO}" style="text-align:left;" />
+							</p:column>
+							<p:column style="text-align:right">
+								<h:outputText value="#{e.amount}" style="text-align:right;">
+									<f:convertNumber pattern="##,###.00" />
+								</h:outputText>
+							</p:column>
+
+							<p:column>
+								<center>
+									<p:commandLink
+										action="${createPaymentVoucher.delete(e.chargeDescription)}"
+										update="mainTable">
+
+										<f:ajax render="voucherDetails" />
+										<p:graphicImage library="images" name="delete.png"
+											style="width:24px;height:24px;" title="delete"></p:graphicImage>
+									</p:commandLink>
+								</center>
+
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column
+										footerText="#{editPermitIssuanceBackingBean.strSelectedTitle}" />
+									<p:column style="text-align:right" footerText="Total Fee Rs." />
+
+									<p:column style="text-align:right">
+										<f:facet name="footer">
+											<h:outputText value="#{createPaymentVoucher.totalfee}">
+												<f:convertNumber pattern="##,###.00" />
+											</h:outputText>
+										</f:facet>
+									</p:column>
+									<p:column footerText="" />
+								</p:row>
+							</p:columnGroup>
+
+						</p:dataTable>
+					</center>
+				</p:panel>
+
+
+				<center>
+
+					<p:commandButton value="Re-Print" styleClass="mainActionbtn"
+						id="rePrint" disabled="#{createPaymentVoucher.disableRePrint}" />
+
+					<p:commandButton value="Generate Voucher" id="generateButton"
+						styleClass="mainActionbtn" style="width:180px"
+						action="#{createPaymentVoucher.generateVoucher}"
+						update="rePrint,addbutton,voucherNo,generateButton,print"
+						disabled="#{createPaymentVoucher.disableGenarate}" />
+
+					<p:commandButton value="Print" ajax="false" id="print"
+						styleClass="mainActionbtn"
+						actionListener="#{createPaymentVoucher.downloadFile}"
+						onclick="PrimeFaces.monitorDownload(start, stop);"
+						oncomplete="PF('genReport').hide();"
+						update="rePrint,addbutton,voucherNo,generateButton"
+						disabled="#{createPaymentVoucher.disablePrint}">
+
+						<f:attribute name="value" value="#{createPaymentVoucher.value}"></f:attribute>
+						<p:fileDownload value="#{createPaymentVoucher.files}" />
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<!-- GPS -->
+		<p:dialog header="GPS" id="GPSModeId" widgetVar="GPSModeId"
+			height="600" width="1000" modal="true" resizable="true"
+			focus="frmGpsModeId:dlg-gps">
+			<h:form id="frmGpsModeId">
+				<div class="ui-grid-row">
+					<div class="gridspadding ui-grid-col-12">
+
+						<p:panel id="dlg-gps">
+							<p:panel
+								style="margin-top: -9px; margin-right: -15px; margin-left: -15px; background-color: #bed6f8 !important;">
+								<h2 style="text-align: center;">SIM Details</h2>
+							</p:panel>
+							<h:panelGroup id="editableView">
+
+								<p:panelGrid style="margin-top:1%;">
+									<p:panel header="SIM Registraion Details"
+										style="border:1px solid #b1cbef">
+
+										<p:panelGrid columns="4" layout="grid"
+											columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-3, ui-grid-col-3">
+											<p:panel>
+												<p:outputPanel>
+													<p:outputLabel value="SIM Registration No."></p:outputLabel>
+												</p:outputPanel>
+											</p:panel>
+											<p:panel>
+												<p:inputText
+													value="#{amendmentBackingBean.simRegistrationDTO.simRegNo}"
+													tabindex="1" style="width:100%" readonly="true">
+												</p:inputText>
+											</p:panel>
+											<p:panel>
+												<p:outputPanel>
+													<p:outputLabel value="SIM No."></p:outputLabel>
+												</p:outputPanel>
+											</p:panel>
+											<p:panel>
+												<p:inputText
+													value="#{amendmentBackingBean.simRegistrationDTO.simNo}"
+													tabindex="1" style="width:100%" readonly="true">
+												</p:inputText>
+											</p:panel>
+
+											<p:panel>
+												<p:outputPanel>
+													<p:outputLabel value="Receiver Name"></p:outputLabel>
+												</p:outputPanel>
+											</p:panel>
+											<p:panel>
+												<p:inputText
+													value="#{amendmentBackingBean.simRegistrationDTO.receiversName}"
+													tabindex="1" style="width:100%" readonly="true">
+													<p:ajax />
+												</p:inputText>
+											</p:panel>
+											<p:panel>
+												<p:outputPanel>
+													<p:outputLabel value="Issue Date"></p:outputLabel>
+												</p:outputPanel>
+											</p:panel>
+											<p:panel>
+												<p:inputText
+													value="#{amendmentBackingBean.simRegistrationDTO.issueDate}"
+													tabindex="1" style="width:100%" readonly="true">
+													<p:ajax />
+												</p:inputText>
+											</p:panel>
+
+											<p:panel>
+												<p:outputPanel>
+													<p:outputLabel value="Valid Until"></p:outputLabel>
+												</p:outputPanel>
+											</p:panel>
+											<p:panel>
+												<p:inputText
+													value="#{amendmentBackingBean.simRegistrationDTO.validUntilDate}"
+													tabindex="1" style="width:100%" readonly="true">
+													<p:ajax />
+												</p:inputText>
+											</p:panel>
+											<p:panel>
+												<p:outputPanel>
+													<p:outputLabel value="Payment Receipt No."></p:outputLabel>
+												</p:outputPanel>
+											</p:panel>
+											<p:panel>
+												<p:inputText
+													value="#{amendmentBackingBean.simRegistrationDTO.receiptNo}"
+													tabindex="1" style="width:100%" readonly="true">
+													<p:ajax />
+												</p:inputText>
+											</p:panel>
+
+										</p:panelGrid>
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-3,ui-grid-col-9">
+											<p:panel>
+												<p:outputPanel>
+													<p:outputLabel value="Remarks"></p:outputLabel>
+												</p:outputPanel>
+											</p:panel>
+											<p:panel>
+												<p:inputTextarea
+													value="#{amendmentBackingBean.simRegistrationDTO.remarks}"
+													tabindex="1" style="width:100%" rows="2" readonly="true">
+													<p:ajax />
+												</p:inputTextarea>
+											</p:panel>
+										</p:panelGrid>
+
+									</p:panel>
+
+								</p:panelGrid>
+
+
+								<p:panel id="panelGridViewA" header="EMI Details"
+									style="border:1px solid #b1cbef;">
+									<p:dataTable id="dtemiPanel" var="emiDet"
+										value="#{amendmentBackingBean.emiDetViewList}"
+										emptyMessage="No EMI details" paginator="true" rows="5"
+										rowsPerPageTemplate="5,6"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										reflow="true">
+
+										<p:column headerText="Bus No." width="30%"
+											style="text-align:left">
+											<h:outputLabel value="#{emiDet.emiBusNo}" />
+										</p:column>
+										<p:column headerText="Status" style="text-align:left">
+											<h:outputLabel value="#{emiDet.emiStatus}" style="width:35%" />
+										</p:column>
+										<p:column headerText="Transaction Date"
+											style="text-align:left">
+											<h:outputLabel value="#{emiDet.emiReIssueDate}"
+												style="width:35%" />
+
+
+										</p:column>
+
+
+									</p:dataTable>
+
+
+
+								</p:panel>
+
+
+
+							</h:panelGroup>
+
+
+						</p:panel>
+					</div>
+				</div>
+			</h:form>
+		</p:dialog>
+		<!-- End GPS -->
+
+		<!--  Public Complain Management -->
+		<p:dialog header="Complaint" id="complaintDlg"
+			widgetVar="complaintDlg" height="550" width="1000" modal="true"
+			resizable="true" focus="complaintDlgFrm:dlg-complaint">
+			<h:form id="complaintDlgFrm">
+				<div class="ui-grid-row">
+					<div class="gridspadding ui-grid-col-12">
+						<p:panel id="panelGridView" header="Complains"
+							style="border:1px solid #b1cbef;">
+							<p:dataTable id="dtComplainPanel" var="complain"
+								value="#{amendmentBackingBean.complainDetViewList}"
+								emptyMessage="No complaints." paginator="true" rows="10"
+								rowsPerPageTemplate="5,10,15"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								reflow="true">
+								<p:column rendered="false">
+									<h:outputText value="#{complain.complaintNo}" />
+								</p:column>
+								<p:column headerText="Complaint No." width="20%">
+									<h:outputLabel value="#{complain.complaintNo}" />
+
+
+								</p:column>
+								<p:column headerText="Status" style="text-align:left">
+									<h:outputLabel value="#{complain.processStatus}"
+										style="width:50%" />
+								</p:column>
+								<p:column headerText="Priority Order" style="text-align:left">
+									<h:outputLabel value="#{complain.priorityOrder}"
+										style="width:50%" />
+
+
+								</p:column>
+
+								<p:column headerText="Created Date" style="text-align:left">
+									<h:outputLabel value="#{complain.createdDate}"
+										style="width:90%" />
+
+
+								</p:column>
+								<p:column headerText="">
+									<p:commandLink action="#{amendmentBackingBean.viewAction()}"
+										update="@form" process="@all">
+
+										<f:setPropertyActionListener value="#{complain}"
+											target="#{amendmentBackingBean.viewSelect}" />
+
+										<p:graphicImage library="images" name="view1.png"
+											style="width:24px;height:24px;" title="view"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+
+
+
+						</p:panel>
+
+						<p:panel id="dlg-complaint">
+							<p:panel
+								style="margin-top: -9px; margin-right: -15px; margin-left: -15px; background-color: #bed6f8 !important;">
+								<h2 style="text-align: center;">Details of Complaint
+									#{amendmentBackingBean.selectedComplaintDTO.complaintNo}</h2>
+							</p:panel>
+
+							<h:panelGroup id="editableView">
+
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-8,ui-grid-col-4" layout="grid"
+									style="margin-top:1%;">
+									<p:panel header="Initiate Details"
+										style="border:1px solid #b1cbef">
+
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-5, ui-grid-col-6">
+
+
+											<p:outputPanel>
+
+												<p:outputLabel value="Priority Order"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:selectOneMenu
+												value="#{amendmentBackingBean.selectedComplaintDTO.priorityOrder}"
+												tabindex="1" style="width:calc(100% - 18px);">
+												<f:selectItem itemLabel="-- Select Order --" itemValue=""></f:selectItem>
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.priorityOrderList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+											<p:outputPanel>
+												<p:outputLabel value="Severity"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:selectOneMenu
+												value="#{amendmentBackingBean.selectedComplaintDTO.severityNo}"
+												tabindex="1" style="width:calc(100% - 18px);">
+												<f:selectItem itemLabel="-- Select Severity --" itemValue=""></f:selectItem>
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.severityList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+
+											<p:outputPanel>
+												<p:outputLabel value="Event Place"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:inputText
+												value="#{amendmentBackingBean.selectedComplaintDTO.eventPlace}"
+												tabindex="1" style="width:100%">
+												<p:ajax />
+											</p:inputText>
+
+											<p:outputPanel>
+												<p:outputLabel value="Event Date &amp; Time"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:calendar
+												value="#{amendmentBackingBean.selectedComplaintDTO.eventDateTime}"
+												tabindex="1" pattern="yyyy-MM-dd HH:mm:ss"
+												converterMessage="Format must be: yyyy-MM-dd HH:mm:ss"
+												inputStyle="width:100%">
+												<p:ajax event="dateSelect"
+													listener="#{manageInquiryBean.eventDateTimeSelect}" />
+											</p:calendar>
+
+											<p:outputPanel>
+												<p:outputLabel value="Complaint Media"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:selectOneMenu
+												value="#{amendmentBackingBean.selectedComplaintDTO.complainMedia}"
+												tabindex="1" style="width:calc(100% - 18px);">
+												<f:selectItem itemLabel="-- Select Complaint Media --"
+													itemValue=""></f:selectItem>
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.complainMediaList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+
+											<p:outputLabel value="Has Written Proof"></p:outputLabel>
+											<p:panelGrid columns="2">
+												<p:selectBooleanCheckbox
+													value="#{amendmentBackingBean.selectedComplaintDTO.hasWrittenProof}"
+													tabindex="1">
+													<!-- <p:ajax update="attachDoc"></p:ajax> -->
+												</p:selectBooleanCheckbox>
+											</p:panelGrid>
+
+											<p:outputLabel value="Complainer Participation"></p:outputLabel>
+											<p:panelGrid columns="2">
+												<p:selectBooleanCheckbox
+													value="#{amendmentBackingBean.selectedComplaintDTO.complainerParticipation}"
+													tabindex="1">
+													<p:ajax update="panelComplainer" />
+												</p:selectBooleanCheckbox>
+											</p:panelGrid>
+
+											<p:outputLabel value="Details of the Complaint"></p:outputLabel>
+											<p:inputTextarea
+												value="#{amendmentBackingBean.selectedComplaintDTO.detailOfComplain}"
+												tabindex="1" style="width:100%"></p:inputTextarea>
+
+										</p:panelGrid>
+
+									</p:panel>
+
+									<p:panel header="Bus Details" style="border:1px solid #b1cbef">
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-5, ui-grid-col-7">
+											<p:outputLabel value="Vehicle No."></p:outputLabel>
+											<p:inputText
+												value="#{amendmentBackingBean.selectedComplaintDTO.vehicleNo}"
+												style="width:100%;"></p:inputText>
+
+											<p:outputLabel value="Permit No."></p:outputLabel>
+											<p:inputText
+												value="#{amendmentBackingBean.selectedComplaintDTO.permitNo}"
+												style="width:100%;"></p:inputText>
+
+											<p:outputLabel value="Route No."></p:outputLabel>
+											<p:selectOneMenu
+												value="#{amendmentBackingBean.selectedComplaintDTO.routeNo}"
+												style="width:calc(100% - 18px);" autoWidth="false"
+												effect="fold" filter="true" filterMatchMode="contains">
+												<p:ajax />
+												<f:selectItem itemLabel="-- Select Route --" itemValue="" />
+												<f:selectItems
+													value="#{terminalPaymentBackingBean.routeList}"
+													var="routeList"
+													itemLabel="#{routeList.routeNo}&#160;:&#160;#{routeList.startFrom}-#{routeList.endAt}"
+													itemValue="#{routeList.routeNo}" />
+											</p:selectOneMenu>
+
+											<p:outputLabel value="Province"></p:outputLabel>
+											<p:selectOneMenu
+												value="#{amendmentBackingBean.selectedComplaintDTO.province}"
+												style="width:calc(100% - 18px);">
+												<p:ajax />
+												<f:selectItem itemLabel="-- Select Province --" itemValue="" />
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.provincelList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+
+											<p:outputLabel value="Origin"></p:outputLabel>
+											<p:inputText
+												value="#{amendmentBackingBean.selectedComplaintDTO.origin}"
+												style="width:100%;">
+												<p:ajax />
+											</p:inputText>
+
+											<p:outputLabel value="Destination"></p:outputLabel>
+											<p:inputText
+												value="#{amendmentBackingBean.selectedComplaintDTO.destination}"
+												style="width:100%;">
+												<p:ajax />
+											</p:inputText>
+
+											<p:outputLabel value="Depot"></p:outputLabel>
+											<p:inputText
+												value="#{amendmentBackingBean.selectedComplaintDTO.depot}"
+												style="width:100%;">
+												<p:ajax />
+											</p:inputText>
+										</p:panelGrid>
+									</p:panel>
+								</p:panelGrid>
+
+								<div class="ui-grid-row">
+
+									<div class="gridspadding ui-grid-col-12">
+										<p:panel id="panelComplainer" header="Complainer Details"
+											style="border:1px solid #b1cbef;">
+
+											<p:panelGrid columns="4" layout="grid"
+												columnClasses="ui-grid-col-1, ui-grid-col-3, ui-grid-col-10, ui-grid-col-4">
+												<h:panelGroup />
+												<p:outputLabel value=""></p:outputLabel>
+												<p:outputPanel>
+													<p:outputLabel value="Name of the Complainer"></p:outputLabel>
+													<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+												</p:outputPanel>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In English" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.complainerName}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In Sinhala" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.complainerName_si}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In Tamil" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.complainerName_ta}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+											</p:panelGrid>
+
+											<p:spacer height="10"></p:spacer>
+
+											<p:panelGrid columns="6" layout="grid"
+												columnClasses="ui-grid-col-1, ui-grid-col-3, ui-grid-col-5, ui-grid-col-5, ui-grid-col-3, ui-grid-col-1">
+												<h:panelGroup />
+												<p:outputLabel value=""></p:outputLabel>
+												<p:outputPanel>
+													<p:outputLabel value="Address Line 1"></p:outputLabel>
+													<p:outputLabel value=" *" style="color:#ff0000;"
+														rendered="#{amendmentBackingBean.selectedComplaintDTO.complainerParticipation}"></p:outputLabel>
+												</p:outputPanel>
+												<p:outputLabel value="Address Line 2"></p:outputLabel>
+												<p:outputLabel value="City"></p:outputLabel>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In English" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.address1}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.address2}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.city}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In Sinhala" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.address1_si}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.address2_si}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.city_si}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In Tamil" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.address1_ta}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.address2_ta}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.city_ta}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+											</p:panelGrid>
+
+											<p:spacer height="10"></p:spacer>
+
+											<p:panelGrid columns="6" layout="grid"
+												columnClasses="ui-grid-col-1, ui-grid-col-3, ui-grid-col-5, ui-grid-col-3,ui-grid-col-5, ui-grid-col-1">
+												<h:panelGroup />
+												<p:outputPanel>
+													<p:outputLabel value="Contact No 1"></p:outputLabel>
+													<p:outputLabel value=" *" style="color:#ff0000;"
+														rendered="#{amendmentBackingBean.selectedComplaintDTO.complainerParticipation}"></p:outputLabel>
+												</p:outputPanel>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.contact1}"
+													maxlength="10">
+													<p:ajax />
+
+												</p:inputText>
+												<p:outputPanel>
+													<p:outputLabel value="Contact No 2"></p:outputLabel>
+													<p:outputLabel value=" *" style="color:#ff0000;"
+														rendered="#{amendmentBackingBean.selectedComplaintDTO.complainerParticipation}"></p:outputLabel>
+												</p:outputPanel>
+												<p:inputText
+													value="#{amendmentBackingBean.selectedComplaintDTO.contact2}"
+													maxlength="10">
+													<p:ajax />
+
+												</p:inputText>
+												<h:panelGroup />
+											</p:panelGrid>
+
+										</p:panel>
+									</div>
+								</div>
+
+								<div class="ui-grid-row">
+									<div class="gridspadding ui-grid-col-12">
+										<p:panel id="panelCommitedOffences"
+											header="Committed Offences" style="border:1px solid #b1cbef;">
+											<p:dataTable id="dtOffencePanel" var="offence"
+												value="#{amendmentBackingBean.selectedComplaintDTO.committedOffences}"
+												emptyMessage="No committed offences" paginator="true"
+												rows="10" rowsPerPageTemplate="5,10,15"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												reflow="true">
+												<p:column rendered="false">
+													<h:outputText value="#{offence.code}" />
+												</p:column>
+												<p:column headerText="Applicable (Yes/No)" width="70">
+													<p:selectBooleanCheckbox value="#{offence.applicable}"
+														disabled="true">
+														<p:ajax />
+													</p:selectBooleanCheckbox>
+												</p:column>
+												<p:column headerText="Offence" style="text-align:left">
+													<h:outputText value="#{offence.description}" />
+												</p:column>
+												<p:column headerText="Remarks" style="text-align:left">
+													<p:inputText value="#{offence.remark}" style="width:90%">
+														<p:ajax />
+													</p:inputText>
+												</p:column>
+											</p:dataTable>
+
+											<p:spacer height="10px"></p:spacer>
+											<p:panelGrid layout="grid" columns="2"
+												columnClasses="ui-grid-col-3, ui-grid-col-8">
+												<p:outputLabel value="Other"></p:outputLabel>
+												<p:inputTextarea
+													value="#{amendmentBackingBean.selectedComplaintDTO.otherOffence}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputTextarea>
+											</p:panelGrid>
+										</p:panel>
+									</div>
+								</div>
+
+							</h:panelGroup>
+
+
+						</p:panel>
+					</div>
+				</div>
+			</h:form>
+		</p:dialog>
+		<!-- Public Complain Management End -->
+
+		<!-- for Investigation -->
+		<p:dialog styleClass="" id="showPageDialog" global="true" modal="true"
+			header="Investigation" width="80%" height="600px" severity="info"
+			widgetVar="showPageDialog" dynamic="true" appendTo="@(body)"
+			resizable="false">
+			<h:form id="frmview">
+				<br></br>
+				<p:panel id="panelInvGridView" header="Investigation"
+					style="border:1px solid #b1cbef;">
+					<p:dataTable id="dtInvestigationPanel" var="invDet"
+						value="#{amendmentBackingBean.investigationDetViewList}"
+						emptyMessage="No Investigastion Details" paginator="true"
+						rows="10" rowsPerPageTemplate="5,10,15"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						reflow="true">
+
+						<p:column headerText="Investigation No." width="20%"
+							style="text-align:left">
+							<h:outputLabel value="#{invDet.invesNo}" />
+
+
+						</p:column>
+						<p:column headerText="Reference No." style="text-align:left">
+							<h:outputLabel value="#{invDet.refNo}" style="width:50%" />
+						</p:column>
+						<p:column headerText="Report No." style="text-align:left">
+							<h:outputLabel value="#{invDet.reportNo}" style="width:50%" />
+
+
+						</p:column>
+
+						<p:column headerText="Permit Owner" style="text-align:left">
+							<h:outputLabel value="#{invDet.permitowner}" style="width:90%" />
+
+
+						</p:column>
+						<p:column headerText="">
+							<p:commandLink action="#{amendmentBackingBean.viewInvesAction()}"
+								update="@form" process="@all">
+
+								<f:setPropertyActionListener value="#{invDet}"
+									target="#{amendmentBackingBean.viewInvSelect}" />
+
+								<p:graphicImage library="images" name="view1.png"
+									style="width:24px;height:24px;" title="view"></p:graphicImage>
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+
+
+
+				</p:panel>
+				<br></br>
+
+				<p:panel id="dlg-Investigation">
+					<p:panel
+						style="margin-top: -9px; margin-right: -15px; margin-left: -15px; background-color: #bed6f8 !important;">
+						<h2 style="text-align: center;">Details of Investigation</h2>
+					</p:panel>
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+						layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Referance No."></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="refNo" style="width:60%" readonly="true"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.refNo}">
+							</p:inputText>
+
+
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Report No."></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="reportNo" style="width:60%" widgetVar="reportNo"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.reportNo}"
+								readonly="true"></p:inputText>
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Charge Reference No."></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="invesNo" style="width:60%; color:green;"
+								widgetVar="invesNo"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.invesNo}"
+								readonly="true"></p:inputText>
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Service Type"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="ServiceType" style="width:60%"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.serviceTypeDes}"
+								readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Permit No."></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="permitNo" style="width:60%"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.permitNo}"
+								readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Permit Owner"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="owner" style="width:60%"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.permitowner}"
+								readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Route No."></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="route" style="width:60%"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.routeNo}"
+								readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="From"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="from" style="width:60%"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.routeFrom}"
+								readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="To"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="to" style="width:60%"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.routeTo}"
+								readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Driver ID"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:inputText id="driverID" style="width:60%" readonly="true"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.driverID}">
+							</p:inputText>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Name"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="DriverName" style="width:60%" readonly="true"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.driverName}">
+							</p:inputText>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Conductor ID"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="conductorID" style="width:60%" readonly="true"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.conductorID}">
+							</p:inputText>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Name"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="conductorName" style="width:60%" readonly="true"
+								value="#{amendmentBackingBean.flyingManageInvestigationLogDTO.conductName}">
+							</p:inputText>
+						</p:panelGrid>
+
+					</p:panelGrid>
+
+					<p:panel>
+
+						<p:panel>
+							<p:outputLabel value="Violation of Conditions"
+								style="font-weight:bold;"></p:outputLabel>
+							<center>
+								<p:dataTable var="fundtTable" paginator="true" rows="5"
+									id="fundtTable" style="width:96%"
+									value="#{amendmentBackingBean.conditionList}"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,15,30" resizableColumns="false"
+									sortBy="#{fundtTable.code}" sortOrder="ascending"
+									liveResize="false" rowIndexVar="index" editable="true"
+									editMode="cell">
+									<!-- <p:ajax event="cellEdit"
+											listener="#{flyingSquadChargeSheetBackingBeann.onCellEdit}" /> -->
+									<p:column headerText="Code" style="text-align:left;width:10%">
+										<h:outputText value="#{fundtTable.code}" />
+									</p:column>
+									<p:column headerText="Description"
+										style="text-align:left;width:25%">
+										<h:outputText style="text-align:left;"
+											value="#{fundtTable.description}" />
+									</p:column>
+
+									<p:column headerText="Remark" style="text-align:left;width:25%">
+										<p:inputText style="text-align:left; width:100%"
+											value="#{fundtTable.remarks}" readonly="true" />
+									</p:column>
+									<p:column headerText="" style="text-align:left;width:5%">
+										<p:selectBooleanCheckbox value="#{fundtTable.ststus}" />
+									</p:column>
+								</p:dataTable>
+							</center>
+						</p:panel>
+
+						<p:panel>
+							<p:outputLabel value="Retain Documents" style="font-weight:bold;"></p:outputLabel>
+
+							<p:growl id="msgs" showDetail="true" />
+							<center>
+								<p:dataTable var="fundtTablen" paginator="true" rows="5"
+									id="fundtTablen" style="width:96%"
+									value="#{amendmentBackingBean.documentList}"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,15,30" resizableColumns="false"
+									sortBy="#{fundtTablen.code}" sortOrder="ascending"
+									liveResize="false" rowIndexVar="index" editable="true"
+									editMode="cell">
+									<!-- <p:ajax event="cellEdit"
+											listener="#{flyingSquadChargeSheetBackingBeann.onCellEdit}" /> -->
+
+									<p:column headerText="Description"
+										style="text-align:left;width:20%">
+										<h:outputText style="text-align:left;"
+											value="#{fundtTablen.description}" />
+									</p:column>
+
+									<p:column headerText="Details"
+										style="text-align:left;width:25%">
+										<p:inputText style="text-align:left; width:100%"
+											value="#{fundtTablen.remark}" readonly="true" />
+									</p:column>
+									<p:column headerText="" style="text-align:left;width:5%">
+										<p:selectBooleanCheckbox value="#{fundtTablen.violated}" />
+									</p:column>
+								</p:dataTable>
+							</center>
+						</p:panel>
+					</p:panel>
+				</p:panel>
+			</h:form>
+			<br></br>
+			<center>
+				<p:commandButton id="cmdbtnclose" value="Close"
+					class="mainActionbtn"
+					actionListener="#{amendmentBackingBean.close}"></p:commandButton>
+			</center>
+		</p:dialog>
+		<!-- Investigation end -->
+
+		<p:dialog styleClass="" id="vehicleValidate" global="true"
+			modal="true" header="Attention" width="65%" height="110px"
+			severity="info" widgetVar="vehicleValidate" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmvehicleValidate">
+				<center>
+					<br></br>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel style="color:red; font-size:16pt;"
+							value="#{amendmentBackingBean.validationMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmvehicleValidate" value="OK"
+						onclick="PF('vehicleValidate').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="vehicleComplainValidate" global="true"
+			modal="true"
+			header="Given Grant Permission to Active/Ongoing Complain for Proceed"
+			width="55%" height="110px" severity="info"
+			widgetVar="vehicleComplainValidate" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmvehicleComplainValidate">
+				<center>
+					<br></br>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+						<p:outputLabel style="color:green; font-size:11pt;"
+							value="#{amendmentBackingBean.validationMsgforComplain}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmvehicleComplainValidate" value="OK"
+						onclick="PF('vehicleComplainValidate').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

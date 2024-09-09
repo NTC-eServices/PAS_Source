@@ -1,0 +1,1632 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn1 {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 180px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+.calendarClass input {
+	width: 62% !important
+}
+</style>
+
+
+		<div class="mainDiv">
+
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Request For Sisu Sariya (View/Edit)</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmView">
+
+
+
+					<p:panelGrid id="searchPan" columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Request No." for="requestNoId1"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:selectOneMenu id="requestNoId1" style="width:65%; "
+							value="#{viewEditRequestForSisuSariyaBackingBean.sisuSariyaViewDTO.requestNo}"
+							effect="fold" filter="true" filterMatchMode="contains">
+
+							<f:selectItem itemLabel="-- Select Request No. --" itemValue="" />
+							<f:selectItems
+								value="#{viewEditRequestForSisuSariyaBackingBean.requestNoList}"
+								var="requestNoList" itemValue="#{requestNoList.requestNo}"
+								itemLabel="#{requestNoList.requestNo}" />
+						</p:selectOneMenu>
+
+
+						<p:panelGrid>
+							<p:outputLabel value=" Request Date" for="dateId1"
+								rendered="false"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:calendar id="dateId1" rendered="false"
+								value="#{viewEditRequestForSisuSariyaBackingBean.sisuSariyaViewDTO.requestDate}"
+								style="width:90%; " navigator="true" locale="en_US"
+								showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+								yearRange="c-100:c+100" readonlyInput="true"></p:calendar>
+
+						</p:panelGrid>
+						<br></br>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+
+							<p:commandButton styleClass="mainActionbtn" value="Search"
+								update="tabviewId" ajax="false"
+								action="#{viewEditRequestForSisuSariyaBackingBean.searchButton}"></p:commandButton>
+
+
+							<p:commandButton styleClass="mainActionbtn" value="Clear"
+								update="tabviewId,frmView" ajax="false"
+								action="#{viewEditRequestForSisuSariyaBackingBean.clearAddDet}"></p:commandButton>
+
+						</p:panelGrid>
+
+					</p:panelGrid>
+
+					<p:panelGrid>
+
+					</p:panelGrid>
+
+					<p:tabView id="tabviewId"
+						activeIndex="#{viewEditRequestForSisuSariyaBackingBean.activeTabIndex}">
+
+						<p:tab title="Requestor Information" id="tbReqInfo">
+
+							<p:panel>
+
+
+								<p:panelGrid id="shwDetail" columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<p:panelGrid>
+										<h2 style="color: blue;">Requestor Information</h2>
+
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Prefered Language" for="prefLang"></p:outputLabel>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+
+										<p:selectOneMenu id="prefLang" tabindex="1"
+											style="width:90%; "
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedPrefLang}"
+											effect="fold" filter="true" filterMatchMode="contains">
+
+											<f:selectItem itemLabel="-- Select Language --" itemValue="" />
+											<f:selectItems
+												value="#{viewEditRequestForSisuSariyaBackingBean.prefLanguList}"
+												var="prefLanguList" itemValue="#{prefLanguList.languageDes}"
+												itemLabel="#{prefLanguList.languageDes}" />
+										</p:selectOneMenu>
+
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Requestor Type" for="reqType"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="10"
+											maxlength="50"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedReqType}"
+											id="reqType">
+
+										</p:inputText>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="ID No." for="idNo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											maxlength="12"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedIdNo}"
+											id="idNo" onkeyup="this.value=this.value.toUpperCase();">
+
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Name in Full (Sinhala)"
+											for="nameSinhala"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="11"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectNameFullSin}"
+											id="nameSinhala">
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Name in Full" for="name"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectNameFull}"
+											id="name">
+
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Address 1 (Sinhala)"
+											for="address1Sinhala"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="12"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectAdd1Sin}"
+											id="address1Sinhala">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Address 1" for="address1"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="13"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectAdd1}"
+											id="address1">
+										</p:inputText>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Address 2 (Sinhala)"
+											for="address2Sinhala"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="13"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectAdd2Sin}"
+											id="address2Sinhala">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Address 2" for="address2"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="5"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectAdd2}"
+											id="address2">
+										</p:inputText>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="City (Sinhala)" for="citySinhala"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="14"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectCitySin}"
+											id="citySinhala">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="City " for="city"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="6"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectCity}"
+											onkeyup="this.value=this.value.toUpperCase();" id="city">
+										</p:inputText>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Name in Full (Tamil)" for="nameTamil"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="15"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectNameFullTamil}"
+											id="nameTamil">
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Telephone No." for="telNo"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="7"
+											maxlength="15"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectTelNo}"
+											id="telNo"></p:inputText>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+
+
+										<p:outputLabel value="Address 1 (Tamil)" for="address1Tamil"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputText style="width:95%;height:18px;" tabindex="16"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectAdd1Tamil}"
+											id="address1Tamil"></p:inputText>
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Mobile No." for="mobNo"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="mobNo" tabindex="8" maxlength="15"
+											style="width:95%;height:18px;"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectMobNo}"></p:inputText>
+
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+
+
+										<p:outputLabel value="Address 2 (Tamil)" for="address2Tamil"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputText style="width:95%;height:18px;" tabindex="17"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectAdd2Tamil}"
+											id="address2Tamil"></p:inputText>
+									</p:panelGrid>
+
+
+
+									<p:panelGrid>
+										<p:outputLabel value="E-mail" for="email"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="email" style="width:95%;height:18px;"
+											tabindex="9"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectEmail}"></p:inputText>
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+
+
+										<p:outputLabel value="City (Tamil)" for="cityTamil"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputText style="width:95%;height:18px;" tabindex="18"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectCityTamil}"
+											id="cityTamil"></p:inputText>
+									</p:panelGrid>
+
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+
+								</p:panelGrid>
+
+								<p:panel style="border-bottom:5px solid #404d6f;" />
+							</p:panel>
+							<!-- for school information -->
+
+							<p:panel>
+								<p:panelGrid id="shwDetail2" columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+									<p:panelGrid>
+										<h2 style="color: blue;">School Information</h2>
+
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Name" for="nameScl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="19"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolName}"
+											id="nameScl">
+
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Name (Sinhala)" for="nameSinScl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="28"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolNameSin}"
+											id="nameSinScl">
+
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Address 1" for="address1Scl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="20"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolAdd1}"
+											id="address1Scl">
+										</p:inputText>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Address 1 (Sinhala)"
+											for="address1SinhalaScl"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="29"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolAdd1Sin}"
+											id="address1SinhalaScl">
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Address 2" for="address2Scl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="21"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolAdd2}"
+											id="address2Scl">
+										</p:inputText>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Address 2 (Sinhala)"
+											for="address2SinhalaScl"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="30"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolAdd2Sin}"
+											id="address2SinhalaScl">
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="City " for="cityScl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="22"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolCity}"
+											onkeyup="this.value=this.value.toUpperCase();" id="cityScl">
+										</p:inputText>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="City (Sinhala)" for="citySinhalaScl"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="31"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolCitySin}"
+											id="citySinhalaScl">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Telephone No." for="telNoScl"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="23"
+											maxlength="15"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolTelNO}"
+											id="telNoScl"></p:inputText>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Name (Tamil)" for="nameTamilScl"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="32"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolNameTamil}"
+											id="nameTamilScl">
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Mobile No." for="mobNoScl"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="mobNoScl" tabindex="24" maxlength="15"
+											style="width:95%;height:18px;"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolMobNO}"></p:inputText>
+
+									</p:panelGrid>
+									<p:panelGrid>
+
+
+										<p:outputLabel value="Address 1 (Tamil)"
+											for="address1TamilScl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputText style="width:95%;height:18px;" tabindex="33"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolAdd1Tamil}"
+											id="address1TamilScl"></p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Province " for="provinceScl"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+
+
+										<p:selectOneMenu id="provinceScl" tabindex="25"
+											style="width:84%; "
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedProvince}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											<p:ajax
+												listener="#{viewEditRequestForSisuSariyaBackingBean.onProvinceChange}"
+												update="districtScl" />
+
+											<f:selectItem itemLabel="-- Select Province --" itemValue="" />
+											<f:selectItems
+												value="#{viewEditRequestForSisuSariyaBackingBean.drpdProvincelList}"
+												var="drpdProvincelList"
+												itemValue="#{drpdProvincelList.code}"
+												itemLabel="#{drpdProvincelList.description}" />
+										</p:selectOneMenu>
+
+
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Address 2 (Tamil)"
+											for="address2TamilScl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputText style="width:95%;height:18px;" tabindex="34"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolAdd2Tamil}"
+											id="address2TamilScl"></p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="District" for="districtScl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:selectOneMenu id="districtScl" tabindex="26"
+											style="width:84%; "
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolDistrict}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											<p:ajax
+												listener="#{viewEditRequestForSisuSariyaBackingBean.onDistrictChange}"
+												update="divSecScl" />
+											<f:selectItem itemLabel="-- Select District --" itemValue="" />
+											<f:selectItems
+												value="#{viewEditRequestForSisuSariyaBackingBean.drpdDistrictList}"
+												var="drpdDistrictList" itemValue="#{drpdDistrictList.code}"
+												itemLabel="#{drpdDistrictList.description}" />
+										</p:selectOneMenu>
+
+
+									</p:panelGrid>
+									<p:panelGrid>
+
+
+										<p:outputLabel value="City (Tamil)" for="cityTamilScl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputText style="width:95%;height:18px;" tabindex="35"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolCityTamil}"
+											id="cityTamilScl"></p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Divisional Secretariat Division"
+											for="divSecScl"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:selectOneMenu id="divSecScl" tabindex="27"
+											style="width:84%; "
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolDivSec}"
+											effect="fold" filter="true" filterMatchMode="contains">
+
+											<f:selectItem itemLabel="-- Select D.S Division --"
+												itemValue="" />
+											<f:selectItems
+												value="#{viewEditRequestForSisuSariyaBackingBean.drpdDevsecList}"
+												var="drpdDevsecList" itemValue="#{drpdDevsecList.code}"
+												itemLabel="#{drpdDevsecList.description}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="E-mail" for="emailScl"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="emailScl" style="width:95%;height:18px;"
+											tabindex="36"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectedSchoolEmail}"></p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+
+								</p:panelGrid>
+
+								<p:panel style="border-bottom:5px solid #404d6f;" />
+								<br></br>
+								<center>
+									<p:commandButton styleClass="mainActionbtn" value="Save"
+										tabindex="37"
+										rendered="#{viewEditRequestForSisuSariyaBackingBean.renderButton}"
+										actionListener="#{viewEditRequestForSisuSariyaBackingBean.updateRecord}"
+										id="cmdbtnSave" process="@form" update="@form "></p:commandButton>
+
+									<p:commandButton styleClass="mainActionbtn" tabindex="38"
+										rendered="#{viewEditRequestForSisuSariyaBackingBean.renderButton}"
+										actionListener="#{viewEditRequestForSisuSariyaBackingBean.clearFields}"
+										value="Clear" id="cmdbtnOwnerClear" process="@form"
+										update="@form  tabviewId"></p:commandButton>
+
+								</center>
+							</p:panel>
+							<br />
+
+							<br />
+
+							<br />
+
+						</p:tab>
+
+						<p:tab title="Request Route Information" id="reqRouteInfo"
+							disabled="#{requestForSisuSariyaBackingBean.activeTabIndex==1}">
+
+
+							<p:panel>
+								<p:panelGrid id="shwDetail3" columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Request No." for="reqNoRouteinfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="0"
+											maxlength="50" readonly="true"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectReqNo}"
+											id="reqNoRouteinfo">
+
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Via" for="viaRoteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="7"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectRoutInfoVia}"
+											id="viaRoteInfo"></p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Origin" for="orginRouteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="1"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectRoutInfoOrigin}"
+											id="orginRouteInfo"
+											onkeyup="this.value=this.value.toUpperCase();">
+
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Via (Sinhala)" for="viaSinRoutInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="viaSinRoutInfo" tabindex="8"
+											style="width:95%;height:18px;"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectRoutInfoViaSin}"></p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Origin (Sinhala)"
+											for="originSinRouteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectRoutInfoOriginSinhala}"
+											id="originSinRouteInfo">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Via (Tamil)" for="viaTamRouteInfo2"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="viaTamRouteInfo2" tabindex="9"
+											style="width:95%;height:18px;"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectRoutInfoViaTamil}"></p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Origin (Tamil)"
+											for="originTamiRouteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="3"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectRoutInfoOriginTamil}"
+											id="originTamiRouteInfo"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="No. Of Passengers " for="noOfPassen"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputNumber inputStyle="width:218px;height:18px;"
+											tabindex="10" padControl="false"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectNoOfPassen}"
+											id="noOfPassen">
+										</p:inputNumber>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Destination" for="destiRouteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="4"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectRoutInfoDestina}"
+											id="destiRouteInfo">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Destination (Sinhala)"
+											for="destiSinRouteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputText style="width:95%;height:18px;" tabindex="5"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectRoutInfoDestiSinhala}"
+											id="destiSinRouteInfo"></p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Destination (Tamil)"
+											for="destiTamRouteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="6"
+											onkeyup="this.value=this.value.toUpperCase();"
+											value="#{viewEditRequestForSisuSariyaBackingBean.selectRoutInfoDestinaTamil}"
+											id="destiTamRouteInfo">
+										</p:inputText>
+
+									</p:panelGrid>
+
+
+								</p:panelGrid>
+								<br></br>
+								<center>
+
+									<p:commandButton styleClass="mainActionbtn" value="Add"
+										update="@form" tabindex="11"
+										rendered="#{viewEditRequestForSisuSariyaBackingBean.renderButton}"
+										action="#{viewEditRequestForSisuSariyaBackingBean.addButton}"></p:commandButton>
+									<p:commandButton styleClass="mainActionbtn" value="Clear"
+										update="@form" tabindex="12"
+										rendered="#{viewEditRequestForSisuSariyaBackingBean.renderButton}"
+										action="#{viewEditRequestForSisuSariyaBackingBean.clearAddDet1}"></p:commandButton>
+
+
+								</center>
+
+							</p:panel>
+							<p:panel>
+								<!-- for data grid -->
+								<center>
+									<p:dataTable id="e" var="showDetails" rows="5" paginator="true"
+										update="@form"
+										value="#{viewEditRequestForSisuSariyaBackingBean.showDataOnGrid}"
+										selection="#{viewEditRequestForSisuSariyaBackingBean.selectedRow}"
+										rowKey="#{showDetails.originDes}_#{showDetails.destinationDes},_#{showDetails.via},_#{showDetails.noOfPassengers}"
+										selectionMode="single"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										tableStyle="width:100%" rowsPerPageTemplate="10,20"
+										resizableColumns="false" liveResize="true" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available">
+
+										<p:column headerText="Origin" style="text-align:left;"
+											visible="false">
+											<h:outputText style="text-align:left;width:0%"
+												value="#{showDetails.requestNo}" visible="true" />
+										</p:column>
+										<p:column headerText="Origin" style="text-align:left;"
+											visible="true">
+											<h:outputText style="text-align:left;width:20%"
+												value="#{showDetails.originDes}" visible="true" />
+										</p:column>
+										<p:column headerText="Destination" style="text-align:left;">
+											<h:outputText style="width:20%;text-align:left;"
+												value="#{showDetails.destinationDes}" />
+										</p:column>
+
+										<p:column headerText="Via" style="text-align:left;">
+											<h:outputText style="width:40%;text-align:left;"
+												value="#{showDetails.via}" />
+										</p:column>
+										<p:column headerText="No. Of Passengers"
+											style="text-align:center;">
+											<h:outputText style="text-align:center;width:10%"
+												value="#{showDetails.noOfPassengers}" />
+										</p:column>
+
+
+
+
+										<p:column style="">
+											<center>
+												<p:commandLink
+													action="${viewEditRequestForSisuSariyaBackingBean.deleteButton()}"
+													update="@form" process="@form">
+
+													<f:setPropertyActionListener value="#{showDetails}"
+														target="#{viewEditRequestForSisuSariyaBackingBean.selectedRow}" />
+
+
+													<p:graphicImage library="images" name="delete.png"
+														style="width:24px;height:24px;" title="delete"></p:graphicImage>
+												</p:commandLink>
+											</center>
+
+										</p:column>
+										<p:column style="align:center" visible="true">
+											<p:commandLink
+												action="#{viewEditRequestForSisuSariyaBackingBean.editButton()}"
+												update="@form">
+
+												<f:setPropertyActionListener value="#{showDetails}"
+													target="#{viewEditRequestForSisuSariyaBackingBean.selectedRow}" />
+
+												<p:graphicImage library="images" name="edit.png"
+													style="width:24px;height:24px;" title="edit"></p:graphicImage>
+											</p:commandLink>
+
+
+										</p:column>
+
+
+									</p:dataTable>
+								</center>
+
+							</p:panel>
+
+							<br></br>
+							<center>
+
+
+								<p:commandButton styleClass="mainActionbtn" value="Save"
+									update="@form" rendered="false"
+									action="#{viewEditRequestForSisuSariyaBackingBean.addButton}"></p:commandButton>
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									update="@form" rendered="false"
+									action="#{viewEditRequestForSisuSariyaBackingBean.clearAddDet}"></p:commandButton>
+
+								<p:commandButton styleClass="mainActionbtn1"
+									value="Document Managment" update="uploadDocumentsDialog"
+									rendered="#{viewEditRequestForSisuSariyaBackingBean.renderButton}"
+									action="#{viewEditRequestForSisuSariyaBackingBean.documentManagement}"></p:commandButton>
+								<p:commandButton styleClass="mainActionbtn1"
+									value="Generate Letter - PRPTA" update="@form"
+									rendered="#{viewEditRequestForSisuSariyaBackingBean.renderButton}"
+									action="#{requestForSisuSariyaBackingBean.clearAddDet}"></p:commandButton>
+								<p:commandButton styleClass="mainActionbtn1"
+									value="Generate Letter - SLTB" update="@form"
+									rendered="#{viewEditRequestForSisuSariyaBackingBean.renderButton}"
+									action="#{requestForSisuSariyaBackingBean.clearAddDet}"></p:commandButton>
+
+
+							</center>
+
+						</p:tab>
+
+
+					</p:tabView>
+				</h:form>
+			</div>
+
+		</div>
+
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{viewEditRequestForSisuSariyaBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{viewEditRequestForSisuSariyaBackingBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1"
+						style="margin-top:10px;margin-bottom:10px" process="frmsuccess"
+						value="OK" onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="uploadDocumentsDialog" global="true" modal="true"
+			header="Upload Documents" width="80%" height="400px" severity="info"
+			widgetVar="uploadDocument" closeOnEscape="true" resizable="false"
+			style="postion: absolute;">
+
+
+			<h:form id="frmdoc">
+
+				<p:tabView>
+					<p:tab title="Upload Documents">
+
+						<p:accordionPanel>
+							<p:growl id="msgs" showDetail="false" />
+							<p:tab title="Mandatory Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abc" tableStyle="width:auto"
+										var="docMandatory"
+										value="#{viewEditRequestForSisuSariyaBackingBean.mandatoryList}"
+										rows="5" paginator="true" sortOrder="ascending"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docMandatory.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docMandatory.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+
+											<h:outputText value="#{docMandatory.uploadFilePath}" />
+										</p:column>
+
+										<p:column
+											headerText="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+											style="width: 150px !important;">
+
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveSisuSariyaMandatoryUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640">
+												
+
+												<f:attribute name="uploadedObj" value="#{docMandatory}" />
+
+											</p:fileUpload>
+
+										</p:column>
+										<p:column headerText="" style="width: 75px;">
+
+
+											<p:commandLink
+												actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+												oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+												<p:graphicImage library="images" name="view.png"
+													style="width:20px;height:20px;" title="view"></p:graphicImage>
+												<f:attribute name="documentMandatory"
+													value="#{docMandatory}" />
+											</p:commandLink>
+
+
+
+										</p:column>
+
+
+									</p:dataTable>
+								</h:panelGrid>
+
+							</p:tab>
+						</p:accordionPanel>
+
+						<br></br>
+						<br></br>
+
+						<p:accordionPanel>
+							<p:growl id="msgse" showDetail="false" />
+							<p:tab title="Optional Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abcd" tableStyle="width:auto"
+										var="docOptional"
+										value="#{viewEditRequestForSisuSariyaBackingBean.optionalList}"
+										rows="5" paginator="true" sortOrder="ascending"
+										scrollable="true" scrollHeight="100%" liveResize="true"
+										liveScroll="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docOptional.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docOptional.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+											<h:outputText value="#{docOptional.uploadOptionalFilePath}" />
+										</p:column>
+
+										<p:column
+											headerText="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+											style="width: 150px;">
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveSisuSariyaOptionalUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640"
+												fileLimitMessage="Please Upload Only One Document">
+												
+
+												<f:attribute name="uploadedOptionalObj"
+													value="#{docOptional}" />
+
+
+
+											</p:fileUpload>
+
+										</p:column>
+
+										<p:column headerText="" style="width: 75px;">
+
+
+											<p:commandLink
+												actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+												oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+												<p:graphicImage library="images" name="view.png"
+													style="width:20px;height:20px;" title="view"></p:graphicImage>
+												<f:attribute name="documentOptional" value="#{docOptional}" />
+											</p:commandLink>
+
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+
+					</p:tab>
+
+					<p:tab title="Upload History">
+
+
+						<p:accordionPanel multiple="true">
+							<p:growl showDetail="false" />
+							<p:tab title="Sisu Sariya - Request No.(Documents)"
+								closable="true">
+
+
+								<p:accordionPanel id="dkfj">
+									<p:growl id="NP" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryNP" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.sisuSariyaMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalNP" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.sisuSariyaOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+							<br></br>
+
+							<p:tab title="Sisu Sariya - Service Reference No.(Documents)"
+								closable="true">
+
+
+								<p:accordionPanel>
+									<p:growl showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docMandatory"
+												value="#{sessionBackingBean.sisuSariyaServiceRefMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docOptional"
+												value="#{sessionBackingBean.sisuSariyaServiceRefOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+							<br></br>
+
+							<p:tab title="Sisu Sariya - Service No.(Documents)"
+								closable="true">
+
+
+								<p:accordionPanel>
+									<p:growl showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docMandatory"
+												value="#{sessionBackingBean.sisuSariyaServiceMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docOptional"
+												value="#{sessionBackingBean.sisuSariyaServiceOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+
+						</p:accordionPanel>
+					</p:tab>
+				</p:tabView>
+
+
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successSveUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlsuccess']}"
+			width="30%" severity="info" widgetVar="successSveUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSveUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.successMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSveUploadDoc"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSveUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="requiredFieldUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlmissing']}"
+			width="30%" severity="info" widgetVar="requiredFieldUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredFieldUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredFieldUploadDoc"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredFieldUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>

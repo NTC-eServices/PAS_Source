@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+<f:view contentType="text/html" id="fview">
+
+	<title>National Transport Commission</title>
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<script type="text/javascript">
+			
+		</script>
+
+		<link rel="shortcut icon" type="image/x-icon"
+			href="#{resource['images/favicon.ico']}" />
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #ffffff;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #07295b, #a4b0ee, #07295b, #8692b2,
+		#333e8b);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #07295b !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #07295b !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.blank {
+	width: 0% !important;
+	background-color: #f5f5f5 !important;
+	border: 1px solid #c2c2c2 !important;
+}
+
+.weak {
+	background-color: #F88E7D !important;
+	border: 1px solid #F95D24 !important;
+	width: 33.33% !important;
+}
+
+.medium {
+	background-color: #FEE379 !important;
+	border: 1px solid #EDB605 !important;
+	width: 66.66% !important;
+}
+
+.strong {
+	background-color: #81FF6C !important;
+	border: 1px solid #05E428 !important;
+	width: 101% !important;
+}
+</style>
+
+
+
+	</h:head>
+
+	<body class="backImage">
+		<h:outputStylesheet library="css" name="login.css" />
+		<h:outputStylesheet library="css" name="common.css" />
+
+
+		<div class="modal-dialog"
+			style="width: 35%; margin-left: 33%; margin-top: 10%; border-radius: 5px;">
+			<div class="modal-content"
+				style="border-radius: 10px; background-color: #ffffff;">
+				<div class="modal-header" align="center">
+					<img class="img-circle" src="resources/images/header_logo_new.png"
+						style="width: 100%;" />
+
+				</div>
+				<h:form id="loginForm" name="loginForm" prependId="false">
+					<h:panelGroup id="loginpanel">
+
+						<p:focus for="j_username"></p:focus>
+
+						<p:outputPanel id="outId">
+							<h:outputLabel value="#{loginBean.loginErrorMessage}"
+								style="font-size: 13px !important;color: red;font-weight:bold;padding-left:110px;"></h:outputLabel>
+						</p:outputPanel>
+
+
+
+
+
+						<h:panelGrid id="loginpanelgrid" columns="2"
+							style="margin-top:20px;width:100%; border: 0px solid blue; border-radius: 12px;"
+							styleClass="loginpanel">
+
+
+
+
+							<p:outputLabel
+								style="font-size: 12px !important;margin-left:25%;font-weight:bold;">#{msg['login.username']}</p:outputLabel>
+
+							<p:inputText id="j_username" name="j_username" autocomplete="off"
+								class="form-control"
+								style="width: 87%;height:25px;font-size: 12px !important;border-radius:5px;"
+								value="#{loginBean.username}"
+								onkeyup="this.value=this.value.toUpperCase();" title="Username">
+								<f:ajax immediate="true" />
+							</p:inputText>
+
+
+
+							<p:outputLabel
+								style="font-size: 12px !important;margin-left:25%;font-weight:bold;">#{msg['login.password']}</p:outputLabel>
+							<p:password id="j_password" name="j_password" autocomplete="off"
+								class="form-control"
+								style="width: 87%;height:25px;font-size: 12px !important;border-radius:5px;"
+								value="#{loginBean.password}" title="Password">
+								<f:ajax immediate="true"></f:ajax>
+							</p:password>
+
+
+							<h:outputLabel value="" />
+
+
+							<p:commandButton id="submit" widgetVar="wgsubmit" type="submit"
+								class="btn btn-primary btn-lg btn-block"
+								style="width:90%;margin-top:10px;height:40px;float: left;font-size: 12px !important; border: 1px solid #FFFFFF; 
+														color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;"
+								value="Login" action="#{loginBean.doLogin}" update="loginForm">
+								<!-- 											<p:ajax update="loginForm" immediate="true"></p:ajax>  -->
+
+							</p:commandButton>
+							<h:outputLabel value="" />
+							<p:spacer height="30"></p:spacer>
+
+							<h:outputLabel value="" />
+							<p:commandLink id="lostpwd"
+								style="font-size: 12px !important;float:right;font-weight:bold;padding-right:10px;color:#6A9DED;"
+								value="Lost Password" class="btn btn-link" type="button"
+								update="frmReser" process="loginpanel"
+								action="#{resetBean.showResetDialog}">
+
+								<f:param name="username" value="#{loginBean.username}" />
+
+							</p:commandLink>
+
+						</h:panelGrid>
+						<div></div>
+					</h:panelGroup>
+
+					<p:dialog header="#{msg['login.lost.password']}" id="lostpwddlgId"
+						widgetVar="lostpwddlg"
+						style="margin-left:5%;margin-bottom:10px;margin-top:-4%;"
+						width="35%" resizable="false" modal="true">
+						<p:ajax event="close" update="topGridId" resetValues="true" />
+
+						<p:focus for="uNameId" />
+						<h:panelGrid columns="2" id="topGridId">
+
+							<p:outputLabel value="#{msg['login.lostpw.username.oplable']}"></p:outputLabel>
+							<p:inputText id="uNameId" style="width:300px;margin-left:3px"
+								value="#{loginBean.changePWDTO.userName}"
+								onkeyup="this.value = this.value.toUpperCase();"
+								onblur="this.value = this.value.toUpperCase();">
+							</p:inputText>
+
+							<p:outputLabel value="#{msg['login.lostpw.email.oplable']}"></p:outputLabel>
+							<p:inputText style="width:300px;margin-left:3px"
+								value="#{loginBean.changePWDTO.emailAddress}">
+							</p:inputText>
+
+						</h:panelGrid>
+						<center>
+							<p:commandButton
+								value="#{msg['login.registre.dialog.reset.button']}"
+								actionListener="#{loginBean.changePasswordAction}"
+								style="width:80px" update="@form" />
+							<p:commandButton
+								value="#{msg['reference.page.clear.button.label']}"
+								action="#{loginBean.clearFormAction}"
+								style="width:80px;margin-left:10px" process="@form"
+								update="@form" />
+						</center>
+
+					</p:dialog>
+
+					<p:confirmDialog header="#{msg['save.dialog.error.header']}"
+						widgetVar="saveError" resizable="false" showEffect="fade"
+						global="true" appendTo="@(body)" closeOnEscape="false"
+						message="#{loginBean.dialogMessage}">
+
+						<center>
+							<p:commandButton value="#{msg['save.error.dialog.button']}"
+								style="width:80px;margin-left:10px"
+								onclick="PF('saveError').hide();" />
+						</center>
+
+					</p:confirmDialog>
+
+					<p:confirmDialog header="#{msg['save.dialog.success.header']}"
+						widgetVar="saveSuccess" resizable="false" showEffect="fade"
+						global="true" appendTo="@(body)" closeOnEscape="false"
+						message="#{loginBean.dialogMessage}">
+
+						<center>
+							<p:commandButton value="#{msg['save.error.dialog.button']}"
+								style="width:80px;margin-left:10px"
+								onclick="PF('saveSuccess').hide();" />
+						</center>
+
+					</p:confirmDialog>
+
+					<p:dialog styleClass="" id="changePWD" header="Change Password"
+						global="true" modal="true" width="650px" severity="info"
+						widgetVar="changePWD" closable="false" closeOnEscape="true"
+						resizable="false">
+
+
+						<center>
+
+
+							<br></br>
+							<h:panelGrid id="changepassword" columns="3" columnClasses="ui-grid-col-4,ui-grid-col-6,ui-grid-col-2"
+								styleClass="loginpanel"
+								style="margin-top:20px;width:60%; border: 0px solid blue; border-radius: 12px;">
+
+								<p:outputLabel
+									style="font-size: 12px !important;margin-top: 10px !important;font-weight:bold;">User ID</p:outputLabel>
+
+								<p:inputText readonly="true" value="#{loginBean.username}"
+									onkeyup="this.value=this.value.toUpperCase();">
+
+								</p:inputText>
+								<p:outputLabel></p:outputLabel>
+
+
+								<p:outputLabel
+									style="font-size: 12px !important;margin-top: 10px !important;font-weight:bold;">New Password</p:outputLabel>
+
+								<p:password placeholder="Enter a New Password" style="margin-top: 0 !important ;"
+									value="#{loginBean.changePWDTO.newPassword}">
+									<p:ajax event="keyup" listener="#{loginBean.checkStrength}"
+										update="pwdStrength" />
+								</p:password>
+
+								<p:progressBar id="pwdStrength" value="0" style="width:100px;margin-top:4px !important;"
+									styleClass="#{loginBean.pwdStrength}" displayOnly="true" />
+
+								<p:outputLabel
+									style="font-size: 12px !important;margin-top: 10px !important;font-weight:bold;">Confirm Password</p:outputLabel>
+
+								<p:password value="#{loginBean.changePWDTO.confirmNewPW}" style="margin-top: 0 !important ;">
+								</p:password>
+
+								<p:outputLabel></p:outputLabel>
+
+							</h:panelGrid>
+
+
+							<p:commandButton value="Save" action="#{loginBean.save}"
+								update="changepassword,hello"
+								style="color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;border: 1px solid #FFFFFF;"></p:commandButton>
+
+							<p:commandButton value="Cancel" action="#{loginBean.cancel}"
+								style="color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;border: 1px solid #FFFFFF;"></p:commandButton>
+
+
+							<h:panelGrid columns="1" id="hello">
+
+								<p:outputPanel style="text-align:center;">
+									<h:outputLabel value="#{loginBean.changePWDErrorMessage}"
+										style="font-size: 13px !important;color: red;font-weight:bold;text-align:center;"></h:outputLabel>
+
+								</p:outputPanel>
+								<br></br>
+								<p:outputPanel>
+									<h:outputLabel
+										value="*Password should contain at least 8 characters with at least one uppercase, lowercase, digit and a special character."
+										style="font-size: 10px" />
+								</p:outputPanel>
+							</h:panelGrid>
+
+							<br />
+
+						</center>
+
+
+					</p:dialog>
+
+				</h:form>
+			</div>
+		</div>
+
+
+	</body>
+	<p:dialog styleClass="" id="resetsuccessSve" global="true" modal="true"
+		header="Success" width="30%" severity="info"
+		widgetVar="resetsuccessSve" closeOnEscape="true" resizable="false">
+		<h:form id="frmresetsuccessSve">
+			<center>
+				<p:panelGrid columns="2" styleClass="ui-noborder">
+					<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+					<p:outputLabel value="#{resetBean.successMessage}"></p:outputLabel>
+
+				</p:panelGrid>
+				<br></br>
+				<p:commandButton style="margin-top:10px;margin-bottom:10px"
+					process="frmresetsuccessSve" value="OK"
+					onclick="PF('resetsuccessSve').hide()">
+				</p:commandButton>
+
+			</center>
+		</h:form>
+	</p:dialog>
+
+	<p:dialog id="resetDialog" global="true" modal="true" width="400px"
+		header="Reset Password" severity="info" widgetVar="successSve"
+		closeOnEscape="true" resizable="false" style=" border-radius: 15px;"
+		styleClass="">
+
+		<h:form id="frmReser">
+
+			<h:panelGroup id="reset">
+
+				<center>
+					<p:outputPanel id="MainHead">
+						<h:outputLabel value="Reset Password"
+							style="font-size: 15px !important;color: black;font-weight:bold" />
+					</p:outputPanel>
+					<br />
+					<p:outputPanel id="outId">
+						<h:outputLabel value="#{resetBean.resetErrorMessage}"
+							style="font-size: 13px !important;color: red; padding-left:35px;" />
+					</p:outputPanel>
+
+				</center>
+
+				<h:panelGrid id="RestPanel" columns="2"
+					style="margin-top:20px;width:100%; border: 0px solid blue; border-radius: 12px;"
+					styleClass="loginpanel">
+
+
+					<p:outputLabel
+						style="font-size: 12px !important;margin-left:25%;font-weight:bold;">
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						Username</p:outputLabel>
+					<p:inputText id="userID" name="userID" value="#{resetBean.userId}"
+						autocomplete="off" class="form-control"
+						style="width: 87%;height:25px;font-size: 12px !important;border-radius:5px;"
+						title="UserID" onkeyup="this.value=this.value.toUpperCase();" />
+
+					<p:outputLabel
+						style="font-size: 12px !important;margin-left:25%;font-weight:bold;">
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						Email Address</p:outputLabel>
+					<p:inputText id="email" name="email" value="#{resetBean.email}"
+						autocomplete="off" class="form-control"
+						style="width: 87%;height:25px;font-size: 12px !important;border-radius:5px;"
+						title="email" />
+
+
+					<p:outputLabel
+						style="font-size: 12px !important;margin-left:25%;font-weight:bold;">
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						Mobile No.</p:outputLabel>
+					<p:inputText id="mobileNO" name="mobileNO"
+						value="#{resetBean.mobileNo}" autocomplete="off"
+						class="form-control" maxlength="10"
+						style="width: 87%;height:25px;font-size: 12px !important;border-radius:5px;"
+						title="mobileNO">
+						<!-- 	<f:validateLength minimum="10" maximum="10" /> -->
+						<p:keyFilter regEx="/[\d]/i" />
+					</p:inputText>
+
+
+
+
+
+					<center>
+						<p:row>
+
+							<p:commandButton id="btnReset" type="submit"
+								class="btn btn-primary btn-lg btn-block"
+								style="width:80px; margin-top:10px;height:40px;float: left;font-size: 12px !important; border: 1px solid #FFFFFF; 
+										color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;"
+								value="Reset" action="#{resetBean.viewResetPasswordDialog}"
+								update="frmReser" process="frmReser">
+
+							</p:commandButton>
+
+							<p:commandButton id="clear"
+								class="btn btn-primary btn-lg btn-block"
+								style="width:80px; margin-top:10px;height:40px;float: left;font-size: 12px !important; border: 1px solid #FFFFFF; 
+										color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;"
+								value="Clear" update="frmReser" process="frmReser"
+								action="#{resetBean.clearAction}">
+
+							</p:commandButton>
+						</p:row>
+					</center>
+
+
+					<p:commandLink id="redirLogPage"
+						style="font-size: 12px !important;float:right;font-weight:bold;padding-right:10px;color:#6A9DED;"
+						value="Login" class="btn btn-link" type="button"
+						action="#{resetBean.showLoginPage}">
+
+						<f:param name="username" value="#{loginBean.username}" />
+
+					</p:commandLink>
+					<p:row>
+						<br />
+						<h:outputLabel value="#{resetBean.successMessage}"
+							style="font-size: 13px !important;color: green;" />
+
+
+
+
+					</p:row>
+
+					<p:spacer height="30"></p:spacer>
+
+
+
+
+				</h:panelGrid>
+
+			</h:panelGroup>
+
+		</h:form>
+	</p:dialog>
+
+
+
+
+</f:view>
+</html>

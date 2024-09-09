@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RetainedDocumentReleaseLetter" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d4823193-6d72-4e96-b19f-4813107d8bb1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<parameter name="P_Charge_ref_no" class="java.lang.String"/>
+	<parameter name="P_Charge_Release_ID" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT a.chg_rels_release_to,
+	a.chg_rels_id_no,
+	a.chg_rels_date,
+	a.vio_doc_invesno,
+	a.vio_doc_cd,
+	b.description
+FROM nt_t_flying_vio_documets a,
+	nt_r_flying_squad_documents b
+WHERE 
+	 a.vio_doc_cd = b.code 
+	 AND a.vio_doc_invesno =  $P{P_Charge_ref_no} 
+	AND a.chg_rels_id_no =  $P{P_Charge_Release_ID}]]>
+	</queryString>
+	<field name="chg_rels_release_to" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="chg_rels_release_to"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_flying_vio_documets"/>
+	</field>
+	<field name="chg_rels_id_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="chg_rels_id_no"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_flying_vio_documets"/>
+	</field>
+	<field name="chg_rels_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="chg_rels_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_flying_vio_documets"/>
+	</field>
+	<field name="vio_doc_invesno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vio_doc_invesno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_flying_vio_documets"/>
+	</field>
+	<field name="vio_doc_cd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vio_doc_cd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_flying_vio_documets"/>
+	</field>
+	<field name="description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_r_flying_squad_documents"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="34" width="550" height="30" uuid="b7623b86-361a-40d5-b344-091062d1d0d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="14" isBold="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Manage Retain Document(s) Releasing Letter]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="52" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="430" y="10" width="122" height="20" uuid="61133e5e-9cb5-46b9-90ef-1eb340914bc4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="30" width="250" height="22" uuid="5fbd695b-9684-40a3-bfe8-95dafbce8fb9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Charge Reference No. : "+$P{P_Charge_ref_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="71" splitType="Stretch">
+			<textField>
+				<reportElement x="70" y="10" width="482" height="31" uuid="dc63186c-5e7c-47f2-9e23-29975a1746a7"/>
+				<textFieldExpression><![CDATA["following list of retained document (s) released to " + $F{chg_rels_release_to} + " ( ID : " + $F{chg_rels_id_no}  + " ) on " + $F{chg_rels_date} + "."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="110" y="50" width="130" height="21" uuid="f6e8c5d0-b3d9-4dfc-86ae-ea9326964d90"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Released Document (s)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="160" y="0" width="320" height="25" uuid="0c9cde57-3e5f-4b96-a2f4-b8f77286f0bf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="54b2d495-ba8b-4756-a9e4-dad323e8c2b8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}+". "+$F{description} ]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

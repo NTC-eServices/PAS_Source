@@ -1,0 +1,990 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #07295b !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #07295b !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1 style="margin-top: 1%; text-align: center; color: #07295b;"
+				class="common_form_header">Create Employee Profile</h1>
+			<div style="width: 80%;" class="subDiv">
+				<p:tabView id="tabviewId">
+					<p:tab title="Particular of Employee" id="tbEmpDet"
+						rendered="#{employeeProfileBackingBean.boolEmpDet}">
+						<h:form id="frmEmpDetails">
+							<p:panel id="pnlEmpDet">
+								<p:panelGrid columns="5"
+									columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-2"
+									layout="grid">
+									<p:panelGrid>
+										<p:outputLabel value="Title" for="txtTitle"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="txtTitle" style="width:30%"
+											value="#{employeeProfileBackingBean.strSelectedTitle}"
+											effect="fold">
+											<p:ajax
+												listener="#{employeeProfileBackingBean.handletitleChange}" />
+											<f:selectItem itemLabel="-- All --" itemValue="" />
+											<f:selectItems
+												value="#{employeeProfileBackingBean.titleList}"
+												var="titleList" itemValue="#{titleList.code}"
+												itemLabel="#{titleList.description}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Appointment Date"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:calendar id="inptAppDate"
+											value="#{employeeProfileBackingBean.employeeDTO.appoinmentDate}"
+											style="width:50%;height:18px;" maxdate="today"
+											showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"></p:calendar>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Profile Picture"></p:outputLabel>
+
+
+										<p:fileUpload
+											fileUploadListener="#{employeeProfileBackingBean.fileUploadListener}"
+											auto="true" update="@form" accept=".jpg,.jpeg,.png"
+											allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640">
+											
+										</p:fileUpload>
+										<img id="img"
+											src="data:image/png;base64,#{employeeProfileBackingBean.imageContentsAsBase64}" />
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="First Name" for="txtFirstName"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText style="width:80%;height:18px;" maxlength="50"
+										value="#{employeeProfileBackingBean.employeeDTO.firstName}"
+										id="txtFirstName"
+										onkeyup="this.value=this.value.toUpperCase();">
+										<p:ajax event="blur" update="txtFullName" />
+									</p:inputText>
+									<p:outputLabel value="Telephone No."></p:outputLabel>
+									<p:inputText style="width:80%;height:18px;"
+										value="#{employeeProfileBackingBean.employeeDTO.telNo}"
+										maxlength="10" id="txtTelNo">
+										<p:keyFilter regEx="/[\d]/i" />
+										<p:ajax update="txtTelNo" />
+									</p:inputText>
+									<p:panelGrid>
+
+									</p:panelGrid>
+
+									<p:outputLabel value="Middle Name"></p:outputLabel>
+									<p:inputText style="width:80%;height:18px;"
+										value="#{employeeProfileBackingBean.employeeDTO.middleName}"
+										id="txtMiddleName" maxlength="100"
+										onkeyup="this.value=this.value.toUpperCase();">
+										<p:ajax event="blur" update="txtFullName" />
+									</p:inputText>
+									<p:outputLabel value="Mobile No."></p:outputLabel>
+									<p:inputText style="width:80%;height:18px;"
+										value="#{employeeProfileBackingBean.employeeDTO.mobileNo}"
+										maxlength="10" id="txtMobNo">
+										<p:keyFilter regEx="/[\d]/i" />
+										<p:ajax update="txtMobNo" />
+									</p:inputText>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Surname" for="txtSurName"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText style="width:80%;height:18px;"
+										value="#{employeeProfileBackingBean.employeeDTO.sureName}"
+										id="txtSurName" onkeyup="this.value=this.value.toUpperCase();"
+										maxlength="50">
+										<p:ajax event="blur" update="txtFullName" />
+									</p:inputText>
+									<p:panelGrid>
+										<p:outputLabel value="E-mail Address" for="txtEmail"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText style="width:80%;height:18px;"
+										value="#{employeeProfileBackingBean.employeeDTO.email}"
+										id="txtEmail" maxlength="100">
+										<f:validateRegex
+											pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+									</p:inputText>
+									<p:panelGrid>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+									<p:panelGrid>
+										<p:outputLabel value="Full Name" for="txtFullName"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText style="width:74%;height:18px;"
+										value="#{employeeProfileBackingBean.employeeDTO.firstName} #{employeeProfileBackingBean.employeeDTO.middleName} #{employeeProfileBackingBean.employeeDTO.sureName}"
+										id="txtFullName"
+										onkeyup="this.value=this.value.toUpperCase();" disabled="true"></p:inputText>
+								</p:panelGrid>
+								<p:panelGrid columns="5"
+									columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-2"
+									layout="grid">
+									<p:panelGrid>
+										<p:outputLabel value="Gender" for="txtGender"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:selectOneMenu id="txtGender" style="width:50%"
+										value="#{employeeProfileBackingBean.strSelectedGenderStatus}"
+										effect="fold">
+
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.genderList}"
+											var="genderList" itemValue="#{genderList.code}"
+											itemLabel="#{genderList.description}" />
+									</p:selectOneMenu>
+									<p:panelGrid>
+										<p:outputLabel value="Employee No." for="txtEmpNo"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:50%;height:18px;"
+											value="#{employeeProfileBackingBean.employeeDTO.empNo}"
+											id="txtEmpNo" onkeyup="this.value=this.value.toUpperCase();"
+											maxlength="20">
+											<p:ajax partialSubmit="true" />
+										</p:inputText>
+
+
+										<p:commandButton styleClass="mainActionbtn" value="Search"
+											update="@all" process="@all" id="cmdbtnSearch"
+											action="#{employeeProfileBackingBean.searchEmployee}"></p:commandButton>
+
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Employee Status"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:outputLabel value="Marital Status"></p:outputLabel>
+									<p:selectOneMenu id="txtMarital" style="width:50%"
+										value="#{employeeProfileBackingBean.strSelectedMartialStatus}"
+										effect="fold">
+
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.martialList}"
+											var="martialList" itemValue="#{martialList.code}"
+											itemLabel="#{martialList.description}" />
+									</p:selectOneMenu>
+									<p:outputLabel value="EPF No."></p:outputLabel>
+									<p:inputText style="width:50%;height:18px;"
+										onkeyup="this.value=this.value.toUpperCase();"
+										value="#{employeeProfileBackingBean.employeeDTO.empEpfNo}"
+										id="txtEpf"></p:inputText>
+									<p:panelGrid>
+										<p:inputText style="width:50%;height:18px;"
+											value="#{employeeProfileBackingBean.employeeDTO.status}"
+											id="txtEmpStatus" maxlength="20"
+											onkeyup="this.value=this.value.toUpperCase();"></p:inputText>
+									</p:panelGrid>
+
+									<p:outputLabel value="Date of Birth"></p:outputLabel>
+									<p:calendar id="Dob"
+										value="#{employeeProfileBackingBean.employeeDTO.dob}"
+										style="width:50%;height:18px;" maxdate="today" showOn="button"
+										pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"></p:calendar>
+									<p:outputLabel value="Employee Location"></p:outputLabel>
+									<p:selectOneMenu id="txtLocation" style="width:76.5%"
+										value="#{employeeProfileBackingBean.strSelectedLocation}"
+										effect="fold">
+
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.locationList}"
+											var="locationList" itemValue="#{locationList.code}"
+											itemLabel="#{locationList.description}" />
+									</p:selectOneMenu>
+									<p:panelGrid></p:panelGrid>
+
+									<p:outputLabel value="NIC No."></p:outputLabel>
+									<p:inputText style="width:50%;height:18px;"
+										value="#{employeeProfileBackingBean.employeeDTO.nicNo}"
+										id="txtNic" maxlength="12"></p:inputText>
+									<p:outputLabel value="Employee Carder"></p:outputLabel>
+
+									<p:selectOneMenu id="txtCarder" style="width:50%"
+										value="#{employeeProfileBackingBean.strSelectedCarder}"
+										effect="fold">
+
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.carderList}"
+											var="carderList" itemValue="#{carderList.code}"
+											itemLabel="#{carderList.description}" />
+									</p:selectOneMenu>
+
+									<p:panelGrid></p:panelGrid>
+
+									<p:outputLabel value="Qualification"></p:outputLabel>
+									<p:selectOneMenu id="txtQualification" style="width:76.5%"
+										value="#{employeeProfileBackingBean.strSelectedQualification}"
+										effect="fold">
+
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.qualificationList}"
+											var="qualificationList" itemValue="#{qualificationList.code}"
+											itemLabel="#{qualificationList.description}" />
+									</p:selectOneMenu>
+									<p:outputLabel value="Permanent Date"></p:outputLabel>
+									<p:calendar id="PermanentDate"
+										value="#{employeeProfileBackingBean.employeeDTO.permanentDate}"
+										style="width:50%;height:18px;" showOn="button" maxdate="today"
+										pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"></p:calendar>
+									<p:panelGrid></p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+									<p:outputLabel value="Details of Qualifications"></p:outputLabel>
+									<p:inputTextarea id="txtQualificationDet"
+										value="#{employeeProfileBackingBean.employeeDTO.qualificationDetails}"
+										style="width:74%;height:36px;" rows="5" cols="30"
+										counter="display" maxlength="200"
+										counterTemplate="{0} characters remaining." autoResize="false" />
+
+								</p:panelGrid>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+									<p:panelGrid></p:panelGrid>
+									<h:outputText id="display" />
+								</p:panelGrid>
+
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+									<p:outputLabel value="Recruitment Date"></p:outputLabel>
+									<p:calendar id="RecruDate"
+										value="#{employeeProfileBackingBean.employeeDTO.recruitmentDate}"
+										style="width:19.5%;height:18px;" showOn="button"
+										maxdate="today" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"></p:calendar>
+								</p:panelGrid>
+
+								<p:panel>
+									<p:panelGrid></p:panelGrid>
+								</p:panel>
+								<center>
+									<p:commandButton styleClass="mainActionbtn" value="Save"
+										process="tabviewId:frmEmpDetails" id="cmdbtnSave"
+										action="#{employeeProfileBackingBean.saveEmployee}"
+										update="tabviewId:frmEmpDetails"></p:commandButton>
+
+									<p:commandLink styleClass="mainLinkButton" resetValues="true"
+										value="Clear" id="cmdlClear"
+										action="#{employeeProfileBackingBean.clearForm}"
+										process="@all" style="font-size:100% !important;"
+										update="@all"></p:commandLink>
+
+									<p:commandLink styleClass="otherLinkButton" resetValues="true"
+										value="Upload Profile Picture" id="cmdlUploadPic"
+										style="font-size:100% !important;margine-left:20px !important;"></p:commandLink>
+
+									<p:commandLink styleClass="otherLinkButton" resetValues="true"
+										value="Document Management" id="cmdlDocManage"
+										style="font-size:100% !important;"></p:commandLink>
+								</center>
+							</p:panel>
+						</h:form>
+					</p:tab>
+
+					<p:tab title="Address Details" id="tcAddressDet"
+						disabled="#{employeeProfileBackingBean.boolEmpAddDet}">
+						<h:form id="frmAddDetails">
+							<p:panelGrid columns="5"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-1,ui-grid-col-4,ui-grid-col-1"
+								layout="grid">
+								<p:panelGrid>
+									<p:outputLabel value="Address Type" for="txtType"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtType" style="width:60%;"
+										value="#{employeeProfileBackingBean.strSelectedAddressType}"
+										effect="fold">
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.addtypeList}"
+											var="addtypeList" itemValue="#{addtypeList.code}"
+											itemLabel="#{addtypeList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Address1" for="txtAddress1"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText style="width:80%;height:18px;" required="false"
+										id="txtAddress1"
+										value="#{employeeProfileBackingBean.empAddressDTO.address1}"
+										onkeyup="this.value=this.value.toUpperCase();" maxlength="100">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Address2" for="txtAddress2"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText style="width:80%;height:18px;" required="false"
+										id="txtAddress2"
+										value="#{employeeProfileBackingBean.empAddressDTO.address2}"
+										onkeyup="this.value=this.value.toUpperCase();" maxlength="100">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="City"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtCity" style="width:60%;"
+										value="#{employeeProfileBackingBean.strSelectedCity}"
+										effect="fold">
+
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems value="#{employeeProfileBackingBean.cityList}"
+											var="cityList" itemValue="#{cityList.code}"
+											itemLabel="#{cityList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<br></br>
+							</p:panelGrid>
+							<center>
+								<p:commandButton id="cmdbtnAdd" value="Save"
+									actionListener="#{employeeProfileBackingBean.addEmpAddress}"
+									class="mainActionbtn" update="tabviewId:frmAddDetails"
+									process="tabviewId:frmAddDetails"></p:commandButton>
+
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									update="tabviewId:frmAddDetails"
+									process="tabviewId:frmAddDetails" id="cmdbtnAddClear"
+									action="#{employeeProfileBackingBean.clearEmpAddress}"></p:commandButton>
+
+
+							</center>
+							<br></br>
+
+							<p:dataTable var="addresstable" paginator="true" update="@form"
+								rows="5"
+								value="#{employeeProfileBackingBean.employeeAddresslist}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10" resizableColumns="true"
+								liveResize="true" rowIndexVar="index">
+
+								<p:column headerText="" style="text-align:center;width:3%">
+									<f:facet name=" header">
+										<h:outputText value="index" />
+									</f:facet>
+									<h:outputText value="#{index + 1}"></h:outputText>
+								</p:column>
+								<p:column headerText="Seq" style="text-align:left;width:5%">
+									<h:outputText value="#{addresstable.seq}" />
+								</p:column>
+
+								<p:column headerText="Address Type"
+									style="text-align:left;width:15%">
+									<h:outputText value="#{addresstable.addressTypeDesc}"
+										style="text-align:left;" />
+								</p:column>
+
+								<p:column headerText="Address 1"
+									style="text-align:left;width:15%">
+									<h:outputText value="#{addresstable.address1}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column headerText="Address 2"
+									style="text-align:left;width:15%">
+									<h:outputText value="#{addresstable.address2}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column headerText="City" style="text-align:left;width:15%">
+									<h:outputText value="#{addresstable.cityDesc}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column headerText="Active"
+									style="text-align:center; width:10%">
+									<h:outputText value="#{addresstable.status}"
+										style="text-align:center;" />
+								</p:column>
+								<p:column headerText="" style="width:7%">
+									<p:commandButton id="cmdbtnEdit" value="Edit"
+										action="#{employeeProfileBackingBean.editAction}"
+										update="@form">
+										<f:setPropertyActionListener value="#{addresstable}"
+											target="#{employeeProfileBackingBean.strSelectedAddressSeq}" />
+									</p:commandButton>
+								</p:column>
+								<p:column headerText="" style="width:8.5%">
+									<p:commandButton id="cmdbtnDelete" value="Delete"
+										action="#{employeeProfileBackingBean.deleteAddButtonAction}"
+										update="@form">
+										<f:setPropertyActionListener value="#{addresstable}"
+											target="#{employeeProfileBackingBean.strSelectedAddressSeq}" />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+
+							<br></br>
+							<br></br>
+							<br></br>
+						</h:form>
+					</p:tab>
+
+
+					<p:tab title="Department Details" id="tbDepartmentDet"
+						disabled="#{employeeProfileBackingBean.boolEmpDeptDet}">
+						<h:form id="frmDepDetails">
+							<p:panelGrid columns="5"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-3,ui-grid-col-1"
+								layout="grid">
+								<p:panelGrid>
+									<p:outputLabel value="Department Name"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtDeptName" style="width:60%;"
+										value="#{employeeProfileBackingBean.strSelectedDeparmentCode}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.deparmentList}"
+											var="deparmentList" itemValue="#{deparmentList.code}"
+											itemLabel="#{deparmentList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Transfer Date" for="txtTransferDate"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:calendar id="txtTransferDate" style="width:50%;height:18px;"
+										maxdate="today" showOn="button" pattern="dd/MM/yyyy"
+										placeholder="DD/MM/YYYY"></p:calendar>
+
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Sub Unit Name" for="txtSubUnitName"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtSubUnitName" style="width:60%;"
+										value="#{employeeProfileBackingBean.strSelectedUnit}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems value="#{employeeProfileBackingBean.unitList}"
+											var="unitList" itemValue="#{unitList.code}"
+											itemLabel="#{unitList.description}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<br></br>
+								<br></br>
+								<br></br>
+
+							</p:panelGrid>
+							<center>
+								<p:commandButton id="cmdbtnDeptSave" value="Save"
+									class="mainActionbtn"></p:commandButton>
+								<p:commandButton id="cmdbtnDeptClear" value="Clear"
+									class="mainActionbtn"></p:commandButton>
+							</center>
+							<br></br>
+							<p:dataTable var="deparmenttable" paginator="true" rows="5"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15" resizableColumns="true"
+								liveResize="true" rowIndexVar="index">
+
+								<p:column headerText="" style="text-align:center;width:2%">
+									<f:facet name=" header">
+										<h:outputText value="index" />
+									</f:facet>
+									<h:outputText value="#{index + 1}"></h:outputText>
+								</p:column>
+
+								<p:column headerText="Deparment Code">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="Deparment Name">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="Sub Unit">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="Transfer Date">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Active">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="" style="width:7%">
+									<p:commandButton id="cmdbtnDeptEdit" value="Edit"></p:commandButton>
+								</p:column>
+								<p:column headerText="" style="width:8.5%">
+									<p:commandButton id="cmdbtnDeptDelete" value="Delete"></p:commandButton>
+								</p:column>
+
+							</p:dataTable>
+						</h:form>
+					</p:tab>
+
+
+					<p:tab title="Designation Details" id="tbDesignationDet"
+						disabled="#{employeeProfileBackingBean.boolEmpDesigDet}">
+						<h:form id="frmDesDetails">
+							<p:panelGrid columns="5"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-3,ui-grid-col-1"
+								layout="grid">
+								<p:panelGrid>
+									<p:outputLabel value="Designation"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtDesignation" style="width:60%;"
+										value="#{employeeProfileBackingBean.strSelectedDesignation}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.designationList}"
+											var="designationList" itemValue="#{designationList.code}"
+											itemLabel="#{designationList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Designated From" for="txtDesignatedFrom"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:calendar id="txtDesignatedFrom"
+										style="width:50%;height:18px;" maxdate="today" showOn="button"
+										pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"></p:calendar>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Grade" for="txtGrade"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtGrade" style="width:60%;"
+										value="#{employeeProfileBackingBean.strSelectedGrade}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems value="#{employeeProfileBackingBean.gradeList}"
+											var="gradeList" itemValue="#{gradeList.code}"
+											itemLabel="#{gradeList.description}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Designation To" for="txtDesignatedTo"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:calendar id="txtDesignatedTo" style="width:50%;height:18px;"
+										mindate="today" showOn="button" pattern="dd/MM/yyyy"
+										placeholder="DD/MM/YYYY"></p:calendar>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Salary Category" for="txtSalaryCat"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtSalaryCat" style="width:60%;"
+										value="#{employeeProfileBackingBean.strSelectedSalaryCat}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.salaryCatList}"
+											var="salaryCatList" itemValue="#{salaryCatList.code}"
+											itemLabel="#{salaryCatList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<br></br>
+							</p:panelGrid>
+							<center>
+								<p:commandButton id="cmdbtnDesiSave" value="Save"
+									class="mainActionbtn"></p:commandButton>
+								<p:commandButton id="cmdbtnDesiClear" value="Clear"
+									class="mainActionbtn"></p:commandButton>
+							</center>
+							<br></br>
+							<p:dataTable var="designationtable" paginator="true" rows="5"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15" resizableColumns="true"
+								liveResize="true" rowIndexVar="index">
+
+								<p:column headerText="" style="text-align:center;width:2%">
+									<f:facet name=" header">
+										<h:outputText value="index" />
+									</f:facet>
+									<h:outputText value="#{index + 1}"></h:outputText>
+								</p:column>
+
+								<p:column headerText="Deparment Code">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="Designation">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="Grade">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="Salary Category">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Designation From">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Designation To">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Active">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="" style="width:7%">
+									<p:commandButton id="cmdbtnDesigEdit" value="Edit"></p:commandButton>
+								</p:column>
+								<p:column headerText="" style="width:8.5%">
+									<p:commandButton id="cmdbtnDesigDelete" value="Delete"></p:commandButton>
+								</p:column>
+
+							</p:dataTable>
+						</h:form>
+					</p:tab>
+
+				</p:tabView>
+			</div>
+		</div>
+
+		<p:dialog styleClass="" id="invalidemail" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="invalidemail"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frminvalidemail">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="Invalid E-mail Address"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frminvalidemail" value="Close"
+						onclick="PF('invalidemail').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="successSve" global="true" modal="true"
+			header="Sucess" width="30%" severity="info" widgetVar="successSve"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="Sucessfully Saved..!"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSve" value="Close"
+						onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="warningMsge" global="true" modal="true"
+			header="Warning" width="30%" severity="info" widgetVar="warningMsge"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmwarningMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning-24.png"></p:graphicImage>
+						<p:outputLabel value="Employee No should be entered.!"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmwarningMsge" value="Close"
+						onclick="PF('warningMsge').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Missing Required Field" width="30%" severity="info"
+			widgetVar="requiredField" closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{employeeProfileBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="Close"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="noDataMsge" global="true" modal="true"
+			header="Warning" width="30%" severity="info" widgetVar="noDataMsge"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmnoDataMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning-24.png"></p:graphicImage>
+						<p:outputLabel value="No data found.!"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmnoDataMsge" value="Close"
+						onclick="PF('noDataMsge').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="deleteconfirmation" global="true"
+			modal="true" header="Warning" width="30%" severity="info"
+			widgetVar="deleteconfirmation" closeOnEscape="true" resizable="false">
+			<h:form id="frmdeleteconfirmation">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning-24.png"></p:graphicImage>
+						<p:outputLabel value="Are you sure you want to delete a record ? "></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton id="yes" value="Yes"
+						actionListener="#{employeeProfileBackingBean.addressDeleteAction}"
+						ajax="true" onclick="PF('deleteconfirmation').hide()"></p:commandButton>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frminvalidemail" value="No"
+						onclick="PF('deleteconfirmation').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

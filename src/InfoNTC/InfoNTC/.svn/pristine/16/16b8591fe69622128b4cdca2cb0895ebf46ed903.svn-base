@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2023-11-29T07:46:54 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ControlSheetForOwnerSix" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="292430d5-f511-4220-81f9-d12f3a1379e5">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="testuat"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="P_Route_No" class="java.lang.String"/>
+	<parameter name="P_Departure" class="java.lang.String"/>
+	<parameter name="P_Start_Date" class="java.util.Date"/>
+	<parameter name="P_End_Date" class="java.util.Date"/>
+	<parameter name="P_Service_Type" class="java.lang.String"/>
+	<parameter name="P_Group_no" class="java.lang.String"/>
+	<parameter name="P_Origin" class="java.lang.String"/>
+	<parameter name="P_Destination" class="java.lang.String"/>
+	<parameter name="SUBREPORT_PATH" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_TravelTIme" class="java.lang.String"/>
+	<parameter name="P_Distance" class="java.lang.String"/>
+	<parameter name="P_Speed" class="java.lang.String"/>
+	<parameter name="P_REf" class="java.lang.String"/>
+	<parameter name="P_trip" class="java.lang.String"/>
+	<parameter name="P_national_logo" class="java.lang.String"/>
+	<parameter name="P_ntc_logo" class="java.lang.String"/>
+	<parameter name="P_OtherSide" class="java.lang.String"/>
+	<parameter name="P_Month_Count" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT * FROM public.nt_t_owner_sheet_dates2]]>
+	</queryString>
+	<field name="col1" class="java.lang.String"/>
+	<field name="col2" class="java.lang.String"/>
+	<field name="col3" class="java.lang.String"/>
+	<field name="col4" class="java.lang.String"/>
+	<field name="col5" class="java.lang.String"/>
+	<field name="col6" class="java.lang.String"/>
+	<field name="col7" class="java.lang.String"/>
+	<field name="col8" class="java.lang.String"/>
+	<field name="col9" class="java.lang.String"/>
+	<field name="col10" class="java.lang.String"/>
+	<field name="col11" class="java.lang.String"/>
+	<field name="col12" class="java.lang.String"/>
+	<field name="col13" class="java.lang.String"/>
+	<field name="col14" class="java.lang.String"/>
+	<field name="col15" class="java.lang.String"/>
+	<field name="col16" class="java.lang.String"/>
+	<field name="col17" class="java.lang.String"/>
+	<field name="col18" class="java.lang.String"/>
+	<field name="col19" class="java.lang.String"/>
+	<field name="col20" class="java.lang.String"/>
+	<field name="col21" class="java.lang.String"/>
+	<field name="col22" class="java.lang.String"/>
+	<field name="col23" class="java.lang.String"/>
+	<field name="col24" class="java.lang.String"/>
+	<field name="col25" class="java.lang.String"/>
+	<field name="col26" class="java.lang.String"/>
+	<field name="col27" class="java.lang.String"/>
+	<field name="col28" class="java.lang.String"/>
+	<field name="col29" class="java.lang.String"/>
+	<field name="col30" class="java.lang.String"/>
+	<field name="col31" class="java.lang.String"/>
+	<field name="col32" class="java.lang.String"/>
+	<field name="col33" class="java.lang.String"/>
+	<field name="col34" class="java.lang.String"/>
+	<field name="col35" class="java.lang.String"/>
+	<field name="col36" class="java.lang.String"/>
+	<field name="col37" class="java.lang.String"/>
+	<field name="col38" class="java.lang.String"/>
+	<field name="col39" class="java.lang.String"/>
+	<field name="col40" class="java.lang.String"/>
+	<field name="col41" class="java.lang.String"/>
+	<field name="col42" class="java.lang.String"/>
+	<field name="col43" class="java.lang.String"/>
+	<field name="col44" class="java.lang.String"/>
+	<field name="col45" class="java.lang.String"/>
+	<field name="col46" class="java.lang.String"/>
+	<field name="col47" class="java.lang.String"/>
+	<field name="col48" class="java.lang.String"/>
+	<field name="col49" class="java.lang.String"/>
+	<field name="col50" class="java.lang.String"/>
+	<field name="col51" class="java.lang.String"/>
+	<field name="col52" class="java.lang.String"/>
+	<field name="col53" class="java.lang.String"/>
+	<field name="col54" class="java.lang.String"/>
+	<field name="col55" class="java.lang.String"/>
+	<field name="col56" class="java.lang.String"/>
+	<field name="col57" class="java.lang.String"/>
+	<field name="col58" class="java.lang.String"/>
+	<field name="col59" class="java.lang.String"/>
+	<field name="col60" class="java.lang.String"/>
+	<field name="col61" class="java.lang.String"/>
+	<field name="col62" class="java.lang.String"/>
+	<field name="col63" class="java.lang.String"/>
+	<field name="col64" class="java.lang.String"/>
+	<field name="col65" class="java.lang.String"/>
+	<field name="col66" class="java.lang.String"/>
+	<field name="col67" class="java.lang.String"/>
+	<field name="col68" class="java.lang.String"/>
+	<field name="col69" class="java.lang.String"/>
+	<field name="col70" class="java.lang.String"/>
+	<field name="col71" class="java.lang.String"/>
+	<field name="col72" class="java.lang.String"/>
+	<field name="col73" class="java.lang.String"/>
+	<field name="col74" class="java.lang.String"/>
+	<field name="col75" class="java.lang.String"/>
+	<field name="col76" class="java.lang.String"/>
+	<field name="col77" class="java.lang.String"/>
+	<field name="col78" class="java.lang.String"/>
+	<field name="col79" class="java.lang.String"/>
+	<field name="col80" class="java.lang.String"/>
+	<field name="col81" class="java.lang.String"/>
+	<field name="col82" class="java.lang.String"/>
+	<field name="col83" class="java.lang.String"/>
+	<field name="col84" class="java.lang.String"/>
+	<field name="col85" class="java.lang.String"/>
+	<field name="col86" class="java.lang.String"/>
+	<field name="col87" class="java.lang.String"/>
+	<field name="col88" class="java.lang.String"/>
+	<field name="col89" class="java.lang.String"/>
+	<field name="col90" class="java.lang.String"/>
+	<field name="col91" class="java.lang.String"/>
+	<field name="col92" class="java.lang.String"/>
+	<field name="col93" class="java.lang.String"/>
+	<field name="col94" class="java.lang.String"/>
+	<field name="col95" class="java.lang.String"/>
+	<field name="col96" class="java.lang.String"/>
+	<field name="col97" class="java.lang.String"/>
+	<field name="col98" class="java.lang.String"/>
+	<field name="col99" class="java.lang.String"/>
+	<field name="col100" class="java.lang.String"/>
+	<field name="col101" class="java.lang.String"/>
+	<field name="col102" class="java.lang.String"/>
+	<field name="col103" class="java.lang.String"/>
+	<field name="col104" class="java.lang.String"/>
+	<field name="col105" class="java.lang.String"/>
+	<field name="col106" class="java.lang.String"/>
+	<field name="col107" class="java.lang.String"/>
+	<field name="col108" class="java.lang.String"/>
+	<field name="col109" class="java.lang.String"/>
+	<field name="col110" class="java.lang.String"/>
+	<field name="col111" class="java.lang.String"/>
+	<field name="col112" class="java.lang.String"/>
+	<field name="col113" class="java.lang.String"/>
+	<field name="col114" class="java.lang.String"/>
+	<field name="col115" class="java.lang.String"/>
+	<field name="col116" class="java.lang.String"/>
+	<field name="col117" class="java.lang.String"/>
+	<field name="col118" class="java.lang.String"/>
+	<field name="col119" class="java.lang.String"/>
+	<field name="col120" class="java.lang.String"/>
+	<field name="month" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="121" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="29" width="560" height="62" uuid="bd3dabc1-3c6b-40c9-b636-b92b92267954"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OWNER SHEET]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="50" width="560" height="20" uuid="d8c12016-52f6-4570-ac80-bb240cf623fc"/>
+				<textElement textAlignment="Center">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Origin} +" To " +$P{P_Destination}  +"  ( Route No. : "+$P{P_Route_No} +" )  " + $P{P_Service_Type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="71" width="560" height="20" uuid="4687e726-0a9d-41fa-b756-9a877ab75fc4"/>
+				<textElement textAlignment="Center">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Departure Times Of The Buses From  "+$P{P_Departure} + "  End"]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RealSize" hAlign="Center">
+				<reportElement x="1" y="0" width="79" height="67" uuid="05f86ae8-6f5e-4600-907f-1260c22954f2"/>
+				<imageExpression><![CDATA[$P{P_national_logo}+"nationalLogo.png"]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" hAlign="Center" vAlign="Middle">
+				<reportElement x="486" y="0" width="71" height="67" uuid="4eb5e8ea-3fce-4b73-9728-bb582e505aed">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_ntc_logo}+"ntclogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="0" width="560" height="30" uuid="7b482137-21da-4f40-9937-c1761ac6ad60"/>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="22" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[NATIONAL TRANSPORT COMMISSION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="99" width="79" height="21" uuid="aa7976a3-035d-4d87-80df-2b29208abda0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NTC No. :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="100" width="101" height="21" uuid="e3e8ea39-8ec3-4ee9-bbac-e58dae2fd984"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bus No. :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="66" y="0" width="70" height="20" uuid="c960826f-3e71-4827-81d2-8c6a8a901b3e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="65" height="20" backcolor="#17E636" uuid="fc23e8b7-d205-493b-bcb4-42853ff6a209">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<textField pattern="YYYY">
+				<reportElement x="0" y="0" width="65" height="20" uuid="36c42e3a-1386-417d-9a5a-3d39515d7bb0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="417" y="-1" width="69" height="20" uuid="2f005185-a191-4fcd-be0b-3410153d3e94">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="487" y="-1" width="67" height="20" backcolor="#17E636" uuid="3a7b6e96-573d-40bb-98ca-feeddfbff698">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<textField pattern="YYYY">
+				<reportElement x="487" y="-1" width="67" height="20" uuid="782b0082-29c1-4888-8a81-6f3dcf783a74">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="487" y="0" width="67" height="20" backcolor="#E9FC12" uuid="11811ade-9866-487f-a0c5-471a8c4152c6">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{COLUMN_COUNT}.equals( $P{P_Month_Count} )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="65" height="20" backcolor="#E9FC12" uuid="5cb19d11-4d19-4454-8088-96d81f77098f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{COLUMN_COUNT}.equals( $P{P_Month_Count} )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="65" height="20" uuid="0b7b5717-9305-4f41-a764-deff6a8abf9f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{month}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="66" y="0" width="70" height="20" forecolor="#FFFFFF" backcolor="#CFCFCF" uuid="1e6c1c8f-6064-4e46-a58c-d8080c12c4ff">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{col1}.substring(1, $F{col1}.length() - 1).startsWith( "1," )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="66" y="0" width="70" height="20" backcolor="#CFCFCF" uuid="aa2945b7-8b3a-4f51-8d3d-61078bfbca60">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col1}.substring(1, $F{col1}.length() - 1).startsWith("1,") 
+    ? ("<style forecolor='#f2f2f2'>" + $F{col1}.substring(1, $F{col1}.length() - 1) +
+        ($F{col7} != null ? ("," + $F{col7}.substring(1, $F{col7}.length() - 1)) : "") +
+        ($F{col13} != null ? ("," + $F{col13}.substring(1, $F{col13}.length() - 1)) : "") +
+        ($F{col19} != null ? ("," + $F{col19}.substring(1, $F{col19}.length() - 1)) : "") +
+        ($F{col25} != null ? ("," + $F{col25}.substring(1, $F{col25}.length() - 1)) : "") +
+        ($F{col31} != null ? ("," + $F{col31}.substring(1, $F{col31}.length() - 1)) : "") +
+        "</style>")
+    : ($F{col1}.substring(1, $F{col1}.length() - 1) +
+        ($F{col7} != null ? ("," + $F{col7}.substring(1, $F{col7}.length() - 1)) : "") +
+        ($F{col13} != null ? ("," + $F{col13}.substring(1, $F{col13}.length() - 1)) : "") +
+        ($F{col19} != null ? ("," + $F{col19}.substring(1, $F{col19}.length() - 1)) : "") +
+        ($F{col25} != null ? ("," + $F{col25}.substring(1, $F{col25}.length() - 1)) : "") +
+        ($F{col31} != null ? ("," + $F{col31}.substring(1, $F{col31}.length() - 1)) : ""))]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="137" y="0" width="70" height="20" forecolor="#FFFFFF" backcolor="#CFCFCF" uuid="b16e629e-0f11-4e67-9b08-37e4ebdf46d1">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{col2}.substring(1, $F{col2}.length() - 1).startsWith( "1," )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="137" y="0" width="70" height="20" backcolor="#CFCFCF" uuid="3226b68a-4b7b-4def-9711-c35124bbd138">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col2}.substring(1, $F{col2}.length() - 1).startsWith("1,") 
+    ? ("<style forecolor='#f2f2f2'>" + $F{col2}.substring(1, $F{col2}.length() - 1) +
+        ($F{col8} != null ? ("," + $F{col8}.substring(1, $F{col8}.length() - 1)) : "") +
+        ($F{col14} != null ? ("," + $F{col14}.substring(1, $F{col14}.length() - 1)) : "") +
+        ($F{col20} != null ? ("," + $F{col20}.substring(1, $F{col20}.length() - 1)) : "") +
+        ($F{col26} != null ? ("," + $F{col26}.substring(1, $F{col26}.length() - 1)) : "") +
+        "</style>")
+    : ($F{col2}.substring(1, $F{col2}.length() - 1) +
+        ($F{col8} != null ? ("," + $F{col8}.substring(1, $F{col8}.length() - 1)) : "") +
+        ($F{col14} != null ? ("," + $F{col14}.substring(1, $F{col14}.length() - 1)) : "") +
+        ($F{col20} != null ? ("," + $F{col20}.substring(1, $F{col20}.length() - 1)) : "") +
+        ($F{col26} != null ? ("," + $F{col26}.substring(1, $F{col26}.length() - 1)) : ""))]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="207" y="0" width="70" height="20" forecolor="#FFFFFF" backcolor="#CFCFCF" uuid="679f9c26-7277-4681-acaa-cefa9bb1197f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{col3}.substring(1, $F{col3}.length() - 1).startsWith( "1," )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="207" y="0" width="70" height="20" backcolor="#CFCFCF" uuid="46486286-682c-4e38-9573-6950513cd044">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col3}.substring(1, $F{col3}.length() - 1).startsWith("1,") 
+    ? ("<style forecolor='#f2f2f2'>" + $F{col3}.substring(1, $F{col3}.length() - 1) +
+        ($F{col9} != null ? ("," + $F{col9}.substring(1, $F{col9}.length() - 1)) : "") +
+        ($F{col15} != null ? ("," + $F{col15}.substring(1, $F{col15}.length() - 1)) : "") +
+        ($F{col21} != null ? ("," + $F{col21}.substring(1, $F{col21}.length() - 1)) : "") +
+        ($F{col27} != null ? ("," + $F{col27}.substring(1, $F{col27}.length() - 1)) : "") +
+        "</style>")
+    : ($F{col3}.substring(1, $F{col3}.length() - 1) +
+        ($F{col9} != null ? ("," + $F{col9}.substring(1, $F{col9}.length() - 1)) : "") +
+        ($F{col15} != null ? ("," + $F{col15}.substring(1, $F{col15}.length() - 1)) : "") +
+        ($F{col21} != null ? ("," + $F{col21}.substring(1, $F{col21}.length() - 1)) : "") +
+        ($F{col27} != null ? ("," + $F{col27}.substring(1, $F{col27}.length() - 1)) : ""))]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="277" y="0" width="70" height="20" forecolor="#FFFFFF" backcolor="#CFCFCF" uuid="ee9e0ae5-849b-479b-8173-e43643c8bcca">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{col4}.substring(1, $F{col4}.length() - 1).startsWith( "1," )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="277" y="0" width="70" height="20" backcolor="#CFCFCF" uuid="b53e1c6f-ddb4-4bac-bd29-be62cb17db3f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col4}.substring(1, $F{col4}.length() - 1).startsWith("1,") 
+    ? ("<style forecolor='#f2f2f2'>" + $F{col4}.substring(1, $F{col4}.length() - 1) +
+        ($F{col10} != null ? ("," + $F{col10}.substring(1, $F{col10}.length() - 1)) : "") +
+        ($F{col16} != null ? ("," + $F{col16}.substring(1, $F{col16}.length() - 1)) : "") +
+        ($F{col22} != null ? ("," + $F{col22}.substring(1, $F{col22}.length() - 1)) : "") +
+        ($F{col28} != null ? ("," + $F{col28}.substring(1, $F{col28}.length() - 1)) : "") +
+        "</style>")
+    : ($F{col4}.substring(1, $F{col4}.length() - 1) +
+        ($F{col10} != null ? ("," + $F{col10}.substring(1, $F{col10}.length() - 1)) : "") +
+        ($F{col16} != null ? ("," + $F{col16}.substring(1, $F{col16}.length() - 1)) : "") +
+        ($F{col22} != null ? ("," + $F{col22}.substring(1, $F{col22}.length() - 1)) : "") +
+        ($F{col28} != null ? ("," + $F{col28}.substring(1, $F{col28}.length() - 1)) : ""))]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="347" y="0" width="70" height="20" forecolor="#FFFFFF" backcolor="#CFCFCF" uuid="37c0c6b0-27b3-4aaf-bb43-f07a9fdd0960">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{col5}.substring(1, $F{col5}.length() - 1).startsWith( "1," )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="347" y="0" width="70" height="20" backcolor="#CFCFCF" uuid="272ef9f8-1836-402d-9a63-15d4ac421516">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col5}.substring(1, $F{col5}.length() - 1).startsWith("1,") 
+    ? ("<style forecolor='#f2f2f2'>" + $F{col5}.substring(1, $F{col5}.length() - 1) +
+        ($F{col11} != null ? ("," + $F{col11}.substring(1, $F{col11}.length() - 1)) : "") +
+        ($F{col17} != null ? ("," + $F{col17}.substring(1, $F{col17}.length() - 1)) : "") +
+        ($F{col23} != null ? ("," + $F{col23}.substring(1, $F{col23}.length() - 1)) : "") +
+        ($F{col29} != null ? ("," + $F{col29}.substring(1, $F{col29}.length() - 1)) : "") +
+        "</style>")
+    : ($F{col5}.substring(1, $F{col5}.length() - 1) +
+        ($F{col11} != null ? ("," + $F{col11}.substring(1, $F{col11}.length() - 1)) : "") +
+        ($F{col17} != null ? ("," + $F{col17}.substring(1, $F{col17}.length() - 1)) : "") +
+        ($F{col23} != null ? ("," + $F{col23}.substring(1, $F{col23}.length() - 1)) : "") +
+        ($F{col29} != null ? ("," + $F{col29}.substring(1, $F{col29}.length() - 1)) : ""))]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="417" y="0" width="69" height="20" forecolor="#FFFFFF" backcolor="#CFCFCF" uuid="5921fe32-5910-4efa-8ba8-9600b21cccb5">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{col6}.substring(1, $F{col6}.length() - 1).startsWith( "1," )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="417" y="0" width="69" height="20" backcolor="#CFCFCF" uuid="74ecb36c-59cf-4eeb-baa8-01a435721079">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col6}.substring(1, $F{col6}.length() - 1).startsWith("1,") 
+    ? ("<style forecolor='#f2f2f2'>" + $F{col6}.substring(1, $F{col6}.length() - 1) +
+        ($F{col12} != null ? ("," + $F{col12}.substring(1, $F{col12}.length() - 1)) : "") +
+        ($F{col18} != null ? ("," + $F{col18}.substring(1, $F{col18}.length() - 1)) : "") +
+        ($F{col24} != null ? ("," + $F{col24}.substring(1, $F{col24}.length() - 1)) : "") +
+        ($F{col30} != null ? ("," + $F{col30}.substring(1, $F{col30}.length() - 1)) : "") +
+        "</style>")
+    : ($F{col6}.substring(1, $F{col6}.length() - 1) +
+        ($F{col12} != null ? ("," + $F{col12}.substring(1, $F{col12}.length() - 1)) : "") +
+        ($F{col18} != null ? ("," + $F{col18}.substring(1, $F{col18}.length() - 1)) : "") +
+        ($F{col24} != null ? ("," + $F{col24}.substring(1, $F{col24}.length() - 1)) : "") +
+        ($F{col30} != null ? ("," + $F{col30}.substring(1, $F{col30}.length() - 1)) : ""))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="0" width="67" height="20" uuid="69b6340c-363d-49c3-9791-aeee43b6d85e">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{month}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="19" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="-1" width="554" height="20" uuid="1385f1bd-7017-46fa-a732-ebf1723dc01d"/>
+				<subreportParameter name="P_Departure">
+					<subreportParameterExpression><![CDATA[$P{P_Departure}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_Distance">
+					<subreportParameterExpression><![CDATA[$P{P_Distance}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_End_Date">
+					<subreportParameterExpression><![CDATA[$P{P_End_Date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_Destination">
+					<subreportParameterExpression><![CDATA[$P{P_Destination}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_Group_no">
+					<subreportParameterExpression><![CDATA[$P{P_Group_no}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_Origin">
+					<subreportParameterExpression><![CDATA[$P{P_Origin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_OtherSide">
+					<subreportParameterExpression><![CDATA[$P{P_OtherSide}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_REf">
+					<subreportParameterExpression><![CDATA[$P{P_REf}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_Route_No">
+					<subreportParameterExpression><![CDATA[$P{P_Route_No}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_Service_Type">
+					<subreportParameterExpression><![CDATA[$P{P_Service_Type}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_Speed">
+					<subreportParameterExpression><![CDATA[$P{P_Speed}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_Start_Date">
+					<subreportParameterExpression><![CDATA[$P{P_Start_Date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_TravelTIme">
+					<subreportParameterExpression><![CDATA[$P{P_TravelTIme}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_trip">
+					<subreportParameterExpression><![CDATA[$P{P_trip}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_PATH} +"ControlSheetForOwnerSixSub.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

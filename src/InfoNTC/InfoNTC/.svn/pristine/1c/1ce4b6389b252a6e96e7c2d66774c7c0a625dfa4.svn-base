@@ -1,0 +1,1598 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">#{msg['um.employeeprofile.header']}</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<p:tabView id="tabviewId"
+					activeIndex="#{employeeProfileBackingBean.activeTabIndex}">
+					<p:tab title="#{msg['um.employeeprofile.tbemployee']}"
+						id="tbEmpDet" rendered="#{employeeProfileBackingBean.boolEmpDet}">
+						<h:form id="frmEmpDetails">
+							<div class="ui-g">
+								<div class="ui-g-10">
+									<p:panel id="pnlEmpDet">
+										<p:panelGrid columns="4"
+											columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+											layout="grid">
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.title']}"
+													for="txtTitle"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu id="txtTitle" tabindex="1"
+													style="width:30%; "
+													disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+													value="#{employeeProfileBackingBean.strSelectedTitle}"
+													effect="fold">
+													<p:ajax
+														listener="#{employeeProfileBackingBean.handletitleChange}" />
+													<f:selectItem itemLabel="-- Select --" itemValue="" />
+													<f:selectItems
+														value="#{employeeProfileBackingBean.titleList}"
+														var="titleList" itemValue="#{titleList.code}"
+														itemLabel="#{titleList.description}" />
+												</p:selectOneMenu>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.appdate']}"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:calendar id="inptAppDate" tabindex="12"
+													value="#{employeeProfileBackingBean.employeeDTO.appoinmentDate}"
+													disabled="#{employeeProfileBackingBean.viewMode  or employeeProfileBackingBean.disable}"
+													style="width:50%;height:18px;" maxdate="today"
+													yearRange="c-100:c+100" navigator="true" locale="en_US"
+													showOn="button" readonlyInput="true" pattern="dd/MM/yyyy"
+													placeholder="DD/MM/YYYY">
+													<p:ajax update="inptAppDate Dob RecruDate PermanentDate"
+														event="dateSelect"
+														listener="#{employeeProfileBackingBean.dateValidation}" />
+												</p:calendar>
+
+
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel
+													value="#{msg['um.employeeprofile.firstname']}"
+													for="txtFirstName"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:inputText style="width:80%;height:18px;" tabindex="2"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												maxlength="50"
+												value="#{employeeProfileBackingBean.employeeDTO.firstName}"
+												id="txtFirstName"
+												onkeyup="this.value=this.value.toUpperCase();">
+												<p:ajax event="blur" update="txtFullName" />
+												 <p:keyFilter regEx="/[a-z0-9_ -/]/i"/>
+											</p:inputText>
+											<p:outputLabel value="#{msg['um.employeeprofile.telno']}"></p:outputLabel>
+											<p:inputText style="width:80%;height:18px; " tabindex="13"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.employeeDTO.telNo}"
+												maxlength="10" id="txtTelNo">
+												<p:ajax update="txtTelNo"
+													listener="#{employeeProfileBackingBean.telNoValidation}" />
+												 <p:keyFilter regEx="/[0-9 ]/i"/>
+											</p:inputText>
+											<p:outputLabel value="#{msg['um.employeeprofile.midname']}"></p:outputLabel>
+											<p:inputText style="width:80%;height:18px;" tabindex="3"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.employeeDTO.middleName}"
+												id="txtMiddleName" maxlength="100"
+												onkeyup="this.value=this.value.toUpperCase();">
+												<p:ajax event="blur" update="txtFullName" />
+											 <p:keyFilter regEx="/[a-z0-9_ -/]/i"/>
+											</p:inputText>
+
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.mobno']}"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:inputText style="width:80%;height:18px; " tabindex="14"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.employeeDTO.mobileNo}"
+												maxlength="10" id="txtMobNo">
+												<p:ajax update="txtMobNo"
+													listener="#{employeeProfileBackingBean.mobNoValidation}" />
+												 <p:keyFilter regEx="/[0-9 ]/i"/>	
+											</p:inputText>
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.surname']}"
+													for="txtSurName"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:inputText style="width:80%;height:18px;" tabindex="4"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.employeeDTO.sureName}"
+												id="txtSurName"
+												onkeyup="this.value=this.value.toUpperCase();"
+												maxlength="50">
+												<p:ajax event="blur" update="txtFullName" />
+												 <p:keyFilter regEx="/[a-z0-9_ -/]/i"/>
+											</p:inputText>
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.email']}"
+													for="txtEmail"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:inputText style="width:80%;height:18px; " tabindex="15"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.employeeDTO.email}"
+												id="txtEmail" maxlength="100">
+												<p:ajax update="txtEmail"
+													listener="#{employeeProfileBackingBean.emailValidation}" />
+												 <p:keyFilter regEx="/[a-z0-9_ -/@#]/i"/>
+											</p:inputText>
+
+										</p:panelGrid>
+										<p:panelGrid columns="2"
+											columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.fullname']}"
+													for="txtFullName"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:inputText style="width:92.5%;height:18px;"
+												value="#{employeeProfileBackingBean.employeeDTO.firstName} #{employeeProfileBackingBean.employeeDTO.middleName} #{employeeProfileBackingBean.employeeDTO.sureName}"
+												id="txtFullName"
+												onkeyup="this.value=this.value.toUpperCase();"
+												disabled="true"></p:inputText>
+										</p:panelGrid>
+										<p:panelGrid columns="4"
+											columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+											layout="grid">
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.gender']}"
+													for="txtGender"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:selectOneMenu id="txtGender" tabindex="5"
+												style="width:50%; "
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.strSelectedGenderStatus}"
+												effect="fold">
+
+												<f:selectItem itemLabel="-- Select --" itemValue="" />
+												<f:selectItems
+													value="#{employeeProfileBackingBean.genderList}"
+													var="genderList" itemValue="#{genderList.code}"
+													itemLabel="#{genderList.description}" />
+											</p:selectOneMenu>
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.empno']}"
+													for="txtEmpNo"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:50%;height:18px;" tabindex="16"
+													readonly="#{employeeProfileBackingBean.editMode}"
+													value="#{employeeProfileBackingBean.employeeDTO.empNo}"
+													disabled="#{employeeProfileBackingBean.viewMode  or employeeProfileBackingBean.editMode or employeeProfileBackingBean.disable}"
+													id="txtEmpNo"
+													onkeyup="this.value=this.value.toUpperCase();"
+													maxlength="10">
+													<p:ajax update="txtEmpNo" partialSubmit="true"
+														listener="#{employeeProfileBackingBean.chkDuplicateEMP}" />
+													<p:ajax update="txtEmpNo"
+														listener="#{employeeProfileBackingBean.empNumberValidator}" />
+														 <p:keyFilter regEx="/[a-z0-9_ -/]/i"/>
+												</p:inputText>
+												
+											</p:panelGrid>
+											<p:outputLabel value="#{msg['um.employeeprofile.marital']}"></p:outputLabel>
+											<p:selectOneMenu id="txtMarital" tabindex="6"
+												style="width:50%;"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.strSelectedMartialStatus}"
+												effect="fold">
+
+												<f:selectItem itemLabel="-- Select --" itemValue="" />
+												<f:selectItems
+													value="#{employeeProfileBackingBean.martialList}"
+													var="martialList" itemValue="#{martialList.code}"
+													itemLabel="#{martialList.description}" />
+											</p:selectOneMenu>
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.epf']}"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:inputText style="width:50%;height:18px;" tabindex="17"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.editModeEpf or employeeProfileBackingBean.disable}"
+												onkeyup="this.value=this.value.toUpperCase();"
+												maxlength="10"
+												value="#{employeeProfileBackingBean.employeeDTO.empEpfNo}"
+												id="txtEpf">
+
+												<p:ajax update="txtEpf"
+													listener="#{employeeProfileBackingBean.chkDuplicateEPF}" />
+													 <p:keyFilter regEx="/[a-z0-9_ -/]/i"/>
+											</p:inputText>
+
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.dob']}"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:calendar id="Dob" navigator="true" locale="en_US"
+												tabindex="7"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.employeeDTO.dob}"
+												style="width:50%;height:18px; " maxdate="today"
+												yearRange="c-100:c+100" readonlyInput="true" showOn="button"
+												pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+
+												<p:ajax update="inptAppDate Dob RecruDate PermanentDate"
+													event="dateSelect"
+													listener="#{employeeProfileBackingBean.dateValidation}" />
+
+											</p:calendar>
+											<p:outputLabel value="#{msg['um.employeeprofile.emploc']}"></p:outputLabel>
+											<p:selectOneMenu id="txtLocation" tabindex="18"
+												style="width:76.5%;"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.strSelectedLocation}"
+												effect="fold">
+
+												<f:selectItem itemLabel="-- All --" itemValue="" />
+												<f:selectItems
+													value="#{employeeProfileBackingBean.locationList}"
+													var="locationList" itemValue="#{locationList.code}"
+													itemLabel="#{locationList.description}" />
+											</p:selectOneMenu>
+
+
+											<p:outputLabel value="#{msg['um.employeeprofile.nic']}"></p:outputLabel>
+											<p:inputText style="width:50%;height:18px;" tabindex="8"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.employeeDTO.nicNo}"
+												onkeyup="this.value=this.value.toUpperCase();" id="txtNic"
+												maxlength="12">
+												<p:ajax update="txtNic"
+													listener="#{employeeProfileBackingBean.chkDuplicateNIC}" />
+											 <p:keyFilter regEx="/[a-z0-9_ -/]/i"/>
+											</p:inputText>
+											<p:outputLabel value="#{msg['um.employeeprofile.carder']}"></p:outputLabel>
+											<p:selectOneMenu id="txtCarder" tabindex="19"
+												style="width:50%; "
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.strSelectedCarder}"
+												effect="fold">
+
+												<f:selectItem itemLabel="-- All --" itemValue="" />
+												<f:selectItems
+													value="#{employeeProfileBackingBean.carderList}"
+													var="carderList" itemValue="#{carderList.code}"
+													itemLabel="#{carderList.description}" />
+											</p:selectOneMenu>
+
+
+											<p:outputLabel value="#{msg['um.employeeprofile.qua']}"></p:outputLabel>
+											<p:selectOneMenu id="txtQualification" style="width:76.5%; "
+												tabindex="9"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.strSelectedQualification}"
+												effect="fold">
+
+												<f:selectItem itemLabel="-- All --" itemValue="" />
+												<f:selectItems
+													value="#{employeeProfileBackingBean.qualificationList}"
+													var="qualificationList"
+													itemValue="#{qualificationList.code}"
+													itemLabel="#{qualificationList.description}" />
+											</p:selectOneMenu>
+											<p:outputLabel value="#{msg['um.employeeprofile.perdate']}"></p:outputLabel>
+											<p:calendar id="PermanentDate" navigator="true" tabindex="20"
+												locale="en_US" yearRange="c-100:c+100" readonlyInput="true"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												value="#{employeeProfileBackingBean.employeeDTO.permanentDate}"
+												style="width:50%;height:18px;" showOn="button"
+												maxdate="today" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY">
+
+												<p:ajax update="inptAppDate Dob RecruDate PermanentDate"
+													event="dateSelect"
+													listener="#{employeeProfileBackingBean.dateValidation}" />
+											</p:calendar>
+
+										</p:panelGrid>
+										<p:panelGrid columns="2"
+											columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+											<p:outputLabel value="#{msg['um.employeeprofile.quadet']}"></p:outputLabel>
+											<p:inputTextarea id="txtQualificationDet" tabindex="10"
+												value="#{employeeProfileBackingBean.employeeDTO.qualificationDetails}"
+												style="width:94%;height:36px;"
+												disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+												rows="5" cols="30" counter="display" maxlength="200"
+												counterTemplate="{0} characters remaining."
+												autoResize="true">
+												 <p:keyFilter regEx="/[a-z0-9_ -/]/i"/>
+												</p:inputTextarea>
+
+										</p:panelGrid>
+										<p:panelGrid columns="2"
+											columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+											<p:panelGrid></p:panelGrid>
+											<h:outputText id="display" />
+										</p:panelGrid>
+
+										<p:panelGrid columns="4"
+											columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+											layout="grid">
+											<p:panelGrid>
+												<p:outputLabel value="#{msg['um.employeeprofile.recdate']}"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:calendar id="RecruDate" navigator="true" locale="de"
+													disabled="#{employeeProfileBackingBean.viewMode or employeeProfileBackingBean.disable}"
+													tabindex="11"
+													value="#{employeeProfileBackingBean.employeeDTO.recruitmentDate}"
+													style="width:19.5%;height:18px; " yearRange="c-100:c+100"
+													showOn="button" maxdate="today" pattern="dd/MM/yyyy"
+													readonlyInput="true" placeholder="DD/MM/YYYY">
+
+													<p:ajax update="inptAppDate Dob RecruDate PermanentDate"
+														event="dateSelect"
+														listener="#{employeeProfileBackingBean.dateValidation}" />
+
+												</p:calendar>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel
+													value="#{msg['um.employeeprofile.empstatus']}"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:50%;height:18px;"
+													value="#{employeeProfileBackingBean.employeeDTO.status}"
+													id="txtEmpStatus" maxlength="20" disabled="true"
+													onkeyup="this.value=this.	value.toUpperCase();"></p:inputText>
+											</p:panelGrid>
+										</p:panelGrid>
+
+										<br></br>
+										<center>
+											<p:commandButton
+												disabled="#{employeeProfileBackingBean.boolEmpAddDet}"
+												styleClass="mainActionbtn" style="width:200px"
+												value="Documents Management"
+												action="#{employeeProfileBackingBean.documentManagement}"
+												id="cmdbtnDocumentManagement" process="@form"
+												update="@form,uploadDocumentsDialog"></p:commandButton>
+											<p:commandButton styleClass="mainActionbtn"
+												value="#{msg['um.employeeprofile.btnsave']}" id="cmdbtnSave"
+												ajax="false"
+												disabled="#{employeeProfileBackingBean.disable}"
+												rendered="#{employeeProfileBackingBean.createMode}"
+												tabindex="22"
+												action="#{employeeProfileBackingBean.saveEmployee}"></p:commandButton>
+											<p:commandButton styleClass="mainActionbtn"
+												value="#{msg['um.employeeprofile.btnback']}" id="cmdbtnBack"
+												ajax="false"
+												rendered="#{employeeProfileBackingBean.editMode or employeeProfileBackingBean.viewMode}"
+												action="#{employeeProfileBackingBean.moveNextPage}"></p:commandButton>
+											<p:commandButton styleClass="mainActionbtn"
+												value="#{msg['um.employeeprofile.btnupdate']}"
+												id="cmdbtnUpdate" ajax="false"
+												rendered="#{employeeProfileBackingBean.editMode}"
+												action="#{employeeProfileBackingBean.updateEmployee}"></p:commandButton>
+											<p:commandButton styleClass="mainActionbtn"
+												resetValues="true" tabindex="23"
+												value="#{msg['um.employeeprofile.btnclear']}" id="cmdlClear"
+												rendered="#{employeeProfileBackingBean.createMode}"
+												action="#{employeeProfileBackingBean.clearForm}"
+												process="@all" style="font-size:100% !important;"
+												update="@all"></p:commandButton>
+											<p:commandLink styleClass="otherLinkButton"
+												resetValues="true"
+												value="#{msg['um.employeeprofile.btndocmng']}"
+												id="cmdlDocManage" rendered="false"
+												style="font-size:100% !important;"></p:commandLink>
+
+										</center>
+									</p:panel>
+								</div>
+								<div class="ui-g-2">
+									<p:outputLabel value="#{msg['um.employeeprofile.pic']}"></p:outputLabel>
+									<p:panelGrid id="pnlImage">
+										<p:fileUpload tabindex="21"
+											disabled="#{employeeProfileBackingBean.viewMode}"
+											id="fuimage"
+											fileUploadListener="#{employeeProfileBackingBean.fileUploadListener}"
+											auto="true" update="a" accept=".jpg,.jpeg,.png"
+											allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640">
+											
+										</p:fileUpload>
+										<p:panel id="a"
+											style="border-color: #b7c7e0;border-style: solid;border-width: initial; width: 140px;">
+											<img id="img"
+												src="data:image/png;base64,#{employeeProfileBackingBean.imageContentsAsBase64}"
+												style="width: 120px; height: 120px;" />
+										</p:panel>
+									</p:panelGrid>
+								</div>
+							</div>
+						</h:form>
+					</p:tab>
+
+					<p:tab title="#{msg['um.employeeprofile.tbaddressdetail']}"
+						id="tcAddressDet"
+						disabled="#{employeeProfileBackingBean.boolEmpAddDet}">
+						<h:form id="frmAddDetails">
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-5,ui-grid-col-2"
+								layout="grid">
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel
+										value="#{msg['um.employeeprofile.tbaddressdetail.addtype']}"
+										for="txtType"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtType" style="width:60%; "
+										disabled="#{employeeProfileBackingBean.boolDisableAddType or employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.strSelectedAddressType}"
+										effect="fold">
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.addtypeList}"
+											var="addtypeList" itemValue="#{addtypeList.code}"
+											itemLabel="#{addtypeList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel
+										value="#{msg['um.employeeprofile.tbaddressdetail.add1']}"
+										for="txtAddress1"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText style="width:80%;height:18px;" required="false"
+										id="txtAddress1"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.empAddressDTO.address1}"
+										onkeyup="this.value=this.value.toUpperCase();" maxlength="100">
+										 <p:keyFilter regEx="/[a-z0-9_ -/]/i"/>
+									</p:inputText>
+									<p:watermark for="txtAddress1" value="eg: 124, 1st Lane"
+										id="watermarkAdd1" />
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel
+										value="#{msg['um.employeeprofile.tbaddressdetail.add2']}"
+										for="txtAddress2"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText style="width:80%;height:18px;" required="false"
+										id="txtAddress2"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.empAddressDTO.address2}"
+										onkeyup="this.value=this.value.toUpperCase();" maxlength="100">
+										 <p:keyFilter regEx="/[a-z0-9_ -/]/i"/>
+									</p:inputText>
+									<p:watermark for="txtAddress2" value="eg: Havelock City"
+										id="watermarkAdd2" />
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel
+										value="#{msg['um.employeeprofile.tbaddressdetail.city']}"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtCity" style="width:60%;"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.strSelectedCity}"
+										effect="fold" filter="true" filterMatchMode="contains"
+										tabindex="1">
+
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems value="#{employeeProfileBackingBean.cityList}"
+											var="cityList" itemValue="#{cityList.code}"
+											itemLabel="#{cityList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<br></br>
+
+							</p:panelGrid>
+							<center>
+								<p:commandButton id="cmdbtnAdd"
+									value="#{msg['um.employeeprofile.tbaddressdetail.save']}"
+									actionListener="#{employeeProfileBackingBean.addEmpAddress}"
+									class="mainActionbtn" update="tabviewId:frmAddDetails"
+									process="tabviewId:frmAddDetails"
+									rendered="#{employeeProfileBackingBean.editMode or employeeProfileBackingBean.createMode}">
+								</p:commandButton>
+
+								<p:commandButton styleClass="mainActionbtn"
+									value="#{msg['um.employeeprofile.tbaddressdetail.clear']}"
+									update="tabviewId:frmAddDetails"
+									process="tabviewId:frmAddDetails" id="cmdbtnAddClear"
+									action="#{employeeProfileBackingBean.clearEmpAddress}"
+									rendered="#{employeeProfileBackingBean.editMode or employeeProfileBackingBean.createMode}"></p:commandButton>
+							</center>
+							<br></br>
+
+							<p:dataTable var="addresstable" paginator="true" update="@form"
+								rows="5" id="dtAddress"
+								value="#{employeeProfileBackingBean.employeeAddresslist}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10" resizableColumns="false"
+								liveResize="true" rowIndexVar="index">
+
+								<p:column headerText="" style="text-align:center;width:3%">
+									<f:facet name=" header">
+										<h:outputText value="index" />
+									</f:facet>
+									<h:outputText value="#{index + 1}"></h:outputText>
+								</p:column>
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbaddressdetail.seq']}"
+									style="text-align:left;width:5%">
+									<h:outputText value="#{addresstable.seq}" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbaddressdetail.dtaddtype']}"
+									width="20%">
+									<h:outputText value="#{addresstable.addressTypeDesc}"
+										style="text-align:left;" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbaddressdetail.dtadd1']}"
+									style="text-align:left;width:17%">
+									<h:outputText value="#{addresstable.address1}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbaddressdetail.dtadd2']}"
+									style="text-align:left;width:17%">
+									<h:outputText value="#{addresstable.address2}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbaddressdetail.dtcity']}"
+									style="text-align:left;width:15%">
+									<h:outputText value="#{addresstable.cityDesc}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbaddressdetail.dtactive']}"
+									style="text-align:center" width="9%">
+									<h:outputText value="#{addresstable.status}"
+										style="text-align:center;" />
+								</p:column>
+								<p:column headerText="" width="5%">
+									<p:commandLink id="cmdbtnEdit"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										action="#{employeeProfileBackingBean.editAction}"
+										update="@form">
+										<f:setPropertyActionListener value="#{addresstable}"
+											target="#{employeeProfileBackingBean.strSelectedAddressSeq}" />
+										<p:graphicImage library="images" name="edit.png"
+											style="width:24px;height:24px;" title="edit"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+								<p:column headerText="" width="5%">
+
+									<p:commandLink id="cmdbtnDelete"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										action="#{employeeProfileBackingBean.deleteAddButtonAction}"
+										update="@form" process="@form">
+										<f:setPropertyActionListener value="#{addresstable}"
+											target="#{employeeProfileBackingBean.strSelectedAddressSeq}" />
+										<p:graphicImage library="images" name="delete.png"
+											style="width:24px;height:24px;" title="delete"></p:graphicImage>
+									</p:commandLink>
+
+
+								</p:column>
+							</p:dataTable>
+
+							<br></br>
+						</h:form>
+					</p:tab>
+
+
+					<p:tab title="#{msg['um.employeeprofile.tbdepatmentdet']}"
+						id="tbDepartmentDet"
+						disabled="#{employeeProfileBackingBean.boolEmpDeptDet}">
+						<h:form id="frmDepDetails">
+							<p:panelGrid columns="5"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-3,ui-grid-col-1"
+								layout="grid">
+								<p:panelGrid>
+									<p:outputLabel
+										value="#{msg['um.employeeprofile.tbdepatmentname']}"
+										for="txtDeptName"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtDeptName" style="width:60%;"
+										disabled="#{employeeProfileBackingBean.boolDisableDeptName or employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.strSelectedDeparmentCode}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.deparmentList}"
+											var="deparmentList" itemValue="#{deparmentList.code}"
+											itemLabel="#{deparmentList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['um.employeeprofile.tbdepatmenttrndate']}"
+											for="txtTransferDate">
+										</p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+
+									<p:calendar id="txtTransferDate" navigator="true"
+										locale="en_US"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.empolyeeDeptDTO.startDate}"
+										style="width:50%;height:18px; " maxdate="today"
+										yearRange="c-100:c+100" readonlyInput="true" showOn="button"
+										pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+
+									</p:calendar>
+
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['um.employeeprofile.tbdepatmentsubunit']}"
+											for="txtSubUnitName"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtSubUnitName" style="width:60%;"
+										disabled="#{employeeProfileBackingBean.boolDisableUnitName or employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.strSelectedUnit}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems value="#{employeeProfileBackingBean.unitList}"
+											var="unitList" itemValue="#{unitList.code}"
+											itemLabel="#{unitList.description}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<br></br>
+
+							</p:panelGrid>
+							<center>
+								<p:commandButton id="cmdbtnDeptSave"
+									value="#{msg['um.employeeprofile.tbdepatmentsave']}"
+									actionListener="#{employeeProfileBackingBean.addDepDetails}"
+									class="mainActionbtn" update="tabviewId:frmDepDetails"
+									process="tabviewId:frmDepDetails"
+									rendered="#{employeeProfileBackingBean.editMode or employeeProfileBackingBean.createMode}"></p:commandButton>
+
+								<p:commandButton styleClass="mainActionbtn"
+									value="#{msg['um.employeeprofile.tbdepatmentclear']}"
+									update="tabviewId:frmDepDetails"
+									process="tabviewId:frmDepDetails" id="cmdbtnDeptClear"
+									action="#{employeeProfileBackingBean.clearDepDetails}"
+									rendered="#{employeeProfileBackingBean.editMode or employeeProfileBackingBean.createMode}"></p:commandButton>
+
+							</center>
+							<br></br>
+							<p:dataTable var="deparmenttable" paginator="true" rows="5"
+								value="#{employeeProfileBackingBean.employeeDepartmentlist}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15" resizableColumns="true"
+								liveResize="true" rowIndexVar="index">
+
+								<p:column headerText="" style="text-align:center;width:3%">
+									<f:facet name=" header">
+										<h:outputText value="index" />
+									</f:facet>
+									<h:outputText value="#{index + 1}"></h:outputText>
+								</p:column>
+
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdepatmentdtcode']}"
+									style="text-align:left;width:12%;">
+									<h:outputText value="#{deparmenttable.deptCode}"
+										style="text-align:left;" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdepatmentdtname']}"
+									style="text-align:left;width:20%;">
+									<h:outputText value="#{deparmenttable.deptDesc}"
+										style="text-align:left;" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdepatmentdtsubunit']}"
+									style="text-align:left;width:15%;">
+									<h:outputText value="#{deparmenttable.unitDesc}"
+										style="text-align:left;" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdepatmentdttrndate']}"
+									style="text-align:left;width:13%;">
+									<h:outputText value="#{deparmenttable.strStartDate}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdepatmentdtactive']}"
+									style="text-align:center;width:8%;">
+									<h:outputText value="#{deparmenttable.status}"
+										style="text-align:center;" />
+								</p:column>
+
+								<p:column headerText="" style="width:7%">
+									<p:commandLink id="cmdbtnDeptEdit"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										action="#{employeeProfileBackingBean.editDeptAction}"
+										update="@form">
+										<f:setPropertyActionListener value="#{deparmenttable}"
+											target="#{employeeProfileBackingBean.strSelectedDeptSeq}" />
+										<p:graphicImage library="images" name="edit.png"
+											style="width:24px;height:24px;" title="edit"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+								<p:column headerText="" style="width:8.5%">
+									<p:commandLink id="cmdbtnDeptDelete"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										action="#{employeeProfileBackingBean.deleteDeptButtonAction}"
+										update="@form">
+										<f:setPropertyActionListener value="#{deparmenttable}"
+											target="#{employeeProfileBackingBean.strSelectedDeptSeq}" />
+										<p:graphicImage library="images" name="delete.png"
+											style="width:24px;height:24px;" title="delete"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+
+							</p:dataTable>
+							<br></br>
+							<br></br>
+						</h:form>
+					</p:tab>
+
+
+					<p:tab title="#{msg['um.employeeprofile.tbdesignationdet']}"
+						id="tbDesignationDet"
+						disabled="#{employeeProfileBackingBean.boolEmpDesigDet}">
+						<h:form id="frmDesDetails">
+							<p:panelGrid columns="5"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-3,ui-grid-col-1"
+								layout="grid">
+								<p:panelGrid>
+									<p:outputLabel
+										value="#{msg['um.employeeprofile.tbdesignationdesc']}"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtDesignation" style="width:60%; "
+										disabled="#{employeeProfileBackingBean.boolDesignation or employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.strSelectedDesignation}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.designationList}"
+											var="designationList" itemValue="#{designationList.code}"
+											itemLabel="#{designationList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['um.employeeprofile.tbdesignationdescfrom']}"
+											for="txtDesignatedFrom"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+
+									<p:calendar id="txtDesignatedFrom" navigator="true"
+										locale="en_US"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.employeeDesignationDTO.startDate}"
+										style="width:50%;height:18px; " maxdate="today"
+										yearRange="c-100:c+100" readonlyInput="true" showOn="button"
+										pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"></p:calendar>
+
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['um.employeeprofile.tbdesignationgrade']}"
+											for="txtGrade"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtGrade" style="width:60%;"
+										disabled="#{employeeProfileBackingBean.boolGrade or employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.strSelectedGrade}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems value="#{employeeProfileBackingBean.gradeList}"
+											var="gradeList" itemValue="#{gradeList.code}"
+											itemLabel="#{gradeList.description}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['um.employeeprofile.tbdesignationto']}"
+											for="txtDesignatedTo"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+
+									<p:calendar id="txtDesignatedTo" navigator="true"
+										locale="en_US"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.employeeDesignationDTO.endDate}"
+										style="width:50%;height:18px; " mindate="today"
+										yearRange="c-100:c+100" readonlyInput="true" showOn="button"
+										pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"></p:calendar>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['um.employeeprofile.tbdesignationsalcat']}"
+											for="txtSalaryCat"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="txtSalaryCat" style="width:60%; "
+										disabled="#{employeeProfileBackingBean.boolSalCate or employeeProfileBackingBean.viewMode}"
+										value="#{employeeProfileBackingBean.strSelectedSalaryCat}"
+										effect="fold">
+										<p:ajax
+											listener="#{employeeProfileBackingBean.handleAddTypeChange}" />
+										<f:selectItem itemLabel="-- All --" itemValue="" />
+										<f:selectItems
+											value="#{employeeProfileBackingBean.salaryCatList}"
+											var="salaryCatList" itemValue="#{salaryCatList.code}"
+											itemLabel="#{salaryCatList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<br></br>
+							</p:panelGrid>
+							<br></br>
+							<center>
+
+								<p:commandButton id="cmdbtnDesiSave"
+									value="#{msg['um.employeeprofile.tbdesignationsave']}"
+									actionListener="#{employeeProfileBackingBean.addDesignationDetails}"
+									class="mainActionbtn" update="tabviewId:frmDesDetails"
+									rendered="#{employeeProfileBackingBean.editMode or employeeProfileBackingBean.createMode}"
+									process="tabviewId:frmDesDetails"></p:commandButton>
+
+								<p:commandButton styleClass="mainActionbtn"
+									value="#{msg['um.employeeprofile.tbdesignationclear']}"
+									update="tabviewId:frmDesDetails"
+									process="tabviewId:frmDesDetails" id="cmdbtnDesiClear"
+									rendered="#{employeeProfileBackingBean.editMode or employeeProfileBackingBean.createMode}"
+									action="#{employeeProfileBackingBean.clearDesignationDetails}"></p:commandButton>
+
+
+							</center>
+							<br></br>
+							<br></br>
+							<p:dataTable var="designationtable" paginator="true" rows="5"
+								value="#{employeeProfileBackingBean.employeeDesignationlist}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15" resizableColumns="true"
+								liveResize="true" rowIndexVar="index">
+
+								<p:column headerText="" style="text-align:center;width:5%">
+									<f:facet name=" header">
+										<h:outputText value="index" />
+									</f:facet>
+									<h:outputText value="#{index + 1}"></h:outputText>
+								</p:column>
+
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdesignationdt']}"
+									style="text-align:left;">
+									<h:outputText value="#{designationtable.designationDesc}"
+										style="text-align:left;" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdesignationdtgrade']}"
+									style="text-align:left; width:10%">
+									<h:outputText value="#{designationtable.gradeCode}"
+										style="text-align:left;" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdesignationdtsalcat']}"
+									style="text-align:left;">
+									<h:outputText value="#{designationtable.salCatDesc}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdesignationdtfrom']}"
+									style="text-align:left;">
+									<h:outputText value="#{designationtable.strStartDate}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdesignationdtto']}"
+									style="text-align:left;">
+									<h:outputText value="#{designationtable.strEndDate}"
+										style="text-align:left;" />
+								</p:column>
+								<p:column
+									headerText="#{msg['um.employeeprofile.tbdesignationdtactive']}"
+									style="text-align:center;">
+									<h:outputText value="#{designationtable.status}"
+										style="text-align:center;" />
+								</p:column>
+								<p:column headerText="" style="width:7%">
+									<p:commandLink id="cmdbtnDesigEdit"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										action="#{employeeProfileBackingBean.editDesigAction}"
+										update="@form">
+										<f:setPropertyActionListener value="#{designationtable}"
+											target="#{employeeProfileBackingBean.strSelectedDesSeq}" />
+										<p:graphicImage library="images" name="edit.png"
+											style="width:24px;height:24px;" title="edit"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+								<p:column headerText="" style="width:8.5%">
+									<p:commandLink id="cmdbtnDesigDelete"
+										disabled="#{employeeProfileBackingBean.viewMode}"
+										action="#{employeeProfileBackingBean.deleteDesigButtonAction}"
+										update="@form">
+										<f:setPropertyActionListener value="#{designationtable}"
+											target="#{employeeProfileBackingBean.strSelectedDesSeq}" />
+										<p:graphicImage library="images" name="delete.png"
+											style="width:24px;height:24px;" title="delete"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+							<br></br>
+							<br></br>
+						</h:form>
+					</p:tab>
+
+				</p:tabView>
+			</div>
+		</div>
+
+		<p:dialog styleClass="" id="invalidemail" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="invalidemail"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frminvalidemail">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{msg['um.employeeprofile.dlerrormsg']}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frminvalidemail"
+						value="#{msg['um.employeeprofile.dlerrorclose']}"
+						onclick="PF('invalidemail').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successSve" global="true" modal="true"
+			header="Success" width="30%" severity="info" widgetVar="successSve"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{msg['um.employeeprofile.dlsuccessmsg']}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSve"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="warningMsge" global="true" modal="true"
+			header="Warning" width="30%" severity="info" widgetVar="warningMsge"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmwarningMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+						<p:outputLabel value="#{msg['um.employeeprofile.dlwarningmsg']}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmwarningMsge"
+						value="#{msg['um.employeeprofile.dlwarningclose']}"
+						onclick="PF('warningMsge').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{employeeProfileBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="noDataMsge" global="true" modal="true"
+			header="Warning" width="30%" severity="info" widgetVar="noDataMsge"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmnoDataMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+						<p:outputLabel value="#{msg['um.employeeprofile.dlnodatamsg']}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmnoDataMsge"
+						value="#{msg['um.employeeprofile.dlnodatamsgclose']}"
+						onclick="PF('noDataMsge').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="deleteconfirmation" global="true"
+			modal="true" header="Warning" width="30%" severity="info"
+			widgetVar="deleteconfirmation" closeOnEscape="true" resizable="false">
+			<h:form id="frmdeleteconfirmation">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{msg['um.employeeprofile.deleteconfirmationmsg']}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton id="yes"
+						value="#{msg['um.employeeprofile.deleteconfirmationyes']}"
+						update="@all"
+						actionListener="#{employeeProfileBackingBean.addressDeleteAction}"
+						ajax="false" onclick="PF('deleteconfirmation').hide()"></p:commandButton>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmdeleteconfirmation"
+						value="#{msg['um.employeeprofile.deleteconfirmationno']}"
+						onclick="PF('deleteconfirmation').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="deleteconfirmationDept" global="true"
+			modal="true" header="Warning" width="30%" severity="info"
+			widgetVar="deleteconfirmationDept" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmdeleteconfirmationDept">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{msg['um.employeeprofile.deleteconfirmationdeptmsg']}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton id="yes"
+						value="#{msg['um.employeeprofile.deleteconfirmationyes']}"
+						update="@all"
+						actionListener="#{employeeProfileBackingBean.departmentDeleteAction}"
+						ajax="false" onclick="PF('deleteconfirmationDept').hide()"></p:commandButton>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmdeleteconfirmationDept"
+						value="#{msg['um.employeeprofile.deleteconfirmationno']}"
+						onclick="PF('deleteconfirmationDept').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="errorMsge" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMsge"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmerrorMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{employeeProfileBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmerrorMsge"
+						value="#{msg['um.employeeprofile.dlcommerrorclose']}"
+						onclick="PF('errorMsge').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="deleteconfirmationDesig" global="true"
+			modal="true" header="Warning" width="30%" severity="info"
+			widgetVar="deleteconfirmationDesig" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmdeleteconfirmationDesig">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{msg['um.employeeprofile.deleteconfirmationdeptmsg']}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton id="yes"
+						value="#{msg['um.employeeprofile.deleteconfirmationyes']}"
+						actionListener="#{employeeProfileBackingBean.designationDeleteAction}"
+						update="@all" ajax="false"
+						onclick="PF('deleteconfirmationDesig').hide()"></p:commandButton>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmdeleteconfirmationDesig"
+						value="#{msg['um.employeeprofile.deleteconfirmationno']}"
+						onclick="PF('deleteconfirmationDesig').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successSveDel" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successSveDel" closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSveDel">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="Successfully Deleted."></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSveDel"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSveDel').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successSveDelDep" global="true"
+			modal="true" header="Success" width="30%" severity="info"
+			widgetVar="successSveDelDep" closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSveDelDep">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="Successfully Deleted."></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSveDelDep"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSveDelDep').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="uploadDocumentsDialog" global="true"
+			modal="true" header="Upload Documents" width="80%" height="400px"
+			severity="info" widgetVar="uploadDocument" closeOnEscape="true"
+			resizable="false" style="postion: absolute;">
+			<p:ajax event="close"
+				listener="#{newPermitIssuanceBackingBean.clearCheckDocumentsTable}" />
+			<h:form id="frmdoc">
+
+				<p:accordionPanel>
+					<p:growl id="msgs" showDetail="false" />
+					<p:tab title="Mandatory Documents">
+						<h:panelGrid>
+							<p:dataTable id="abc" tableStyle="width:auto" var="docMandatory"
+								value="#{employeeProfileBackingBean.mandatoryList}" rows="10"
+								paginator="true" sortOrder="ascending"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="10,20,30,40,50">
+
+
+
+								<p:column headerText="Code" style="width: 100px;">
+									<h:outputText value="#{docMandatory.doc_Code}" />
+								</p:column>
+								<p:column headerText="Description" style="width: 300px;">
+									<h:outputText value="#{docMandatory.add_Doc_Description}" />
+								</p:column>
+								<p:column headerText="File Path" style="width: 300px;">
+
+									<h:outputText value="#{docMandatory.uploadFilePath}" />
+								</p:column>
+
+								<p:column headerText="" style="width: 150px !important;"
+									rendered="#{employeeProfileBackingBean.checkUpload}">
+
+									<p:fileUpload
+										fileUploadListener="#{documentManagementBean.saveUserManagementMandatoryUploadDocuments}"
+										mode="advanced" dragDropSupport="false" multiple="true"
+										auto="true" showButtons="false" update="@form" fileLimit="1"
+										accept=".pdf,.jpg,.jpeg,.png"
+										allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640">
+										
+
+										<f:attribute name="uploadedObj" value="#{docMandatory}" />
+
+									</p:fileUpload>
+
+								</p:column>
+
+								<p:column headerText="" style="width: 75px;"
+									rendered="#{employeeProfileBackingBean.checkView}">
+
+									<p:commandLink
+										actionListener="#{documentManagementBean.viewAction}"
+										oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+										<p:graphicImage library="images" name="view.png"
+											style="width:20px;height:20px;" title="view"></p:graphicImage>
+										<f:attribute name="documentPathMandatory"
+											value="#{docMandatory}" />
+									</p:commandLink>
+
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+
+				<br></br>
+				<br></br>
+
+				<p:accordionPanel>
+					<p:growl id="msgse" showDetail="false" />
+					<p:tab title="Optional Documents">
+						<h:panelGrid>
+							<p:dataTable id="abcd" tableStyle="width:auto" var="docOptional"
+								value="#{employeeProfileBackingBean.optionalList}" rows="10"
+								paginator="true" sortOrder="ascending"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="10,20,30,40,50">
+
+
+
+								<p:column headerText="Code"
+									style="width: 100px;text-align:left;">
+									<h:outputText value="#{docOptional.doc_Code}" />
+								</p:column>
+								<p:column headerText="Description"
+									style="width: 300px;text-align:left;">
+									<h:outputText value="#{docOptional.add_Doc_Description}" />
+								</p:column>
+								<p:column headerText="File Path"
+									style="width: 300px;text-align:left;">
+									<h:outputText value="#{docOptional.uploadOptionalFilePath}" />
+								</p:column>
+
+								<p:column headerText="" style="width: 150px;"
+									rendered="#{employeeProfileBackingBean.checkUpload}">
+									<p:fileUpload
+										fileUploadListener="#{documentManagementBean.saveUserManagementOptionalUploadDocuments}"
+										mode="advanced" dragDropSupport="false" multiple="true"
+										update="@form" auto="true" showButtons="false" fileLimit="1"
+										accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsl,.xlsm"
+										allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx|xls|xlsx|xlsm)$/"
+										sizeLimit="15728640"
+										fileLimitMessage="Please Upload Only One Document">
+										
+
+										<f:attribute name="uploadedOptionalObj" value="#{docOptional}" />
+
+
+									</p:fileUpload>
+
+								</p:column>
+
+								<p:column headerText="" style="width: 75px;"
+									rendered="#{employeeProfileBackingBean.checkView}">
+									<p:commandLink
+										actionListener="#{documentManagementBean.viewOptionalDocAction}"
+										oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+										<p:graphicImage library="images" name="view.png"
+											style="width:20px;height:20px;" title="view"></p:graphicImage>
+										<f:attribute name="documentPathOptional"
+											value="#{docOptional}" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+
+
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successSveUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlsuccess']}"
+			width="30%" severity="info" widgetVar="successSveUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSveUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.successMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						update="frmdoc" process="frmsuccessSveUploadDoc"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSveUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="requiredFieldUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlmissing']}"
+			width="30%" severity="info" widgetVar="requiredFieldUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredFieldUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredFieldUploadDoc"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredFieldUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

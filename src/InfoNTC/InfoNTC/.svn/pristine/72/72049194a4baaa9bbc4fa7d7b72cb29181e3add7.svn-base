@@ -1,0 +1,576 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 220px;
+	white-space: nowrap !important;
+	margin: 3px;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn1 {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 180px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+.calendarClass input {
+	width: 62% !important
+}
+
+.ui-datepicker-calendar {
+	display: none;
+	width: 100%;
+}
+</style>
+
+		<div class="mainDiv">
+			<h:form id="mainxx">
+				<h1
+					style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+					class="common_form_header">Generate Control Sheet</h1>
+
+				<div style="width: 95%;" class="subDiv">
+					<p:panelGrid columns="2"
+						columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+						<p:outputLabel for="report" value="Select Report Type " />
+
+						<p:selectOneRadio id="report"
+							value="#{timeTableReportsBackingBean.rptType}"
+							unselectable="true">
+							<f:selectItem itemLabel="Control Sheet" itemValue="ct" />
+							<f:selectItem itemLabel="Control Sheet For Owner" itemValue="cto" />
+
+							<p:ajax update="mainxx">
+							</p:ajax>
+						</p:selectOneRadio>
+
+
+					</p:panelGrid>
+					<br></br>
+					<p:panelGrid id="searchPan" columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+
+
+
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Panel Reference No."></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="refID" tabindex="1" style="width:84%; "
+								value="#{timeTableReportsBackingBean.refNo}" effect="fold"
+								filter="true" filterMatchMode="contains">
+								<p:ajax listener="#{timeTableReportsBackingBean.onRefChange}"
+									update="groupID,serviceType,route"></p:ajax>
+								<f:selectItem itemLabel="--Select a Ref. No.--" itemValue="" />
+								<f:selectItems value="#{timeTableReportsBackingBean.refNoList}"
+									var="filterRefNoList" itemValue="#{filterRefNoList}"
+									itemLabel="#{filterRefNoList}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Group No."></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="groupID" tabindex="1" style="width:84%; "
+								value="#{timeTableReportsBackingBean.groupNo}" effect="fold"
+								filter="true" filterMatchMode="contains">
+
+								<f:selectItem itemLabel="--Select a Group--" itemValue="" />
+								<f:selectItems value="#{timeTableReportsBackingBean.groupList}"
+									var="filterGroupNoList" itemValue="#{filterGroupNoList}"
+									itemLabel="#{filterGroupNoList}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Route"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="route" tabindex="1" style="width:84%; "
+								value="#{timeTableReportsBackingBean.route}" effect="fold"
+								filter="true" filterMatchMode="contains">
+								<p:ajax listener="#{timeTableReportsBackingBean.onRouteChange}"
+									update="originID,destinationID,depSideID"></p:ajax>
+								<f:selectItem itemLabel="--Select a Route--" itemValue="" />
+								<f:selectItems value="#{timeTableReportsBackingBean.getRouteNo}"
+									var="filterRouteNoList" itemValue="#{filterRouteNoList}"
+									itemLabel="#{filterRouteNoList}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Service Type"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="serviceType" tabindex="1"
+								style="width:84%; "
+								value="#{timeTableReportsBackingBean.serviceTypeDes}"
+								effect="fold" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="--Select a Service Type--" itemValue="" />
+								<f:selectItems
+									value="#{timeTableReportsBackingBean.getServiceType}"
+									var="filterServiceList" itemValue="#{filterServiceList}"
+									itemLabel="#{filterServiceList}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Origin"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="originID" tabindex="2" style="width:90%; "
+								value="#{timeTableReportsBackingBean.orgin}" effect="fold"></p:inputText>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Destination"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="destinationID" tabindex="2" style="width:90%; "
+								value="#{timeTableReportsBackingBean.destination}" effect="fold"></p:inputText>
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Departure Side"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="depSideID" tabindex="1" style="width:84%; "
+								value="#{timeTableReportsBackingBean.depSide}" effect="fold"
+								filter="true" filterMatchMode="contains">
+								<p:ajax
+									listener="#{timeTableReportsBackingBean.onDepartureSIdeChange}"
+									update="month"></p:ajax>
+								<f:selectItem itemLabel="--Select a Departure Side--"
+									itemValue="" />
+								<f:selectItems
+									value="#{timeTableReportsBackingBean.departureList}"
+									var="filterDepList" itemValue="#{filterDepList}"
+									itemLabel="#{filterDepList}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Date Range" for="month"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+
+
+
+							<p:selectOneMenu id="month" tabindex="1" style="width:84%; "
+								value="#{timeTableReportsBackingBean.dateRange}" effect="fold"
+								filter="true" filterMatchMode="contains">
+
+								<p:ajax
+									listener="#{timeTableReportsBackingBean.dateRangeChange}"
+									update="monthID">
+								</p:ajax>
+								<f:selectItem itemLabel="--Select a date range--" itemValue="" />
+								<f:selectItems
+									value="#{timeTableReportsBackingBean.startMonthList}"
+									var="startMonthList" itemValue="#{startMonthList}"
+									itemLabel="#{startMonthList}" />
+							</p:selectOneMenu>
+
+
+
+
+
+
+						</p:panelGrid>
+
+
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Month"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="monthID" tabindex="1" style="width:84%; "
+								disabled="#{timeTableReportsBackingBean.rptType eq 'cto'}"
+								value="#{timeTableReportsBackingBean.mon}" effect="fold">
+								<f:selectItem itemLabel="--Select a month--" itemValue="" />
+								<f:selectItems
+									value="#{timeTableReportsBackingBean.stelectMonthList}"
+									var="selectMonthList" itemValue="#{selectMonthList}"
+									itemLabel="#{selectMonthList}" />
+
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+
+
+
+
+
+					</p:panelGrid>
+
+				</div>
+
+				<center>
+					<div style="width: 95%;" class="subDiv">
+						<p:panel>
+							<p:commandButton styleClass="mainActionbtn"
+								value="Control Sheet (PDF)" process="@form"
+								disabled="#{timeTableReportsBackingBean.rptType eq 'cto'}"
+								actionListener="#{timeTableReportsBackingBean.printControlSheet}"
+								oncomplete="window.open('/InfoNTC/showUpload?reportName=ControlSheet')"
+								id="ptintID" update="@form"></p:commandButton>
+							
+							<p:commandButton styleClass="mainActionbtn"
+								value="Control Sheet (PDF 2)" process="@form" 
+								rendered="#{timeTableReportsBackingBean.renderLeave}"
+								disabled="#{timeTableReportsBackingBean.rptType eq 'cto'}"
+								actionListener="#{timeTableReportsBackingBean.printControlSheetForTwoDay}"
+								oncomplete="window.open('/InfoNTC/showUpload?reportName=ControlSheet')"
+								id="ptintIDTD" update="@form"></p:commandButton>
+							
+							<!-- <p:commandButton styleClass="mainActionbtn"
+								value="Control Sheet (Excel)" process="@form"
+								disabled="#{timeTableReportsBackingBean.rptType eq 'cto'}"
+								actionListener="#{timeTableReportsBackingBean.printControlSheet}"
+								oncomplete="window.open('/InfoNTC/showUpload?reportName=ControlSheet')"
+								id="ptintIDXLS" update="@form"></p:commandButton> -->
+
+							<p:commandButton styleClass="mainActionbtn"
+								value="Control Sheet For Owner (PDF)" process="@form"
+								actionListener="#{timeTableReportsBackingBean.printOwnerControlSheetNew}"
+								oncomplete="window.open('/InfoNTC/showUpload?reportName=ControlSheetForOwner')"
+								disabled="#{timeTableReportsBackingBean.rptType eq 'ct'}"
+								id="ptintOwnerID" update="@form"></p:commandButton>
+							
+							<p:commandButton styleClass="mainActionbtn"
+								value="Control Sheet For Owner (PDF 2)" process="@form" 
+								rendered="#{timeTableReportsBackingBean.renderLeave}"
+								actionListener="#{timeTableReportsBackingBean.printOwnerControlSheetNewTwoDay}"
+								oncomplete="window.open('/InfoNTC/showUpload?reportName=ControlSheetForOwner')"
+								disabled="#{timeTableReportsBackingBean.rptType eq 'ct'}"
+								id="ptintOwnerIDTD" update="@form" ></p:commandButton>
+
+							<!-- <p:commandButton styleClass="mainActionbtn"
+								value="Control Sheet For Owner (Excel)" process="@form"
+								actionListener="#{timeTableReportsBackingBean.printOwnerControlSheetNew}"
+								oncomplete="window.open('/InfoNTC/showUpload?reportName=ControlSheetForOwner')"
+								disabled="#{timeTableReportsBackingBean.rptType eq 'ct'}"
+								id="ptintOwnerIDXLS" update="@form"></p:commandButton> -->
+
+							<p:commandButton styleClass="mainActionbtn"
+								value="Rotation Report" process="@form"
+								actionListener="#{timeTableReportsBackingBean.printRotationReport}"
+								id="ptint" update="@form"></p:commandButton>
+
+							<p:commandButton value="Dowanlod Rotation Report" ajax="false" rendered="#{timeTableReportsBackingBean.rotationSheet != null}"
+								actionListener="#{timeTableReportsBackingBean.generateRotationExcel()}"
+								style="width:20%" styleClass="mainActionbtn">
+								<p:fileDownload value="#{timeTableReportsBackingBean.rotationSheet}" />
+							</p:commandButton>
+							
+							<p:commandButton styleClass="mainActionbtn"
+								value="Save Terminal Data" process="@form" 
+								disabled="#{timeTableReportsBackingBean.rptType == 'cto' or timeTableReportsBackingBean.rptType == null}"
+								actionListener="#{timeTableReportsBackingBean.saveTerminalData}"
+								update="@form"></p:commandButton>
+								
+							<p:commandButton styleClass="mainActionbtn" value="Clear"
+								process="@all"
+								action="#{timeTableReportsBackingBean.clearControlSheet}"
+								id="clear" update="@form"></p:commandButton>
+
+						</p:panel>
+					</div>
+				</center>
+				<div style="width: 95%;" class="subDiv">
+
+					<p:dataTable id="table1"
+						value="#{timeTableReportsBackingBean.rotationList}" var="details"
+						editable="true" editMode="cell" rowIndexVar="index"
+						styleClass="myTable" emptyMessage="No records available"
+						lazy="true" paginator="true" rows="100"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						rowsPerPageTemplate="100,200,300">
+
+
+						<f:facet name="{Exporters}">
+							<div style="float: right; padding-top: 5px;">
+
+								<h:commandLink value="Excel" style="margin-right:5px">
+									<p:dataExporter type="xlsxstream" target="table1"
+										fileName="Rotation report" />
+								</h:commandLink>
+
+								<h:commandLink value="PDF">
+									<p:dataExporter type="pdf" target="table1"
+										fileName="Rotation report" />
+								</h:commandLink>
+
+							</div>
+						</f:facet>
+
+						<p:column style="padding:1px;" headerText="No" id="abbOri">
+							<h:outputText style="width:70%" value="#{details.rowNumber}" />
+						</p:column>
+
+						<p:column style="padding:1px;" headerText="BusNo" id="bus">
+							<h:outputText style="width:70%" value="#{details.busNo}" />
+						</p:column>
+
+						<p:columns value="#{timeTableReportsBackingBean.generatedColumns}"
+							var="genCol" columnIndexVar="colIndex" id="midOri">
+							<f:facet name="header">
+								<h:outputText value="#{genCol.headerText}" />
+							</f:facet>
+							<h:outputText value="#{details.fullRotationList[colIndex]}" />
+						</p:columns>
+
+						<p:column style="padding:1px;" headerText="No Of Days" id="days">
+							<h:outputText style="width:70%" value="#{details.noOfDays}" />
+						</p:column>
+
+						<p:column style="padding:1px;" headerText="Distance">
+							<h:outputText style="width:70%" value="#{details.totalDistance}" />
+						</p:column>
+
+
+					</p:dataTable>
+
+				</div>
+			</h:form>
+		</div>
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{timeTableReportsBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Info" width="30%" severity="info" widgetVar="successMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{timeTableReportsBackingBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2020-06-19T16:31:46 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PermitActivationLetter" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="75a39b53-b3f9-4687-8685-abc2943b3bff">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="P_AppNO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select distinct pmc_permit_no,pmc_cancel_from,pmc_cancel_to,pmc_cancel_type,to_char(rep_modified_date,'yyyy-MM-dd'),a.pmo_full_name_sinhala
+,pmc_cancel_to,to_char(rep_created_date,'yyyy-MM-dd') as cancelDate
+from public.nt_t_permit_cancel 
+inner join public.nt_t_pm_vehi_owner a on a.pmo_permit_no=public.nt_t_permit_cancel.pmc_permit_no
+where pmc_application_no= $P{P_AppNO}  and pmc_active_status='A']]>
+	</queryString>
+	<field name="pmc_permit_no" class="java.lang.String"/>
+	<field name="pmc_cancel_from" class="java.sql.Date"/>
+	<field name="pmc_cancel_to" class="java.sql.Date"/>
+	<field name="pmc_cancel_type" class="java.lang.String"/>
+	<field name="to_char" class="java.lang.String"/>
+	<field name="pmo_full_name_sinhala" class="java.lang.String"/>
+	<field name="COLUMN_7" class="java.sql.Date"/>
+	<field name="canceldate" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="117" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="262" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="222" width="470" height="20" uuid="5a30ff83-a58c-40cc-825c-ab7b26e0b067"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="15" isBold="true"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<text><![CDATA[අධ්‍යක්‍ෂ(තත්ව​ ආරක්‍ෂණ හා බාහිර සම්බන්ධතා)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="242" width="280" height="20" uuid="bd70a091-a037-45f5-99ad-fb6aff3771e6"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="14"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="48" y="-4" width="280" height="30" uuid="b9ce8890-35c0-44e1-892b-c359efc7c260"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="11"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ජාගකොස​/ "]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="420" y="-4" width="100" height="30" uuid="27d0f5da-06d9-4007-b603-271dd1fa562d"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="115" width="535" height="45" isPrintWhenDetailOverflows="true" uuid="b80b8928-5782-4528-a4ab-44d28a5d81a8">
+					<printWhenExpression><![CDATA[$F{pmc_cancel_type}.equals( "T" )]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmc_cancel_from}+"   දින සිට   "+  $F{pmc_cancel_to}+" දක්වා   තාවකාලිකව​  අහෝසි කරන ලද​     "+$F{pmc_permit_no}+"    දරණ බලපත්‍රයය  " + $F{to_char}+" දින සිට  සේවයේ ක්‍රියත්මක කර ඇති බව දැනුම් දෙන්නෙමු."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="84" width="535" height="20" uuid="8ebe0f10-e88d-45fa-9b14-7d75643266f1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="12" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" අහෝසි  කරන ලද  "+$F{pmc_permit_no}+ "  බලපත්‍රය  නැවත​ ක්‍රියත්මක කිරීම "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="48" width="520" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="58aa3763-a6ce-416e-8125-181dd795da27"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_full_name_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="115" width="535" height="45" isPrintWhenDetailOverflows="true" uuid="3c5e714b-0b73-4bfe-a6dd-70b8bb247033">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{pmc_cancel_type}.equals( "P" )]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{canceldate}+"  දින​  සිට අහෝසි කරන ලද​     "+$F{pmc_permit_no}+"    දරණ බලපත්‍රයය  " + $F{to_char}+" දින සිට  සේවයේ ක්‍රියත්මක කර ඇති බව දැනුම් දෙන්නෙමු."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

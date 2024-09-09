@@ -1,0 +1,3551 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+		<f:event type="preRenderView" listener="#{makeBean.onPageLoad}" />
+	</ui:define>
+
+	<ui:define name="content">
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.colOne {
+	background-color: #B3E396;
+}
+
+.colTwo {
+	background-color: #96E3A0;
+}
+
+.colThree {
+	background-color: #96E3C6;
+}
+
+.colFour {
+	background-color: #96D9E3;
+}
+
+.colFive {
+	background-color: #96B3E3;
+}
+
+.colSix {
+	background-color: #A096E3;
+}
+
+.colSeven {
+	background-color: #786CCA;
+}
+
+.colStage {
+	background-color: #D7ECC9;
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Common Inquiry</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<p:tabView id="tabviewId">
+
+					<!-- Tab 01 -->
+					<p:tab id="tab-commonInquiry" title="Common Inquiry">
+
+						<h:form id="frmAssignModels">
+							<p:panel>
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+									layout="grid">
+									<p:panelGrid>
+										<p:outputLabel value="Vehicle No."></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="vehicleNoId" tabindex="1"
+											style="width:89%; " disabled="false"
+											value="#{inquiryDetails.selectedVehicleNo}" effect="fold"
+											filter="true" filterMatchMode="contains">
+											<p:ajax listener="#{inquiryDetails.onVehicleNoChange}"
+												update="permitNoId" />
+											<f:selectItem itemLabel="--Select Vehicle No.--" itemValue="" />
+											<f:selectItems value="#{inquiryDetails.vehicleNoList}"
+												var="vehicleNoList" itemValue="#{vehicleNoList.regNoOfBus}"
+												itemLabel="#{vehicleNoList.regNoOfBus}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Permit No."></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="permitNoId" tabindex="1"
+											style="width:89%; " disabled="false"
+											value="#{inquiryDetails.selectedPermitNo}" effect="fold"
+											filter="true" filterMatchMode="contains">
+											<p:ajax listener="#{inquiryDetails.onPermitNoChange}"
+												update="vehicleNoId" />
+											<f:selectItem itemLabel="--Select Permit No.--" itemValue="" />
+											<f:selectItems value="#{inquiryDetails.permitNoList}"
+												var="permitNoList" itemValue="#{permitNoList.permitNo}"
+												itemLabel="#{permitNoList.permitNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+								</p:panelGrid>
+							</p:panel>
+							<br></br>
+							<center>
+
+								<p:commandButton value="Search"
+									action="#{inquiryDetails.search}" update="@form,tabviewId"
+									process="@form,tabviewId" class="mainActionbtn"></p:commandButton>
+
+								<p:commandButton value="Clear" update="@form,tabviewId"
+									process="@form,tabviewId" action="#{inquiryDetails.clear}"
+									class="mainActionbtn"></p:commandButton>
+							</center>
+							<br></br>
+							
+							<p:tabView id="tabviewId"
+								rendered="#{inquiryDetails.showActiveTab}">
+
+								<!-- ***********************************      Tab 01       ******************************************************************* -->
+								<p:tab title="Active Record Details" id="tabOneId"
+									activeIndex="#{inquiryDetails.activeTabIndex}">
+
+									<p:panel style="border-bottom:5px solid #404d6f;">
+										<p:panelGrid id="activeOwnerPanel" columns="4"
+											columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+											layout="grid">
+											<p:outputLabel value="Current Owner Details"
+												style="color:#07295b;font-style: italic;font-weight: bold;"></p:outputLabel>
+
+
+											<p:panelGrid></p:panelGrid>
+											<p:panelGrid></p:panelGrid>
+											<p:panelGrid></p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Permit No." for="permitNoId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="permitNoId"
+													value="#{inquiryDetails.permitRenewalsDTO.permitNo}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="Vehicle No." for="vehicleNoId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="vehicleNoId"
+													value="#{inquiryDetails.permitRenewalsDTO.regNoOfBus}"></p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Title" for="titleId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="titleId"
+													value="#{inquiryDetails.permitRenewalsDTO.titleDescription}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="Gender" for="genderId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="genderId"
+													value="#{inquiryDetails.permitRenewalsDTO.genderDescription}"></p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Date of Birth" for="dobId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="dobId" value="#{inquiryDetails.permitRenewalsDTO.dob}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="NIC/Org.Reg. No." for="nicId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="nicId" value="#{inquiryDetails.permitRenewalsDTO.nic}"></p:inputText>
+											</p:panelGrid>
+
+										</p:panelGrid>
+
+										<p:panelGrid columns="2"
+											columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+											<p:panelGrid>
+												<p:outputLabel value="Owner Name" for="ownerNameId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="ownerNameId"
+													value="#{inquiryDetails.permitRenewalsDTO.fullName}"></p:inputText>
+											</p:panelGrid>
+										</p:panelGrid>
+
+										<p:panelGrid columns="4"
+											style="margin-top: 1%;margin-bottom:1%"
+											columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+											layout="grid">
+											<p:outputLabel value="Address in" style="font-weight: bold;"></p:outputLabel>
+											<p:outputLabel value="Address Line 1"
+												style="font-weight: bold;"></p:outputLabel>
+											<p:outputLabel value="Address Line 2"
+												style="font-weight: bold;"></p:outputLabel>
+											<p:outputLabel value="City" style="font-weight: bold;"></p:outputLabel>
+											<p:panelGrid>
+												<p:outputLabel value="English"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="addOneId"
+													value="#{inquiryDetails.permitRenewalsDTO.addressOne}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="addTwoId"
+													value="#{inquiryDetails.permitRenewalsDTO.addressTwo}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="cityId"
+													value="#{inquiryDetails.permitRenewalsDTO.city}"></p:inputText>
+											</p:panelGrid>
+
+
+
+
+											<p:panelGrid>
+												<p:outputLabel value="Mobile No." for="mobileNoId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="mobileNoId"
+													value="#{inquiryDetails.permitRenewalsDTO.mobileNo}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid></p:panelGrid>
+											<p:panelGrid></p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Province" for="provinceId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="provinceId"
+													value="#{inquiryDetails.permitRenewalsDTO.provinceDescription}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="Application No." for="appNoId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="appNoId"
+													value="#{inquiryDetails.permitRenewalsDTO.applicationNo}"></p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Districe" for="districtId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="districtId"
+													value="#{inquiryDetails.permitRenewalsDTO.districtDescription}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="New Permit No." for="newPermitNoId"
+													rendered="#{inquiryDetails.showNewPermitNoField}"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="newPermitNoId"
+													rendered="#{inquiryDetails.showNewPermitNoField}"
+													value="#{inquiryDetails.permitRenewalsDTO.newPermitNo}"></p:inputText>
+											</p:panelGrid>
+
+
+											<p:panelGrid>
+												<p:outputLabel value="Divisional Secretariat Division"
+													for="divsionalId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="divsionalId"
+													value="#{inquiryDetails.permitRenewalsDTO.divisionSectionDescription}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="Status" for="statusId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="statusId"
+													value="#{inquiryDetails.permitRenewalsDTO.statusDes}"></p:inputText>
+											</p:panelGrid>
+
+										</p:panelGrid>
+
+										<center>
+											<p:commandButton styleClass="mainActionbtn"
+												value="Power of Attorney"
+												action="#{inquiryDetails.powerOfAttorneyAction}"
+												style="width:20%;height:18px;"
+												disabled="#{inquiryDetails.disableAttorneyHolderBtn}"
+												id="cmdbtnPoA" process="@form" update="@form"></p:commandButton>
+										</center>
+									</p:panel>
+
+									<p:panel>
+										<p:panelGrid id="activePermitPanel" columns="4"
+											columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+											layout="grid">
+											<p:outputLabel value="Current Permit Details"
+												style="color:#07295b;font-style: italic;font-weight: bold;"></p:outputLabel>
+
+
+											<p:panelGrid></p:panelGrid>
+											<p:panelGrid></p:panelGrid>
+											<p:panelGrid></p:panelGrid>
+
+
+											<p:panelGrid>
+												<p:outputLabel value="Route No." for="routeNoId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="routeNoId"
+													value="#{inquiryDetails.permitRenewalsDTO.routeNo}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="Place of Origin of the Service"
+													for="originId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="originId"
+													value="#{inquiryDetails.permitRenewalsDTO.placeOfOrginOfTheService}"></p:inputText>
+											</p:panelGrid>
+
+
+											<p:panelGrid>
+												<p:outputLabel value="Service Type" for="serviceTypeId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="serviceTypeId"
+													value="#{inquiryDetails.permitRenewalsDTO.serviceTypeDescription}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="Via" for="viaId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="viaId" value="#{inquiryDetails.permitRenewalsDTO.via}"></p:inputText>
+											</p:panelGrid>
+
+
+											<p:panelGrid>
+												<p:outputLabel value="Service Start Date" for="startDateId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="startDateId"
+													value="#{inquiryDetails.permitRenewalsDTO.fromToDate}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="Place of Destination"
+													for="destinationId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="destinationId"
+													value="#{inquiryDetails.permitRenewalsDTO.placeOfDestination}"></p:inputText>
+											</p:panelGrid>
+
+
+											<p:panelGrid>
+												<p:outputLabel value="Permit Expire Date" for="expiryDateId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="expiryDateId"
+													value="#{inquiryDetails.permitRenewalsDTO.permitExpiryDate}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid></p:panelGrid>
+											<p:panelGrid></p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Tender Fee (Y/N)" for="tenderPermitId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="tenderPermitId"
+													value="#{inquiryDetails.permitRenewalsDTO.tenderFeeValidValue}"></p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:outputLabel value="Annual Tender Payment Rs."
+													for="tenderPayId"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText style="width:100%;height:18px;" readonly="true"
+													id="tenderPayId"
+													value="#{inquiryDetails.permitRenewalsDTO.tenderAnualFee}"></p:inputText>
+											</p:panelGrid>
+											
+										</p:panelGrid>
+									</p:panel>
+								</p:tab>
+								
+								<p:tab title="History of Permit/ Vehicle No." id="tabTwoId"
+									activeIndex="#{inquiryDetails.activeTabIndex}">
+
+									<p:panel>
+										<center>
+
+
+											<p:dataTable id="permitHistoryTable" var="permitHistoryTable"
+												rows="5" paginator="true" value="#{inquiryDetails.dataList}"
+												selection="#{inquiryDetails.selectPemrmitHisDTO}"
+												selectionMode="single"
+												rowKey="#{permitHistoryTable.applicationNo}"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="10,20" resizableColumns="false"
+												liveResize="true" tableStyle="width:auto"
+												rowIndexVar="index" styleClass="myTable"
+												emptyMessage="No Records are available.">
+
+												<p:ajax event="rowSelect"
+													listener="#{inquiryDetails.selectPermitHistoryRow}"
+													update="@form" process="@form" />
+
+												<p:column headerText="" visible="false"
+													style="text-align:left;width:8%">
+													<h:outputText value="" />
+												</p:column>
+
+												<p:column headerText="Permit No."
+													style="text-align:left;width:16%">
+													<h:outputText value="#{permitHistoryTable.permitNo}" />
+												</p:column>
+
+
+
+												<p:column headerText="Vehicle No."
+													style="text-align:left;width:16%">
+													<h:outputText value="#{permitHistoryTable.regNoOfBus}" />
+												</p:column>
+
+												<p:column headerText="Application No."
+													style="text-align:left;width:8%">
+													<h:outputText value="#{permitHistoryTable.applicationNo}" />
+												</p:column>
+
+												<p:column headerText="Route No."
+													style="text-align:left;width:8%">
+													<h:outputText value="#{permitHistoryTable.routeNo}" />
+												</p:column>
+												<p:column headerText="Origin"
+													style="text-align:left;width:8%">
+													<h:outputText
+														value="#{permitHistoryTable.placeOfOrginOfTheService}" />
+												</p:column>
+
+												<p:column headerText="Via" style="text-align:left;width:19%">
+													<h:outputText value="#{permitHistoryTable.via}" />
+												</p:column>
+
+												<p:column headerText="Destination"
+													style="text-align:left;width:8%">
+													<h:outputText
+														value="#{permitHistoryTable.placeOfDestination}" />
+												</p:column>
+
+												<p:column headerText="Owner Name"
+													style="text-align:left;width:8%">
+													<h:outputText value="#{permitHistoryTable.fullName}" />
+												</p:column>
+
+												<p:column headerText="Service Type"
+													style="text-align:left;width:8%">
+													<h:outputText
+														value="#{permitHistoryTable.serviceTypeDescription}" />
+												</p:column>
+
+												<p:column headerText="First Permit Issued Date"
+													style="text-align:left;width:8%">
+													<h:outputText value="#{permitHistoryTable.validFromDate}" />
+												</p:column>
+
+												<p:column headerText="Permit Expiry Date"
+													style="text-align:left;width:8%">
+													<h:outputText
+														value="#{permitHistoryTable.permitExpiryDate}" />
+												</p:column>
+
+												<p:column headerText="Status"
+													style="text-align:left;width:12%">
+													<h:outputText value="#{permitHistoryTable.statusDes}" />
+												</p:column>
+
+												<p:column headerText="Remarks"
+													style="text-align:left;width:12%">
+													<h:outputText value="#{permitHistoryTable.specialRemark}" />
+												</p:column>
+
+											</p:dataTable>
+										</center>
+
+									</p:panel>
+
+									<p:panel id="btnPanelOne">
+
+										<center>
+											<p:commandButton value="Inspection" class="mainActionbtn"
+												style="width:12%; margin-left:1%"
+												update="@form,permitHistoryTable,btnPanelOne,vehicleInspectionViewModeId,frmvehicleInspectionViewModeId"
+												action="#{inquiryDetails.viewVehicleInspectionAct}"
+												disabled="#{inquiryDetails.disableButton}">
+
+											</p:commandButton>
+											<p:commandButton value="Issue New Permit"
+												class="mainActionbtn"
+												update="@form,permitHistoryTable,btnPanelOne"
+												action="#{inquiryDetails.viewIssueNewPermit}"
+												style="width:15%; margin-left:1%"
+												disabled="#{inquiryDetails.disableButton}">
+											</p:commandButton>
+											<p:commandButton value="Permit Renewal" class="mainActionbtn"
+												update="@form,permitHistoryTable,btnPanelOne"
+												rendered="#{inquiryDetails.showPermitRenewalBtn}"
+												action="#{inquiryDetails.viewPermitRenewal}"
+												disabled="#{inquiryDetails.disableButton}"
+												style="width:13%; margin-left:1%">
+											</p:commandButton>
+
+											<p:commandButton value="Amendments" class="mainActionbtn"
+												update="@form,permitHistoryTable,btnPanelOne"
+												rendered="#{inquiryDetails.showAmendmentsBtn}"
+												action="#{inquiryDetails.viewAmendments}"
+												disabled="#{inquiryDetails.disableButton}"
+												style="width:12%; margin-left:1%">
+											</p:commandButton>
+
+											<p:commandButton value="Payments" class="mainActionbtn"
+												update="@form,permitHistoryTable,btnPanelOne,frmPaymentVoucher"
+												action="#{inquiryDetails.viewPayments}"
+												disabled="#{inquiryDetails.disableButton}"
+												style="width:12%; margin-left:1%">
+											</p:commandButton>
+
+											<p:commandButton value="History" class="mainActionbtn"
+												action="#{inquiryDetails.viewHistory}"
+												update="@form,permitHistoryTable,btnPanelOne,frmhistorydialog"
+												disabled="#{inquiryDetails.disableButton}"
+												style="width:10%; margin-left:1%">
+											</p:commandButton>
+
+											<p:commandButton value="Old History" class="mainActionbtn"
+												action="#{inquiryDetails.viewOldHistory}"
+												update="@form,frmoldhistorydialog" disabled="false"
+												style="width:13%; margin-left:1%">
+											</p:commandButton>
+
+											<p:commandButton value="View Bus Fare" class="mainActionbtn"
+												action="#{fareTableApprovalBackingBean.viewInquery()}"
+												update="@form,frmoldhistorydialog,frmfarerate"
+												disabled="false" style="width:13%; margin-left:1%">
+											</p:commandButton>
+
+										</center>
+
+									</p:panel>
+
+								</p:tab>
+								
+							</p:tabView>
+						</h:form>
+					</p:tab>
+					
+					<!-- Tab 02 -->
+					<p:tab id="tab-subsidyInquiry" title="Subsidy Inquiry">
+						<h:form id="frmSubsidyInquiry">
+							<p:panel>
+
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Bus No."></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="siBusNo" tabindex="1" style="width:89%; "
+											disabled="false"
+											value="#{inquiryDetails.subsidyDTO.busRegNo}" effect="fold"
+											filter="true" filterMatchMode="contains">
+											<p:ajax listener="#{inquiryDetails.onSubsidyBusNoChange}"
+												update="siRequestNo,siOperatorNameDepo,siReferenceNo,siServiceNo" />
+											<f:selectItem itemLabel="--Select Bus No.--" itemValue="" />
+											<f:selectItems value="#{inquiryDetails.busNoList}"
+												var="vehicleNoList" itemValue="#{vehicleNoList.busRegNo}"
+												itemLabel="#{vehicleNoList.busRegNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Request No."></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="siRequestNo" tabindex="2"
+											style="width:89%; " disabled="false"
+											value="#{inquiryDetails.subsidyDTO.requestNo}" effect="fold"
+											filter="true" filterMatchMode="contains">
+											<p:ajax
+												listener="#{inquiryDetails.onSubsidyonRequestNoChangeoChange}"
+												update="siBusNo,siOperatorNameDepo,siReferenceNo,siServiceNo" />
+											<f:selectItem itemLabel="--Select Request No.--" itemValue="" />
+											<f:selectItems value="#{inquiryDetails.requestNoList}"
+												var="p" itemValue="#{p.requestNo}"
+												itemLabel="#{p.requestNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Operator Name/Depo"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="siOperatorNameDepo" tabindex="3"
+											style="width:89%; " disabled="false"
+											value="#{inquiryDetails.subsidyDTO.nameOfOperator}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											<p:ajax
+												listener="#{inquiryDetails.onSubsidyOperatorNameDepoChange}"
+												update="siBusNo,siRequestNo,siReferenceNo,siServiceNo" />
+											<f:selectItem itemLabel="--Select Operator Name/Depo--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.operatorDepoNameList}"
+												var="p" itemValue="#{p.nameOfOperator}"
+												itemLabel="#{p.nameOfOperator}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Reference No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="siReferenceNo" tabindex="4"
+											style="width:89%; " disabled="false"
+											value="#{inquiryDetails.subsidyDTO.serviceRefNo}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											<p:ajax
+												listener="#{inquiryDetails.onSubsidyReferenceNoChange}"
+												update="siBusNo,siRequestNo,siOperatorNameDepo,siServiceNo" />
+											<f:selectItem itemLabel="--Select Reference No.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.serviceRefNoList}"
+												var="p" itemValue="#{p.serviceRefNo}"
+												itemLabel="#{p.serviceRefNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Service No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="siServiceNo" tabindex="5"
+											style="width:89%; " disabled="false"
+											value="#{inquiryDetails.subsidyDTO.serviceNo}" effect="fold"
+											filter="true" filterMatchMode="contains">
+											<p:ajax listener="#{inquiryDetails.onSubsidyServiceNoChange}"
+												update="siBusNo,siRequestNo,siOperatorNameDepo,siReferenceNo" />
+											<f:selectItem itemLabel="--Select Service No.--" itemValue="" />
+											<f:selectItems value="#{inquiryDetails.serviceNoList}"
+												var="p" itemValue="#{p.serviceNo}"
+												itemLabel="#{p.serviceNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+								</p:panelGrid>
+							</p:panel>
+							
+							<br></br>
+							<center>
+
+								<p:commandButton value="Search"
+									action="#{inquiryDetails.searchSisuSariya}" update="@form"
+									class="mainActionbtn"></p:commandButton>
+
+								<p:commandButton value="Clear" update="@form"
+									action="#{inquiryDetails.clearSisuSearch}"
+									class="mainActionbtn"></p:commandButton>
+							</center>
+							<br></br>
+
+							<p:panel rendered="#{inquiryDetails.showSisuSearchResultsPanel}"
+								style="padding-left:0 !important; padding-right:0 !important;">
+								<center>
+
+									<p:dataTable id="subsidyInquiryTable" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.sisuDataList}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+
+										<p:column headerText="Request No."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.requestNo}" />
+										</p:column>
+
+										<p:column headerText="Reference No."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.serviceRefNo}" />
+										</p:column>
+
+										<p:column headerText="Srevice No."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.serviceNo}" />
+										</p:column>
+
+										<p:column headerText="Bus No."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.busRegNo}" />
+										</p:column>
+
+										<p:column headerText="Operator / Depo Name"
+											style="text-align:left;width:100px;">
+											<h:outputText value="#{record.nameOfOperator}" />
+										</p:column>
+
+										<p:column headerText="Task Code"
+											style="text-align:left;width:70px;">
+											<h:outputText value="#{record.taskCode}" />
+										</p:column>
+
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.taskDescription}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.taskStatusDescription}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDateTimeStr}" />
+										</p:column>
+
+										<p:column headerText="Remarks"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.remark}" />
+										</p:column>
+									</p:dataTable>
+								</center>
+
+							</p:panel>
+						</h:form>
+					</p:tab>	
+					
+					
+					<!-- Tab 03 -->
+					<p:tab id="tab-investigationInquiry" title="Investigation Inquiry">
+						<h:form id="frmInvestigationInquiry">
+							<p:panel>
+
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+									layout="grid">
+									
+									<p:panelGrid>
+										<p:outputLabel value="Reference No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="inReferenceNo" tabindex="4"
+											style="width:89%; " disabled="#{inquiryDetails.disableDropRef}"
+											value="#{inquiryDetails.manageInvestigationDTO.invReferenceNo}"
+											effect="fold" filter="true" filterMatchMode="contains" >
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDown}"
+												update="inoffenceNo,inBusNo,inPermitNo"></p:ajax>
+											
+											<f:selectItem itemLabel="--Select Reference No.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.investigationRefNoList}"
+												var="p" itemValue="#{p.invReferenceNo}"
+												itemLabel="#{p.invReferenceNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="Offence Name."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="inoffenceNo" tabindex="4"
+											style="width:89%; " disabled="#{inquiryDetails.disableDropOff}"
+											value="#{inquiryDetails.manageInvestigationDTO.offenceName}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDown}"
+												update="inReferenceNo,inBusNo,inPermitNo"></p:ajax>
+											
+											<f:selectItem itemLabel="--Select Offence Name.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.investigationOffNameList}"
+												var="p" itemValue="#{p.offenceName}"
+												itemLabel="#{p.offenceName}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="Bus No."></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="inBusNo" tabindex="1" style="width:89%; "
+											disabled="#{inquiryDetails.disableDropRef}"
+											value="#{inquiryDetails.manageInvestigationDTO.vehicleNo}" effect="fold"
+											filter="true" filterMatchMode="contains">
+											
+											<f:selectItem itemLabel="--Select Bus No.--" itemValue="" />
+											<f:selectItems value="#{inquiryDetails.investigationBusNoList}"
+												var="vehicleNoList" itemValue="#{vehicleNoList.vehicleNo}"
+												itemLabel="#{vehicleNoList.vehicleNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="Permit No."></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="inPermitNo" tabindex="1" style="width:89%; "
+											disabled="#{inquiryDetails.disableDropRef}"
+											value="#{inquiryDetails.manageInvestigationDTO.permitNo}" effect="fold"
+											filter="true" filterMatchMode="contains">
+											
+											<f:selectItem itemLabel="--Select Permit No.--" itemValue="" />
+											<f:selectItems value="#{inquiryDetails.investigationPermitNoList}"
+												var="vehicleNoList" itemValue="#{vehicleNoList.permitNo}"
+												itemLabel="#{vehicleNoList.permitNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+		
+								</p:panelGrid>
+							</p:panel>
+							<br></br>
+							<center>
+
+								<p:commandButton value="Search"
+									action="#{inquiryDetails.searchInvestigation}" update="@form"
+									class="mainActionbtn"></p:commandButton>
+
+								<p:commandButton value="Clear" 
+								update="@form"
+									action="#{inquiryDetails.clearInvestigationSearch}"
+									class="mainActionbtn"></p:commandButton>
+							</center>
+							<br></br>
+							
+							<p:panel rendered="#{inquiryDetails.showSisuSearchResultsPanel}"
+								style="padding-left:0 !important; padding-right:0 !important;" id="first">
+								<center>
+									<p:dataTable id="investInquiryTable" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.investigationDataListForRefNo}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+
+
+										<p:column headerText="Reference No."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.invReferenceNo}" />
+										</p:column>
+										
+										<p:column headerText="Bus No."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.vehicleNo}" />
+										</p:column>
+
+										<p:column headerText="Permit No."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.permitNo}" />
+										</p:column>
+
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.departmentType}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.actionDesc}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDate}" />
+										</p:column>
+	
+									</p:dataTable>
+								</center>
+							</p:panel>	
+							
+							<p:panel rendered="#{inquiryDetails.showInvTable}"
+								style="padding-left:0 !important; padding-right:0 !important;" id="second" >
+								<center>
+									<p:dataTable id="investInquiryTableOffence" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.investigationDataListForOffenceName}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+										
+										<p:column headerText="Offence Name."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.offenceName}" />
+										</p:column>
+
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.departmentType}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.actionDesc}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDate}" />
+										</p:column>
+
+										
+									</p:dataTable>
+								</center>
+							</p:panel>	
+								
+							
+						</h:form>
+					</p:tab>
+					
+					<!-- Tab 4 -->	
+					<p:tab id="tab-grievanceInquiry" title="Grievances Inquiry">
+						<h:form id="frmGrievanceInquiry">
+							<p:panel>
+
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+									layout="grid">
+									
+									<p:panelGrid>
+										<p:outputLabel value="Complaint No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="grComNo" tabindex="4"
+											style="width:89%; " disabled="false"
+											value="#{inquiryDetails.commonInquiryDTO.complaintNo}"
+											effect="fold" filter="true" filterMatchMode="contains" >
+											
+											<f:selectItem itemLabel="--Select Complaint No.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.grievanceComplaintNoList}"
+												var="p" itemValue="#{p.complaintNo}"
+												itemLabel="#{p.complaintNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="Bus No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="grBusNo" tabindex="4"
+											style="width:89%; " disabled="false"
+											value="#{inquiryDetails.commonInquiryDTO.busNo}"
+											effect="fold" filter="true" filterMatchMode="contains" >
+											
+											<f:selectItem itemLabel="--Select Bus No.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.grievanceBusNoList}"
+												var="p" itemValue="#{p.busNo}"
+												itemLabel="#{p.busNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="Permit No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="grPermitNo" tabindex="4"
+											style="width:89%; " disabled="false"
+											value="#{inquiryDetails.commonInquiryDTO.permitNo}"
+											effect="fold" filter="true" filterMatchMode="contains" >
+											
+											<f:selectItem itemLabel="--Select Permit No.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.grievancePermitNoList}"
+												var="p" itemValue="#{p.permitNo}"
+												itemLabel="#{p.permitNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+								</p:panelGrid>
+							</p:panel>	
+							<br></br>
+							<center>
+
+								<p:commandButton value="Search"
+									action="#{inquiryDetails.searchGrievance}" update="@form"
+									class="mainActionbtn"></p:commandButton>
+
+								<p:commandButton value="Clear" 
+								update="@form"
+									action="#{inquiryDetails.clearGrievanceSearch}"
+									class="mainActionbtn"></p:commandButton>
+							</center>
+							<br></br>
+							
+							<p:panel rendered="#{inquiryDetails.showSisuSearchResultsPanel}"
+								style="padding-left:0 !important; padding-right:0 !important;">
+								<center>
+									<p:dataTable id="grievanceInquiryTable" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.grievanceDataList}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+
+
+										<p:column headerText="Complaint No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.complaintNo}" />
+										</p:column>
+										
+										<p:column headerText="Bus No."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.busNo}" />
+										</p:column>
+
+										<p:column headerText="Permit No."
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.permitNo}" />
+										</p:column>
+
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.functionDes}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.statusDes}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDate}" />
+										</p:column>
+	
+									</p:dataTable>
+								</center>
+							</p:panel>	
+						
+						</h:form>
+					</p:tab>
+					
+					
+					<!-- Tab 5 -->	
+					<p:tab id="tab-driverConInquiry" title="Driver Conductor Inquiry">
+						<h:form id="frmDriverConInquiry">
+							<p:panel>
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Application No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="dcAppNo" tabindex="4" style="width:89%; "
+											disabled="#{inquiryDetails.disableDCDrop}"
+											value="#{inquiryDetails.commonInquiryDTO.appNo}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDownDC}"
+												update="dateOftraining"></p:ajax>
+
+											<f:selectItem itemLabel="--Select Application No.--"
+												itemValue="" />
+											<f:selectItems
+												value="#{inquiryDetails.driConApplicationDataList}" var="p"
+												itemValue="#{p.appNo}" itemLabel="#{p.appNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="NIC No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="dcNICNo" tabindex="4" style="width:89%; "
+											disabled="#{inquiryDetails.disableDCDrop}"
+											value="#{inquiryDetails.commonInquiryDTO.nicNo}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDownDC}"
+												update="dateOftraining"></p:ajax>
+
+											<f:selectItem itemLabel="--Select NIC No.--"
+												itemValue="" />
+											<f:selectItems
+												value="#{inquiryDetails.driConNICDataList}" var="p"
+												itemValue="#{p.nicNo}" itemLabel="#{p.nicNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="Driver/Conductor ID."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="dcDCNo" tabindex="4" style="width:89%; "
+											disabled="#{inquiryDetails.disableDCDrop}"
+											value="#{inquiryDetails.commonInquiryDTO.driverConductorId}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDownDC}"
+												update="dateOftraining"></p:ajax>
+
+											<f:selectItem itemLabel="--Select ID.--"
+												itemValue="" />
+											<f:selectItems
+												value="#{inquiryDetails.driConIdDataList}" var="p"
+												itemValue="#{p.driverConductorId}" itemLabel="#{p.driverConductorId}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="Bus No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="dcBusNo" tabindex="4" style="width:89%; "
+											disabled="#{inquiryDetails.disableDCDrop}"
+											value="#{inquiryDetails.commonInquiryDTO.busNo}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDownDC}"
+												update="dateOftraining"></p:ajax>
+
+											<f:selectItem itemLabel="--Select Bus No.--"
+												itemValue="" />
+											<f:selectItems
+												value="#{inquiryDetails.driConBusNoList}" var="p"
+												itemValue="#{p.busNo}" itemLabel="#{p.busNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Schedule Training Date"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:calendar id="dateOftraining" tabindex="21"
+											value="#{inquiryDetails.commonInquiryDTO.sheduleDate}"
+											style="width:40px;height:18px;" navigator="true"
+											locale="en_US" showOn="button" pattern="yyyy/MM/dd"
+											placeholder="YYYY/MM/DD" yearRange="c-100:c+100"
+											readonlyInput="true"
+											disabled="#{inquiryDetails.disableDCCal}">
+										
+										</p:calendar>
+									</p:panelGrid>
+								</p:panelGrid>							
+							</p:panel>
+							<br></br>
+							<center>
+
+								<p:commandButton value="Search"
+									action="#{inquiryDetails.searchDriverConductor}" update="@form"
+									class="mainActionbtn"></p:commandButton>
+
+								<p:commandButton value="Clear" 
+								update="@form"
+									action="#{inquiryDetails.clearDriverConductorSearch}"
+									class="mainActionbtn"></p:commandButton>
+							</center>
+							<br></br>
+							
+							<p:panel rendered="#{inquiryDetails.showSisuSearchResultsPanel}"
+								style="padding-left:0 !important; padding-right:0 !important;">
+								<center>
+								
+									<p:dataTable id="driverConductorInquiryTable" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.driConNICDCIDDataList}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+
+
+										<p:column headerText="Driver/Conductor No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.driverConductorId}" />
+										</p:column>
+										
+										<p:column headerText="NIC No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.nicNo}" />
+										</p:column>
+										
+										<p:column headerText="Application No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.appNo}" />
+										</p:column>
+										
+										<p:column headerText="Bus No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.busNo}" />
+										</p:column>
+										
+										<p:column headerText="Permit No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.permitNo}" />
+										</p:column>
+
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.functionDes}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.statusDes}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDate}" />
+										</p:column>
+	
+									</p:dataTable>
+								
+								</center>
+							</p:panel>	
+							
+							<p:panel rendered="#{inquiryDetails.showVouTable}"
+								style="padding-left:0 !important; padding-right:0 !important;">
+								<center>
+								
+									<p:dataTable id="driverConductorDateInquiryTable" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.driConDateDataList}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+
+
+										<p:column headerText="Schedule Training Date"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.sheduleDate}" />
+										</p:column>
+
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.functionDes}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.statusDes}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDate}" />
+										</p:column>
+	
+									</p:dataTable>
+								</center>
+							</p:panel>	
+						</h:form>
+					</p:tab>
+					
+					<!-- Tab 6 -->	
+					<p:tab id="tab-terminalInquiry" title="Terminal Inquiry">
+						<h:form id="frmTerminalInquiry">
+							<p:panel>
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+									layout="grid">
+									<p:panelGrid>
+										<p:outputLabel value="Terminal No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="trTerNo" tabindex="4"
+											style="width:89%; " disabled="#{inquiryDetails.disableDropOff}"
+											value="#{inquiryDetails.commonInquiryDTO.terminalId}"
+											effect="fold" filter="true" filterMatchMode="contains" >
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDown}"
+												update="trBusNo,trVouNo,trPayType"></p:ajax>
+											
+											<f:selectItem itemLabel="--Select Terminal No.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.terminalTerminalNoList}"
+												var="p" itemValue="#{p.terminalId}"
+												itemLabel="#{p.terminalId}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="Bus No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="trBusNo" tabindex="4"
+											style="width:89%; " disabled="#{inquiryDetails.disableDropBus}"
+											value="#{inquiryDetails.commonInquiryDTO.busNo}"
+											effect="fold" filter="true" filterMatchMode="contains" >
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDown}"
+												update="trVouNo,trTerNo"></p:ajax>
+											
+											
+											<f:selectItem itemLabel="--Select Bus No.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.terminalBusNoList}"
+												var="p" itemValue="#{p.busNo}"
+												itemLabel="#{p.busNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+								
+									<p:panelGrid>
+										<p:outputLabel value="Voucher No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="trVouNo" tabindex="4"
+											style="width:89%; " disabled="#{inquiryDetails.disableDropVou}"
+											value="#{inquiryDetails.commonInquiryDTO.voucherNo}"
+											effect="fold" filter="true" filterMatchMode="contains" >
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDown}"
+												update="trTerNo,trPayType,trBusNo"></p:ajax>
+											
+											<f:selectItem itemLabel="--Select Voucher No.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.terminalVoucherNoList}"
+												var="p" itemValue="#{p.voucherNo}"
+												itemLabel="#{p.voucherNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									
+									<p:panelGrid>
+										<p:outputLabel value="Payment Type."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="trPayType" tabindex="4"
+											style="width:89%; " disabled="#{inquiryDetails.disableDropBus}"
+											value="#{inquiryDetails.commonInquiryDTO.payType}"
+											effect="fold" filter="true" filterMatchMode="contains" >
+											
+											<p:ajax
+												listener="#{inquiryDetails.onSelectDropDown}"
+												update="trVouNo,trTerNo"></p:ajax>
+											
+											<f:selectItem itemLabel="--Select Payment Type.--"
+												itemValue="" />
+											<f:selectItems value="#{inquiryDetails.terminalPaymentTypeList}"
+												var="p" itemValue="#{p.payType}"
+												itemLabel="#{p.payType}" />
+										</p:selectOneMenu>
+									</p:panelGrid>	
+								</p:panelGrid>		
+							</p:panel>
+							<br></br>
+							<center>
+
+								<p:commandButton value="Search"
+									action="#{inquiryDetails.searchTerminal}" update="@form"
+									class="mainActionbtn"></p:commandButton>
+
+								<p:commandButton value="Clear" 
+								update="@form"
+									action="#{inquiryDetails.clearTerminalSearch}"
+									class="mainActionbtn"></p:commandButton>
+							</center>
+							<br></br>
+							
+							<p:panel rendered="#{inquiryDetails.showSisuSearchResultsPanel}"
+								style="padding-left:0 !important; padding-right:0 !important;">
+								<center>
+									<p:dataTable id="terminalInquiryTable" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.terminalTerminalDataList}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+
+
+										<p:column headerText="Terminal No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.terminalId}" />
+										</p:column>
+
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.functionDes}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.statusDes}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDate}" />
+										</p:column>
+	
+									</p:dataTable>
+								</center>
+							</p:panel>	
+							
+							<p:panel rendered="#{inquiryDetails.showVouTable}"
+								style="padding-left:0 !important; padding-right:0 !important;">
+								<center>
+									<p:dataTable id="terminalVouInquiryTable" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.terminalVoucherDataList}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+
+
+										<p:column headerText="Voucher No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.voucherNo}" />
+										</p:column>
+
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.functionDes}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.statusDes}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDate}" />
+										</p:column>
+	
+									</p:dataTable>
+								</center>
+							</p:panel>	
+						
+							<p:panel rendered="#{inquiryDetails.showPayTable}"
+								style="padding-left:0 !important; padding-right:0 !important;">
+								<center>
+									<p:dataTable id="terminalPayInquiryTable" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.terminalPayDataList}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+
+										<p:column headerText="Payment Type"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.payType}" />
+										</p:column>
+										
+										<p:column headerText="Bus No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.busNo}" />
+										</p:column>
+										
+										<p:column headerText="Permit No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.permitNo}" />
+										</p:column>
+
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.functionDes}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.statusDes}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDate}" />
+										</p:column>
+	
+									</p:dataTable>
+								</center>
+							</p:panel>	
+							
+							<p:panel rendered="#{inquiryDetails.showBusTable}"
+								style="padding-left:0 !important; padding-right:0 !important;">
+								<center>
+									<p:dataTable id="terminalBusInquiryTable" var="record" rows="10"
+										paginator="true" value="#{inquiryDetails.terminalBusDataList}"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20" resizableColumns="false"
+										liveResize="true" tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available.">
+
+										<p:column headerText="Bus No"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.busNo}" />
+										</p:column>
+										
+										<p:column headerText="Task Description"
+											style="text-align:left;width:130px;">
+											<h:outputText value="#{record.functionDes}" />
+										</p:column>
+
+										<p:column headerText="Status"
+											style="text-align:left;width:80px;">
+											<h:outputText value="#{record.statusDes}" />
+										</p:column>
+
+										<p:column headerText="Created By"
+											style="text-align:left;width:90px;">
+											<h:outputText value="#{record.createdBy}" />
+										</p:column>
+
+										<p:column headerText="Created Date and Time"
+											style="text-align:left;width:120px;">
+											<h:outputText value="#{record.createdDate}" />
+										</p:column>
+	
+									</p:dataTable>
+								</center>
+							</p:panel>	
+						
+						
+						
+						</h:form>
+					</p:tab>		
+					
+				</p:tabView>
+			</div>
+		</div>
+		
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{inquiryAdmin.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Info" width="30%" severity="info" widgetVar="successMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{inquiryAdmin.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Alert" width="30%" severity="info" widgetVar="alertMSG"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAlert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="#{inquiryAdmin.alertMSG}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmAlert" onclick="PF('alertMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{inquiryDetails.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="requiredFieldBusFare" global="true"
+			modal="true" header="Error" width="30%" severity="info"
+			widgetVar="requiredFieldFare" closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredFieldBusFare">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{fareTableApprovalBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredFieldBusFare" value="OK"
+						onclick="PF('requiredFieldFare').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="viewAttorneyHodlderId" global="true"
+			modal="true" width="70%" severity="info" closable="true"
+			widgetVar="viewAttorneyHodlderId" closeOnEscape="true"
+			resizable="false" header="Power of Attorney Holder - View">
+			<h:form id="frmAttorneyHolder">
+				<br></br>
+				<br></br>
+				<p:panelGrid id="activeOwnerPanel" columns="4"
+					columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+					layout="grid">
+					<p:panelGrid>
+						<p:outputLabel value="Title" for="titleId1"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="titleId1"
+							value="#{inquiryDetails.attorneyHolderDTO.titleDescription}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Gender" for="genderId1"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="genderId1"
+							value="#{inquiryDetails.attorneyHolderDTO.genderDescription}"></p:inputText>
+					</p:panelGrid>
+
+					<p:panelGrid>
+						<p:outputLabel value="Date of Birth" for="dobId1"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="dobId1" value="#{inquiryDetails.attorneyHolderDTO.dob}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="NIC/Org.Reg. No." for="nicId1"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="nicId1" value="#{inquiryDetails.attorneyHolderDTO.nic}"></p:inputText>
+					</p:panelGrid>
+				</p:panelGrid>
+				<p:panelGrid columns="2"
+					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+					<p:panelGrid>
+						<p:outputLabel value="Name in Full" for="ownerNameId1"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="ownerNameId1"
+							value="#{inquiryDetails.attorneyHolderDTO.fullName}"></p:inputText>
+					</p:panelGrid>
+
+					<p:panelGrid>
+						<p:outputLabel value="Name in Full"></p:outputLabel>
+						<div>
+							<b>(Sinhala)</b>
+						</div>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="ownerNameIdSin"
+							value="#{inquiryDetails.attorneyHolderDTO.fullNameSinhala}"></p:inputText>
+					</p:panelGrid>
+
+					<p:panelGrid>
+						<p:outputLabel value="Name in Full"></p:outputLabel>
+						<div>
+							<b>(Tamil)</b>
+						</div>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="ownerNameIdTam"
+							value="#{inquiryDetails.attorneyHolderDTO.fullNameTamil}"></p:inputText>
+					</p:panelGrid>
+
+					<p:panelGrid>
+						<p:outputLabel
+							value="#{msg['common.backlog.tbbusownerinfo.namewithinitials']}"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="ownerNameIdIntials"
+							value="#{inquiryDetails.attorneyHolderDTO.nameWithInitials}"></p:inputText>
+					</p:panelGrid>
+				</p:panelGrid>
+				<p:panelGrid columns="4" style="margin-top: 1%;margin-bottom:1%"
+					columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+					layout="grid">
+					<p:outputLabel value="Address in" style="font-weight: bold;"></p:outputLabel>
+					<p:outputLabel value="Address Line 1" style="font-weight: bold;"></p:outputLabel>
+					<p:outputLabel value="Address Line 2" style="font-weight: bold;"></p:outputLabel>
+					<p:outputLabel value="City" style="font-weight: bold;"></p:outputLabel>
+
+					<p:panelGrid>
+						<p:outputLabel value="English"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="add1Eng"
+							value="#{inquiryDetails.attorneyHolderDTO.addressOne}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="add2Eng"
+							value="#{inquiryDetails.attorneyHolderDTO.addressTwo}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="cityEng" value="#{inquiryDetails.attorneyHolderDTO.city}"></p:inputText>
+					</p:panelGrid>
+
+					<p:panelGrid>
+						<p:outputLabel value="Sinhala"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="add1Sin"
+							value="#{inquiryDetails.attorneyHolderDTO.addressOneSinhala}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="add2Sin"
+							value="#{inquiryDetails.attorneyHolderDTO.addressTwoSinhala}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="citySin"
+							value="#{inquiryDetails.attorneyHolderDTO.citySinhala}"></p:inputText>
+					</p:panelGrid>
+
+					<p:panelGrid>
+						<p:outputLabel value="Tamil"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="add1Tam"
+							value="#{inquiryDetails.attorneyHolderDTO.addressOneTamil}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="add2Tam"
+							value="#{inquiryDetails.attorneyHolderDTO.addressTwoTamil}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="cityTam"
+							value="#{inquiryDetails.attorneyHolderDTO.cityTamil}"></p:inputText>
+					</p:panelGrid>
+				</p:panelGrid>
+				<p:panelGrid columns="4"
+					columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-3,ui-grid-col-3"
+					layout="grid">
+
+					<p:panelGrid>
+						<p:outputLabel value="Attorney Holder Start Date"
+							for="attStartDateId"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="attStartDateId"
+							value="#{inquiryDetails.attorneyHolderDTO.attorneyHolderStartDate}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Attorney Holder End Date" for="attEndDateId"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="attEndDateId"
+							value="#{inquiryDetails.attorneyHolderDTO.attorneyHolderEndDate}"></p:inputText>
+					</p:panelGrid>
+
+					<p:panelGrid>
+						<p:outputLabel value="Telephone No." for="telId"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="telId" value="#{inquiryDetails.attorneyHolderDTO.teleNo}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+
+					<p:panelGrid>
+						<p:outputLabel value="Mobile No." for="mobileNoId1"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="mobileNoId1"
+							value="#{inquiryDetails.attorneyHolderDTO.mobileNo}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Status" for="statusId1"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:100%;height:18px;" readonly="true"
+							id="statusId1"
+							value="#{inquiryDetails.attorneyHolderDTO.statusDes}"></p:inputText>
+					</p:panelGrid>
+
+
+
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="vehicleInspectionViewModeId" global="true"
+			modal="true" header="Vehicle Inspection" width="80%" height="500px"
+			severity="info" widgetVar="vehicleInspectionViewModeId"
+			closeOnEscape="true" resizable="false" style="postion: absolute;">
+			<h:form id="frmvehicleInspectionViewModeId">
+
+
+				<p:tabView id="tabviewId">
+					<p:tab title="View Vehicle Inspection" id="tbEmpDet"
+						rendered="#{employeeProfileBackingBean.boolEmpDet}">
+
+						<h:form id="field">
+							<div style="overflow: scroll">
+								<p:panel>
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+
+
+										<p:panelGrid>
+											<p:outputLabel value="Permit No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="permitno" style="width:90%"
+												value="#{inquiryDetails.vehicleDTO.permitNo}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:outputLabel value="Queue No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText value="#{inquiryDetails.vehicleDTO.queueNo}"
+												id="queue" style="width:90%" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Vehicle No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="vehicle" style="width:90%"
+												value="#{inquiryDetails.vehicleDTO.vehicleNo}"
+												readonly="true"></p:inputText>
+										</p:panelGrid>
+										<p:panelGrid></p:panelGrid>
+										<p:panelGrid></p:panelGrid>
+
+									</p:panelGrid>
+								</p:panel>
+
+								<br> </br>
+
+
+								<div style="width: 90%;" class="subDiv">
+									<p:panelGrid columns="2" id="bla2"
+										columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+
+										<p:panelGrid>
+											<p:outputLabel value="Permit Owner Name"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText value="#{inquiryDetails.vehicleDTO.permitOwner}"
+												id="ownername" style="width:100%" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="NIC / Registration No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="nic" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.nicreg}" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Make"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="Make" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.make}" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Model"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="Model" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.model}" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Route No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="routeno" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.routeNo}" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbpermitinfo.origin']}"></p:outputLabel>
+										<p:inputText style="width:80%;height:18px;" id="txtOrigin"
+											value="#{inquiryDetails.issuePermitDTO.origin}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel
+											value="#{msg['common.backlog.tbpermitinfo.destination']}"></p:outputLabel>
+										<p:inputText style="width:80%;height:18px;"
+											id="txtDestination"
+											value="#{inquiryDetails.issuePermitDTO.destination}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel
+											value="#{msg['common.backlog.tbpermitinfo.via']}"></p:outputLabel>
+										<p:panelGrid>
+											<p:inputTextarea style="width:80%;height:18px;" id="txtVia"
+												readonly="true" rows="3"
+												value="#{inquiryDetails.issuePermitDTO.via}"
+												onkeyup="this.value=this.value.toUpperCase();">
+											</p:inputTextarea>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Route Details"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="route" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.routeDetails}"
+												readonly="true"></p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Manufacture Year"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="Man" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.productDate}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Service Type"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="service" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.serviceType}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Chassis No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="chass" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.chassisNo}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Application No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="application" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.applicationNo}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+									</p:panelGrid>
+
+
+									<p:dataTable id="abc" var="vehicle"
+										value="#{inquiryDetails.dataListViewInspection}"
+										style="width:100%" rows="10" paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20">
+										<p:column headerText="#" style="text-align:left;width:8%">
+											<h:outputText value="#{vehicle.actionPointSeqNo}" />
+										</p:column>
+
+										<p:column headerText="Section"
+											style="text-align:left;width:10%">
+											<h:outputText value="#{vehicle.section}" />
+										</p:column>
+
+										<p:column headerText="Description"
+											style="text-align:left;width:20%">
+											<h:outputText value="#{vehicle.description}" />
+										</p:column>
+
+										<p:column headerText="Remark"
+											style="text-align:left;width:20%">
+											<h:outputText value="#{vehicle.remark}" />
+										</p:column>
+
+
+										<p:column headerText="Exists"
+											style="text-align:left;width:10%">
+
+											<p:selectBooleanCheckbox value="#{vehicle.exists}"
+												disabled="true" />
+										</p:column>
+									</p:dataTable>
+
+									<br></br>
+								</div>
+								<center>
+									<div style="width: 90%;" class="subDiv">
+										<p:panelGrid columns="2"
+											columnClasses="ui-grid-col-6,ui-grid-col-4," layout="grid"
+											id="footerDiv">
+
+
+											<p:panelGrid>
+												<h:outputText
+													value="If any issue in the Inspection Report on section 1 and 2 require correct
+			and next inspection date on or before">
+												</h:outputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:inputText id="cal1"
+													value="#{inquiryDetails.vehicleDTO.date1}" readonly="true"
+													style="width:70%" />
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<h:outputText
+													value="If any issue in the Inspection Report on section 3 require correct
+			and next inspection date on or before">
+
+												</h:outputText>
+												<br> </br>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="cal2"
+													value="#{inquiryDetails.vehicleDTO.date2}" readonly="true"
+													style="width:70%" />
+											</p:panelGrid>
+											<p:panelGrid>
+												<h:outputText value="Types of Inspection">
+												</h:outputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="typeInspection" style="width:100%;"
+													readonly="true"
+													value="#{inquiryDetails.vehicleDTO.inspectionTypeDes}">
+												</p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<h:outputText value="Inspection Status">
+												</h:outputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu id="insStatus" style="width:95%"
+													disabled="true"
+													value="#{inquiryDetails.vehicleDTO.inspectionStatusCode}">
+													<f:selectItem itemLabel="--Select Inspection Status--"
+														itemValue="" noSelectionOption="true" />
+													<f:selectItem itemLabel="COMPLETE" itemValue="C" />
+													<f:selectItem itemLabel="INCOMPLETE" itemValue="I" />
+												</p:selectOneMenu>
+											</p:panelGrid>
+											<p:panelGrid>
+												<h:outputText value="Location ">
+													<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+												</h:outputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu id="loc" style="width:95%" disabled="true"
+													value="#{inquiryDetails.vehicleDTO.inspecLocationCode}">
+													<f:selectItem itemLabel="--Select Location--" itemValue=""
+														noSelectionOption="true" />
+													<f:selectItems value="#{inquiryDetails.locationList}"
+														var="a" itemLabel="#{a.inspecLocationDes}"
+														itemValue="#{a.inspecLocationCode}" />
+												</p:selectOneMenu>
+											</p:panelGrid>
+											<h:outputText value="Final Remark " style="font-weight:bold">
+											</h:outputText>
+											<p:panelGrid>
+												<p:inputTextarea rows="6" cols="33"
+													value="#{inquiryDetails.vehicleDTO.finalremarkDescription}"
+													readonly="true" style="width:100%" />
+											</p:panelGrid>
+										</p:panelGrid>
+										<br></br>
+
+
+
+
+									</div>
+									<br></br>
+								</center>
+							</div>
+						</h:form>
+
+					</p:tab>
+					<p:tab title="Uploaded Photos" id="checkDocumentsTable"
+						rendered="true">
+
+						<h:form id="frmUploadPhotos">
+							<div style="overflow: scroll">
+								<br></br>
+								<!--  new design start -->
+								<div class="ui-g">
+									<div class="ui-lg-12" style="text-align: center;">
+										<p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+											layout="grid">
+
+
+											<p:outputLabel value="Permit Owner Name"
+												style="font-weight: bold;"></p:outputLabel>
+
+											<p:inputText value="#{inquiryDetails.vehicleOwnerName}"
+												style="width:50%;text-align: center;" readonly="true"></p:inputText>
+
+
+											<p:outputLabel value="Vehicle No." style="font-weight: bold;"></p:outputLabel>
+
+											<p:inputText value="#{inquiryDetails.vehicleNo}"
+												style="width:20%;text-align: center;" readonly="true"></p:inputText>
+
+
+										</p:panelGrid>
+									</div>
+
+									<div class="ui-lg-12" style="text-align: center;">
+										<h1 style="margin-bottom: 2%;">Permit Owner</h1>
+										<center>
+											<p:panel id="imageOwner">
+												<div class="ui-lg-4" style="text-align: center;">
+													<img id="img"
+														src="data:image/png;base64,#{inquiryDetails.imageOfPermitOwner}"
+														style="width: 60%; height: 60%;" />
+
+													<div class="ui-g-12 ui-md-6 ui-lg-12">
+														<div class="ui-g-12 ui-md-6 ui-lg-6">
+															<p:fileUpload
+																fileUploadListener="#{uploadPhotosBackingBean.handleImageUpload}"
+																mode="advanced" auto="true"
+																accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640"
+																update="imageOwner" style="width:60%" rendered="false">
+																
+															</p:fileUpload>
+														</div>
+
+													</div>
+												</div>
+											</p:panel>
+
+
+										</center>
+									</div>
+
+
+									<div class="ui-lg-12" style="text-align: center;">
+										<h1 style="">Vehicle Photos</h1>
+										<p:panel id="vehicleImgs">
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.firstImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="1" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.secondImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="2" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.thirdImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="3" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.fourthImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="4" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.fifthImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="5" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.sixthImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="6" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+										</p:panel>
+									</div>
+
+
+								</div>
+							</div>
+						</h:form>
+					</p:tab>
+				</p:tabView>
+				<!-- </center> -->
+
+			</h:form>
+		</p:dialog>
+
+
+
+		<p:dialog styleClass="" id="otherInspectionView" global="true"
+			modal="true" header="Other Inspection" width="80%" height="500px"
+			severity="info" widgetVar="otherInspectionView" closeOnEscape="true"
+			resizable="false" style="postion: absolute;">
+			<h:form id="frmOtherInspectionView">
+
+
+				<p:tabView id="tabviewId">
+					<p:tab title="View Other Inspection" id="tbEmpDet"
+						rendered="#{employeeProfileBackingBean.boolEmpDet}">
+
+						<h:form id="field">
+							<div style="overflow: scroll">
+								<p:panel>
+									<p:panelGrid columns="4"
+										columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+										layout="grid">
+
+
+
+										<p:panelGrid>
+											<p:outputLabel value="Permit No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="permitno" style="width:90%"
+												value="#{inquiryDetails.vehicleDTO.permitNo}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:outputLabel value="Queue No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText value="#{inquiryDetails.vehicleDTO.queueNo}"
+												id="queue" style="width:90%" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Vehicle No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="vehicle" style="width:90%"
+												value="#{inquiryDetails.vehicleDTO.vehicleNo}"
+												readonly="true"></p:inputText>
+										</p:panelGrid>
+										<p:panelGrid></p:panelGrid>
+										<p:panelGrid></p:panelGrid>
+
+									</p:panelGrid>
+								</p:panel>
+
+								<br> </br>
+
+
+								<div style="width: 90%;" class="subDiv">
+									<p:panelGrid columns="2" id="bla2"
+										columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+
+										<p:panelGrid>
+											<p:outputLabel value="Permit Owner Name"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText value="#{inquiryDetails.vehicleDTO.permitOwner}"
+												id="ownername" style="width:100%" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="NIC / Registration No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="nic" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.nicreg}" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Make"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="Make" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.makeDescription}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Model"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="Model" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.modelDescription}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Route No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="routeno" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.routeNo}" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbpermitinfo.origin']}"></p:outputLabel>
+										<p:inputText style="width:80%;height:18px;" id="txtOrigin"
+											value="#{inquiryDetails.issuePermitDTO.origin}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel
+											value="#{msg['common.backlog.tbpermitinfo.destination']}"></p:outputLabel>
+										<p:inputText style="width:80%;height:18px;"
+											id="txtDestination"
+											value="#{inquiryDetails.issuePermitDTO.destination}"
+											readonly="true"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+
+										<p:outputLabel
+											value="#{msg['common.backlog.tbpermitinfo.via']}"></p:outputLabel>
+										<p:panelGrid>
+											<p:inputTextarea style="width:80%;height:18px;" id="txtVia"
+												readonly="true" rows="3"
+												value="#{inquiryDetails.issuePermitDTO.via}"
+												onkeyup="this.value=this.value.toUpperCase();">
+											</p:inputTextarea>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Route Details"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="route" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.routeDetails}"
+												readonly="true"></p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Manufacture Year"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="Man" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.manyear}" readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Service Type"></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+
+											<p:selectOneMenu id="service" style="width:95%"
+												disabled="true"
+												value="#{inquiryDetails.vehicleDTO.serviceTypeCode}"
+												effect="fold" filter="true" filterMatchMode="contains">
+
+												<f:selectItem itemLabel="-- Select Service Type --" />
+												<f:selectItems value="#{inquiryDetails.servicelist}" var="c"
+													itemValue="#{c.serviceTypeCode}"
+													itemLabel="#{c.serviceTypeDescription}" />
+
+											</p:selectOneMenu>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Chassis No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="chass" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.chassisNo}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<p:outputLabel value="Application No."></p:outputLabel>
+										</p:panelGrid>
+										<p:panelGrid>
+											<p:inputText id="application" style="width:100%"
+												value="#{inquiryDetails.vehicleDTO.applicationNo}"
+												readonly="true">
+											</p:inputText>
+										</p:panelGrid>
+
+									</p:panelGrid>
+
+
+									<p:dataTable id="abc" var="vehicle"
+										value="#{inquiryDetails.dataListViewInspection}"
+										style="width:100%" rows="10" paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20">
+										<p:column headerText="#" style="text-align:left;width:8%">
+											<h:outputText value="#{vehicle.actionPointSeqNo}" />
+										</p:column>
+
+										<p:column headerText="Section"
+											style="text-align:left;width:10%">
+											<h:outputText value="#{vehicle.section}" />
+										</p:column>
+
+										<p:column headerText="Description"
+											style="text-align:left;width:20%">
+											<h:outputText value="#{vehicle.description}" />
+										</p:column>
+
+										<p:column headerText="Remark"
+											style="text-align:left;width:20%">
+											<h:outputText value="#{vehicle.remark}" />
+										</p:column>
+
+
+										<p:column headerText="Exists"
+											style="text-align:left;width:10%">
+
+											<p:selectBooleanCheckbox value="#{vehicle.exists}"
+												disabled="true" />
+										</p:column>
+									</p:dataTable>
+
+									<br></br>
+								</div>
+								<center>
+									<div style="width: 90%;" class="subDiv">
+										<p:panelGrid columns="2"
+											columnClasses="ui-grid-col-6,ui-grid-col-4," layout="grid"
+											id="footerDiv">
+
+
+											<p:panelGrid>
+												<h:outputText
+													value="If any issue in the Inspection Report on section 1 and 2 require correct
+			and next inspection date on or before">
+												</h:outputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:inputText id="cal1"
+													value="#{inquiryDetails.vehicleDTO.date1}" readonly="true"
+													style="width:70%" />
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<h:outputText
+													value="If any issue in the Inspection Report on section 3 require correct
+			and next inspection date on or before">
+
+												</h:outputText>
+												<br> </br>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="cal2"
+													value="#{inquiryDetails.vehicleDTO.date2}" readonly="true"
+													style="width:70%" />
+											</p:panelGrid>
+											<p:panelGrid>
+												<h:outputText value="Types of Inspection">
+												</h:outputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="typeInspection" style="width:100%;"
+													readonly="true"
+													value="#{inquiryDetails.vehicleDTO.inspectionTypeDes}">
+												</p:inputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<h:outputText value="Inspection Status">
+												</h:outputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu id="insStatus" style="width:95%"
+													disabled="true"
+													value="#{inquiryDetails.vehicleDTO.inspectionStatusCode}">
+													<f:selectItem itemLabel="--Select Inspection Status--"
+														itemValue="" noSelectionOption="true" />
+													<f:selectItem itemLabel="COMPLETE" itemValue="C" />
+													<f:selectItem itemLabel="INCOMPLETE" itemValue="I" />
+												</p:selectOneMenu>
+											</p:panelGrid>
+											<p:panelGrid>
+												<h:outputText value="Location ">
+													<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+												</h:outputText>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu id="loc" style="width:95%" disabled="true"
+													value="#{inquiryDetails.vehicleDTO.inspecLocationCode}">
+													<f:selectItem itemLabel="--Select Location--" itemValue=""
+														noSelectionOption="true" />
+													<f:selectItems value="#{inquiryDetails.locationList}"
+														var="a" itemLabel="#{a.inspecLocationDes}"
+														itemValue="#{a.inspecLocationCode}" />
+												</p:selectOneMenu>
+											</p:panelGrid>
+											<h:outputText value="Final Remark " style="font-weight:bold">
+											</h:outputText>
+											<p:panelGrid>
+												<p:inputTextarea rows="6" cols="33"
+													value="#{inquiryDetails.vehicleDTO.finalremarkDescription}"
+													readonly="true" style="width:100%" />
+											</p:panelGrid>
+										</p:panelGrid>
+										<br></br>
+
+
+
+
+									</div>
+									<br></br>
+								</center>
+							</div>
+						</h:form>
+
+					</p:tab>
+					<p:tab title="Uploaded Photos" id="checkDocumentsTable"
+						rendered="true">
+
+						<h:form id="frmUploadPhotos">
+							<div style="overflow: scroll">
+								<br></br>
+								<!--  new design start -->
+								<div class="ui-g">
+									<div class="ui-lg-12" style="text-align: center;">
+										<p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+											layout="grid">
+
+
+											<p:outputLabel value="Permit Owner Name"
+												style="font-weight: bold;"></p:outputLabel>
+
+											<p:inputText value="#{inquiryDetails.vehicleOwnerName}"
+												style="width:50%;text-align: center;" readonly="true"></p:inputText>
+
+
+											<p:outputLabel value="Vehicle No." style="font-weight: bold;"></p:outputLabel>
+
+											<p:inputText value="#{inquiryDetails.vehicleNo}"
+												style="width:20%;text-align: center;" readonly="true"></p:inputText>
+
+
+										</p:panelGrid>
+									</div>
+
+									<div class="ui-lg-12" style="text-align: center;">
+										<h1 style="margin-bottom: 2%;">Permit Owner</h1>
+										<center>
+											<p:panel id="imageOwner">
+												<div class="ui-lg-4" style="text-align: center;">
+													<img id="img"
+														src="data:image/png;base64,#{inquiryDetails.imageOfPermitOwner}"
+														style="width: 60%; height: 60%;" />
+
+													<div class="ui-g-12 ui-md-6 ui-lg-12">
+														<div class="ui-g-12 ui-md-6 ui-lg-6">
+															<p:fileUpload
+																fileUploadListener="#{uploadPhotosBackingBean.handleImageUpload}"
+																mode="advanced" auto="true"
+																accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640"
+																update="imageOwner" style="width:60%" rendered="false" >
+																
+															</p:fileUpload>
+														</div>
+
+													</div>
+												</div>
+											</p:panel>
+
+
+										</center>
+									</div>
+
+
+									<div class="ui-lg-12" style="text-align: center;">
+										<h1 style="">Vehicle Photos</h1>
+										<p:panel id="vehicleImgs">
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.firstImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="1" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.secondImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="2" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.thirdImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="3" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.fourthImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="4" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.fifthImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="5" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+											<div class="ui-g-12 ui-md-6 ui-lg-4"
+												style="text-align: center;">
+
+												<img id="img"
+													src="data:image/png;base64,#{inquiryDetails.sixthImageOfVehicle}"
+													style="width: 100%; height: 100%;" />
+												<div class="ui-g-12 ui-md-6 ui-lg-12">
+													<p:fileUpload
+														fileUploadListener="#{uploadPhotosBackingBean.handleVehicleImagesUpload}"
+														mode="advanced" auto="true"
+														accept=".jpg,.jpeg,.png" allowTypes="/(\.|\/)(jpe?g|png)$/" sizeLimit="15728640" update="vehicleImgs"
+														rendered="false">
+														
+														<f:attribute name="imageId" value="6" />
+													</p:fileUpload>
+
+												</div>
+											</div>
+										</p:panel>
+									</div>
+
+								</div>
+							</div>
+						</h:form>
+					</p:tab>
+				</p:tabView>
+				<!-- </center> -->
+
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="viewPaymentVoucherId" global="true"
+			modal="true" width="70%" severity="info" closable="true"
+			widgetVar="viewPaymentVoucherId" closeOnEscape="true"
+			resizable="false" header="View Payment Voucher">
+			<h:form id="frmPaymentVoucher">
+				<br></br>
+				<h1>Payment History</h1>
+				<center>
+					<p:dataTable id="paymentDetailsTable" var="paymentDetailsTable"
+						rows="5" paginator="true"
+						value="#{inquiryDetails.paymentHistoryDataList}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" resizableColumns="false"
+						liveResize="true" rowIndexVar="index"
+						emptyMessage="No payments history available">
+
+						<p:column headerText="Receipt No."
+							style="text-align:left;width:8%">
+							<h:outputText value="#{paymentDetailsTable.reciptNo}" />
+						</p:column>
+
+						<p:column headerText="Voucher No."
+							style="text-align:left;width:8%">
+							<h:outputText value="#{paymentDetailsTable.voucherNo}" />
+						</p:column>
+
+						<p:column headerText="Txn Date" style="text-align:left;width:8%">
+							<h:outputText value="#{paymentDetailsTable.displayTxnDate}" />
+						</p:column>
+
+						<p:column headerText="Amount" style="text-align:right;width:8%">
+							<h:outputText value="#{paymentDetailsTable.displayAmount}">
+								<f:convertNumber pattern="##,###.00" />
+							</h:outputText>
+						</p:column>
+
+						<p:column style="text-align:left;width:8%">
+							<p:commandLink id="cmdbtnView"
+								action="#{inquiryDetails.viewActButtonAction}"
+								update="paymentDetailsTable,@form" process="paymentDetailsTable"
+								disabled="false">
+								<f:setPropertyActionListener value="#{paymentDetailsTable}"
+									target="#{inquiryDetails.selectedViewRow}" />
+								<p:graphicImage library="images" name="view.png"
+									style="width:24px;height:24px;" title="view payment details"></p:graphicImage>
+							</p:commandLink>
+						</p:column>
+
+					</p:dataTable>
+					<br />
+
+				</center>
+
+
+				<br></br>
+				<p:growl id="msgs" showDetail="true" />
+				<center>
+					<p:dataTable var="funActTable" id="dtFunActTable1"
+						value="#{inquiryDetails.chargeTypePaymentDataList}"
+						resizableColumns="false" liveResize="false"
+						rendered="#{inquiryDetails.showChargeTypeTable}">
+
+						<p:column headerText="Charge Type Code"
+							style="text-align:left;width:8%">
+							<h:outputText style="text-align:left;"
+								value="#{funActTable.chargeTypeCode}" />
+						</p:column>
+						<p:column headerText="Charge Type"
+							style="text-align:left;width:10%">
+							<h:outputText style="text-align:left;"
+								value="#{funActTable.chargeTypeDescription}" />
+						</p:column>
+						<p:column headerText="Amount" style="text-align:right;width:10%">
+							<h:outputText style="text-align:left;"
+								value="#{funActTable.chargeTypeDisplayAmount}" />
+						</p:column>
+
+						<p:columnGroup type="footer">
+							<p:row>
+								<p:column colspan="2" style="text-align:right"
+									footerText="Total Fee Rs." />
+								<p:column style="text-align:right">
+									<f:facet name="footer">
+										<h:outputText value="#{inquiryDetails.voutotalfee}">
+											<f:convertNumber pattern="##,###.00" />
+										</h:outputText>
+									</f:facet>
+								</p:column>
+
+							</p:row>
+						</p:columnGroup>
+
+
+					</p:dataTable>
+				</center>
+
+
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="historyDLG" global="true" modal="true"
+			header="Inquiry History" width="70%" height="auto" severity="info"
+			widgetVar="historyDialog" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmhistorydialog">
+				<center>
+					<p:panelGrid columns="1" styleClass="ui-noborder">
+
+						<p:panel id="rolePanel">
+
+							<p:dataTable id="historytable" var="e" styleClass="myTable-two"
+								rows="10" value="#{inquiryDetails.historyList}" paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="2,3" resizableColumns="false"
+								liveResize="true" rowIndexVar="index"
+								sortBy="#{e.createdDateString}" sortOrder="descending"
+								emptyMessage="No records are available">
+
+								<p:column headerText="Application No." style="text-align: left;">
+									<h:outputText value="#{e.applicationNo}" />
+								</p:column>
+
+								<p:column headerText="Task Code" style="text-align: left;">
+									<h:outputText value="#{e.taskCode}" />
+								</p:column>
+
+
+								<p:column headerText="Task Description"
+									style="text-align: left;">
+									<h:outputText value="#{e.taskCodeDes}" />
+								</p:column>
+
+								<p:column headerText="Status" style="text-align: left;">
+									<h:outputText value="#{e.taskStatus}" />
+								</p:column>
+
+								<p:column headerText="Created By" style="text-align: left;">
+									<h:outputText value="#{e.createdBy}" />
+								</p:column>
+
+								<p:column headerText="Created Date/Time"
+									style="text-align: left;">
+									<h:outputText value="#{e.createdDateString}" />
+								</p:column>
+
+							</p:dataTable>
+						</p:panel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton value="OK" onclick="PF('historyDialog').hide()"
+						class="btn btn-primary btn-lg btn-block"
+						style="width:80px; margin-top:10px;height:30px;font-size: 12px !important; border: 1px solid #FFFFFF; 
+						color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;">
+					</p:commandButton>
+				</center>
+			</h:form>
+
+		</p:dialog>
+
+
+		<p:dialog id="oldHistoryDLG" global="true" modal="true"
+			header="Inquiry Old History" width="70%" height="auto"
+			severity="info" widgetVar="oldHistoryDialog" closeOnEscape="true"
+			resizable="false">
+
+			<h:form id="frmoldhistorydialog">
+				<center>
+					<p:panelGrid columns="1" styleClass="ui-noborder">
+
+						<p:panel id="rolePanel">
+
+							<p:dataTable id="oldHistorytable" var="e"
+								styleClass="myTable-two" rows="10"
+								value="#{inquiryDetails.oldHistoryList}" paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="2,3" resizableColumns="false"
+								liveResize="true" rowIndexVar="index"
+								sortBy="#{e.validFromDate}" sortOrder="descending"
+								emptyMessage="No records are available">
+
+								<p:column headerText="Permit No." style="text-align: left;">
+									<h:outputText value="#{e.permitNo}" />
+								</p:column>
+
+								<p:column headerText="Bus No." style="text-align: left;">
+									<h:outputText value="#{e.regNoOfBus}" />
+								</p:column>
+
+
+								<p:column headerText="Route" style="text-align: left;">
+									<h:outputText value="#{e.routeNo}" />
+								</p:column>
+
+								<p:column headerText="Origin" style="text-align: left;">
+									<h:outputText value="#{e.placeOfOrginOfTheService}" />
+								</p:column>
+
+								<p:column headerText="Destination" style="text-align: left;">
+									<h:outputText value="#{e.placeOfDestination}" />
+								</p:column>
+
+								<p:column headerText="Name" style="text-align: left;;width:20%">
+									<h:outputText value="#{e.fullName}" />
+								</p:column>
+
+								<p:column headerText="Type" style="text-align: left;;width:5%">
+									<h:outputText value="#{e.serviceTypeCode}" />
+								</p:column>
+
+								<p:column headerText="validy Form" style="text-align: left;">
+									<h:outputText value="#{e.validFromDate}" />
+								</p:column>
+
+								<p:column headerText="Comments" style="text-align: left;">
+									<h:outputText value="#{e.specialRemark}" />
+								</p:column>
+
+							</p:dataTable>
+						</p:panel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton value="OK" onclick="PF('oldHistoryDialog').hide()"
+						class="btn btn-primary btn-lg btn-block"
+						style="width:80px; margin-top:10px;height:30px;font-size: 12px !important; border: 1px solid #FFFFFF; 
+						color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;">
+					</p:commandButton>
+				</center>
+			</h:form>
+
+		</p:dialog>
+
+
+		<p:dialog id="viewFareDB" global="true" modal="true" closable="flase"
+			header="Fare Rate Details" width="98%" height="auto" severity="info"
+			widgetVar="viewFareRate" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmfarerate">
+				<center>
+					<p:panelGrid columns="1" styleClass="ui-noborder">
+
+						<p:panel id="ratePanel">
+
+							<p:dataTable id="rateTable" var="e" styleClass="myTable-two"
+								rows="14"
+								value="#{fareTableApprovalBackingBean.viewBusFareRateList}"
+								paginator="true" tableStyle="width:100%;font-size:12px;"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								resizableColumns="false" liveResize="true" rowIndexVar="index"
+								sortBy="#{e.stageNo}" sortOrder="ascending"
+								emptyMessage="No records are available" editable="true"
+								editMode="cell" widgetVar="cellRate">
+
+
+								<f:facet name="header">
+									<p:outputLabel
+										value="#{fareTableApprovalBackingBean.yearString}"></p:outputLabel>
+								</f:facet>
+
+
+								<p:columnGroup type="header">
+									<p:row>
+										<p:column rowspan="3" headerText="Stage" />
+										<p:column colspan="21" headerText="Rate" />
+									</p:row>
+									<p:row>
+										<p:column colspan="3" headerText="Normal"
+											visible="#{fareTableApprovalBackingBean.normalFareAdd}" />
+										<p:column colspan="3" headerText="Semi Luxury"
+											visible="#{fareTableApprovalBackingBean.semiLuxuaryFareAdded}" />
+										<p:column colspan="3" headerText="Luxury"
+											visible="#{fareTableApprovalBackingBean.luxuaryFareAdded}" />
+										<p:column colspan="3" headerText="Super Luxury"
+											visible="#{fareTableApprovalBackingBean.superLuxuaryFareAdded}" />
+										<p:column colspan="3" headerText="High-Way"
+											visible="#{fareTableApprovalBackingBean.highWayFareAdded}" />
+										<p:column colspan="3" headerText="Sisu Sariya Half"
+											visible="#{fareTableApprovalBackingBean.sisuSariyaHalfAdded}" />
+										<p:column colspan="3" headerText="Sisu Sariya Quarter"
+											visible="#{fareTableApprovalBackingBean.sisuSariyaQuarterAdded}" />
+
+									</p:row>
+									<p:row>
+										<p:column headerText="Current"
+											visible="#{fareTableApprovalBackingBean.normalFareAdd}" />
+										<p:column headerText="New"
+											visible="#{fareTableApprovalBackingBean.normalFareAdd}" />
+										<p:column headerText="Rounded"
+											visible="#{fareTableApprovalBackingBean.normalFareAdd}" />
+
+										<p:column headerText="Current"
+											visible="#{fareTableApprovalBackingBean.semiLuxuaryFareAdded}" />
+										<p:column headerText="New"
+											visible="#{fareTableApprovalBackingBean.semiLuxuaryFareAdded}" />
+										<p:column headerText="Rounded"
+											visible="#{fareTableApprovalBackingBean.semiLuxuaryFareAdded}" />
+
+										<p:column headerText="Current"
+											visible="#{fareTableApprovalBackingBean.luxuaryFareAdded}" />
+										<p:column headerText="New"
+											visible="#{fareTableApprovalBackingBean.luxuaryFareAdded}" />
+										<p:column headerText="Rounded"
+											visible="#{fareTableApprovalBackingBean.luxuaryFareAdded}" />
+
+										<p:column headerText="Current"
+											visible="#{fareTableApprovalBackingBean.superLuxuaryFareAdded}" />
+										<p:column headerText="New"
+											visible="#{fareTableApprovalBackingBean.superLuxuaryFareAdded}" />
+										<p:column headerText="Rounded"
+											visible="#{fareTableApprovalBackingBean.superLuxuaryFareAdded}" />
+
+										<p:column headerText="Current"
+											visible="#{fareTableApprovalBackingBean.highWayFareAdded}" />
+										<p:column headerText="New"
+											visible="#{fareTableApprovalBackingBean.highWayFareAdded}" />
+										<p:column headerText="Rounded"
+											visible="#{fareTableApprovalBackingBean.highWayFareAdded}" />
+
+										<p:column headerText="New"
+											visible="#{fareTableApprovalBackingBean.sisuSariyaHalfAdded}" />
+										<p:column headerText="Adjuested"
+											visible="#{fareTableApprovalBackingBean.sisuSariyaHalfAdded}" />
+										<p:column headerText="Diffrent"
+											visible="#{fareTableApprovalBackingBean.sisuSariyaHalfAdded}" />
+
+										<p:column headerText="New"
+											visible="#{fareTableApprovalBackingBean.sisuSariyaQuarterAdded}" />
+										<p:column headerText="Adjuested"
+											visible="#{fareTableApprovalBackingBean.sisuSariyaQuarterAdded}" />
+										<p:column headerText="Diffrent"
+											visible="#{fareTableApprovalBackingBean.sisuSariyaQuarterAdded}" />
+									</p:row>
+								</p:columnGroup>
+
+								<p:column styleClass="colStage">
+									<h:outputText value="#{e.stageNo}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.normalFareAdd}"
+									styleClass="colOne">
+									<h:outputText value="#{e.normalCurrentFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.normalFareAdd}"
+									styleClass="colOne">
+									<h:outputText value="#{e.normalNewFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.normalFareAdd}"
+									styleClass="colOne">
+									<h:outputText value="#{e.normalRoundFee}" />
+
+								</p:column>
+
+								<p:column
+									visible="#{fareTableApprovalBackingBean.semiLuxuaryFareAdded}"
+									styleClass="colTwo">
+									<h:outputText value="#{e.semiLuxuryCurrentFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.semiLuxuaryFareAdded}"
+									styleClass="colTwo">
+									<h:outputText value="#{e.semiLuxuryNewFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.semiLuxuaryFareAdded}"
+									styleClass="colTwo">
+									<h:outputText value="#{e.semiLuxuryRoundFee}" />
+								</p:column>
+
+
+								<p:column
+									visible="#{fareTableApprovalBackingBean.luxuaryFareAdded}"
+									styleClass="colThree">
+									<h:outputText value="#{e.luxuryCurrentFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.luxuaryFareAdded}"
+									styleClass="colThree">
+									<h:outputText value="#{e.luxuryNewFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.luxuaryFareAdded}"
+									styleClass="colThree">
+									<h:outputText value="#{e.luxuryRoundFee}" />
+
+								</p:column>
+
+								<p:column
+									visible="#{fareTableApprovalBackingBean.superLuxuaryFareAdded}"
+									styleClass="colFour">
+									<h:outputText value="#{e.superLuxuryCurrentFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.superLuxuaryFareAdded}"
+									styleClass="colFour">
+									<h:outputText value="#{e.superLuxuryNewFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.superLuxuaryFareAdded}"
+									styleClass="colFour">
+
+									<h:outputText value="#{e.superLuxuryRoundFee}" />
+
+								</p:column>
+
+
+								<p:column
+									visible="#{fareTableApprovalBackingBean.highWayFareAdded}"
+									styleClass="colFive">
+									<h:outputText value="#{e.highwayCurrentFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.highWayFareAdded}"
+									styleClass="colFive">
+									<h:outputText value="#{e.highwayNewFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.highWayFareAdded}"
+									styleClass="colFive">
+
+									<h:outputText value="#{e.highwayRoundFee}" />
+
+								</p:column>
+
+								<p:column
+									visible="#{fareTableApprovalBackingBean.sisuSariyaHalfAdded}"
+									styleClass="colSix">
+									<h:outputText value="#{e.sisuSariyaHalfNoramlFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.sisuSariyaHalfAdded}"
+									styleClass="colSix">
+
+									<h:outputText value="#{e.sisuSariyaHalfAdjestedFee}" />
+
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.sisuSariyaHalfAdded}"
+									styleClass="colSix">
+									<h:outputText value="#{e.sisuSariyaHalfdiffrentFee}" />
+								</p:column>
+
+
+
+								<p:column
+									visible="#{fareTableApprovalBackingBean.sisuSariyaQuarterAdded}"
+									styleClass="colSeven">
+									<h:outputText value="#{e.sisuSariyaQuarterNoramlFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.sisuSariyaQuarterAdded}"
+									styleClass="colSeven">
+									<h:outputText value="#{e.sisuSariyaQuarterAdjestedFee}" />
+								</p:column>
+								<p:column
+									visible="#{fareTableApprovalBackingBean.sisuSariyaQuarterAdded}"
+									styleClass="colSeven">
+									<h:outputText value="#{e.sisuSariyaQuarterdiffrentFee}" />
+								</p:column>
+
+							</p:dataTable>
+						</p:panel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton value="Close" onclick="PF('viewFareRate').hide()"
+						class="btn btn-primary btn-lg btn-block"
+						style="width:80px; margin-top:1px;height:30px;font-size: 12px !important; border: 1px solid #FFFFFF; 
+						color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;">
+					</p:commandButton>
+				</center>
+			</h:form>
+
+		</p:dialog>
+										
+
+									
+
+
+	</ui:define>
+</ui:composition>

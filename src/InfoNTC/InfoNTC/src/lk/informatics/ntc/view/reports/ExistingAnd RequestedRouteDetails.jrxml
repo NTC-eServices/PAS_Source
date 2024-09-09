@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-06-25T17:26:06 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ExistingAnd RequestedRouteDetails" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14018a4a-9d28-465a-ada3-dbb02c8a6f63">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="P_LOGO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.trr_via as new_via,a.trr_origin as new_origin,a.trr_destination as new_destination,
+a.trr_application_no,a.trr_status,b.pm_permit_no,b.pm_vehicle_regno,b.pm_route_no,
+c.rou_via as old_via,c.rou_service_origine as old_origin,c.rou_service_destination as old_destination
+from public.nt_temp_route_request a
+inner join public.nt_t_pm_application b on b.pm_application_no=a.trr_application_no
+inner join public.nt_r_route c on c.rou_number=b.pm_route_no
+where a.trr_status in('P','R')]]>
+	</queryString>
+	<field name="new_via" class="java.lang.String"/>
+	<field name="new_origin" class="java.lang.String"/>
+	<field name="new_destination" class="java.lang.String"/>
+	<field name="trr_application_no" class="java.lang.String"/>
+	<field name="trr_status" class="java.lang.String"/>
+	<field name="pm_permit_no" class="java.lang.String"/>
+	<field name="pm_vehicle_regno" class="java.lang.String"/>
+	<field name="pm_route_no" class="java.lang.String"/>
+	<field name="old_via" class="java.lang.String"/>
+	<field name="old_origin" class="java.lang.String"/>
+	<field name="old_destination" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="480" height="60" uuid="f2c79830-5a2e-40e0-98de-7565064c981f"/>
+				<imageExpression><![CDATA[$P{P_LOGO}+"header_logo_new.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="800" height="30" uuid="80a76169-e606-4215-8cb6-a450af28dac2"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[New Route Request Summary Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="68" splitType="Stretch">
+			<rectangle>
+				<reportElement x="230" y="18" width="568" height="20" backcolor="#DADEE5" uuid="d40dab76-77de-413b-9ceb-95a5514a655c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="2" width="800" height="7" uuid="94a2cabc-9ff7-4725-b68a-12b41e6d0c7c"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="38" width="81" height="30" uuid="0ccef2c5-cc1e-4070-8da5-dd87e318fa2a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Application Number ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="38" width="70" height="30" uuid="37037b84-9972-4684-b716-3017d985682f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Permit Number ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="38" width="78" height="30" uuid="fdf88d69-f782-48eb-ac45-adfe318f84dc">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Bus Number ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="38" width="100" height="30" uuid="11ec5f6d-1df1-4d9e-88cb-a5660df9b9b9"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Origin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="38" width="100" height="30" uuid="42199004-dcb3-45e5-983d-6525134491e1"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Destination]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="38" width="90" height="30" uuid="8ce96612-c0ae-4d21-b181-a589de73a454">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Via]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="20" width="290" height="16" forecolor="#0A0A0A" backcolor="#DADEE5" uuid="5db00f58-ae2b-49a6-82e2-a10b182ad141"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Existing Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="18" width="278" height="20" backcolor="#000000" uuid="59d4a224-2f74-43ea-82f1-ca897c955203"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[New Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="38" width="100" height="30" uuid="6ab78004-72a5-40b7-9691-932bdc384456">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Destination]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="38" width="90" height="30" uuid="da42e909-e311-4473-9cbd-bdb59aa70973">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Origin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="710" y="38" width="88" height="30" uuid="f6a32495-d0d2-4b89-8acf-9d54eaa4481a">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Via]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="800" height="30" uuid="ea0aa484-5f8b-45ac-9d04-51cb8c53a459"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="81" height="30" isPrintWhenDetailOverflows="true" uuid="7728367d-0efc-48f2-ba5a-c8f342663750">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{trr_application_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="81" y="0" width="70" height="30" isPrintWhenDetailOverflows="true" uuid="0e75c11d-edfa-419e-8dd2-0c0e934eaf41">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pm_permit_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="152" y="0" width="78" height="30" isPrintWhenDetailOverflows="true" uuid="ce4d8d09-76b4-464d-98b5-b2f283b4caff"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pm_vehicle_regno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="230" y="0" width="100" height="30" isPrintWhenDetailOverflows="true" uuid="76dd3baa-75ec-4f21-8dd4-27c1056d78e1"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{old_origin}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="330" y="0" width="100" height="30" isPrintWhenDetailOverflows="true" uuid="b9354e7a-7dfe-4537-af5c-98c4007e6ea6"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{old_destination}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="430" y="0" width="90" height="30" isPrintWhenDetailOverflows="true" uuid="da3b7c6e-4536-4985-a40f-185e3ad45a2d"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{old_via}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="520" y="0" width="90" height="30" isPrintWhenDetailOverflows="true" uuid="18cd9f2c-c9dc-40da-bdef-3b3dd3ce5bdb"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{new_origin}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="610" y="0" width="100" height="30" isPrintWhenDetailOverflows="true" uuid="74ef6801-791d-42d6-8319-6459b8c5e8cc"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{new_destination}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="710" y="0" width="88" height="30" isPrintWhenDetailOverflows="true" uuid="8ed62746-9210-4f86-85fe-e2fbf4018dbf"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{new_via}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

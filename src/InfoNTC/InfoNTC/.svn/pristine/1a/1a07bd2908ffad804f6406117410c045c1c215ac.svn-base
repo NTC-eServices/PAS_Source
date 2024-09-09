@@ -1,0 +1,874 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+#Dob {
+	width: 80% !important;
+}
+
+.calendarClass input {
+	width: 79% !important;
+}
+
+.numField .ui-inputfield {
+	width: 89% !important;
+	font-weight: bold;
+	text-align: right;
+}
+
+.footer {
+	height: 20px;
+	background-color: #07295b;
+	/* padding: .7em 1.5em 0em 1.5em; */
+	text-align: center;
+	colour: #84063A;
+	color: #777373;
+}
+
+.ui-datatable-scrollable .ui-datatable-scrollable-header {
+	min-height: 20px;
+}
+
+.ui-datatable-scrollable-body {
+	height: 125px !important;
+}
+
+.genReqNumButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	text-decoration: none !important;
+	color: white !important;
+	border-radius: 5px !important;
+}
+
+.high {
+	background-color: #e4a6a6 !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+
+.middle {
+	background-color: #f5ba76 !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+
+.low {
+	background-color: #f8e7ac !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+</style>
+
+		<div class="mainDiv">
+			<!-- header -->
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Grievance Management Dashboard</h1>
+
+			<div style="width: 95%;" class="subDiv">
+
+				<h:form id="dashboardForm">
+					<p:panel id="pnl-search">
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-9,ui-grid-col-3" layout="grid">
+							<p:panelGrid columns="3"
+								columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+								layout="grid">
+
+
+
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Department"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu style="width:85%;" effect="fold" filter="true"
+										filterMatchMode="contains"
+										value="#{grievanceManagementDashboardBackingBean.actionDepartmentCode}">
+										<f:selectItem itemLabel="--Select Department--" itemValue="" />
+										<f:selectItems
+											value="#{grievanceManagementDashboardBackingBean.actionDepartmentList}"
+											var="dept" itemLabel="#{dept.description}"
+											itemValue="#{dept.code}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Action Start Date">
+									</p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:calendar id="startDateCalId"
+										value="#{grievanceManagementDashboardBackingBean.startDate}"
+										style="height:18px;" navigator="true" locale="en_US"
+										showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+										maxdate="today" yearRange="c-100:c+100" readonlyInput="true">
+										<p:ajax event="dateSelect" update="endDateCalId" />
+									</p:calendar>
+								</p:panelGrid>
+
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Action End Date">
+									</p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:calendar id="endDateCalId"
+										value="#{grievanceManagementDashboardBackingBean.endDate}"
+										style="height:18px;" navigator="true" locale="en_US"
+										showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+										yearRange="c-100:c+100" readonlyInput="true"></p:calendar>
+								</p:panelGrid>
+
+
+
+
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="4" style="margin-top:2%;"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+
+							<p:panelGrid></p:panelGrid>
+
+							<p:commandButton id="searchBtn" styleClass="mainLinkButton"
+								style="width: 100%" value="Search" update="@form"
+								action="#{grievanceManagementDashboardBackingBean.searchButtonAction}">
+
+							</p:commandButton>
+
+							<p:commandButton id="clearBtn" styleClass="mainLinkButton"
+								style="width: 100%" value="Clear" update="@form"
+								action="#{grievanceManagementDashboardBackingBean.clearButtonAction}">
+							</p:commandButton>
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+
+						<p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+							layout="grid" style="margin-top:2%;"
+							rendered="#{grievanceManagementDashboardBackingBean.showDataTable}">
+
+							<p:dataTable id="actions" var="action"
+								value="#{grievanceManagementDashboardBackingBean.complaintActionList}"
+								rows="5" width="100%" paginator="true"
+								selection="#{grievanceManagementDashboardBackingBean.selectedComplaintActionValue}"
+								selectionMode="single" rowIndexVar="index"
+								rowKey="#{action.complainNo}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
+
+								<p:ajax event="rowSelect"
+									listener="#{grievanceManagementDashboardBackingBean.onRowClick}"
+									process="@form" update="@form,complainAction" />
+
+
+								<p:column headerText="Complain No." width="15%;text-align:left;">
+									<h:outputText value="#{action.complainNo}" />
+								</p:column>
+								<p:column headerText="Department" width="15%;text-align:left;">
+									<h:outputText value="#{action.department}" />
+								</p:column>
+
+								<p:column headerText="Status" width="15%;text-align:left;">
+									<h:outputText value="#{action.status}" />
+								</p:column>
+
+								<p:column headerText="Action" width="30%;text-align:left;">
+									<h:outputText value="#{action.action}" />
+								</p:column>
+
+								<p:column headerText="Action Date" width="15%;text-align:left;">
+									<h:outputText value="#{action.actionDate}" />
+								</p:column>
+
+								<p:column width="10%">
+									<p:commandLink id="cmdBtnViewComplaint"
+										action="#{grievanceManagementDashboardBackingBean.viewComplaint}">
+										<p:graphicImage library="images" name="complaint.png"
+											style="margin:2px;width:25px;height:25px;border-radius: 50%;"
+											title="View Complaint"></p:graphicImage>
+										<f:setPropertyActionListener value="#{action}"
+											target="#{grievanceManagementDashboardBackingBean.selectedComplaintAction}" />
+									</p:commandLink>
+								</p:column>
+
+							</p:dataTable>
+						</p:panelGrid>
+
+					</p:panel>
+				</h:form>
+
+				<p:dialog header="Complaint" id="complaintDlg"
+					widgetVar="complaintDlg" height="550" width="1000" modal="true"
+					resizable="true" focus="complaintDlgFrm:dlg-complaint">
+					<h:form id="complaintDlgFrm">
+						<p:panel id="dlg-complaint">
+							<p:panel
+								style="margin-top: -9px; margin-right: -15px; margin-left: -15px; background-color: #bed6f8 !important;">
+								<h2 style="text-align: center;">Details of Complaint
+									#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.complaintNo}</h2>
+							</p:panel>
+
+							<h:panelGroup id="editableView">
+
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-8,ui-grid-col-4" layout="grid"
+									style="margin-top:4%;">
+									<p:panel header="Initiate Details"
+										style="border:1px solid #b1cbef">
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-5, ui-grid-col-6">
+											<p:outputPanel>
+												<p:outputLabel value="Priority Order"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:selectOneMenu
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.priorityOrder}"
+												tabindex="1" style="width:calc(100% - 18px);">
+												<f:selectItem itemLabel="-- Select Order --" itemValue=""></f:selectItem>
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.priorityOrderList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+											<p:outputPanel>
+												<p:outputLabel value="Severity"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:selectOneMenu
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.severityNo}"
+												tabindex="1" style="width:calc(100% - 18px);">
+												<f:selectItem itemLabel="-- Select Severity --" itemValue=""></f:selectItem>
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.severityList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+
+											<p:outputPanel>
+												<p:outputLabel value="Event Place"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:inputText
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.eventPlace}"
+												tabindex="1" style="width:100%">
+												<p:ajax />
+											</p:inputText>
+
+											<p:outputPanel>
+												<p:outputLabel value="Event Date &amp; Time"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:calendar
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.eventDateTime}"
+												tabindex="1" pattern="yyyy-MM-dd HH:mm:ss"
+												converterMessage="Format must be: yyyy-MM-dd HH:mm:ss"
+												inputStyle="width:100%">
+												<p:ajax event="dateSelect"
+													listener="#{grievanceManagementDashboardBackingBean.eventDateTimeSelect}" />
+											</p:calendar>
+
+											<p:outputPanel>
+												<p:outputLabel value="Complaint Media"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:selectOneMenu
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.complainMedia}"
+												tabindex="1" style="width:calc(100% - 18px);">
+												<f:selectItem itemLabel="-- Select Complaint Media --"
+													itemValue=""></f:selectItem>
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.complainMediaList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+
+											<p:outputLabel value="Has Written Proof"></p:outputLabel>
+											<p:panelGrid columns="2">
+												<p:selectBooleanCheckbox
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.hasWrittenProof}"
+													tabindex="1">
+
+												</p:selectBooleanCheckbox>
+											</p:panelGrid>
+
+											<p:outputLabel value="Complainer Participation"></p:outputLabel>
+											<p:panelGrid columns="2">
+												<p:selectBooleanCheckbox
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.complainerParticipation}"
+													tabindex="1">
+													<p:ajax update="panelComplainer" />
+												</p:selectBooleanCheckbox>
+											</p:panelGrid>
+
+											<p:outputLabel value="Details of the Complaint"></p:outputLabel>
+											<p:inputTextarea
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.detailOfComplain}"
+												tabindex="1" style="width:100%"></p:inputTextarea>
+
+										</p:panelGrid>
+
+									</p:panel>
+
+									<p:panel header="Bus Details" style="border:1px solid #b1cbef">
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-5, ui-grid-col-7">
+											<p:outputLabel value="Vehicle No."></p:outputLabel>
+											<p:inputText
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.vehicleNo}"
+												style="width:100%;"></p:inputText>
+
+											<p:outputLabel value="Permit No."></p:outputLabel>
+											<p:inputText
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.permitNo}"
+												style="width:100%;"></p:inputText>
+
+											<p:outputLabel value="Route No."></p:outputLabel>
+											<p:selectOneMenu
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.routeNo}"
+												style="width:calc(100% - 18px);" autoWidth="false"
+												effect="fold" filter="true" filterMatchMode="contains">
+												<p:ajax />
+												<f:selectItem itemLabel="-- Select Route --" itemValue="" />
+												<f:selectItems
+													value="#{terminalPaymentBackingBean.routeList}"
+													var="routeList"
+													itemLabel="#{routeList.routeNo}&#160;:&#160;#{routeList.startFrom}-#{routeList.endAt}"
+													itemValue="#{routeList.routeNo}" />
+											</p:selectOneMenu>
+
+											<p:outputLabel value="Province"></p:outputLabel>
+											<p:selectOneMenu
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.province}"
+												style="width:calc(100% - 18px);">
+												<p:ajax />
+												<f:selectItem itemLabel="-- Select Province --" itemValue="" />
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.provincelList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+
+											<p:outputLabel value="Origin"></p:outputLabel>
+											<p:inputText
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.origin}"
+												style="width:100%;">
+												<p:ajax />
+											</p:inputText>
+
+											<p:outputLabel value="Destination"></p:outputLabel>
+											<p:inputText
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.destination}"
+												style="width:100%;">
+												<p:ajax />
+											</p:inputText>
+
+											<p:outputLabel value="Depot"></p:outputLabel>
+											<p:inputText
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.depot}"
+												style="width:100%;">
+												<p:ajax />
+											</p:inputText>
+
+											<p:outputLabel value="Service Type"></p:outputLabel>
+											<p:inputText
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.serviceTypeDescription}"
+												style="width:100%;">
+												<p:ajax />
+											</p:inputText>
+										</p:panelGrid>
+									</p:panel>
+								</p:panelGrid>
+
+								<div class="ui-grid-row">
+
+									<div class="gridspadding ui-grid-col-12">
+										<p:panel id="panelComplainer" header="Complainer Details"
+											style="border:1px solid #b1cbef;">
+
+											<p:panelGrid columns="4" layout="grid"
+												columnClasses="ui-grid-col-1, ui-grid-col-3, ui-grid-col-10, ui-grid-col-4">
+												<h:panelGroup />
+												<p:outputLabel value=""></p:outputLabel>
+												<p:outputPanel>
+													<p:outputLabel value="Name of the Complainer"></p:outputLabel>
+													<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+												</p:outputPanel>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In English" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.complainerName}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In Sinhala" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.complainerName_si}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In Tamil" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.complainerName_ta}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+											</p:panelGrid>
+
+											<p:spacer height="10"></p:spacer>
+
+											<p:panelGrid columns="6" layout="grid"
+												columnClasses="ui-grid-col-1, ui-grid-col-3, ui-grid-col-5, ui-grid-col-5, ui-grid-col-3, ui-grid-col-1">
+												<h:panelGroup />
+												<p:outputLabel value=""></p:outputLabel>
+												<p:outputPanel>
+													<p:outputLabel value="Address Line 1"></p:outputLabel>
+													<p:outputLabel value=" *" style="color:#ff0000;"
+														rendered="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.complainerParticipation}"></p:outputLabel>
+												</p:outputPanel>
+												<p:outputLabel value="Address Line 2"></p:outputLabel>
+												<p:outputLabel value="City"></p:outputLabel>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In English" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.address1}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.address2}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.city}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In Sinhala" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.address1_si}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.address2_si}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.city_si}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+
+												<h:panelGroup />
+												<p:outputLabel value="In Tamil" style="font-size:12px"></p:outputLabel>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.address1_ta}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.address2_ta}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.city_ta}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputText>
+												<h:panelGroup />
+											</p:panelGrid>
+
+											<p:spacer height="10"></p:spacer>
+
+											<p:panelGrid columns="6" layout="grid"
+												columnClasses="ui-grid-col-1, ui-grid-col-3, ui-grid-col-5, ui-grid-col-3,ui-grid-col-5, ui-grid-col-1">
+												<h:panelGroup />
+												<p:outputPanel>
+													<p:outputLabel value="Contact No. 1"></p:outputLabel>
+													<p:outputLabel value=" *" style="color:#ff0000;"
+														rendered="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.complainerParticipation}"></p:outputLabel>
+												</p:outputPanel>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.contact1}"
+													maxlength="10">
+													<p:ajax />
+													<p:keyFilter regEx="/[-+()0-9]+/"></p:keyFilter>
+												</p:inputText>
+												<p:outputPanel>
+													<p:outputLabel value="Contact No. 2"></p:outputLabel>
+													<p:outputLabel value=" *" style="color:#ff0000;"
+														rendered="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.complainerParticipation}"></p:outputLabel>
+												</p:outputPanel>
+												<p:inputText
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.contact2}"
+													maxlength="10">
+													<p:ajax />
+													<p:keyFilter regEx="/[-+()0-9]+/"></p:keyFilter>
+												</p:inputText>
+												<h:panelGroup />
+											</p:panelGrid>
+
+										</p:panel>
+									</div>
+								</div>
+
+								<div class="ui-grid-row">
+									<div class="gridspadding ui-grid-col-12">
+										<p:panel id="panelCommitedOffences"
+											header="Committed Offences" style="border:1px solid #b1cbef;">
+											<p:dataTable id="dtOffencePanel" var="offence"
+												value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.committedOffences}"
+												emptyMessage="No committed offences." paginator="true"
+												rows="10" rowsPerPageTemplate="5,10,15"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												reflow="true">
+												<p:column rendered="false">
+													<h:outputText value="#{offence.code}" />
+												</p:column>
+												<p:column headerText="Applicable (Yes/No)" width="70">
+													<p:selectBooleanCheckbox value="#{offence.applicable}"
+														disabled="true">
+														<p:ajax />
+													</p:selectBooleanCheckbox>
+												</p:column>
+												<p:column headerText="Offence" style="text-align:left">
+													<h:outputText value="#{offence.description}" />
+												</p:column>
+												<p:column headerText="Remarks" style="text-align:left">
+													<p:inputText value="#{offence.remark}" style="width:90%">
+														<p:ajax />
+													</p:inputText>
+												</p:column>
+											</p:dataTable>
+
+											<p:spacer height="10px"></p:spacer>
+											<p:panelGrid layout="grid" columns="2"
+												columnClasses="ui-grid-col-3, ui-grid-col-8">
+												<p:outputLabel value="Other"></p:outputLabel>
+												<p:inputTextarea
+													value="#{grievanceManagementDashboardBackingBean.selectedComplaintDTO.otherOffence}"
+													style="width:100%">
+													<p:ajax />
+												</p:inputTextarea>
+											</p:panelGrid>
+										</p:panel>
+									</div>
+								</div>
+
+							</h:panelGroup>
+
+
+						</p:panel>
+					</h:form>
+				</p:dialog>
+
+
+				<p:dialog styleClass="" id="complainAction" global="true"
+					modal="true" header="Complain Action" width="40%" severity="info"
+					widgetVar="complainActionDlg" closeOnEscape="true"
+					resizable="false">
+
+					<h:form id="frmComplainAction">
+
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+
+							<p:outputLabel value="Complain No."></p:outputLabel>
+
+							<p:inputText style="width:100%" disabled="true"
+								value="#{grievanceManagementDashboardBackingBean.selectedComplaintAction.complainNo}"></p:inputText>
+
+							<p:outputLabel value="Action"></p:outputLabel>
+
+							<p:inputTextarea rows="6" cols="33"
+								disabled="#{grievanceManagementDashboardBackingBean.selectedComplaintAction.status eq 'Closed'}"
+								style="width:100%;height:150px" autoResize="false"
+								value="#{grievanceManagementDashboardBackingBean.selectedComplaintAction.action}"></p:inputTextarea>
+
+							<p:outputLabel value="Action Completed Date"></p:outputLabel>
+
+							<p:calendar id="actionDateCalId"
+								disabled="#{grievanceManagementDashboardBackingBean.selectedComplaintAction.status eq 'Closed' || grievanceManagementDashboardBackingBean.selectedComplaintAction.statusCode eq 'O'}"
+								value="#{grievanceManagementDashboardBackingBean.selectedComplaintAction.actionCompletedDate}"
+								style="width:100%;height:18px;" navigator="true" locale="en_US"
+								mindate="today" showOn="button" pattern="dd/MM/yyyy"
+								placeholder="DD/MM/YYYY" yearRange="c-100:c+100"
+								readonlyInput="true"></p:calendar>
+
+						</p:panelGrid>
+						<br />
+						<center>
+
+							<p:commandButton style="margin-top:5px;margin-bottom:10px"
+								styleClass="mainActionbtn" value="Save"
+								rendered="#{grievanceManagementDashboardBackingBean.selectedComplaintAction.status ne 'Closed'}"
+								process="frmComplainAction"
+								update="frmComplainAction,dashboardForm"
+								action="#{grievanceManagementDashboardBackingBean.saveAction}">
+							</p:commandButton>
+
+							<p:commandButton style="margin-top:5px;margin-bottom:10px"
+								styleClass="mainActionbtn" value="Complete"
+								disabled="#{grievanceManagementDashboardBackingBean.selectedComplaintAction.statusCode eq 'O'}"
+								rendered="#{grievanceManagementDashboardBackingBean.selectedComplaintAction.status ne 'Closed'}"
+								process="frmComplainAction"
+								update="frmComplainAction,dashboardForm"
+								action="#{grievanceManagementDashboardBackingBean.completeAction}">
+							</p:commandButton>
+
+							<p:commandButton style="margin-top:5px;margin-bottom:10px"
+								styleClass="mainActionbtn" value="Clear"
+								rendered="#{grievanceManagementDashboardBackingBean.selectedComplaintAction.status ne 'Closed'}"
+								process="frmComplainAction"
+								update="frmComplainAction,dashboardForm"
+								action="#{grievanceManagementDashboardBackingBean.clearAction}">
+							</p:commandButton>
+
+							<p:commandButton style="margin-top:5px;margin-bottom:10px"
+								styleClass="mainActionbtn" value="Close"
+								process="frmComplainAction"
+								onclick="PF('complainActionDlg').hide()">
+							</p:commandButton>
+						</center>
+					</h:form>
+				</p:dialog>
+
+
+
+				<p:dialog id="dialogError" global="true" modal="true" header="Error"
+					width="30%" severity="info" widgetVar="errorDialog"
+					closeOnEscape="true" resizable="false">
+					<h:form id="frmError">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+								<p:outputLabel
+									value="#{grievanceManagementDashboardBackingBean.errorMsg}"></p:outputLabel>
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								process="frmError" value="OK" onclick="PF('errorDialog').hide()">
+							</p:commandButton>
+
+						</center>
+					</h:form>
+				</p:dialog>
+
+				<p:dialog id="dialogSuccess" global="true" modal="true"
+					header="Success" width="30%" severity="info"
+					widgetVar="successDialog" closeOnEscape="true" resizable="false">
+					<h:form id="frmSuccess">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+								<p:outputLabel
+									value="#{grievanceManagementDashboardBackingBean.successMsg}"></p:outputLabel>
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								process="frmSuccess" value="OK"
+								onclick="PF('successDialog').hide()">
+							</p:commandButton>
+						</center>
+					</h:form>
+				</p:dialog>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

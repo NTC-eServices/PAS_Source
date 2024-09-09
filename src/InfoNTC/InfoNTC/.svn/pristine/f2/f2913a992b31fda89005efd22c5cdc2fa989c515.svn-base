@@ -1,0 +1,1185 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn1 {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 180px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtnDM:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtnDM {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 180px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+.calendarClass input {
+	width: 62% !important
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Edit Driver/Conductor Details- Authorized</h1>
+
+			<div style="width: 95%;" class="subDiv">
+
+
+				<h:form id="frmDriConReg">
+					<br></br>
+
+					<p:panelGrid columns="2"
+						columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+						<p:panelGrid columns="1" columnClasses="ui-grid-col-12,"
+										layout="grid" styleClass="transparentBackground">
+								<p:panel id="preview"
+								rendered="#{editDriverConductorRegistrationHighAuthBean.photoHave}"
+									style="border-color: #b7c7e0;border-style: solid;border-width: initial; width: 200px;">
+									<img id="img"
+										src="data:image/png;base64,#{editDriverConductorRegistrationHighAuthBean.imageContentsAsBase64}"
+										style="width: 150px; height: 150px;" />
+								</p:panel>
+								</p:panelGrid>
+						
+						<p:panel>
+							<p:panelGrid columns="3"
+								columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+								layout="grid">
+
+
+
+
+
+								<p:panelGrid>
+									<p:outputLabel value="Type of Training"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="typeOfTrainingselect" tabindex="1"
+										style="width:70%; "
+										value="#{editDriverConductorRegistrationHighAuthBean.strSelectedType}"
+										effect="fold" filter="true" filterMatchMode="contains">
+										<p:ajax
+											listener="#{editDriverConductorRegistrationHighAuthBean.onTrainingTypeChange}"
+											update="selectID,selectDCID" />
+										<f:selectItem itemLabel="-- Select Training Type --"
+											itemValue="" />
+										<f:selectItems
+											value="#{editDriverConductorRegistrationHighAuthBean.trainingTypeList}"
+											var="type" itemValue="#{type.code}"
+											itemLabel="#{type.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+
+								<p:panelGrid>
+									<p:outputLabel value="ID Number"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="selectID" tabindex="2" style="width:70%; "
+										value="#{editDriverConductorRegistrationHighAuthBean.strSelectedNic}"
+										effect="fold" filter="true" filterMatchMode="contains"
+										disabled="#{editDriverConductorRegistrationHighAuthBean.disableNic}">
+										<p:ajax
+											listener="#{editDriverConductorRegistrationHighAuthBean.onIDNoChange}"
+											update="selectDCID" />
+										<f:selectItem itemLabel="-- Select ID No. --" itemValue="" />
+										<f:selectItems
+											value="#{editDriverConductorRegistrationHighAuthBean.idNoList}"
+											var="idlist" itemValue="#{idlist.code}"
+											itemLabel="#{idlist.code}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+
+
+								<p:panelGrid>
+									<p:outputLabel value="Driver/Conductor ID"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="selectDCID" tabindex="3"
+										style="width:70%; "
+										value="#{editDriverConductorRegistrationHighAuthBean.strSelectedID}"
+										effect="fold" filter="true" filterMatchMode="contains"
+										disabled="#{editDriverConductorRegistrationHighAuthBean.disableDCId}">
+										<f:selectItem itemLabel="-- Select Driver/Conductor ID --"
+											itemValue="" />
+										<f:selectItems
+											value="#{editDriverConductorRegistrationHighAuthBean.driverConList}"
+											var="dclist" itemValue="#{dclist.code}"
+											itemLabel="#{dclist.code}" />
+										<p:ajax
+											listener="#{editDriverConductorRegistrationHighAuthBean.onDCIDNoChange}"
+											update="frmDriConReg , preview" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+							</p:panelGrid>
+
+						</p:panel>
+					</p:panelGrid>
+					<center>
+						<p:panel columns="1" columnClasses="ui-grid-col-12" layout="grid">
+
+							<p:commandButton styleClass="mainActionbtn" value="Search"
+								update="@form" tabindex="4" process="@form"
+								action="#{editDriverConductorRegistrationHighAuthBean.mainSearch}"></p:commandButton>
+							<p:commandButton styleClass="mainActionbtn" value="Clear"
+								update="@form" tabindex="5" process="@form"
+								action="#{editDriverConductorRegistrationHighAuthBean.mainClear}"></p:commandButton>
+
+
+
+
+						</p:panel>
+
+					</center>
+
+
+
+
+
+
+					<p:panel id="pnldetails"
+						style="border:5px solid #bed6f8; margin:10px;"
+						rendered="#{editDriverConductorRegistrationHighAuthBean.hidePanel}">
+						<p:panel
+							style="margin-top: -9px; margin-right: -15px; margin-left: -15px; background-color: #bed6f8 !important;">
+							<h2 style="text-align: center;">Details of Driver/Conductor
+								Registration</h2>
+						</p:panel>
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-10,ui-grid-col-2" layout="grid">
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<div style="border-style: solid;">
+									<div>
+										<p:outputLabel value="Total Points" style="font-weight:bold;"></p:outputLabel>
+									</div>
+									<div
+										style="border-style: solid; background-color: yellow; Height: 35px; width: 82%;">
+										<b><p:outputLabel id="points"
+												style="font-size:20pt;text-align:center;"
+												value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.points}">
+											</p:outputLabel></b>
+									</div>
+								</div>
+
+							</p:panelGrid>
+						</p:panelGrid>
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+
+
+
+							<p:outputLabel value="Training Language Medium"
+								for="typeOfTraining">
+
+							</p:outputLabel>
+							<p:selectOneMenu id="medium" tabindex="7" style="width:84%; "
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.trainingLanguageCode}"
+								effect="fold" filter="true" filterMatchMode="contains">
+
+								<f:selectItem itemLabel="-- Select Medium --" itemValue="" />
+								<f:selectItems
+									value="#{editDriverConductorRegistrationHighAuthBean.languageList}"
+									var="lanMedium" itemValue="#{lanMedium.trainingLanguageCode}"
+									itemLabel="#{lanMedium.trainingLanguageDes}" />
+							</p:selectOneMenu>
+
+
+
+
+							<p:outputLabel value="Type of Training" for="typeOfTraining">
+								<span style="color: red;">*</span>
+							</p:outputLabel>
+
+							<p:inputText
+								style="width:85%;height:18px;color:red;font-weight:bold;"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.newtrainingType}"
+								id="typeOfTraining" readonly="true">
+							</p:inputText>
+
+
+							<p:outputLabel value="Application No." for="appNo"></p:outputLabel>
+
+
+							<p:inputText
+								style="width:85%;height:18px;color:red;font-weight:bold;"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.appNo}"
+								id="appNo" onkeyup="this.value=this.value.toUpperCase();"
+								readonly="true">
+							</p:inputText>
+
+							<p:outputLabel value="ID Number" for="nic">
+								<span style="color: red;">*</span>
+							</p:outputLabel>
+
+							<p:inputText style="width:85%;height:18px;" tabindex="2"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.nic}"
+								id="nic" onkeyup="this.value=this.value.toUpperCase();"
+								maxlength="12">
+
+								<p:ajax
+									listener="#{editDriverConductorRegistrationHighAuthBean.onNicChange}" />
+
+							</p:inputText>
+
+							<p:outputLabel value="Driver/Conductor ID" for="id"></p:outputLabel>
+
+
+							<p:inputText
+								style="width:85%;height:18px;color:green;font-weight:bold;"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.driverConductorId}"
+								id="id" onkeyup="this.value=this.value.toUpperCase();"
+								readonly="true">
+							</p:inputText>
+						</p:panelGrid>
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+							<p:outputLabel value="Name with Initials" for="name">
+								<span style="color: red;">*</span>
+							</p:outputLabel>
+
+							<p:inputText style="width:95%;height:18px;" tabindex="3"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.nameWithInitials}"
+								id="name" onkeyup="this.value=this.value.toUpperCase();"
+								maxlength="100">
+								<p:keyFilter regEx="/[a-z_\.\s\'\-]/i" />
+							</p:inputText>
+
+							<p:outputLabel value="Full Name" for="fullName">
+								<span style="color: red;">*</span>
+							</p:outputLabel>
+
+							<p:inputText style="width:95%;height:18px;" tabindex="4"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.fullNameEng}"
+								id="fullName" onkeyup="this.value=this.value.toUpperCase();"
+								maxlength="100">
+								<p:keyFilter regEx="/[a-z_\.\s\'\-]/i" />
+							</p:inputText>
+
+							<p:outputLabel value="Full Name(Sinhala)" for="fullNameSin">
+
+							</p:outputLabel>
+
+							<p:inputText style="width:95%;height:18px;" tabindex="5"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.fullNameSin}"
+								id="fullNameSin" maxlength="100">
+
+							</p:inputText>
+							<p:outputLabel value="Full Name(Tamil)" for="fullNameTam">
+
+							</p:outputLabel>
+
+							<p:inputText style="width:95%;height:18px;" tabindex="6"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.fullNameTam}"
+								id="fullNameTam" maxlength="100">
+
+							</p:inputText>
+
+						</p:panelGrid>
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:outputLabel value="Gender" for="gender">
+								<span style="color: red;">*</span>
+							</p:outputLabel>
+
+
+							<p:selectOneMenu id="gender" tabindex="7" style="width:84%; "
+								value="#{editDriverConductorRegistrationHighAuthBean.strSelectedGender}"
+								effect="fold" filter="true" filterMatchMode="contains">
+
+								<f:selectItem itemLabel="-- Select Gender --" itemValue="" />
+								<f:selectItems
+									value="#{editDriverConductorRegistrationHighAuthBean.genderList}"
+									var="gender" itemValue="#{gender.code}"
+									itemLabel="#{gender.description}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Date of Birth" for="dob">
+								<span style="color: red;">*</span>
+							</p:outputLabel>
+
+
+							<p:calendar id="dob" tabindex="8"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.dob}"
+								style="width:220px;height:18px;" navigator="true" locale="en_US"
+								showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+								yearRange="c-100:c" readonlyInput="true"></p:calendar>
+
+							<p:outputLabel value="District" for="district">
+								<span style="color: red;">*</span>
+							</p:outputLabel>
+
+
+							<p:selectOneMenu id="district" tabindex="9" style="width:84%; "
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.newDistrict}"
+								effect="fold" filter="true" filterMatchMode="contains">
+
+								<f:selectItem itemLabel="-- Select District --" itemValue="" />
+								<f:selectItems
+									value="#{editDriverConductorRegistrationHighAuthBean.districtList}"
+									var="district" itemValue="#{district.code}"
+									itemLabel="#{district.description}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid>
+								<h3>Driver / Conductor ID</h3>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+
+							<p:outputLabel value="First Issue Date" for="firstIssueDate">
+							</p:outputLabel>
+
+							<p:calendar id="firstIssueDate" tabindex="1"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.firstDateOfIssue}"
+								style="width:220px;height:18px;" navigator="true" locale="en_US"
+								showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+								yearRange="c-100:c" readonlyInput="true"></p:calendar>
+
+							<p:outputLabel value="Valid Start Date" for="dateOfIssue">
+							</p:outputLabel>
+
+							<p:calendar id="dateOfIssue"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.dateOfIssue}"
+								style="width:220px;height:18px;" navigator="true" locale="en_US"
+								showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+								yearRange="c-100:c" readonlyInput="true"></p:calendar>
+
+							<p:outputLabel value=" Valid Expire Date" for="dateOfExpiry">
+							</p:outputLabel>
+
+							<p:calendar id="dateOfExpiry"
+								value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.expiryDate}"
+								style="width:220px;height:18px;" navigator="true" locale="en_US"
+								showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+								yearRange="c-50:c+50" readonlyInput="true"></p:calendar>
+
+
+
+						</p:panelGrid>
+						<p:panel style="border-bottom:5px solid #bed6f8;" />
+
+						<p:panelGrid columns="1" layout="grid">
+							<p:panelGrid>
+								<h2 style="color: blue;">Permanent Address</h2>
+
+							</p:panelGrid>
+
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+								layout="grid">
+
+
+								<p:panelGrid></p:panelGrid>
+								<p:outputLabel value="English" style="font-weight:bold;"></p:outputLabel>
+								<p:outputLabel value="Sinhala" style="font-weight:bold;"></p:outputLabel>
+								<p:outputLabel value="Tamil" style="font-weight:bold;"></p:outputLabel>
+
+								<p:outputLabel value="Address Line 1">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="10"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.add1Eng}"
+									onkeyup="this.value=this.value.toUpperCase()" id="add1Eng"
+									maxlength="100">
+								</p:inputText>
+								<p:inputText style="width:95%;height:18px;" tabindex="13"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.add1Sin}"
+									onkeyup="this.value=this.value.toUpperCase()" id="add1Sin"
+									maxlength="100">
+								</p:inputText>
+								<p:inputText style="width:85%;height:18px;" tabindex="16"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.add1Tam}"
+									onkeyup="this.value=this.value.toUpperCase()" id="add1Tam"
+									maxlength="100">
+								</p:inputText>
+
+								<p:outputLabel value="Address Line 2">
+
+								</p:outputLabel>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="11"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.add2Eng}"
+									onkeyup="this.value=this.value.toUpperCase()" id="add2Eng"
+									maxlength="100">
+								</p:inputText>
+								<p:inputText style="width:95%;height:18px;" tabindex="14"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.add2Sin}"
+									onkeyup="this.value=this.value.toUpperCase()" id="add2Sin"
+									maxlength="100">
+								</p:inputText>
+								<p:inputText style="width:85%;height:18px;" tabindex="17"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.add2Tam}"
+									onkeyup="this.value=this.value.toUpperCase()" id="add3Tam"
+									maxlength="100">
+								</p:inputText>
+
+								<p:outputLabel value="City">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="12"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.cityEng}"
+									onkeyup="this.value=this.value.toUpperCase()" id="cityEng"
+									maxlength="100">
+								</p:inputText>
+								<p:inputText style="width:95%;height:18px;" tabindex="15"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.citySin}"
+									onkeyup="this.value=this.value.toUpperCase()" id="citySin"
+									maxlength="100">
+								</p:inputText>
+								<p:inputText style="width:85%;height:18px;" tabindex="18"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.cityTam}"
+									onkeyup="this.value=this.value.toUpperCase()" id="cityTam"
+									maxlength="100">
+								</p:inputText>
+
+								<p:outputLabel value="Contact No." for="contact">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="19"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.contactNo}"
+									id="contact" maxlength="12">
+									<p:keyFilter regEx="/[\d\-]/" />
+								</p:inputText>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:outputLabel value="Driving License No." for="license">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="20"
+									disabled="#{editDriverConductorRegistrationHighAuthBean.conductor}"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.licenseNo}"
+									onkeyup="this.value=this.value.toUpperCase()" id="license"
+									maxlength="15">
+
+								</p:inputText>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:outputLabel value="Driving License Issue Date"
+									for="dateOfIssueDriveLic">
+								</p:outputLabel>
+
+								<p:calendar id="dateOfIssueDriveLic" tabindex="21"
+									disabled="#{editDriverConductorRegistrationHighAuthBean.conductor}"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.dateOfIssueLicence}"
+									style="width:220px;height:18px;" navigator="true"
+									locale="en_US" showOn="button" pattern="dd/MM/yyyy"
+									placeholder="DD/MM/YYYY" yearRange="c-100:c"
+									readonlyInput="true"></p:calendar>
+
+								<p:outputLabel value="Driving Licensen Expire Date"
+									for="dateOfExpiryDriveLic">
+								</p:outputLabel>
+
+								<p:calendar id="dateOfExpiryDriveLic" tabindex="22"
+									disabled="#{editDriverConductorRegistrationHighAuthBean.conductor}"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.dateOfExpiryLicence}"
+									style="width:220px;height:18px;" navigator="true"
+									locale="en_US" showOn="button" pattern="dd/MM/yyyy"
+									placeholder="DD/MM/YYYY" yearRange="c-50:c+50"
+									readonlyInput="true"></p:calendar>
+
+
+							</p:panelGrid>
+
+							<p:panelGrid columns="2"
+								columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+								<p:outputLabel value="Education Qualification" for="edu">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="23"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.education}"
+									onkeyup="this.value=this.value.toUpperCase()" id="edu"
+									maxlength="250">
+
+								</p:inputText>
+
+								<p:outputLabel value="GS Certification No." for="gsCert">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+								<p:inputText id="gsCert" style="width:95%;height:18px;"
+									tabindex="24"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.gsCertificateNo}"
+									onkeyup="this.value=this.value.toUpperCase()" maxlength="100">
+
+								</p:inputText>
+
+								<p:outputLabel value="Issued Date for GS Certificate"
+									for="gscissuedate">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+
+								<p:calendar id="gscissuedate" tabindex="25"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.gscissuedate}"
+									style="width:220px;height:18px;" navigator="true"
+									locale="en_US" showOn="button" pattern="dd/MM/yyyy"
+									placeholder="DD/MM/YYYY" yearRange="c-50:c+50"
+									readonlyInput="true"></p:calendar>
+
+								<p:outputLabel value="Police Clearance Station" for="police">
+								</p:outputLabel>
+
+								<p:inputText id="police" style="width:95%;height:18px;"
+									tabindex="25"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.policeClearanceStation}"
+									onkeyup="this.value=this.value.toUpperCase()" maxlength="100">
+
+								</p:inputText>
+
+								<p:outputLabel value="Issued Date for Police Clearance"
+									for="pcissuedate">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+								<p:calendar id="pcissuedate" tabindex="27"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.pcissuedate}"
+									style="width:220px;height:18px;" navigator="true"
+									locale="en_US" showOn="button" pattern="dd/MM/yyyy"
+									placeholder="DD/MM/YYYY" yearRange="c-50:c+50"
+									readonlyInput="true"></p:calendar>
+
+								<p:outputLabel value="Medical Certificate Number"
+									for="medicalcerNo">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="28"
+									disabled="#{editDriverConductorRegistrationHighAuthBean.conductor}"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.medicalcertificateNo}"
+									onkeyup="this.value=this.value.toUpperCase()" id="medicalcerNo"
+									maxlength="25">
+								</p:inputText>
+
+								<p:outputLabel value="Issued Date  for Medical Report"
+									for="mrissuedate">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+
+								<p:calendar id="mrissuedate" tabindex="29"
+									disabled="#{editDriverConductorRegistrationHighAuthBean.conductor}"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.mrissuedate}"
+									style="width:220px;height:18px;" navigator="true"
+									locale="en_US" showOn="button" pattern="dd/MM/yyyy"
+									placeholder="DD/MM/YYYY" yearRange="c-50:c+50"
+									readonlyInput="true"></p:calendar>
+
+								<p:outputLabel value="Expire Date  for Medical Report"
+									for="mrexpiredate">
+									<span style="color: red;">*</span>
+								</p:outputLabel>
+
+
+								<p:calendar id="mrexpiredate" tabindex="30"
+									disabled="#{editDriverConductorRegistrationHighAuthBean.conductor}"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.mrexpiredate}"
+									style="width:220px;height:18px;" navigator="true"
+									locale="en_US" showOn="button" pattern="dd/MM/yyyy"
+									placeholder="DD/MM/YYYY" yearRange="c-50:c+50"
+									readonlyInput="true"></p:calendar>
+
+
+								<p:outputLabel value="Registration No. of Current Service Bus"
+									for="vehi">
+								</p:outputLabel>
+
+								<p:inputText id="vehi" style="width:95%;height:18px;"
+									tabindex="31"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.vehicleRegNo}"
+									onkeyup="this.value=this.value.toUpperCase()" maxlength="20">
+									<p:ajax
+										listener="#{editDriverConductorRegistrationHighAuthBean.onVehicleChange}"
+										update="permit,route,txtfrom,txtto" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+								layout="grid">
+
+
+								<p:outputLabel value="Permit No." for="permit">
+								</p:outputLabel>
+
+								<p:selectOneMenu id="permit" tabindex="32" style="width:84%; "
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.permitNo}"
+									effect="fold" filter="true" filterMatchMode="contains">
+									<p:ajax
+										listener="#{editDriverConductorRegistrationHighAuthBean.onPermitChange}"
+										update="route,txtfrom,txtto" />
+
+									<f:selectItem itemLabel="-- Select Permit No. --" itemValue="" />
+									<f:selectItems
+										value="#{editDriverConductorRegistrationHighAuthBean.permitList}"
+										var="permit" itemValue="#{permit.permitNo}"
+										itemLabel="#{permit.permitNo}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Route No." for="route">
+								</p:outputLabel>
+
+								<p:inputText id="route" style="width:85%;height:18px;"
+									tabindex="33" readonly="true"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.routeNo}"
+									maxlength="20">
+
+								</p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid columns="2"
+								columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+								<p:outputLabel value="From (Origin)" for="txtfrom">
+								</p:outputLabel>
+								<p:inputText id="txtfrom" style="width:95%;height:18px;"
+									tabindex="34" readonly="true"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.from}">
+								</p:inputText>
+
+
+								<p:outputLabel value="To (Destination)" for="txtto">
+								</p:outputLabel>
+								<p:inputText id="txtto" style="width:95%;height:18px;"
+									tabindex="35" readonly="true"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.to}">
+								</p:inputText>
+
+								<p:outputLabel value="Remarks" for="txtto">
+								</p:outputLabel>
+								<p:inputTextarea id="remarks" style="width:95%;height:18px;"
+									tabindex="35" maxlength="300" rows="3"
+									value="#{editDriverConductorRegistrationHighAuthBean.registrationDto.specialRemarks}">
+								</p:inputTextarea>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<center>
+
+									<p:commandButton styleClass="mainActionbtn" value="Update"
+										update="frmDriConReg" tabindex="36" process="@form"
+										action="#{editDriverConductorRegistrationHighAuthBean.update}"></p:commandButton>
+
+									<p:commandButton styleClass="mainActionbtn" value="Clear"
+										update="frmDriConReg" tabindex="37" process="frmDriConReg"
+										action="#{editDriverConductorRegistrationHighAuthBean.clear}"></p:commandButton>
+
+									<p:commandButton styleClass="mainActionbtnDM"
+										value="Documents Management" tabindex="38"
+										action="#{editDriverConductorRegistrationHighAuthBean.goToDocumentsManagementBtn}"
+										update="uploadDocumentsDialog"></p:commandButton>
+
+								</center>
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+
+						</p:panelGrid>
+
+					</p:panel>
+
+				</h:form>
+
+			</div>
+		</div>
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{editDriverConductorRegistrationHighAuthBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="successSve" global="true" modal="true"
+			header="Success" width="30%" severity="info" widgetVar="successSve"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{editDriverConductorRegistrationHighAuthBean.sucessMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1"
+						style="margin-top:10px;margin-bottom:10px" process="frmsuccessSve"
+						value="OK" onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<!-- Document Upload view -->
+		<p:dialog styleClass="" id="uploadDocumentsDialog" global="true"
+			closable="false" modal="true" header="Upload Documents" width="80%"
+			height="400px" severity="info" widgetVar="uploadDocument"
+			closeOnEscape="true" resizable="false" draggable="false">
+			<!-- <p:ajax event="close"
+				listener="#{editDriverConductorRegistrationHighAuthBean.clearCheckDocumentsTable}" /> -->
+
+
+			<h:form id="frmdoc">
+
+				<p:tabView>
+					<p:tab title="Upload Documents">
+
+						<p:accordionPanel>
+							<p:growl id="msgs" showDetail="false" />
+							<p:tab title="Mandatory Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abc" tableStyle="width:80%" var="docMandatory"
+										value="#{editDriverConductorRegistrationHighAuthBean.mandatoryList}"
+										rows="10" rowsPerPageTemplate="10,20,30,40,50"
+										paginator="true" sortOrder="ascending"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docMandatory.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docMandatory.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+
+											<h:outputText value="#{docMandatory.uploadFilePath}" />
+										</p:column>
+
+										<p:column headerText="" style="width: 150px !important;">
+
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveDriverConductorMandatoryUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640">
+												
+
+												<f:attribute name="uploadedObj" value="#{docMandatory}" />
+											</p:fileUpload>
+
+										</p:column>
+
+									</p:dataTable>
+								</h:panelGrid>
+
+							</p:tab>
+						</p:accordionPanel>
+
+						<br></br>
+						<br></br>
+
+						<p:accordionPanel>
+							<p:growl id="msgse" showDetail="false" />
+							<p:tab title="Optional Documents">
+
+								<h:panelGrid>
+									<p:dataTable id="abcd" tableStyle="width:auto"
+										var="docOptional"
+										value="#{editDriverConductorRegistrationHighAuthBean.optionalList}"
+										rows="10" rowsPerPageTemplate="10,20,30,40,50"
+										paginator="true" sortOrder="ascending" scrollable="true"
+										scrollHeight="100%" liveResize="true" liveScroll="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docOptional.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docOptional.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+											<h:outputText value="#{docOptional.uploadOptionalFilePath}" />
+										</p:column>
+
+										<p:column headerText="" style="width: 150px;">
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveDriverConductorOptionalUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640"
+												fileLimitMessage="Please Upload Only One Document">
+												
+
+												<f:attribute name="uploadedOptionalObj"
+													value="#{docOptional}" />
+
+											</p:fileUpload>
+
+										</p:column>
+
+									</p:dataTable>
+								</h:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+
+						<center>
+							<p:commandButton id="cmdbtnBack" value="Back"
+								class="mainActionbtn" update="@all"
+								onclick="PF('viewCreateChargeType').hide()"
+								action="#{editPermitRenewalsBackingBean.goBack}">
+							</p:commandButton>
+						</center>
+
+					</p:tab>
+
+					<p:tab title="Upload History">
+
+
+						<p:accordionPanel id="dkfj">
+							<p:growl id="NP" showDetail="false" />
+							<p:tab title="Mandatory Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="mandatoryNP" tableStyle="width:auto"
+										var="docMandatory"
+										value="#{sessionBackingBean.sisuSariyaMandatoryDocumentList}"
+										rows="5" paginator="true" sortOrder="ascending"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docMandatory.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docMandatory.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Name" style="width: 200px;">
+
+											<h:outputText value="#{docMandatory.documentName}" />
+										</p:column>
+
+										<p:column headerText="" style="width: 75px;">
+
+
+											<p:commandLink
+												actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+												oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+												<p:graphicImage library="images" name="view.png"
+													style="width:20px;height:20px;" title="view"></p:graphicImage>
+												<f:attribute name="documentMandatory"
+													value="#{docMandatory}" />
+											</p:commandLink>
+
+
+
+										</p:column>
+
+
+									</p:dataTable>
+								</h:panelGrid>
+
+							</p:tab>
+						</p:accordionPanel>
+
+						<br></br>
+						<br></br>
+
+						<p:accordionPanel>
+
+							<p:growl showDetail="false" />
+
+							<p:tab title="Optional Documents">
+
+								<h:panelGrid>
+									<p:dataTable id="optionalNP" tableStyle="width:auto"
+										var="docOptional"
+										value="#{sessionBackingBean.sisuSariyaOptionalDocumentList}"
+										rows="5" paginator="true" sortOrder="ascending"
+										scrollHeight="100%" liveResize="true" liveScroll="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docOptional.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docOptional.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Name" style="width: 200px;">
+											<h:outputText value="#{docOptional.documentName}" />
+										</p:column>
+
+										<p:column headerText="" style="width: 75px;">
+
+
+											<p:commandLink
+												actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+												oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+												<p:graphicImage library="images" name="view.png"
+													style="width:20px;height:20px;" title="view"></p:graphicImage>
+												<f:attribute name="documentOptional" value="#{docOptional}" />
+											</p:commandLink>
+
+										</p:column>
+
+
+									</p:dataTable>
+								</h:panelGrid>
+							</p:tab>
+
+						</p:accordionPanel>
+
+
+
+
+
+
+
+					</p:tab>
+
+
+
+
+				</p:tabView>
+
+
+
+
+			</h:form>
+
+		</p:dialog>
+		<!-- end document upload -->
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security
+                         http://www.springframework.org/schema/security/spring-security-3.0.xsd ">
+
+
+
+	<global-method-security secured-annotations="enabled">
+	</global-method-security>
+	
+
+	
+	<http auto-config="true">
+		
+	
+		<intercept-url pattern="/faces/css/**" access="ROLE_ANONYMOUS" requires-channel="any"/> 
+		<intercept-url pattern="/css/**" access="ROLE_ANONYMOUS,ROLE_USER" requires-channel="any"/>
+		<intercept-url pattern="/css/deafult.css" access="ROLE_ANONYMOUS,ROLE_USER" requires-channel="any"/>
+		<intercept-url pattern="/css/common-form.css" access="ROLE_ANONYMOUS,ROLE_USER" requires-channel="any"/>
+		
+		<intercept-url pattern="/faces/images/**" access="ROLE_ANONYMOUS" requires-channel="any"/> 
+		<intercept-url pattern="/images/**" access="ROLE_ANONYMOUS,ROLE_USER" requires-channel="any"/>
+		<intercept-url pattern="/faces/faces/images/**" access="ROLE_ANONYMOUS,ROLE_USER" requires-channel="any"/> 
+		
+		<intercept-url pattern="/login.xhtml*" access="ROLE_ANONYMOUS,ROLE_USER"	requires-channel="any" />
+		<intercept-url pattern="/index.jsp*" access="ROLE_USER"	requires-channel="any" />	
+			
+			<!-- <intercept-url pattern="/login.xhtml*" access="ROLE_ANONYMOUS,ROLE_USER"	requires-channel="any" />
+			<intercept-url pattern="/index.jsp*" access="ROLE_USER"	requires-channel="any" /> -->		
+			<intercept-url pattern="/faces/pages/**" access="ROLE_USER" requires-channel="any"/> 
+			<intercept-url pattern="/pages/**" access="ROLE_USER" requires-channel="any"/>
+			 
+			 <intercept-url pattern="/displayQueueNumbers.xhtml*" access="ROLE_ANONYMOUS,ROLE_USER" requires-channel="any" />
+						
+			<form-login login-processing-url="/j_spring_security_check"
+				login-page="/login.xhtml" default-target-url="/"
+				authentication-failure-url="/login.xhtml?login_error=1"/>
+			 <logout logout-success-url="/login.xhtml" />
+		
+	</http>
+	
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsService">	
+		 <!-- <password-encoder ref="AppPasswordEncoder"/> -->
+		</authentication-provider>		
+	</authentication-manager>
+
+	<beans:bean id="userService" class="lk.informatics.ntc.model.service.UserService">
+	</beans:bean>
+
+	<beans:bean id="userDetailsService"	class="lk.informatics.ntc.model.service.UserDetailsServiceImpl">
+		   	<beans:property name="userService" ref="userService" />
+	</beans:bean>   
+	
+     <beans:bean class="lk.informatics.ntc.view.util.PasswordEncryption" id="AppPasswordEncoder"/> 
+ 
+	 
+	
+</beans:beans>
+

@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2020-08-06T10:37:49 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FlyingSquadCourtInformationStatusReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f365fa10-8dae-44b0-ac40-6530673c4f5d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<parameter name="P_user" class="java.lang.String"/>
+	<parameter name="P_case_no" class="java.util.Collection"/>
+	<parameter name="P_case_S_date" class="java.lang.String"/>
+	<parameter name="P_case_E_date" class="java.lang.String"/>
+	<parameter name="P_Inves_S_date" class="java.lang.String"/>
+	<parameter name="P_Inves_E_date" class="java.lang.String"/>
+	<parameter name="P_vehi_num" class="java.lang.String"/>
+	<parameter name="P_permit_no" class="java.lang.String"/>
+	<parameter name="P_court_name" class="java.lang.String"/>
+	<parameter name="P_origin" class="java.lang.String"/>
+	<parameter name="P_destination" class="java.lang.String"/>
+	<parameter name="P_image" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select distinct coc_vehicle_no,coc_permit_no,coc_route_orgin,coc_route_destination,I.inv_det_ref_no,coc_status,coc_court_name
+,coc_inspection_date,X.ccd_calling_date as nextCallingDate,X.ccd_court_name as nextCourtName,coc_court_close_date,coc_action_taken,
+coc_close_remark,coc_case_no,X.ccd_status
+from public.nt_m_court_cases C 
+left outer join public.nt_t_flying_investigation_log_det I on I.inv_det_vehicle_no=C.coc_vehicle_no 
+left outer join public.nt_t_court_calling_days X on X.ccd_case_no=C.coc_case_no and  X.ccd_status not in ('D')
+where   $X{IN,coc_case_no, P_case_no}]]>
+	</queryString>
+	<field name="coc_vehicle_no" class="java.lang.String"/>
+	<field name="coc_permit_no" class="java.lang.String"/>
+	<field name="coc_route_orgin" class="java.lang.String"/>
+	<field name="coc_route_destination" class="java.lang.String"/>
+	<field name="inv_det_ref_no" class="java.lang.String"/>
+	<field name="coc_status" class="java.lang.String"/>
+	<field name="coc_court_name" class="java.lang.String"/>
+	<field name="coc_inspection_date" class="java.lang.String"/>
+	<field name="nextcallingdate" class="java.lang.String"/>
+	<field name="nextcourtname" class="java.lang.String"/>
+	<field name="coc_court_close_date" class="java.lang.String"/>
+	<field name="coc_action_taken" class="java.lang.String"/>
+	<field name="coc_close_remark" class="java.lang.String"/>
+	<field name="coc_case_no" class="java.lang.String"/>
+	<field name="ccd_status" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="87" width="637" height="30" uuid="125bfb17-ae03-4a4d-a331-8644666e94ab"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flying Squad Court Information Status Report]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="720" y="100" width="80" height="30" uuid="cb43de4f-9e17-4614-af02-54ac1d4e882e"/>
+				<textElement textAlignment="Left">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="80" width="80" height="30" uuid="2f4cc69a-bec6-4028-bacf-051003dea064"/>
+				<textElement textAlignment="Left">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_user}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="639" y="100" width="71" height="17" uuid="cafa9bd1-bd4d-4427-bdf5-9982dd93826a"/>
+				<text><![CDATA[Created Date ]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Top">
+				<reportElement x="-10" y="0" width="810" height="80" uuid="e2d22c9f-6e22-43ed-82e1-5a368d2b8d8c"/>
+				<imageExpression><![CDATA[$P{P_image}+"header_logo_new.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="639" y="80" width="70" height="20" uuid="60dbca89-241b-48cc-9e09-f557d4a7983f"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[User]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="710" y="80" width="10" height="20" uuid="017d706a-a9f8-4f92-a218-bcbcb08e5f58"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="710" y="100" width="10" height="20" uuid="77b0d81d-54ca-4f4e-ac0a-67fd29c53a37"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="130" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="36" width="116" height="20" isRemoveLineWhenBlank="true" uuid="42c95646-ab27-444c-a80d-044023b0c88e"/>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Case Start Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="116" height="20" isRemoveLineWhenBlank="true" uuid="a78339ec-d443-432e-bedb-48d25e1ca502"/>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Case End Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="106" width="116" height="20" isRemoveLineWhenBlank="true" uuid="1a155294-19d4-4795-b8ab-37f3d8679107"/>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Investigation End Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="86" width="116" height="20" isRemoveLineWhenBlank="true" uuid="d02b196a-3b4f-42f9-81bf-e09ed21f78c2"/>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Investigation Start Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="519" y="30" width="120" height="20" isRemoveLineWhenBlank="true" uuid="ea6c6f24-5b7f-4883-a3b0-d44455d705e5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Permit No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="519" y="10" width="120" height="20" isRemoveLineWhenBlank="true" uuid="fdf2b3b9-b4c4-443a-b72e-195336a2b306"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vehicle No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="519" y="70" width="120" height="20" isRemoveLineWhenBlank="true" uuid="cfbcf675-3881-4a71-8458-5ec8f18bc39d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Origin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="519" y="50" width="120" height="20" isRemoveLineWhenBlank="true" uuid="31ccd4e9-9f75-4531-94cf-2208cfdd0cc3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Court Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="519" y="90" width="120" height="20" isRemoveLineWhenBlank="true" uuid="23c1ae67-c869-4f54-849f-dfd293a31237"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Destination]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="36" width="10" height="20" isRemoveLineWhenBlank="true" uuid="2936a289-5e8d-42c8-9976-f197a9b55f62"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="56" width="10" height="20" isRemoveLineWhenBlank="true" uuid="595d6f98-dd22-4ece-98a6-69c392889bd6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="86" width="10" height="20" isRemoveLineWhenBlank="true" uuid="95436703-3e53-442e-8614-da74f5c18123"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="106" width="10" height="20" isRemoveLineWhenBlank="true" uuid="75cc4920-bd9a-49e2-9563-89a835aa9dfb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="599" y="10" width="50" height="20" isRemoveLineWhenBlank="true" uuid="466a9122-c0d9-4fd3-a7a8-bb3b99836060"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="599" y="30" width="50" height="20" isRemoveLineWhenBlank="true" uuid="050ec906-c63c-4906-a71a-c4ab3e84ad6b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="599" y="50" width="50" height="20" isRemoveLineWhenBlank="true" uuid="657c8674-62f9-4742-a344-bf65cbec599d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="599" y="70" width="50" height="20" isRemoveLineWhenBlank="true" uuid="0fcd61b8-2f63-409e-88f1-c6f607b6e7f0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="599" y="90" width="50" height="20" isRemoveLineWhenBlank="true" uuid="f549baf1-daf3-40d5-9f1e-d8ce79721b7e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="610" y="90" width="190" height="20" isRemoveLineWhenBlank="true" uuid="2827246a-bc39-4ed6-b3b2-4488e5d7f15a"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{P_destination}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="610" y="70" width="190" height="20" isRemoveLineWhenBlank="true" uuid="ec07fcb4-6736-4584-b52c-335dbb2a38b5"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{P_origin}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="610" y="50" width="190" height="20" isRemoveLineWhenBlank="true" uuid="6c568429-a251-4253-ba9a-ba4a57bdded5"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{P_court_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="610" y="30" width="190" height="20" isRemoveLineWhenBlank="true" uuid="6bcb2ad9-42e9-4055-bf7a-ffa03db6baa0"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{P_permit_no}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="610" y="10" width="190" height="20" isRemoveLineWhenBlank="true" uuid="3e619d91-b6c9-4631-8755-da14a846efc7"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{P_vehi_num}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="126" y="36" width="242" height="20" isRemoveLineWhenBlank="true" uuid="a3bffcdf-1e46-4fea-a527-ba172972bf24"/>
+				<textFieldExpression><![CDATA[$P{P_case_S_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="126" y="56" width="242" height="20" isRemoveLineWhenBlank="true" uuid="abb25614-f233-464f-a241-9f6c48961ac3"/>
+				<textFieldExpression><![CDATA[$P{P_case_E_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="126" y="86" width="243" height="20" isRemoveLineWhenBlank="true" uuid="f3d38efe-15a9-4715-a044-0e3de76f7e2b"/>
+				<textFieldExpression><![CDATA[$P{P_Inves_S_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="126" y="106" width="242" height="20" isRemoveLineWhenBlank="true" uuid="99027951-b613-4f97-acc0-20812b83ea5c"/>
+				<textFieldExpression><![CDATA[$P{P_Inves_E_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="116" height="20" isRemoveLineWhenBlank="true" uuid="390a3523-60c0-47c9-80dc-2951f111d12e"/>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Case No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="10" width="10" height="20" isRemoveLineWhenBlank="true" uuid="f79a884c-353c-484f-806e-4451eaed00c8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="127" y="10" width="673" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="b215f868-bd83-4f69-9fbc-9d97a9f7f936"/>
+				<textFieldExpression><![CDATA[$P{P_case_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="800" height="61" forecolor="#1D2329" backcolor="#F5F5F5" uuid="b5edac77-bc97-41a0-bf26-7de6bcf39cda"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="60" uuid="06056ee9-ec3d-470b-bf02-297bee46c28a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Vehicle No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="0" width="56" height="60" uuid="5ea86304-2579-423f-a60a-06efd85d2d21"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Permit No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="0" width="71" height="60" uuid="0eec176a-486b-41df-8919-f8e450cb9369"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Origin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="0" width="60" height="60" uuid="21f33a00-81c4-49c0-9312-bf9669c630c8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Reference No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="309" y="0" width="60" height="60" uuid="217a7127-41ea-4612-9cc7-3b78d9dbf6f5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="0" width="70" height="60" uuid="996258a1-dc49-4acf-8916-9c6a5f02fccb"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Court Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="70" height="60" uuid="eac527b1-27a1-4949-97d9-bc68428fc308"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Investigation Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="510" y="0" width="70" height="60" uuid="148d1127-4342-4c7a-82aa-f724fe55f8d8"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Next Calling Date & Court Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="0" width="60" height="60" uuid="68dc0492-7153-4b22-8cb7-b081e0876059"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Destination]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="0" width="70" height="60" uuid="54ba7371-8172-4475-86fd-f5c8609b38bb"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Case Close Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="0" width="80" height="60" uuid="b0f9fea0-451e-4653-a5f3-01e14268be89"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Action]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="730" y="0" width="70" height="60" uuid="f7f86e29-8d54-4ed5-be6c-aaa58a2cc614"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="89" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="800" height="89" uuid="893c15c7-19a8-4247-ad33-fb69efb7e19f"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="1" width="60" height="88" isPrintWhenDetailOverflows="true" uuid="9ae705ff-37dc-469e-8d32-da09974df177"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_vehicle_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="60" y="1" width="56" height="88" isPrintWhenDetailOverflows="true" uuid="84d82f26-2734-483a-ae46-239d07b97ebf"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_permit_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="116" y="1" width="71" height="88" isPrintWhenDetailOverflows="true" uuid="bca4dd88-8057-40d1-9d8e-210cb5a2ef99">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_route_orgin}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="187" y="1" width="61" height="88" isPrintWhenDetailOverflows="true" uuid="5be001d3-7670-47ba-8c70-b91494c753e8">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_route_destination}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="248" y="1" width="61" height="88" isPrintWhenDetailOverflows="true" uuid="d6c758b1-aaa6-4d3d-8fc3-324b153533be">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{inv_det_ref_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="309" y="1" width="60" height="88" isPrintWhenDetailOverflows="true" uuid="c6808063-3f6d-422a-83db-6fcd3834acb5">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_status}.equals( "A" )?"Active" :" Inactive"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="369" y="1" width="71" height="88" isPrintWhenDetailOverflows="true" uuid="7872e885-1c9d-447a-b559-1c32eafebeb5">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_court_name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="440" y="1" width="70" height="88" isPrintWhenDetailOverflows="true" uuid="1c429ef1-8332-46b8-bb2f-18c6b95e4a84">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_inspection_date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="510" y="1" width="70" height="88" isPrintWhenDetailOverflows="true" uuid="82f897f3-6420-4d74-b308-a249828c056c">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nextcallingdate} +" "+$F{nextcourtname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="580" y="1" width="70" height="88" isPrintWhenDetailOverflows="true" uuid="271cebb0-4d56-4915-9aee-ef82b73138c2">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_court_close_date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="650" y="1" width="80" height="88" isPrintWhenDetailOverflows="true" uuid="7aba2564-dd9a-4364-8b7c-210806189100">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_action_taken}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="730" y="1" width="70" height="88" isPrintWhenDetailOverflows="true" uuid="92ac6469-86f2-4ad2-8a8b-16658bed1e0f">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{coc_close_remark}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

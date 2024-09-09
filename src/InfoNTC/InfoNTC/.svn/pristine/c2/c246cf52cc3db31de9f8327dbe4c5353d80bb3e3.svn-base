@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2023-11-29T16:27:32 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ControlSheetForOwnerNewSubreport8" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="20" isFloatColumnFooter="true" uuid="4a468c42-19c3-4494-bad9-54602087436e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW_DATAADAPTERUAT.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="LeaveDataSet" uuid="0db5cbd1-25ad-443f-89b6-0698ffdbceaa">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW_DATAADAPTERUAT.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_trip" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT * FROM public.nt_m_control_sheet_leavebus]]>
+		</queryString>
+		<field name="col1" class="java.lang.String"/>
+		<field name="col2" class="java.lang.String"/>
+		<field name="col3" class="java.lang.String"/>
+		<field name="col4" class="java.lang.String"/>
+		<field name="col5" class="java.lang.String"/>
+		<field name="col6" class="java.lang.String"/>
+		<field name="col7" class="java.lang.String"/>
+		<field name="col8" class="java.lang.String"/>
+		<field name="col9" class="java.lang.String"/>
+		<field name="col10" class="java.lang.String"/>
+		<field name="col11" class="java.lang.String"/>
+		<field name="col12" class="java.lang.String"/>
+		<field name="col13" class="java.lang.String"/>
+		<field name="col14" class="java.lang.String"/>
+		<field name="col15" class="java.lang.String"/>
+		<field name="col16" class="java.lang.String"/>
+		<field name="col17" class="java.lang.String"/>
+		<field name="col18" class="java.lang.String"/>
+		<field name="col19" class="java.lang.String"/>
+		<field name="col20" class="java.lang.String"/>
+		<field name="col21" class="java.lang.String"/>
+		<field name="col22" class="java.lang.String"/>
+		<field name="col23" class="java.lang.String"/>
+		<field name="col24" class="java.lang.String"/>
+		<field name="col25" class="java.lang.String"/>
+		<field name="col26" class="java.lang.String"/>
+		<field name="col27" class="java.lang.String"/>
+		<field name="col28" class="java.lang.String"/>
+		<field name="col29" class="java.lang.String"/>
+		<field name="col30" class="java.lang.String"/>
+		<field name="col31" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_Route_No" class="java.lang.String"/>
+	<parameter name="P_Departure" class="java.lang.String"/>
+	<parameter name="P_Start_Date" class="java.util.Date"/>
+	<parameter name="P_End_Date" class="java.util.Date"/>
+	<parameter name="P_Service_Type" class="java.lang.String"/>
+	<parameter name="P_Group_no" class="java.lang.String"/>
+	<parameter name="P_Origin" class="java.lang.String"/>
+	<parameter name="P_Destination" class="java.lang.String"/>
+	<parameter name="SUBREPORT_PATH" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_TravelTIme" class="java.lang.String"/>
+	<parameter name="P_Distance" class="java.lang.String"/>
+	<parameter name="P_Speed" class="java.lang.String"/>
+	<parameter name="P_REf" class="java.lang.String"/>
+	<parameter name="P_trip" class="java.lang.String"/>
+	<parameter name="P_national_logo" class="java.lang.String"/>
+	<parameter name="P_ntc_logo" class="java.lang.String"/>
+	<parameter name="P_OtherSide" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM public.nt_t_owner_sheet_buses]]>
+	</queryString>
+	<field name="col1" class="java.lang.String"/>
+	<field name="col2" class="java.lang.String"/>
+	<field name="col3" class="java.lang.String"/>
+	<field name="col4" class="java.lang.String"/>
+	<field name="col5" class="java.lang.String"/>
+	<field name="col6" class="java.lang.String"/>
+	<field name="col7" class="java.lang.String"/>
+	<field name="col8" class="java.lang.String"/>
+	<field name="col9" class="java.lang.String"/>
+	<field name="col10" class="java.lang.String"/>
+	<field name="col11" class="java.lang.String"/>
+	<field name="col12" class="java.lang.String"/>
+	<field name="col13" class="java.lang.String"/>
+	<field name="col14" class="java.lang.String"/>
+	<field name="col15" class="java.lang.String"/>
+	<field name="col16" class="java.lang.String"/>
+	<field name="col17" class="java.lang.String"/>
+	<field name="col18" class="java.lang.String"/>
+	<field name="col19" class="java.lang.String"/>
+	<field name="col20" class="java.lang.String"/>
+	<field name="col21" class="java.lang.String"/>
+	<field name="col22" class="java.lang.String"/>
+	<field name="col23" class="java.lang.String"/>
+	<field name="col24" class="java.lang.String"/>
+	<field name="col25" class="java.lang.String"/>
+	<field name="col26" class="java.lang.String"/>
+	<field name="col27" class="java.lang.String"/>
+	<field name="col28" class="java.lang.String"/>
+	<field name="col29" class="java.lang.String"/>
+	<field name="col30" class="java.lang.String"/>
+	<field name="col31" class="java.lang.String"/>
+	<field name="time_slot" class="java.lang.String"/>
+	<field name="time_slot_depart" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="30">
+			<staticText>
+				<reportElement x="0" y="1" width="56" height="14" uuid="c5be2d0a-f633-4bed-9f8a-53381bbbb488">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departure From]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="16" width="56" height="14" uuid="1668f1e8-2ace-48c2-b6ed-ddbb35648b13"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Departure}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="498" y="1" width="56" height="14" uuid="480210b6-d593-488c-8423-98358cd4b368">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departure From]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="498" y="16" width="56" height="14" uuid="b89731be-1b2f-48e0-8398-098c43629123">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_OtherSide}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="57" y="1" width="440" height="28" uuid="66d96e1c-d655-41c9-8d4c-f2b4d36fdba7"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="0" width="553" height="14" backcolor="#FCFCE8" uuid="a03cd35e-f291-49dd-95ef-df1df9235c91">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{col1}.endsWith( "F" )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="112" y="0" width="55" height="14" backcolor="#FCFCE8" uuid="c1696835-29a0-4854-a160-c2b6dd724034">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col2}.substring(0,$F{col2}.length()-1)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="387" y="0" width="55" height="14" backcolor="#FCFCE8" uuid="e42540c5-b512-4292-9d71-409ae5b12889">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col7}.substring(0,$F{col7}.length()-1)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="332" y="0" width="55" height="14" backcolor="#FCFCE8" uuid="ff3e53ce-1156-4762-a18c-efde807bb7ab"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col6}.substring(0,$F{col6}.length()-1)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="56" height="14" uuid="8bf5343d-c47d-4e7e-bd6d-39175c70b314">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{time_slot}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="57" y="0" width="55" height="14" backcolor="#FCFCE8" uuid="43775825-6ed9-4974-b274-ac58de889f87">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col1}.substring(0,$F{col1}.length()-1)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="498" y="0" width="56" height="14" backcolor="#FCFCE8" uuid="b73d1722-629a-4587-b961-40dda613c2d3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{time_slot_depart}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="442" y="0" width="55" height="14" backcolor="#FCFCE8" uuid="7c3165e9-996f-46b3-a7a5-541a4ccda033">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col8}.substring(0,$F{col8}.length()-1)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="222" y="0" width="55" height="14" backcolor="#FCFCE8" uuid="6e9a31ee-6297-4204-932f-2f49a5dacd41">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col4}.substring(0,$F{col4}.length()-1)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="277" y="0" width="55" height="14" backcolor="#FCFCE8" uuid="396e1bca-a1b8-4a14-b317-6482d3095849">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col5}.substring(0,$F{col5}.length()-1)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="167" y="0" width="55" height="14" backcolor="#FCFCE8" uuid="e66a74db-e44f-4d60-8019-e76e8a67eef8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{col3}.substring(0,$F{col3}.length()-1)]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="126">
+			<componentElement>
+				<reportElement x="442" y="14" width="55" height="14" uuid="5b8b6624-8ec4-496e-ba08-e4f30e2b7ec0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="ef0181a4-1ae3-4677-893c-36c2edfdf7b3">
+						<datasetParameter name="P_trip">
+							<datasetParameterExpression><![CDATA[$P{P_trip}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="55">
+						<textField>
+							<reportElement x="0" y="0" width="55" height="14" uuid="6872c0fb-ad4d-4105-9ab9-ebde118d6c32"/>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{col8}.substring(0,$F{col8}.length()-1)]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="387" y="14" width="55" height="14" uuid="19baa129-0c51-4542-9a7a-320b64837f65"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="aec01a98-fcf1-4c59-b5b5-e51d99f6b01c">
+						<datasetParameter name="P_trip">
+							<datasetParameterExpression><![CDATA[$P{P_trip}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="55">
+						<textField>
+							<reportElement x="0" y="0" width="55" height="14" uuid="36d04de1-07de-420e-b93f-a08287209a9f"/>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{col7}.substring(0,$F{col7}.length()-1)]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="0" y="14" width="56" height="14" uuid="ef76f814-dd3f-4845-a908-5122710ab35f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="e6efb2d3-8cf8-467a-af83-7ddc94368fa4">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="56">
+						<textField>
+							<reportElement x="0" y="0" width="56" height="14" uuid="4d5df754-daaa-4480-b758-e06ac5bd0cfc">
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="57" y="14" width="55" height="14" uuid="4a969c29-6551-4c0f-baaf-8dfd5cbbe390">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="118c7362-709c-4bc6-9294-a06d1438998d">
+						<datasetParameter name="P_trip">
+							<datasetParameterExpression><![CDATA[$P{P_trip}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="55">
+						<textField>
+							<reportElement x="0" y="0" width="55" height="14" uuid="af725e01-1593-4bc0-a1c2-7869fc8cc661"/>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{col1}.substring(0,$F{col1}.length()-1)]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="112" y="14" width="55" height="14" uuid="51976e84-1dc5-4802-a686-e0d2a4618589">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="61e25960-cc5d-4552-9577-673e5a9f8ec0">
+						<datasetParameter name="P_trip">
+							<datasetParameterExpression><![CDATA[$P{P_trip}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="55">
+						<textField>
+							<reportElement x="0" y="0" width="55" height="14" uuid="e112af34-4f83-483f-aae4-0b5a37b8040f"/>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{col2}.substring(0,$F{col2}.length()-1)]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="167" y="14" width="55" height="14" uuid="f6db538c-78b7-49f1-95bb-958e64834f2c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="e74f2142-6afe-4e36-bac2-48684e3511ed">
+						<datasetParameter name="P_trip">
+							<datasetParameterExpression><![CDATA[$P{P_trip}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="55">
+						<textField>
+							<reportElement x="0" y="0" width="55" height="14" uuid="90ca6fde-00b0-4e6b-9e46-b3f48fbf3355"/>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{col3}.substring(0,$F{col3}.length()-1)]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="222" y="14" width="55" height="14" uuid="baf2d763-e044-4c14-aa4e-0a3b014343d0"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="944fa1b0-b216-4c12-907c-4f52039283b7">
+						<datasetParameter name="P_trip">
+							<datasetParameterExpression><![CDATA[$P{P_trip}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="55">
+						<textField>
+							<reportElement x="0" y="0" width="55" height="14" uuid="6d6cc4f7-290d-4b3f-b047-6d385e380c80"/>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{col4}.substring(0,$F{col4}.length()-1)]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="277" y="14" width="55" height="14" uuid="2081f2b9-fbce-4c34-bc5a-5141a2d046e8"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="e76d5877-55b8-4805-a95d-9a9db66fff9a">
+						<datasetParameter name="P_trip">
+							<datasetParameterExpression><![CDATA[$P{P_trip}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="55">
+						<textField>
+							<reportElement x="0" y="0" width="55" height="14" uuid="6a5b5792-56f3-4c8b-90c1-4c56cc69147c"/>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{col5}.substring(0,$F{col5}.length()-1)]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="332" y="14" width="55" height="14" uuid="f676faba-39b0-494f-b7e9-633845fc6f6a"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="391fe3ba-18f8-44e0-91d4-6a11d6da4a2e">
+						<datasetParameter name="P_trip">
+							<datasetParameterExpression><![CDATA[$P{P_trip}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="55">
+						<textField>
+							<reportElement x="0" y="0" width="55" height="14" uuid="235da06b-b989-4a37-8a2a-941901e5776b"/>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{col6}.substring(0,$F{col6}.length()-1)]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="498" y="14" width="56" height="14" uuid="9868c808-a52a-4381-ae94-237ea5003875">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="LeaveDataSet" uuid="9793aad8-a0ee-47d8-b31a-3a2fc27af455">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="56">
+						<textField>
+							<reportElement x="0" y="0" width="56" height="14" uuid="3ad515a7-49de-4193-b253-fe25766a5edb"/>
+							<box>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="6"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="39" width="80" height="20" uuid="5228d5dd-49b8-4def-b59c-dd129b59c26b"/>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Route Distance ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="80" y="39" width="10" height="20" uuid="0a78e5cb-ee38-4f78-994e-26980c3a2c7e"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="90" y="39" width="99" height="20" isPrintWhenDetailOverflows="true" uuid="edc8caf5-225f-49a6-884c-f6b82ebf4a05"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Distance}+"km"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="59" width="80" height="20" uuid="0c647db6-0d6f-41ef-96a8-40600de344be"/>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Travel Time   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="80" y="59" width="10" height="20" uuid="5f887436-fd61-4e2c-bc04-feadbea63d52"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="90" y="60" width="99" height="20" isPrintWhenDetailOverflows="true" uuid="d5243e31-286d-44c9-acf1-6450cf538d32"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_TravelTIme}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="90" y="79" width="99" height="20" isPrintWhenDetailOverflows="true" uuid="ffa8c736-c50f-4c90-a85d-f7b7114f0be7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Speed}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="80" y="79" width="10" height="20" uuid="5df549d7-be31-41d5-84eb-cea23fae3f9f"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="79" width="80" height="20" uuid="7580787a-3b09-4dd0-a4cd-c1378985a991"/>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Speed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="106" width="80" height="20" uuid="e18bb793-c43c-4dbe-ab77-bdde1587f275"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Executed Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="80" y="106" width="228" height="20" uuid="b6fcb17e-4af0-468e-b5f4-ebc0f44908b4"/>
+				<text><![CDATA[.....................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="412" y="65" width="158" height="20" uuid="51f91c81-5aba-475f-8854-fe62d577a60f"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Chairman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="412" y="85" width="158" height="20" uuid="5b0532b8-a10c-4c97-8070-34fd5ae0c813"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[National Transport Commission]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="0" width="55" height="14" uuid="3704c319-f644-4059-bb12-ce44234472a8"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Leave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="56" height="14" uuid="a7512807-16ac-4ac9-8693-f443351a9d64">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Leave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="0" width="442" height="14" uuid="9df72e9b-c594-40f1-ab0b-0458f49d4ae4">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Leave buses will be empty on that day]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

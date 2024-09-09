@@ -1,0 +1,600 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.myTable td:nth-child(6) {
+	width: 10px;
+}
+
+.myTable td:nth-child(2) {
+	width: 10px;
+}
+
+.myTable td:nth-child(3) {
+	width: 10px;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-input {
+	margin-top: -20px;
+}
+</style>
+
+
+
+		<h:form id="form">
+			<div class="mainDiv">
+				<h1
+					style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+					class="common_form_header">Approve New Employee Profile</h1>
+				<div style="width: 95%;" class="subDiv">
+
+					<p:panel>
+						<p:panelGrid columns="4" style="margin-left:115px"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+							layout="grid">
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['emp.epf_no']}"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="txtsearchEPFno" style="width:60%"
+									value="#{approveEmployeeProfile.searchEmployeeDTO.empEpfNo}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+									<f:selectItem itemLabel="--Select EPF No.--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{approveEmployeeProfile.epfNumberList}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Employee Status" style="text-align: left;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="txtTitle" style="width:60%"
+									onkeyup="this.value=this.value.toUpperCase();"
+									value="#{approveEmployeeProfile.searchEmployeeDTO.status}"
+									effect="fold">
+									<f:selectItem itemLabel="-- Select Status--" itemValue="" />
+									<f:selectItem itemLabel="Approve" itemValue="A" />
+									<f:selectItem itemLabel="Pending" itemValue="P" />
+									<f:selectItem itemLabel="Reject" itemValue="R" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['emp.nic_no']}" for="nicNumber"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+
+								<p:inputText id="nicNumber"
+									onkeyup="this.value=this.value.toUpperCase();"
+									value="#{approveEmployeeProfile.nicNumber}" label="nic_number"
+									style="width:58.5%" maxlength="12"
+									placeholder="-- Enter Status--">
+
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['emp.location']}"
+									style="text-align: left;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+
+								<p:selectOneMenu id="idsearchlocation" style="width:60%"
+									value="#{approveEmployeeProfile.searchEmployeeDTO.location}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+									<f:selectItem itemLabel="--Select Location--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{approveEmployeeProfile.epfLocationList}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['emp.user_id']}"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="idsearchuserid" style="width:60%"
+									value="#{approveEmployeeProfile.searchEmployeeDTO.userId}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+									<f:selectItem itemLabel="--Select User ID--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{approveEmployeeProfile.userIdList}" />
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+
+							<p:panelGrid>
+
+								<p:outputLabel value="#{msg['emp.no']}"
+									style="padding-left: 0px;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+
+								<p:selectOneMenu id="txtSerachPermit" style="width:60%"
+									value="#{approveEmployeeProfile.searchEmployeeDTO.empNo}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+									<f:selectItem itemLabel="--Select Employee No.--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{approveEmployeeProfile.empNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+						</p:panelGrid>
+						<center>
+
+							<p:commandButton value="Search"
+								action="#{approveEmployeeProfile.showData()}"
+								styleClass="mainActionbtn"
+								update="checkboxDT,buttonPanel01,frmalert,frmError"
+								id="cmdBtnSearch">
+							</p:commandButton>
+
+							<p:commandButton value="Clear"
+								action="#{approveEmployeeProfile.clearAction}" update="@form"
+								styleClass="mainActionbtn" process="@all" />
+
+						</center>
+					</p:panel>
+
+					<br />
+
+					<p:panel id="dataTablePanel">
+						<center>
+							<p:growl id="msgs" showDetail="true" />
+
+							<p:dataTable id="checkboxDT" var="e" rows="10" paginator="true"
+								value="#{approveEmployeeProfile.empolyeeDetails}"
+								selection="#{approveEmployeeProfile.selectedEmps}"
+								rowKey="#{e.empEpfNo}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="10,20" resizableColumns="false"
+								liveResize="true" rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No users are available">
+
+								<p:column selectionMode="Multiple" id="box2"
+									style="text-align:center;">
+								</p:column>
+
+								<p:column headerText="Emp No." visible="false">
+									<h:outputText value="#{e.empNo}" />
+								</p:column>
+
+								<p:column headerText="depCode" visible="false">
+									<h:outputText value="#{e.depCode}" />
+								</p:column>
+
+								<p:column headerText="EPF No.">
+									<h:outputText value="#{e.empEpfNo}" />
+								</p:column>
+
+								<p:column headerText="Full Name">
+									<h:outputText value="#{e.fullName}" />
+								</p:column>
+
+								<p:column headerText="NIC No.">
+									<h:outputText value="#{e.nicNo}" />
+								</p:column>
+
+								<p:column headerText="Account Req." style="text-align:center;">
+
+									<p:selectBooleanCheckbox value="#{e.reqBool}" id="box">
+										<p:ajax event="change" process="box" update="btn_assign" />
+
+
+									</p:selectBooleanCheckbox>
+
+									<p:selectManyCheckbox></p:selectManyCheckbox>
+
+
+								</p:column>
+
+								<p:column headerText="Emp. Status">
+									<h:outputText value="#{e.status}">
+										<f:selectItem itemLabel="Select" itemValue="" />
+										<f:selectItem itemLabel="Approve" itemValue="A" />
+										<f:selectItem itemLabel="Pending" itemValue="P" />
+									</h:outputText>
+								</p:column>
+
+								<p:column headerText="Department">
+									<h:outputText value="#{e.department}" />
+								</p:column>
+
+								<p:column headerText="Designation">
+									<h:outputText value="#{e.designation}" />
+								</p:column>
+
+								<p:column style="width:7%">
+									<h:commandLink action="#{approveEmployeeProfile.editAction}"
+										update="checkboxDT">
+										<f:setPropertyActionListener value="#{e}"
+											target="#{approveEmployeeProfile.selectedEmp}" />
+										<p:graphicImage library="images" name="view1.png"
+											style="width:24px;height:24px;" title="View"></p:graphicImage>
+									</h:commandLink>
+								</p:column>
+
+								<p:column style="width:7%">
+
+									<p:commandLink action="#{approveEmployeeProfile.assignRole}"
+										id="btn_assign" disabled="#{!e.reqBool}"
+										update="checkboxDT, frmAssignError,frmalert">
+
+										<f:setPropertyActionListener value="#{e}"
+											target="#{approveEmployeeProfile.selectedEmp}" />
+										<p:graphicImage library="images" name="assignrole.png"
+											style="width:30px;height:30px;" title="Assign Roles"></p:graphicImage>
+									</p:commandLink>
+
+
+								</p:column>
+
+							</p:dataTable>
+
+						</center>
+					</p:panel>
+					<br />
+					<p:panel id="buttonPanel01">
+						<center>
+
+							<p:commandButton value="Approve" styleClass="mainActionbtn"
+								action="#{approveEmployeeProfile.approveAction}"
+								id="btn_approve" disabled="#{approveEmployeeProfile.disable}"
+								update="checkboxDT,errorMessage,successSve,buttonPanel01">
+
+								<f:setPropertyActionListener value="#{true}"
+									target="#{approveEmployeeProfile.disable}" />
+							</p:commandButton>
+
+							<p:commandButton value="Reject" styleClass="mainActionbtn"
+								id="btn_reject" disabled="#{approveEmployeeProfile.disable2}"
+								action="#{approveEmployeeProfile.checkRejectList}"
+								update="frmReject,rejectDialog,successSve,errorMessage,checkboxDT,btn_approve">
+
+								<f:setPropertyActionListener value="#{true}"
+									target="#{approveEmployeeProfile.disable}" />
+							</p:commandButton>
+
+						</center>
+					</p:panel>
+
+				</div>
+			</div>
+
+		</h:form>
+
+		<p:dialog styleClass="" id="successSve" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlsuccess']}" width="30%"
+			severity="info" widgetVar="successSve" closeOnEscape="true"
+			resizable="false">
+
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{approveEmployeeProfile.approveStatus}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="Close" process="frmsuccessSve"
+						onclick="PF('successSve').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="assignPopUp" global="true" modal="true"
+			header="Assign Role" width="50%" height="auto" severity="info"
+			widgetVar="assignRole" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAssignError">
+				<center>
+					<p:panelGrid columns="1" styleClass="ui-noborder">
+						<p:panel id="rolePanel">
+							<p:dataTable id="roleDataTable" var="e" styleClass="myTable-two"
+								value="#{approveEmployeeProfile.userDetails}"
+								selection="#{approveEmployeeProfile.selectUserRole}"
+								rowKey="#{e.roleCode}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="2,3" resizableColumns="false"
+								liveResize="true" rowIndexVar="index"
+								emptyMessage="No records are available">
+
+								<p:column selectionMode="Multiple" id="fade"
+									style="width:10%;text-align:center" />
+								<p:tooltip id="toolTipFade" for="fade"
+									value="There are 4 options for position" position="top" />
+								<p:column headerText="Emp No." visible="false">
+									<h:outputText value="#{e.roleCode}" />
+								</p:column>
+
+								<p:column headerText="Role Code"
+									style="width:10%;text-align:left">
+
+									<h:outputText value="#{e.roleCode}" style="text-align:left" />
+
+								</p:column>
+
+								<p:column headerText="Description"
+									style="width:25%;text-align:left">
+
+									<h:outputText value="#{e.roleDescription}"
+										style="text-align:left" />
+								</p:column>
+							</p:dataTable>
+						</p:panel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton update="frmAssignError,successSve,frmError"
+						value="Save" process="frmAssignError"
+						action="#{approveEmployeeProfile.saveRole}"
+						onclick="PF('assignRole').hide()"
+						class="btn btn-primary btn-lg btn-block"
+						style="width:80px; margin-top:10px;height:30px;font-size: 12px !important; border: 1px solid #FFFFFF; 
+						color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;">
+					</p:commandButton>
+				</center>
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog styleClass="" id="errorMessage" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errStatus"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{approveEmployeeProfile.errorStatus}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errStatus').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="infoMessage" global="true" modal="true"
+			header="Information" width="30%" severity="info"
+			widgetVar="alertMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmalert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{approveEmployeeProfile.alertStatus}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('alertMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="rejectDialog" global="true" modal="true" width="439px"
+			header="Reject Employee" severity="info" widgetVar="dlg1"
+			closeOnEscape="true" resizable="false" style=" border-radius: 3px;">
+			<h:form id="frmReject">
+				<h:panelGroup id="reject">
+					<center>
+						<p:outputPanel id="MainHead">
+							<h:outputLabel value="Reject Employee"
+								style="font-size: 15px !important;color: black;font-weight:bold" />
+						</p:outputPanel>
+						<br />
+					</center>
+
+					<h:panelGrid id="rejectPanel" columns="1"
+						style="margin-top:20px;width:100%; border: 0px solid blue; border-radius: 12px;"
+						styleClass="loginpanel">
+						<p:inputTextarea placeholder="Enter the comment here"
+							style="width:400px; height: 200px;" autoResize="false"
+							value="#{approveEmployeeProfile.rejectReason}" />
+						<center>
+							<p:row>
+								<p:commandButton id="btnReject" type="submit"
+									class="btn btn-primary btn-lg btn-block"
+									style="width:80px; margin-top:10px;height:40px;float: left;font-size: 12px !important; border: 1px solid #FFFFFF; 
+										color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;"
+									value="Reject" update="checkboxDT"
+									action="#{approveEmployeeProfile.reject}"
+									oncomplete="PF('dlg1').hide();" ajax="false">
+
+								</p:commandButton>
+
+								<p:commandButton id="btnClear"
+									class="btn btn-primary btn-lg btn-block"
+									style="width:80px; margin-top:10px;height:40px;float: left;font-size: 12px !important; border: 1px solid #FFFFFF; 
+										color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;"
+									value="Cancel" update="" process=""
+									oncomplete="PF('dlg1').hide();">
+
+								</p:commandButton>
+							</p:row>
+						</center>
+						<p:spacer height="30"></p:spacer>
+					</h:panelGrid>
+
+				</h:panelGroup>
+
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

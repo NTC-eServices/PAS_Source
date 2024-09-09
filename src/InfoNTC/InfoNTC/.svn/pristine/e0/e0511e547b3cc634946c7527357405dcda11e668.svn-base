@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2020-06-25T15:25:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SpecialHirePermit" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="b6f56ad7-2505-4c5a-9493-45517d85ed31">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="P_Vehi_No" class="java.lang.String"/>
+	<parameter name="P_logo" class="java.lang.String"/>
+	<parameter name="P_curley" class="java.lang.String"/>
+	<parameter name="P_Watermark" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select tep_vehicleno,tep_issued_date,tep_issued_month,tep_receipt_no,tep_ammount_paid,
+tep_permit_no,tep_origin ,tep_destination,tep_route_via,tep_valid_from,tep_valid_to,tep_chargeamt,tep_due_date	
+from public.nt_t_terminal_payment 
+where tep_receipt_no= $P{P_Vehi_No}     and tep_payment_type_code='003']]>
+	</queryString>
+	<field name="tep_vehicleno" class="java.lang.String"/>
+	<field name="tep_issued_date" class="java.lang.String"/>
+	<field name="tep_issued_month" class="java.lang.String"/>
+	<field name="tep_receipt_no" class="java.lang.String"/>
+	<field name="tep_ammount_paid" class="java.math.BigDecimal"/>
+	<field name="tep_permit_no" class="java.lang.String"/>
+	<field name="tep_origin" class="java.lang.String"/>
+	<field name="tep_destination" class="java.lang.String"/>
+	<field name="tep_route_via" class="java.lang.String"/>
+	<field name="tep_valid_from" class="java.lang.String"/>
+	<field name="tep_valid_to" class="java.lang.String"/>
+	<field name="tep_chargeamt" class="java.math.BigDecimal"/>
+	<field name="tep_due_date" class="java.lang.String"/>
+	<background>
+		<band height="335" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="10" width="554" height="325" uuid="e0cf4f4b-6532-4b65-9080-4c2e648b3b7b"/>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="162" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="51" width="550" height="28" uuid="60a3eacf-03ec-43d5-b633-66d798ab6d27"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="18" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[NATIONAL TRANSPORT COMMISSION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="30" uuid="2eaab08b-5f05-4083-9ff0-a158b9f9055f"/>
+				<box topPadding="0">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="22" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="7" width="550" height="61" isPrintWhenDetailOverflows="true" uuid="e176fdf7-2af1-467d-a698-ad00c0dd21a6"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Latha" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[தேசிய​ போக்குவரத்து ஆணைக்குழூ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="24" y="6" width="76" height="67" uuid="2b5b7337-6bac-406c-914c-5c011bc82e4d"/>
+				<imageExpression><![CDATA[$P{P_logo}+"ntclogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="450" y="28" width="100" height="30" uuid="457bca47-2511-418d-9d50-6e031d62f775"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[OPERATOR'S COPY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="126" width="554" height="27" uuid="683c953c-dcf5-4035-8803-8fa9476e3176"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[SPECIAL HIRE PERMIT - Inter Province]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="100" width="300" height="40" isPrintWhenDetailOverflows="true" uuid="9e917901-bcf7-4c4d-9b88-ae9a32b721a0">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="9" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[விசேட​ சேவை அனுமதிப்பத்திரம் ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="76" width="552" height="36" uuid="95bf3454-df17-44bd-a8d4-307bc4767859">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="16" isBold="true" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[විශේෂ චාරිකා අවසර පත්‍රය - අන්තර් පළාත්]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="84" width="70" height="20" uuid="69d3adc6-0c26-40fd-91a1-bfe53825006c"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Iskoola Pota" size="10" isBold="true" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ අංකය​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="360" y="97" width="70" height="14" isPrintWhenDetailOverflows="true" uuid="6b991937-0266-4825-ba92-319e83592b9d">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ இலக்கம்]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="111" width="70" height="19" uuid="f6304277-1774-42d1-895e-009d6c2a1e50"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="430" y="79" width="20" height="46" uuid="3b4589f8-54f7-404e-afcc-8c95502a9a7b"/>
+				<imageExpression><![CDATA[$P{P_curley}+"Curleyimages.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="450" y="10" width="100" height="30" uuid="190e538c-455a-4c0d-a654-c53382e3af8b"/>
+				<textFieldExpression><![CDATA[$F{tep_permit_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="435" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="6" width="170" height="14" uuid="30401c9a-5986-4773-ba73-d60c4b853fb5"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="10" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[බස්‍ රථ අංකය​ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="20" width="170" height="14" isPrintWhenDetailOverflows="true" uuid="7efeb161-079c-4852-8748-68aec54ff24e"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[பேரூந்து இலக்கம் :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="34" width="170" height="14" uuid="9d0d5508-fa45-4f8e-a240-7af3a4a806d8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Bus No. :]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="179" y="6" width="20" height="49" uuid="2ff2e7aa-7779-4c09-b63a-d64d63842ed0"/>
+				<imageExpression><![CDATA[$P{P_curley}+"Curleyimages.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="63" width="189" height="14" uuid="0d3ac68b-32e0-4775-81e7-9f009f61da8f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="10" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[නිත්‍යසේවා අවසර පත්‍ර අංකය​ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="77" width="191" height="14" isPrintWhenDetailOverflows="true" uuid="0af19609-3c8c-4300-bc0c-a8092955ae23"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[நிரந்தர​  சேவை அனுமதிப்பத்திர இலக்கம் :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="91" width="190" height="14" uuid="8ed08afd-be7b-40f3-89e7-c205c1d587e2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Regular Passenger Permit No. :]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="179" y="60" width="20" height="49" uuid="ccf8a4dd-6082-4dde-ac61-3482f0edea91"/>
+				<imageExpression><![CDATA[$P{P_curley}+"Curleyimages.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="200" y="15" width="344" height="30" uuid="4410cd54-3bf5-40a3-ba3b-9bbdb4a535bd"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[...........................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="68" width="344" height="30" uuid="099fe4ba-d68f-4dfe-b5aa-213521ca1f97"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[...........................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="118" width="189" height="14" uuid="c9985d00-bd80-4913-b9f8-d965e539e6b5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="10" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[විශේෂ චාරිකාවට අදාළ විස්තර​:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="132" width="191" height="14" isPrintWhenDetailOverflows="true" uuid="1cc71719-03f0-466d-8767-3fbc42fea1f5"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[விசேட​ சேவை சம்பந்தமான​ விபரங்கள் :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="146" width="190" height="14" uuid="f3abbab8-f5c5-46f5-aea1-d73e59b0fe69">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Details relating to the Special Hire :]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="179" y="115" width="20" height="49" uuid="3c96604d-e53b-4012-a9fa-0f3bbf02be4d"/>
+				<imageExpression><![CDATA[$P{P_curley}+"Curleyimages.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="200" y="123" width="344" height="30" uuid="5955af53-891c-4914-90aa-b148fcd61c75"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[...........................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="229" width="90" height="14" uuid="7dcda199-3a89-4daa-b0ef-f5c0b9da7d00">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="10" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ගමන් මාර්ගය​ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="243" width="90" height="15" isPrintWhenDetailOverflows="true" uuid="e16887a9-ca23-4c65-9f1a-76eb63fb2d44"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[செயலாற்றும் வழி :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="258" width="70" height="15" uuid="4ea8e2a2-9005-4d2c-920d-8306904700f0"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Route]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="176" width="90" height="14" uuid="d72db179-1df2-4ce2-a553-ff7766976377">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="10" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ආරම්භ වන දිනය :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="205" width="70" height="15" uuid="f6074aae-7bc7-484c-a9a2-2399f5ec6812"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Starting Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="190" width="90" height="15" isPrintWhenDetailOverflows="true" uuid="77ca4151-be2c-43f4-a281-a0358db7a0f9"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ஆரம்பிக்கும் தினம் :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="180" width="150" height="30" uuid="2ce16fcd-db3f-424f-9a2b-95ae44670e4b"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[.................................................]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="89" y="172" width="20" height="49" uuid="cb339607-58b9-4b07-ace8-16a0c25a2b9b"/>
+				<imageExpression><![CDATA[$P{P_curley}+"Curleyimages.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame">
+				<reportElement x="89" y="227" width="20" height="49" uuid="d211bc0f-d372-47f4-acfe-311549f4f24c"/>
+				<imageExpression><![CDATA[$P{P_curley}+"Curleyimages.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="110" y="235" width="435" height="30" uuid="f5948c97-cf55-47b2-bf82-3f5a441d434c"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[........................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="176" width="90" height="14" uuid="8f54dfd2-f116-4377-bb15-f5043f5f7776">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="10" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[අවසන් වන දිනය​ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="258" y="190" width="90" height="15" isPrintWhenDetailOverflows="true" uuid="0e87c601-2113-47a1-8e37-9c914c3681e5"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[முடிவடையும் தினம் :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="205" width="89" height="15" uuid="d1e40392-1f25-4e5c-8ace-04972f58aad8"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Closing  Date :]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="349" y="172" width="20" height="49" uuid="a6db7fe0-5f8e-499f-92aa-c8340a2820a4"/>
+				<imageExpression><![CDATA[$P{P_curley}+"Curleyimages.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="370" y="180" width="175" height="30" uuid="8b43c93f-f9ec-49af-ab6e-5ac7ef360b43"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[.....................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="290" width="554" height="14" uuid="8eeaa4e3-ecc1-484a-989f-b614e98ba255">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="10" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ඉහත විස්තර සඳහන් විශේෂ චාරිකා සේවාවෙහි යෙදීම සඳහා මෙයින් අවසර දෙනු ලැබේ.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="304" width="554" height="15" isPrintWhenDetailOverflows="true" uuid="36043f39-166b-48c6-b319-09d79d984e7a"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[மேலே குறிப்பிட்டுள்ளவாறு விசேட​  சேவை செயலாற்ற​ இத்தால் அனுமதிக்கப்பட்டுள்ளது]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="320" width="554" height="15" uuid="8cd83b0f-5bd2-4283-9d61-a829711d9bbc"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[The Special Hire as per  details given above is hereby  authorised.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="367" width="151" height="17" uuid="0db035a9-27db-40fd-931a-25ca5c8f83bf"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="12" isBold="true" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[බලයලත් නිලධාරි]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="384" width="192" height="16" isPrintWhenDetailOverflows="true" uuid="8f9d8559-d6ae-4235-a189-5d30c183a225"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[அதிகாரம் அளிக்கப்பட்டுள்ள​  உத்தியோகத் தர்]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="400" width="192" height="15" uuid="6bacf7cc-ab6f-451b-9d63-814166bb035f"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Authorised Officer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="337" width="219" height="30" uuid="cb94b52f-2983-41a8-a817-f2341cb16706"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[.......................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="415" width="80" height="14" uuid="86f4399b-d660-4195-a23d-a925c6abffa2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="10" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[(මුද්‍රාව තබන්න​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="71" y="415" width="90" height="15" isPrintWhenDetailOverflows="true" uuid="ff80e7bf-789b-47f4-8efb-d90d90c4f759"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[-இலச்சினை இடுக​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="415" width="70" height="15" uuid="bae61518-e11a-4f7b-a2eb-77b161d05182"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[- Affix Seal )]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="367" width="90" height="14" uuid="822178ef-7e22-48d7-8b00-cc8c5cd5c8a6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="10" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[දිනය :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="348" y="381" width="90" height="15" isPrintWhenDetailOverflows="true" uuid="9676c0fd-f34b-4c29-8750-7d88b50af86c"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ தினம் :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="396" width="70" height="15" uuid="1345dff0-c760-434c-aadc-83c62828212a"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Starting Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="20" width="290" height="30" uuid="678fade4-3547-4265-98a7-3992fd3461f3"/>
+				<textFieldExpression><![CDATA[$F{tep_vehicleno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="72" width="340" height="30" uuid="6acfa6ab-ded8-48cb-9eca-72be5c1c0426"/>
+				<textFieldExpression><![CDATA[$F{tep_permit_no}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="112" y="184" width="128" height="30" uuid="8782af5d-36e5-4d59-b99e-6b3d8e6693cb"/>
+				<textFieldExpression><![CDATA[$F{tep_valid_from}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="370" y="184" width="130" height="30" uuid="7d21b5e4-1f98-4909-9c96-862a9e94f845"/>
+				<textFieldExpression><![CDATA[$F{tep_valid_to}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="109" y="237" width="411" height="61" isPrintWhenDetailOverflows="true" uuid="defe4eff-bff3-49c5-9e09-2ce8e3e6388d"/>
+				<textFieldExpression><![CDATA[$F{tep_origin} +" To "+$F{tep_destination} +($F{tep_route_via}.equals( null )?" ": " Via - "+$F{tep_route_via})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="510">
+			<staticText>
+				<reportElement x="0" y="4" width="550" height="30" uuid="1f6493e0-eba0-4aae-8445-7addd20b2688"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="16" isBold="true" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[විශේෂ චාරිකා අවසර පත්‍ර සම්බන්ධ කොන්දේසි.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="38" width="542" height="31" uuid="629fab08-fa4b-4d84-b2ca-d8dabdcf507b"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="12" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ විශේෂ චාරිකාවෙහි යෙදෙන සෑම අවස්ථාවකදිම මෙම අවසර පත්‍රය සමඟ නිත්‍ය සේවා අවසර පත්‍ර පොත හා ලේබලය ද රැගෙන යා යුතුය.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="69" width="542" height="31" uuid="7f218ccd-5782-4623-bf05-61a60c91a02e"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="12" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[විශේෂ චාරිකා අවසර පත්‍රයෙහි සඳහන් කාලය තුල එහි සඳහන් මාර්ගයන්හි පමණක් ධාවනය කළ යුතුය.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="91" width="552" height="31" uuid="095628c5-624b-4968-92c1-70ff686f512b"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="12" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[චාරිකාව නිම වී දින පහක් ඉක්ම යාමට පෙර මෙම විශේෂ චාරිකා අවසර පත්‍රය නිකුත් කළ නිළධාරීන්ට ආපසු භාර දිය යුතුය. එසේ ආපසු භාර දීමට අපොහොසත් වන අවසර පත්‍රයක් වෙනුවෙන් රු.250/- මුදලක් අය කරනු ඇත.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="124" width="542" height="31" uuid="59bdfd68-e8d3-44cc-bbbe-bd02d248daf4"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="12" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[විශේෂ චාරිකා අවසර පත්‍රය අයථා ලෙස පරිහරණය කිරීම දඬුවම් ලැබිය හැකි වරදකී.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="151" width="542" height="31" uuid="ca0b676c-8426-4e94-bf8f-e788cfeaab7f"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="12" isBold="false" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[මෙයට අමතරව ජාතික ගමනා ගමන කොමිෂන් සභාව / පළාත් ප්‍රවාහන අධිකාරිය විසින් පනවන ලබන නියමයන් හා කොන්දේසි අනුව මෙම බලපත්‍රලාභීන් ක්‍රියා කළ යුතුය.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="187" width="549" height="30" uuid="55c98d84-ba39-4629-a461-cfe1e5756ae9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[CONDITIONS FOR SPECIAL HIRE PERMITS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="217" width="544" height="31" uuid="fde45765-58ad-49a0-9d3d-5fc221e64cdc"/>
+				<textElement>
+					<font size="11"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[The regular permits and the label should be carried all the time, when operated for special hire.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="241" width="544" height="31" uuid="367caadd-861d-45ac-b40a-11d29a27e0f2"/>
+				<textElement>
+					<font size="11"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ The bus should be operated only during the period and the routes, authorized.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="268" width="544" height="31" uuid="3493ffe9-db41-4c9c-9d90-3956b538724c"/>
+				<textElement>
+					<font size="11"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ When the Special Hire is completed, the special permits should be surrendered to the issuing authority within 7 days and the inability to do so will become liable for a fine of Rs.250/-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="302" width="544" height="31" uuid="08ba7ef3-9fd9-4cbb-bb1b-c82769e4a39c"/>
+				<textElement>
+					<font size="11"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ Misuse of special hire permits will be a punishable offence.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="330" width="544" height="31" uuid="a1b1f5a6-f4c5-49db-9e39-2dc9d752287b"/>
+				<textElement>
+					<font size="11"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[In addition these permit holders should follow the terms and conditions laid down by the National Transport Commission and the Provincial Transport Authority.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="366" width="550" height="40" isPrintWhenDetailOverflows="true" uuid="66683ff6-4132-40ec-b3c6-676eb0fbcf5c"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="10" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[விசேஷ சேவை  செயலாற்றும் சம்பந்தமான​ நிபந்தனைகள்]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="399" width="540" height="40" isPrintWhenDetailOverflows="true" uuid="0c433541-0697-4d43-91de-79e567d6e520"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="9" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ விசேட​  சேவை  செயலாற்றும் பொழுது நிரந்தர​ அனுமதிப்பத்திரமும்  புத்தகம்  அனுமதிப்பத்திரத்துடன்.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="435" width="546" height="30" isPrintWhenDetailOverflows="true" uuid="859a4db2-e384-40a8-8f23-a65223233b2c"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="9" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[விசேட​  அனுமதிப்பத்திரத்தில் குறிப்பிடப்பட்டுள்ள பாதையிலும் காலத்திற்குள்ளும்மாத் திரமே செயலாற்றப்படல் வேண்டும்.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="465" width="539" height="45" isPrintWhenDetailOverflows="true" uuid="d5b0e162-7f95-45e1-9d5d-e756b0cdcf36"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Latha" size="9" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[விசேட​  சேவை  முடிவடைந்த​ 07  தினங்களுக்குள் இந்த​ அனுமதிப்பத்திரம்  திருப்பி ஒப்படைக்கப்படல்  வேண்டும். இது  தவறும் பட்சத்தில் ரூபா 250 தண்டனை ஆக​ அறவிடப்படும்.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="38" width="9" height="30" uuid="e91145c4-347f-4438-aba5-cc340e6734a0"/>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="68" width="9" height="23" uuid="12b7a61b-38d2-4848-a11c-060c88e1795c"/>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="91" width="9" height="31" uuid="e824df4b-b0ea-46b3-8680-fed82693f3cc"/>
+				<text><![CDATA[3.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="124" width="9" height="31" uuid="bddc9d90-585d-4796-93b2-1111993394aa"/>
+				<text><![CDATA[4.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="151" width="9" height="31" uuid="ad5fb8b2-ce95-455a-8065-887f52065b0f"/>
+				<text><![CDATA[5.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="269" width="9" height="31" uuid="56512395-e8a2-44f7-99b6-f92f46268887"/>
+				<text><![CDATA[3.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="329" width="9" height="31" uuid="46158885-32b0-43f3-9fee-a78dd5e4c40e">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[5.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="241" width="9" height="23" uuid="51b37ffb-8195-4faa-baa0-6b400a1b0e7b"/>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="217" width="9" height="24" uuid="396d9286-680c-4741-9d5e-2df26986ef0b"/>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="301" width="9" height="31" uuid="a9bc76c3-299e-4372-a07d-668190d2f9ec"/>
+				<text><![CDATA[4.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="408" width="9" height="24" uuid="c039a78c-b107-4a9c-bd65-417e05ff379c"/>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="435" width="9" height="23" uuid="555b4e31-882b-4224-9aa7-c742ff9a0b83"/>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="469" width="9" height="31" uuid="4c218abd-816c-44b9-8739-d1f362ea99b8"/>
+				<text><![CDATA[3.]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

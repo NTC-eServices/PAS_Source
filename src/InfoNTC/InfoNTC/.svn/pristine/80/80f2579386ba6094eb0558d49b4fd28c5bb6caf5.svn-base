@@ -1,0 +1,2406 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+#Dob {
+	width: 80% !important;
+}
+
+.calendarClass input {
+	width: 79% !important;
+}
+
+.numField .ui-inputfield {
+	width: 89% !important;
+	font-weight: bold;
+	text-align: right;
+}
+
+.footer {
+	height: 20px;
+	background-color: #07295b;
+	text-align: center;
+	colour: #84063A;
+	color: #777373;
+}
+
+.ui-datatable-scrollable .ui-datatable-scrollable-header {
+	min-height: 20px;
+}
+
+.ui-datatable-scrollable-body {
+	height: 125px !important;
+}
+</style>
+
+		<div class="mainDiv">
+			<!-- header -->
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Sisu Sariya
+				Renewals/Amendment/Cancellation Agreement</h1>
+
+			<div style="width: 95%;" class="subDiv">
+
+				<h:form id="frm-search">
+					<p:panel id="pnl-search">
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel>Operator/Depo Name</p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-operatorDepoName" style="width:100%;"
+									effect="fold"
+									value="#{ssPermitRenewalBean.sisuSeriyaDTO.nameOfOperator}"
+									filter="true" filterMatchMode="contains">
+									<f:selectItem itemLabel="-- Select Operator/Depo Name --"
+										itemValue="" />
+									<f:selectItems
+										value="#{ssPermitRenewalBean.drpdOperatorDepoNameList}"
+										var="list" itemValue="#{list.nameOfOperator}"
+										itemLabel="#{list.nameOfOperator}" />
+									<p:ajax
+										listener="#{ssPermitRenewalBean.onOperatorDepoNameChange}"
+										update="@form" />
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Service No./Service Agreement No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:selectOneMenu id="drpd-serviceNo" style="width:100%;"
+								effect="fold"
+								value="#{ssPermitRenewalBean.sisuSeriyaDTO.serviceNo}"
+								filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="-- Select Service No. --" itemValue="" />
+								<f:selectItems value="#{ssPermitRenewalBean.drpdServiceNoList}"
+									var="seriveNoList" itemValue="#{seriveNoList.serviceNo}"
+									itemLabel="#{seriveNoList.serviceNo}" />
+								<p:ajax listener="#{ssPermitRenewalBean.onServiceNoChange}"
+									process="@form" update="@form" />
+							</p:selectOneMenu>
+							
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel>Service Reference No.</p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-serviceReferenceNo"
+									style="width:100%;" effect="fold"
+									value="#{ssPermitRenewalBean.sisuSeriyaDTO.serviceRefNo}"
+									filter="true" filterMatchMode="contains">
+									<f:selectItem itemLabel="-- Select Service Reference No. --"
+										itemValue="" />
+									<f:selectItems
+										value="#{ssPermitRenewalBean.drpdServiceReferanceNoList}"
+										var="seriveRefNoList"
+										itemValue="#{seriveRefNoList.serviceRefNo}"
+										itemLabel="#{seriveRefNoList.serviceRefNo}" />
+									<p:ajax
+										listener="#{ssPermitRenewalBean.onServiceReferanceNoChange}"
+										process="@form" update="@form" />
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Request No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:inputText id="txt-RequestNo" style="width:80%;height:18px;"
+								maxlength="12"
+								value="#{ssPermitRenewalBean.sisuSeriyaDTO.requestNo}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+							
+							<p:panelGrid></p:panelGrid>
+
+						</p:panelGrid>
+
+
+					</p:panel>
+
+
+					<p:tabView id="tabviewId"
+						activeIndex="#{ssPermitRenewalBean.activeTabIndex}"
+						rendered="true">
+
+
+						<!-- Tab 01 -->
+						<p:tab id="tab-serviceInformation" title="Service Information">
+							<p:panel id="pnl-serviceInformation">
+
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel style="font-weight: bold;"
+											value="Cancellation Agreement"></p:outputLabel>
+									</p:panelGrid>
+									<p:selectBooleanCheckbox
+										value="#{ssPermitRenewalBean.cancellation}"
+										style="padding-left: 0px;"
+										disabled="#{ssPermitRenewalBean.view}">
+									</p:selectBooleanCheckbox>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Preferred Language"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="drpd-preferredLanguage" effect="fold"
+										disabled="false" style="width:66%;"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.languageCode}">
+										<f:selectItem itemLabel="ENGLISH" itemValue="E" />
+										<f:selectItem itemLabel="SINHALA" itemValue="S" />
+										<f:selectItem itemLabel="TAMIL" itemValue="T" />
+									</p:selectOneMenu>
+
+									<p:panelGrid>
+										<p:outputLabel value="Service Type"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="drpd-serviceType" style="width:90%;"
+										disabled="false" effect="fold" filter="true"
+										filterMatchMode="contains"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.serviceTypeCode}">
+										<f:selectItem itemLabel="-- Select Service Type. --"
+											itemValue="" />
+										<f:selectItems
+											value="#{ssPermitRenewalBean.drpdServiceTypeList}"
+											var="requestNoList" itemLabel="#{requestNoList.description}"
+											itemValue="#{requestNoList.code}" />
+									</p:selectOneMenu>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Bus Number."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="txt-busNumber" readonly="false"
+										style="width:73%;height:18px;" maxlength="12"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.busRegNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Permit No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="txt-permitNo" style="width:50%;height:18px;"
+											disabled="#{ssPermitRenewalBean.disablePermitNo}"
+											maxlength="12"
+											value="#{ssPermitRenewalBean.sisuSeriyaDTO.permitNo}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+										<p:selectBooleanCheckbox value="#{ssPermitRenewalBean.sltb}"
+											style="padding-left: 6px;" itemLabel="SLTB"
+											disabled="#{ssPermitRenewalBean.view}">
+
+										</p:selectBooleanCheckbox>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Origin"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="txt-origin" style="width:73%;height:18px;"
+										readonly="false" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.originCode}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel value="Distance KM"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputNumber id="txt-distanceKm" readonly="false"
+										style="width:100%;height:18px;" maxlength="10"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.distance}"
+										padControl="false"
+										onkeyup="this.value=this.value.toUpperCase();">
+										<p:keyFilter regEx="/[\d]/i" />
+
+
+									</p:inputNumber>
+
+									<p:panelGrid>
+										<p:outputLabel value="Destination"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText id="txt-destination"
+										style="width:73%;height:18px;" readonly="false" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.destinationCode}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel value="Trips per Day"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputNumber id="txt-tripsPerDay"
+										style="width:100%;height:18px;" readonly="false"
+										padControl="false" maxlength="5"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.tripsPerDay}">
+									</p:inputNumber>
+
+									<p:panelGrid>
+										<p:outputLabel value="Via"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="txt-via" readonly="false"
+										style="width:73%;height:18px;" maxlength="100"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.via}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel value="Service Start Date"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<div style="width: 100%">
+											<p:calendar id="cld-serviceStartDate"
+												disabled="#{ssPermitRenewalBean.view}"
+												styleClass="calendarClass"
+												value="#{ssPermitRenewalBean.sisuSeriyaDTO.serviceStartDateObj}"
+												readonlyInput="false"
+												yearRange="c-100:c+100" navigator="true" locale="en_US"
+												showOn="button" process="cld-serviceStartDate"
+												update="cld-serviceStartDate" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY" mask="true">
+												<p:ajax event="dateSelect"
+													listener="#{ssPermitRenewalBean.onServiceStartDateChange}"
+													update="cld-serviceStartDate" />
+
+											</p:calendar>
+										</div>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Nic/Org Reg.No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="txt-nicOrgRegNo" readonly="false"
+										style="width:73%;height:18px;" maxlength="12"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.nicNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel value="Service End Date" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<div style="width: 100%">
+											<p:calendar id="cld-serviceEndDate"
+												disabled="#{ssPermitRenewalBean.view}"
+												styleClass="calendarClass"
+												value="#{ssPermitRenewalBean.temptServiceEndDate}"
+												readonlyInput="false" mindate="today"
+												yearRange="c-100:c+100" navigator="true" locale="en_US"
+												showOn="button" process="cld-serviceEndDate"
+												update="cld-serviceEndDate" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY" mask="true">
+												
+
+											</p:calendar>
+										</div>
+									</p:panelGrid>
+								</p:panelGrid>
+
+
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Operator/Depo Name"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText id="txt-nameOfOperatorEnglish" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.nameOfOperator}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel value="Operator/Depo Name"></p:outputLabel>
+										<div>
+											<b>(Sinhala)</b>
+										</div>
+									</p:panelGrid>
+
+									<p:inputText id="txt-nameOfOperatorSinhala" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.nameOfOperatorSin}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel value="Operator/Depo Name"></p:outputLabel>
+										<div>
+											<b>(Tamil)</b>
+										</div>
+									</p:panelGrid>
+
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="txt-nameOfOperatorTamil" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.nameOfOperatorTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid columns="4" style="margin-top: 1%;margin-bottom:1%"
+									columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+									layout="grid">
+
+									<p:outputLabel value="Address in" style="font-weight: bold;"></p:outputLabel>
+									<p:outputLabel value="Address Line 1"
+										style="font-weight: bold;"></p:outputLabel>
+									<p:outputLabel value="Address Line 2"
+										style="font-weight: bold;"></p:outputLabel>
+									<p:outputLabel value="City" style="font-weight: bold;"></p:outputLabel>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="English"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="txt-address1English" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.addressOne}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText id="txt-address2English" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.addressTwo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText id="txt-cityEnglish" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.city}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+
+									<p:outputLabel value="Sinhala"></p:outputLabel>
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="txt-address1Sinhala" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.addressOneSin}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="txt-address2Sinhala" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.adressTwoSin}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="txt-citySinhala" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.citySin}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+
+									<p:outputLabel value="Tamil"></p:outputLabel>
+									<p:inputText style="width:100%;height:18px;"
+										id="txt-address1Tamil" maxlength="50" readonly="false"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.addressOneTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="txt-address2Tamil" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.adressTwoTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText id="txt-cityTamil" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.cityTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+								</p:panelGrid>
+
+
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Status"></p:outputLabel>
+									</p:panelGrid>
+
+
+									<p:selectOneMenu id="drpd-Status" effect="fold" disabled="true"
+										style="width:66%;"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.serviceRenewalStatus}">
+										<f:selectItem itemLabel="ONGOING" itemValue="O" />
+										<f:selectItem itemLabel="PENDING" itemValue="P" />
+										<f:selectItem itemLabel="APPROVED" itemValue="A" />
+									</p:selectOneMenu>
+
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.province']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:selectOneMenu id="txt-province" style="width:90%;"
+										disabled="false" effect="fold"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.provinceCode}">
+
+										<f:selectItem itemLabel="-- Select --" itemValue="" />
+										<f:selectItems
+											value="#{ssPermitRenewalBean.drpdProvincelList}"
+											var="provincelList" itemValue="#{provincelList.code}"
+											itemLabel="#{provincelList.description}" />
+									</p:selectOneMenu>
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.tel']}"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="txt-telephoneNo"
+										style="width:73%;height:18px;" maxlength="10"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.telNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.district']}"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="txt-district" style="width:90%;"
+										disabled="false" effect="fold"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.districtCode}">
+
+										<f:selectItem itemLabel="-- Select --" itemValue="" />
+										<f:selectItems value="#{ssPermitRenewalBean.drpdDistrictList}"
+											var="districtList" itemValue="#{districtList.code}"
+											itemLabel="#{districtList.description}" />
+									</p:selectOneMenu>
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.mobile']}"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="txt-mobileNo" style="width:73%;height:18px;"
+										maxlength="10"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.mobileNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.ds']}"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:selectOneMenu id="tab01-txt-divisionalSecretariatDivision"
+										disabled="false" style="width:90%; " effect="fold"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.divisionalSecCode}">
+
+										<f:selectItem itemLabel="-- Select --" itemValue="" />
+										<f:selectItems value="#{ssPermitRenewalBean.drpdDevsecList}"
+											var="divSecList" itemValue="#{divSecList.code}"
+											itemLabel="#{divSecList.description}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+									<p:outputLabel value="Remark"></p:outputLabel>
+									<p:inputTextarea rows="3" style="width:100%;height:18px;"
+										readonly="false" id="txt-remark" maxlength="255"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.remark}"
+										onkeyup="this.value=this.value.toUpperCase();"></p:inputTextarea>
+								</p:panelGrid>
+
+
+
+								<br></br>
+								<br></br>
+
+								<!-- buttons -->
+								<p:panelGrid columns="3"
+									columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+									layout="grid">
+
+									<p:commandButton id="btn-tab01Save" styleClass="mainLinkButton"
+										style="width:100%" disabled="#{ssPermitRenewalBean.view}"
+										value="Save" ajax="false" update="@form"
+										rendered="#{!ssPermitRenewalBean.edit}"
+										action="#{ssPermitRenewalBean.btnTab01Save}"></p:commandButton>
+									<p:commandButton id="btn-tab01Update"
+										styleClass="mainLinkButton" style="width:100%"
+										disabled="#{ssPermitRenewalBean.view}" value="Update"
+										ajax="false" update="@form"
+										rendered="#{ssPermitRenewalBean.edit}"
+										action="#{ssPermitRenewalBean.btnTab01Save}"></p:commandButton>
+									<p:commandButton id="btn-tab01Cancel"
+										styleClass="mainLinkButton" style="width:100%" value="Clear"
+										ajax="false" update="@form"
+										action="#{ssPermitRenewalBean.btnTab01Clear}">
+									</p:commandButton>
+									<p:commandButton id="btn-tab01DocumentManagement"
+										styleClass="mainLinkButton" style="width:100%"
+										disabled="#{!ssPermitRenewalBean.edit}"
+										value="Document Management" ajax="false"
+										update="uploadDocumentsDialog"
+										action="#{ssPermitRenewalBean.documentManagement}">
+									</p:commandButton>
+									<center>
+										<p:commandButton id="btn-tab01RenewalHistory"
+											styleClass="mainLinkButton" style="width:100%"
+											value="History" ajax="false" update="renewalHistoryDialog"
+											action="#{ssPermitRenewalBean.onBtnClickHistory}">
+										</p:commandButton>
+									</center>
+
+								</p:panelGrid>
+								<br></br>
+								<br></br>
+
+
+							</p:panel>
+						</p:tab>
+
+						<!-- Tab 02 -->
+						<p:tab title="Schoool Information"
+							disabled="#{ssPermitRenewalBean.disableTab02}">
+							<p:panel id="pnl-schoolInformation">
+
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Name"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:inputText id="tab02-txt-nameEnglish" readonly="false"
+										style="width:100%;height:18px;" maxlength="100"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolName}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel value="Name"></p:outputLabel>
+										<div>
+											<b>(Sinhala)</b>
+										</div>
+									</p:panelGrid>
+
+									<p:inputText id="tab02-txt-nameSinhala" readonly="false"
+										style="width:100%;height:18px;" maxlength="100"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolNameSin}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel value="Name"></p:outputLabel>
+										<div>
+											<b>(Tamil)</b>
+										</div>
+									</p:panelGrid>
+
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="tab02-txt-nameTamil" maxlength="100"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolNameTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid columns="4" style="margin-top: 1%;margin-bottom:1%"
+									columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+									layout="grid">
+
+									<p:outputLabel value="Address in" style="font-weight: bold;"></p:outputLabel>
+									<p:outputLabel value="Address Line 1"
+										style="font-weight: bold;"></p:outputLabel>
+									<p:outputLabel value="Address Line 2"
+										style="font-weight: bold;"></p:outputLabel>
+									<p:outputLabel value="City" style="font-weight: bold;"></p:outputLabel>
+
+									<p:panelGrid>
+										<p:outputLabel value="English"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="tab02-txt-address1English" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolAddressOne}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText id="tab02-txt-address2English" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolAddressTwo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText id="tab02-txt-cityEnglish" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolCity}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:outputLabel value="Sinhala"></p:outputLabel>
+									<p:inputText id="tab02-txt-address1Sinhala"
+										style="width:100%;height:18px;" maxlength="50"
+										readonly="false"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolAdrressOneSin}"
+										onkeyup="this.value=this.value.toUpperCase();">
+
+									</p:inputText>
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="tab02-txt-address2Sinhala" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolAddressTwoSin}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="tab02-txt-citySinhala" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolCitySin}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:outputLabel value="Tamil"></p:outputLabel>
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="tab02-txt-address1Tamil" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolAddressOneTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText style="width:100%;height:18px;" readonly="false"
+										id="tab02-txt-address2Tamil" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolAddressTwoTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:inputText id="tab02-txt-cityTamil" readonly="false"
+										style="width:100%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolCityTamil}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+								</p:panelGrid>
+
+
+
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Email"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="tab02-txt-email"
+										disabled="#{ssPermitRenewalBean.view}"
+										style="width:73%;height:18px;" maxlength="50"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolEmailAdd}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.province']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+
+									<p:selectOneMenu id="tab02-txt-province" style="width:90%;"
+										disabled="false" effect="fold"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolProvinceCode}">
+										<p:ajax listener="#{ssPermitRenewalBean.onProvinceChange}"
+											update="tab02-txt-district" />
+
+										<f:selectItem itemLabel="-- Select --" itemValue="" />
+										<f:selectItems readonly="true"
+											value="#{ssPermitRenewalBean.drpdProvincelList}"
+											var="provincelList" itemValue="#{provincelList.code}"
+											itemLabel="#{provincelList.description}" />
+									</p:selectOneMenu>
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.tel']}"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="tab02-txt-telephoneNo"
+										style="width:73%;height:18px;" maxlength="10"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolTelNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.district']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:selectOneMenu id="tab02-txt-district" style="width:90%;"
+										disabled="false" effect="fold"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolDistrictCode}">
+										<p:ajax
+											listener="#{backlogPermitBackingBean.onDistrictChange}"
+											update="tab02-txt-district" />
+
+										<f:selectItem itemLabel="-- Select --" itemValue="" />
+										<f:selectItems readonly="false"
+											value="#{ssPermitRenewalBean.drpdDistrictList}"
+											var="districtList" itemValue="#{districtList.code}"
+											itemLabel="#{districtList.description}" />
+									</p:selectOneMenu>
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.mobile']}"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="tab02-txt-mobileNo"
+										style="width:73%;height:18px;" maxlength="10"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolMobileNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+
+									</p:inputText>
+
+									<p:panelGrid>
+										<p:outputLabel
+											value="#{msg['common.backlog.tbbusownerinfo.ds']}"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:selectOneMenu id="tab02-txt-divisionalSecretariatDivision"
+										disabled="false" style="width:90%; " effect="fold"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.schoolDivisinSecCode}">
+
+										<f:selectItem itemLabel="-- Select --" itemValue="" />
+										<f:selectItems value="#{ssPermitRenewalBean.drpdDevsecList}"
+											var="divSecList" itemValue="#{divSecList.code}"
+											itemLabel="#{divSecList.description}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<br></br>
+								<br></br>
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+									layout="grid">
+									<p:panelGrid></p:panelGrid>
+
+									<p:commandButton id="tab02-btn-update"
+										styleClass="mainLinkButton" style="width:100%" value="Update"
+										ajax="false" update="@form"
+										disabled="#{ssPermitRenewalBean.view}"
+										rendered="#{ssPermitRenewalBean.renderButton}"
+										action="#{ssPermitRenewalBean.btnTab02Save}"></p:commandButton>
+
+
+									<p:commandButton id="tab02-btn-documentManagement"
+										styleClass="mainLinkButton" style="width:100%"
+										disabled="#{ssPermitRenewalBean.view}"
+										value="Document Management" ajax="false"
+										update="uploadDocumentsDialog"
+										rendered="#{ssPermitRenewalBean.renderButton}"
+										action="#{ssPermitRenewalBean.documentManagement}">
+									</p:commandButton>
+									<p:panelGrid></p:panelGrid>
+								</p:panelGrid>
+
+
+							</p:panel>
+						</p:tab>
+
+						<!-- Tab 03 -->
+						<p:tab title="Bank Information"
+							disabled="#{ssPermitRenewalBean.disableTab03}" rendered="true">
+							<p:panel id="pnl-bankInformation">
+
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-4"
+									layout="grid">
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Account Number"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="tab03-txt-accountNo"
+										style="width:89%;height:18px;" maxlength="20"
+										value="#{ssPermitRenewalBean.sisuSeriyaDTO.accountNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+
+									</p:inputText>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel>Bank Name</p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="tab03-drpd-bankName" style="width:80%;"
+											effect="fold" filter="true" filterMatchMode="contains"
+											value="#{ssPermitRenewalBean.sisuSeriyaDTO.bankNameCode}">
+											<p:ajax listener="#{ssPermitRenewalBean.onBankChange}"
+												process="@form" update="tab03-drpd-bankBranchName" />
+
+											<f:selectItem itemLabel="Select a Bank Name " itemValue="" />
+											<f:selectItems value="#{ssPermitRenewalBean.drpdBankList}"
+												var="drpdBankList"
+												itemLabel="#{drpdBankList.bankDescription}"
+												itemValue="#{drpdBankList.bankCode}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel> Branch Name</p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="tab03-drpd-bankBranchName"
+											style="width:80%;" effect="fold" filter="true"
+											filterMatchMode="contains"
+											value="#{ssPermitRenewalBean.sisuSeriyaDTO.bankBranchNameCode}">
+											<f:selectItem itemLabel=" Select a Branch " itemValue="" />
+											<f:selectItems
+												value="#{ssPermitRenewalBean.drpdBankBranchList}" var="d"
+												itemLabel="#{d.branchDescription}"
+												itemValue="#{d.branchCode}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+								</p:panelGrid>
+
+
+								<br></br>
+								<br></br>
+								<p:panelGrid columns="3"
+									columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,"
+									layout="grid">
+
+									<p:commandButton id="tab03-btn-save"
+										rendered="#{ssPermitRenewalBean.renderButton}"
+										styleClass="mainLinkButton" style="width:100%"
+										disabled="#{ssPermitRenewalBean.view}" value="Save"
+										ajax="false" update="@form"
+										action="#{ssPermitRenewalBean.btnTab03Save}"></p:commandButton>
+									<p:commandButton id="tab03-btn-clear"
+										disabled="#{ssPermitRenewalBean.view}"
+										rendered="#{ssPermitRenewalBean.renderButton}"
+										styleClass="mainLinkButton" style="width:100%" value="Clear"
+										ajax="false" update="@form"
+										action="#{ssPermitRenewalBean.btnTab03Clear}">
+									</p:commandButton>
+									<p:commandButton id="tab03-btn-documentManagement"
+										rendered="#{ssPermitRenewalBean.renderButton}"
+										styleClass="mainLinkButton" style="width:100%"
+										disabled="#{ssPermitRenewalBean.view}"
+										value="Document Management" ajax="false"
+										update="uploadDocumentsDialog"
+										action="#{ssPermitRenewalBean.documentManagement}">
+									</p:commandButton>
+								</p:panelGrid>
+
+							</p:panel>
+						</p:tab>
+
+					</p:tabView>
+				</h:form>
+
+
+
+			</div>
+		</div>
+
+
+		<!-- Display required field field error massage -->
+		<p:dialog styleClass="" id="frm_Tender" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlmissing']}" width="30%"
+			severity="info" widgetVar="requiredField" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{ssPermitRenewalBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frm-search"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<!-- Display alert massage -->
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Information" width="30%" severity="info"
+			widgetVar="alertMessage" closeOnEscape="true" resizable="false">
+			<h:form id="frmAlert">
+				<p:panelGrid columns="3" style="margin-top:3%"
+					columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-9"
+					layout="grid">
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<div></div>
+						<div></div>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel style="margin-left:0%"
+							value="#{ssPermitRenewalBean.alertMsg}"></p:outputLabel>
+
+						<p:panelGrid columns="2" style="margin-top:3%"
+							columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+							<center>
+								<p:commandButton style="margin-top:10px;margin-bottom:10px"
+									process="frmAlert"
+									value="#{msg['um.employeeprofile.dlmissingclose']}"
+									onclick="PF('alertMSG').hide()">
+								</p:commandButton>
+							</center>
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+					</p:panelGrid>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		<!-- Display success massage -->
+		<p:dialog styleClass="" id="successMessage" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="Successfully Saved."></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="uploadDocumentsDialog" global="true" modal="true"
+			header="Upload Documents" width="80%" height="400px" severity="info"
+			widgetVar="uploadDocument" closeOnEscape="true" resizable="false"
+			style="postion: absolute;">
+
+
+			<h:form id="frmdoc">
+
+				<p:tabView>
+					<p:tab title="Upload Documents">
+
+						<p:accordionPanel>
+							<p:growl id="msgs" showDetail="false" />
+							<p:tab title="Mandatory Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abc" tableStyle="width:auto"
+										var="docMandatory"
+										value="#{ssPermitRenewalBean.mandatoryList}" rows="5"
+										paginator="true" sortOrder="ascending"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docMandatory.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docMandatory.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+
+											<h:outputText value="#{docMandatory.uploadFilePath}" />
+										</p:column>
+
+										<p:column
+											headerText="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+											style="width: 150px !important;">
+
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveSisuSariyaAgreementRenewalsMandatoryUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640">
+												
+
+												<f:attribute name="uploadedObj" value="#{docMandatory}" />
+
+											</p:fileUpload>
+
+										</p:column>
+
+									</p:dataTable>
+								</h:panelGrid>
+
+							</p:tab>
+						</p:accordionPanel>
+
+						<br></br>
+						<br></br>
+
+						<p:accordionPanel>
+							<p:growl id="msgse" showDetail="false" />
+							<p:tab title="Optional Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abcd" tableStyle="width:auto"
+										var="docOptional" value="#{ssPermitRenewalBean.optionalList}"
+										rows="5" paginator="true" sortOrder="ascending"
+										scrollable="true" scrollHeight="100%" liveResize="true"
+										liveScroll="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docOptional.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docOptional.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+											<h:outputText value="#{docOptional.uploadOptionalFilePath}" />
+										</p:column>
+
+										<p:column
+											headerText="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+											style="width: 150px;">
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveSisuSariyaAgreementRenewalsOptionalUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640"
+												fileLimitMessage="Please Upload Only One Document">
+												
+
+												<f:attribute name="uploadedOptionalObj"
+													value="#{docOptional}" />
+
+
+
+											</p:fileUpload>
+
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+
+					</p:tab>
+
+					<p:tab title="Upload History">
+
+
+						<p:accordionPanel multiple="true">
+							<p:growl showDetail="false" />
+							<p:tab title="Sisu Sariya - Request No.(Documents)"
+								closable="true">
+
+
+								<p:accordionPanel id="dkfj">
+									<p:growl id="NP" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryNP" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.sisuSariyaMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalNP" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.sisuSariyaOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+							<br></br>
+
+							<p:tab title="Sisu Sariya - Service Reference No.(Documents)"
+								closable="true">
+
+
+								<p:accordionPanel>
+									<p:growl showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docMandatory"
+												value="#{sessionBackingBean.sisuSariyaServiceRefMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docOptional"
+												value="#{sessionBackingBean.sisuSariyaServiceRefOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+							<br></br>
+
+							<p:tab title="Sisu Sariya - Service No.(Documents)"
+								closable="true">
+
+
+								<p:accordionPanel>
+									<p:growl showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docMandatory"
+												value="#{sessionBackingBean.sisuSariyaServiceMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docOptional"
+												value="#{sessionBackingBean.sisuSariyaServiceOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+
+						</p:accordionPanel>
+					</p:tab>
+				</p:tabView>
+
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successSveUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlsuccess']}"
+			width="30%" severity="info" widgetVar="successSveUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSveUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.successMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSveUploadDoc"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSveUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="requiredFieldUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlmissing']}"
+			width="30%" severity="info" widgetVar="requiredFieldUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredFieldUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredFieldUploadDoc"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredFieldUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="renewalHistoryDialog" global="true" modal="true"
+			header="Sisu Sariya Service Renewal History" width="80%"
+			height="600px" severity="info" widgetVar="renewalHistoryDialog"
+			closeOnEscape="true" resizable="false" style="postion: absolute;">
+
+
+			<h:form id="frmRenewalHistory">
+				<p:dataTable var="h"
+					value="#{ssPermitRenewalBean.serviceHistoryList}"
+					rendered="#{!ssPermitRenewalBean.showDetailsForm}">
+
+					<p:column headerText="Service Reference No.">
+						<h:outputText value="#{h.serviceRefNo}" />
+					</p:column>
+
+					<p:column headerText="Bus No.">
+						<h:outputText value="#{h.busRegNo}" />
+					</p:column>
+
+					<p:column headerText="Permit No.">
+						<h:outputText value="#{h.permitNo}" />
+					</p:column>
+
+					<p:column headerText="Modify Date and Time">
+						<h:outputText value="#{h.modifiedDateString}" />
+					</p:column>
+
+					<p:column headerText="Modify By">
+						<h:outputText value="#{h.modifiedBy}" />
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandLink
+							action="#{ssPermitRenewalBean.viewDetailedHistory()}"
+							update="frmRenewalHistory">
+
+							<f:setPropertyActionListener value="#{h}"
+								target="#{ssPermitRenewalBean.viewSelect}" />
+
+							<p:graphicImage library="images" name="view1.png"
+								style="width:24px;height:24px;" title="view"></p:graphicImage>
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+
+				<br></br>
+				<br></br>
+
+				<p:dataTable var="viewSelect"
+					rendered="#{ssPermitRenewalBean.showDetailsForm}"
+					value="#{ssPermitRenewalBean.selectedHistoryRecord}">
+
+					<p:column headerText="Service Reference No.">
+						<h:outputText value="#{viewSelect.serviceRefNo}" />
+					</p:column>
+
+					<p:column headerText="Bus No.">
+						<h:outputText value="#{viewSelect.busRegNo}" />
+					</p:column>
+
+					<p:column headerText="Permit No.">
+						<h:outputText value="#{viewSelect.permitNo}" />
+					</p:column>
+
+					<p:column headerText="Modify Date and Time">
+						<h:outputText value="#{viewSelect.modifiedDateString}" />
+					</p:column>
+
+					<p:column headerText="Modify By">
+						<h:outputText value="#{viewSelect.modifiedBy}" />
+					</p:column>
+					<h:outputText value="#{viewSelect.serviceRefNo}" />
+				</p:dataTable>
+
+				<br></br>
+				<br></br>
+				<!-- tab view start-->
+				<p:tabView id="historytabviewId"
+					activeIndex="#{ssPermitRenewalBean.activeTabIndexViewHistory}"
+					rendered="#{ssPermitRenewalBean.showDetailsForm}">
+					<!-- Tab 01 start -->
+					<p:tab title="Service Information">
+						<p:panel>
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+								layout="grid">
+
+								<p:panelGrid>
+									<p:outputLabel value="Preferred Language" for="languageId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="languageId" style="width:66%"
+										value="#{ssPermitRenewalBean.selectedLangauge}"
+										disabled="true">
+										<p:ajax listener="#{ssPermitRenewalBean.onLanguageChange}"
+											update="languageId" />
+										<f:selectItem itemLabel="-- Select --" itemValue="" />
+										<f:selectItems value="#{ssPermitRenewalBean.languageList}"
+											var="languageList" itemValue="#{languageList.languageCode}"
+											itemLabel="#{languageList.languageDes}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Service Type" for="serviceTypeId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.serviceTypeDes}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="serviceTypeId" style="width:82%;" readonly="true"></p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Bus No." for="busRegNoId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.busRegNo}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="busRegNoId" style="width:82%;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Permit No." for="permitNoId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.permitNo}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="permitNoId" style="width:82%;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Origin" for="originId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.originDes}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="originId" style="width:82%;" readonly="true"></p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Distance(KM)" for="distanceId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputNumber style="width:82%;height:18px;" id="distanceId"
+										readonly="true"
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.distance}"
+										maxlength="5" maxValue="99999" padControl="false"
+										onkeyup="this.value=this.value.toUpperCase();">
+										<p:keyFilter regEx="/[\d]/i" />
+										<p:ajax update="distanceId"
+											listener="#{ssPermitRenewalBean.distanceValidation}" />
+									</p:inputNumber>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Destination" for="destinationId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.destinationDes}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="destinationId" style="width:82%;" readonly="true"></p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Trips per Day" for="tripsPerDayId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputNumber style="width:82%;height:18px;"
+										id="tripsPerDayId"
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.tripsPerDay}"
+										maxlength="5" maxValue="99999" padControl="false"
+										onkeyup="this.value=this.value.toUpperCase();" readonly="true">
+										<p:keyFilter regEx="/[\d]/i" />
+										<p:ajax update="tripsPerDayId"
+											listener="#{ssPermitRenewalBean.distanceValidation}" />
+									</p:inputNumber>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Via" for="viaId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.via}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="viaId" style="width:82%;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Service Start Date"
+										for="serviceStartDateId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.serviceStartDateVal}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="serviceStartDateId" style="width:82%;" readonly="true"></p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="NIC/ Org Reg. No." for="nicId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.nicNo}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="nicId" style="width:82%;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Service End Date" for="serviceEndDateId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.serviceEndDateVal}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="serviceEndDateId" style="width:82%;" readonly="true"></p:inputText>
+								</p:panelGrid>
+							</p:panelGrid>
+
+							<p:panelGrid columns="2"
+								columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+
+								<p:panelGrid>
+									<p:outputLabel value="Operator/Depo Name" for="nameOfOpeId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.nameOfOperator}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="nameOfOpeId" style="width:100%;height:18px;"
+										readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Operator/Depo Name" for="nameOfOpeSinId"></p:outputLabel>
+									<div>
+										<b>(Sinhala)</b>
+									</div>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.nameOfOperatorSin}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="nameOfOpeSinId" style="width:100%;height:18px;"
+										readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Operator/Depo Name"
+										for="nameOfOpeTamilId"></p:outputLabel>
+									<div>
+										<b>(Tamil)</b>
+									</div>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.nameOfOperatorTamil}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="nameOfOpeTamilId" style="width:100%;height:18px;"
+										readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+							</p:panelGrid>
+
+							<p:panelGrid columns="4" style="margin-top: 1%;margin-bottom:1%"
+								columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+								layout="grid">
+
+								<p:outputLabel value="Address in" style="font-weight: bold;"></p:outputLabel>
+								<p:outputLabel value="Address Line 1" style="font-weight: bold;"></p:outputLabel>
+								<p:outputLabel value="Address Line 2" style="font-weight: bold;"></p:outputLabel>
+								<p:outputLabel value="City" style="font-weight: bold;"></p:outputLabel>
+
+								<p:panelGrid>
+									<p:outputLabel value="English"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.addressOne}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="addOneId" style="width:100%;height:18px;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.addressTwo}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="addTwoId" style="width:100%;height:18px;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.city}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="cityId" style="width:100%;height:18px;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Sinhala"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.addressOneSin}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="addOneSinId" style="width:100%;height:18px;"
+										readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.adressTwoSin}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="addTwoSinId" style="width:100%;height:18px;"
+										readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.citySin}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="citySinId" style="width:100%;height:18px;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Tamil"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.addressOneTamil}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="addOneTamId" style="width:100%;height:18px;"
+										readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.adressTwoTamil}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="addTwoTamilId" style="width:100%;height:18px;"
+										readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.cityTamil}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="cityTamilId" style="width:100%;height:18px;"
+										readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+							</p:panelGrid>
+
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+								layout="grid">
+
+								<p:panelGrid>
+									<p:outputLabel value="Status" for="statusId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.serviceRenewalStatus}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="statusId" style="width:82%;" readonly="true"></p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Province" for="provinceId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.provinceDes}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="provinceId" style="width:82%;" readonly="true"></p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Telephone No." for="txtteleNum"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.telNo}"
+										style="width:73%;height:18px;" id="txtteleNum" maxlength="10"
+										onkeyup="this.value=this.value.toUpperCase();" readonly="true">
+										<p:keyFilter regEx="/[\d]/i" />
+										<p:ajax update="txtteleNum" />
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="District" for="districtId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.districtDes}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="districtId" style="width:82%;" readonly="true"></p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Mobile No." for="mobileId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.mobileNo}"
+										style="width:73%;height:18px;" id="mobileId" maxlength="10"
+										onkeyup="this.value=this.value.toUpperCase();" readonly="true">
+										<p:keyFilter regEx="/[\d]/i" />
+										<p:ajax update="mobileId" />
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Divisional Secretraiat Division"
+										for="divisionId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.divisionalSecDes}"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										id="divisionId" style="width:82%;" readonly="true"></p:inputText>
+								</p:panelGrid>
+
+
+							</p:panelGrid>
+							<p:panelGrid columns="2"
+								columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+								<p:panelGrid>
+									<p:outputLabel value="Remark" for="remarkId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historyAgreementsDTO.remark}"
+										onkeyup="this.value=this.value.toUpperCase();" id="remarkId"
+										style="width:100%;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+							</p:panelGrid>
+
+						</p:panel>
+
+
+					</p:tab>
+					<!-- Tab 01 end -->
+
+					<p:tab title="School Information">
+
+						<p:panel>
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+								layout="grid">
+
+								<p:panelGrid>
+									<p:outputLabel value="Name" for="nameId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolName}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="nameId" style="width:82%;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Province" for="sclProvinceId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolProvinceDes}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclProvinceId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Name(Sinhala)" for="nameSinhalaId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolNameSin}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="nameSinhalaId" style="width:82%;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="District" for="sclDistrictId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolDistrictDes}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclDistrictId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Name(Tamil)" for="nameTamilId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolNameTamil}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="nameTamilId" style="width:82%;" readonly="true">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Divisional Secretariat Division"
+										for="sclDivisionId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolDivisionSecDes}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclDivisionId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Address One" for="sclAddOneId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolAddressOne}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclAddOneId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Telephone No." for="sclTelNoId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolTelNo}"
+										style="width:73%;height:18px;" id="sclTelNoId" maxlength="10"
+										onkeyup="this.value=this.value.toUpperCase();">
+										<p:keyFilter regEx="/[\d]/i" />
+										<p:ajax update="sclTelNoId" />
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Address One(Sinhala)"
+										for="sclAddOneSinId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolAdrressOneSin}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclAddOneSinId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Mobile No." for="sclMobNoId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolMobileNo}"
+										style="width:73%;height:18px;" id="sclMobNoId" maxlength="10"
+										onkeyup="this.value=this.value.toUpperCase();">
+										<p:keyFilter regEx="/[\d]/i" />
+										<p:ajax update="sclMobNoId" />
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Address One(Tamil)"
+										for="sclAddOneTamilId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolAddressOneTamil}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclAddOneTamilId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="E-mail Address" for="sclEmailId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolEmailAdd}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclEmailId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Address Two" for="sclAddTwoId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolAddressTwo}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclAddTwoId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Address Two(Sinala)" for="sclAddTwoSinId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolAddressTwoSin}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclAddTwoSinId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Address Two(Tamil)"
+										for="sclAddTwoTamilId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolAddressTwoTamil}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclAddTwoTamilId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="City" for="sclCityId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolCity}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclCityId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="City(Sinhala)" for="sclCitySinId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolCitySin}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclCitySinId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="City(Tamil)" for="sclCityTamilId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText
+										value="#{ssPermitRenewalBean.historySchoolInfoDTO.schoolCityTamil}"
+										maxlength="50" onkeyup="this.value=this.value.toUpperCase();"
+										id="sclCityTamilId" style="width:82%;">
+									</p:inputText>
+								</p:panelGrid>
+							</p:panelGrid>
+						</p:panel>
+
+					</p:tab>
+
+
+					<p:tab title="Bank Information">
+
+
+						<p:panel>
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+								layout="grid">
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel>Account No.</p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText style="width:80%;height:18px;" id="accNoId"
+										maxlength="20"
+										value="#{ssPermitRenewalBean.historyBankInfoDTO.accountNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel>Bank Name</p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="bankNameId" style="width:90%"
+										disabled="true"
+										value="#{ssPermitRenewalBean.historyBankInfoDTO.bankNameCode}"
+										effect="fold">
+										<p:ajax
+											listener="#{ssPermitRenewalBean.onBankBranchesChangeForBanks}"
+											update="bankBranchNameId" />
+										<f:selectItem itemLabel="--Select Bank--" itemValue=""
+											noSelectionOption="false" />
+										<f:selectItems value="#{ssPermitRenewalBean.bankNameList}"
+											var="bankNameList" itemValue="#{bankNameList.bankNameCode}"
+											itemLabel="#{bankNameList.bankName}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel>Bank Branch Name</p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="bankBranchNameId" style="width:90%"
+										disabled="true"
+										value="#{ssPermitRenewalBean.historyBankInfoDTO.bankBranchNameCode}"
+										effect="fold">
+										<f:selectItem itemLabel="--Select Bank Branch--" itemValue=""
+											noSelectionOption="false" />
+										<f:selectItems
+											value="#{ssPermitRenewalBean.bankBranchNameList}"
+											var="bankBranchNameList"
+											itemValue="#{bankBranchNameList.bankBranchNameCode}"
+											itemLabel="#{bankBranchNameList.bankBranchNameDes}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+							</p:panelGrid>
+
+						</p:panel>
+
+					</p:tab>
+
+				</p:tabView>
+				<!-- Tab view end -->
+				<center>
+					<p:commandButton id="btn-back"
+						rendered="#{ssPermitRenewalBean.showDetailsForm}"
+						styleClass="mainLinkButton" style="width:100px" disabled="false"
+						value="Back" update="frmRenewalHistory"
+						action="#{ssPermitRenewalBean.viewHistoryBack}"></p:commandButton>
+				</center>
+
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

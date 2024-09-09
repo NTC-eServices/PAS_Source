@@ -1,0 +1,720 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-input {
+	margin-top: -20px;
+}
+
+.ui-inputfield ui-widget ui-state-default ui-corner-all {
+	width: 10%;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-datepicker {
+	border: 1px solid #39F !important;
+}
+</style>
+
+		<h:form id="form">
+
+			<div class="mainDiv">
+				<h1
+					style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+					class="common_form_header">#{msg['edit.view.route.creator']}</h1>
+				<div style="width: 96%;" class="subDiv">
+
+					<p:panel id="panelSearch">
+						<br></br>
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.route.no']}" />
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="searchRoute" style="width:85%"
+									disabled="#{editRouteCreationBackingBean.searched}"
+									value="#{editRouteCreationBackingBean.searchRoute}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+									<f:selectItem itemLabel="-- All --" itemValue="ALL"
+										noSelectionOption="true" />
+									<f:selectItems value="#{editRouteCreationBackingBean.routes}"
+										var="a" itemLabel="#{a.routeNo}" itemValue="#{a.routeNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.status']}" />
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="searchStatus" style="width:85%"
+									disabled="#{editRouteCreationBackingBean.searched}"
+									value="#{editRouteCreationBackingBean.searchStatus}">
+									<f:selectItem itemLabel="-- All --" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItem itemLabel="ACTIVE" itemValue="ACTIVE" />
+									<f:selectItem itemLabel="INACTIVE" itemValue="INACTIVE" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Bus Type"
+									rendered="#{editRouteCreationBackingBean.rederBusType}"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="busService"
+									rendered="#{editRouteCreationBackingBean.rederBusType}"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.busTypeStr}"
+									style="width:85%" readonly="true" placeholder="">
+								</p:inputText>
+
+							</p:panelGrid>
+						</p:panelGrid>
+						<br></br>
+						<center>
+							<p:commandButton value="#{msg['edit.view.route.creator.search']}"
+								styleClass="mainActionbtn" id="btnSearch"
+								action="#{editRouteCreationBackingBean.search}" update="@form" />
+							<p:commandButton value="#{msg['edit.view.route.creator.clear']}"
+								styleClass="mainActionbtn" style="width:auto" id="btnClear"
+								action="#{editRouteCreationBackingBean.clearForm}"
+								update="@form" />
+						</center>
+					</p:panel>
+
+					<p:panel id="panelOne"
+						rendered="#{editRouteCreationBackingBean.searched and editRouteCreationBackingBean.editMode}">
+						<br></br>
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-4,ui-grid-col-2"
+							layout="grid">
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.route.no']}"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="routeNo" style="width:85%" disabled="true"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.routeNo}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+									<p:ajax
+										listener="#{editRouteCreationBackingBean.onRouteSelect}"
+										update="panelOne,length" />
+									<f:selectItem itemLabel="--Select--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{editRouteCreationBackingBean.routes}"
+										var="a" itemLabel="#{a.routeNo}" itemValue="#{a.routeNo}" />
+								</p:selectOneMenu>
+								<p:message for="routeNo"></p:message>
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel
+									value="#{msg['route.creator.abbreviation.letter']}"></p:outputLabel>
+							</p:panelGrid>
+
+							<!-- first line end-->
+
+							<!-- second line start-->
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.start.from']}"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+
+								<p:inputText id="startFrom"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.startFrom}"
+									style="width:85%" readonly="true" placeholder="">
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:inputText id="startFromSwipe"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.endAt}"
+									style="width:85%" readonly="true" placeholder="">
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:inputText id="abbrStartFrom"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.abbreviationStart}"
+									onkeyup="this.value=this.value.toUpperCase();"
+									onblur="this.value=this.value.toUpperCase();" style="width:85%"
+									readonly="false" placeholder="" maxlength="20">
+									<p:keyFilter regEx="/[a-z0-9_\-]/i" />
+								</p:inputText>
+							</p:panelGrid>
+							<!-- second line end-->
+
+							<!-- third line start-->
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.end.at']}"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+
+								<p:inputText id="endAt"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.endAt}"
+									style="width:85%" readonly="true" placeholder="">
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:inputText id="endAtSwipe"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.startFrom}"
+									style="width:85%" readonly="true" placeholder="">
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:inputText id="abbrEndAt"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.abbreviationEnd}"
+									onkeyup="this.value=this.value.toUpperCase();"
+									onblur="this.value=this.value.toUpperCase();" style="width:85%"
+									readonly="false" placeholder="" maxlength="20">
+									<p:keyFilter regEx="/[a-z0-9_\-]/i" />
+								</p:inputText>
+							</p:panelGrid>
+							<!-- third line end-->
+						</p:panelGrid>
+					</p:panel>
+
+					<p:panel id="panelTwo"
+						rendered="#{editRouteCreationBackingBean.searched and editRouteCreationBackingBean.editMode}">
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-7,ui-grid-col-7" layout="grid">
+
+							<!-- stationsTable start -->
+
+							<p:dataTable id="stationsTable" var="p" scrollable="true"
+								scrollHeight="100"
+								value="#{editRouteCreationBackingBean.midPoints}"
+								rowKey="#{p.stationCode}" resizableColumns="false"
+								tableStyle="width:auto" rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No records available.">
+
+								<p:column headerText="#" style="width:5%">
+									<center>
+										<h:outputText value="#{index+1}" />
+									</center>
+								</p:column>
+
+								<p:column headerText="#{msg['route.creator.mid.points']}"
+									style="width:40%">
+									<p:selectOneMenu id="midpoints"
+										style="width:70%;margin-left:5px;margin-right:5px;"
+										value="#{p.stationCode}" filter="true"
+										filterMatchMode="contains" tabindex="1">
+
+										<f:selectItem itemLabel="--Select--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{editRouteCreationBackingBean.stations}" var="a"
+											itemLabel="#{a.staionName}" itemValue="#{a.stationCode}" />
+									</p:selectOneMenu>
+								</p:column>
+
+								<p:column headerText="#{msg['route.creator.time.taken']}"
+									style="width:15%">
+									<center>
+
+										<p:calendar inputStyle="width:50px" mask="true"
+											placeholder="HH:MM" value="#{p.timeTaken}" pattern="HH:mm"
+											timeOnly="true" />
+									</center>
+								</p:column>
+
+								<p:column
+									headerText="#{msg['route.creator.add']} / #{msg['route.creator.remove']}"
+									style="width:5%">
+									<center>
+										<p:commandLink id="cmdbtnAddMidPoint"
+											rendered="#{p.displayAddNew}"
+											action="#{editRouteCreationBackingBean.addStationsTableRow('S')}"
+											update="stationsTable">
+											<p:graphicImage library="images" name="add.png"
+												style="margin:2px;width:22px;height:22px;border-radius: 50%;"
+												title="Add"></p:graphicImage>
+										</p:commandLink>
+										<p:commandLink id="cmdbtnRemoveMidPoint"
+											rendered="#{p.displayRemove}"
+											action="#{editRouteCreationBackingBean.removeStationsTableLastRow('S')}"
+											update="stationsTable">
+											<p:graphicImage library="images" name="delete.png"
+												style="margin:2px;width:20px;height:20px;border-radius: 50%;"
+												title="Remove"></p:graphicImage>
+										</p:commandLink>
+									</center>
+								</p:column>
+
+							</p:dataTable>
+							<!-- stationsTable end -->
+
+							<!-- stationsTable swap start -->
+							<p:dataTable id="stationsTableSwap" var="p1" scrollable="true"
+								scrollHeight="100"
+								value="#{editRouteCreationBackingBean.midPointsSwap}"
+								rowKey="#{p1.stationCode}" resizableColumns="false"
+								tableStyle="width:auto" rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No records available.">
+
+								<p:column headerText="#" style="width:5%">
+									<center>
+										<h:outputText value="#{index+1}" />
+									</center>
+								</p:column>
+
+								<p:column headerText="#{msg['route.creator.mid.points']}"
+									style="width:30%">
+									<p:selectOneMenu id="midpointsSwap"
+										style="width:70%;margin-left:5px;margin-right:5px;"
+										value="#{p1.stationCode}" filter="true"
+										filterMatchMode="contains" tabindex="1">
+
+										<f:selectItem itemLabel="--Select--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{editRouteCreationBackingBean.stations2}" var="a1"
+											itemLabel="#{a1.staionName}" itemValue="#{a1.stationCode}" />
+									</p:selectOneMenu>
+								</p:column>
+
+								<p:column headerText="#{msg['route.creator.time.taken']}"
+									style="width:15%">
+									<center>
+
+										<p:calendar inputStyle="width:50px" mask="true"
+											value="#{p1.timeTaken}" placeholder="HH:MM" pattern="HH:mm"
+											timeOnly="true" />
+									</center>
+								</p:column>
+
+								<p:column
+									headerText="#{msg['route.creator.add']} / #{msg['route.creator.remove']}"
+									style="width:5%">
+									<center>
+										<p:commandLink id="cmdbtnAddMidPoint"
+											rendered="#{p1.displayAddNew}"
+											action="#{editRouteCreationBackingBean.addStationsTableRow('R')}"
+											update="stationsTableSwap">
+											<p:graphicImage library="images" name="add.png"
+												style="margin:2px;width:22px;height:22px;border-radius: 50%;"
+												title="Add"></p:graphicImage>
+										</p:commandLink>
+										<p:commandLink id="cmdbtnRemoveMidPoint"
+											rendered="#{p1.displayRemove}"
+											action="#{editRouteCreationBackingBean.removeStationsTableLastRow('R')}"
+											update="stationsTableSwap">
+											<p:graphicImage library="images" name="delete.png"
+												style="margin:2px;width:20px;height:20px;border-radius: 50%;"
+												title="Remove"></p:graphicImage>
+										</p:commandLink>
+									</center>
+								</p:column>
+
+							</p:dataTable>
+							<!-- stationsTable swap end -->
+
+						</p:panelGrid>
+					</p:panel>
+					<p:panel id="panelThree"
+						rendered="#{editRouteCreationBackingBean.searched and editRouteCreationBackingBean.editMode}">
+						<p:panelGrid columns="6"
+							columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.length']} (km)"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:inputText id="length"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.length}"
+									style="width:85%" readonly="true" placeholder="">
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.travel.time']}"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:calendar id="travelTime" inputStyle="width:85%;"
+									readonlyInput="true"
+									disabled="#{!editRouteCreationBackingBean.searched}"
+									placeholder="HH:MM" mask="true" styleClass="calendarClass"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.travelTime}"
+									pattern="HH:mm" timeOnly="true">
+									<p:ajax event="dateSelect"
+										listener="#{editRouteCreationBackingBean.calculateBusSpeed}"
+										update="panelThree" />
+								</p:calendar>
+								<p:message for="travelTime"></p:message>
+							</p:panelGrid>
+
+							<p:panelGrid>
+
+								<p:outputLabel value="#{msg['route.creator.bus.speed']} (km/h)"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="busSpeed"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.busSpeed}"
+									style="width:85%" readonly="true" placeholder=""
+									tooltip="Calculated automaticly" />
+
+
+
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.status']}"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="status" style="width:85%"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.status}">
+									<f:selectItem itemLabel="ACTIVE" itemValue="ACTIVE" />
+									<f:selectItem itemLabel="INACTIVE" itemValue="INACTIVE" />
+								</p:selectOneMenu>
+								<p:message for="status"></p:message>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.driver.rest.time']}"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:calendar id="driverRestTime" inputStyle="width:85%;"
+									readonlyInput="true" placeholder="HH:MM" mask="true"
+									styleClass="calendarClass"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.driverRestTime}"
+									pattern="HH:mm" timeOnly="true">
+									<p:ajax event="dateSelect"
+										listener="#{editRouteCreationBackingBean.calculateBusSpeed}"
+										update="panelThree" />
+								</p:calendar>
+								<p:message for="driverRestTime"></p:message>
+							</p:panelGrid>
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="#{msg['route.creator.route']}"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="route" style="width:85%"
+									value="#{editRouteCreationBackingBean.routeCreationDTO.routeType}"
+									filter="true" filterMatchMode="contains" tabindex="1">
+
+									<f:selectItems
+										value="#{editRouteCreationBackingBean.routeTypes}" var="a"
+										itemLabel="#{a.routeTypeNameEn}"
+										itemValue="#{a.routeTypeCode}" />
+								</p:selectOneMenu>
+								<p:message for="route"></p:message>
+							</p:panelGrid>
+						</p:panelGrid>
+
+					</p:panel>
+
+					<p:panel id="panelFour"
+						rendered="#{editRouteCreationBackingBean.searched and editRouteCreationBackingBean.editMode}">
+						<center>
+							<p:commandButton value="#{msg['route.creator.save']}"
+								rendered="#{editRouteCreationBackingBean.editMode}"
+								styleClass="mainActionbtn" id="btnSave"
+								action="#{editRouteCreationBackingBean.save}" update="@form" />
+							<p:commandButton value="#{msg['route.creator.clear.record']}"
+								styleClass="mainActionbtn" style="width:auto"
+								id="btnClearRecord"
+								action="#{editRouteCreationBackingBean.clearRecord}"
+								update="@form"></p:commandButton>
+						</center>
+					</p:panel>
+
+					<p:panel id="panelFive">
+						<center>
+
+							<p:dataTable id="dataTable" scrollHeight="150"
+								style="width:100%; word-wrap: break-word;" scrollable="true"
+								value="#{editRouteCreationBackingBean.routeList}" var="r"
+								rowKey="#{r.routeNo}" resizableColumns="false" liveResize="true"
+								tableStyle="width:auto" rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No records available">
+
+								<p:column headerText="#" style="width:5%">
+									<center>
+										<p:outputLabel value="#{index+1}" />
+									</center>
+								</p:column>
+
+
+								<p:column headerText="#{msg['route.creator.route.no']}"
+									style="width:10%  ">
+									<p:outputLabel value="#{r.routeNo}" />
+								</p:column>
+
+								<p:column headerText="#{msg['route.creator.start.from']}"
+									style="width:15%; text-align:left;">
+									<p:outputLabel value="#{r.startFrom}" />
+								</p:column>
+
+								<p:column headerText="#{msg['route.creator.end.at']}"
+									style="width:15%; text-align:left;">
+									<p:outputLabel value="#{r.endAt}" />
+								</p:column>
+								<p:column headerText="Bus Type"
+									style="width:15%; text-align:left;">
+									<p:outputLabel value="#{r.busTypeStr}" />
+								</p:column>
+
+
+								<p:column headerText="#{msg['route.creator.length']} (km)"
+									style="width:10%; text-align:left;">
+									<p:outputLabel value="#{r.length}" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['route.creator.time.taken']} (HH:MM)"
+									style="width:10%; text-align:left;">
+									<p:outputLabel value="#{r.timetaken}" />
+								</p:column>
+
+								<p:column headerText="#{msg['route.creator.status']}"
+									style="width:10%; text-align:left;">
+									<p:outputLabel value="#{r.status}" />
+								</p:column>
+
+								<p:column headerText="#{msg['route.creator.edit']}"
+									style="width:5%">
+									<center>
+										<p:commandLink
+											action="#{editRouteCreationBackingBean.edit(r)}"
+											update="@form">
+											<p:graphicImage library="images" name="edit.png"
+												style="width:20px;height:20px;border-radius: 50%;"
+												title="Edit"></p:graphicImage>
+										</p:commandLink>
+									</center>
+								</p:column>
+							</p:dataTable>
+						</center>
+					</p:panel>
+
+					<p:panel id="panelSix"
+						rendered="#{editRouteCreationBackingBean.searched}">
+						<center>
+							<p:commandButton value="#{msg['route.creator.clear.form']}"
+								styleClass="mainActionbtn" style="width:auto" id="btnClearForm"
+								action="#{editRouteCreationBackingBean.clearForm}"
+								update="@form" />
+							<!-- <p:commandButton value="#{msg['route.creator.exit']}"
+								styleClass="mainActionbtn" id="btnExit"
+								action="#{editRouteCreationBackingBean.exit}" update="@form" /> -->
+						</center>
+					</p:panel>
+					<p:panel></p:panel>
+				</div>
+			</div>
+
+		</h:form>
+
+		<p:dialog id="errorMSG" global="true" modal="true" header="Error"
+			width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{editRouteCreationBackingBean.message}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="successMSG" global="true" modal="true" header="Success"
+			width="30%" severity="info" widgetVar="successMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{editRouteCreationBackingBean.message}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="infoMSG" global="true" modal="true" header="Alert"
+			width="30%" severity="info" widgetVar="infoMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmInfo">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{editRouteCreationBackingBean.message}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmInfo" onclick="PF('infoMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

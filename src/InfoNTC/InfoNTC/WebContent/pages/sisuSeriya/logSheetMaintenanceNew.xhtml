@@ -1,0 +1,1915 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtnRecal {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 100px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+.mainActionbtn1 {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 180px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+.calendarClass input {
+	width: 62% !important
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Log Sheet Maintenance</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="xx">
+
+					<p:panelGrid id="searchPan" columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value=" Service Type" for="serType"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="serType" style="width:84%; "
+								value="#{logsheetMaintenanceBackingBean.logDTO.serviceType}"
+								effect="fold" filter="true" filterMatchMode="contains">
+
+								<p:ajax
+									listener="#{logsheetMaintenanceBackingBean.onChangeServiceType}"
+									update="@form" />
+
+								<f:selectItem itemLabel="--Select Service Type.--" itemValue="" />
+								<f:selectItems
+									value="#{logsheetMaintenanceBackingBean.serviceTypeList}"
+									var="filters" itemValue="#{filters.serviceCode}"
+									itemLabel="#{filters.serviceDescription}" />
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value=" Year" for="year"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText style="width:84%;height:18px;" tabindex="2"
+								disabled="false" maxlength="5"
+								value="#{logsheetMaintenanceBackingBean.logDTO.year}" id="year"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Service Reference No."></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:autoComplete inputStyle="width:100%" id="serviceRefNo"
+								minQueryLength="4"
+								value="#{logsheetMaintenanceBackingBean.logDTO.referenceNo}"
+								onkeyup="this.value=this.value.toUpperCase();"
+								completeMethod="#{logsheetMaintenanceBackingBean.completeRefNo}"
+								effect="fade" />
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Month"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu effect="fold" style="width:84%;" id="month"
+								value="#{logsheetMaintenanceBackingBean.logDTO.month}">
+								<f:selectItem itemLabel="-- Select Month --" itemValue="" />
+								<f:selectItem itemLabel="JANUARY" itemValue="JANUARY" />
+								<f:selectItem itemLabel="FEBRUARY" itemValue="FEBRUARY" />
+								<f:selectItem itemLabel="MARCH" itemValue="MARCH" />
+								<f:selectItem itemLabel="APRIL" itemValue="APRIL" />
+								<f:selectItem itemLabel="MAY" itemValue="MAY" />
+								<f:selectItem itemLabel="JUNE" itemValue="JUNE" />
+								<f:selectItem itemLabel="JULY" itemValue="JULY" />
+								<f:selectItem itemLabel="AUGUST" itemValue="AUGUST" />
+								<f:selectItem itemLabel="SEPTEMBER" itemValue="SEPTEMBER" />
+								<f:selectItem itemLabel="OCTOBER" itemValue="OCTOBER" />
+								<f:selectItem itemLabel="NOVEMBER" itemValue="NOVEMBER" />
+								<f:selectItem itemLabel="DECEMBER" itemValue="DECEMBER" />
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:outputLabel value=" Service No./ Service Agreement No." for="serviceAgreeNo"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="serviceAgreeNo" tabindex="1"
+								style="width:84%; "
+								value="#{logsheetMaintenanceBackingBean.logDTO.serviceNo}"
+								effect="fold" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="--Select Service No.--" itemValue="" />
+								<f:selectItems
+									value="#{logsheetMaintenanceBackingBean.serviceNoList}"
+									var="list" itemValue="#{list}" itemLabel="#{list}" />
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<br></br>
+
+
+
+
+						<p:panelGrid>
+							<p:commandButton styleClass="mainActionbtn" value="Search"
+								style="margin-left: 60%;" update="@form" process="@form"
+								disabled="#{logsheetMaintenanceBackingBean.searchCheck}"
+								actionListener="#{logsheetMaintenanceBackingBean.search}"></p:commandButton>
+
+
+						</p:panelGrid>
+
+						<p:panelGrid>
+
+
+							<p:commandButton styleClass="mainActionbtn" value="Clear"
+								style="margin-left: -10%;" update="@form" process="@form"
+								action="#{logsheetMaintenanceBackingBean.clear}"></p:commandButton>
+						</p:panelGrid>
+
+					</p:panelGrid>
+
+
+
+
+
+					<p:panelGrid>
+
+					</p:panelGrid>
+					<p:panel style="border-bottom:5px solid #404d6f;" />
+					<p:panel>
+						<p:panelGrid id="shwDetail" columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid>
+								<p:outputLabel value="Operator/Depo Name" for="nameOfOp"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.nameOfOperator}"
+									id="nameOfOp" onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value=" Origin" for="origin"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.origin}"
+									id="origin" onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value=" End Of Start Date" for="startDate"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.endOfStartDate}"
+									id="startDate" onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value=" Destination" for="destination"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.destination}"
+									id="destination" onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value=" Service End Date" for="endDate"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.serviceEndDate}"
+									id="endDate" onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value=" Via" for="via"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.via}" id="via"
+									onkeyup="this.value=this.value.toUpperCase();" readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value=" Status" for="status"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.status}"
+									id="status" onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value=" Distance KM" for="distance"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.distance}"
+									id="distance" onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value=" Bus No." for="busno"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.busNo}"
+									id="busno" onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value=" Service Reference No." for="servref"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.referenceNo}"
+									id="servref" onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+
+							<p:panelGrid
+								rendered="#{logsheetMaintenanceBackingBean.showSchoolCalPanel}">
+								<p:outputLabel value=" Approved School" for="sch"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid
+								rendered="#{logsheetMaintenanceBackingBean.showSchoolCalPanel}">
+								<p:inputText style="width:84%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.schoolApprovals}"
+									id="sch" readonly="true">
+
+								</p:inputText>
+
+							</p:panelGrid>
+
+
+
+						</p:panelGrid>
+					</p:panel>
+					<p:panel>
+						<center>
+							<p:dataTable id="e" var="table"
+								value="#{logsheetMaintenanceBackingBean.datatableList}" rows="5"
+								paginator="true"
+								selection="#{logsheetMaintenanceBackingBean.selectedRow}"
+								rowKey="#{table.logRefNo}" selectionMode="single"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								tableStyle="width:90%" rowsPerPageTemplate="10,20"
+								resizableColumns="false" liveResize="true" rowIndexVar="index"
+								styleClass="myTable" emptyMessage="No records are available.">
+
+								<p:ajax event="rowSelect"
+									listener="#{logsheetMaintenanceBackingBean.onRowSelect}"
+									update="@form" />
+								<p:column headerText="Year" style="text-align:center; width:10%"
+									visible="true">
+									<h:outputText style="text-align:left;width:80%"
+										value="#{table.year}" visible="true" />
+								</p:column>
+								<p:column headerText="Month" style="text-align:left; width:15%">
+									<h:outputText style="width:80%;text-align:left;"
+										value="#{table.month}" />
+								</p:column>
+
+								<p:column headerText="Log Reference No."
+									style="text-align:left; width:20%">
+									<h:outputText style="width:80%;text-align:left;"
+										value="#{table.logRefNo}" />
+								</p:column>
+								<p:column headerText="Received Date"
+									style="text-align:left; width:20%">
+									<h:outputText style="text-align:left;width:80%"
+										value="#{table.receivedDate}" />
+								</p:column>
+
+
+								<p:column style="">
+									<center>
+										<p:commandLink
+											action="${logsheetMaintenanceBackingBean.add()}"
+											update="@form" process="@form">
+
+											<f:setPropertyActionListener value="#{table}"
+												target="#{logsheetMaintenanceBackingBean.selectedRow}" />
+
+
+											<p:graphicImage library="images" name="New.png"
+												style="width:24px;height:24px;" title="Add"></p:graphicImage>
+										</p:commandLink>
+									</center>
+
+								</p:column>
+
+								<p:column style="">
+									<center>
+										<p:commandLink
+											action="${logsheetMaintenanceBackingBean.view()}"
+											update="@form" process="@form">
+
+											<f:setPropertyActionListener value="#{table}"
+												target="#{logsheetMaintenanceBackingBean.selectedRow}" />
+
+
+											<p:graphicImage library="images" name="view.png"
+												style="width:24px;height:24px;" title="View"></p:graphicImage>
+										</p:commandLink>
+									</center>
+
+								</p:column>
+
+								<p:column style="">
+									<p:commandLink
+										action="#{logsheetMaintenanceBackingBean.edit()}"
+										update="@form">
+
+										<f:setPropertyActionListener value="#{table}"
+											target="#{logsheetMaintenanceBackingBean.selectedRow}" />
+
+										<p:graphicImage library="images" name="edit.png"
+											style="width:24px;height:24px;" title="edit"></p:graphicImage>
+									</p:commandLink>
+
+
+								</p:column>
+
+
+								<p:column style="">
+									<center>
+										<p:commandLink
+											action="${logsheetMaintenanceBackingBean.delete()}"
+											update="@form" process="@form">
+
+											<f:setPropertyActionListener value="#{table}"
+												target="#{logsheetMaintenanceBackingBean.selectedRow}" />
+
+
+
+											<p:graphicImage library="images" name="delete.png"
+												style="width:24px;height:24px;" title="delete"></p:graphicImage>
+										</p:commandLink>
+									</center>
+
+								</p:column>
+
+
+							</p:dataTable>
+						</center>
+						<br></br>
+
+					</p:panel>
+					<p:panel style="border-bottom:5px solid #404d6f;" />
+					<p:panel id="sisuSeriyaCalculationPanel"
+						rendered="#{logsheetMaintenanceBackingBean.showSchoolCalPanel}">
+
+						<p:panelGrid id="shwDetail2" columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid>
+								<p:outputLabel value="Requestor Information" style="color:blue;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Payment Details" style="color:blue;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="No Of Operator Turns" for="noOfTurn"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.noOfTurns}"
+									id="noOfTurn"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Log Type" for="logTypeId"></p:outputLabel>
+							</p:panelGrid>
+							<p:selectOneMenu id="logTypeId" tabindex="1" style="width:84%; "
+								readonly="#{logsheetMaintenanceBackingBean.disable}"
+								value="#{logsheetMaintenanceBackingBean.logDTO.logType}"
+								effect="fold" filter="true" filterMatchMode="contains">
+
+								<f:selectItem itemLabel="-- Select Log Type --" itemValue="" />
+								<f:selectItems
+									value="#{permitRenewalsBackingBean.filterApplalicationNoList}"
+									var="filterApplalicationNoList"
+									itemValue="#{filterApplalicationNoList.applicationNo}"
+									itemLabel="#{filterApplalicationNoList.applicationNo}" />
+							</p:selectOneMenu>
+
+							<p:panelGrid>
+								<p:outputLabel value="No Of Turns in GPS" for="noOfTurnGps"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.noOfTurnsinGPS}"
+									id="noOfTurnGps"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Payment Type" for="payType"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="payType" tabindex="1" style="width:84%; "
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.paymentType}"
+									effect="fold" filter="true" filterMatchMode="contains">
+
+									<f:selectItem itemLabel="-- Select Payment Type --"
+										itemValue="" />
+									<f:selectItem itemLabel="CASH" itemValue="CASH" />
+									<f:selectItem itemLabel="CHEQUE" itemValue="CHEQUE" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Log Sheet Delay" for="logDelay"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.logSheetDelay}"
+									id="logDelay"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Running %	" for="run"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.runningD}"
+									id="run">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Average Pasengers" for="avePasen"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.averagePasengers}"
+									id="avePasen"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Total Length" for="totLength"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.totalLengthD}"
+									id="totLength">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="School Required Running Date"
+									for="reqRunDate"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.schoolRequiredRunningDate}"
+									id="reqRunDate"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+									<p:keyFilter regEx="/[\d\-\.]/" />
+
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Subsidy Rs." for="subsidyRs"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:50%;height:18px;" tabindex="2"
+									maxlength="50" readonly="#{!logsheetMaintenanceBackingBean.reCalculateMode}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.subsidyD}"
+									id="subsidyRs">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<!-- <f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" /> -->
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+								<p:commandButton styleClass="mainActionbtnRecal"
+									action="#{logsheetMaintenanceBackingBean.reCalculationPopUp}" value="Recalculate"
+									rendered="#{logsheetMaintenanceBackingBean.reCalculateMode}"
+									update="@form"
+									disabled="#{logsheetMaintenanceBackingBean.disabledCalculate}"></p:commandButton>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Late Trips" for="lateTrip"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.lateTrips}"
+									id="lateTrip"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+									<p:keyFilter regEx="/[\d\-\.]/" />
+
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Late Fee Rs." for="lateFee"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.lateFeeD}"
+									id="lateFee">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="School Approvals" for="sclAppr"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectBooleanCheckbox
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.approvalBoolean}"
+									id="sclAppr" />
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Penalty Fee Rs." for="penaltyFee"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.penaltyFeeD}"
+									id="penaltyFee">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Arrears" for="arrears"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.arrears}"
+									id="arrears"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Payment Rs." for="payment"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;color: red;"
+									tabindex="2" maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.paymentD}"
+									id="payment">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Deductions" for="deduct"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.deductions}"
+									id="deduct"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculation}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="OtherPre%"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<div class="ui-g">
+									<div class="ui-g-6">
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											maxlength="50"
+											value="#{logsheetMaintenanceBackingBean.logDTO.otherPercentage}"
+											id="otherPre"
+											readonly="#{logsheetMaintenanceBackingBean.disable}">
+											<p:keyFilter regEx="/[\d\-\.]/" />
+											<f:ajax
+												listener="#{logsheetMaintenanceBackingBean.calculation}"
+												update="@form" />
+										</p:inputText>
+									</div>
+									<div class="ui-g-6">
+
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											maxlength="50"
+											value="#{logsheetMaintenanceBackingBean.logDTO.otherPercentageCalculationValD}"
+											id="otherPreVal"
+											readonly="#{logsheetMaintenanceBackingBean.disable}">
+											<p:keyFilter regEx="/[\d\-\.]/" />
+											<f:ajax
+												listener="#{logsheetMaintenanceBackingBean.calculation}"
+												update="@form" />
+											<f:convertNumber pattern="##,###.00" />
+										</p:inputText>
+									</div>
+								</div>
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+
+						</p:panelGrid>
+
+					</p:panel>
+
+					<p:panel
+						rendered="#{logsheetMaintenanceBackingBean.showSchoolCalPanel}">
+
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+							<p:outputLabel>Special Remark</p:outputLabel>
+
+							<p:inputTextarea rows="4" style="width:100%" id="specialRemark"
+								value="#{logsheetMaintenanceBackingBean.logDTO.specialRemark}"
+								onkeyup="this.value = this.value.toUpperCase();"
+								readonly="#{logsheetMaintenanceBackingBean.disable}"></p:inputTextarea>
+						</p:panelGrid>
+						<br></br>
+						<center>
+							<p:panelGrid>
+								<p:commandButton styleClass="mainActionbtn"
+									action="#{logsheetMaintenanceBackingBean.save}" value="Save"
+									rendered="#{logsheetMaintenanceBackingBean.createMode}"
+									update="@form"
+									disabled="#{logsheetMaintenanceBackingBean.disable}"></p:commandButton>
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									update="@form"
+									action="#{logsheetMaintenanceBackingBean.clearThird}"></p:commandButton>
+
+							</p:panelGrid>
+						</center>
+
+
+					</p:panel>
+
+					<p:panel id="gamiSeriyaCalculationPanel"
+						rendered="#{logsheetMaintenanceBackingBean.showGamiSeriyaCalPanel}">
+
+						<p:panelGrid id="shwDetail21" columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid>
+								<p:outputLabel value="Requestor Information" style="color:blue;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Payment Details" style="color:blue;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="No Of Operator Turns" for="noOfTurnGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.noOfTurns}"
+									id="noOfTurnGami"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Log Type" for="logTypeIdGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:selectOneMenu id="logTypeIdGami" tabindex="1"
+								style="width:84%; "
+								readonly="#{logsheetMaintenanceBackingBean.disable}"
+								value="#{logsheetMaintenanceBackingBean.logDTO.logType}"
+								effect="fold" filter="true" filterMatchMode="contains">
+
+								<f:selectItem itemLabel="-- Select Log Type --" itemValue="" />
+								<f:selectItems
+									value="#{permitRenewalsBackingBean.filterApplalicationNoList}"
+									var="filterApplalicationNoList"
+									itemValue="#{filterApplalicationNoList.applicationNo}"
+									itemLabel="#{filterApplalicationNoList.applicationNo}" />
+							</p:selectOneMenu>
+
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="No Of Turns in GPS" for="noOfTurnGpsGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.noOfTurnsinGPS}"
+									id="noOfTurnGpsGami"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Payment Type" for="payTypeGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="payTypeGami" tabindex="1"
+									style="width:84%; "
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.paymentType}"
+									effect="fold" filter="true" filterMatchMode="contains">
+
+									<f:selectItem itemLabel="-- Select Payment Type --"
+										itemValue="" />
+									<f:selectItem itemLabel="CASH" itemValue="CASH" />
+									<f:selectItem itemLabel="CHEQUE" itemValue="CHEQUE" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Trips Per Day" for="tripsGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.tripsPerDay}"
+									id="tripsGami"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Requested %" for="requstedGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.requestedD}"
+									id="requstedGami">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Log Sheet Delay" for="logDelayGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.logSheetDelay}"
+									id="logDelayGami"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Running %	" for="runGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.runningD}"
+									id="runGami">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Average Pasengers" for="avePasenGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.averagePasengers}"
+									id="avePasenGami"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Total Length" for="totLengthGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.totalLengthD}"
+									id="totLengthGami">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Gami Sriya Required Running Date"
+									for="reqRunDateGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.schoolRequiredRunningDate}"
+									id="reqRunDateGami"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+									<p:keyFilter regEx="/[\d\-\.]/" />
+
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Subsidy Rs." for="subsidyRsGami"></p:outputLabel>
+							</p:panelGrid>
+						
+							
+							
+								<p:panelGrid>
+								<p:inputText style="width:50%;height:18px;" tabindex="2"
+									maxlength="50" readonly="#{!logsheetMaintenanceBackingBean.reCalculateMode}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.subsidyD}"
+									id="subsidyRsGami">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<!-- <f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" /> -->
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+								<p:commandButton styleClass="mainActionbtnRecal"
+									action="#{logsheetMaintenanceBackingBean.reCalculationPopUp}" value="Recalculate"
+									rendered="#{logsheetMaintenanceBackingBean.reCalculateMode}"
+									update="@form"
+									disabled="#{logsheetMaintenanceBackingBean.disabledCalculate}"></p:commandButton>
+							</p:panelGrid>
+							
+							
+							
+							<p:panelGrid>
+								<p:outputLabel value="Late Trips" for="lateTripGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.lateTrips}"
+									id="lateTripGami"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+									<p:keyFilter regEx="/[\d\-\.]/" />
+
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Late Fee Rs." for="lateFeeGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.lateFeeD}"
+									id="lateFeeGami">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Gami Seriya Approvals" for="sclApprGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectBooleanCheckbox
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.approvalBoolean}"
+									id="sclApprGami" />
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Penalty Fee Rs." for="penaltyFeeGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.penaltyFeeD}"
+									id="penaltyFeeGami">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Arrears" for="arrearsGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.arrears}"
+									id="arrearsGami"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Payment Rs." for="paymentGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;color: red;"
+									tabindex="2" maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.paymentD}"
+									id="paymentGami">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Deductions" for="deductGami"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.deductions}"
+									id="deductGami"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="OtherPre%"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<div class="ui-g">
+									<div class="ui-g-6">
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											maxlength="50"
+											value="#{logsheetMaintenanceBackingBean.logDTO.otherPercentage}"
+											id="otherPreGami"
+											readonly="#{logsheetMaintenanceBackingBean.disable}">
+											<p:keyFilter regEx="/[\d\-\.]/" />
+											<f:ajax
+												listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+												update="@form" />
+										</p:inputText>
+									</div>
+									<div class="ui-g-6">
+
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											maxlength="50"
+											value="#{logsheetMaintenanceBackingBean.logDTO.otherPercentageCalculationValD}"
+											id="otherPreValGami"
+											readonly="#{logsheetMaintenanceBackingBean.disable}">
+											<p:keyFilter regEx="/[\d\-\.]/" />
+											<f:ajax
+												listener="#{logsheetMaintenanceBackingBean.calculationGami}"
+												update="@form" />
+											<f:convertNumber pattern="##,###.00" />
+										</p:inputText>
+									</div>
+								</div>
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+
+						</p:panelGrid>
+
+
+					</p:panel>
+
+					<p:panel
+						rendered="#{logsheetMaintenanceBackingBean.showGamiSeriyaCalPanel}">
+
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+							<p:outputLabel>Special Remark</p:outputLabel>
+
+							<p:inputTextarea rows="4" style="width:100%" id="specialRemark1"
+								value="#{logsheetMaintenanceBackingBean.logDTO.specialRemark}"
+								onkeyup="this.value = this.value.toUpperCase();"
+								readonly="#{logsheetMaintenanceBackingBean.disable}"></p:inputTextarea>
+						</p:panelGrid>
+						<br></br>
+						<center>
+							<p:panelGrid>
+								<p:commandButton styleClass="mainActionbtn"
+									action="#{logsheetMaintenanceBackingBean.save}" value="Save"
+									rendered="#{logsheetMaintenanceBackingBean.createMode}"
+									update="@form"
+									disabled="#{logsheetMaintenanceBackingBean.disable}"></p:commandButton>
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									update="@form"
+									action="#{logsheetMaintenanceBackingBean.clearThird}"></p:commandButton>
+
+							</p:panelGrid>
+						</center>
+
+
+					</p:panel>
+
+					<p:panel id="nisiSeriyaCalculationPanel"
+						rendered="#{logsheetMaintenanceBackingBean.showNisiCalPanel}">
+
+						<p:panelGrid id="shwDetail3" columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid>
+								<p:outputLabel value="Requestor Information" style="color:blue;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Payment Details" style="color:blue;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="No Of Operator Turns" for="noOfTurnNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.noOfTurns}"
+									id="noOfTurnNisi"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Log Type" for="logTypeNisiId"></p:outputLabel>
+							</p:panelGrid>
+							<p:selectOneMenu id="logTypeNisiId" tabindex="1"
+								style="width:84%; "
+								readonly="#{logsheetMaintenanceBackingBean.disable}"
+								value="#{logsheetMaintenanceBackingBean.logDTO.logType}"
+								effect="fold" filter="true" filterMatchMode="contains">
+
+								<f:selectItem itemLabel="-- Select Log Type --" itemValue="" />
+								<f:selectItems
+									value="#{permitRenewalsBackingBean.filterApplalicationNoList}"
+									var="filterApplalicationNoList"
+									itemValue="#{filterApplalicationNoList.applicationNo}"
+									itemLabel="#{filterApplalicationNoList.applicationNo}" />
+							</p:selectOneMenu>
+
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="No Of Turns in GPS" for="noOfTurnGpsNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.noOfTurnsinGPS}"
+									id="noOfTurnGpsNisi"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Payment Type" for="payTypeNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="payTypeNisi" tabindex="1"
+									style="width:84%; "
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.paymentType}"
+									effect="fold" filter="true" filterMatchMode="contains">
+
+									<f:selectItem itemLabel="-- Select Payment Type --"
+										itemValue="" />
+									<f:selectItem itemLabel="CASH" itemValue="CASH" />
+									<f:selectItem itemLabel="CHEQUE" itemValue="CHEQUE" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Trips Per Day" for="tripsNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.tripsPerDay}"
+									id="tripsNisi"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Requested %" for="requstedNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.requestedD}"
+									id="requstedNisi">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Log Sheet Delay" for="logDelayNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.logSheetDelay}"
+									id="logDelayNisi"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Running %	" for="runNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.runningD}"
+									id="runNisi">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Average Pasengers" for="avePasenNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.averagePasengers}"
+									id="avePasenNisi"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Total Length" for="totLengthNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.totalLengthD}"
+									id="totLengthNisi">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+
+
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Nisi Seriya Required Running Date"
+									for="reqRunDateNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.schoolRequiredRunningDate}"
+									id="reqRunDateNisi"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+									<p:keyFilter regEx="/[\d\-\.]/" />
+
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Subsidy Rs." for="subsidyRsNisi"></p:outputLabel>
+							</p:panelGrid>
+						
+							
+							
+									<p:panelGrid>
+								<p:inputText style="width:50%;height:18px;" tabindex="2"
+									maxlength="50" readonly="#{!logsheetMaintenanceBackingBean.reCalculateMode}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.subsidyD}"
+									id="subsidyRsNisi">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<!-- <f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" /> -->
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+								<p:commandButton styleClass="mainActionbtnRecal"
+									action="#{logsheetMaintenanceBackingBean.reCalculationPopUp}" value="Recalculate"
+									rendered="#{logsheetMaintenanceBackingBean.reCalculateMode}"
+									update="@form"
+									disabled="#{logsheetMaintenanceBackingBean.disabledCalculate}"></p:commandButton>
+							</p:panelGrid>
+							
+							
+							
+							<p:panelGrid>
+								<p:outputLabel value="Late Trips" for="lateTripNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.lateTrips}"
+									id="lateTripNisi"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+									<p:keyFilter regEx="/[\d\-\.]/" />
+
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Late Fee Rs." for="lateFeeNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.lateFeeD}"
+									id="lateFeeNisi">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Nisi Seriya Approvals" for="sclApprNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectBooleanCheckbox
+									readonly="#{logsheetMaintenanceBackingBean.disable}"
+									value="#{logsheetMaintenanceBackingBean.logDTO.approvalBoolean}"
+									id="sclApprNisi" />
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Penalty Fee Rs." for="penaltyFeeNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.penaltyFeeD}"
+									id="penaltyFeeNisi">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Arrears" for="arrearsNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.arrears}"
+									id="arrearsNisi"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Payment Rs." for="paymentNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;color: red;"
+									tabindex="2" maxlength="50" readonly="true"
+									value="#{logsheetMaintenanceBackingBean.logDTO.paymentD}"
+									id="paymentNisi">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:convertNumber pattern="##,###.00" />
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Deductions" for="deductNisi"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:95%;height:18px;" tabindex="2"
+									maxlength="50"
+									value="#{logsheetMaintenanceBackingBean.logDTO.deductions}"
+									id="deductNisi"
+									readonly="#{logsheetMaintenanceBackingBean.disable}">
+									<p:keyFilter regEx="/[\d\-\.]/" />
+									<f:ajax
+										listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+										update="@form" />
+								</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="OtherPre%"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<div class="ui-g">
+									<div class="ui-g-6">
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											maxlength="50"
+											value="#{logsheetMaintenanceBackingBean.logDTO.otherPercentage}"
+											id="otherPreNisi"
+											readonly="#{logsheetMaintenanceBackingBean.disable}">
+											<p:keyFilter regEx="/[\d\-\.]/" />
+											<f:ajax
+												listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+												update="@form" />
+										</p:inputText>
+									</div>
+									<div class="ui-g-6">
+
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											maxlength="50"
+											value="#{logsheetMaintenanceBackingBean.logDTO.otherPercentageCalculationValD}"
+											id="otherPreValNisi"
+											readonly="#{logsheetMaintenanceBackingBean.disable}">
+											<p:keyFilter regEx="/[\d\-\.]/" />
+											<f:ajax
+												listener="#{logsheetMaintenanceBackingBean.calculationNisi}"
+												update="@form" />
+											<f:convertNumber pattern="##,###.00" />
+										</p:inputText>
+									</div>
+								</div>
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+
+						</p:panelGrid>
+
+
+					</p:panel>
+
+					<p:panel
+						rendered="#{logsheetMaintenanceBackingBean.showNisiCalPanel}">
+
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+							<p:outputLabel>Special Remark</p:outputLabel>
+
+							<p:inputTextarea rows="4" style="width:100%" id="specialRemark2"
+								value="#{logsheetMaintenanceBackingBean.logDTO.specialRemark}"
+								onkeyup="this.value = this.value.toUpperCase();"
+								readonly="#{logsheetMaintenanceBackingBean.disable}"></p:inputTextarea>
+						</p:panelGrid>
+						<br></br>
+						<center>
+							<p:panelGrid>
+								<p:commandButton styleClass="mainActionbtn"
+									action="#{logsheetMaintenanceBackingBean.save}" value="Save"
+									rendered="#{logsheetMaintenanceBackingBean.createMode}"
+									update="@form"
+									disabled="#{logsheetMaintenanceBackingBean.disable}"></p:commandButton>
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									update="@form"
+									action="#{logsheetMaintenanceBackingBean.clearThird}"></p:commandButton>
+
+							</p:panelGrid>
+						</center>
+
+
+					</p:panel>
+
+				</h:form>
+			</div>
+		</div>
+
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{logsheetMaintenanceBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="successSve" global="true" modal="true"
+			header="Success" width="30%" severity="info" widgetVar="successSve"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{logsheetMaintenanceBackingBean.sucessMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1"
+						style="margin-top:10px;margin-bottom:10px" process="frmsuccessSve"
+						update="@form" value="OK" onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+		<p:dialog styleClass="" id="warning" global="true" modal="true"
+			header="Info" width="30%" severity="info" widgetVar="warning"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmWarning">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{logsheetMaintenanceBackingBean.warningMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1"
+						style="margin-top:10px;margin-bottom:10px" process="frmWarning"
+						update="@form" value="OK" onclick="PF('warning').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="requiredFieldUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlmissing']}"
+			width="30%" severity="info" widgetVar="requiredFieldUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredFieldUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredFieldUploadDoc"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredFieldUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog styleClass="" id="comfirmMSG" global="true" modal="true"
+			header="Confirmation" width="30%" severity="info"
+			widgetVar="comfirmMSG" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmcomfirm">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="Are you sure! Do you want to Recalculate?"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="Yes" 
+						action="#{logsheetMaintenanceBackingBean.reCalculationTypeSelect}">
+					</p:commandButton>
+
+					<p:commandButton
+						style="margin-top:10px;margin-bottom:10px;margin-left:10px"
+						value="No" action="#{logsheetMaintenanceBackingBean.noReCalculate}">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

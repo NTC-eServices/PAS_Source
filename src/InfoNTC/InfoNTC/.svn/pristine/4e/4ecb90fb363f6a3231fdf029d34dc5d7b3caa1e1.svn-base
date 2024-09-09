@@ -1,0 +1,396 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 130px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Sisu Sariya School Report</h1>
+
+			<h:form id="disply">
+				<br />
+				<div style="width: 90%;" class="subDiv">
+
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Bus Type"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="busTypeID" style="width:200px"
+								value="#{subsidyBusesInfoBackingBean.subsidyDTO.privateSltb}"
+								filter="true" filterMatchMode="contains" tabindex="1">
+
+								<f:selectItem itemLabel="--All--" itemValue="" />
+								<f:selectItem itemLabel="Private " itemValue="P" />
+								<f:selectItem itemLabel="SLTB" itemValue="S" />
+
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Province"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="provinceId" style="width:200px"
+								value="#{subsidyBusesInfoBackingBean.subsidyDTO.provinceCode}"
+								onkeyup="this.value=this.value.toUpperCase();" filter="true"
+								filterMatchMode="contains" tabindex="1" effect="fold">
+
+								<p:ajax
+									listener="#{subsidyBusesInfoBackingBean.getDistrictForProvince}"
+									update="districtID" />
+								<f:selectItem itemLabel="-- All --" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{subsidyBusesInfoBackingBean.provinceList}"
+									var="provinceList" itemValue="#{provinceList.provinceCode}"
+									itemLabel="#{provinceList.provinceDes}" />
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Distrct"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="districtID" style="width:200px"
+								value="#{subsidyBusesInfoBackingBean.subsidyDTO.districtCode}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								effect="fold">
+								<f:selectItem itemLabel="-- All --" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{subsidyBusesInfoBackingBean.districtList}"
+									var="districtList" itemValue="#{districtList.districtCode}"
+									itemLabel="#{districtList.districtDes}" />
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Year"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red"></p:outputLabel>
+						</p:panelGrid>
+						<p:inputText inputStyle="width:400px" id="selectedYear"
+								styleClass="calendarClass"
+								value="#{subsidyBusesInfoBackingBean.selectedYear}"
+								maxlength="4" placeholder="YYYY" locale="en_US">
+								<p:keyFilter regEx="/[0-9]/i" />
+						</p:inputText>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Start Month"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red"></p:outputLabel>
+							
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="startMonth" style="width:200px"
+								value="#{subsidyBusesInfoBackingBean.startMonthValue}"
+								onkeyup="this.value=this.value.toUpperCase();" filter="true"
+								filterMatchMode="contains" tabindex="1" effect="fold">
+
+								<f:selectItem itemLabel="-- Select Month --" itemValue=""
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="January" itemValue="1"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="February" itemValue="2"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="March" itemValue="3"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="April" itemValue="4"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="May" itemValue="5"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="June" itemValue="6"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="July" itemValue="7"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="August" itemValue="8"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="September" itemValue="9"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="October" itemValue="10"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="November" itemValue="11"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="December" itemValue="12"
+									noSelectionOption="true" />
+								
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="End Month"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red"></p:outputLabel>
+							
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu id="endMonth" style="width:200px"
+								value="#{subsidyBusesInfoBackingBean.endMonthValue}"
+								onkeyup="this.value=this.value.toUpperCase();" filter="true"
+								filterMatchMode="contains" tabindex="1" effect="fold">
+
+								<f:selectItem itemLabel="-- Select Month --" itemValue=""
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="January" itemValue="1"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="February" itemValue="2"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="March" itemValue="3"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="April" itemValue="4"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="May" itemValue="5"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="June" itemValue="6"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="July" itemValue="7"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="August" itemValue="8"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="September" itemValue="9"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="October" itemValue="10"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="November" itemValue="11"
+									noSelectionOption="true" />
+									<f:selectItem itemLabel="December" itemValue="12"
+									noSelectionOption="true" />
+								
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<br></br>
+
+					</p:panelGrid>
+
+				</div>
+
+				<center>
+
+					<br></br>
+
+					<p:commandButton styleClass="mainActionbtn" tabindex="4"
+						value="Excel Report" id="cmdbtnSearchExcel" process="@all"
+						onclick="PrimeFaces.monitorDownload(start, stop);"
+						ajax="false"
+						actionListener="#{subsidyBusesInfoBackingBean.genBusWiseSchoolRptExcel}"
+						update="@form,requiredField">
+
+						<p:fileDownload value="#{subsidyBusesInfoBackingBean.files}" />
+					</p:commandButton>
+					<p:commandButton styleClass="mainActionbtn" tabindex="4"
+						value=" PDF Report" id="cmdbtnSearch" process="@all"
+						actionListener="#{subsidyBusesInfoBackingBean.genBusWiseSchoolRpt}"
+						update="@form,requiredField">
+					</p:commandButton>
+					<p:commandButton styleClass="mainActionbtn" tabindex="5"
+						value="Clear" action="#{subsidyBusesInfoBackingBean.clearField}"
+						id="cmdbtnMainClear" process="@all" update="@all" ajax="false"></p:commandButton>
+
+				</center>
+				<br></br>
+			</h:form>
+		</div>
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Info" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{subsidyBusesInfoBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

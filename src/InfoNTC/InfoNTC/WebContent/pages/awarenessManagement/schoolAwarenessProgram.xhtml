@@ -1,0 +1,1753 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.nopadd .ui-panelgrid-cell {
+	padding: 4px 0px !important;
+}
+
+.sm-padding .ui-panelgrid-cell {
+	padding-top: 4px !important;
+	padding-bottom: 4px !important;
+}
+
+.panelsimple {
+	border: 5px solid #bed6f8;
+}
+
+.panelsimple .ui-panel-titlebar {
+	background: none !important;
+	background-color: #bed6f8 !important;
+	margin: -5px !important;
+}
+
+.dtright .ui-datatable .ui-datatable-header {
+	text-align: left !important;
+}
+</style>
+
+
+		<div class="mainDiv">
+
+			<div style="margin-top: 0%;" class="common_form_header">
+				<h1 style="color: #ffffff; text-align: center; font-weight: bold">School
+					Awareness Program</h1>
+
+
+			</div>
+
+			<div style="width: 95%;" class="subDiv ui-grid ui-grid-responsive">
+				<h:form id="frmCaptureAwareness"
+					style="background-color :#f1f1f1; padding:10px"
+					styleClass="dtright">
+
+					<div class="rowpadding ui-grid-row">
+						<div class="ui-grid-col-12">
+							<p:commandButton value="New Project"
+								icon="fa fa-plus-circle fa-lg" process="@this"
+								action="#{awarenessManagementBackingBean.showNewProjectDialog}"
+								update="newProjectDialog" style="width:125px; float:right"
+								styleClass="mainActionbtn" tabindex="1" />
+						</div>
+					</div>
+
+					<p:dataTable id="dtProject" widgetVar="projectTable" var="project"
+						value="#{awarenessManagementBackingBean.projectList}"
+						editable="true" paginator="true" rows="10"
+						rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						reflow="true" style="margin-bottom:20px"
+						rowStyleClass="#{project.refNo eq awarenessManagementBackingBean.selectedProject.refNo ? 'highlight-row' : null}"
+						filterMatchMode="contains" filterBy="#{project.projectName}"
+						filteredValue="#{awarenessManagementBackingBean.filteredProjectList}">
+
+						<p:ajax event="rowEdit"
+							listener="#{awarenessManagementBackingBean.updateProject}"
+							update="dtProject" />
+						<p:ajax event="rowEditCancel" update="dtProject" />
+
+						<p:column sortBy="#{project.refNo}" headerText="Ref. No."
+							width="100" style="text-align:left">
+							<h:outputText value="#{project.refNo}" />
+						</p:column>
+
+						<p:column sortBy="#{project.projectName}"
+							headerText="Project Name" width="200" style="text-align:left">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{project.projectName}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{project.projectName}"
+										label="Project Name" style="width:calc(100% - 20px)"
+										onkeyup="this.value=this.value.toUpperCase()" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column sortBy="#{project.noOfProject}"
+							headerText="No. of Program" width="70" style="text-align:center">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{project.noOfProject}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:spinner value="#{project.noOfProject}" min="0" size="7"
+										style="padding-right: 14px;" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column sortBy="#{project.status}" headerText="Status"
+							width="80" style="text-align:center">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText
+										value="#{project.status eq 'A' ?'Active' :(project.status eq 'I' ?'Inactive' :'Hold')}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{project.status}"
+										style="width:calc(100% - 18px)">
+										<f:selectItem itemLabel="Active" itemValue="A"></f:selectItem>
+										<f:selectItem itemLabel="Inactive" itemValue="I"></f:selectItem>
+										<f:selectItem itemLabel="Hold" itemValue="H"></f:selectItem>
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column width="15" style="text-align:center">
+							<p:rowEditor />
+						</p:column>
+
+						<p:column width="15" style="text-align:center">
+							<p:commandLink onclick="PF('prjDeleteConfirm').show();"
+								title="Delete Project" update="frmCaptureAwareness:dtProject">
+								<i class="fa fa-trash fa-lg" style="color: #ff0000;" />
+								<f:setPropertyActionListener value="#{project}"
+									target="#{awarenessManagementBackingBean.selectedProject}" />
+							</p:commandLink>
+						</p:column>
+
+						<p:column width="15" style="text-align:center">
+							<p:commandLink
+								action="#{awarenessManagementBackingBean.viewProjectDetails}"
+								title="View Project Details"
+								update="frmCaptureAwareness:idProjectDetailPanel, frmCaptureAwareness:dtProject">
+								<i class="fa fa-th-list fa-lg" />
+								<f:setPropertyActionListener value="#{project}"
+									target="#{awarenessManagementBackingBean.selectedProject}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+
+					<h:panelGroup id="idProjectDetailPanel">
+
+						<p:panel rendered="#{awarenessManagementBackingBean.showDetail}"
+							styleClass="panelsimple">
+							<f:facet name="header">
+			            Details of the Programs
+			        </f:facet>
+
+							<div class="rowpadding ui-grid-row">
+								<div class="ui-grid-col-12">
+									<p:commandButton value="New Program"
+										icon="fa fa-plus-circle fa-lg" process="@this"
+										action="#{awarenessManagementBackingBean.showNewProgramDialog}"
+										update="newProgramDialog" style="width:125px; float:right"
+										styleClass="mainActionbtn" tabindex="1" />
+								</div>
+							</div>
+
+							<p:dataTable id="dtProgram" widgetVar="programTable"
+								var="program"
+								value="#{awarenessManagementBackingBean.selectedProject.subProgramList}"
+								editable="true" paginator="true" rows="10"
+								rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								reflow="true" style="margin-bottom:20px">
+
+								<p:ajax event="rowEdit"
+									listener="#{awarenessManagementBackingBean.updateProgram}"
+									update="dtProgram" />
+								<p:ajax event="rowEditCancel" update="dtProgram" />
+
+								<p:column headerText="Sub Ref. No." sortBy="#{program.subRefNo}"
+									width="90" style="text-align:left">
+									<h:outputText value="#{program.subRefNo}" />
+								</p:column>
+
+								<p:column headerText="Province" sortBy="#{program.province}"
+									width="110" style="text-align:left">
+									<p:cellEditor>
+										<f:facet name="output">
+											<ui:repeat
+												value="#{awarenessManagementBackingBean.provinceList}"
+												var="p">
+												<h:outputText value="#{p.description}"
+													rendered="#{p.code eq program.province}" />
+											</ui:repeat>
+										</f:facet>
+										<f:facet name="input">
+											<p:selectOneMenu value="#{program.province}"
+												style="width:calc(100% - 34px)">
+												<f:ajax
+													listener="#{awarenessManagementBackingBean.updateProvince('UPDATE',program)}"
+													update="drpDistrictB" />
+												<f:selectItem itemLabel="-- Select Province --" itemValue=""></f:selectItem>
+												<f:selectItems
+													value="#{awarenessManagementBackingBean.provinceList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="District" sortBy="#{program.district}"
+									width="80" id="drpDistrictB" style="text-align:left">
+									<p:cellEditor>
+										<f:facet name="output">
+											<ui:repeat
+												value="#{awarenessManagementBackingBean.districtListAll}"
+												var="d">
+												<h:outputText value="#{d.description}"
+													rendered="#{d.code eq program.district}" />
+											</ui:repeat>
+										</f:facet>
+										<f:facet name="input">
+											<p:selectOneMenu value="#{program.district}"
+												style="width:calc(100% - 34px)">
+												<f:selectItem itemLabel="-- Select District --" itemValue=""></f:selectItem>
+												<f:selectItems
+													value="#{awarenessManagementBackingBean.districtListAll}"
+													var="d" itemValue="#{d.code}" itemLabel="#{d.description}"></f:selectItems>
+											</p:selectOneMenu>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Zone" sortBy="#{program.zone}" width="100"
+									style="text-align:left">
+									<p:cellEditor>
+										<f:facet name="output">
+											<ui:repeat
+												value="#{awarenessManagementBackingBean.eduZoneList}"
+												var="z">
+												<h:outputText value="#{z.description}"
+													rendered="#{z.code eq program.zone}" />
+											</ui:repeat>
+										</f:facet>
+										<f:facet name="input">
+											<p:selectOneMenu value="#{program.zone}"
+												style="width:calc(100% - 34px)">
+												<f:selectItem itemLabel="-- Select Zone --" itemValue=""></f:selectItem>
+												<f:selectItems
+													value="#{awarenessManagementBackingBean.eduZoneList}"
+													var="z" itemValue="#{z.code}" itemLabel="#{z.description}"></f:selectItems>
+											</p:selectOneMenu>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Scheduled Date"
+									sortBy="#{program.scheduleDate}" width="100"
+									style="text-align:left">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{program.scheduleDate}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:calendar value="#{program.scheduleDate}"
+												styleClass="calendarClass" navigator="true" locale="en_US"
+												showOn="button" inputStyle="width:calc(100% - 43px)"
+												pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+												yearRange="c-100:c+100" readonlyInput="true">
+											</p:calendar>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Place" sortBy="#{program.place}"
+									width="120" style="text-align:left">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{program.place}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{program.place}"
+												style="width:calc(100% - 15px)"
+												onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Status" sortBy="#{program.status}"
+									width="70" style="text-align:center">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText
+												value="#{program.status eq 'A' ?'Active' :(program.status eq 'I' ?'Inactive' :'Hold')}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:selectOneMenu value="#{program.status}"
+												style="width:calc(100% - 18px)"
+												disabled="#{awarenessManagementBackingBean.selectedProject.status != 'A'}">
+												<f:selectItem itemLabel="Active" itemValue="A"></f:selectItem>
+												<f:selectItem itemLabel="Inactive" itemValue="I"></f:selectItem>
+												<f:selectItem itemLabel="Hold" itemValue="H"></f:selectItem>
+											</h:selectOneMenu>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column width="15" style="text-align:center">
+									<p:rowEditor />
+								</p:column>
+
+								<p:column width="15" style="text-align:center">
+									<p:commandLink onclick="PF('prmDeleteConfirm').show();"
+										title="Delete Program" style="color:#ff0000;">
+										<i class="fa fa-trash fa-lg" />
+										<f:setPropertyActionListener value="#{program}"
+											target="#{awarenessManagementBackingBean.selectedProgram}" />
+									</p:commandLink>
+								</p:column>
+
+								<p:column width="15" style="text-align:center">
+									<p:commandLink
+										action="#{awarenessManagementBackingBean.loadLetterManagement}"
+										title="Letter Management" update="letterDialog">
+										<i class="fa fa-envelope fa-lg" />
+										<f:setPropertyActionListener value="#{program}"
+											target="#{awarenessManagementBackingBean.selectedProgram}" />
+									</p:commandLink>
+								</p:column>
+
+								<p:column width="15" style="text-align:center">
+									<p:commandLink
+										action="#{awarenessManagementBackingBean.loadEventManagement}"
+										title="Event Management" update="eventDialog">
+										<i class="fa fa-users fa-lg" />
+										<f:setPropertyActionListener value="#{program}"
+											target="#{awarenessManagementBackingBean.selectedProgram}" />
+									</p:commandLink>
+								</p:column>
+
+								<p:column width="15" style="text-align:center">
+									<p:commandLink
+										action="#{awarenessManagementBackingBean.loadTransportManagement}"
+										title="Transport Management" update="transportDialog">
+										<i class="fa fa-taxi fa-lg" />
+										<f:setPropertyActionListener value="#{program}"
+											target="#{awarenessManagementBackingBean.selectedProgram}" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+
+
+							<div class="gridspadding" align="center">
+								<p:commandButton value="Letter Management Preview"
+									styleClass="mainActionbtn"
+									style="white-space:normal!important;width:171px;height:40px !important;"
+									tabindex="1"
+									actionListener="#{awarenessManagementBackingBean.previewLetterManagement}"
+									alt="Letter Management Preview" update="lettersPreviewDialog"></p:commandButton>
+
+								<p:spacer width="5px"></p:spacer>
+
+								<p:commandButton value="Transport Management Preview"
+									styleClass="mainActionbtn"
+									style="white-space:normal!important;width:171px;height:40px !important;"
+									tabindex="1"
+									actionListener="#{awarenessManagementBackingBean.previewTransportManagement}"
+									alt="Transport Management Preview" update="frmTransportPreview"></p:commandButton>
+							</div>
+
+						</p:panel>
+
+					</h:panelGroup>
+
+				</h:form>
+			</div>
+
+
+			<!-- ############################################################################################################################################
+	###################################### ADD NEW PROJECT, ADD NEW PROGRAM #########################################################################
+	############################################################################################################################################# -->
+
+			<p:dialog id="newProjectDialog" widgetVar="newProjectDialog"
+				global="true" modal="true" header=" Add New Project" width="30%"
+				resizable="false">
+				<h:form id="frmNewProject">
+
+					<div class="ui-widget-content ui-grid ui-grid-responsive">
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Reference No"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:inputText
+									value="#{awarenessManagementBackingBean.newProject.refNo}"
+									style="text-transform:uppercase; width:100%" disabled="true"
+									onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Project Name"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:inputText
+									value="#{awarenessManagementBackingBean.newProject.projectName}"
+									style="width:100%"
+									onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="No. of Program"></p:outputLabel>
+							</div>
+							<p:spinner
+								value="#{awarenessManagementBackingBean.newProject.noOfProject}"
+								min="0" size="7" style="padding-right: 14px;" />
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Status"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:selectOneMenu
+									value="#{awarenessManagementBackingBean.newProject.status}"
+									style="width:calc(100% - 18px)">
+									<f:selectItem itemLabel="Active" itemValue="A"></f:selectItem>
+									<f:selectItem itemLabel="Inactive" itemValue="I"></f:selectItem>
+									<f:selectItem itemLabel="Hold" itemValue="H"></f:selectItem>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="gridspadding" align="center">
+							<p:commandButton value="Add" styleClass="mainActionbtn"
+								tabindex="1"
+								actionListener="#{awarenessManagementBackingBean.saveNewProject}"
+								alt="Add" update="frmCaptureAwareness:dtProject"></p:commandButton>
+
+							<p:spacer width="5px"></p:spacer>
+
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								tabindex="1"
+								actionListener="#{awarenessManagementBackingBean.clearNewProjectDialog}"
+								alt="Clear" update="frmNewProject"></p:commandButton>
+						</div>
+					</div>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="newProgramDialog" widgetVar="newProgramDialog"
+				global="true" modal="true" header=" Add New Program" width="30%"
+				resizable="false">
+				<h:form id="frmNewProgram">
+
+					<div class="ui-widget-content ui-grid ui-grid-responsive">
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Program Type"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:selectOneRadio
+									value="#{awarenessManagementBackingBean.newProgram.type}"
+									disabled="#{awarenessManagementBackingBean.selectedProject.status != 'A'}">
+									<p:ajax
+										listener="#{awarenessManagementBackingBean.changeProgramType}"
+										update="frmNewProgram"></p:ajax>
+									<f:selectItem itemLabel="School Program" itemValue="S"></f:selectItem>
+									<f:selectItem itemLabel="Other" itemValue="O"></f:selectItem>
+								</p:selectOneRadio>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Sub Reference No"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:inputText
+									value="#{awarenessManagementBackingBean.newProgram.subRefNo}"
+									style="text-transform:uppercase; width:100%" disabled="true"
+									onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Province"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:selectOneMenu
+									value="#{awarenessManagementBackingBean.newProgram.province}"
+									style="width:calc(100% - 18px)">
+									<p:ajax
+										listener="#{awarenessManagementBackingBean.updateProvince('NEW', awarenessManagementBackingBean.newProgram)}"
+										update="drpDistrict" />
+									<f:selectItem itemLabel="-- Select Province --" itemValue=""></f:selectItem>
+									<f:selectItems
+										value="#{awarenessManagementBackingBean.provinceList}"
+										var="var" itemValue="#{var.code}"
+										itemLabel="#{var.description}"></f:selectItems>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="District"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:selectOneMenu id="drpDistrict"
+									value="#{awarenessManagementBackingBean.newProgram.district}"
+									style="width:calc(100% - 18px)">
+									<f:selectItem itemLabel="-- Select District --" itemValue=""></f:selectItem>
+									<f:selectItems
+										value="#{awarenessManagementBackingBean.districtList}"
+										var="var" itemValue="#{var.code}"
+										itemLabel="#{var.description}"></f:selectItems>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Educational Zone / Zone"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:selectOneMenu
+									value="#{awarenessManagementBackingBean.newProgram.zone}"
+									style="width:calc(100% - 18px)">
+									<f:selectItem itemLabel="-- Select Zone --" itemValue=""></f:selectItem>
+									<f:selectItems
+										value="#{awarenessManagementBackingBean.eduZoneList}"
+										var="var" itemValue="#{var.code}"
+										itemLabel="#{var.description}"></f:selectItems>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Schedule Date"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:calendar
+									value="#{awarenessManagementBackingBean.newProgram.scheduleDate}"
+									styleClass="calendarClass" navigator="true" locale="en_US"
+									showOn="button" inputStyle="width:calc(100% - 43px)"
+									pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+									yearRange="c-100:c+100" readonlyInput="true">
+								</p:calendar>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Place"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:inputText
+									value="#{awarenessManagementBackingBean.newProgram.place}"
+									style="width:100%"
+									onkeyup="this.value=this.value.toUpperCase()" />
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4">
+								<p:outputLabel value="Status"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-5">
+								<p:selectOneMenu
+									value="#{awarenessManagementBackingBean.newProgram.status}"
+									style="width:calc(100% - 18px)"
+									disabled="#{awarenessManagementBackingBean.selectedProject.status != 'A'}">
+									<f:selectItem itemLabel="Active" itemValue="A"></f:selectItem>
+									<f:selectItem itemLabel="Inactive" itemValue="I"></f:selectItem>
+									<f:selectItem itemLabel="Hold" itemValue="H"></f:selectItem>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="gridspadding" align="center">
+							<p:commandButton value="Add" styleClass="mainActionbtn"
+								tabindex="1"
+								actionListener="#{awarenessManagementBackingBean.saveNewProgram}"
+								alt="Add" update="frmCaptureAwareness:dtProgram"></p:commandButton>
+
+							<p:spacer width="5px"></p:spacer>
+
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								tabindex="1"
+								actionListener="#{awarenessManagementBackingBean.clearNewProgramDialog}"
+								alt="Clear" update="frmNewProgram"></p:commandButton>
+						</div>
+					</div>
+				</h:form>
+			</p:dialog>
+
+
+			<!-- ############################################################################################################################################
+	###################################### PROGRAM DETAILS DIALOGS ###############################################################################
+	############################################################################################################################################# -->
+
+			<!-- ################################# LETTER MAINTENANCE ################################################################################## -->
+
+			<p:dialog id="letterDialog" widgetVar="letterDialog" global="true"
+				modal="true" header=" Letter Maintenance" width="60%"
+				resizable="false">
+				<h:form id="frmLetterMain">
+
+					<p:panelGrid columns="4" layout="grid"
+						columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-3, ui-grid-col-4">
+						<p:outputLabel value="Reference No"
+							style="font-weight:bold; margin-bottom:5px"></p:outputLabel>
+						<p:outputLabel
+							value="#{awarenessManagementBackingBean.selectedProgram.subRefNo}"></p:outputLabel>
+
+						<p:outputLabel value="Province" style="font-weight:bold;"></p:outputLabel>
+						<ui:repeat var="v"
+							value="#{awarenessManagementBackingBean.provinceList}">
+							<p:outputLabel value="#{v.description}"
+								rendered="#{v.code == awarenessManagementBackingBean.selectedProgram.province}"></p:outputLabel>
+						</ui:repeat>
+
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+
+						<p:outputLabel value="District"
+							style="font-weight:bold; margin-bottom:5px"></p:outputLabel>
+						<ui:repeat var="v"
+							value="#{awarenessManagementBackingBean.districtListAll}">
+							<p:outputLabel value="#{v.description}"
+								rendered="#{v.code == awarenessManagementBackingBean.selectedProgram.district}"></p:outputLabel>
+						</ui:repeat>
+
+						<p:outputLabel value="Education Zone / Zone"
+							style="font-weight:bold"></p:outputLabel>
+						<ui:repeat var="v"
+							value="#{awarenessManagementBackingBean.eduZoneList}">
+							<p:outputLabel value="#{v.description}"
+								rendered="#{v.code == awarenessManagementBackingBean.selectedProgram.zone}"></p:outputLabel>
+						</ui:repeat>
+
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+
+						<p:outputLabel value="Year" style="font-wight:bold"></p:outputLabel>
+						<p:inputNumber
+							value="#{awarenessManagementBackingBean.selectedLetter.year}"
+							decimalPlaces="0" decimalSeparator="" thousandSeparator=""
+							maxValue="9999" minValue="0" inputStyle="width:50px"
+							text-align="left"></p:inputNumber>
+
+						<p:outputPanel>
+							<p:outputLabel value="Zone Letter Issue Date"
+								style="font-wight:bold"></p:outputLabel>
+						</p:outputPanel>
+						<p:calendar
+							value="#{awarenessManagementBackingBean.selectedLetter.zoneIssueDate}"
+							styleClass="calendarClass" navigator="true" locale="en_US"
+							showOn="button" inputStyle="width:calc(100% - 43px)"
+							pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+							yearRange="c-100:c+100" readonlyInput="true" />
+
+						<p:outputPanel>
+							<p:outputLabel value="School Name / Institute Name"
+								style="font-wight:bold"></p:outputLabel>
+							<p:outputLabel value=" *" style="color:#ff0000"></p:outputLabel>
+						</p:outputPanel>
+						<p:inputText
+							value="#{awarenessManagementBackingBean.selectedLetter.schoolName}"
+							style="width:calc(100% - 10px)"
+							onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+
+						<p:outputPanel>
+							<p:outputLabel value="School Letter Date" style="font-wight:bold"></p:outputLabel>
+						</p:outputPanel>
+						<p:calendar
+							value="#{awarenessManagementBackingBean.selectedLetter.schoolLetterDate}"
+							styleClass="calendarClass" navigator="true" locale="en_US"
+							showOn="button" inputStyle="width:calc(100% - 43px)"
+							pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+							yearRange="c-100:c+100" readonlyInput="true" />
+
+						<p:outputPanel>
+							<p:outputLabel value="Police Name / Institute Name"
+								style="font-wight:bold"></p:outputLabel>
+						</p:outputPanel>
+						<p:inputText
+							value="#{awarenessManagementBackingBean.selectedLetter.policeName}"
+							style="width:calc(100% - 10px)"
+							onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+
+						<p:outputPanel>
+							<p:outputLabel value="Police Letter Date" style="font-wight:bold"></p:outputLabel>
+						</p:outputPanel>
+						<p:calendar
+							value="#{awarenessManagementBackingBean.selectedLetter.policeLetterDate}"
+							styleClass="calendarClass" navigator="true" locale="en_US"
+							showOn="button" inputStyle="width:calc(100% - 43px)"
+							pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+							yearRange="c-100:c+100" readonlyInput="true" />
+					</p:panelGrid>
+
+
+					<p:spacer height="10"></p:spacer>
+					<div class="gridspadding" align="center">
+						<p:commandButton value="Save" styleClass="mainActionbtn"
+							tabindex="1"
+							actionListener="#{awarenessManagementBackingBean.saveLetterData}"
+							alt="Save" update="frmLetterMain"></p:commandButton>
+
+						<p:spacer width="5px"></p:spacer>
+
+						<p:commandButton value="Reset" styleClass="mainActionbtn"
+							tabindex="1"
+							actionListener="#{awarenessManagementBackingBean.resetLetterData}"
+							alt="Reset" update="frmLetterMain"></p:commandButton>
+					</div>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="lettersPreviewDialog" widgetVar="lettersPreviewDialog"
+				global="true" modal="true" header=" Letter Management Preview"
+				width="70%" resizable="false">
+				<h:form id="frmLettersPreview">
+					<p:panelGrid columns="4" layout="grid"
+						columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-3, ui-grid-col-4">
+						<p:outputLabel value="Reference No :"
+							style="font-weight:bold !important"></p:outputLabel>
+						<p:outputLabel
+							value="#{awarenessManagementBackingBean.selectedProject.refNo}"></p:outputLabel>
+
+						<p:outputLabel value="Project Name :"
+							style="font-weight:bold !important"></p:outputLabel>
+						<p:outputLabel
+							value="#{awarenessManagementBackingBean.selectedProject.projectName}"></p:outputLabel>
+					</p:panelGrid>
+
+					<p:spacer height="10"></p:spacer>
+
+					<p:dataTable var="var"
+						value="#{awarenessManagementBackingBean.letterList}"
+						editable="true" paginator="true" rows="10"
+						rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						reflow="true">
+
+						<p:ajax event="rowEdit"
+							listener="#{awarenessManagementBackingBean.updateLetter}"
+							update="lettersPreviewDialog" />
+						<p:ajax event="rowEditCancel" update="lettersPreviewDialog" />
+
+						<p:column headerText="Sub Reference Code" sortBy="#{var.subRefNo}"
+							style="text-align:left">
+							<p:outputLabel value="#{var.subRefNo}"></p:outputLabel>
+						</p:column>
+
+						<p:column headerText="Zone Issue Date"
+							sortBy="#{var.zoneIssueDate}" width="120" style="text-align:left">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{var.zoneIssueDate}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:calendar value="#{var.zoneIssueDate}"
+										styleClass="calendarClass" navigator="true" locale="en_US"
+										showOn="button" inputStyle="width:calc(100% - 43px)"
+										pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+										yearRange="c-100:c+100" readonlyInput="true">
+									</p:calendar>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="School Name / Institute Name"
+							sortBy="#{var.schoolName}" style="text-align:left">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{var.schoolName}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{var.schoolName}"
+										style="width:calc(100% - 15px)"
+										onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="School / Institute Letter Date"
+							sortBy="#{var.schoolLetterDate}" width="120"
+							style="text-align:left">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{var.schoolLetterDate}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:calendar value="#{var.schoolLetterDate}"
+										styleClass="calendarClass" navigator="true" locale="en_US"
+										showOn="button" inputStyle="width:calc(100% - 43px)"
+										pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+										yearRange="c-100:c+100" readonlyInput="true">
+									</p:calendar>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Police / Institute Name"
+							sortBy="#{var.policeName}" style="text-align:left">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{var.policeName}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{var.policeName}"
+										style="width:calc(100% - 15px)"
+										onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Police / Institute Letter Date"
+							sortBy="#{var.policeLetterDate}" width="120"
+							style="text-align:left">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{var.policeLetterDate}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:calendar value="#{var.policeLetterDate}"
+										styleClass="calendarClass" navigator="true" locale="en_US"
+										showOn="button" inputStyle="width:calc(100% - 43px)"
+										pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+										yearRange="c-100:c+100" readonlyInput="true">
+									</p:calendar>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column width="15" style="text-align:center" rendered="false">
+							<p:rowEditor />
+						</p:column>
+
+						<p:column width="15" style="text-align:center" rendered="false">
+							<p:commandLink title="Delete Letter"
+								action="#{awarenessManagementBackingBean.deleteLetter}"
+								style="color:#ff0000;">
+								<i class="fa fa-trash fa-lg" />
+								<f:setPropertyActionListener value="#{program}"
+									target="#{awarenessManagementBackingBean.selectedLetter}" />
+							</p:commandLink>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</p:dialog>
+
+
+			<!-- ################################# EVENT MAINTENANCE ################################################################################## -->
+
+			<p:dialog id="eventDialog" widgetVar="eventDialog" global="true"
+				modal="true" header=" Event Management" width="70%"
+				resizable="false">
+				<h:form id="frmEventMgmnt">
+
+					<p:panelGrid columns="4" layout="grid"
+						columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-3, ui-grid-col-4">
+						<p:outputLabel value="Sub Reference No"
+							style="font-weight:bold !important"></p:outputLabel>
+						<p:outputLabel
+							value="#{awarenessManagementBackingBean.selectedProgram.subRefNo}"></p:outputLabel>
+
+						<p:outputLabel value="Date" style="font-weight:bold"></p:outputLabel>
+						<p:outputLabel
+							value="#{awarenessManagementBackingBean.selectedProgram.scheduleDate}"></p:outputLabel>
+
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+
+						<p:outputLabel value="School Name / Event Place"
+							style="font-weight:bold"></p:outputLabel>
+						<p:inputText
+							value="#{awarenessManagementBackingBean.selectedProgram.schoolName}"
+							onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+
+						<p:outputLabel value="Estimated Budjet" style="font-weight:bold"></p:outputLabel>
+						<p:inputNumber
+							value="#{awarenessManagementBackingBean.selectedProgram.estimatedBudjet}"
+							minValue="0" styleClass="right" />
+
+						<p:outputLabel value="No. of Students / Participants"
+							style="font-weight:bold"></p:outputLabel>
+						<p:inputNumber
+							value="#{awarenessManagementBackingBean.selectedProgram.noOfStudents}"
+							decimalPlaces="0" minValue="0" styleClass="right"></p:inputNumber>
+
+						<p:outputLabel value="Actual Budjet" style="font-weight:bold"></p:outputLabel>
+						<p:inputNumber
+							value="#{awarenessManagementBackingBean.selectedProgram.actualBudjet}"
+							minValue="0" styleClass="right" />
+
+					</p:panelGrid>
+
+					<p:panelGrid columns="3" layout="grid"
+						columnClasses="ui-grid-col-3, ui-grid-col-7, ui-grid-col-4">
+						<p:outputLabel value="Remarks" style="font-weight:bold"></p:outputLabel>
+						<p:inputTextarea
+							value="#{awarenessManagementBackingBean.selectedProgram.remarks}"
+							maxlength="1000" style="width:100%" />
+						<p:panelGrid />
+					</p:panelGrid>
+
+					<div class="gridspadding" align="center">
+						<p:commandButton value="Save" styleClass="mainActionbtn"
+							tabindex="1"
+							actionListener="#{awarenessManagementBackingBean.saveEventDetail}"
+							alt="Save" update="frmEventMgmnt"></p:commandButton>
+
+						<p:spacer width="5px"></p:spacer>
+
+						<p:commandButton value="Reset" styleClass="mainActionbtn"
+							tabindex="1"
+							actionListener="#{awarenessManagementBackingBean.resetEventDetail}"
+							alt="Reset" update="frmEventMgmnt"></p:commandButton>
+					</div>
+
+					<p:spacer height="10"></p:spacer>
+
+					<p:panel style="border: 1px solid #bdd5f8;">
+						<center>
+							<h2 style="font-family: Palatino;">Participation List</h2>
+						</center>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-12">
+								<p:commandButton icon="fa fa-plus-circle fa-lg" process="@this"
+									action="#{awarenessManagementBackingBean.showNewParticipantDialog}"
+									update="newParticipantDialog" style="width:50px; float:right"
+									styleClass="mainActionbtn" tabindex="1" />
+							</div>
+						</div>
+
+						<p:dataTable id="dtParticipant" widgetVar="participantTable"
+							var="var"
+							value="#{awarenessManagementBackingBean.participationList}"
+							editable="true" paginator="true" rows="5"
+							rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							reflow="true" sortBy="#{var.typeOfParticipation}"
+							expandableRowGroups="true">
+
+							<p:headerRow>
+								<p:column colspan="8">
+									<h:outputText
+										value="#{var.typeOfParticipation == 'O' ? 'Other' :'Emplyoee'}" />
+								</p:column>
+							</p:headerRow>
+
+							<p:ajax event="rowEdit"
+								listener="#{awarenessManagementBackingBean.updateParticipant}"
+								update="dtParticipant" />
+							<p:ajax event="rowEditCancel" update="dtParticipant" />
+
+							<p:column style="width:0px"></p:column>
+							<p:column headerText="Employee No." width="120"
+								style="text-align:left">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{var.empNo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:autoComplete value="#{var.empNo}" size="10"
+											completeMethod="#{awarenessManagementBackingBean.completeEmpNo}"
+											rendered="#{var.typeOfParticipation == 'E'}"
+											scrollHeight="500">
+											<p:ajax event="itemSelect"
+												listener="#{awarenessManagementBackingBean.changeEmpNo('UPDATE', var)}"
+												update="frmNewParticipant" />
+										</p:autoComplete>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="EPF No." width="120"
+								style="text-align:left">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{var.epfNo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:autoComplete id="editEPF" value="#{var.epfNo}" size="10"
+											completeMethod="#{awarenessManagementBackingBean.completeEpfNo}"
+											rendered="#{var.typeOfParticipation == 'E'}"
+											scrollHeight="500">
+											<p:ajax event="itemSelect"
+												listener="#{awarenessManagementBackingBean.changeEpfNo('UPDATE', var)}"
+												update="frmNewParticipant" />
+										</p:autoComplete>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Name" width="170" style="text-align:left">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{var.participantName}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="editName" value="#{var.participantName}"
+											disabled="#{var.typeOfParticipation == 'E'}"
+											style="width:calc(100% - 15px)"
+											onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Id No. / Ref No" width="150"
+								style="text-align:left">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{var.idNo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{var.idNo}"
+											style="width:calc(100% - 30px)"
+											onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Officer Type" style="text-align:left">
+								<p:cellEditor>
+									<f:facet name="output">
+										<ui:repeat var="officer"
+											value="#{awarenessManagementBackingBean.officerTypeList}">
+											<h:outputText value="#{officer.description}"
+												rendered="#{var.officerType == officer.code}" />
+										</ui:repeat>
+									</f:facet>
+									<f:facet name="input">
+										<p:selectOneMenu value="#{var.officerType}"
+											style="width:calc(100% - 30px)"
+											rendered="#{var.typeOfParticipation == 'O'}">
+											<f:selectItem itemLabel="-- Select Officer Type --"
+												itemValue=""></f:selectItem>
+											<f:selectItems
+												value="#{awarenessManagementBackingBean.officerTypeList}"
+												var="officer" itemLabel="#{officer.description}"
+												itemValue="#{officer.code}"></f:selectItems>
+										</p:selectOneMenu>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column width="32" style="text-align:center">
+								<p:rowEditor />
+							</p:column>
+
+							<p:column width="32" style="text-align:center">
+								<p:commandLink title="Delete Letter"
+									action="#{awarenessManagementBackingBean.removeParticipant}"
+									style="color:#ff0000;" update="dtParticipant">
+									<i class="fa fa-trash fa-lg" />
+									<f:setPropertyActionListener value="#{var}"
+										target="#{awarenessManagementBackingBean.selectedParticipant}" />
+								</p:commandLink>
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="newParticipantDialog" widgetVar="newParticipantDialog"
+				global="true" modal="true" header=" New Participant" width="30%"
+				resizable="false">
+				<h:form id="frmNewParticipant">
+
+					<p:panelGrid columns="2" layout="grid"
+						columnClasses="ui-grid-col-5, ui-grid-col-6">
+						<p:outputPanel>
+							<p:outputLabel value="Type of Participation"></p:outputLabel>
+							<p:outputLabel style="color:#ff0000" value=" *"></p:outputLabel>
+						</p:outputPanel>
+						<p:selectOneMenu
+							value="#{awarenessManagementBackingBean.newParticipant.typeOfParticipation}"
+							style="width: calc(100% - 15px)">
+							<p:ajax
+								listener="#{awarenessManagementBackingBean.changeParticipationType('NEW')}"
+								update="frmNewParticipant" />
+							<f:selectItem itemValue="" itemLabel="-- Select Type --" />
+							<f:selectItem itemValue="E" itemLabel="Employee" />
+							<f:selectItem itemValue="O" itemLabel="Other" />
+						</p:selectOneMenu>
+
+						<p:outputPanel
+							rendered="#{awarenessManagementBackingBean.newParticipant.typeOfParticipation == 'E'}">
+							<p:outputLabel value="Employee No."></p:outputLabel>
+							<p:outputLabel style="color:#ff0000" value=" *"></p:outputLabel>
+						</p:outputPanel>
+						<p:autoComplete
+							value="#{awarenessManagementBackingBean.newParticipant.empNo}"
+							completeMethod="#{awarenessManagementBackingBean.completeEmpNo}"
+							size="20" forceSelection="true"
+							rendered="#{awarenessManagementBackingBean.newParticipant.typeOfParticipation == 'E'}"
+							scrollHeight="500">
+							<p:ajax event="itemSelect"
+								listener="#{awarenessManagementBackingBean.changeEmpNo('NEW', awarenessManagementBackingBean.newParticipant)}"
+								update="frmNewParticipant" />
+						</p:autoComplete>
+
+						<p:outputLabel value="EPF No."
+							rendered="#{awarenessManagementBackingBean.newParticipant.typeOfParticipation == 'E'}"></p:outputLabel>
+						<p:autoComplete
+							value="#{awarenessManagementBackingBean.newParticipant.epfNo}"
+							completeMethod="#{awarenessManagementBackingBean.completeEpfNo}"
+							size="20" forceSelection="true"
+							rendered="#{awarenessManagementBackingBean.newParticipant.typeOfParticipation == 'E'}"
+							scrollHeight="500">
+							<p:ajax event="itemSelect"
+								listener="#{awarenessManagementBackingBean.changeEpfNo('NEW', awarenessManagementBackingBean.newParticipant)}"
+								update="frmNewParticipant" />
+						</p:autoComplete>
+
+						<p:outputPanel>
+							<p:outputLabel value="Name"></p:outputLabel>
+							<p:outputLabel style="color:#ff0000" value=" *"></p:outputLabel>
+						</p:outputPanel>
+						<p:inputText
+							value="#{awarenessManagementBackingBean.newParticipant.participantName}"
+							disabled="#{awarenessManagementBackingBean.newParticipant.typeOfParticipation == 'E'}"
+							style="width:100%" onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+
+						<p:outputLabel value="Id No"></p:outputLabel>
+						<p:inputText
+							value="#{awarenessManagementBackingBean.newParticipant.idNo}"
+							disabled="#{awarenessManagementBackingBean.newParticipant.typeOfParticipation == 'E'}"
+							style="width:100%" onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+
+						<p:outputLabel value="Officer Type"
+							rendered="#{awarenessManagementBackingBean.newParticipant.typeOfParticipation == 'O'}"></p:outputLabel>
+						<p:selectOneMenu
+							value="#{awarenessManagementBackingBean.newParticipant.officerType}"
+							style="width: calc(100% - 15px)"
+							rendered="#{awarenessManagementBackingBean.newParticipant.typeOfParticipation == 'O'}">
+							<f:selectItem itemValue="" itemLabel="-- Select Type --" />
+							<f:selectItems
+								value="#{awarenessManagementBackingBean.officerTypeList}"
+								var="v" itemValue="#{v.code}" itemLabel="#{v.description}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+
+					<div class="gridspadding" align="center">
+						<p:commandButton value="Add" styleClass="mainActionbtn"
+							tabindex="1"
+							actionListener="#{awarenessManagementBackingBean.saveNewParticipant}"
+							alt="Add" update="eventDialog"></p:commandButton>
+
+						<p:spacer width="5px"></p:spacer>
+
+						<p:commandButton value="Clear" styleClass="mainActionbtn"
+							tabindex="1"
+							actionListener="#{awarenessManagementBackingBean.clearNewParticipantDialog}"
+							alt="Clear" update="frmNewParticipant"></p:commandButton>
+					</div>
+				</h:form>
+			</p:dialog>
+
+
+			<!-- ################################# TRANSPORT MAINTENANCE ################################################################################## -->
+
+			<p:dialog id="transportDialog" widgetVar="transportDialog"
+				global="true" modal="true" header=" Transport Management"
+				width="60%" resizable="false">
+				<h:form id="frmTransportMgmnt">
+
+					<p:panelGrid columns="4" layout="grid"
+						columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-3, ui-grid-col-4">
+						<p:outputLabel value="Sub Reference No"
+							style="font-weight:bold !important"></p:outputLabel>
+						<p:outputLabel
+							value="#{awarenessManagementBackingBean.selectedProgram.subRefNo}"></p:outputLabel>
+
+						<p:outputLabel value="Province" style="font-weight:bold;"></p:outputLabel>
+						<ui:repeat var="v"
+							value="#{awarenessManagementBackingBean.provinceList}">
+							<p:outputLabel value="#{v.description}"
+								rendered="#{v.code == awarenessManagementBackingBean.selectedProgram.province}"></p:outputLabel>
+						</ui:repeat>
+
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+
+						<p:outputLabel value="District"
+							style="font-weight:bold; margin-bottom:5px"></p:outputLabel>
+						<ui:repeat var="v"
+							value="#{awarenessManagementBackingBean.districtListAll}">
+							<p:outputLabel value="#{v.description}"
+								rendered="#{v.code == awarenessManagementBackingBean.selectedProgram.district}"></p:outputLabel>
+						</ui:repeat>
+
+						<p:outputLabel value="Education Zone / Zone"
+							style="font-weight:bold"></p:outputLabel>
+						<ui:repeat var="v"
+							value="#{awarenessManagementBackingBean.eduZoneList}">
+							<p:outputLabel value="#{v.description}"
+								rendered="#{v.code == awarenessManagementBackingBean.selectedProgram.zone}"></p:outputLabel>
+						</ui:repeat>
+
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+
+						<p:outputLabel value="Date" style="font-weight:bold"></p:outputLabel>
+						<p:outputLabel
+							value="#{awarenessManagementBackingBean.selectedProgram.scheduleDate}"></p:outputLabel>
+
+						<p:panelGrid />
+						<p:panelGrid />
+					</p:panelGrid>
+
+
+					<p:spacer height="10"></p:spacer>
+
+					<p:panel style="border: 1px solid #bdd5f8;">
+						<center>
+							<h2 style="font-family: Palatino;">Vehicle Information</h2>
+						</center>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-12">
+								<p:commandButton icon="fa fa-plus-circle fa-lg" process="@this"
+									action="#{awarenessManagementBackingBean.showNewTransportDialog}"
+									update="newTransportDialog" style="width:50px; float:right"
+									styleClass="mainActionbtn" tabindex="1" />
+							</div>
+						</div>
+
+						<p:dataTable id="dtTransport" widgetVar="transportTable" var="var"
+							value="#{awarenessManagementBackingBean.transportList}"
+							editable="true" paginator="true" rows="10"
+							rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							reflow="true">
+
+							<p:ajax event="rowEdit"
+								listener="#{awarenessManagementBackingBean.updateTransport}"
+								update="dtTransport" />
+							<p:ajax event="rowEditCancel" update="dtTransport" />
+
+							<p:column headerText="Vehicle No." width="100"
+								style="text-align:left">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{var.vehicleNo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{var.vehicleNo}"
+											style="width: calc(100% - 23px)"
+											onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Driver Name" width="160"
+								style="text-align:left">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{var.driverName}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{var.driverName}"
+											style="width: calc(100% - 23px)"
+											onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="KM" style="text-align:right" width="50">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{var.km}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputNumber value="#{var.km}" padControl="false"
+											decimalPlaces="3" minValue="0"
+											inputStyle="width: calc(100% - 23px)" styleClass="right"></p:inputNumber>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Transport Date" width="100"
+								style="text-align:left">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{var.transportDate}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:calendar value="#{var.transportDate}"
+											styleClass="calendarClass" navigator="true" locale="en_US"
+											showOn="button" inputStyle="width:calc(100% - 43px)"
+											pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+											yearRange="c-100:c+100" readonlyInput="true">
+										</p:calendar>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column width="15" style="text-align:center">
+								<p:rowEditor />
+							</p:column>
+
+							<p:column width="15" style="text-align:center">
+								<p:commandLink title="Delete Letter"
+									action="#{awarenessManagementBackingBean.removeTransport}"
+									style="color:#ff0000;" update="frmTransportMgmnt:dtTransport">
+									<i class="fa fa-trash fa-lg" />
+									<f:setPropertyActionListener value="#{var}"
+										target="#{awarenessManagementBackingBean.selectedTransport}" />
+								</p:commandLink>
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="newTransportDialog" widgetVar="newTransportDialog"
+				global="true" modal="true" header=" New Transport" width="30%"
+				resizable="false">
+				<h:form id="frmNewTransport">
+
+					<p:panelGrid columns="2" layout="grid"
+						columnClasses="ui-grid-col-5, ui-grid-col-6">
+						<p:outputPanel>
+							<p:outputLabel value="Vehicle No."></p:outputLabel>
+							<p:outputLabel style="color:#ff0000" value=" *"></p:outputLabel>
+						</p:outputPanel>
+
+						<p:inputText
+							value="#{awarenessManagementBackingBean.newTransport.vehicleNo}"
+							tabindex="1"
+							style="text-transform:uppercase; width: calc(100% - 10px);"
+							onkeyup="this.value=this.value.toUpperCase()">
+
+						</p:inputText>
+
+						<p:outputPanel>
+							<p:outputLabel value="Driver Name"></p:outputLabel>
+							<p:outputLabel style="color:#ff0000" value=" *"></p:outputLabel>
+						</p:outputPanel>
+						<p:inputText
+							value="#{awarenessManagementBackingBean.newTransport.driverName}"
+							style="width: calc(100% - 10px);"
+							onkeyup="this.value=this.value.toUpperCase()"></p:inputText>
+
+						<p:outputPanel>
+							<p:outputLabel value="KM"></p:outputLabel>
+							<p:outputLabel style="color:#ff0000" value=" *"></p:outputLabel>
+						</p:outputPanel>
+						<p:inputNumber
+							value="#{awarenessManagementBackingBean.newTransport.km}"
+							padControl="false" decimalPlaces="3" minValue="0"
+							inputStyle="width: calc(100% - 10px);" styleClass="right"></p:inputNumber>
+
+						<p:outputPanel>
+							<p:outputLabel value="Transport Date"></p:outputLabel>
+							<p:outputLabel style="color:#ff0000" value=" *"></p:outputLabel>
+						</p:outputPanel>
+						<p:calendar
+							value="#{awarenessManagementBackingBean.newTransport.transportDate}"
+							styleClass="calendarClass" navigator="true" locale="en_US"
+							showOn="button" inputStyle="width:calc(100% - 43px)"
+							pattern="dd/MM/yyyy" placeholder="dd/MM/yyyy"
+							yearRange="c-100:c+100" readonlyInput="true">
+						</p:calendar>
+					</p:panelGrid>
+
+					<div class="gridspadding" align="center">
+						<p:commandButton value="Add" styleClass="mainActionbtn"
+							tabindex="1"
+							actionListener="#{awarenessManagementBackingBean.saveNewTransport}"
+							alt="Add" update="transportDialog"></p:commandButton>
+
+						<p:spacer width="5px"></p:spacer>
+
+						<p:commandButton value="Clear" styleClass="mainActionbtn"
+							tabindex="1"
+							actionListener="#{awarenessManagementBackingBean.clearNewTransportDialog}"
+							alt="Clear" update="frmNewTransport"></p:commandButton>
+					</div>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="transportPreviewDialog"
+				widgetVar="transportPreviewDialog" global="true" modal="true"
+				header=" Transport Management Preview" width="70%" resizable="false">
+				<h:form id="frmTransportPreview">
+
+					<p:panelGrid columns="4" layout="grid"
+						columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-3, ui-grid-col-4">
+						<p:outputLabel value="Reference No :"
+							style="font-weight:bold !important"></p:outputLabel>
+						<p:outputLabel
+							value="#{awarenessManagementBackingBean.selectedProject.refNo}"></p:outputLabel>
+
+						<p:outputLabel value="Project Name :"
+							style="font-weight:bold !important"></p:outputLabel>
+						<p:outputLabel
+							value="#{awarenessManagementBackingBean.selectedProject.projectName}"></p:outputLabel>
+
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+						<p:panelGrid />
+
+
+						<p:panelGrid />
+						<p:panelGrid />
+					</p:panelGrid>
+
+
+					<p:spacer height="10"></p:spacer>
+
+
+					<p:dataTable var="var"
+						value="#{awarenessManagementBackingBean.transportList}"
+						paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+						paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						reflow="true">
+						<p:column headerText="Sub Ref No" sortBy="#{var.subRefNo}"
+							style="text-align:left">
+							<p:outputLabel value="#{var.subRefNo}"></p:outputLabel>
+						</p:column>
+
+						<p:column headerText="Place" sortBy="#{var.place}"
+							style="text-align:left">
+							<p:outputLabel value="#{var.place}"></p:outputLabel>
+						</p:column>
+
+						<p:column headerText="Event Date" sortBy="#{var.scheduleDate}"
+							style="text-align:left">
+							<p:outputLabel value="#{var.scheduleDate}"></p:outputLabel>
+						</p:column>
+
+
+						<p:column headerText="Vehicle No." sortBy="#{var.vehicleNo}"
+							width="100" style="text-align:left">
+							<p:outputLabel value="#{var.vehicleNo}" size="10"></p:outputLabel>
+						</p:column>
+
+						<p:column headerText="Driver Name" sortBy="#{var.driverName}"
+							width="160" style="text-align:left">
+							<p:outputLabel value="#{var.driverName}"></p:outputLabel>
+						</p:column>
+
+						<p:column headerText="KM" sortBy="1" style="text-align:right"
+							width="50">
+							<p:outputLabel value="#{var.km}"></p:outputLabel>
+						</p:column>
+
+						<p:column headerText="Transport Date"
+							sortBy="#{var.transportDate}" width="100" style="text-align:left">
+							<p:outputLabel value="#{var.transportDate}"></p:outputLabel>
+						</p:column>
+					</p:dataTable>
+
+				</h:form>
+			</p:dialog>
+
+
+			<!-- ############################################################################################################################################
+	###################################### CONFIRMATION DIALOGS #####################################################################################
+	############################################################################################################################################# -->
+
+			<p:dialog id="dialogDeleteConfirmPrj" global="true" modal="true"
+				header="Confirmation" width="30%" widgetVar="prjDeleteConfirm"
+				closeOnEscape="true" resizable="false">
+				<h:form id="frmPrjDelete">
+					<center>
+						<p:outputLabel
+							value="Are you sure you want delete Project including project details?"></p:outputLabel>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							process="frmPrjDelete" value="Yes"
+							action="#{awarenessManagementBackingBean.deleteProject}"
+							oncomplete="PF('prjDeleteConfirm').hide()"
+							update="frmCaptureAwareness">
+						</p:commandButton>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							process="frmPrjDelete" value="No"
+							onclick="PF('prjDeleteConfirm').hide()">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="dialogDeleteConfirmPrm" global="true" modal="true"
+				header="Confirmation" width="30%" widgetVar="prmDeleteConfirm"
+				closeOnEscape="true" resizable="false">
+				<h:form id="frmPrmDelete">
+					<center>
+						<p:outputLabel
+							value="Are you sure you want delete selected Program and data?"></p:outputLabel>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							process="frmPrmDelete" value="Yes"
+							action="#{awarenessManagementBackingBean.deleteProgram}"
+							oncomplete="PF('prmDeleteConfirm').hide();"
+							update="frmCaptureAwareness:dtProgram">
+						</p:commandButton>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							process="frmPrmDelete" value="No"
+							onclick="PF('prmDeleteConfirm').hide();">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="dialogError" global="true" modal="true" header="Error"
+				width="30%" severity="info" widgetVar="errorDialog"
+				closeOnEscape="true" resizable="false">
+				<h:form id="frmError">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+							<p:outputLabel value="#{awarenessManagementBackingBean.errorMsg}"></p:outputLabel>
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							process="frmError" value="OK" onclick="PF('errorDialog').hide()">
+						</p:commandButton>
+
+					</center>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="dialogSucces" global="true" modal="true"
+				header="Success" width="30%" severity="info"
+				widgetVar="successDialog" closeOnEscape="true" resizable="false"
+				appendTo="@(body)">
+				<h:form id="frmSuccess">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+							<p:outputLabel
+								value="#{awarenessManagementBackingBean.sucessMsg}"></p:outputLabel>
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							process="frmSuccess" value="OK"
+							onclick="PF('successDialog').hide()">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+
+		</div>
+
+	</ui:define>
+</ui:composition>

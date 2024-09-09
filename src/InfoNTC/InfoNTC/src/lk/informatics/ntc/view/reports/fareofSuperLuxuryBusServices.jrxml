@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fareofSuperLuxuryBusServices" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d62ec52a-c8e7-4e33-af5b-dd0e2b68b49e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="RouteDetails" uuid="d77f57b9-3655-4ecf-9b9d-b89b61874f70">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_RouteforMain" class="java.lang.String"/>
+		<parameter name="P_ServiceforMain" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select distinct nt_r_route.rou_number,nt_r_route.rou_service_origine,nt_r_route.rou_service_destination,
+nt_r_route.rou_service_origine_sin,nt_r_route.rou_service_destination_sin,nt_r_route.rou_tot_busfare
+from nt_r_route inner join nt_m_route_station 
+on nt_m_route_station.rs_route_no = nt_r_route.rou_number
+where nt_r_route.rou_number= $P{P_RouteforMain} 
+--and nt_m_route_station.rs_service_type = '003'
+and nt_m_route_station.rs_is_super_luxuary = 'Y']]>
+		</queryString>
+		<field name="rou_number" class="java.lang.String"/>
+		<field name="rou_service_origine" class="java.lang.String"/>
+		<field name="rou_service_destination" class="java.lang.String"/>
+		<field name="rou_service_origine_sin" class="java.lang.String"/>
+		<field name="rou_service_destination_sin" class="java.lang.String"/>
+		<field name="rou_tot_busfare" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="Fare" uuid="33634f99-1ed6-479b-bbb1-58cb4a0b5084">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Stage" class="java.math.BigDecimal"/>
+		<queryString>
+			<![CDATA[select  nt_t_fee_circle.tfc_super_luxury_round_fee as tfc_semi_luxury_round_fee
+from nt_t_fee_circle
+where nt_t_fee_circle.tfc_stage =  $P{P_Stage}]]>
+		</queryString>
+		<field name="tfc_semi_luxury_round_fee" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="AmendmentDate" uuid="5f7376c2-4ce9-44eb-892d-a846016afaf6">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[select mfc_re_ammendment_date from nt_m_fee_circle_master
+where mfc_status = 'A']]>
+		</queryString>
+		<field name="mfc_re_ammendment_date" class="java.sql.Date"/>
+	</subDataset>
+	<parameter name="P_RouteNo" class="java.lang.String"/>
+	<parameter name="P_Service_Type" class="java.lang.String"/>
+	<parameter name="P_logo1" class="java.lang.String"/>
+	<parameter name="P_logo2" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select max(rs_stage)
+from nt_m_route_station inner join nt_t_fee_circle
+on nt_m_route_station.rs_stage = nt_t_fee_circle.tfc_stage
+where  nt_m_route_station.rs_route_no =$P{P_RouteNo} and  nt_m_route_station.rs_is_super_luxuary = 'Y']]>
+	</queryString>
+	<field name="max" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="499" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement x="108" y="378" width="600" height="107" backcolor="#E3DCDC" uuid="8bb1db0a-889d-4521-9509-2eccdc8f56ae"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="108" y="135" width="302" height="30" uuid="ca824746-7932-452e-a5eb-5d3bf09653e8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="16"/>
+				</textElement>
+				<text><![CDATA[මාර්ග අංකය​]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="412" y="135" width="296" height="63" uuid="4d3dba82-9cbe-4324-8bbc-9712b5419ade"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="RouteDetails" uuid="720817f9-33b2-4b7c-a96d-3cf7098322c8">
+						<datasetParameter name="P_RouteforMain">
+							<datasetParameterExpression><![CDATA[$P{P_RouteNo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="P_ServiceforMain">
+							<datasetParameterExpression><![CDATA[$P{P_Service_Type}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="63" width="296">
+						<textField>
+							<reportElement x="0" y="0" width="296" height="62" uuid="38809b35-4f67-4994-801e-0086ab6977a3"/>
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="20" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{rou_number}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="412" y="320" width="307" height="62" isPrintWhenDetailOverflows="true" uuid="21bc37c6-51c5-40c1-9053-72863b865f7e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Fare" uuid="4dbc2513-72ff-4f72-9029-0b1aa91afcdf">
+						<datasetParameter name="P_Stage">
+							<datasetParameterExpression><![CDATA[$F{max}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="62" width="307">
+						<textField pattern="#,##0.00;#,##0.00" isBlankWhenNull="false">
+							<reportElement positionType="Float" x="0" y="0" width="296" height="59" isPrintWhenDetailOverflows="true" uuid="ce290de3-7370-43b0-859d-f4e7e1f6d870"/>
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="20" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{tfc_semi_luxury_round_fee}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="108" y="166" width="302" height="31" uuid="ad33091f-ed4f-4889-aa66-9566f70303d5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Route No.]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="108" y="199" width="302" height="59" isPrintWhenDetailOverflows="true" uuid="b3e177ad-e57f-446b-9a20-4d3ab93c8c33">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="RouteDetails" uuid="7edaaaaf-4b30-48ea-ae72-4e1801041e01">
+						<datasetParameter name="P_RouteforMain">
+							<datasetParameterExpression><![CDATA[$P{P_RouteNo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="P_ServiceforMain">
+							<datasetParameterExpression><![CDATA[$P{P_Service_Type}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="59" width="302">
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="302" height="59" isPrintWhenDetailOverflows="true" uuid="4c099f99-6614-4a7b-88de-1baf9485b5a5"/>
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="20" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{rou_service_origine}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="412" y="199" width="296" height="59" isPrintWhenDetailOverflows="true" uuid="7430ef78-bf3e-4818-9222-b0cb21a2df4e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="RouteDetails" uuid="6b934078-a231-48ca-84f9-a2f89b8c1179">
+						<datasetParameter name="P_RouteforMain">
+							<datasetParameterExpression><![CDATA[$P{P_RouteNo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="P_ServiceforMain">
+							<datasetParameterExpression><![CDATA[$P{P_Service_Type}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="59" width="296">
+						<textField isBlankWhenNull="false">
+							<reportElement x="0" y="0" width="296" height="59" isPrintWhenDetailOverflows="true" uuid="044a29ec-f3a8-45ec-a043-2c01bb227608"/>
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="20" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{rou_service_destination}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="108" y="259" width="302" height="59" isPrintWhenDetailOverflows="true" uuid="b1f1d964-9be2-4467-9b8c-dba6187184fd">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="RouteDetails" uuid="3e54a019-d20a-4a9e-97bd-4b1bdf4d95d9">
+						<datasetParameter name="P_RouteforMain">
+							<datasetParameterExpression><![CDATA[$P{P_RouteNo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="P_ServiceforMain">
+							<datasetParameterExpression><![CDATA[$P{P_Service_Type}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="59" width="302">
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="302" height="59" isPrintWhenDetailOverflows="true" uuid="0c32b137-04f7-4dda-86a5-46d22d9f128f"/>
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="Iskoola Pota" size="20" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{rou_service_origine_sin}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="412" y="259" width="296" height="59" isPrintWhenDetailOverflows="true" uuid="eb365a65-40ef-4a61-916b-047778888a61">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="RouteDetails" uuid="208e6eb5-d61f-4f13-aa37-d23d29f34416">
+						<datasetParameter name="P_RouteforMain">
+							<datasetParameterExpression><![CDATA[$P{P_RouteNo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="P_ServiceforMain">
+							<datasetParameterExpression><![CDATA[$P{P_Service_Type}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="59" width="296">
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="296" height="59" isPrintWhenDetailOverflows="true" uuid="3866f9b5-bdcd-4a96-a1e8-7bed018da3d8"/>
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="Iskoola Pota" size="20" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{rou_service_destination_sin}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="259" y="320" width="151" height="59" uuid="b2582a1d-51c4-485a-b164-47a28ad0a863">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Fare]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="320" width="151" height="59" uuid="a82350ef-7461-4797-b1a4-2ab9c44ce1d2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="16"/>
+				</textElement>
+				<text><![CDATA[ගාස්තුව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="379" width="600" height="42" uuid="2ef20d04-473a-40cc-9fce-776edd24054d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[ අධිවේගී මාර්ග සේවාවකි.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="408" width="547" height="30" uuid="cea484f0-b4d4-400d-8b95-b9ced557336d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[  දින සංශෝධිත ගාස්තුව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="434" width="600" height="52" isPrintWhenDetailOverflows="true" uuid="e44788dd-dfe5-4ddd-a9ac-d795d6529ead">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[ සභාපති 
+ ජාතික ගමනා ගමන කොමිෂන් සභාව නො.241 උද​‍‍ න පාර​, කොළඹ 05. ක්‍ ෂණික ඇමතුම් 1955
+ ෆැක්ස් 0112 585297]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="108" y="408" width="100" height="30" isPrintWhenDetailOverflows="true" uuid="05f6b1c2-9cee-47e2-aa95-f23819c6c61e"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="AmendmentDate" uuid="ec802bd1-ce2e-4979-9054-4742fd62cf52">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="100">
+						<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="100" height="30" isPrintWhenDetailOverflows="true" uuid="f78dd79a-0aee-4b1c-9d50-43d98c033e77"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Left">
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{mfc_re_ammendment_date}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<rectangle>
+				<reportElement x="108" y="82" width="600" height="50" backcolor="#E3DCDC" uuid="53cc68e9-b0bf-4bbf-a01a-4a0aac9925df"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="108" y="82" width="600" height="52" backcolor="#FFFFFF" uuid="04905946-993d-43b8-a9ef-a684771ac859"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="28"/>
+				</textElement>
+				<text><![CDATA[අධි සුඛෝපභෝගී - Super Luxury]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="2" width="600" height="52" backcolor="#FFFFFF" uuid="dc77faea-b33c-4100-8f22-ee46c080eab3"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="28"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement x="110" y="4" width="80" height="65" uuid="5a46dc7e-05bc-4160-b268-8e051dc05cd2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_logo1}+"nationalLogo.png"]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="627" y="3" width="80" height="65" uuid="e20afb93-dec7-4e37-ae7c-9dbd9790ecfe">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_logo2}+"ntclogo.jpg"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="190" y="3" width="437" height="76" backcolor="#FF8A00" uuid="11489b8c-7d88-45aa-8a5b-1f6e5099f26a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="108" y="2" width="600" height="79" uuid="946043a0-5abc-48bd-827f-3792fd6020ff">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="18" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

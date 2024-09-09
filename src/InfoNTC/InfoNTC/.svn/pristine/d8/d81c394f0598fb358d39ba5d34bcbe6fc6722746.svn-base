@@ -1,0 +1,1009 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.right .ui-inputfield {
+	text-align: right;
+}
+
+.numberinput {
+	text-align: right;
+}
+
+.numberinput .ui-inputfield {
+	text-align: right;
+	border: 0px;
+	box-shadow: none;
+	background-color: #f1f1f1;
+	font-weight: bold;
+	font-size: 15px;
+	width: 80%;
+	opacity: 1;
+}
+
+.large .ui-inputfield {
+	font-size: 18px;
+}
+
+.green .ui-inputfield {
+	color: #10b561;
+}
+
+.ui-fluid .ui-spinner .ui-spinner-input {
+	height: 28px
+}
+
+.disableread .ui-state-disabled, .ui-widget-content .ui-state-disabled,
+	.ui-widget-header .ui-state-disabled {
+	opacity: 0.7 !important;
+}
+</style>
+
+		<div class="mainDiv">
+
+			<div style="margin-top: 0%;" class="common_form_header">
+				<h1 style="color: #ffffff; text-align: center; font-weight: bold">Terminal
+					Payments</h1>
+
+				<div style="text-align: right; margin-top: -16px; margin-right: 2px">
+					<p:clock pattern="EEE, d MMM yyyy HH:mm:ss" />
+					
+								<p:commandLink id="ajax"
+									action="#{terminalPaymentNewBackingBean.openStationPopUp}"
+									style="margin-left:5px;">
+									<u><h:outputText value="Change Location" /></u>
+								</p:commandLink>
+
+				</div>
+			</div>
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmAcceptPayments" style="background-color :#f1f1f1;"
+					styleClass="disableread">
+					<p:spacer height="10px"></p:spacer>
+					
+					
+					<p:outputPanel id="stationPanel" styleClass="center">
+						<p:outputLabel value="#{terminalPaymentNewBackingBean.stationName}"
+							styleClass="title5"></p:outputLabel>
+					</p:outputPanel>
+					<br></br>
+					<p:dialog closable="false" header="Select Station"
+						visible="#{terminalPaymentNewBackingBean.localcheckcounter}"
+						widgetVar="dlg2" modal="true" height="120" width="420"
+						resizable="false" update="@all">
+
+
+
+						<p:panelGrid columns="2" id="dialoggrid"
+							columnClasses="ui-grid-col-5,ui-grid-col-5">
+
+							<p:panelGrid
+								rendered="#{terminalPaymentNewBackingBean.showStationPopup}">
+
+								<p:outputLabel value="Select Terminal Location : "></p:outputLabel>
+
+							</p:panelGrid>
+
+
+							<p:panelGrid
+								rendered="#{terminalPaymentNewBackingBean.showStationPopup}">
+								<p:selectOneMenu id="counter" style="width:171px"
+									value="#{terminalPaymentNewBackingBean.selectedTerminalLocation}">
+									<p:ajax
+										listener="#{terminalPaymentNewBackingBean.onCounterSelect}"
+										update="stationPanel"
+										onClose="#{terminalPaymentNewBackingBean.handleClose}">
+									</p:ajax>
+									<f:selectItem itemLabel="-- Select Location --" itemValue="" />
+									<f:selectItems
+										value="#{assignBusRoutesToBlockBackingBean.mainStationDetailsList}"
+										var="stationDesList" itemValue="#{stationDesList.code}"
+										itemLabel="#{stationDesList.description}" />
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+
+
+
+						</p:panelGrid>
+						<br></br>
+						<center>
+
+
+							<p:commandButton id="Exit" value="Exit"
+								action="#{terminalPaymentNewBackingBean.handleClose}"
+								class="mainActionbtn" ajax="true" update="@all">
+							</p:commandButton>
+
+							<p:commandButton class="mainActionbtn" ajax="true"
+								update="frmAcceptPayments" value="Cancel"
+								action="#{terminalPaymentNewBackingBean.cancelDialog}"
+								onclick="PF('errorDialog').hide()">
+							</p:commandButton>
+
+
+						</center>
+
+					</p:dialog>
+					
+					
+					
+					
+					
+					
+					
+
+					<div class="ui-widget-content ui-grid ui-grid-responsive">
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-3"></div>
+							<div class="ui-grid-col-2">
+								<p:outputLabel value="Payment Type."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-3">
+								<p:selectOneMenu id="paymentTypeId" effect="fold" filter="true"
+									filterMatchMode="contains" style="width:calc(95% - 20px)"
+									value="#{terminalPaymentNewBackingBean.selectedPayTypeCode}"
+									valueChangeListener="#{terminalPaymentNewBackingBean.onPaymentTypeChange}">
+									<f:selectItem itemLabel="--Select a Payment Type--" />
+									<f:selectItems
+										value="#{terminalPaymentNewBackingBean.paymentTypeList}"
+										var="d" itemLabel="#{d.description}" itemValue="#{d.code}" />
+									<p:ajax update="frmAcceptPayments" />
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+				
+
+						<h:panelGroup rendered="true">
+							<div class="ui-grid-row">
+								<div class="gridspadding ui-grid-col-6 sm-padding">
+									<p:panel id="mainDetail" style="border:1px solid #b1cbef">
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-4, ui-grid-col-8">
+											<p:panelGrid>
+												<p:outputLabel value="Vehicle Reg.No."></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="vehicleRegNoId" maxlength="8"
+													value="#{terminalPaymentNewBackingBean.vehicleRegNo}"
+													rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '001'}"
+													style="width:95%; text-transform: uppercase;">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_]/i" />
+													<p:ajax event="blur"
+														listener="#{terminalPaymentNewBackingBean.onVehicleNoChange}"
+														update="frmAcceptPayments" />
+												</p:inputText>
+												<p:autoComplete
+													value="#{terminalPaymentNewBackingBean.vehicleRegNo}"
+													completeMethod="#{complaintViewEditBackingBean.completeVehicleNo}"
+													rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '001'}"
+													onkeyup="this.value=this.value.toUpperCase();"
+													forceSelection="true" inputStyle="width:95%" size="30">
+													<p:ajax event="itemSelect"
+														listener="#{terminalPaymentNewBackingBean.onVehicleNoChange}"
+														update="frmAcceptPayments" />
+												</p:autoComplete>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Payment Due Date"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:calendar id="dueDate"
+													value="#{terminalPaymentNewBackingBean.dueDate}"
+													styleClass="calendarClass" navigator="true"
+													inputStyle="width:calc(100% - 43px)" showOn="button"
+													pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+													yearRange="c-100:c+100" mask="true" readonlyInput="true"
+													validatorMessage="Invalid Date"
+													valueChangeListener="#{terminalPaymentNewBackingBean.onDueDateChange}">
+													<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+													<p:ajax event="dateSelect" immediate="true"
+														update="frmAcceptPayments:idBasicAmt, frmAcceptPayments:idPenaltyAmt, frmAcceptPayments:idTotalPaid, frmAcceptPayments:idTotalCollection" />
+													<p:ajax event="valueChange" immediate="true"
+														update="frmAcceptPayments:idBasicAmt, frmAcceptPayments:idPenaltyAmt, frmAcceptPayments:idTotalPaid, frmAcceptPayments:idTotalCollection" />
+												</p:calendar>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Paid Date"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:calendar id="paidDate"
+													value="#{terminalPaymentNewBackingBean.paidDate}"
+													styleClass="calendarClass" navigator="true"
+													inputStyle="width:calc(100% - 43px)" showOn="button"
+													pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+													yearRange="c-100:c+100" mask="true" readonlyInput="true"
+													validatorMessage="Invalid Date"
+													valueChangeListener="#{terminalPaymentNewBackingBean.onPaidDateChange}">
+													<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+													<p:ajax event="dateSelect" immediate="true"
+														update="frmAcceptPayments:idBasicAmt, frmAcceptPayments:idPenaltyAmt, frmAcceptPayments:idTotalPaid, frmAcceptPayments:idTotalCollection" />
+													<p:ajax event="valueChange" immediate="true"
+														update="frmAcceptPayments:idBasicAmt, frmAcceptPayments:idPenaltyAmt, frmAcceptPayments:idTotalPaid, frmAcceptPayments:idTotalCollection" />
+												</p:calendar>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Payment Mode"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu
+													value="#{terminalPaymentNewBackingBean.payMode}"
+													style="width:calc(95% - 18px);" autoWidth="false"
+													effect="fold" filter="true" filterMatchMode="contains">
+													<f:selectItems
+														value="#{terminalPaymentNewBackingBean.paymentModes}"
+														var="pay" itemLabel="#{pay.description}"
+														itemValue="#{pay.code}" />
+													<p:ajax update="receiptRepNoId" />
+												</p:selectOneMenu>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Receipt Reference No."></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="receiptRepNoId"
+													value="#{terminalPaymentNewBackingBean.payReciptRef}"
+													style="width:95%;" maxlength="15"
+													onkeyup="this.value=this.value.toUpperCase();">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '001'}">
+												<p:outputLabel value="Valid From "></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '001'}">
+												<p:calendar id="fromDate"
+													value="#{terminalPaymentNewBackingBean.validFromDate}"
+													styleClass="calendarClass" navigator="true"
+													readonlyInput="true" inputStyle="width:calc(100% - 43px)"
+													showOn="button" pattern="dd/MM/yyyy"
+													placeholder="DD/MM/YYYY" yearRange="c-100:c+100"
+													mask="true"
+													disabled="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '001'}">
+												</p:calendar>
+											</p:panelGrid>
+
+											<p:panelGrid
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode == '001'}">
+												<p:outputLabel value="Issued Date"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode == '001'}">
+												<p:calendar id="issueDate"
+													value="#{terminalPaymentNewBackingBean.issuedDate}"
+													styleClass="calendarClass" navigator="true"
+													readonlyInput="true" inputStyle="width:calc(100% - 43px)"
+													showOn="button" pattern="dd/MM/yyyy"
+													placeholder="DD/MM/YYYY" yearRange="c-100:c+100"
+													mask="true"></p:calendar>
+											</p:panelGrid>
+
+											<p:panelGrid
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode == '001'}">
+												<p:outputLabel value="Issued Month"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"
+													rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '001'}"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode == '001'}">
+												<p:inputText id="issueMonth"
+													value="#{terminalPaymentNewBackingBean.issuedMonth}"
+													valueChangeListener="#{terminalPaymentNewBackingBean.onIssuedMonthChange}"
+													type="month" style="width:95%">
+													<p:ajax update="@this"></p:ajax>
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '001'}">
+												<p:outputLabel value="Valid To "></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '001'}">
+												<p:calendar id="toDate"
+													value="#{terminalPaymentNewBackingBean.validToDate}"
+													styleClass="calendarClass" navigator="true"
+													readonlyInput="true" inputStyle="width:calc(100% - 43px)"
+													showOn="button" pattern="dd/MM/yyyy"
+													placeholder="DD/MM/YYYY" yearRange="c-100:c+100"
+													disabled="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '001'}">
+												</p:calendar>
+											</p:panelGrid>
+
+										</p:panelGrid>
+									</p:panel>
+									<br></br>
+
+									<p:panelGrid id="shwAmount" columns="2" layout="grid"
+										columnClasses="ui-grid-col-5, ui-grid-col-7">
+
+										<p:panelGrid>
+											<div style="margin-top: 10px">
+												<p:outputLabel value="Basic Amount "></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</div>
+										</p:panelGrid>
+										<p:panelGrid columns="2">
+											<p:outputLabel value="Rs."></p:outputLabel>
+											<p:inputNumber id="idBasicAmt"
+												valueChangeListener="#{terminalPaymentNewBackingBean.onBasicAmountChange}"
+												value="#{terminalPaymentNewBackingBean.basicAmount}"
+												decimalPlaces="2" disabled="false" styleClass="numberinput">
+												<p:ajax update="idTotalPaid,idTotalCollection"></p:ajax>
+											</p:inputNumber>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<div style="margin-top: 10px">
+												<p:outputLabel value="Penalty "></p:outputLabel>
+											</div>
+										</p:panelGrid>
+										<p:panelGrid columns="2">
+											<p:outputLabel value="Rs."></p:outputLabel>
+											<p:inputNumber id="idPenaltyAmt"  
+												value="#{terminalPaymentNewBackingBean.penalty}"
+												valueChangeListener="#{terminalPaymentNewBackingBean.onPenaltyChange}"
+												minValue="0" disabled="#{terminalPaymentNewBackingBean.penaltyDisable}" styleClass="numberinput"
+												style="#{terminalPaymentNewBackingBean.selectedPayTypeCode == null or terminalPaymentNewBackingBean.selectedPayTypeCode == '' ?'display:none' :''};"
+												inputStyle="width:80%">
+												<p:ajax update="idTotalPaid,idTotalCollection,frmAcceptPayments:idPenaltyAmt"></p:ajax>
+												<p:ajax event="valueChange" immediate="true" process="frmAcceptPayments:idPenaltyAmt"
+														update=" frmAcceptPayments:idPenaltyAmt" />
+											</p:inputNumber>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<div style="margin-top: 10px">
+												<p:outputLabel value="Total Amount Paid "></p:outputLabel>
+											</div>
+										</p:panelGrid>
+										<p:panelGrid columns="2">
+											<p:outputLabel value="Rs."></p:outputLabel>
+											<p:inputNumber id="idTotalPaid"
+												value="#{terminalPaymentNewBackingBean.amountPaid}"
+												disabled="true" styleClass="numberinput">
+											</p:inputNumber>
+										</p:panelGrid>
+
+										<p:panelGrid>
+											<div style="margin-top: 10px">
+												<p:outputLabel value="Total Daily Collection "
+													style="color:#10b561; font-weight:bold"></p:outputLabel>
+											</div>
+										</p:panelGrid>
+
+										<p:panelGrid columns="2">
+											<p:outputLabel value="Rs."
+												style="color:#10b561; font-weight:bold"></p:outputLabel>
+											<p:inputNumber id="idTotalCollection"
+												value="#{terminalPaymentNewBackingBean.totalCollection}"
+												disabled="true" styleClass="numberinput large green">
+											</p:inputNumber>
+										</p:panelGrid>
+
+									</p:panelGrid>
+
+									<p:spacer height="10px"></p:spacer>
+
+								</div>
+
+								<div class="gridspadding ui-grid-col-6">
+									<p:panel id="panelpermitDetail"
+										header="Permanent Permit Details"
+										style="border:1px solid #b1cbef;background-color: cadetblue;">
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-4, ui-grid-col-8">
+											<p:panelGrid>
+												<p:outputLabel value="Permit No."></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText maxlength="20"
+													value="#{terminalPaymentNewBackingBean.permitNo}"
+													onkeyup="this.value=this.value.toUpperCase();"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}"
+													style="width:95%">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Route No."></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="fromRouteNo" maxlength="20"
+													value="#{terminalPaymentNewBackingBean.routeNo}"
+													onkeyup="this.value=this.value.toUpperCase();"
+													style="width:95%;"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Route Origin"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="fromRouteId" maxlength="50"
+													value="#{terminalPaymentNewBackingBean.routeOrigin}"
+													onkeyup="this.value=this.value.toUpperCase();"
+													style="width:95%;"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Route Destination"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText maxlength="50"
+													value="#{terminalPaymentNewBackingBean.routeDestination}"
+													onkeyup="this.value=this.value.toUpperCase();"
+													style="width:95%;"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/]/i" />
+												</p:inputText>
+
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Route Via"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="idRouteVia" maxlength="100"
+													onkeyup="this.value=this.value.toUpperCase();"
+													value="#{terminalPaymentNewBackingBean.routeVia}"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}"
+													style="width:95%;">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/, ]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Owner Name "></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="ownerNameId" maxlength="70"
+													value="#{terminalPaymentNewBackingBean.owner}"
+													onkeyup="this.value=this.value.toUpperCase();"
+													style="width:95%;"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}">
+													<p:keyFilter regEx="/[a-zA-Z-_ ]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Gender "></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu
+													value="#{terminalPaymentNewBackingBean.gender}"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}"
+													effect="fold" style="width:calc(95% - 18px);">
+													<f:selectItem itemLabel="--- Select Gender ---"
+														itemValue=""></f:selectItem>
+													<f:selectItems
+														value="#{terminalPaymentNewBackingBean.genderList}"
+														var="g" itemLabel="#{g.description}" itemValue="#{g.code}"></f:selectItems>
+												</p:selectOneMenu>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Contact Number"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="contactNoId"
+													value="#{terminalPaymentNewBackingBean.contactNo}"
+													style="width:95%"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}"
+													maxlength="10">
+													<p:keyFilter regEx="/[\d]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Service Type"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu id="smServiceType"
+													value="#{terminalPaymentNewBackingBean.vehicleServiceType}"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}"
+													effect="fold" style="width:calc(95% - 18px);">
+													<f:selectItem itemLabel="" itemValue=""></f:selectItem>
+													<f:selectItems
+														value="#{terminalPaymentNewBackingBean.serviceTypeList}"
+														var="g" itemLabel="#{g.description}" itemValue="#{g.code}"></f:selectItems>
+												</p:selectOneMenu>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Permit Expiry Date"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:calendar id="idexpiryDate"
+													value="#{terminalPaymentNewBackingBean.expireDateN}"
+													styleClass="calendarClass" navigator="true"
+													inputStyle="width:calc(100% - 43px)" showOn="button"
+													pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+													yearRange="c-100:c+100" mask="true" readonlyInput="true"
+													disabled="#{terminalPaymentNewBackingBean.withoutNTCPermit}">
+												</p:calendar>
+												<!-- ToDo -->
+											</p:panelGrid>
+
+										</p:panelGrid>
+
+									</p:panel>
+									<br></br>
+									<p:panel id="panelHTpermitDetail"
+										rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '001'}"
+										header="Temporary/Special Hire Permit Details"
+										style="border:1px solid #b1cbef">
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-4, ui-grid-col-8">
+
+											<p:panelGrid>
+												<p:outputLabel value="NTC No./ Permit No."></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="PermitId"
+													value="#{terminalPaymentNewBackingBean.tsPermitNo}"
+													disabled="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '002' or terminalPaymentNewBackingBean.selectedPayTypeCode eq '003'}"
+													style="width:95%; text-transform: uppercase;">
+
+												</p:inputText>
+											</p:panelGrid>
+	
+										<!-- 	<p:panelGrid>
+												<p:outputLabel value="Route No."
+													rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '003'}"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"
+													rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '003'}"></p:outputLabel> 
+											</p:panelGrid> -->
+											<!-- <p:panelGrid>
+												<p:inputText id="idRouteNoT"
+													value="#{terminalPaymentNewBackingBean.tsRouteNo}"
+													disabled="true"
+													style="width:95%;" maxlength="10"
+													onkeyup="this.value=this.value.toUpperCase();"
+													rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '003'}">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/]/i" />
+												</p:inputText> 
+
+											</p:panelGrid>-->
+
+
+											<p:panelGrid>
+												<p:outputLabel value="Route Origin"
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '003'}"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '003'}"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu id="idRouteOrigin"
+													rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '003'}"
+													value="#{terminalPaymentNewBackingBean.tsOriginCode}"
+													style="width:calc(95% - 18px);" autoWidth="false"
+													effect="fold" filter="true" filterMatchMode="contains">
+													<f:selectItem itemLabel="--Select Origin--" itemValue="" />
+													<f:selectItems
+														value="#{terminalPaymentNewBackingBean.routeList}"
+														var="routeList"
+														itemLabel="#{routeList.routeNo}&#160;:&#160;#{routeList.startFrom}&#160;-&#160;#{routeList.endAt}"
+														itemValue="#{routeList.routeNo}" />
+													<p:ajax
+														listener="#{terminalPaymentNewBackingBean.getRouteData}"
+														update="frmAcceptPayments:idRouteDest, frmAcceptPayments:idRouteViaN" />
+												</p:selectOneMenu>
+
+										<!-- 		<p:inputText id="idRouteOriginT"
+													value="#{terminalPaymentNewBackingBean.routeOrigin}"
+													maxlength="50"
+													disabled="true"
+													rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '003'}"
+													style="width:95%;"
+													onkeyup="this.value=this.value.toUpperCase();">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/]/i" />
+												</p:inputText> -->
+
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Route Destination"
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '003'}"
+												></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="idRouteDest"
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '003'}"
+													value="#{terminalPaymentNewBackingBean.tsDestination}"
+													style="width:95%;"
+													disabled="true"
+													onkeyup="this.value=this.value.toUpperCase();">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/]/i" />
+												</p:inputText>
+
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Route Via"
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '003'}"></p:outputLabel>
+												
+												<p:outputLabel value="Special Route"
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '003'}"></p:outputLabel>
+											    	<p:outputLabel value="*" style="color:red;"
+											    	rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '003'}"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="idRouteViaN"
+													onkeyup="this.value=this.value.toUpperCase();"
+													value="#{terminalPaymentNewBackingBean.tsVia}"
+													disabled="#{terminalPaymentNewBackingBean.selectedPayTypeCode != '003'}"
+													style="width:95%;">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/, ]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Owner Name "></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="ownerNameIdN" maxlength="70"
+													value="#{terminalPaymentNewBackingBean.tsOwner}"
+													style="width:95%;"
+													onkeyup="this.value=this.value.toUpperCase();">
+													<p:keyFilter regEx="/[a-zA-Z-_ ]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Gender "></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu id="genderidN"
+													value="#{terminalPaymentNewBackingBean.tsGender}"
+													effect="fold" style="width:calc(95% - 18px);">
+													<f:selectItem itemLabel="--- Select Gender ---"
+														itemValue=""></f:selectItem>
+													<f:selectItems
+														value="#{terminalPaymentNewBackingBean.genderList}"
+														var="g" itemLabel="#{g.description}" itemValue="#{g.code}"></f:selectItems>
+												</p:selectOneMenu>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Contact Number"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputText id="contactNoIdN"
+													value="#{terminalPaymentNewBackingBean.tsContactNo}"
+													style="width:95%" maxlength="10">
+													<p:keyFilter regEx="/[\d]/i" />
+												</p:inputText>
+											</p:panelGrid>
+
+											<p:panelGrid>
+												<p:outputLabel value="Service Type"></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:selectOneMenu id="smServiceTypeN"
+													value="#{terminalPaymentNewBackingBean.tsVehicleServiceType}"
+													effect="fold" style="width:calc(95% - 18px);">
+													<f:selectItem itemLabel="--- Select Service Type ---"
+														itemValue=""></f:selectItem>
+													<f:selectItems
+														value="#{terminalPaymentNewBackingBean.serviceTypeList}"
+														var="g" itemLabel="#{g.description}" itemValue="#{g.code}"></f:selectItems>
+												</p:selectOneMenu>
+											</p:panelGrid>
+
+
+											<p:panelGrid
+												rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '003'}">
+												<p:outputLabel
+													value="Details Relating to the Special Hire Permit "></p:outputLabel>
+												<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+											</p:panelGrid>
+											<p:panelGrid>
+												<p:inputTextarea id="detailsforHP"
+													value="#{terminalPaymentNewBackingBean.hirePermitRemark}"
+													rendered="#{terminalPaymentNewBackingBean.selectedPayTypeCode eq '003'}"
+													style="width:95%" maxlength="300" rows="3">
+													<p:keyFilter regEx="/[a-zA-Z0-9-_/, ]/i" />
+												</p:inputTextarea>
+											</p:panelGrid>
+
+
+										</p:panelGrid>
+									</p:panel>
+								</div>
+
+							</div>
+						</h:panelGroup>
+
+
+						<center>
+							<p:commandButton id="cmdbtnAdd" value="Save"
+								disabled="#{terminalPaymentNewBackingBean.enableReceipt}"
+								class="mainActionbtn" update="frmAcceptPayments"
+								process="frmAcceptPayments"
+								actionListener="#{terminalPaymentNewBackingBean.submitForm}">
+							</p:commandButton>
+
+							<p:commandButton id="cmdbtnAddClear" value="Clear"
+								styleClass="mainActionbtn" update="frmAcceptPayments"
+								process="frmAcceptPayments"
+								actionListener="#{terminalPaymentNewBackingBean.clearFields}">
+							</p:commandButton>
+
+							<p:commandButton id="cmdbtnGenerateReceipt"
+								style="width:20%;height:18px;" value="Generate Receipt"
+								class="mainActionbtn" update="frmAcceptPayments"
+								process="frmAcceptPayments"
+								oncomplete="window.open('/InfoNTC/showUpload?reportName=Receipt')"
+								disabled="#{!terminalPaymentNewBackingBean.enableReceipt}"
+								actionListener="#{terminalPaymentNewBackingBean.generateReceipt}">
+							</p:commandButton>
+
+							<p:commandButton id="cmdbtnGeneratePermit"
+								style="width:20%;height:18px;" value="Print Permit"
+								class="mainActionbtn" update="frmAcceptPayments"
+								process="frmAcceptPayments"
+								oncomplete="window.open('/InfoNTC/showUpload?reportName=Permit')"
+								disabled="#{terminalPaymentNewBackingBean.enablePermit}"
+								actionListener="#{terminalPaymentNewBackingBean.genratePermit}">
+							</p:commandButton>
+
+						</center>
+						<br></br>
+					</div>
+
+				</h:form>
+
+				<p:dialog id="dialogError" global="true" modal="true" header="Error"
+					width="30%" severity="info" widgetVar="errorDialog"
+					closeOnEscape="true" resizable="false">
+					<h:form id="frmError">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+								<p:outputLabel value="#{terminalPaymentNewBackingBean.errorMsg}"></p:outputLabel>
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								process="frmError" value="OK" onclick="PF('errorDialog').hide()">
+							</p:commandButton>
+
+						</center>
+					</h:form>
+				</p:dialog>
+
+				<p:dialog id="dialogSucces" global="true" modal="true"
+					header="Success" width="30%" severity="info"
+					widgetVar="successDialog" closeOnEscape="true" resizable="false">
+					<h:form id="frmSuccess">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+								<p:outputLabel
+									value="#{terminalPaymentNewBackingBean.sucessMsg}"></p:outputLabel>
+
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								process="frmSuccess" value="OK"
+								onclick="PF('successDialog').hide()">
+							</p:commandButton>
+						</center>
+					</h:form>
+				</p:dialog>
+
+				<p:dialog styleClass="" id="warningMsge" global="true" modal="true"
+					header="Warning" width="30%" severity="info"
+					widgetVar="warningMsge" closeOnEscape="true" resizable="false">
+					<h:form id="frmwarningMsge">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+								<p:outputLabel value="#{terminalPaymentNewBackingBean.errorMsg}"></p:outputLabel>
+
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								process="frmwarningMsge" value="OK"
+								onclick="PF('warningMsge').hide()">
+							</p:commandButton>
+
+						</center>
+					</h:form>
+				</p:dialog>
+
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

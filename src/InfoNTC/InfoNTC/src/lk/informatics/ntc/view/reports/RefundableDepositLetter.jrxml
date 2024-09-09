@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2021-06-14T13:39:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RefundableDepositLetter" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ff006f6c-1798-4109-b4fc-b11684d87422">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC_Live.xml"/>
+	<parameter name="TAP_REF_NO" class="java.lang.String"/>
+	<parameter name="TAP_APP_NO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT *,
+nt_t_tender_details.*
+FROM public.nt_m_tender_applicant 
+inner join public.nt_t_tender_details on nt_t_tender_details.seqno = nt_m_tender_applicant.tap_app_pre_route_seq 
+WHERE (tap_reference_no= $P{TAP_REF_NO}   and tap_application_no= $P{TAP_APP_NO}  and ( tap_board_approval_status is null or tap_board_approval_status= 'R'))]]>
+	</queryString>
+	<field name="seqno" class="java.lang.Long"/>
+	<field name="tap_application_no" class="java.lang.String"/>
+	<field name="tap_reference_no" class="java.lang.String"/>
+	<field name="tap_remark" class="java.lang.String"/>
+	<field name="tap_bank" class="java.lang.String"/>
+	<field name="tap_is_doc_available" class="java.lang.Boolean"/>
+	<field name="tap_status" class="java.lang.String"/>
+	<field name="tap_recite_no" class="java.lang.String"/>
+	<field name="tap_refundable_deposit_amount" class="java.math.BigDecimal"/>
+	<field name="tap_voucher_no" class="java.lang.String"/>
+	<field name="tap_address01" class="java.lang.String"/>
+	<field name="tap_address02" class="java.lang.String"/>
+	<field name="tap_city" class="java.lang.String"/>
+	<field name="tap_owners_capability" class="java.lang.String"/>
+	<field name="tap_is_signature_available" class="java.lang.Boolean"/>
+	<field name="tap_applicant_name" class="java.lang.String"/>
+	<field name="tap_title" class="java.lang.String"/>
+	<field name="tap_nic" class="java.lang.String"/>
+	<field name="tap_contact_no" class="java.lang.String"/>
+	<field name="tap_application_receive_person" class="java.lang.String"/>
+	<field name="tap_application_receive_person_id_type" class="java.lang.String"/>
+	<field name="tap_application_receive_person_id_no" class="java.lang.String"/>
+	<field name="tap_is_first_envelope_done" class="java.lang.Boolean"/>
+	<field name="tap_is_tender_evaluation_done" class="java.lang.Boolean"/>
+	<field name="tap_first_committee_status" class="java.lang.String"/>
+	<field name="tap_tender_evalution_status" class="java.lang.String"/>
+	<field name="tap_bid_price" class="java.math.BigDecimal"/>
+	<field name="tap_tender_application_remark" class="java.lang.String"/>
+	<field name="tap_threshold_percentage" class="java.math.BigDecimal"/>
+	<field name="tap_is_parallel_permit_available" class="java.lang.Boolean"/>
+	<field name="tap_is_cancellation_on_parallel_permit" class="java.lang.Boolean"/>
+	<field name="tap_board_approval_status" class="java.lang.String"/>
+	<field name="tap_print_agreement_count" class="java.lang.Integer"/>
+	<field name="tap_app_pre_route_seq" class="java.lang.Long"/>
+	<field name="tap_bank_slip_reference_no" class="java.lang.String"/>
+	<field name="tap_created_by" class="java.lang.String"/>
+	<field name="tap_create_date" class="java.sql.Timestamp"/>
+	<field name="tap_modified_by" class="java.lang.String"/>
+	<field name="tap_modified_date" class="java.sql.Timestamp"/>
+	<field name="tap_first_env_remark" class="java.lang.String"/>
+	<field name="tap_second_env_remark" class="java.lang.String"/>
+	<field name="tap_second_committee_status" class="java.lang.String"/>
+	<field name="tap_ten_evaluation_remark" class="java.lang.String"/>
+	<field name="tap_first_committee_remark" class="java.lang.String"/>
+	<field name="tap_second_committee_remark" class="java.lang.String"/>
+	<field name="tap_board_remark" class="java.lang.String"/>
+	<field name="tap_refund_voucher_generated" class="java.lang.String"/>
+	<field name="tap_serial_no" class="java.lang.String"/>
+	<field name="tap_offer_letter_count" class="java.lang.Long"/>
+	<field name="COLUMN_50" class="java.lang.Long"/>
+	<field name="tnd_reference_no" class="java.lang.String"/>
+	<field name="tnd_serial_no" class="java.lang.String"/>
+	<field name="tnd_route_no" class="java.lang.String"/>
+	<field name="tnd_via" class="java.lang.String"/>
+	<field name="tnd_type_of_service" class="java.lang.String"/>
+	<field name="tnd_one_way_fare" class="java.math.BigDecimal"/>
+	<field name="tnd_turns_perday" class="java.lang.Integer"/>
+	<field name="tnd_parallel_roads" class="java.lang.String"/>
+	<field name="tnd_effective_routes" class="java.lang.String"/>
+	<field name="tnd_created_by" class="java.lang.String"/>
+	<field name="tnd_create_date" class="java.sql.Timestamp"/>
+	<field name="tnd_modified_by" class="java.lang.String"/>
+	<field name="tnd_modified_date" class="java.sql.Timestamp"/>
+	<field name="tnd_departure" class="java.lang.String"/>
+	<field name="tnd_arrival" class="java.lang.String"/>
+	<field name="tnd_no_of_permits" class="java.lang.Integer"/>
+	<field name="tnd_treasure_holder_price" class="java.math.BigDecimal"/>
+	<field name="COLUMN_68" class="java.lang.Long"/>
+	<field name="COLUMN_69" class="java.lang.String"/>
+	<field name="COLUMN_70" class="java.lang.String"/>
+	<field name="COLUMN_71" class="java.lang.String"/>
+	<field name="COLUMN_72" class="java.lang.String"/>
+	<field name="COLUMN_73" class="java.lang.String"/>
+	<field name="COLUMN_74" class="java.math.BigDecimal"/>
+	<field name="COLUMN_75" class="java.lang.Integer"/>
+	<field name="COLUMN_76" class="java.lang.String"/>
+	<field name="COLUMN_77" class="java.lang.String"/>
+	<field name="COLUMN_78" class="java.lang.String"/>
+	<field name="COLUMN_79" class="java.sql.Timestamp"/>
+	<field name="COLUMN_80" class="java.lang.String"/>
+	<field name="COLUMN_81" class="java.sql.Timestamp"/>
+	<field name="COLUMN_82" class="java.lang.String"/>
+	<field name="COLUMN_83" class="java.lang.String"/>
+	<field name="COLUMN_84" class="java.lang.Integer"/>
+	<field name="COLUMN_85" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="132" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="456" y="20" width="100" height="30" uuid="18441dac-8994-4295-aa92-dad54629cd9c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="68" width="554" height="20" isRemoveLineWhenBlank="true" uuid="60e01861-4502-4c2e-b8e0-5987466965ca"/>
+				<textElement>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tap_address01}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="88" width="554" height="20" isRemoveLineWhenBlank="true" uuid="eb8117bb-f4d8-4fa5-9e22-295785d2bdaa"/>
+				<textElement>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tap_address02}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="108" width="554" height="20" isRemoveLineWhenBlank="true" uuid="5aee627c-5f69-4c91-b534-3f7e3e4209a2"/>
+				<textElement>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tap_city}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="50" width="554" height="18" isPrintWhenDetailOverflows="true" uuid="d74b861e-28eb-4910-b1a3-e28c7698ae79">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{tap_applicant_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="219" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="28" width="70" height="20" uuid="f78bf7ab-90fc-4e83-912f-e3635ae17871"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[ටෙන්ඩර් අංක]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="66" y="28" width="124" height="20" isPrintWhenDetailOverflows="true" uuid="bd778bb4-e07e-4241-bdab-769650ea4c60"/>
+				<textFieldExpression><![CDATA[$F{tap_reference_no}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="127" y="28" width="434" height="20" uuid="d71341df-8de5-4ba1-ac94-4af16c63750c"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[යටතේ ඔබ විසින්  ඉදිරිපත් කරන  ලද අයදුම්පත්‍රය මූලික සුදුසුකම් සපුරා නොතිබීම හේතුවෙන් ​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="310" height="20" uuid="31e4c1c8-04fa-45c2-849a-e43bc7eb9825">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[ප්‍රතික්ශේප වී අැත​. ඔබ විසින් අැප තැන්පතු ලෙස ගෙවන ලද රු.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="###,###,###,###.00" isBlankWhenNull="true">
+				<reportElement x="310" y="45" width="90" height="20" isPrintWhenDetailOverflows="true" uuid="3450bba1-a9b3-4fc1-82fa-460215a6e162">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tap_refundable_deposit_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="61" width="575" height="33" uuid="95d52742-42e5-420b-b437-b0f324bdce5d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[මෙ සමග අමුණා අැති අයදුම් පත්‍රය  සම්පූර්ණ කර ජාතික ගමනාගමන කොමිෂන් සභාව වෙත යොමු කරන ලෙස කාරුණිකව දැනුම් දෙමි.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="159" width="379" height="19" uuid="21c90539-b982-41d2-ae25-ea9df4495efd">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[අධ්‍යක්‍ෂක ,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="178" width="379" height="20" uuid="22cd273b-023f-4e64-9d0e-bdbeaac95538">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[(ධාවන හා සේවා අධීක්‍ෂණ​)වෙනුවට​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="198" width="489" height="21" uuid="d4f6cb48-dbcf-43e1-b363-9c24444c5b61">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="220" height="16" uuid="20aab36a-ae5c-4b72-8529-eebf51c4a969"/>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[අධිවේගී මාර්ග මගී ප්‍රවාහන ටෙන්ඩර් අංක ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="212" y="1" width="170" height="16" uuid="3e337c6d-e17c-457a-b9a0-2ee54b161ae8"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tap_reference_no}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="45" width="159" height="20" uuid="3f5258b7-f20c-43d9-b407-c2fd58b93ae5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<text><![CDATA[ක මුදල ආපසු ලබා ගැනීම සඳහා]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

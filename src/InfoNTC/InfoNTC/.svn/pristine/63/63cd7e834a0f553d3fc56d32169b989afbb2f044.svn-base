@@ -1,0 +1,2626 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-g-6 {
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-g {
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.addBtn {
+	font-weight: bold;
+	background: #141845 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 70px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.colNoOfBuses {
+	background-color: #d1cdcd;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">#{msg['timetable.trip.generator']}</h1>
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="mainfrm">
+
+					<p:panel>
+
+						<p:panelGrid id="shwDetail" columns="5" style="margin-top:5px"
+							columnClasses="ui-grid-col-1,ui-grid-col-4,ui-grid-col-6,ui-grid-col-4,ui-grid-col-6"
+							layout="grid">
+
+							<!-- 01 -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Route No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="routeNo" style="width:70%" effect="fold"
+									filter="true" filterMatchMode="contains" tabindex="1"
+									value="#{noOfTripsGeneratorBackingBean.timeTableDTO.routeNo}">
+
+
+									<f:selectItem itemLabel="-- All --" itemValue="" />
+									<f:selectItems
+										value="#{noOfTripsGeneratorBackingBean.busRouteList}" var="d"
+										itemLabel="#{d.routeNo}" itemValue="#{d.routeNo}" />
+
+									<p:ajax update="@form"
+										listener="#{noOfTripsGeneratorBackingBean.ajaxFillBusCategory}" />
+
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Bus Category"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="buscategory" style="width:70%"
+									effect="fold" filter="true" filterMatchMode="contains"
+									tabindex="1"
+									disabled="#{noOfTripsGeneratorBackingBean.disableBusCategory}"
+									value="#{noOfTripsGeneratorBackingBean.timeTableDTO.busCategory}">
+
+
+									<f:selectItem itemLabel="-- All --" itemValue="" />
+									<f:selectItems
+										value="#{noOfTripsGeneratorBackingBean.busCategoryList}"
+										var="d" itemLabel="#{d.busCategoryDes}"
+										itemValue="#{d.busCategory}" />
+										
+										
+									<p:ajax update="@form"
+										listener="#{noOfTripsGeneratorBackingBean.ajaxFillRouteDetails}" />
+
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+
+							<!-- 02 -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Origin"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText onkeyup="this.value=this.value.toUpperCase();"
+									style="width:70%; " readonly="true"
+									value="#{noOfTripsGeneratorBackingBean.timeTableDTO.origin}" />
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Destination"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText onkeyup="this.value=this.value.toUpperCase();"
+									style="width:70%; " readonly="true"
+									value="#{noOfTripsGeneratorBackingBean.timeTableDTO.destination}" />
+							</p:panelGrid>
+
+
+							<!-- 03 -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Reference No."></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText onkeyup="this.value=this.value.toUpperCase();"
+									style="width:70%; color:red;font-weight: bold;" maxlength="12"
+									readonly="true"
+									value="#{noOfTripsGeneratorBackingBean.timeTableDTO.tripRefNo}" />
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+
+
+						</p:panelGrid>
+					</p:panel>
+
+					<p:panel id="buttonPanelThree">
+						<center>
+							<p:commandButton value="Search" styleClass="mainActionbtn"
+								action="#{noOfTripsGeneratorBackingBean.searchAction}"
+								update="@form,tabviewId,frmError,mainfrm:tabviewId:groupPanelOne,mainfrm:tabviewId:groupPanelTwo,mainfrm:tabviewId:groupPanelThree"></p:commandButton>
+
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								action="#{noOfTripsGeneratorBackingBean.clearOne}"
+								update="@form"></p:commandButton>
+						</center>
+`					</p:panel>
+
+					<p:tabView id="tabviewId" rendered="true"
+						activeIndex="#{noOfTripsGeneratorBackingBean.activeTabIndex}">
+
+
+						<!-- Tab 01 Group 01 -->
+						<p:tab id="tab-groupOne" title="Group One">
+							<p:panel>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-7,ui-grid-col-7" layout="grid">
+
+
+
+									<!-- origin table start -->
+
+									<p:dataTable id="originGroupOne" var="p" editable="true"
+										widgetVar="cellOriginGroupOneList"
+										value="#{noOfTripsGeneratorBackingBean.originGroupOneList}"
+										resizableColumns="false" tableStyle="width:100%"
+										rowIndexVar="index" styleClass="myTable"
+										emptyMessage="No records available.">
+
+										<f:facet name="header">
+
+											<h:outputLabel
+												value="#{noOfTripsGeneratorBackingBean.timeTableDTO.origin} - Route Start"></h:outputLabel>
+
+										</f:facet>
+
+										<p:ajax event="rowEdit"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxOnRowEditOriginOne}"
+											update="frmError,mainfrm:tabviewId:originGroupOne,mainfrm:tabviewId:groupPanelOne" />
+
+										<p:columnGroup type="header">
+											<p:row>
+												<p:column headerText="" visible="false" />
+												<p:column colspan="2" headerText="Time Range" />
+												<p:column headerText="No. Of Buses" />
+												<p:column headerText="Frequency (min)" />
+												<p:column headerText="" style="width:15%" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column visible="false">
+											<h:outputText value="#{p.id}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.firstValue}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.secondValue}" />
+										</p:column>
+
+										<p:column styleClass="colNoOfBuses">
+											<h:outputText value="#{p.noOfBuses}" />
+										</p:column>
+
+										<p:column>
+											<p:cellEditor>
+												<f:facet name="output">
+													<h:outputText value="#{p.frequency}" />
+												</f:facet>
+												<f:facet name="input">
+													<p:inputText id="modelInput" value="#{p.frequency}"
+														style="width:70%"
+														validatorMessage="Frequency should not be less than zero">
+
+														<f:validateLongRange minimum="0" />
+													</p:inputText>
+												</f:facet>
+											</p:cellEditor>
+										</p:column>
+
+										<p:columnGroup type="footer" rendered="false">
+											<p:row>
+
+												<p:column colspan="2" style="text-align:right"
+													footerText="No Of Trips:" />
+
+												<p:column style="text-align:right">
+													<f:facet name="footer">
+														<h:outputText id="totalBusOriginOne"
+															value="#{noOfTripsGeneratorBackingBean.tripsDTO.totalTripsOriginOne}">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+												<p:column footerText="" />
+												<p:column footerText="" />
+
+											</p:row>
+										</p:columnGroup>
+
+
+
+
+
+										<p:column>
+											<p:rowEditor />
+										</p:column>
+
+									</p:dataTable>
+									<!-- origin table end -->
+
+									<!-- destination table start -->
+									<p:dataTable id="destinationTableGroupOne" var="p"
+										editable="true"
+										value="#{noOfTripsGeneratorBackingBean.destinationGroupOneList}"
+										resizableColumns="false" tableStyle="width:100%"
+										rowIndexVar="index" styleClass="myTable"
+										emptyMessage="No records available.">
+
+
+										<f:facet name="header">
+											<h:outputLabel
+												value="#{noOfTripsGeneratorBackingBean.timeTableDTO.destination} - Route End" />
+										</f:facet>
+
+										<p:ajax event="rowEdit"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxOnRowEditDestinationOne}"
+											update="frmError,mainfrm:tabviewId:destinationTableGroupOne,mainfrm:tabviewId:groupPanelOne" />
+
+										<p:columnGroup type="header">
+											<p:row>
+												<p:column headerText="" visible="false" />
+												<p:column colspan="2" headerText="Time Range" />
+												<p:column headerText="No. Of Buses" />
+												<p:column headerText="Frequency (min)" />
+												<p:column headerText="" style="width:15%" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column visible="false">
+											<h:outputText value="#{p.id}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.firstValue}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.secondValue}" />
+										</p:column>
+
+										<p:column styleClass="colNoOfBuses">
+											<h:outputText value="#{p.noOfBuses}" />
+										</p:column>
+
+										<p:column>
+											<p:cellEditor>
+												<f:facet name="output">
+													<h:outputText value="#{p.frequency}" />
+												</f:facet>
+												<f:facet name="input">
+													<p:inputText id="modelInput" value="#{p.frequency}"
+														style="width:70%"
+														validatorMessage="Frequency should not be less than zero">
+
+														<f:validateLongRange minimum="0" />
+													</p:inputText>
+												</f:facet>
+											</p:cellEditor>
+										</p:column>
+
+										<p:columnGroup type="footer" rendered="false">
+											<p:row>
+
+												<p:column colspan="2" style="text-align:right"
+													footerText="No Of Trips:" />
+
+												<p:column style="text-align:right">
+													<f:facet name="footer">
+														<h:outputText id="totalBusDestinationOne"
+															value="#{noOfTripsGeneratorBackingBean.tripsDTO.totalTripsDestinationOne}">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+												<p:column footerText="" />
+												<p:column footerText="" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column>
+											<p:rowEditor />
+										</p:column>
+
+
+									</p:dataTable>
+									<!-- destination table end -->
+
+								</p:panelGrid>
+							</p:panel>
+
+
+
+							<p:panel id="groupPanelOne">
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+
+									<p:outputLabel value="No. of Trips" style="font-weight: bold"></p:outputLabel>
+
+
+									<p:inputText readonly="true"
+										value="#{noOfTripsGeneratorBackingBean.tripsDTO.totalTripsOriginOne}"
+										style="width:50%"></p:inputText>
+
+
+									<p:outputLabel value="No. of Trips" style="font-weight: bold"></p:outputLabel>
+
+
+									<p:inputText readonly="true"
+										value="#{noOfTripsGeneratorBackingBean.tripsDTO.totalTripsDestinationOne}"
+										style="width:50%"></p:inputText>
+
+
+
+									<p:outputLabel value="No. of Pvt. Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="false"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.noOfPVTbuessOriginOne}">
+
+										<p:ajax update="totalBusOriginOne"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+
+									</p:inputText>
+
+									<p:outputLabel value="No. of Pvt. Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="false"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.noOfPVTbuessDestinationOne}">
+
+										<p:ajax update="totalBusDestinationOne"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+
+									<p:outputLabel value="No. of CTB Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.noOfCTBbuessOriginOne}">
+
+										<p:ajax update="totalBusOriginOne"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+
+									</p:inputText>
+
+									<p:outputLabel value="No. of CTB Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.noOfCTBbuessDestinationOne}">
+										<p:ajax update="totalBusDestinationOne"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+
+									</p:inputText>
+
+
+									<p:outputLabel value="No. of Other Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.noOfOtherbuessOriginOne}">
+
+										<p:ajax update="totalBusOriginOne"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+
+									</p:inputText>
+
+									<p:outputLabel value="No. of Other Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.noOfOtherbuessDestinationOne}">
+
+
+										<p:ajax update="totalBusDestinationOne"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+
+									<p:outputLabel value="Rest Time (min)"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.restTimeOriginOne}"></p:inputText>
+
+									<p:outputLabel value="Rest Time (min)"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.restTimeDestinationOne}"></p:inputText>
+
+									<p:outputLabel value="Total Buses" style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="true"
+										id="totalBusOriginOne"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.totalBusesOriginOne}"></p:inputText>
+										
+									
+									
+									<p:outputLabel value="Total Buses" style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="true"
+										id="totalBusDestinationOne"
+										value="#{noOfTripsGeneratorBackingBean.groupOneDTO.totalBusesDestinationOne}"></p:inputText>
+										
+									<p:commandButton value="View Private Buses" styleClass="mainActionbtn"
+											action="#{noOfTripsGeneratorBackingBean.viewPrivateBusesActionOrigin}" style="width:150px;" update="@this,originPVTBusesDlg"></p:commandButton>
+									<p:panelGrid></p:panelGrid>
+									
+									<p:commandButton value="View Private Buses" styleClass="mainActionbtn"
+											action="#{noOfTripsGeneratorBackingBean.viewPrivateBusesActionDestination}"  style="width:150px;" update="@this,destinationPVTBusesDlg"></p:commandButton>
+
+								</p:panelGrid>
+								
+							</p:panel>
+
+						</p:tab>
+
+						<!-- Tab 02 Group 02 -->
+						<p:tab id="tab-groupTwo" title="Group Two"
+							disabled="#{noOfTripsGeneratorBackingBean.disabledGroupTwo}">
+
+							<p:panel>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-7,ui-grid-col-7" layout="grid">
+
+
+									<!-- origin table start -->
+
+									<p:dataTable id="originGroupTwo" var="p" editable="true"
+										value="#{noOfTripsGeneratorBackingBean.originGroupTwoList}"
+										resizableColumns="false" tableStyle="width:100%"
+										rowIndexVar="index" styleClass="myTable"
+										emptyMessage="No records available.">
+
+
+
+										<f:facet name="header">
+											<h:outputLabel
+												value="#{noOfTripsGeneratorBackingBean.timeTableDTO.origin} - Route Start" />
+										</f:facet>
+
+										<p:ajax event="rowEdit"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxOnRowEditOriginTwo}"
+											update="frmError,mainfrm:tabviewId:originGroupTwo,mainfrm:tabviewId:groupPanelTwo" />
+
+										<p:columnGroup type="header">
+											<p:row>
+												<p:column headerText="" visible="false" />
+												<p:column colspan="2" headerText="Time Range" />
+												<p:column headerText="No. Of Buses" />
+												<p:column headerText="Frequency (min)" />
+												<p:column headerText="" style="width:15%" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column visible="false">
+											<h:outputText value="#{p.id}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.firstValue}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.secondValue}" />
+										</p:column>
+
+										<p:column styleClass="colNoOfBuses">
+											<h:outputText value="#{p.noOfBuses}" />
+										</p:column>
+
+										<p:column>
+											<p:cellEditor>
+												<f:facet name="output">
+													<h:outputText value="#{p.frequency}" />
+												</f:facet>
+												<f:facet name="input">
+													<p:inputText id="modelInput" value="#{p.frequency}"
+														style="width:70%"
+														validatorMessage="Frequency should not be less than zero">
+
+														<f:validateLongRange minimum="0" />
+													</p:inputText>
+												</f:facet>
+											</p:cellEditor>
+										</p:column>
+
+										<p:columnGroup type="footer" rendered="false">
+											<p:row>
+
+												<p:column colspan="2" style="text-align:right"
+													footerText="No Of Trips:" />
+
+												<p:column style="text-align:right">
+													<f:facet name="footer">
+														<h:outputText id="totalBusOriginTwo"
+															value="#{noOfTripsGeneratorBackingBean.totalBusesOriginTwo}">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+												<p:column footerText="" />
+												<p:column footerText="" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column>
+											<p:rowEditor />
+										</p:column>
+
+
+									</p:dataTable>
+									<!-- origin table end -->
+
+									<!-- destination table start -->
+									<p:dataTable id="destinationTableGroupTwo" var="p"
+										editable="true"
+										value="#{noOfTripsGeneratorBackingBean.destinationGroupTwoList}"
+										resizableColumns="false" tableStyle="width:100%"
+										rowIndexVar="index" styleClass="myTable"
+										emptyMessage="No records available.">
+
+
+
+										<f:facet name="header">
+											<h:outputLabel
+												value="#{noOfTripsGeneratorBackingBean.timeTableDTO.destination} - Route End" />
+										</f:facet>
+
+										<p:ajax event="rowEdit"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxOnRowEditDestinationTwo}"
+											update="frmError,mainfrm:tabviewId:destinationTableGroupTwo,mainfrm:tabviewId:groupPanelTwo" />
+
+										<p:columnGroup type="header">
+											<p:row>
+												<p:column headerText="" visible="false" />
+												<p:column colspan="2" headerText="Time Range" />
+												<p:column headerText="No. Of Buses" />
+												<p:column headerText="Frequency (min)" />
+												<p:column headerText="" style="width:15%" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column visible="false">
+											<h:outputText value="#{p.id}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.firstValue}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.secondValue}" />
+										</p:column>
+
+										<p:column styleClass="colNoOfBuses">
+											<h:outputText value="#{p.noOfBuses}" />
+										</p:column>
+
+										<p:column>
+											<p:cellEditor>
+												<f:facet name="output">
+													<h:outputText value="#{p.frequency}" />
+												</f:facet>
+												<f:facet name="input">
+													<p:inputText id="modelInput" value="#{p.frequency}"
+														style="width:70%"
+														validatorMessage="Frequency should not be less than zero">
+
+														<f:validateLongRange minimum="0" />
+													</p:inputText>
+												</f:facet>
+											</p:cellEditor>
+										</p:column>
+
+										<p:columnGroup type="footer" rendered="false">
+											<p:row>
+
+												<p:column colspan="2" style="text-align:right"
+													footerText="No Of Trips:" />
+
+												<p:column style="text-align:right">
+													<f:facet name="footer">
+														<h:outputText id="totalbusdestiationtwo"
+															value="#{noOfTripsGeneratorBackingBean.totalBusesDestinationTwo}">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+												<p:column footerText="" />
+												<p:column footerText="" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column>
+											<p:rowEditor />
+										</p:column>
+
+									</p:dataTable>
+									<!-- destination table end -->
+
+								</p:panelGrid>
+							</p:panel>
+
+							<p:panel id="groupPanelTwo">
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+
+									<p:outputLabel value="No. of Trips" style="font-weight: bold"></p:outputLabel>
+
+
+									<p:inputText readonly="true"
+										value="#{noOfTripsGeneratorBackingBean.tripsDTO.totalTripsOriginTwo}"
+										style="width:50%"></p:inputText>
+
+
+									<p:outputLabel value="No. of Trips" style="font-weight: bold"></p:outputLabel>
+
+
+									<p:inputText readonly="true"
+										value="#{noOfTripsGeneratorBackingBean.tripsDTO.totalTripsDestinationTwo}"
+										style="width:50%"></p:inputText>
+
+
+									<p:outputLabel value="No. of Pvt. Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="false"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.noOfPVTbuessOriginTwo}">
+
+										<p:ajax update="totalBusesoriginTwo"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+
+									</p:inputText>
+
+									<p:outputLabel value="No. of Pvt. Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="false"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.noOfPVTbuessDestinationTwo}">
+										<p:ajax update="totalBusesDestinationTwo"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+
+									<p:outputLabel value="No. of CTB Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.noOfCTBbuessOriginTwo}">
+
+										<p:ajax update="totalBusesoriginTwo"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+									<p:outputLabel value="No. of CTB Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.noOfCTBbuessDestinationTwo}">
+
+										<p:ajax update="totalBusesDestinationTwo"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+
+									<p:outputLabel value="No. of Other Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.noOfOtherbuessOriginTwo}">
+
+										<p:ajax update="totalBusesoriginTwo"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+									<p:outputLabel value="No. of Other Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.noOfOtherbuessDestinationTwo}">
+
+
+										<p:ajax update="totalBusesDestinationTwo"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+
+									<p:outputLabel value="Rest Time (min)"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.restTimeOriginTwo}"></p:inputText>
+
+									<p:outputLabel value="Rest Time (min)"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.restTimeDestinationTwo}"></p:inputText>
+
+									<p:outputLabel value="Total Buses" style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="true"
+										id="totalBusesoriginTwo"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.totalBusesOriginTwo}"></p:inputText>
+
+									<p:outputLabel value="Total Buses" style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="true"
+										id="totalBusesDestinationTwo"
+										value="#{noOfTripsGeneratorBackingBean.groupTwoDTO.totalBusesDestinationTwo}"></p:inputText>
+
+								</p:panelGrid>
+
+							</p:panel>
+
+						</p:tab>
+
+						<!-- Tab 03 Group 03 -->
+						<p:tab id="tab-groupThree" title="Group Three"
+							disabled="#{noOfTripsGeneratorBackingBean.disabledGroupThree}">
+
+							<p:panel>
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-7,ui-grid-col-7" layout="grid">
+
+
+
+									<!-- origin table start -->
+
+									<p:dataTable id="originGroupThree" var="p" editable="true"
+										value="#{noOfTripsGeneratorBackingBean.originGroupThreeList}"
+										rowKey="#{p.stationCode}" resizableColumns="false"
+										tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records available.">
+
+
+
+										<f:facet name="header">
+											<h:outputLabel
+												value="#{noOfTripsGeneratorBackingBean.timeTableDTO.origin} - Route Start" />
+										</f:facet>
+
+										<p:ajax event="rowEdit"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxOnRowEditOriginThree}"
+											update="frmError,mainfrm:tabviewId:originGroupThree,mainfrm:tabviewId:groupPanelThree" />
+
+										<p:columnGroup type="header">
+											<p:row>
+												<p:column headerText="" visible="false" />
+												<p:column colspan="2" headerText="Time Range" />
+												<p:column headerText="No. Of Buses" />
+												<p:column headerText="Frequency (min)" />
+												<p:column headerText="" style="width:15%" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column visible="false">
+											<h:outputText value="#{p.id}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.firstValue}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.secondValue}" />
+										</p:column>
+
+										<p:column styleClass="colNoOfBuses">
+											<h:outputText value="#{p.noOfBuses}" />
+										</p:column>
+
+										<p:column>
+											<p:cellEditor>
+												<f:facet name="output">
+													<h:outputText value="#{p.frequency}" />
+												</f:facet>
+												<f:facet name="input">
+													<p:inputText id="modelInput" value="#{p.frequency}"
+														style="width:70%"
+														validatorMessage="Frequency should not be less than zero">
+
+														<f:validateLongRange minimum="0" />
+													</p:inputText>
+												</f:facet>
+											</p:cellEditor>
+										</p:column>
+
+										<p:columnGroup type="footer" rendered="false">
+											<p:row>
+
+												<p:column colspan="2" style="text-align:right"
+													footerText="No Of Trips:" />
+
+												<p:column style="text-align:right">
+													<f:facet name="footer">
+														<h:outputText id="totalBusOriginThree"
+															value="#{noOfTripsGeneratorBackingBean.totalBusesOriginThree}">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+												<p:column footerText="" />
+												<p:column footerText="" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column>
+											<p:rowEditor />
+										</p:column>
+
+
+									</p:dataTable>
+									<!-- origin table end -->
+
+									<!-- destination table start -->
+									<p:dataTable id="destinationTableGroupThree" var="p"
+										editable="true"
+										value="#{noOfTripsGeneratorBackingBean.destinationGroupThreeList}"
+										rowKey="#{p.stationCode}" resizableColumns="false"
+										tableStyle="width:100%" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records available.">
+
+
+
+
+										<f:facet name="header">
+											<h:outputLabel
+												value="#{noOfTripsGeneratorBackingBean.timeTableDTO.destination} - Route End" />
+										</f:facet>
+
+										<p:ajax event="rowEdit"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxOnRowEditDestinationThree}"
+											update="frmError,mainfrm:tabviewId:destinationTableGroupThree,mainfrm:tabviewId:groupPanelThree" />
+
+										<p:columnGroup type="header">
+											<p:row>
+												<p:column headerText="" visible="false" />
+												<p:column colspan="2" headerText="Time Range" />
+												<p:column headerText="No. Of Buses" />
+												<p:column headerText="Frequency (min)" />
+												<p:column headerText="" style="width:15%" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column visible="false">
+											<h:outputText value="#{p.id}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.firstValue}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText value="#{p.secondValue}" />
+										</p:column>
+
+										<p:column styleClass="colNoOfBuses">
+											<h:outputText value="#{p.noOfBuses}" />
+										</p:column>
+
+										<p:column>
+											<p:cellEditor>
+												<f:facet name="output">
+													<h:outputText value="#{p.frequency}" />
+												</f:facet>
+												<f:facet name="input">
+													<p:inputText id="modelInput" value="#{p.frequency}"
+														style="width:70%"
+														validatorMessage="Frequency should not be less than zero">
+
+														<f:validateLongRange minimum="0" />
+													</p:inputText>
+												</f:facet>
+											</p:cellEditor>
+										</p:column>
+
+										<p:columnGroup type="footer" rendered="false">
+											<p:row>
+
+												<p:column colspan="2" style="text-align:right"
+													footerText="No Of Trips:" />
+
+												<p:column style="text-align:right">
+													<f:facet name="footer">
+														<h:outputText id="totalbusdestiationthree"
+															value="#{noOfTripsGeneratorBackingBean.totalBusesDestinationThree}">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+												<p:column footerText="" />
+												<p:column footerText="" />
+											</p:row>
+										</p:columnGroup>
+
+										<p:column>
+											<p:rowEditor />
+										</p:column>
+
+
+									</p:dataTable>
+									<!-- destination table end -->
+
+								</p:panelGrid>
+							</p:panel>
+
+							<p:panel id="groupPanelThree">
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<p:outputLabel value="No. of Trips" style="font-weight: bold"></p:outputLabel>
+
+
+									<p:inputText readonly="true"
+										value="#{noOfTripsGeneratorBackingBean.tripsDTO.totalTripsOriginThree}"
+										style="width:50%"></p:inputText>
+
+
+									<p:outputLabel value="No. of Trips" style="font-weight: bold"></p:outputLabel>
+
+
+									<p:inputText readonly="true"
+										value="#{noOfTripsGeneratorBackingBean.tripsDTO.totalTripsDestinationThree}"
+										style="width:50%"></p:inputText>
+
+									<p:outputLabel value="No. of Pvt. Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="false"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.noOfPVTbuessOriginThree}">
+
+										<p:ajax update="totalBusesOriginThree"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+
+									</p:inputText>
+
+									<p:outputLabel value="No. of Pvt. Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="false"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.noOfPVTbuessDestinationThree}">
+
+										<p:ajax update="totalBusesDestinationThree"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+
+									<p:outputLabel value="No. of CTB Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.noOfCTBbuessOriginThree}">
+
+										<p:ajax update="totalBusesOriginThree"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+									<p:outputLabel value="No. of CTB Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.noOfCTBbuessDestinationThree}">
+										<p:ajax update="totalBusesDestinationThree"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+
+									<p:outputLabel value="No. of Other Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.noOfOtherbuessOriginThree}">
+										<p:ajax update="totalBusesOriginThree"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+									<p:outputLabel value="No. of Other Buses"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.noOfOtherbuessDestinationThree}">
+
+										<p:ajax update="totalBusesDestinationThree"
+											listener="#{noOfTripsGeneratorBackingBean.ajaxCalculateTotalNoOfBus}" />
+									</p:inputText>
+
+
+									<p:outputLabel value="Rest Time (min)"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.restTimeOriginThree}"></p:inputText>
+
+									<p:outputLabel value="Rest Time (min)"
+										style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.restTimeDestinationThree}"></p:inputText>
+
+									<p:outputLabel value="Total Buses" style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="true"
+										id="totalBusesOriginThree"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.totalBusesOriginThree}"></p:inputText>
+
+									<p:outputLabel value="Total Buses" style="font-weight: bold"></p:outputLabel>
+									<p:inputText style="width:50%" readonly="true"
+										id="totalBusesDestinationThree"
+										value="#{noOfTripsGeneratorBackingBean.groupThreeDTO.totalBusesDestinationThree}"></p:inputText>
+
+								</p:panelGrid>
+
+							</p:panel>
+
+						</p:tab>
+
+					</p:tabView>
+
+
+					<p:panel id="buttonPanelTwo">
+						<center>
+							<p:commandButton value="Save" styleClass="mainActionbtn"
+								action="#{noOfTripsGeneratorBackingBean.saveAction}"
+								update="@form,frmError,frmsuccess,frmAlert"></p:commandButton>
+
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								action="#{noOfTripsGeneratorBackingBean.clearTwo}"
+								update="@form,frmError,frmsuccess,frmAlert"></p:commandButton>
+						</center>
+`					</p:panel>
+
+
+					<p:panel id="buttonPanelFour" visible="false">
+						<center>
+							<p:commandButton value="Panel Generator With Fixed Time"
+								disabled="#{noOfTripsGeneratorBackingBean.disabledWithFixedTime}"
+								action="#{noOfTripsGeneratorBackingBean.panelGeneratorWithFixedTime}"
+								styleClass="mainActionbtn" style="width:25%;"></p:commandButton>
+
+							<p:commandButton value="Panel Generator Without Fixed Time"
+								disabled="#{noOfTripsGeneratorBackingBean.disabledWithOutFixedTime}"
+								action="#{noOfTripsGeneratorBackingBean.panelGeneratorWithOutFixedTime}"
+								styleClass="mainActionbtn" style="width:28%;"></p:commandButton>
+
+							<p:commandButton value="Panel Generator With Fixed Buses"
+								disabled="#{noOfTripsGeneratorBackingBean.disabledWithFixedBuses}"
+								action="#{noOfTripsGeneratorBackingBean.panelGeneratorWithFixedBuses}"
+								styleClass="mainActionbtn" style="width:25%;"></p:commandButton>
+						</center>
+`					</p:panel>
+
+
+				</h:form>
+			</div>
+		</div>
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="#{noOfTripsGeneratorBackingBean.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="#{noOfTripsGeneratorBackingBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Alert" width="30%" severity="info" widgetVar="alertMSG"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAlert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="#{noOfTripsGeneratorBackingBean.alertMSG}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmAlert" onclick="PF('alertMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="fixedTime" global="true" modal="true" closable="true"
+			header="Panel Generator With Fixed Time" width="85%" height="auto"
+			severity="info" widgetVar="fiedTimeVAR" closeOnEscape="true"
+			resizable="false">
+
+
+			<h:form id="frmAttorneyHolder02">
+
+				<p:panelGrid id="shwDetail" columns="4"
+					columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+					layout="grid">
+
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Route No."></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectOneMenu id="routeNoId" style="width:50%"
+							value="#{panelWithFixedTimeBackingBean.panelGenFixedTimeDTO.routeNo}"
+							effect="fold" filter="true" filterMatchMode="contains">
+							<p:ajax
+								listener="#{panelWithFixedTimeBackingBean.getBusCategory}"
+								update="buscategoryId" />
+							<f:selectItem itemLabel="--Select Route No.--" itemValue="" />
+							<f:selectItems
+								value="#{panelWithFixedTimeBackingBean.routeNoList}"
+								var="filterRouteNoList" itemValue="#{filterRouteNoList.routeNo}"
+								itemLabel="#{filterRouteNoList.routeNo}" />
+
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+
+
+
+
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Bus Category"></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<!-- <p:selectOneMenu id="buscategoryId" style="width:50%"  
+							value="#{panelWithFixedTimeBackingBean.panelGenFixedTimeDTO.busCategory}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											
+											<f:selectItem itemLabel="Select Bus Category" itemValue="" />
+											<f:selectItems
+												value="#{panelWithFixedTimeBackingBean.busCategoryList}"
+												var="filterBusCatList"
+												itemValue="#{filterBusCatList.busCategory}"
+												itemLabel="#{filterBusCatList.busCategoryDes}" />					
+										
+						</p:selectOneMenu> -->
+
+						<p:inputText id="buscategoryId" style="width:60%;height:18px;"
+							value="#{panelWithFixedTimeBackingBean.panelGenFixedTimeDTO.busCategoryDes}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+
+
+
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:commandButton style="margin-left:75%"
+							styleClass="mainActionbtn" value="Search" update="@form"
+							actionListener="#{panelWithFixedTimeBackingBean.Search}"></p:commandButton>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:commandButton style="margin-left:10%" value="Clear"
+							styleClass="mainActionbtn"
+							actionListener="#{panelWithFixedTimeBackingBean.ClearButton}"
+							update="@form"></p:commandButton>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+
+				</p:panelGrid>
+
+
+				<br></br>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<p:panel style="font-size:15px;font-weight:bold;">
+							<center>Origin to Destination</center>
+
+
+							<p:tabView>
+								<p:tab title="Group1">
+									<p:dataTable var="trips" id="group1Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;"
+										value="#{panelWithFixedTimeBackingBean.timeStartList}"
+										update="@all"
+										selection="#{panelWithFixedTimeBackingBean.selectedRow}"
+										rowKey="#{trips.timeStartVal}_#{trips.timeEndVal}"
+										selectionMode="single"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										resizableColumns="false" liveResize="true" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No. of Trips Available">
+
+										<p:column headerText="Bus No." style="text-align:left">
+
+
+											<p:selectOneMenu id="busId" style="width:70%"
+												value="#{panelWithFixedTimeBackingBean.panelGenFixedTimeDTO.busType}"
+												effect="fold" filter="true" filterMatchMode="contains">
+
+												<f:selectItem itemLabel="Select a Bus " itemValue="" />
+												<f:selectItem itemLabel="SLTB " itemValue="" />
+												<f:selectItem itemLabel="ETC " itemValue="" />
+												<f:selectItems
+													value="#{panelWithFixedTimeBackingBean.timeStartList}"
+													var="filterBusCatList"
+													itemValue="#{filterBusCatList.busType}"
+													itemLabel="#{filterBusCatList.busType}" />
+
+											</p:selectOneMenu>`
+										
+								</p:column>
+
+
+										<p:column headerText="Start At" style="text-align:left">
+											<h:outputText style="text-align:left;"
+												value="#{trips.timeStartVal}" />
+										</p:column>
+
+										<p:column headerText="End At" style="text-align:left">
+											<h:outputText style="text-align:left;"
+												value="#{trips.timeEndVal}" />
+										</p:column>
+
+
+
+										<!-- <p:columnGroup type="footer">
+									<p:row style="width:50%">
+										<p:column colspan="1" style="text-align:right"
+											footerText=" " />
+										<p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" />
+										<p:column style="text-align:left">
+											<f:facet name="footer">
+												<h:outputText value="" >
+													
+												</h:outputText>
+											</f:facet>
+										</p:column>
+										
+									</p:row>
+								</p:columnGroup> -->
+
+									</p:dataTable>
+
+
+
+
+
+
+								</p:tab>
+								<p:tab title="Group2">
+
+									<p:dataTable var="trips" id="group2Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+									</p:dataTable>
+
+
+								</p:tab>
+
+								<p:tab title="Group3">
+
+									<p:dataTable var="trips" id="group3Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+									</p:dataTable>
+
+
+
+								</p:tab>
+							</p:tabView>
+
+
+						</p:panel>
+
+
+
+
+
+
+					</div>
+					<div class="ui-g-12">
+
+						<p:panel style="font-size:15px;font-weight:bold;">
+							<center>Destination to Origin</center>
+
+
+							<p:tabView>
+								<p:tab title="Group1">
+
+									<p:dataTable var="trips" id="group01Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+
+									</p:dataTable>
+
+
+
+
+								</p:tab>
+								<p:tab title="Group2">
+
+									<p:dataTable var="trips" id="group02Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+
+									</p:dataTable>
+
+
+								</p:tab>
+
+								<p:tab title="Group3">
+									<p:dataTable var="trips" id="group03Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+									</p:dataTable>
+
+
+
+								</p:tab>
+							</p:tabView>
+
+
+
+						</p:panel>
+
+					</div>
+				</div>
+
+				<br></br>
+				<p:panel>
+					<center>
+						<p:commandButton value="Save" styleClass="mainActionbtn"></p:commandButton>
+
+						<p:commandButton value="Clear" styleClass="mainActionbtn"></p:commandButton>
+					</center>
+`		</p:panel>
+
+
+			</h:form>
+
+
+		</p:dialog>
+
+		<p:dialog id="withOutfixedTime" global="true" modal="true"
+			closable="true" header="Panel Generator Without Fixed Time"
+			width="85%" height="auto" severity="info"
+			widgetVar="withOutFiedTimeVAR" closeOnEscape="true" resizable="false">
+			<h:form id="frmAttorneyHolder">
+
+				<p:panelGrid id="shwDetail" columns="4"
+					columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+					layout="grid">
+
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Route No."></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectOneMenu id="routeNo" style="width:50%">
+
+
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+
+
+
+
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Bus Category"></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectOneMenu id="buscategory" style="width:50%">
+
+
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+
+
+
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:commandButton style="margin-left:75%"
+							styleClass="mainActionbtn" value="Search"></p:commandButton>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:commandButton style="margin-left:10%" value="Clear"
+							styleClass="mainActionbtn"></p:commandButton>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+
+				</p:panelGrid>
+
+
+				<br></br>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<p:panel style="font-size:15px;font-weight:bold;">
+							<center>Origin to Destination</center>
+
+
+							<p:tabView>
+								<p:tab title="Group1">
+									<p:dataTable var="trips" id="group1Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row style="width:50%">
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+
+									</p:dataTable>
+
+
+
+
+
+
+								</p:tab>
+								<p:tab title="Group2">
+
+									<p:dataTable var="trips" id="group2Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+									</p:dataTable>
+
+
+								</p:tab>
+
+								<p:tab title="Group3">
+
+									<p:dataTable var="trips" id="group3Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+									</p:dataTable>
+
+
+
+								</p:tab>
+							</p:tabView>
+
+
+						</p:panel>
+
+
+
+
+
+
+					</div>
+					<div class="ui-g-12">
+
+						<p:panel style="font-size:15px;font-weight:bold;">
+							<center>Destination to Origin</center>
+
+
+							<p:tabView>
+								<p:tab title="Group1">
+
+									<p:dataTable var="trips" id="group01Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+
+									</p:dataTable>
+
+
+
+
+								</p:tab>
+								<p:tab title="Group2">
+
+									<p:dataTable var="trips" id="group02Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+
+									</p:dataTable>
+
+
+								</p:tab>
+
+								<p:tab title="Group3">
+									<p:dataTable var="trips" id="group03Table"
+										tableStyle="text-align:left;width:100%;font-size:12px;"
+										style="width:60%;">
+
+										<p:column headerText="Bus No." style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+										<p:column headerText="Time Slot" style="text-align:left">
+											<h:outputText style="text-align:left;" />
+										</p:column>
+
+
+
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="1" style="text-align:right"
+													footerText="No. of Trips Available " />
+												<!-- <p:column footerText="#{createPaymentVoucher.totalfee}"
+											style="text-align:right" /> -->
+												<p:column style="text-align:left">
+													<f:facet name="footer">
+														<h:outputText value="">
+
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+									</p:dataTable>
+
+
+
+								</p:tab>
+							</p:tabView>
+
+
+
+						</p:panel>
+
+					</div>
+				</div>
+
+				<br></br>
+				<p:panel>
+					<center>
+						<p:commandButton value="Save" styleClass="mainActionbtn"></p:commandButton>
+
+						<p:commandButton value="Clear" styleClass="mainActionbtn"></p:commandButton>
+					</center>
+`		</p:panel>
+
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog id="fixedBuses" global="true" modal="true" closable="true"
+			header="Panel Generator With Fixed Buses" width="85%" height="auto"
+			severity="info" widgetVar="fiedBusesVAR" closeOnEscape="true"
+			resizable="false">
+
+			<h:form id="mainfrm02">
+
+				<p:panel>
+
+					<p:panelGrid id="shwDetail" columns="5" style="margin-top:5px"
+						columnClasses="ui-grid-col-1,ui-grid-col-4,ui-grid-col-6,ui-grid-col-4,ui-grid-col-6"
+						layout="grid">
+
+						<!-- 01 -->
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Route No."></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="routeNo" style="width:70%" effect="fold"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.routeNo}">
+								<f:selectItem itemLabel="-- All --" itemValue="" />
+								<f:selectItems
+									value="#{panelGeneratorWithFixedBusesBean.busRouteList}"
+									var="d" itemLabel="#{d.routeNo}" itemValue="#{d.routeNo}" />
+
+								<p:ajax update="@form"
+									listener="#{panelGeneratorWithFixedBusesBean.ajaxFillBusCategory}" />
+
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Bus Category"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText style="width:70%" id="buscategory" readonly="true"
+								value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.busCategoryDes}" />
+
+						</p:panelGrid>
+
+						<!-- 02 -->
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Origin"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText onkeyup="this.value=this.value.toUpperCase();"
+								style="width:70%; " readonly="true"
+								value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.origin}" />
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Destination"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText onkeyup="this.value=this.value.toUpperCase();"
+								style="width:70%; " readonly="true"
+								value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.destination}" />
+						</p:panelGrid>
+
+
+
+					</p:panelGrid>
+				</p:panel>
+
+				<p:panel id="buttonPanelThree">
+					<center>
+						<p:commandButton value="Search" styleClass="mainActionbtn"
+							action="#{panelGeneratorWithFixedBusesBean.searchAction}"
+							update="@form,tabviewId,frmError"></p:commandButton>
+
+						<p:commandButton value="Clear" styleClass="mainActionbtn"
+							action="#{panelGeneratorWithFixedBusesBean.clearOne}"
+							update="@form"></p:commandButton>
+					</center>
+`					</p:panel>
+
+
+				<!--  Start Tab View -->
+
+				<p:tabView id="tabviewId" rendered="true"
+					activeIndex="#{panelGeneratorWithFixedBusesBean.activeTabIndex}">
+
+
+					<!-- Tab 01 Group 01 -->
+					<p:tab id="tab-groupOne" title="Group One">
+						<p:panel>
+							<p:panelGrid columns="2"
+								columnClasses="ui-grid-col-7,ui-grid-col-7" layout="grid">
+
+								<h:outputLabel style="font-weight: bold;"
+									value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.origin} - Route Start"></h:outputLabel>
+								<h:outputLabel style="font-weight: bold;"
+									value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.destination} - Route End"></h:outputLabel>
+
+								<!-- origin table start -->
+
+								<p:dataTable id="originGroupOne" var="p"
+									widgetVar="cellOriginGroupOneList"
+									value="#{panelGeneratorWithFixedBusesBean.originGroupOneList}"
+									resizableColumns="false" tableStyle="width:100%"
+									rowIndexVar="index" styleClass="myTable"
+									emptyMessage="No records available.">
+
+									<f:facet name="header">
+										<h:outputLabel
+											value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.groupOneDays}"></h:outputLabel>
+									</f:facet>
+
+									<p:columnGroup type="header">
+
+										<p:row>
+											<p:column headerText="" visible="false" />
+											<p:column headerText="Bus No." width="45%" />
+											<p:column headerText="Abbreviation" />
+											<p:column headerText="Start" width="15%" />
+											<p:column headerText="End" width="15%" />
+										</p:row>
+									</p:columnGroup>
+
+									<p:column visible="false">
+										<h:outputText value="#{p.id}" />
+									</p:column>
+
+									<p:column width="35%">
+										<p:selectOneMenu value="#{p.assigneBusNo}" style="width:85%"
+											disabled="#{p.ctbBus}" effect="fold" filter="true"
+											filterMatchMode="contains" tabindex="1">
+											<f:selectItem itemLabel="-- Bus No. --" itemValue="" />
+											<f:selectItems
+												value="#{panelGeneratorWithFixedBusesBean.busNoList}"
+												var="e" itemLabel="#{e.assigneBusNo}"
+												itemValue="#{e.assigneBusNo}" />
+										</p:selectOneMenu>
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.busNo}" />
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.startTime}" />
+									</p:column>
+
+									<p:column styleClass="colNoOfBuses">
+										<h:outputText value="#{p.endTime}" />
+									</p:column>
+
+								</p:dataTable>
+
+								<!-- origin table end -->
+
+
+								<!-- destination table start -->
+								<p:dataTable id="destinationTableGroupOne" var="p"
+									value="#{panelGeneratorWithFixedBusesBean.destinationGroupOneList}"
+									resizableColumns="false" tableStyle="width:100%"
+									rowIndexVar="index" styleClass="myTable"
+									emptyMessage="No records available.">
+
+									<f:facet name="header">
+										<h:outputLabel
+											value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.groupOneDays}" />
+									</f:facet>
+
+									<p:columnGroup type="header">
+										<p:row>
+											<p:column headerText="" visible="false" />
+											<p:column headerText="Bus No." width="45%" />
+											<p:column headerText="Abbreviation" />
+											<p:column headerText="Start" width="15%" />
+											<p:column headerText="End" width="15%" />
+										</p:row>
+									</p:columnGroup>
+
+									<p:column visible="false">
+										<h:outputText value="#{p.id}" />
+									</p:column>
+
+									<p:column width="35%">
+										<p:selectOneMenu value="#{p.assigneBusNo}" style="width:85%"
+											disabled="#{p.ctbBus}" effect="fold" filter="true"
+											filterMatchMode="contains" tabindex="1">
+											<f:selectItem itemLabel="-- Bus No. --" itemValue="" />
+											<f:selectItems
+												value="#{panelGeneratorWithFixedBusesBean.busNoList}"
+												var="e" itemLabel="#{e.assigneBusNo}"
+												itemValue="#{e.assigneBusNo}" />
+										</p:selectOneMenu>
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.busNo}" />
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.startTime}" />
+									</p:column>
+
+									<p:column styleClass="colNoOfBuses">
+										<h:outputText value="#{p.endTime}" />
+									</p:column>
+
+								</p:dataTable>
+								<!-- destination table end -->
+
+							</p:panelGrid>
+						</p:panel>
+
+					</p:tab>
+
+					<!-- Tab 02 Group 02 -->
+					<p:tab id="tab-groupTwo" title="Group Two"
+						disabled="#{panelGeneratorWithFixedBusesBean.disabledGroupTwo}">
+
+						<p:panel>
+							<p:panelGrid columns="2"
+								columnClasses="ui-grid-col-7,ui-grid-col-7" layout="grid">
+
+								<h:outputLabel style="font-weight: bold;"
+									value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.origin} - Route Start"></h:outputLabel>
+								<h:outputLabel style="font-weight: bold;"
+									value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.destination} - Route End"></h:outputLabel>
+
+
+
+								<!-- origin table start -->
+
+								<p:dataTable id="originGroupTwo" var="p"
+									value="#{panelGeneratorWithFixedBusesBean.originGroupTwoList}"
+									resizableColumns="false" tableStyle="width:100%"
+									rowIndexVar="index" styleClass="myTable"
+									emptyMessage="No records available.">
+
+									<f:facet name="header">
+										<h:outputLabel
+											value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.groupTwoDays}" />
+									</f:facet>
+
+									<p:columnGroup type="header">
+										<p:row>
+											<p:column headerText="" visible="false" />
+											<p:column headerText="Bus No." width="45%" />
+											<p:column headerText="Abbreviation" />
+											<p:column headerText="Start" width="15%" />
+											<p:column headerText="End" width="15%" />
+										</p:row>
+									</p:columnGroup>
+
+									<p:column visible="false">
+										<h:outputText value="#{p.id}" />
+									</p:column>
+
+									<p:column width="35%">
+										<p:selectOneMenu value="#{p.assigneBusNo}" style="width:85%"
+											disabled="#{p.ctbBus}" effect="fold" filter="true"
+											filterMatchMode="contains" tabindex="1">
+											<f:selectItem itemLabel="-- Bus No. --" itemValue="" />
+											<f:selectItems
+												value="#{panelGeneratorWithFixedBusesBean.busNoList}"
+												var="e" itemLabel="#{e.assigneBusNo}"
+												itemValue="#{e.assigneBusNo}" />
+										</p:selectOneMenu>
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.busNo}" />
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.startTime}" />
+									</p:column>
+
+									<p:column styleClass="colNoOfBuses">
+										<h:outputText value="#{p.endTime}" />
+									</p:column>
+
+								</p:dataTable>
+								<!-- origin table end -->
+
+
+								<!-- destination table start -->
+								<p:dataTable id="destinationTableGroupTwo" var="p"
+									value="#{panelGeneratorWithFixedBusesBean.destinationGroupTwoList}"
+									resizableColumns="false" tableStyle="width:100%"
+									rowIndexVar="index" styleClass="myTable"
+									emptyMessage="No records available.">
+
+									<f:facet name="header">
+										<h:outputLabel
+											value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.groupTwoDays}" />
+									</f:facet>
+
+									<p:columnGroup type="header">
+										<p:row>
+											<p:column headerText="" visible="false" />
+											<p:column headerText="Bus No." width="45%" />
+											<p:column headerText="Abbreviation" />
+											<p:column headerText="Start" width="15%" />
+											<p:column headerText="End" width="15%" />
+										</p:row>
+									</p:columnGroup>
+
+									<p:column visible="false">
+										<h:outputText value="#{p.id}" />
+									</p:column>
+
+									<p:column width="35%">
+										<p:selectOneMenu value="#{p.assigneBusNo}" style="width:85%"
+											disabled="#{p.ctbBus}" effect="fold" filter="true"
+											filterMatchMode="contains" tabindex="1">
+											<f:selectItem itemLabel="-- Bus No. --" itemValue="" />
+											<f:selectItems
+												value="#{panelGeneratorWithFixedBusesBean.busNoList}"
+												var="e" itemLabel="#{e.assigneBusNo}"
+												itemValue="#{e.assigneBusNo}" />
+										</p:selectOneMenu>
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.busNo}" />
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.startTime}" />
+									</p:column>
+
+									<p:column styleClass="colNoOfBuses">
+										<h:outputText value="#{p.endTime}" />
+									</p:column>
+
+								</p:dataTable>
+								<!-- destination table end -->
+
+							</p:panelGrid>
+						</p:panel>
+					</p:tab>
+
+
+					<!-- Tab 03 Group 03 -->
+					<p:tab id="tab-groupThree" title="Group Three"
+						disabled="#{panelGeneratorWithFixedBusesBean.disabledGroupThree}">
+
+						<p:panel>
+							<p:panelGrid columns="2"
+								columnClasses="ui-grid-col-7,ui-grid-col-7" layout="grid">
+
+								<h:outputLabel style="font-weight: bold;"
+									value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.origin} - Route Start"></h:outputLabel>
+								<h:outputLabel style="font-weight: bold;"
+									value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.destination} - Route End"></h:outputLabel>
+
+
+
+								<!-- origin table start -->
+
+								<p:dataTable id="originGroupThree" var="p"
+									value="#{panelGeneratorWithFixedBusesBean.originGroupThreeList}"
+									rowKey="#{p.stationCode}" resizableColumns="false"
+									tableStyle="width:100%" rowIndexVar="index"
+									styleClass="myTable" emptyMessage="No records available.">
+
+
+									<f:facet name="header">
+										<h:outputLabel
+											value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.groupThreeDays}" />
+									</f:facet>
+
+									<p:columnGroup type="header">
+
+										<p:row>
+											<p:column headerText="" visible="false" />
+											<p:column headerText="Bus No." width="45%" />
+											<p:column headerText="Abbreviation" />
+											<p:column headerText="Start" width="15%" />
+											<p:column headerText="End" width="15%" />
+										</p:row>
+									</p:columnGroup>
+
+									<p:column visible="false">
+										<h:outputText value="#{p.id}" />
+									</p:column>
+
+									<p:column width="35%">
+										<p:selectOneMenu value="#{p.assigneBusNo}" style="width:85%"
+											disabled="#{p.ctbBus}" effect="fold" filter="true"
+											filterMatchMode="contains" tabindex="1">
+											<f:selectItem itemLabel="-- Bus No. --" itemValue="" />
+											<f:selectItems
+												value="#{panelGeneratorWithFixedBusesBean.busNoList}"
+												var="e" itemLabel="#{e.assigneBusNo}"
+												itemValue="#{e.assigneBusNo}" />
+										</p:selectOneMenu>
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.busNo}" />
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.startTime}" />
+									</p:column>
+
+									<p:column styleClass="colNoOfBuses">
+										<h:outputText value="#{p.endTime}" />
+									</p:column>
+
+
+								</p:dataTable>
+								<!-- origin table end -->
+
+
+
+								<!-- destination table start -->
+								<p:dataTable id="destinationTableGroupThree" var="p"
+									editable="true"
+									value="#{panelGeneratorWithFixedBusesBean.destinationGroupThreeList}"
+									rowKey="#{p.stationCode}" resizableColumns="false"
+									tableStyle="width:100%" rowIndexVar="index"
+									styleClass="myTable" emptyMessage="No records available.">
+
+									<f:facet name="header">
+										<h:outputLabel
+											value="#{panelGeneratorWithFixedBusesBean.timeTableDTO.groupThreeDays}" />
+									</f:facet>
+
+									<p:columnGroup type="header">
+										<p:row>
+											<p:column headerText="" visible="false" />
+											<p:column headerText="Bus No." width="45%" />
+											<p:column headerText="Abbreviation" />
+											<p:column headerText="Start" width="15%" />
+											<p:column headerText="End" width="15%" />
+										</p:row>
+									</p:columnGroup>
+
+									<p:column visible="false">
+										<h:outputText value="#{p.id}" />
+									</p:column>
+
+									<p:column width="35%">
+										<p:selectOneMenu value="#{p.assigneBusNo}" style="width:85%"
+											disabled="#{p.ctbBus}" effect="fold" filter="true"
+											filterMatchMode="contains" tabindex="1">
+											<f:selectItem itemLabel="-- Bus No. --" itemValue="" />
+											<f:selectItems
+												value="#{panelGeneratorWithFixedBusesBean.busNoList}"
+												var="e" itemLabel="#{e.assigneBusNo}"
+												itemValue="#{e.assigneBusNo}" />
+										</p:selectOneMenu>
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.busNo}" />
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.startTime}" />
+									</p:column>
+
+									<p:column styleClass="colNoOfBuses">
+										<h:outputText value="#{p.endTime}" />
+									</p:column>
+
+
+								</p:dataTable>
+								<!-- destination table end -->
+
+							</p:panelGrid>
+						</p:panel>
+
+
+
+					</p:tab>
+
+				</p:tabView>
+
+
+				<p:panel id="buttonPanelTwo">
+					<center>
+						<p:commandButton value="Save" styleClass="mainActionbtn"
+							action="#{panelGeneratorWithFixedBusesBean.saveAction}"
+							update="@form,frmError,frmsuccess,frmAlert"></p:commandButton>
+
+						<p:commandButton value="Clear" styleClass="mainActionbtn"
+							action="#{panelGeneratorWithFixedBusesBean.clearTwo}"
+							update="@form,frmError,frmsuccess,frmAlert"></p:commandButton>
+					</center>
+`					</p:panel>
+
+			</h:form>
+
+
+		</p:dialog>
+
+			<p:dialog styleClass="" id="originPVTBusesDlg" global="true" modal="true"
+			header="Origin Private Buses" width="30%" severity="info" widgetVar="originPVTBusesDlg"
+			closeOnEscape="true" resizable="false">
+
+				<h:form id="frmoriginPVTBusesDlg">
+				
+					<p:dataTable id="originPVTBuses" var="p"
+									editable="true" scrollable="true"
+								scrollHeight="150"
+									value="#{noOfTripsGeneratorBackingBean.originPVTBusesList}"
+									 resizableColumns="false"
+									tableStyle="width:100%" rowIndexVar="index"
+									styleClass="myTable" emptyMessage="No records available.">
+
+									<p:columnGroup type="header">
+										<p:row>
+											<p:column headerText="Bus No." width="45%" />
+											
+											<p:column headerText="Permit No."  />
+										</p:row>
+									</p:columnGroup>
+
+
+									<p:column>
+										<h:outputText value="#{p.vehicleNo}" />
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.permitNo}" />
+									</p:column>
+
+					</p:dataTable>
+				
+				</h:form>
+			</p:dialog>
+			
+			<p:dialog styleClass="" id="destinationPVTBusesDlg" global="true" modal="true"
+			header="Destination Private Buses" width="30%" severity="info" widgetVar="destinationPVTBusesDlg"
+			closeOnEscape="true" resizable="false">
+
+				<h:form id="frmdestinationPVTBuses">
+					<p:dataTable id="destinationPVTBuses" var="p"
+									editable="true" scrollable="true"
+								scrollHeight="150"
+									value="#{noOfTripsGeneratorBackingBean.destinatinoPVTBusesList}"
+									 resizableColumns="false"
+									tableStyle="width:100%" rowIndexVar="index"
+									styleClass="myTable" emptyMessage="No records available.">
+
+									<p:columnGroup type="header">
+										<p:row>
+											<p:column headerText="Bus No." width="45%" />
+											
+											<p:column headerText="Permit No."  />
+										</p:row>
+									</p:columnGroup>
+
+
+									<p:column>
+										<h:outputText value="#{p.vehicleNo}" />
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{p.permitNo}" />
+									</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</p:dialog>
+
+	</ui:define>
+</ui:composition>

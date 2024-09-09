@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-07-25T16:32:45 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AmmenmendtToOwnerChangeCommitteApproveSin" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd76f107-c7a0-4b8c-b505-7acf31c925ef">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="NewOwnerName" uuid="c4f47b94-d876-48ce-93a3-36a241ee49e7">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_old_app_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select pmo_full_name_sinhala from  public.nt_t_pm_vehi_owner  where pmo_application_no= $P{P_old_app_no}]]>
+		</queryString>
+		<field name="pmo_full_name_sinhala" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_LOGO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.amd_application_no,a.amd_existing_busno,a.amd_relationship_with_transferor,d.description,
+b.pmo_full_name,b.pmo_full_name_sinhala,
+c.pm_permit_expire_date,c.pm_old_application_no
+from public.nt_m_amendments a
+left outer join public.nt_t_pm_vehi_owner b on b.pmo_application_no=a.amd_application_no
+left outer join public.nt_t_pm_application c on c.pm_application_no=a.amd_application_no
+inner join public.nt_r_relationships d on d.code=a.amd_relationship_with_transferor
+where a.amd_status ='C'
+and a.amd_trn_type ='14']]>
+	</queryString>
+	<field name="amd_application_no" class="java.lang.String"/>
+	<field name="amd_existing_busno" class="java.lang.String"/>
+	<field name="amd_relationship_with_transferor" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="pmo_full_name" class="java.lang.String"/>
+	<field name="pmo_full_name_sinhala" class="java.lang.String"/>
+	<field name="pm_permit_expire_date" class="java.lang.String"/>
+	<field name="pm_old_application_no" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="112" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="62" width="792" height="20" uuid="c9d36db4-3470-4582-a338-d8ddbb382e1b"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[අන්තර් පළාත් මගී සේවා අවසරපත්‍ර ඥතීත්වයමත අයිතිය සංශෝධ​නය කිරීම​,]]></text>
+			</staticText>
+			<image scaleImage="RealSize" hAlign="Left" vAlign="Middle">
+				<reportElement x="0" y="0" width="802" height="50" uuid="0602c28e-73b4-455f-a497-e93b66478643"/>
+				<imageExpression><![CDATA[$P{P_LOGO}+"header_logo_new.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="84" width="792" height="28" uuid="6e0c76dd-7feb-4d1b-a6b1-df39c511beea"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[අයදුම්පත් මූලික ලේඛන පරීක්‍ෂා කිරීම​,සහතික කිරීම​.]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="20" width="30" height="49" isPrintWhenDetailOverflows="true" uuid="2a0f5458-08c3-4c02-a1d4-7332e17bc7b1"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[අනු අංකය​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="20" width="40" height="49" isPrintWhenDetailOverflows="true" uuid="dba1dcc8-c397-4eb0-be9a-5c648e1be34e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[අවසර පත්‍ර අංකය​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="20" width="68" height="32" isPrintWhenDetailOverflows="true" uuid="fcb70e47-6115-46e1-b8c9-8711c451a4d8"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[දිවුරුම් ප්‍රකාශන​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="20" width="132" height="49" isPrintWhenDetailOverflows="true" uuid="e6bc1e50-2dca-4950-bc90-8a6fb0f8f98a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[මුල් අයිතිකරුගෙ නම​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="20" width="133" height="49" isPrintWhenDetailOverflows="true" uuid="b259537d-4bec-4f17-b222-5a7bb3552f22">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[නව අයිතිකරුගෙ නම]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="20" width="57" height="49" isPrintWhenDetailOverflows="true" uuid="a9596599-02eb-49a7-926b-8990c0264a73"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[බලපත්‍රය වලංගු කාලය​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="20" width="61" height="49" isPrintWhenDetailOverflows="true" uuid="c2e3cd8f-35a2-4bd6-a656-c34d77529900"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[බස්‍ රථ අංකය​:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="522" y="20" width="186" height="26" isPrintWhenDetailOverflows="true" uuid="062a03b1-4215-464b-a8dd-04fefaac488c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ඥාතීත්වය තහවුරු කිරීමෙ ලේඛණ​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="708" y="20" width="84" height="49" isPrintWhenDetailOverflows="true" uuid="7ca477c5-e687-4601-867f-bac046696436">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ඥාතී සබදතාවය​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="52" width="20" height="17" uuid="6e80b133-e541-4b61-ae03-765413ebc8a7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="52" width="20" height="17" uuid="5a4d27d6-f749-414c-bf03-5b29ec268128">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="52" width="28" height="17" uuid="336ad25f-7446-4002-9e5a-9329b338f7ae"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="522" y="46" width="49" height="23" isPrintWhenDetailOverflows="true" uuid="41eb5478-37a4-4540-b812-40fa447a6e09"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[උපැන්න  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="572" y="46" width="37" height="23" isPrintWhenDetailOverflows="true" uuid="7c4647d2-5e1c-4693-9f03-bf589b3c2cf7"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[විවාහ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="609" y="46" width="40" height="23" isPrintWhenDetailOverflows="true" uuid="ff6f9140-9aa0-4eaf-aa77-0957d4f8f129"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[මරණ​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="649" y="46" width="59" height="23" isPrintWhenDetailOverflows="true" uuid="af8d501f-4c1d-491c-b8bb-c34fb2030323"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[වෙනත්]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="3" width="40" height="17" isPrintWhenDetailOverflows="true" uuid="1c91adf2-b6d1-4c2c-8c37-ff899f3856dc"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[දිනය​ :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="680" y="3" width="111" height="17" uuid="4ba433db-ca68-4d8f-b9d2-8a330a0d0a4e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="792" height="36" uuid="6a079b9b-6404-43be-bfed-a770a872cc86"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="30" height="36" isPrintWhenDetailOverflows="true" uuid="ae952d4b-735e-4fcd-80db-e32f6bf1cdd5"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="30" y="0" width="40" height="36" isPrintWhenDetailOverflows="true" uuid="c5219fd3-b163-4260-893a-4b9d95b20c62"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amd_application_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="138" y="0" width="132" height="36" isPrintWhenDetailOverflows="true" uuid="069107a5-c81c-4663-b849-7f0c39b69e69"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pmo_full_name_sinhala}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="270" y="0" width="133" height="36" uuid="019d9a61-0efb-4804-b163-75074b81407d"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="NewOwnerName" uuid="8f6e071b-1566-46c9-8150-6dcd8aed9b7e">
+							<datasetParameter name="P_old_app_no">
+								<datasetParameterExpression><![CDATA[$F{amd_application_no}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="36" width="133">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="133" height="36" isPrintWhenDetailOverflows="true" uuid="7cb3d4aa-7f28-439c-b370-0ac525588976"/>
+								<box>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+								</box>
+								<textElement>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{pmo_full_name_sinhala}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="403" y="0" width="57" height="36" isPrintWhenDetailOverflows="true" uuid="851a12d0-5508-49f8-b8bd-0f3b98a7630b"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pm_permit_expire_date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="460" y="0" width="62" height="36" isPrintWhenDetailOverflows="true" uuid="db01557b-757e-43e9-99a8-76704dae8dd3"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amd_existing_busno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="708" y="0" width="84" height="36" isPrintWhenDetailOverflows="true" uuid="3387f82a-7f83-423a-80bb-0fa694fa1416">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="70" y="0" width="20" height="36" isPrintWhenDetailOverflows="true" uuid="4db272de-6816-47b8-82de-0ac570e74803"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="90" y="0" width="20" height="36" isPrintWhenDetailOverflows="true" uuid="b9448bfb-e472-488c-bbb2-ab7d86976086"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="110" y="0" width="28" height="36" isPrintWhenDetailOverflows="true" uuid="942fbad9-6e10-4207-9c1c-1facf5e6f1dd"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="522" y="0" width="49" height="36" isPrintWhenDetailOverflows="true" uuid="98289c27-9225-41bf-9c9f-6997ac5ecb6b">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="572" y="0" width="37" height="36" isPrintWhenDetailOverflows="true" uuid="9c2ad941-ff67-4ca6-9401-e5f1106d8852"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="609" y="0" width="40" height="36" isPrintWhenDetailOverflows="true" uuid="c3924eb1-fddc-43a5-84a0-d36a040160d1"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="649" y="0" width="59" height="36" isPrintWhenDetailOverflows="true" uuid="d8a02b5f-2e4b-4aa7-94e5-ef0ddff14511"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="70">
+			<staticText>
+				<reportElement x="0" y="30" width="133" height="20" uuid="a439473b-2b7b-4ee8-9bb0-44b5854fc8ac"/>
+				<text><![CDATA[............................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="133" height="25" isPrintWhenDetailOverflows="true" uuid="3dabbc49-bed5-4081-8fb2-92639f6bf7ca">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[කමිටු සභාපති]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="30" width="133" height="20" uuid="3f37d6ba-f82f-4c15-8af3-1019414ce549"/>
+				<text><![CDATA[............................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="45" width="133" height="25" isPrintWhenDetailOverflows="true" uuid="1547b83b-98fa-487b-830e-be257147e65f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[සමාජික 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="609" y="45" width="133" height="25" isPrintWhenDetailOverflows="true" uuid="71c88360-94ca-4e43-b7af-b356dc539e40">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[සමාජික 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="609" y="30" width="133" height="20" uuid="dd9aa4ea-7fbb-4463-ac4c-e1c8632184b7"/>
+				<text><![CDATA[............................................]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="708" y="0" width="83" height="30" uuid="0e0cb154-261d-4182-807c-26d81da39ef5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

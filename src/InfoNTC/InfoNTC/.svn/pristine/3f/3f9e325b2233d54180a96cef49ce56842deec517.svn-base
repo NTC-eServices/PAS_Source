@@ -1,0 +1,811 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+.calendarClass input {
+	width: 62% !important
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Generate Traffic Proposal</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmTrafficProposal">
+					<br />
+
+					<p:panel>
+						<p:panelGrid id="searchPanel" columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid>
+								<p:outputLabel value="Request No." for="requestNoId"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+
+
+								<p:selectOneMenu id="requestNoId" tabindex="1"
+									style="width:84%; " disabled="false"
+									value="#{generateTrafficProposal.selectedRequestNo}"
+									effect="fold" filter="true" filterMatchMode="contains">
+									<p:ajax listener="#{generateTrafficProposal.onRequestNoChange}"
+										update="sMethodId,sTypeId,sNoId" />
+									<f:selectItem itemLabel="All" itemValue="" />
+									<f:selectItems value="#{generateTrafficProposal.requestNoList}"
+										var="requestNoList" itemValue="#{requestNoList.requestNo}"
+										itemLabel="#{requestNoList.requestNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Survey No." for="sNoId"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:93%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{generateTrafficProposal.trafficProposalDTO.surveyNo}"
+									id="sNoId" readonly="true">
+								</p:inputText>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Survey Method" for="sMethodId"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:90%;height:18px;" tabindex="2"
+									disabled="false" maxlength="50"
+									value="#{generateTrafficProposal.trafficProposalDTO.surveyMethodDes}"
+									id="sMethodId" readonly="true">
+								</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Survey Type" for="sTypeId"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:93%;height:18px;" readonly="true"
+									id="sTypeId"
+									value="#{generateTrafficProposal.trafficProposalDTO.surveyTypeDes}">
+								</p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Traffic Proposal No."
+									for="trafficProposalNoId"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:90%;height:18px;color:red; "
+									tabindex="13"
+									value="#{generateTrafficProposal.trafficProposalDTO.trafficProposalNo}"
+									maxlength="10" id="trafficProposalNoId" readonly="true"
+									disabled="true">
+									<p:ajax update="frmTrafficProposal"
+										listener="#{generateTrafficProposal.onTrafficProposalNoChange}" />
+								</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+						</p:panelGrid>
+						<br></br>
+					</p:panel>
+
+					<p:panel>
+						<center>
+							<p:commandButton styleClass="mainActionbtn" value="Search"
+								id="cmdbtnSearch" disabled="false"
+								action="#{generateTrafficProposal.searchAct}"
+								update="frmTrafficProposal"></p:commandButton>
+
+							<p:commandButton styleClass="mainActionbtn" value="Clear"
+								action="#{generateTrafficProposal.clearFields}" disabled="false"
+								id="cmdbtnClear" process="frmTrafficProposal"
+								update="frmTrafficProposal,searchPanel,trafficProposalTable"></p:commandButton>
+
+
+
+						</center>
+					</p:panel>
+
+					<br />
+					<br></br>
+
+					<p:panel id="panelTwo"
+						rendered="#{generateTrafficProposal.showDetailsPanels}">
+
+						<center>
+
+
+							<p:dataTable id="trafficProposalTable" var="trafficProposalTable"
+								rows="5" paginator="true"
+								value="#{generateTrafficProposal.dataList}"
+								selection="#{generateTrafficProposal.selectDTO}"
+								selectionMode="single" rowKey="#{trafficProposalTable.routeNo}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="10,20" resizableColumns="false"
+								liveResize="true" tableStyle="width:auto" rowIndexVar="index"
+								styleClass="myTable" emptyMessage="No Records are available.">
+
+								<p:ajax event="rowSelect"
+									listener="#{generateTrafficProposal.selectRow}" update="@form"
+									process="@form" />
+
+								<p:column headerText="" visible="false"
+									style="text-align:left;width:8%">
+									<h:outputText value="" />
+								</p:column>
+
+								<p:column headerText="Route No."
+									style="text-align:left;width:8%">
+									<h:outputText value="#{trafficProposalTable.routeNo}" />
+								</p:column>
+
+
+
+								<p:column headerText="Origin" style="text-align:left;width:12%">
+									<h:outputText value="#{trafficProposalTable.origin}" />
+								</p:column>
+
+
+								<p:column headerText="Destination"
+									style="text-align:left;width:12%">
+									<h:outputText value="#{trafficProposalTable.destination}" />
+								</p:column>
+								<p:column headerText="Via" style="text-align:left;width:8%">
+									<h:outputText value="#{trafficProposalTable.via}" />
+								</p:column>
+
+								<p:column headerText="Effective Route"
+									style="text-align:left;width:12%">
+									<h:outputText value="#{trafficProposalTable.effectRoute}" />
+								</p:column>
+
+
+								<p:column headerText="No. of Permits &lt;br/&gt; Req. to Issue"
+									style="text-align:right;width:2%">
+									<h:inputText
+										value="#{trafficProposalTable.noOfPermitsReqToIssue}"
+										maxlength="2" id="permitNoReqId" style="text-align:right;">
+										<p:ajax
+											listener="#{trafficProposalTable.onNoOfPermitsReqIssueChange}"
+											update="permitNoReqId" />
+										
+									</h:inputText>
+								</p:column>
+
+								<p:column style="text-align:left;width:8%">
+									<p:commandLink id="cmdbtnEdit"
+										action="#{generateTrafficProposal.editAction}"
+										update="trafficProposalTable"
+										disabled="#{generateTrafficProposal.disabledEditBtn}">
+										<f:setPropertyActionListener value="#{trafficProposalTable}"
+											target="#{generateTrafficProposal.selectedRow}" />
+										<p:graphicImage library="images" name="edit.png"
+											style="width:24px;height:24px;" title="edit"></p:graphicImage>
+									</p:commandLink>
+
+
+								</p:column>
+							</p:dataTable>
+						</center>
+					</p:panel>
+
+
+					<p:panel rendered="#{generateTrafficProposal.showDetailsPanels}">
+
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid">
+
+							<p:panelGrid>
+								<p:outputLabel value="Special Remark" for="specialRemarkId"
+									style="text-align:left;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputTextarea style="width:120%;height:48px; "
+									value="#{generateTrafficProposal.trafficProposalDTO.specialRemark}"
+									maxlength="200" id="specialRemarkId" rows="3" cols="12"
+									readonly="#{generateTrafficProposal.readOnlyInputRemarks}">
+								
+									</p:inputTextarea>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Special Print Note"
+									for="specialPrintNoteId" style="text-align:left;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputTextarea style="width:120%;height:48px; "
+									value="#{generateTrafficProposal.trafficProposalDTO.specialPrintNote}"
+									readonly="#{generateTrafficProposal.readOnlyInputRemarks}"
+									maxlength="200" id="specialPrintNoteId" rows="3" cols="12">
+									
+									</p:inputTextarea>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Suggestions" for="sugId"
+									style="text-align:left;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputTextarea style="width:120%;height:48px; "
+									value="#{generateTrafficProposal.trafficProposalDTO.suggestions}"
+									readonly="#{generateTrafficProposal.readOnlyInputRemarks}"
+									maxlength="200" id="sugId" rows="3" cols="12">
+								
+									</p:inputTextarea>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+						</p:panelGrid>
+
+
+
+					</p:panel>
+					<br></br>
+
+					<p:panel rendered="#{generateTrafficProposal.showDetailsPanels}">
+						<center>
+							<p:commandButton styleClass="mainActionbtn" value="Save"
+								actionListener="#{generateTrafficProposal.updateRecord}"
+								id="cmdbtnOwnerSave"
+								disabled="#{generateTrafficProposal.readOnlyInputRemarks}"
+								process="trafficProposalNoId,frmTrafficProposal,cmdbtnPrintTrafficPro,specialRemarkId,specialPrintNoteId,sugId"
+								update="frmTrafficProposal,trafficProposalNoId,specialRemarkId,specialPrintNoteId,sugId"></p:commandButton>
+
+							<p:commandButton styleClass="mainActionbtn"
+								actionListener="#{generateTrafficProposal.clearForm}"
+								value="Clear" id="cmdbtnOwnerClear" process="@all"
+								update="frmTrafficProposal,cmdbtnPrintTrafficPro"></p:commandButton>
+						</center>
+					</p:panel>
+
+					<p:panel rendered="#{generateTrafficProposal.showDetailsPanels}">
+						<center>
+							<p:commandButton styleClass="mainActionbtn"
+								value="Print Traffic Proposal" style="width:20%;"
+								actionListener="#{generateTrafficProposal.printTrafficProAct}"
+								disabled="#{generateTrafficProposal.disabledPrintTrafBtn}"
+								oncomplete="window.open('/InfoNTC/showUpload?reportName=Traffic Proposal')"
+								id="cmdbtnPrintTrafficPro" process="frmTrafficProposal"
+								update="frmTrafficProposal">
+
+
+							</p:commandButton>
+							<p:commandButton styleClass="mainActionbtn"
+								value="Re-Print Traffic Proposal" style="width:20%;"
+								actionListener="#{generateTrafficProposal.rePrintTrafficProAct}"
+								disabled="#{generateTrafficProposal.disabledRePrintTrafBtn}"
+								onclick="PrimeFaces.monitorDownload(start, stop);"
+								oncomplete="PF('genReport').hide();"
+								id="cmdbtnRePrintTrafficPro" process="frmTrafficProposal"
+								update="frmTrafficProposal">
+								<p:fileDownload value="#{generateTrafficProposal.files}" />
+							</p:commandButton>
+							<p:commandButton styleClass="mainActionbtn"
+								value="Upload Documents"
+								actionListener="#{generateTrafficProposal.uploadDocPopUp}"
+								style="width:20%;" id="cmdbtnUploadDoc"
+								process="frmTrafficProposal"
+								update="frmTrafficProposal,frmdocSurvey"></p:commandButton>
+							<p:commandButton styleClass="mainActionbtn" value="Time Table"
+								disabled="#{generateTrafficProposal.disabledWithSelectedRow}"
+								actionListener="#{generateTrafficProposal.viewTimeTableAct}"
+								style="width:20%;" id="cmdbtnTimeTb"
+								process="frmTrafficProposal" update="frmTrafficProposal"></p:commandButton>
+							<p:commandButton styleClass="mainActionbtn" value="Fare Table"
+								disabled="#{generateTrafficProposal.disabledWithSelectedRow}"
+								actionListener="#{generateTrafficProposal.viewFareTableAct}"
+								style="width:20%;" id="cmdbtnFareTb"
+								process="frmTrafficProposal" update="frmTrafficProposal"></p:commandButton>
+						</center>
+					</p:panel>
+
+				</h:form>
+
+
+
+
+
+			</div>
+		</div>
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{generateTrafficProposal.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="successSve" global="true" modal="true"
+			header="Success" width="30%" severity="info" widgetVar="successSve"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{generateTrafficProposal.sucessMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1"
+						style="margin-top:10px;margin-bottom:10px" process="frmsuccessSve"
+						value="OK" onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="infoPopUp" global="true" modal="true"
+			header="Info" width="30%" severity="info" widgetVar="infoPopUp"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmInfoPopUp">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+						<p:outputLabel value="#{generateTrafficProposal.infoMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1"
+						style="margin-top:10px;margin-bottom:10px" process="frmInfoPopUp"
+						value="OK" onclick="PF('infoPopUp').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="uploadSurveyDocumentsDialog" global="true"
+			modal="true" header="Upload Documents" width="80%" height="400px"
+			severity="info" widgetVar="uploadSurveyDocument" closeOnEscape="true"
+			resizable="false" style="postion: absolute;">
+
+
+
+			<h:form id="frmdocSurvey">
+
+				<p:tabView>
+					<p:tab title="Upload Documents">
+
+						<p:accordionPanel>
+							<p:growl id="msgs" showDetail="false" />
+							<p:tab title="Mandatory Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abc" tableStyle="width:auto"
+										var="docMandatory"
+										value="#{generateTrafficProposal.mandatoryList}" rows="5"
+										paginator="true" sortOrder="ascending"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docMandatory.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docMandatory.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+
+											<h:outputText value="#{docMandatory.uploadFilePath}" />
+										</p:column>
+
+										<p:column headerText="" style="width: 150px !important;">
+
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveSurveyMandatoryUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640">
+												
+
+												<f:attribute name="uploadedObj" value="#{docMandatory}" />
+
+											</p:fileUpload>
+										</p:column>
+
+									</p:dataTable>
+								</h:panelGrid>
+
+
+							</p:tab>
+						</p:accordionPanel>
+
+						<br></br>
+						<br></br>
+
+						<p:accordionPanel>
+							<p:growl id="msgse" showDetail="false" />
+							<p:tab title="Optional Documents">
+
+
+
+								<h:panelGrid>
+									<p:dataTable id="abcd" tableStyle="width:auto"
+										var="docOptional"
+										value="#{generateTrafficProposal.optionalList}" rows="5"
+										paginator="true" sortOrder="ascending"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+
+
+										<p:column headerText="Code"
+											style="width: 100px;text-align:left;">
+											<h:outputText value="#{docOptional.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description"
+											style="width: 300px;text-align:left;">
+											<h:outputText value="#{docOptional.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path"
+											style="width: 300px;text-align:left;">
+											<h:outputText value="#{docOptional.uploadOptionalFilePath}" />
+										</p:column>
+
+										<p:column headerText="" style="width: 150px;">
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveSurveyOptionalUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												update="@form" auto="true" showButtons="false" fileLimit="1"
+												accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsl,.xlsm"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx|xls|xlsx|xlsm)$/"
+												sizeLimit="15728640"
+												fileLimitMessage="Please Upload Only One Document">
+												
+
+												<f:attribute name="uploadedOptionalObj"
+													value="#{docOptional}" />
+
+
+											</p:fileUpload>
+
+										</p:column>
+
+
+									</p:dataTable>
+								</h:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+
+					</p:tab>
+
+					<p:tab title="Upload History">
+
+
+						<p:accordionPanel multiple="true">
+							<p:growl showDetail="false" />
+							<p:tab title="Survey Management" closable="true">
+
+
+								<p:accordionPanel id="fsdfsdgsdg">
+									<p:growl id="SM" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatorySM" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.surveyMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalSM" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.surveyOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+						</p:accordionPanel>
+
+
+					</p:tab>
+
+				</p:tabView>
+
+
+
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="requiredFieldUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlmissing']}"
+			width="30%" severity="info" widgetVar="requiredFieldUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredFieldUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredFieldUploadDoc"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredFieldUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+
+	</ui:define>
+</ui:composition>

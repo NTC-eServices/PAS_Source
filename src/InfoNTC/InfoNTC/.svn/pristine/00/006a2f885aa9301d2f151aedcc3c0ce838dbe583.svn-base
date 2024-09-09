@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2022-11-18T12:37:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InvestigationVoucherpaymentReceipt" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="55eb195e-17f7-4a79-831e-0d4f1a2b70b7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW_DATAADAPTERUAT.xml"/>
+	<subDataset name="nameandtenderNo" uuid="e3852237-6be2-4c40-a658-5bf49753100a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="voucher_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select o.pmo_full_name,a.pm_vehicle_regno
+from nt_m_payment_voucher v inner join nt_t_pm_application a 
+on a.pm_application_no = v.pav_application_no inner join nt_t_pm_vehi_owner o
+on a.pm_application_no = o.pmo_application_no
+where v.pav_voucher_no= $P{voucher_no}]]>
+		</queryString>
+		<field name="pmo_full_name" class="java.lang.String"/>
+		<field name="pm_vehicle_regno" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="AppNODataSet" uuid="522caf94-1b27-4b34-85dc-3a061cabb0f6">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Voucher_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select pav_application_no from public.nt_m_payment_voucher where pav_voucher_no= $P{P_Voucher_no}]]>
+		</queryString>
+		<field name="pav_application_no" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Dataset1" uuid="3415ecda-e690-4489-818f-b205e8fa330e">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_driver_id" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select dcr_name_with_initials,dcr_driver_conductor_id 
+from  public.nt_t_driver_conductor_registration
+where dcr_driver_conductor_id= $P{P_driver_id}]]>
+		</queryString>
+		<field name="dcr_name_with_initials" class="java.lang.String"/>
+		<field name="dcr_driver_conductor_id" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_Voucher_No" class="java.lang.String">
+		<defaultValueExpression><![CDATA["VRN1800003"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="image_path" class="java.lang.String"/>
+	<parameter name="P_login_user" class="java.lang.String"/>
+	<parameter name="P_charge_Ref" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.charge_late_payment_amount , x.charge_ref_no,x.charge_offence,x.charge_attempt,x.charge_amount,x.charge_driver_id,x.charge_conductor_id,
+a.charge_permit,a.charge_vehicle,b.ofm_offence_desc,c.description,d.inv_voucher_no,d.inv_account_no ,e.rec_receipt_no
+from public.nt_t_investigation_charge_sheet x
+inner join public.nt_t_investigation_charge_master a on a.charge_ref_no= x.charge_ref_no
+inner join public.nt_m_offence_management b on b.ofm_offence_code=x.charge_offence
+inner join public.nt_r_attempts c on c.code=x.charge_attempt
+inner join public.nt_t_investigation_charge_voucher d on d.inv_charge_ref_no=x.charge_ref_no
+inner join public.nt_t_investigation_receipt e on e.rec_charge_ref_no=x.charge_ref_no
+where c.active='A' and x.charge_ref_no= $P{P_charge_Ref}]]>
+	</queryString>
+	<field name="charge_late_payment_amount" class="java.math.BigDecimal"/>
+	<field name="charge_ref_no" class="java.lang.String"/>
+	<field name="charge_offence" class="java.lang.String"/>
+	<field name="charge_attempt" class="java.lang.String"/>
+	<field name="charge_amount" class="java.math.BigDecimal"/>
+	<field name="charge_driver_id" class="java.lang.String"/>
+	<field name="charge_conductor_id" class="java.lang.String"/>
+	<field name="charge_permit" class="java.lang.String"/>
+	<field name="charge_vehicle" class="java.lang.String"/>
+	<field name="ofm_offence_desc" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="inv_voucher_no" class="java.lang.String"/>
+	<field name="inv_account_no" class="java.lang.String"/>
+	<field name="rec_receipt_no" class="java.lang.String"/>
+	<variable name="vod_amount1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{charge_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="177" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="800" height="26" uuid="b8c02559-c134-4f1e-b0d3-9df3b42e9b65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NATIONAL TRANSPORT COMMISSION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="26" width="800" height="20" uuid="4e90df25-1e12-4089-b3f3-40efef56f5fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Receipt]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="165" width="800" height="1" uuid="0d147f2f-6160-4929-b08a-6831868e6860">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="110" y="94" width="12" height="19" isPrintWhenDetailOverflows="true" uuid="7517f9d4-09e1-4939-8c88-1edee9521ad4">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="132" width="12" height="19" isPrintWhenDetailOverflows="true" uuid="5f255e77-fc34-438c-975e-df52c1bc9980">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="94" width="110" height="19" isPrintWhenDetailOverflows="true" uuid="0a1f5850-386c-4338-988b-9cf0bc0800a2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Charge Reff. No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="110" height="19" isPrintWhenDetailOverflows="true" uuid="6bf38e33-1b88-4d50-bd1e-6633a212e610">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Permit No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="132" width="110" height="19" isPrintWhenDetailOverflows="true" uuid="c2c5d71e-81f4-4edb-9a1c-3f664ce4c931">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Conductor Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="113" width="110" height="19" isPrintWhenDetailOverflows="true" uuid="7e4a6e36-9adc-41a4-a76e-26a32bad43f6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Driver Details]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="124" y="132" width="667" height="19" uuid="71455a23-3c52-4180-b0b5-0f3f3e9a1745"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Dataset1" uuid="aee1211f-4648-4241-9171-d81974321024">
+						<datasetParameter name="P_driver_id">
+							<datasetParameterExpression><![CDATA[$F{charge_conductor_id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="19" width="667">
+						<textField>
+							<reportElement x="0" y="0" width="667" height="19" uuid="2cbb029b-8312-4542-a4ba-b28b28316b38"/>
+							<textFieldExpression><![CDATA[$F{dcr_driver_conductor_id}+ " /"+$F{dcr_name_with_initials}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="110" y="56" width="12" height="19" isPrintWhenDetailOverflows="true" uuid="eb6b0f5b-161a-48dd-8813-238e5bb0bfd3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="94" width="478" height="19" uuid="c14f7c7a-3f17-4ef0-9b2c-a34e58ff0370"/>
+				<textFieldExpression><![CDATA[$P{P_charge_Ref}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="122" y="113" width="667" height="19" uuid="1ebc5d59-119b-4271-88be-fe24b270d771"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Dataset1" uuid="31e39032-ef7b-46ac-95eb-10b03f3009be">
+						<datasetParameter name="P_driver_id">
+							<datasetParameterExpression><![CDATA[$F{charge_driver_id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="19" width="667">
+						<textField>
+							<reportElement x="0" y="0" width="660" height="19" uuid="e0839819-911c-4630-8111-13ea9f0126d5"/>
+							<textFieldExpression><![CDATA[$F{dcr_driver_conductor_id}+ "/ "+$F{dcr_name_with_initials}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="75" width="110" height="19" isPrintWhenDetailOverflows="true" uuid="1b261992-3353-44ef-af35-2d6111f75cb9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Vehicle No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="113" width="12" height="19" isPrintWhenDetailOverflows="true" uuid="4b8c9323-9216-4f1d-9375-b4a2ee99cdbb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="56" width="478" height="19" uuid="ef012a90-0973-4a78-bf6d-92370b24c21d"/>
+				<textFieldExpression><![CDATA[$F{charge_permit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="75" width="478" height="19" uuid="2fe88ce6-be46-449e-bf4b-46c0495f58de"/>
+				<textFieldExpression><![CDATA[$F{charge_vehicle}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="110" y="75" width="12" height="19" isPrintWhenDetailOverflows="true" uuid="40a89e7e-f945-40f5-9937-4f125adf0b50">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="100" height="20" uuid="283bed84-05bc-4fbd-95d0-4a27345eefbe"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Offence Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="100" y="0" width="269" height="20" uuid="bca36785-4ff2-4b62-bcc2-cbfc138e7cc0"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Offence Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="369" y="0" width="115" height="20" uuid="6d6310ab-0af6-4fc0-8752-8b132d80e566"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Account No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="484" y="0" width="84" height="20" uuid="480d2746-22f2-4924-abe6-db939ac57b65"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Amount (Rs.)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="100" height="25" isPrintWhenDetailOverflows="true" uuid="70811d84-d1c5-4f3b-8a79-273d341b3b9d"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{charge_offence}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="269" height="25" isPrintWhenDetailOverflows="true" uuid="b08b329a-b18d-4c22-be42-4f00a5b0daa3"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ofm_offence_desc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="369" y="0" width="115" height="25" isPrintWhenDetailOverflows="true" uuid="8175ed1c-cef2-4ce2-8b85-b7d7dc6e0783">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inv_account_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="484" y="0" width="84" height="25" isPrintWhenDetailOverflows="true" uuid="4302bf1a-5e3c-4a7e-81e5-db15eeeb3c8e"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{charge_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="160" splitType="Stretch">
+			<staticText>
+				<reportElement x="370" y="21" width="114" height="20" uuid="bbfb680e-28b4-4769-a2be-8e6fef060f93">
+					<printWhenExpression><![CDATA[$V{COLUMN_COUNT}==19?( new Boolean($V{COLUMN_NUMBER}==2)): (new Boolean($V{COLUMN_NUMBER}==1))]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="0" y="64" width="60" height="18" uuid="8ac262be-55c4-49f6-9d15-53f0b3c60d69">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Receipt No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="75" width="190" height="16" uuid="fa1330ea-75eb-48f0-a219-32699b597e76">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="64" width="120" height="18" uuid="9cc42514-6fd4-4927-8ca6-7e0312688376"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[..........................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="59" width="190" height="18" uuid="a00b008b-844d-4e33-bbaa-923381626eea">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[.......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="59" width="189" height="18" uuid="112c72a7-a4a9-418e-b1cd-79fad3e04144">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[...........................................................................]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy h:mm a">
+				<reportElement x="610" y="55" width="190" height="22" isPrintWhenDetailOverflows="true" uuid="bd814083-57a6-48ab-b6fe-477e8aa6d230"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="350" y="100" width="60" height="60" uuid="1b5a772a-feac-4e45-bbf5-6738b161bc1b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{image_path}+"paid.jfif"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="69" y="62" width="100" height="30" uuid="8fbe9cb3-451e-4cdf-af03-48370cac7282">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{rec_receipt_no}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="64" width="9" height="18" uuid="c180c030-2df4-4a62-bb2f-dbb5df3c1f5a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="369" y="77" width="191" height="23" isPrintWhenDetailOverflows="true" uuid="dc60f649-7963-498d-b9f3-77784ad011a4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{P_login_user}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="484" y="21" width="84" height="20" uuid="da008dae-b32f-440c-aed4-0a6b37af4f44"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vod_amount1} +$F{charge_late_payment_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="369" y="0" width="115" height="20" uuid="aec56e12-0547-4e60-bbc0-32aca70b3b22">
+					<printWhenExpression><![CDATA[$V{COLUMN_COUNT}==19?( new Boolean($V{COLUMN_NUMBER}==2)): (new Boolean($V{COLUMN_NUMBER}==1))]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Late Payment Fee]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="484" y="0" width="84" height="20" uuid="85f60f68-7b34-42eb-8476-fcebe7faace4"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{charge_late_payment_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

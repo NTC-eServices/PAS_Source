@@ -1,0 +1,762 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+#Dob {
+	width: 80% !important;
+}
+
+.calendarClass input {
+	width: 65% !important;
+}
+
+.numField .ui-inputfield {
+	width: 89% !important;
+	font-weight: bold;
+	text-align: right;
+}
+
+.footer {
+	height: 20px;
+	background-color: #07295b;
+	/* padding: .7em 1.5em 0em 1.5em; */
+	text-align: center;
+	colour: #84063A;
+	color: #777373;
+}
+</style>
+
+		<div class="mainDiv">
+			<!-- header -->
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Open Tender Applications</h1>
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="tender">
+
+					<!-- Panel 01 -->
+					<p:panel id="pnl_Search">
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+
+							<!-- _Reference No -->
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid>
+								<p:outputLabel value="Tender Reference No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:selectOneMenu id="drpd_RefearanceNo" style="width:80%;"
+								effect="fold" value="#{openTenderApp.tenderDTO.tenderRefNo}">
+								<f:selectItem itemLabel="-- Select --" itemValue="" />
+								<f:selectItems value="#{openTenderApp.referenceNoList}"
+									var="referenceNoList" itemValue="#{referenceNoList}"
+									itemLabel="#{referenceNoList}" />
+								<p:ajax listener="#{openTenderApp.onReferenceNoChange}"
+									process="@form" update="@form" />
+							</p:selectOneMenu>
+							<p:outputLabel></p:outputLabel>
+
+							<!-- _Tender Description -->
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Tender Description</p:outputLabel>
+							<p:inputText id="txt_TenderDescription"
+								style="width:89%;height:18px;" maxlength="50" readonly="true"
+								value="#{openTenderApp.tenderDTO.tenderDes}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Tender Closing Date</p:outputLabel>
+							<p:panelGrid columns="2" styleClass="internalInput"
+								columnClasses="ui-grid-col-7,ui-grid-col-5 " layout="grid">
+								<!-- _Tender Closing Date -->
+								<p:inputText id="txt_TenderClosingDate" placeholder="DD/MM/YYYY"
+									style="width:80%;height:18px;" maxlength="50" readonly="true"
+									value="#{openTenderApp.tenderDTO.tenClosingDate}"
+									onkeyup="this.value=this.value.toUpperCase();">
+								</p:inputText>
+								<!-- _Tender Closing Time -->
+								<p:inputText id="txt_TenderClosingTime" placeholder="HH:MM"
+									style="width:71%;height:18px;" maxlength="50" readonly="true"
+									value="#{openTenderApp.tenderDTO.tenClosingTime}"
+									onkeyup="this.value=this.value.toUpperCase();">
+								</p:inputText>
+							</p:panelGrid>
+							<p:outputLabel></p:outputLabel>
+
+							<!-- _Tender Application No -->
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid>
+								<p:outputLabel value="Tender Application No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:selectOneMenu id="drpd_ApplicationNo" style="width:80%;"
+								effect="fold" filter="true" filterMatchMode="contains"
+								value="#{openTenderApp.applicationNo}">
+
+								<f:selectItem itemLabel="-- Select Application No. --"
+									itemValue="" />
+								<f:selectItems value="#{openTenderApp.tenderApplicationNoList}"
+									var="applicationNoList" itemLabel="#{applicationNoList}"
+									itemValue="#{applicationNoList}" />
+								<p:ajax listener="#{openTenderApp.onApplicationNoChange}"
+									process="@form" update="@form" />
+							</p:selectOneMenu>
+							<p:outputLabel></p:outputLabel>
+							<!-- view Application No -->
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid>
+								<p:outputLabel value="view Application No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:selectOneMenu id="drpd_viewApplicationNo" style="width:80%;"
+								effect="fold" filter="true" filterMatchMode="contains"
+								value="#{openTenderApp.tenderApplicantDTO.applicationNo}">
+
+								<f:selectItem itemLabel="-- Select Application No. --"
+									itemValue="" />
+								<f:selectItems value="#{openTenderApp.applicationNoList}"
+									var="applicationNoList" itemLabel="#{applicationNoList}"
+									itemValue="#{applicationNoList}" />
+								<p:ajax listener="#{openTenderApp.onViewApplicationNoChange}"
+									process="@form"
+									update="pnl_first_Committee,pnl_Second_Committe" />
+							</p:selectOneMenu>
+							<p:outputLabel></p:outputLabel>
+
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="3"
+							columnClasses="ui-grid-col-3,ui-grid-col-6,ui-grid-col-3"
+							layout="grid">
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<br></br>
+								<!-- Clear Button -->
+								<p:commandButton styleClass="mainLinkButton" style="width:100%"
+									value="Clear" update="@form" action="#{openTenderApp.clear}"></p:commandButton>
+								<p:outputLabel></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+						</p:panelGrid>
+
+					</p:panel>
+
+					<!-- Panel 02-->
+					<p:panel id="pnl_first_Committee">
+
+						<p:panelGrid columns="6"
+							columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-1"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Title</p:outputLabel>
+							<p:inputText id="txt_Title" style="width:89%;height:18px;"
+								maxlength="50" readonly="true"
+								value="#{openTenderApp.tenderApplicantDTO.title}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+
+
+							<p:outputLabel>Nic</p:outputLabel>
+							<p:inputText id="txt_Nic" style="width:89%;height:18px;"
+								maxlength="50" readonly="true"
+								value="#{openTenderApp.tenderApplicantDTO.nic}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+						</p:panelGrid>
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-9"
+							layout="grid">
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Name</p:outputLabel>
+							<p:inputText id="txt_Name" style="width:85%;height:18px;"
+								maxlength="50" readonly="true"
+								value="#{openTenderApp.tenderApplicantDTO.bidderName}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+						</p:panelGrid>
+
+						<p:panelGrid columns="6"
+							columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-1"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Contact No.</p:outputLabel>
+							<p:inputText id="txt_ContactNo" style="width:89%;height:18px;"
+								maxlength="50" readonly="true"
+								value="#{openTenderApp.tenderApplicantDTO.contactNo}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+							<p:outputLabel>Voucher No.</p:outputLabel>
+							<p:inputText id="txt_VouchertNo" style="width:89%;height:18px;"
+								maxlength="50" readonly="true"
+								value="#{openTenderApp.tenderApplicantDTO.voucherNo}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+								styleClass="internalPanel"
+								columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid">
+
+								<p:panelGrid styleClass="internalPanel">
+									<p:outputLabel value="Refundable Deposite Amount"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:outputLabel value="Rs." styleClass="internalInput"
+									style="text-align:right;margin: auto;padding-right:0px;font-weight: bold;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:inputNumber id="txt_DepositeAmount" styleClass="numField"
+								style="width:89%;height:18px;font-weight: bold" maxlength="50"
+								value="#{openTenderApp.tenderApplicantDTO.refundableDepositAmount}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputNumber>
+
+							<p:panelGrid>
+								<p:outputLabel value="Receipt No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:inputText id="txt_ReceiptNo" style="width:89%;height:18px;"
+								maxlength="50"
+								value="#{openTenderApp.tenderApplicantDTO.reciptNo}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+
+							<p:panelGrid>
+								<p:outputLabel value="RouteNo."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:selectOneMenu id="drpd_RouteNo" style="width:80%;"
+								effect="fold" filter="true" filterMatchMode="contains"
+								value="#{openTenderApp.tenderApplicantDTO.routeSeqNo}">
+								<p:ajax listener="#{openTenderApp.onRouteNoChange}"
+									process="@form"
+									update="txt_Departure,txt_SerialNo,txt_Arrival,txt_ThPrice" />
+
+								<f:selectItem itemLabel="-- Select Route No. --" itemValue="" />
+								<f:selectItems value="#{openTenderApp.routeNoList}"
+									var="applicationNoList"
+									itemLabel="#{applicationNoList.routeNo}"
+									itemValue="#{applicationNoList.routeSeqNo}" />
+							</p:selectOneMenu>
+							<p:outputLabel>Departure</p:outputLabel>
+							<p:inputText id="txt_Departure" style="width:89%;height:18px;"
+								maxlength="50" readonly="true"
+								value="#{openTenderApp.tenderApplicantDTO.departure}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel>Serial No.</p:outputLabel>
+							<p:inputText id="txt_SerialNo" style="width:89%;height:18px;"
+								maxlength="50" readonly="true"
+								value="#{openTenderApp.tenderApplicantDTO.serialNo}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+
+							<p:outputLabel>Arrival</p:outputLabel>
+							<p:inputText id="txt_Arrival" style="width:89%;height:18px;"
+								maxlength="50" readonly="true"
+								value="#{openTenderApp.tenderApplicantDTO.arrival}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+								styleClass="internalPanel"
+								columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid">
+
+								<p:panelGrid styleClass="internalPanel">
+									<p:outputLabel value="TH Price"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:outputLabel value="Rs." styleClass="internalInput"
+									style="text-align:right;margin: auto;padding-right:0px;font-weight: bold;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:inputNumber id="txt_ThPrice"
+								style="width:89%;height:18px;font-weight: bold" maxlength="50"
+								readonly="true" styleClass="numField"
+								value="#{openTenderApp.tenderApplicantDTO.thBidPriceAnnum}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputNumber>
+
+							<p:panelGrid>
+								<p:outputLabel value="Bank Name"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:inputText id="txt_BankName" style="width:89%;height:18px;"
+								maxlength="50"
+								value="#{openTenderApp.tenderApplicantDTO.bankName}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputText>
+							<p:outputLabel></p:outputLabel>
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="6"
+							columnClasses="ui-grid-col-1,ui-grid-col-3,ui-grid-col-2,ui-grid-col-2,ui-grid-col-3,ui-grid-col-1"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid>
+								<p:outputLabel>Bid Document Available</p:outputLabel>
+								<p:selectBooleanCheckbox style="padding-left:20px"
+									value="#{openTenderApp.tenderApplicantDTO.documentAvailable}">
+								</p:selectBooleanCheckbox>
+							</p:panelGrid>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="3"
+							columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-9"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Remark</p:outputLabel>
+							<p:panelGrid>
+								<p:inputTextarea style="width:85%" maxlength="200" rows="3"
+									counter="displayB" counterTemplate="{0} characters remaining."
+									value="#{openTenderApp.tenderApplicantDTO.firstEnvRemark}" />
+								<br></br>
+								<h:outputText id="displayB" />
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:outputLabel></p:outputLabel>
+
+							<!-- _First envelop Button -->
+							<p:commandButton styleClass="mainLinkButton" style="width:100%"
+								disabled="#{openTenderApp.disableFirstEnvSave}" value="Save"
+								update="@form" action="#{openTenderApp.saveFirstEvelop}"></p:commandButton>
+							<!-- Clear Button -->
+							<p:commandButton styleClass="mainLinkButton" style="width:100%"
+								disabled="#{openTenderApp.disableFirstEnvSave}" value="Clear"
+								update="pnl_first_Committee"
+								action="#{openTenderApp.clearFirstEnvelop}"></p:commandButton>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+
+						</p:panelGrid>
+
+
+
+					</p:panel>
+
+
+					<!-- Panel 03-->
+					<p:panel id="pnl_Second_Committe">
+						<p:separator />
+						<br></br>
+						<p:panelGrid columns="6"
+							columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-3,ui-grid-col-5,,ui-grid-col-1"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+							<p:panelGrid>
+								<p:outputLabel>Owners Signature</p:outputLabel>
+								<p:selectBooleanCheckbox style="padding-left:10px"
+									value="#{openTenderApp.tenderApplicantDTO.ownersSignature}">
+								</p:selectBooleanCheckbox>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel>Permit Available For Parallel Route</p:outputLabel>
+								<p:selectBooleanCheckbox style="padding-left:20px"
+									value="#{openTenderApp.tenderApplicantDTO.parallelRootAvai}">
+								</p:selectBooleanCheckbox>
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+						<br></br>
+						<p:panelGrid columns="5"
+							columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-3,ui-grid-col-5,ui-grid-col-1"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+
+							<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+								styleClass="internalPanel"
+								columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid">
+
+								<p:panelGrid styleClass="internalPanel">
+									<p:outputLabel value="Bid Price"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:outputLabel value="Rs." styleClass="internalInput"
+									style="text-align:right;margin: auto;padding-right:0px;font-weight: bold;"></p:outputLabel>
+							</p:panelGrid>
+
+
+
+							<p:inputNumber id="txt_BidPrice"
+								style="width:95% !important;height:18px;font-weight: bold"
+								maxlength="50" styleClass="numField"
+								value="#{openTenderApp.tenderApplicantDTO.bidPrice}"
+								onkeyup="this.value=this.value.toUpperCase();">
+							</p:inputNumber>
+
+							<p:panelGrid>
+								<p:outputLabel>Acceptance Of Permit Cancellation On Parallel Route</p:outputLabel>
+								<p:selectBooleanCheckbox style="padding-left:20px"
+									value="#{openTenderApp.tenderApplicantDTO.acceptanceOfPermit}">
+								</p:selectBooleanCheckbox>
+							</p:panelGrid>
+							<p:outputLabel></p:outputLabel>
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="3"
+							columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-9"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Owner's Capability</p:outputLabel>
+							<p:panelGrid>
+								<p:inputTextarea style="width:85%" maxlength="200" rows="3"
+									counter="displayC" counterTemplate="{0} characters remaining."
+									value="#{openTenderApp.tenderApplicantDTO.ownersCapability}" />
+								<br></br>
+
+								<h:outputText id="displayC" />
+							</p:panelGrid>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Special Remarks</p:outputLabel>
+
+							<p:panelGrid>
+								<p:inputTextarea style="width:85%" maxlength="200" rows="3"
+									counter="display" counterTemplate="{0} characters remaining."
+									value="#{openTenderApp.tenderApplicantDTO.secondEnvRemark}" />
+								<br></br>
+								<h:outputText id="display" />
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:outputLabel></p:outputLabel>
+
+							<!-- save Button -->
+							<p:commandButton styleClass="mainLinkButton" style="width:100%"
+								disabled="#{openTenderApp.disableSecondtEnvSave}" value="Save"
+								update="@form" action="#{openTenderApp.saveSecondEvelop}"></p:commandButton>
+							<!-- Clear Button -->
+							<p:commandButton styleClass="mainLinkButton" style="width:100%"
+								disabled="#{openTenderApp.disableSecondtEnvSave}" value="Clear"
+								update="pnl_Second_Committe"
+								action="#{openTenderApp.clearSecondEnvelop}"></p:commandButton>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid columns="3"
+							columnClasses="ui-grid-col-3,ui-grid-col-6,ui-grid-col-3"
+							layout="grid">
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<br></br>
+								<!-- Complete tender Button -->
+								<p:commandButton styleClass="mainLinkButton" style="width:100%"
+									disabled="#{openTenderApp.disableSecondtEnvSave}"
+									value="Complete Tender Opening" update="@form"
+									action="#{openTenderApp.completeOpenTender}"></p:commandButton>
+								<p:outputLabel></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+						</p:panelGrid>
+
+
+
+					</p:panel>
+
+
+				</h:form>
+			</div>
+		</div>
+
+		<!-- Display required field field error massage -->
+		<p:dialog styleClass="" id="frm_Tender" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlmissing']}" width="30%"
+			severity="info" widgetVar="requiredField" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{openTenderApp.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frm_Tender"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<!-- Display alert massage -->
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Information" width="30%" severity="info"
+			widgetVar="alertMessage" closeOnEscape="true" resizable="false">
+			<h:form id="frmAlert">
+				<p:panelGrid columns="3" style="margin-top:3%"
+					columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-9"
+					layout="grid">
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<div></div>
+						<div></div>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel style="margin-left:15%"
+							value="#{openTenderApp.alertMsg}"></p:outputLabel>
+
+						<p:panelGrid columns="2" style="margin-top:3%"
+							columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+							<center>
+								<p:commandButton style="margin-top:10px;margin-bottom:10px"
+									process="frmAlert"
+									value="#{msg['um.employeeprofile.dlmissingclose']}"
+									onclick="PF('alertMSG').hide()">
+								</p:commandButton>
+							</center>
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+					</p:panelGrid>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		<!-- Display success massage -->
+		<p:dialog styleClass="" id="successMessage" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="Successfully Saved."></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>

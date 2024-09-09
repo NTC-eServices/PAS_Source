@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-02-26T09:21:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrafficProposal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="2deaa3b9-2000-41de-bee2-a73f8301cefd">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<subDataset name="Traffic_Proposal" uuid="19dc03e8-db05-4500-92b4-51a0dc1f9464">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<parameter name="P_survey_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT  proposal_no,summary_approve_remarks FROM public.nt_t_traffic_proposal where survey_no= $P{P_survey_no}]]>
+		</queryString>
+		<field name="proposal_no" class="java.lang.String"/>
+		<field name="summary_approve_remarks" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Route_det" uuid="09f427df-dd45-48c7-b6f6-46f6250a587d">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_survey_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT seqno, srd_survey_no, srd_route_no, srd_origin, srd_destination, srd_via,  srd_effective_route, srd_no_of_permits 
+FROM public.nt_t_survey_route_detail where srd_survey_no= $P{P_survey_no}  order by srd_route_no]]>
+		</queryString>
+		<field name="seqno" class="java.lang.Long"/>
+		<field name="srd_survey_no" class="java.lang.String"/>
+		<field name="srd_route_no" class="java.lang.String"/>
+		<field name="srd_origin" class="java.lang.String"/>
+		<field name="srd_destination" class="java.lang.String"/>
+		<field name="srd_via" class="java.lang.String"/>
+		<field name="srd_effective_route" class="java.lang.String"/>
+		<field name="srd_no_of_permits" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="remarks_data_st" uuid="bfe29fdf-28fd-4cf0-a941-7d0973419ed1">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Survey_No" class="java.lang.String"/>
+		<parameter name="P_Proposal_No" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT  summary_approve_remarks FROM public.nt_t_traffic_proposal where survey_no= $P{P_Survey_No}  and proposal_no= $P{P_Proposal_No}]]>
+		</queryString>
+		<field name="summary_approve_remarks" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_REQ_NO" class="java.lang.String"/>
+	<parameter name="P_LOG0" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT  a.ini_surveyno as surveyno ,a.ini_survey_type as survey_type_code,a.ini_survey_method as survey_method_code, 
+b.description as survey_type_des, c.description as survey_method_des 
+FROM public.nt_t_initiate_survey a, public.nt_r_survey_types b, public.nt_r_survey_methods c 
+where a.ini_isu_requestno= $P{P_REQ_NO}  and b.code=a.ini_survey_type and c.code=a.ini_survey_method]]>
+	</queryString>
+	<field name="surveyno" class="java.lang.String"/>
+	<field name="survey_type_code" class="java.lang.String"/>
+	<field name="survey_method_code" class="java.lang.String"/>
+	<field name="survey_type_des" class="java.lang.String"/>
+	<field name="survey_method_des" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="163" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="70" width="560" height="30" uuid="f6167fc9-8728-480c-8f79-7754f70285c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Generate Traffic Proposal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="560" height="10" uuid="d1b85e9e-60f0-4b81-9a90-bad98e94b113"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="100" height="15" uuid="8321fd78-3629-4a42-ab0d-2e867fee292b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Request No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="125" width="100" height="15" uuid="899c487a-721a-48fe-a769-7f88812ecad9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Survey Method]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="100" height="15" uuid="d587759b-c00b-4951-adea-1dff5fc0de81">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Traffic Proposal No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="110" width="70" height="15" uuid="430b388e-5e00-45ae-9244-07384ba990d0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Survey No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="125" width="70" height="15" uuid="63105287-a19f-46f6-9935-d007ea25f9ec">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Survey Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="111" width="5" height="14" uuid="e80c4657-d7d5-4e09-b0ea-b2a8f3d4e1fc"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="126" width="5" height="14" uuid="5f9f674c-405c-4332-a28e-c1c162dac3d9"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="140" width="5" height="14" uuid="b10cb13f-f165-41d7-b6e0-dd95c466db0b"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="111" width="5" height="14" uuid="31f7694d-02a4-4a02-83cc-944c5e501e08"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="125" width="5" height="14" uuid="21a7f42f-2b9a-463d-9326-c54e2769fe07"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="105" y="110" width="205" height="16" uuid="7e6bb417-5337-4ed3-8900-593c6ace5a73"/>
+				<textFieldExpression><![CDATA[$P{P_REQ_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="110" width="175" height="15" uuid="504c0fd0-2002-4b9a-a5e1-c7030cf2b9b7"/>
+				<textFieldExpression><![CDATA[$F{surveyno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="125" width="175" height="16" uuid="db73f274-b213-462e-b108-c178e0a39566"/>
+				<textFieldExpression><![CDATA[$F{survey_type_des}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="126" width="205" height="15" uuid="2fb64014-f05d-410a-807c-48a83a1f3d17"/>
+				<textFieldExpression><![CDATA[$F{survey_method_des}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="105" y="141" width="455" height="14" uuid="6cd6f0da-4abb-456b-9af7-db59c837e9d7"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Traffic_Proposal" uuid="f3ecd57b-41fe-4f68-904f-fe389d847414">
+						<datasetParameter name="P_survey_no">
+							<datasetParameterExpression><![CDATA[$F{surveyno}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="14" width="455">
+						<textField>
+							<reportElement x="0" y="0" width="455" height="14" uuid="002030d3-c113-4dbf-9c15-6941d8ac7f1b"/>
+							<textFieldExpression><![CDATA[$F{proposal_no}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="300" height="72" uuid="944493d4-ddeb-43c2-9885-691806f679e5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[  $P{P_LOG0}+"header_logo_new.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="30" uuid="301f151e-9f24-44f5-8db9-561fc80aaee0"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Route No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="30" uuid="cd0986a7-ee9b-449f-be12-7f9cb25ba7c7"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Origine]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="30" uuid="3de9eb3e-82e6-4c4d-9983-ce7d5fbe09e0"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Destination]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="100" height="30" uuid="6f874cd0-0b73-4405-9e95-ec3594873bf2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Via]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="95" height="30" uuid="102bfcd4-9882-42e3-8247-8377fc35109e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Effective Route]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="0" width="80" height="30" uuid="bdd709f0-38cc-4533-9202-80752878ca1a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[No of Permits Require To Issue ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="115" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="50" uuid="ce4d90c0-b97a-41a8-ab81-36df015a67a2"/>
+				<componentElement>
+					<reportElement x="0" y="0" width="80" height="50" uuid="bb6b223a-858b-456b-8359-7f1ead29003c"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="Route_det" uuid="8b6af565-12d0-44a2-b278-c0ac1f118c7e">
+							<datasetParameter name="P_survey_no">
+								<datasetParameterExpression><![CDATA[$F{surveyno}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="50" width="80">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="80" height="50" isPrintWhenDetailOverflows="true" uuid="6d80f814-2d84-4cd0-b2b1-be20739c7ad6"/>
+								<box>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement>
+									<paragraph leftIndent="5" rightIndent="0"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{srd_route_no}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="80" y="0" width="100" height="50" uuid="962002c6-53cc-414b-ad79-fe3c77a43193"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="Route_det" uuid="fd7e4710-b793-4b3c-8131-d6a032348976">
+							<datasetParameter name="P_survey_no">
+								<datasetParameterExpression><![CDATA[$F{surveyno}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="50" width="100">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="50" uuid="ce1ae905-9ac8-459d-b5d0-e6f5b62cb77f"/>
+								<box>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{srd_origin}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="180" y="0" width="100" height="50" uuid="3e2ba24a-b105-4379-a324-8e79d39362e3"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="Route_det" uuid="eec0441c-c760-43b2-a23d-aef1e228b6a4">
+							<datasetParameter name="P_survey_no">
+								<datasetParameterExpression><![CDATA[$F{surveyno}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="50" width="100">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="50" uuid="e31537e1-ed23-488f-8fcc-30f08ff44134"/>
+								<box>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{srd_destination}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="280" y="0" width="100" height="50" uuid="1998a479-8260-40ff-a3ca-f845290ffb44"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="Route_det" uuid="8cb03a75-e332-4805-83c4-fcb46e652c24">
+							<datasetParameter name="P_survey_no">
+								<datasetParameterExpression><![CDATA[$F{surveyno}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="50" width="100">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="50" uuid="3366afb6-147a-4f08-8ca0-ad7df482c640"/>
+								<box>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{srd_via}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="380" y="0" width="95" height="50" uuid="b5ce1aab-b1f2-4d65-a279-2b768017bcc8"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="Route_det" uuid="0d71cae7-940b-49f1-b7af-91d0dce34a9a">
+							<datasetParameter name="P_survey_no">
+								<datasetParameterExpression><![CDATA[$F{surveyno}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="50" width="95">
+							<textField>
+								<reportElement x="0" y="0" width="95" height="50" uuid="47163228-8ee1-47d6-90b0-0118773a62e5"/>
+								<box>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{srd_effective_route}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="475" y="0" width="80" height="50" uuid="0acbcaad-dc41-44c5-8567-49024fb781ef"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="Route_det" uuid="e80203b2-0a07-4974-b3f4-fbafc81ae4fe">
+							<datasetParameter name="P_survey_no">
+								<datasetParameterExpression><![CDATA[$F{surveyno}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="50" width="80">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="50" uuid="d4875857-fa0d-4e0c-ae9a-bdea11252d68"/>
+								<box>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Right">
+									<paragraph leftIndent="0" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{srd_no_of_permits}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="90" height="30" uuid="ac404ced-6090-4bb2-9e21-1065634759e1"/>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Special Remarks :]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="90" y="0" width="465" height="30" uuid="0a6c6521-c70d-4c90-b8e1-b366175aead5"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Traffic_Proposal" uuid="db24d069-3490-4399-ba04-30e057eec51f">
+						<datasetParameter name="P_survey_no">
+							<datasetParameterExpression><![CDATA[$F{surveyno}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="465">
+						<textField>
+							<reportElement x="0" y="0" width="465" height="30" uuid="ce08f68f-d2c6-4b15-8e08-4d87df069ee0"/>
+							<textFieldExpression><![CDATA[$F{summary_approve_remarks}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="0" width="100" height="30" uuid="48d149d8-e87f-4d25-ab23-3e6f455d10b1"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

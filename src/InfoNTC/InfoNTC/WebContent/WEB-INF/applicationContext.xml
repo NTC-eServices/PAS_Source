@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+
+	<context:component-scan
+		base-package="lk.informatics.ntc" />
+	<context:annotation-config />
+
+
+	<bean id="springApplicationContex"
+		class="lk.informatics.ntc.view.util.SpringApplicationContex" />
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location"
+			value="classpath:/application.properties" />
+	</bean>
+
+
+	<bean id="userService"
+		class="lk.informatics.ntc.model.service.UserService"></bean>
+
+	<bean id="employeeProfileService"
+		class="lk.informatics.ntc.model.service.EmployeeProfileServiceImpl"></bean>
+
+	<bean id="paymentVoucherService"
+		class="lk.informatics.ntc.model.service.PaymentVousherServiceImpl" />
+
+	<bean id="adminService"
+		class="lk.informatics.ntc.model.service.AdminServiceImpl" />
+
+	<bean id="accessPermissionService"
+		class="lk.informatics.ntc.model.service.AccessPermissionServiceImpl" />
+
+	<bean id="manageUserService"
+		class="lk.informatics.ntc.model.service.ManageUserImpl" />
+
+	<bean id="inspectionActionPointService"
+		class="lk.informatics.ntc.model.service.InspectionActionPointServiceImpl" />
+
+	<bean id="incompleteApprovalService"
+		class="lk.informatics.ntc.model.service.IncompleteApprovalServiceImpl" />
+
+	<bean id="paymentTypeMaintenanceService"
+		class="lk.informatics.ntc.model.service.PaymentTypeMaintenanceImpl" />
+
+	<bean id="vehicleInspectionService"
+		class="lk.informatics.ntc.model.service.VehicleInspectionServiceImpl" />
+
+	<bean id="referenceDataService"
+		class="lk.informatics.ntc.model.service.ReferenceDataService" />
+
+	<bean id="queueManagementService"
+		class="lk.informatics.ntc.model.service.QueueManagementServiceImpl" />
+
+	<bean id="permitservice"
+		class="lk.informatics.ntc.model.service.PermitServiceImpl" />
+
+	<bean id="documentManagementService"
+		class="lk.informatics.ntc.model.service.DocumentManagementServiceImpl" />
+
+	<bean id="commonService"
+		class="lk.informatics.ntc.model.service.CommonServiceImpl" />
+
+	<bean id="migratedService"
+		class="lk.informatics.ntc.model.service.MigratedServiceImpl" />
+
+	<!-- <bean id="reportUtilsService" class="lk.informatics.ntc.model.service.ReportUtilsService" 
+		/> -->
+
+	<bean id="issuePermitService"
+		class="lk.informatics.ntc.model.service.IssuePermitServiceImpl" />
+
+	<bean id="generateReceiptService"
+		class="lk.informatics.ntc.model.service.GenerateReceiptServiceImpl" />
+
+	<bean id="permitRenewalsService"
+		class="lk.informatics.ntc.model.service.PermitRenewalsServiceImpl" />
+
+	<bean id="displayQueueNumberService"
+		class="lk.informatics.ntc.model.service.DisplayQueueNumbersServiceImpl" />
+
+	<bean id="expiredPermitsApprovalService"
+		class="lk.informatics.ntc.model.service.ExpiredPermitsApprovalServiceImpl" />
+
+	<bean id="grantApprovalforBusChangeService"
+		class="lk.informatics.ntc.model.service.GrantApprovalforBusChangeServiceImpl" />
+
+	<bean id="assignBranchesService"
+		class="lk.informatics.ntc.model.service.AssignBranchesServiceImpl" />
+
+	<bean id="assignDivSecService"
+		class="lk.informatics.ntc.model.service.AssignDivSecServiceImpl" />
+
+	<bean id="setupCommitteeBoardService"
+		class="lk.informatics.ntc.model.service.SetupCommitteeBoardServiceImpl" />
+
+	<bean id="surveyService"
+		class="lk.informatics.ntc.model.service.SurveyServiceImpl" />
+
+	<bean id="generateSurveyFormService"
+		class="lk.informatics.ntc.model.service.GenerateSurveyFormServiceImpl" />
+
+	<bean id="tenderService"
+		class="lk.informatics.ntc.model.service.TenderServiceImpl" />
+
+	<bean id="approveElectedBidderService"
+		class="lk.informatics.ntc.model.service.ApproveElectedBidderServiceImpl" />
+
+	<bean id="cancellationsPermitService"
+		class="lk.informatics.ntc.model.service.CancellationsPermitServiceImpl" />
+
+	<bean id="amendmentService"
+		class="lk.informatics.ntc.model.service.AmendmentServiceImpl" />
+
+	<bean id="addService"
+		class="lk.informatics.ntc.model.service.TenderAdvertisementServiceImpl" />
+
+	<bean id="generateDraftSurveyService"
+		class="lk.informatics.ntc.model.service.GenerateDraftSurveyServiceImpl" />
+
+	<bean id="enterSurveyDataService"
+		class="lk.informatics.ntc.model.service.EnterSurveyDataServiceImpl" />
+
+	<bean id="printLetterService"
+		class="lk.informatics.ntc.model.service.PrintLetterServiceImpl" />
+
+	<bean id="sisuSariyaService"
+		class="lk.informatics.ntc.model.service.SisuSariyaServiceImpl" />
+
+	<bean id="logSheetMaintenanceService"
+		class="lk.informatics.ntc.model.service.LogsheetMaintenanceServiceImpl" />
+
+	<bean id="subSidyManagementService"
+		class="lk.informatics.ntc.model.service.SubSidyManagementServiceImpl" />
+
+	<bean id="gamiSariyaService"
+		class="lk.informatics.ntc.model.service.GamiSariyaServiceImpl" />
+
+
+
+	<bean id="stationDetailsService"
+		class="lk.informatics.ntc.model.service.StationDetailsServiceImpl" />
+
+	<bean id="routeCreatorService"
+		class="lk.informatics.ntc.model.service.RouteCreatorServiceImpl" />
+
+	<bean id="busFareService"
+		class="lk.informatics.ntc.model.service.BusFareServiceImpl" />
+
+	<bean id="reportService"
+		class="lk.informatics.ntc.model.service.ReportServiceImpl" />
+
+	<bean id="busAssignOnRoutesService"
+		class="lk.informatics.ntc.model.service.BusAssignOnRoutesServiceImpl" />
+
+	<bean id="nisiSeriyaService"
+		class="lk.informatics.ntc.model.service.NisiSeriyaServiceImpl" />
+
+	<bean id="windscreenLabelService"
+		class="lk.informatics.ntc.model.service.WindscreenLabelServiceImpl" />
+
+	<bean id="historyService"
+		class="lk.informatics.ntc.model.service.HistoryServiceImpl" />
+	<bean id="panelGeneratorService"
+		class="lk.informatics.ntc.model.service.PanelGeneratorServiceImpl" />
+
+	<bean id="timeTableService"
+		class="lk.informatics.ntc.model.service.TimeTableServiceImpl" />
+
+	<bean id="panelGeneratorWithoutFixedTimeService"
+		class="lk.informatics.ntc.model.service.PanelGeneratorWithoutFixedTimeServiceImpl" />
+
+	<bean id="routeScheduleService"
+		class="lk.informatics.ntc.model.service.RouteScheduleServiceImpl" />
+	<bean id="subsidyReportsService"
+		class="lk.informatics.ntc.model.service.SubsidyReportsServiceImpl" />
+
+	<bean id="busesAssignedForAbbreviationService"
+		class="lk.informatics.ntc.model.service.BusesAssignedForAbbreviationServiceImpl" />
+
+	<bean id="terminalManagementService"
+		class="lk.informatics.ntc.model.service.TerminalManagementServiceImpl" />
+
+	<bean id="combineTimeTableGenerateService"
+		class="lk.informatics.ntc.model.service.CombineTimeTableGenerateServiceImpl" />
+
+	<bean id="flyManageGroupService"
+		class="lk.informatics.ntc.model.service.FlyManageGroupServiceImpl" />
+
+	<bean id="grievanceManagementService"
+		class="lk.informatics.ntc.model.service.GrievanceManagementServiceImpl" />
+
+	<bean id="driverConductorTrainingService"
+		class="lk.informatics.ntc.model.service.DriverConductorTrainingServiceImpl" />
+
+
+	<bean id="flySetupSquadService"
+		class="lk.informatics.ntc.model.service.FlySteupSquadServiceImpl" />
+
+	<bean id="awarenessManagementService"
+		class="lk.informatics.ntc.model.service.AwarenessManagementServiceImpl" />
+
+	<bean id="manageInquiryService"
+		class="lk.informatics.ntc.model.service.ManageInquiryServiceImpl" />
+
+	<bean id="offenceManagementService"
+		class="lk.informatics.ntc.model.service.OffenceManagementServiceImpl" />
+
+	<bean id="uploadDriverConducPhotoService"
+		class="lk.informatics.ntc.model.service.UploadDriverConductorPhotoServiceImpl" />
+
+	<bean id="flyingSquadScheduleService"
+		class="lk.informatics.ntc.model.service.FlyingSquadScheduleServiceImpl" />
+
+	<bean id="flyingSquadInvestigationService"
+		class="lk.informatics.ntc.model.service.FlyingSquadInvestigationServiceImpl" />
+
+	<bean id="flyingSquadApprovalInvestigationService"
+		class="lk.informatics.ntc.model.service.FlyingSquadApprovalInvestigationServiceImpl" />
+
+	<bean id="flyingSquadAttendanceService"
+		class="lk.informatics.ntc.model.service.FlyingSquadAttendanceServiceImpl" />
+
+	<bean id="manageInvestigationService"
+		class="lk.informatics.ntc.model.service.ManageInvestigationServiceImpl" />
+
+	<bean id="flyingSquadInvestigationLogService"
+		class="lk.informatics.ntc.model.service.FlyingSquadInvestigationLogServiceImpl" />
+
+	<bean id="flyingSquadChargeSheetService"
+		class="lk.informatics.ntc.model.service.FlyingSquadChargeSheetServiceImpl" />
+
+	<bean id="flyingSquadRelaseDocumentService"
+		class="lk.informatics.ntc.model.service.FlyingSquadRelaseDocumentServiceImpl" />
+
+	<bean id="manageCourtCaseService"
+		class="lk.informatics.ntc.model.service.ManageCourtCaseServiceImpl" />
+
+	<bean id="approveActionChargesService"
+		class="lk.informatics.ntc.model.service.ApproveActionChargesServiceImpl" />
+
+	<bean id="suspendService"
+		class="lk.informatics.ntc.model.service.SuspendServiceImpl" />
+
+	<bean id="manageRetainDocumentsService"
+		class="lk.informatics.ntc.model.service.ManageRetainDocumentsServiceImpl" />
+
+	<bean id="simRegistrationService"
+		class="lk.informatics.ntc.model.service.SimRegistrationServiceImpl" />
+
+	<bean id="simRegEditService"
+		class="lk.informatics.ntc.model.service.SimRegEditServiceImpl" />
+
+	<bean id="temporaryHoldService"
+		class="lk.informatics.ntc.model.service.TemporaryHoldServiceImpl" />
+
+	<bean id="grievanceManagementDashboardService"
+		class="lk.informatics.ntc.model.service.GrievanceManagementDashboardServiceImpl" />
+
+	<bean id="setUpMidPointsService"
+		class="lk.informatics.ntc.model.service.SetUpMidPointsServiceImpl" />
+
+
+	<bean id="panelGeneratorNewService"
+		class="lk.informatics.ntc.model.service.PanelGeneratorNewServiceImpl" />
+
+	<bean id="routeService"
+		class="lk.informatics.ntc.model.service.RouteSetUpForTimeTableServiceImpl" />
+
+	<bean id="combinePanelService"
+		class="lk.informatics.ntc.model.service.CombinePanelGenaratorServiceImpl" />
+
+	<bean id="combineControlSheetService"
+		class="lk.informatics.ntc.model.service.CombineControlSheetServiceImpl" />
+
+</beans>

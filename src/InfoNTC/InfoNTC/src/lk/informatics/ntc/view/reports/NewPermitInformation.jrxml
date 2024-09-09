@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-05-14T16:15:05 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewPermitInformation" language="groovy" pageWidth="595" pageHeight="842" columnWidth="540" leftMargin="35" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="8897a0c5-a8cc-46f5-b335-2b493c56eb33">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="P_APP" class="java.lang.String"/>
+	<parameter name="P_LOGO" class="java.lang.String"/>
+	<parameter name="P_REPRINT" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select  distinct pm_application_no,pm_permit_no,pm_vehicle_regno,pm_permit_issue_date,pm_valid_to,pm_permit_expire_date,pm_route_flag,
+nt_t_pm_vehi_owner.pmo_full_name,nt_t_pm_vehi_owner.pmo_address1,nt_t_pm_vehi_owner.pmo_address2,nt_t_pm_vehi_owner.pmo_address3,nt_t_pm_vehi_owner.pmo_city ,
+public.nt_r_route.rou_number,public.nt_r_route.rou_service_origine,public.nt_r_route.rou_service_destination
+FROM nt_t_pm_application
+inner join  public.nt_t_pm_vehi_owner on nt_t_pm_application.pm_application_no = public.nt_t_pm_vehi_owner.pmo_application_no
+inner join public.nt_r_route on nt_t_pm_application.pm_route_no=public.nt_r_route.rou_number
+where pm_application_no= $P{P_APP}]]>
+	</queryString>
+	<field name="pm_application_no" class="java.lang.String"/>
+	<field name="pm_permit_no" class="java.lang.String"/>
+	<field name="pm_vehicle_regno" class="java.lang.String"/>
+	<field name="pm_permit_issue_date" class="java.lang.String"/>
+	<field name="pm_valid_to" class="java.lang.String"/>
+	<field name="pm_permit_expire_date" class="java.lang.String"/>
+	<field name="pm_route_flag" class="java.lang.String"/>
+	<field name="pmo_full_name" class="java.lang.String"/>
+	<field name="pmo_address1" class="java.lang.String"/>
+	<field name="pmo_address2" class="java.lang.String"/>
+	<field name="pmo_address3" class="java.lang.String"/>
+	<field name="pmo_city" class="java.lang.String"/>
+	<field name="rou_number" class="java.lang.String"/>
+	<field name="rou_service_origine" class="java.lang.String"/>
+	<field name="rou_service_destination" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="210" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="280" height="50" uuid="c57d9eed-401d-4807-809e-f85840f8faf1"/>
+				<imageExpression><![CDATA[$P{P_LOGO}+"header_logo_new.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="70" width="560" height="30" uuid="84ffce3a-d176-4b91-9e61-3cddad05e958"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[New Permit Print Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="560" height="10" uuid="b52e5583-a080-4613-b791-53f6623a48bc"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="80" height="20" uuid="e991b248-9627-461f-987b-17592e7dd9a7"/>
+				<text><![CDATA[Owner Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="110" width="3" height="20" uuid="234c4e34-e2c7-4f98-bdb2-ef451051bc77"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="130" width="80" height="20" uuid="b6cb31de-13e9-467e-adaa-c5df8b0263aa"/>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="130" width="3" height="20" uuid="3c562ae5-1654-4dfd-89d1-4dfe7e4f0a18"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="86" y="110" width="474" height="20" uuid="5ae21c9c-62f5-4940-b8fc-820e30ae0ce1"/>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_full_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="86" y="130" width="464" height="20" isRemoveLineWhenBlank="true" uuid="ffd1bee0-512f-4124-9c53-aea6daa2f716"/>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="86" y="150" width="464" height="20" isRemoveLineWhenBlank="true" uuid="3d471a03-fde2-4e32-b1a7-d30147bbc995"/>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="86" y="170" width="464" height="20" isRemoveLineWhenBlank="true" uuid="234b1a18-48e3-4fd9-bc19-cdd3ef91b053"/>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="300" y="0" width="241" height="20" uuid="f9c089c6-0ba4-473a-96c2-a6f948727436"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Permit No. : "+$F{pm_permit_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="300" y="20" width="241" height="30" uuid="c906fe5c-f5ac-4c16-a4a4-b17a44a09322"/>
+				<textElement textAlignment="Right" markup="styled">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_REPRINT}.equals( null )?" ":"<style forecolor='red'>"+$P{P_REPRINT}+"</style>"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="86" y="190" width="464" height="20" isRemoveLineWhenBlank="true" uuid="da48ca53-9471-4e3a-9dc9-876d652a8057">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_city}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="105" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="-1" y="0" width="530" height="105" backcolor="#DADEE5" uuid="e3538f80-dc3d-46e7-bb7c-8cfe94c564d7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="3" width="10" height="20" backcolor="#DADEE5" uuid="c5c9c79d-73fe-46ab-9add-dcbb7b67a62d"/>
+				<text><![CDATA[1.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="23" width="10" height="20" uuid="2b058235-bf3a-401b-9823-cf1c9079b944"/>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="43" width="10" height="20" uuid="4737cd98-98f4-43a6-9a7c-c881d7ec5f7b"/>
+				<text><![CDATA[3.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="13" y="3" width="77" height="20" isPrintWhenDetailOverflows="true" uuid="85c52f2e-b2aa-4351-8722-f776db3a83ef"/>
+				<text><![CDATA[Permit No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="13" y="23" width="77" height="20" isPrintWhenDetailOverflows="true" uuid="5f8bb9f4-af94-4f24-ac59-caded085f655"/>
+				<text><![CDATA[Application No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="13" y="43" width="77" height="20" isPrintWhenDetailOverflows="true" uuid="7b82c654-f7e9-4e08-9047-61f8ecbf58f7"/>
+				<text><![CDATA[Vehicle No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="23" width="3" height="20" uuid="b94dfba3-f928-4c5c-ac6d-6f52ea63830d"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="43" width="3" height="20" uuid="5f1acb0a-2e26-4ba5-a5cd-2ffdae6d020b"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="3" width="10" height="20" uuid="1086d3d7-f357-4d4b-be42-a939bf0447c0"/>
+				<text><![CDATA[6.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="23" width="10" height="20" uuid="c6ef5dd2-ca08-4c79-b20a-855a1ddd9649"/>
+				<text><![CDATA[7.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="43" width="10" height="20" uuid="218d10b3-7ac6-44d0-bb2c-31e5f97fdb27"/>
+				<text><![CDATA[8.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="240" y="3" width="105" height="20" isPrintWhenDetailOverflows="true" uuid="535a94cc-e983-47cb-a10d-15a216e0d8b0"/>
+				<text><![CDATA[Route No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="240" y="23" width="105" height="20" isPrintWhenDetailOverflows="true" uuid="26da4d27-89b2-47cc-a78b-88ab121565ff"/>
+				<text><![CDATA[Place Of Origin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="240" y="43" width="105" height="20" isPrintWhenDetailOverflows="true" uuid="c72c6f3b-6960-40ce-9e6e-00693cadad6b"/>
+				<text><![CDATA[Place Of Destination]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="3" width="3" height="20" uuid="9762b61b-8026-4753-befc-93641825ebfb">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="23" width="3" height="20" uuid="4a8d067c-821e-477a-a7f0-d6039ed0d2ef">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="43" width="3" height="20" uuid="422ff6e3-4fe5-440f-8cf8-6bd491a69a3e"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="13" y="63" width="77" height="20" isPrintWhenDetailOverflows="true" uuid="ef8bddfe-7151-43e2-a2ac-4e14bd7ab62d"/>
+				<text><![CDATA[Issue Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="240" y="63" width="105" height="20" isPrintWhenDetailOverflows="true" uuid="71f24f54-b818-467d-a92d-a454a34574fa"/>
+				<text><![CDATA[Permit Valid Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="13" y="83" width="77" height="20" isPrintWhenDetailOverflows="true" uuid="cd337f06-7cf7-431a-a368-dc36ca819342"/>
+				<text><![CDATA[Expire Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="63" width="3" height="20" uuid="030d6447-c575-4ba5-bdbe-78502bf9acb2"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="63" width="3" height="20" uuid="c024c2b5-2189-4abb-b5c1-7d9eb4ef40ff"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="83" width="3" height="20" uuid="cdee18c2-6e66-4922-b119-e90406928537"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="89" y="23" width="141" height="20" uuid="4765c684-96fd-40d5-b8b1-82fb945e0763"/>
+				<textElement>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_application_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="89" y="3" width="141" height="20" uuid="52940bea-88cb-4cc2-8737-e0750790003f"/>
+				<textElement markup="styled">
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_permit_no}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="90" y="3" width="3" height="20" uuid="39471230-82d0-4226-9f44-675ebef44dcc"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="89" y="43" width="141" height="20" uuid="a26d19ca-ff08-423d-8638-27ae4e386aeb"/>
+				<textElement>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_vehicle_regno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="348" y="3" width="174" height="20" backcolor="#FFFFFF" uuid="4f2efe68-1170-436e-bd3a-b85572d3e0b6"/>
+				<textElement>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rou_number}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="348" y="23" width="174" height="20" uuid="6d8c6df2-b4fd-4cde-939d-eb1d9199799c"/>
+				<textElement>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_route_flag}=='Y'?$F{rou_service_destination}:$F{rou_service_origine}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="348" y="43" width="174" height="20" uuid="3f11dab2-da70-4d8f-8434-a957fd2d9e0b"/>
+				<textElement>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_route_flag}=='Y'?$F{rou_service_origine}:$F{rou_service_destination}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="89" y="63" width="141" height="20" uuid="6a822090-e7b9-401a-b018-0e5847db4146"/>
+				<textElement>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_permit_issue_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="348" y="63" width="174" height="20" uuid="50a3e1ee-7d93-4c51-b39c-6a56763da3c1"/>
+				<textElement>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_valid_to}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="89" y="83" width="417" height="20" uuid="646db14f-60f9-4744-a65b-a9db4f20e658"/>
+				<textElement>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_permit_expire_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="63" width="10" height="20" uuid="25de2b0e-3451-49e1-b898-bdff80633c80"/>
+				<text><![CDATA[4.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="63" width="10" height="20" uuid="04122aab-db30-45dd-9d0c-f35b7193bf75"/>
+				<text><![CDATA[9.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="83" width="10" height="20" uuid="67b68468-f2d4-47ea-b1b0-f7f0a2a1aaac"/>
+				<text><![CDATA[5.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="67">
+			<staticText>
+				<reportElement x="0" y="47" width="100" height="20" uuid="798e792c-071e-4c61-95a9-c3f29d4722b9"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="47" width="190" height="20" uuid="7a6dd337-56ba-44a3-baed-c5958e7680a5"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Authorized officer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="37" width="100" height="20" uuid="ffe81f77-70c1-49a9-872f-13415dbebd72"/>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="37" width="190" height="20" uuid="f4d39380-64f0-4860-a019-cbe96686154e"/>
+				<text><![CDATA[...................................................................]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="33" width="100" height="18" uuid="1e0280e7-e647-46a1-9ec7-bca4465409e2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="5" width="506" height="25" backcolor="#993F3D" uuid="dcd6d8a1-57d5-47f4-8fc4-95f5f093f4ba"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

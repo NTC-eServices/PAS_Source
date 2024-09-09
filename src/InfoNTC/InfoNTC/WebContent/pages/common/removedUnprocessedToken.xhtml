@@ -1,0 +1,343 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+		<div class="mainDiv" id="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Removed Unprocessed Token for
+				Current Date</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmviewRouteMaintenance">
+					<p:panel id="panelOne">
+						<br></br>
+						<center>
+							<p:dataTable var="tokentable" paginator="true" update="@form"
+								rows="5" id="dttoken"
+								value="#{unprocessTokenBackingBean.tokenList}" style="width:95%"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="10,20,50,100" resizableColumns="false"
+								liveResize="false" rowIndexVar="index">
+								<p:column headerText="" style="text-align:center;width:8%">
+									<f:facet name=" header">
+										<h:outputText value="index" />
+									</f:facet>
+									<h:outputText value="#{index + 1}"></h:outputText>
+								</p:column>
+								<p:column headerText="" style="text-align:left;width:8%"
+									visible="false">
+									<h:outputText style="text-align:left;"
+										value="#{tokentable.seq}" visible="false" />
+								</p:column>
+								<p:column headerText="Queue No."
+									style="text-align:left;width:10%">
+									<h:outputText style="text-align:left;"
+										value="#{tokentable.queueNo}" />
+								</p:column>
+								<p:column headerText="Transaction Type"
+									style="text-align:left;width:20%">
+									<h:outputText style="text-align:left;"
+										value="#{tokentable.tranDescription}" />
+								</p:column>
+								<p:column headerText="Vehicle No."
+									style="text-align:left;width:10%">
+									<h:outputText style="text-align:left;"
+										value="#{tokentable.vehicleNo}" />
+								</p:column>
+								<p:column headerText="Permit No."
+									style="text-align:left;width:10%">
+									<h:outputText style="text-align:left;"
+										value="#{tokentable.permitNo}" />
+								</p:column>
+								<p:column headerText="Application No."
+									style="text-align:left;width:17%">
+									<h:outputText style="text-align:left;"
+										value="#{tokentable.applicationNo}" />
+								</p:column>
+								<p:column headerText="Created By"
+									style="text-align:left;width:15%">
+									<h:outputText style="text-align:left;"
+										value="#{tokentable.createdBy}" />
+								</p:column>
+								<p:column headerText="" style="width:7%">
+									<p:commandLink id="cmdbtnDelete"
+										action="#{unprocessTokenBackingBean.deleteAction}" ajax="true"
+										update="errorMSG,successMSG,frmviewRouteMaintenance">
+										<f:setPropertyActionListener value="#{tokentable}"
+											target="#{unprocessTokenBackingBean.strSelectedTokenSeq}" />
+										<p:graphicImage library="images" name="delete.png"
+											style="width:24px;height:24px;" title="delete"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</center>
+						<br></br>
+					</p:panel>
+
+					<br />
+					<h2 style="margin-left: 3%">Renewal Tokens</h2>
+					<br />
+
+					<center>
+						<p:dataTable var="renewalTokentable" paginator="true"
+							update="@form" rows="5" id="rntoken"
+							value="#{unprocessTokenBackingBean.renewalTokenList}"
+							style="width:95%"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,20,50,100" resizableColumns="false"
+							liveResize="false" rowIndexVar="index">
+							<p:column headerText="" style="text-align:center;width:8%">
+								<f:facet name=" header">
+									<h:outputText value="index" />
+								</f:facet>
+								<h:outputText value="#{index + 1}"></h:outputText>
+							</p:column>
+							<p:column headerText="" style="text-align:left;width:8%"
+								visible="false">
+								<h:outputText style="text-align:left;"
+									value="#{renewalTokentable.seq}" visible="false" />
+							</p:column>
+							<p:column headerText="Queue No."
+								style="text-align:left;width:10%">
+								<h:outputText style="text-align:left;"
+									value="#{renewalTokentable.queueNo}" />
+							</p:column>
+							<p:column headerText="Vehicle No."
+								style="text-align:left;width:10%">
+								<h:outputText style="text-align:left;"
+									value="#{renewalTokentable.vehicleNo}" />
+							</p:column>
+							<p:column headerText="Permit No."
+								style="text-align:left;width:10%">
+								<h:outputText style="text-align:left;"
+									value="#{renewalTokentable.permitNo}" />
+							</p:column>
+							<p:column headerText="Application No."
+								style="text-align:left;width:17%">
+								<h:outputText style="text-align:left;"
+									value="#{renewalTokentable.applicationNo}" />
+							</p:column>
+							<p:column headerText="Created By"
+								style="text-align:left;width:15%">
+								<h:outputText style="text-align:left;"
+									value="#{renewalTokentable.createdBy}" />
+							</p:column>
+							<p:column headerText="Created Date"
+								style="text-align:left;width:15%" rendered="false">
+								<h:outputText style="text-align:left;"
+									value="#{renewalTokentable.createdDate}" pattern="dd/MM/yyyy" />
+							</p:column>
+						</p:dataTable>
+					</center>
+					<br />
+				</h:form>
+
+			</div>
+
+		</div>
+
+
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{unprocessTokenBackingBean.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Sucess" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{unprocessTokenBackingBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

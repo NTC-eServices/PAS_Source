@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2021-06-14T12:50:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vehicleInspectionSubReportNew" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="40" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="d055e7da-cbb0-434d-be9f-e41ffcca2659">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC_Dev.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<subDataset name="inspectdate" uuid="2a37d12f-857d-4143-b5b6-dbc13faa2986">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_app" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT pm_application_no, case when pm_next_ins_date_sec1_2 is null then 'N/A' else pm_next_ins_date_sec1_2 end , 
+case when pm_next_ins_date_sec3 is null then 'N/A' else pm_next_ins_date_sec3 end 
+FROM public.nt_t_pm_application
+where pm_application_no= $P{P_app}]]>
+		</queryString>
+		<field name="pm_application_no" class="java.lang.String"/>
+		<field name="pm_next_ins_date_sec1_2" class="java.lang.String"/>
+		<field name="pm_next_ins_date_sec3" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="finalRemarks" uuid="49506309-25bb-475d-9f40-62a923f17915">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC_Dev.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_app" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select case when  pm_inspect_remark is null then  'N/A' else pm_inspect_remark end  , case  when proceed_remark is null then 'N/A'
+ else proceed_remark end from nt_t_pm_application where pm_application_no= $P{P_app}]]>
+		</queryString>
+		<field name="pm_inspect_remark" class="java.lang.String"/>
+		<field name="proceed_remark" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_App_no" class="java.lang.String"/>
+	<parameter name="P_inspection_type" class="java.lang.String"/>
+	<parameter name="P_inspection_status" class="java.lang.String"/>
+	<parameter name="P_Location" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select vid_app_no, vid_remark,vid_exist,vid_created_by,vid_created_date , vid_modified_by , vid_modified_date ,nt_r_inspec_act_points.rou_description,
+nt_r_inspec_act_points.rou_code,nt_r_inspec_act_points.rou_section_code,nt_r_sections.description
+FROM public.nt_t_vehicle_inspec_det ,nt_r_inspec_act_points, nt_r_sections
+where nt_t_vehicle_inspec_det.vid_sec_seq = nt_r_inspec_act_points.iap_seq
+and nt_r_sections.code = nt_r_inspec_act_points.rou_section_code
+and vid_app_no= $P{P_App_no}  
+order by nt_r_sections.code ,nt_r_inspec_act_points.iap_seq]]>
+	</queryString>
+	<field name="vid_app_no" class="java.lang.String"/>
+	<field name="vid_remark" class="java.lang.String"/>
+	<field name="vid_exist" class="java.lang.String"/>
+	<field name="vid_created_by" class="java.lang.String"/>
+	<field name="vid_created_date" class="java.sql.Timestamp"/>
+	<field name="vid_modified_by" class="java.lang.String"/>
+	<field name="vid_modified_date" class="java.sql.Timestamp"/>
+	<field name="rou_description" class="java.lang.String"/>
+	<field name="rou_code" class="java.lang.String"/>
+	<field name="rou_section_code" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<group name="description">
+		<groupExpression><![CDATA[$F{description}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="0" y="2" width="331" height="13" isPrintWhenDetailOverflows="true" uuid="76849fe6-2723-40c0-b5cd-7879b54e99fe"/>
+					<textElement verticalAlignment="Bottom" markup="html">
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="" isPrintRepeatedValues="false" x="371" y="0" width="143" height="21" isPrintInFirstWholeBand="true" uuid="6827a754-b353-4351-aa8b-b226fbffd97a">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Remarks]]></text>
+				</staticText>
+				<staticText>
+					<reportElement isPrintRepeatedValues="false" x="515" y="0" width="38" height="21" isPrintInFirstWholeBand="true" uuid="95bebcfd-c129-470d-b639-85fa86d9830f"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+						<paragraph leftIndent="0"/>
+					</textElement>
+					<text><![CDATA[Existing]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="16" splitType="Immediate">
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="1" y="0" width="553" height="16" uuid="0f847e6a-0dcf-4074-a1f5-73728a3b1d69">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="514" y="0" width="38" height="16" isPrintWhenDetailOverflows="true" uuid="d6e3f3ea-9c9d-4295-adc1-9f59224aad3f">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{vid_exist}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="20" y="0" width="350" height="16" isPrintWhenDetailOverflows="true" uuid="24b48493-d010-4175-ae3f-ca898a6519ed"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{rou_description}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="20" height="16" isPrintWhenDetailOverflows="true" uuid="3186debc-75bc-423f-8716-fc61ed3d22dc">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{rou_code}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="370" y="0" width="144" height="16" isPrintWhenDetailOverflows="true" uuid="a6b5fd5a-6468-4224-a654-67a904e57ab3">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{vid_remark}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="256">
+			<frame>
+				<reportElement positionType="Float" x="0" y="10" width="549" height="20" uuid="74fba8a1-8b68-49fb-8edc-06e5b2bc411e">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<componentElement>
+					<reportElement positionType="Float" x="80" y="0" width="465" height="20" isPrintWhenDetailOverflows="true" uuid="8659a98a-017b-499d-be95-0fcbe05df146">
+						<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="finalRemarks" uuid="c12f0097-d29a-42e7-a087-265dcd49aa1e">
+							<datasetParameter name="P_app">
+								<datasetParameterExpression><![CDATA[$P{P_App_no}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="20" width="465">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="460" height="20" isPrintWhenDetailOverflows="true" uuid="e6e7a59b-f432-4306-8cdc-6e372e40db7d"/>
+								<textElement textAlignment="Justified">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{pm_inspect_remark}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement x="0" y="0" width="80" height="20" uuid="5be1d4ef-4848-46e9-a918-7c3ba730583d"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Final Remarks : ]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="1" y="37" width="550" height="50" isPrintWhenDetailOverflows="true" uuid="1ea331d9-132c-4f83-a496-984171aa98b1"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="1" y="8" width="549" height="20" isPrintWhenDetailOverflows="true" uuid="9aeb3a46-2ed9-4ad1-8a8e-4881b3c45ab7"/>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[If any issue in the Inspection Report on section 1 & 2 require correct and next inspection date on or before]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="29" width="544" height="20" isPrintWhenDetailOverflows="true" uuid="f451928a-87b0-4016-9bf6-976445de45e6"/>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[If any issue in the Inspection Report on section 3 require correct and next inspection date on or before ]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="495" y="8" width="51" height="20" isPrintWhenDetailOverflows="true" uuid="c04db806-75ce-4b91-9ac9-c4b5c3b505ca">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="inspectdate" uuid="4de0700d-10d6-4ac1-af72-f69973d7437f">
+							<datasetParameter name="P_app">
+								<datasetParameterExpression><![CDATA[$P{P_App_no}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="20" width="51">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="51" height="19" uuid="9f13efdd-163d-455b-9399-9362f84ef629"/>
+								<textElement markup="none"/>
+								<textFieldExpression><![CDATA[$F{pm_next_ins_date_sec1_2}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="495" y="29" width="51" height="21" isPrintWhenDetailOverflows="true" uuid="b7d1efa0-4321-44df-a9b1-f3739699437a"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="inspectdate" uuid="6f40e9c3-96cb-41c2-a4b1-5c8b51c8229e">
+							<datasetParameter name="P_app">
+								<datasetParameterExpression><![CDATA[$P{P_App_no}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="21" width="51">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="51" height="21" uuid="6b579091-91cc-4798-a2cb-662034b96aaf"/>
+								<textFieldExpression><![CDATA[$F{pm_next_ins_date_sec3}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement x="490" y="8" width="3" height="20" uuid="65ae9631-ce48-411c-8b79-433fd75aad2b">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="490" y="29" width="3" height="20" uuid="b3c37bb2-c228-47df-a6ac-45cc41add052">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="127" width="110" height="17" isPrintWhenDetailOverflows="true" uuid="fc8b31a2-7b56-4f28-bdcd-a6cf9ae21707"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Created User ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="121" y="133" width="160" height="14" isPrintWhenDetailOverflows="true" uuid="20c983f0-4f09-4a07-8898-aca81ec43807"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="120" y="125" width="190" height="17" isPrintWhenDetailOverflows="true" uuid="565f1d0a-ec35-4382-8cf8-c7cd8edfcdd0"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vid_created_by}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="150" width="110" height="20" isPrintWhenDetailOverflows="true" uuid="5c8cc923-b514-4324-926f-4800c8669578"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Created Date & Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="120" y="154" width="120" height="14" isPrintWhenDetailOverflows="true" uuid="dc4f3b89-e997-4df8-b9d1-962c1468dfb8"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy h:mm a" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="120" y="150" width="120" height="19" isPrintWhenDetailOverflows="true" uuid="3d941078-3029-4a5c-bb17-0983fb39e4ed"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vid_created_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="309" y="125" width="110" height="14" isPrintWhenDetailOverflows="true" uuid="8c15b1be-ff8c-4533-b3fc-66a1e8bd63ea"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type of Inspection]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="429" y="128" width="110" height="14" isPrintWhenDetailOverflows="true" uuid="0eadf23e-90e7-462f-a4fa-21b4b15af528"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="309" y="149" width="100" height="20" isPrintWhenDetailOverflows="true" uuid="3f286874-553e-4ca1-b90a-b5f869917efa"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inspection Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="430" y="152" width="120" height="14" isPrintWhenDetailOverflows="true" uuid="790fe688-706e-4d6a-975c-c33f6c6c3a58"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="239" width="229" height="1" isPrintWhenDetailOverflows="true" uuid="4724c0ab-d3a2-488a-b041-1c82e10b794f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="234" width="548" height="20" isPrintWhenDetailOverflows="true" uuid="d0dfbf46-58a2-4c28-8a3d-98a4adbad35c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[End of Report ]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="321" y="239" width="229" height="1" isPrintWhenDetailOverflows="true" uuid="f5e07083-9dcd-4252-8e7f-556779827977">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="120" y="158" width="190" height="35" isPrintWhenDetailOverflows="true" uuid="d479efe8-e2ad-4139-af6f-eb6bc9b83a37"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vid_modified_by}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="177" width="110" height="17" isPrintWhenDetailOverflows="true" uuid="6386136c-4ea6-4d75-835d-d5847b94dd5c"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Last Edited User]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="197" width="110" height="20" isPrintWhenDetailOverflows="true" uuid="4fa61fc0-98ae-4595-ba57-c0a295ef0fea"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Last Edited Date & Time]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy h:mm a" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="120" y="197" width="120" height="19" isPrintWhenDetailOverflows="true" uuid="3f77c257-ac74-47cc-9943-ee80aad00c99"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vid_modified_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="309" y="177" width="98" height="14" isPrintWhenDetailOverflows="true" uuid="cdb974cd-57ab-43d5-8978-f72ef0041e50"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Location]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="431" y="177" width="110" height="14" isPrintWhenDetailOverflows="true" uuid="11fb86bb-b442-45e2-955d-74fdb6683572"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="309" y="205" width="109" height="14" isPrintWhenDetailOverflows="true" uuid="3d883e6a-a397-489d-a54e-0fb33c83bd2c"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sign Of Inspection Officer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="429" y="205" width="110" height="14" isPrintWhenDetailOverflows="true" uuid="e58069e9-2bca-46dd-8c98-7ceff3e3434f"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="110" y="127" width="10" height="17" isPrintWhenDetailOverflows="true" uuid="b09360d9-41ed-4473-9e34-f17d07c36874"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="110" y="147" width="10" height="17" isPrintWhenDetailOverflows="true" uuid="2b7159b0-e773-4518-89cf-ff2dc9e3beac"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="110" y="175" width="10" height="17" isPrintWhenDetailOverflows="true" uuid="a76a9057-4672-4eda-88eb-ffd8e26e9d48"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="110" y="193" width="10" height="17" isPrintWhenDetailOverflows="true" uuid="8c5329c7-02a0-47ab-a1bd-4c4ae5838cb6"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="419" y="203" width="10" height="17" isPrintWhenDetailOverflows="true" uuid="24c01404-2796-4f29-a56c-f76de389b5bf"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="419" y="171" width="10" height="17" isPrintWhenDetailOverflows="true" uuid="35c4f46b-4e17-4419-87cf-3dd3591a1c09">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="419" y="145" width="10" height="17" isPrintWhenDetailOverflows="true" uuid="78bff6d3-ea2a-4805-92ed-16f58f1af109">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="419" y="120" width="10" height="17" isPrintWhenDetailOverflows="true" uuid="7211a6e5-13ec-4bf7-9698-01e9f7e099a2"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="429" y="125" width="116" height="24" uuid="0d6bd3b5-3cc5-4c0a-b282-85601438ae22"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_inspection_type}.equals( "NI" )? "New Permit" :$P{P_inspection_type}.equals( "AI" )? "Amendment" : $P{P_inspection_type}.equals( "PI" )? "Renewal" : $P{P_inspection_type}.equals( "SI" )? "Site Visit" : $P{P_inspection_type}.equals( "CI" )? "Complain" :$P{P_inspection_type}.equals( "II" )? "Inquiry" :" -"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="148" width="118" height="30" uuid="5f97f2f2-09a7-484a-833a-0a82132e480e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_inspection_status}.equals("I")? "Incomplete" : "Complete"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="175" width="100" height="30" uuid="909b8ca6-d07b-4f14-96e8-2068f238c76e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Location}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="121" y="183" width="160" height="14" isPrintWhenDetailOverflows="true" uuid="4f140ba9-91de-4ab0-9a6e-f666037e9ffc"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="121" y="198" width="160" height="14" isPrintWhenDetailOverflows="true" uuid="3c15cfb7-9c21-4602-b662-7a71d11187b6"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<frame>
+				<reportElement positionType="Float" x="2" y="95" width="549" height="20" uuid="677c0c7e-c41c-4689-a116-400487ed567a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<componentElement>
+					<reportElement positionType="Float" x="80" y="0" width="465" height="20" isPrintWhenDetailOverflows="true" uuid="e7ff2142-c831-400d-9f91-9e4420bce243">
+						<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="finalRemarks" uuid="7e6043e5-5826-469b-80cd-8939c7edac07">
+							<datasetParameter name="P_app">
+								<datasetParameterExpression><![CDATA[$P{P_App_no}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="20" width="465">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="460" height="20" isPrintWhenDetailOverflows="true" uuid="bd345721-cc40-43f4-80f5-eb7615a08de6"/>
+								<textElement textAlignment="Justified">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{proceed_remark}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement x="0" y="0" width="80" height="20" uuid="95add8c1-fade-426f-ba6a-a32245d8be95"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Proceed Remarks : ]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -1,0 +1,377 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn2 {
+	font-weight: bold;
+	background: #FF7456 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 180px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	margin: 30px 0px 30px 0px;
+	position: relative;
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+.calendarClass input {
+	width: 62% !important
+}
+</style>
+
+		<div class="mainDiv">
+			<h:form id="form">
+
+				<h1
+					style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+					class="common_form_header">Queue Management User Console</h1>
+
+				<div style="width: 100%;" class="subDiv">
+
+
+
+					<p:panelGrid id="searchPan" columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Division"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu style="width:100%; "
+								value="#{queueUserConsoleBean.queueNumberDTO.transTypeCode}"
+								effect="fold" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="-- Select Division --" />
+								<f:selectItems value="#{queueUserConsoleBean.divisionList}"
+									var="d" itemValue="#{d.sectionCode}"
+									itemLabel="#{d.sectionDes}" />
+
+								<p:ajax update="@form"
+									listener="#{queueUserConsoleBean.onDivisionSelect}" />
+
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Number"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:inputText disabled="#{queueUserConsoleBean.disabledCounter}"
+								id="txtQueueNo1" maxlength="8"
+								onkeyup="this.value=this.value.toUpperCase();"
+								value="#{queueUserConsoleBean.queueNumberDTO.queueNumber}"
+								style="width:100%">
+							</p:inputText>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Counter"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:selectOneMenu style="width:100%;"
+								disabled="#{queueUserConsoleBean.disabledCounter}"
+								value="#{queueUserConsoleBean.queueNumberDTO.counterNo}"
+								effect="fold" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="-- Select Counter --" />
+								<f:selectItems value="#{queueUserConsoleBean.counterList}"
+									var="c" itemValue="#{c.counterId}" itemLabel="#{c.counterName}" />
+
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+					</p:panelGrid>
+
+
+					<p:panelGrid id="buttonGrid" columns="5"
+						columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-3"
+						layout="grid">
+
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid>
+							<p:commandButton styleClass="mainActionbtn2" value="Call Next"
+								style="width:100%;margin:15px 0px 0px 0px;"
+								update="@form,frmError,frmsuccess,frmAlert"
+								action="#{queueUserConsoleBean.callNextQueueNo}"></p:commandButton>
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:commandButton styleClass="mainActionbtn" value="Call"
+								style="width:100%;margin:15px 0px 0px 0px ;"
+								update="@form,frmError,frmsuccess,frmAlert"
+								action="#{queueUserConsoleBean.callQueueNo}"></p:commandButton>
+						</p:panelGrid>
+
+
+						<p:panelGrid>
+							<p:commandButton styleClass="mainActionbtn" value="Clear"
+								style="width:80%;margin:15px 0px 0px 0px;"
+								action="#{queueUserConsoleBean.clearData}"
+								update="@form,frmError,frmsuccess,frmAlert"></p:commandButton>
+						</p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+
+					</p:panelGrid>
+
+
+
+				</div>
+			</h:form>
+		</div>
+
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{queueUserConsoleBean.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{queueUserConsoleBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Alert" width="30%" severity="info" widgetVar="alertMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAlert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="#{queueUserConsoleBean.alertMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmAlert" onclick="PF('alertMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>

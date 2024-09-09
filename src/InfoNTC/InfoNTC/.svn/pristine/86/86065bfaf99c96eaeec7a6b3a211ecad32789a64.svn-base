@@ -1,0 +1,604 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+#frmviewRouteMaintenance:j_idt81 {
+	background-color: blue !important;
+	font-weight: bold;
+}
+
+.myTable td:nth-child(3) {
+	width: 150px;
+}
+
+.myTable td:nth-child(8) {
+	width: 30px;
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Manage User</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmUserSearch">
+
+					<div class="ui-g-12">
+
+						<p:panel id="pnlEmpDet" style="width:80%;margin-left:10%">
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+								layout="grid">
+								<p:panelGrid>
+
+
+
+									<p:outputLabel value="EPF No." for="epfNo"></p:outputLabel>
+
+
+
+
+								</p:panelGrid>
+								<p:panelGrid>
+
+									<p:selectOneMenu id="epfNo" style="width:200px"
+										value="#{manageUserBackingBean.manageUserDTO.epfNo}"
+										effect="fold">
+
+										<f:selectItem itemLabel="-- Select EPF No. --" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{manageUserBackingBean.epfList}"
+											var="epfList" itemValue="#{epfList.epfNo}"
+											itemLabel="#{epfList.epfNo}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="User ID" for="userId"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="userId" style="width:200px"
+										value="#{manageUserBackingBean.manageUserDTO.userId}"
+										effect="fold">
+
+										<f:selectItem itemLabel="-- Select User ID --" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{manageUserBackingBean.userIdList}"
+											var="userIdList" itemValue="#{userIdList.userId}"
+											itemLabel="#{userIdList.userId}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid>
+
+									<p:outputLabel value="NIC No." for="nic"></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText id="nic" style="width:200px"
+										value="#{manageUserBackingBean.manageUserDTO.nicNo}"
+										onkeyup="this.value=this.value.toUpperCase();"
+										placeholder="--Enter NIC No.--"
+										maxlength="12">
+										
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Department" for="dept"></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="dept" style="width:200px"
+										value="#{manageUserBackingBean.manageUserDTO.deptCode}"
+										effect="fold">
+
+										<f:selectItem itemLabel="-- Select Department --" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{manageUserBackingBean.deptList}"
+											var="deptList" itemValue="#{deptList.deptCode}"
+											itemLabel="#{deptList.deptDesc}	- #{deptList.deptCode}" />
+									</p:selectOneMenu>
+
+
+
+								</p:panelGrid>
+
+								<br></br>
+							</p:panelGrid>
+						</p:panel>
+
+
+					</div>
+
+
+					<center>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid columns="2">
+
+							<p:column>
+								<p:commandButton id="cmdbtnSearchx" value="Search"
+									class="mainActionbtn" ajax="false"
+									action="#{manageUserBackingBean.searchUser}" update="userTable">
+								</p:commandButton>
+								<p:commandButton id="cmdbtnClearPagex" value="Clear"
+									class="mainActionbtn" action="#{manageUserBackingBean.init}"
+									update="@form">
+								</p:commandButton>
+							</p:column>
+
+						</p:panelGrid>
+					</center>
+
+					<br> </br>
+
+				</h:form>
+
+				<h:form id="frmuserTable">
+					<br></br>
+					<center>
+						<p:dataTable var="userList" paginator="true" rows="10"
+							id="userTable" rowIndexVar="rowIndex"
+							value="#{manageUserBackingBean.userList}"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,20" resizableColumns="false"
+							liveResize="true" rowKey="#{userList.empNo}"
+							tableStyle="text-align:left;"
+							selection="#{manageUserBackingBean.selectedUserRadio}"
+							styleClass="myTable">
+
+
+
+
+							<p:column selectionMode="single"
+								style="width:16px;text-align:center" />
+							<p:column headerText="Employee No." visible="true" width="8%">
+								<h:outputText style="text-align:left;" value="#{userList.empNo}"
+									visible="true" />
+							</p:column>
+							<p:column headerText="Name" width="12%" style="text-align:left;">
+								<h:outputText style="text-align:left;" value="#{userList.name}" />
+							</p:column>
+							<p:column headerText="Department" width="10%">
+								<h:outputText style="text-align:left;"
+									value="#{userList.deptCode}" />
+							</p:column>
+							<p:column headerText="NIC No." width="10%">
+								<h:outputText style="text-align:left;" value="#{userList.nicNo}" />
+							</p:column>
+							<p:column headerText="EPF No." width="7%">
+								<h:outputText style="text-align:left;" value="#{userList.epfNo}" />
+							</p:column>
+							<p:column headerText="User ID" width="12%">
+								<h:outputText style="text-align:left;"
+									value="#{userList.userId}" />
+							</p:column>
+							<p:column headerText="Employee Satus" width="9%">
+								<h:outputText style="text-align:left;"
+									value="#{userList.empStatus}" />
+							</p:column>
+							<p:column headerText="User Status" width="8%">
+								<h:outputText style="text-align:left;"
+									value="#{userList.userStatus}" />
+							</p:column>
+							<p:column width="5%" headerText="View Roles">
+
+
+								<p:commandLink id="cmdbtnViewRole"
+									action="#{manageUserBackingBean.viewUserRole}"
+									oncomplete="PF('rolesDialog').show()" update="rolesList">
+									<f:setPropertyActionListener value="#{userList}"
+										target="#{manageUserBackingBean.selectedViewRole}" />
+									<p:graphicImage library="images" name="view1.png"
+										style="width:24px;height:24px;" title="View Roles"></p:graphicImage>
+								</p:commandLink>
+
+							</p:column>
+
+							<p:column width="5%" headerText="Edit Roles">
+
+
+								<p:commandLink id="cmdbtnEditRole"
+									action="#{manageUserBackingBean.editUserRole}"
+									disabled="#{userList.userStatus == 'PENDING' || userList.userStatus == 'REJECT'|| userList.userStatus == 'INACTIVE'}"
+									update="userTable">
+
+									<f:setPropertyActionListener value="#{userList.userId}"
+										target="#{manageUserBackingBean.selectedUser}" />
+									<p:graphicImage library="images" name="edit.png"
+										style="width:24px;height:24px;" title="Edit Roles"></p:graphicImage>
+								</p:commandLink>
+
+
+							</p:column>
+							<p:column width="5%" headerText="Edit Status">
+							
+
+								<p:commandLink id="cmdbtnEditStatus"
+									action="#{manageUserBackingBean.editUserStatus}"
+									disabled="#{userList.userStatus == 'PENDING' || userList.userStatus == 'REJECT'}"
+									update="dialogEditStatus">
+
+									<f:setPropertyActionListener value="#{userList}"
+										target="#{manageUserBackingBean.selectedUserEdit}" />
+									<p:graphicImage library="images" name="edit.png"
+										style="width:24px;height:24px;" title="Edit Status"></p:graphicImage>
+								</p:commandLink>
+
+
+							</p:column>
+
+						</p:dataTable>
+					</center>
+					<br></br>
+
+
+
+					<br></br>
+					<p:panelGrid columns="3"
+						columnClasses="ui-grid-col-2,ui-grid-col-8,ui-grid-col-2"
+						layout="grid">
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid>
+
+							<p:row id="row1">
+								<center>
+									<p:panelGrid columns="2">
+										<p:column>
+											<p:outputLabel value="Reject Reason" for="rejectReason"></p:outputLabel>
+										</p:column>
+										<p:column>
+											<p:inputText id="rejectReason" style="width:400px"
+												value="#{manageUserBackingBean.rejectReason}"
+												onkeyup="this.value=this.value.toUpperCase();">
+											</p:inputText>
+										</p:column>
+									</p:panelGrid>
+
+								</center>
+							</p:row>
+							<p:row id="row2">
+								<center>
+									<p:panelGrid columns="3">
+										<p:column>
+											<p:commandButton id="cmdbtnGenerateUser"
+												value="Generate User ID" class="mainActionbtn" ajax="false"
+												action="#{manageUserBackingBean.generateUser}"
+												update="userTable" style="width:200px"></p:commandButton>
+										</p:column>
+										<p:column>
+											<p:commandButton id="cmdbtnRejectUser" value="Reject User"
+												class="mainActionbtn" ajax="false"
+												action="#{manageUserBackingBean.rejectUser}"
+												update="userTable" style="width:200px"></p:commandButton>
+										</p:column>
+										<p:column>
+											<p:commandButton id="cmdbtnCancel" value="Clear"
+												class="mainActionbtn" ajax="false"
+												actionListener="#{manageUserBackingBean.clearSearch}"
+												update="frmuserTable,frmUserSearch" style="width:200px"></p:commandButton>
+										</p:column>
+									</p:panelGrid>
+
+								</center>
+							</p:row>
+
+
+						</p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+					</p:panelGrid>
+
+					<br></br>
+
+				</h:form>
+
+
+
+			</div>
+
+
+
+		</div>
+
+		<p:dialog styleClass="" id="successMessage" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlsuccess']}" width="50%"
+			severity="info" widgetVar="successMessage" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmsuccessMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{manageUserBackingBean.successMsg}"></p:outputLabel>
+						<p:outputLabel></p:outputLabel>
+						<p:outputLabel value="#{manageUserBackingBean.user}"></p:outputLabel>
+
+
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessMsge"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="errorMessage" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlcommerror']}" width="25%"
+			severity="info" widgetVar="errorMessage" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmerrorMsge">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{manageUserBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmerrorMsge"
+						value="#{msg['um.employeeprofile.dlcommerrorclose']}"
+						onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog header="User Roles" widgetVar="rolesDialog" height="100%"
+			width="25%" modal="true" showEffect="fade" hideEffect="fade"
+			resizable="false">
+			<p:dataTable id="rolesList" var="userRoles"
+				value="#{manageUserBackingBean.userRoles}">
+				<p:column headerText="Role Code" style="text-align:left">
+					<h:outputText value="#{userRoles.roleCode}" style="text-align:left" />
+				</p:column>
+				<p:column headerText="Role Name" style="text-align:left">
+					<h:outputText value="#{userRoles.roleName}" style="text-align:left" />
+				</p:column>
+			</p:dataTable>
+		</p:dialog>
+
+
+		<p:dialog header="Edit Status" widgetVar="dlg2" modal="true"
+			id="dialogEditStatus" resizable="false" height="100%" width="30%">
+			<h:form id="frmEditStatus">
+				<br></br>
+				<p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
+					layout="grid">
+
+
+					<p:column>
+						<p:outputLabel value="User Id" for="userId"></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:column>
+
+					<p:column>
+						<p:inputText id="userId" style="width:200px;"
+							value="#{manageUserBackingBean.selectedUserEdit.userId}"
+							readonly="true">
+						</p:inputText>
+					</p:column>
+				</p:panelGrid>
+
+				<p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
+					layout="grid">
+					<p:column>
+						<p:outputLabel value="User Status" for="userStatus"></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:column>
+
+					<p:column>
+						<p:inputText id="userStatus" style="width:200px;"
+							value="#{manageUserBackingBean.selectedStatus}" readonly="true">
+						</p:inputText>
+					</p:column>
+				</p:panelGrid>
+
+				<p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
+					layout="grid">
+					<p:column>
+						<p:outputLabel value="Inactive Reason" for="inactiveReason"></p:outputLabel>
+					</p:column>
+
+					<p:column>
+						<p:inputTextarea id="inactiveReason"
+							style="width:200px;height:100px;"
+							value="#{manageUserBackingBean.inactiveReason}" rows="5"
+							onkeyup="this.value=this.value.toUpperCase();" cols="25" />
+
+					</p:column>
+				</p:panelGrid>
+				<br></br>
+				<p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
+					layout="grid">
+					<p:column></p:column>
+
+					<p:column>
+						<p:commandButton id="cmdbtnSaveStatus" value="Save"
+							class="mainActionbtn" ajax="false"
+							action="#{manageUserBackingBean.updateUserStatus}"
+							update="userTable"></p:commandButton>
+
+						<p:commandButton id="cmdbtnCancelStatus" value="Cancel"
+							class="mainActionbtn" ajax="false"
+							action="#{manageUserBackingBean.cancelUserStatus}"></p:commandButton>
+
+					</p:column>
+				</p:panelGrid>
+
+
+
+			</h:form>
+
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>

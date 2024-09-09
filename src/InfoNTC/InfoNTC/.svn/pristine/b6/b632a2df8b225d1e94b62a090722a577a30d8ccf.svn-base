@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2021-08-31T16:43:30 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SpecialHirePermitPrePrint" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d329b2b5-3e0b-47a3-8c07-49a1b6cb041d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC_Dev.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="P_Receipt_No" class="java.lang.String"/>
+	<parameter name="P_ammount_inLetter" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select tep_vehicleno ,tep_issued_date,tep_issued_month,tep_receipt_no,tep_ammount_paid,tep_hirepermit_remark ,tep_chargeamt ,
+tep_permit_no ,tep_st_route_no ,tep_st_origin ,tep_st_destination ,tep_st_via ,tep_valid_from,tep_valid_to,tep_chargeamt,tep_org_permit_no ,tep_due_date ,to_char(now(), 'Day') as currentDayInName
+from public.nt_t_terminal_payment 
+where tep_receipt_no=  $P{P_Receipt_No}    
+and tep_payment_type_code='003']]>
+	</queryString>
+	<field name="tep_vehicleno" class="java.lang.String"/>
+	<field name="tep_issued_date" class="java.lang.String"/>
+	<field name="tep_issued_month" class="java.lang.String"/>
+	<field name="tep_receipt_no" class="java.lang.String"/>
+	<field name="tep_ammount_paid" class="java.math.BigDecimal"/>
+	<field name="tep_hirepermit_remark" class="java.lang.String"/>
+	<field name="tep_chargeamt" class="java.math.BigDecimal"/>
+	<field name="tep_permit_no" class="java.lang.String"/>
+	<field name="tep_st_route_no" class="java.lang.String"/>
+	<field name="tep_st_origin" class="java.lang.String"/>
+	<field name="tep_st_destination" class="java.lang.String"/>
+	<field name="tep_st_via" class="java.lang.String"/>
+	<field name="tep_valid_from" class="java.lang.String"/>
+	<field name="tep_valid_to" class="java.lang.String"/>
+	<field name="COLUMN_15" class="java.math.BigDecimal"/>
+	<field name="tep_org_permit_no" class="java.lang.String"/>
+	<field name="tep_due_date" class="java.lang.String"/>
+	<field name="currentdayinname" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="129">
+			<textField>
+				<reportElement x="452" y="29" width="100" height="30" uuid="558cc25a-0e4f-4a10-be4b-0e70bf3a59b4"/>
+				<textFieldExpression><![CDATA[$F{tep_permit_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="305" splitType="Stretch">
+			<textField>
+				<reportElement x="160" y="-31" width="100" height="30" uuid="dd440441-639f-42b8-9a18-566068e1896c"/>
+				<textFieldExpression><![CDATA[$F{tep_vehicleno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="-26" width="100" height="30" uuid="95f8ab6c-1c91-4c78-be7c-47885b2b8fce"/>
+				<textFieldExpression><![CDATA[$F{tep_org_permit_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="2" width="250" height="30" uuid="9dcee75b-b563-4560-8777-ef49a6ae06dd"/>
+				<textFieldExpression><![CDATA[$F{tep_hirepermit_remark}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="161" y="38" width="100" height="30" uuid="c9478c25-213e-4039-bfc8-91fa5449f3fa"/>
+				<textFieldExpression><![CDATA[$F{tep_valid_from}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="38" width="100" height="30" uuid="9a2b8f91-1dcd-4b27-9d5f-b977ac508314"/>
+				<textFieldExpression><![CDATA[$F{tep_valid_to}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="159" y="72" width="370" height="30" uuid="87f14ff5-5a75-4ed4-a910-69c5ecdb10e0"/>
+				<textFieldExpression><![CDATA[$F{tep_st_via}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="153" y="187" width="100" height="30" uuid="24da7ce2-0803-4ed3-b1a3-09e4dce5bc7e"/>
+				<textFieldExpression><![CDATA[$F{tep_chargeamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="352" y="134" width="100" height="30" uuid="44573bde-b598-4aca-83b3-98940ba9e3d8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="300" y="188" width="245" height="30" isPrintWhenDetailOverflows="true" uuid="539161e5-4b45-4e27-81da-183e4a49532e"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_ammount_inLetter}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

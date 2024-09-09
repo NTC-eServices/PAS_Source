@@ -1,0 +1,508 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+		<f:event type="preRenderView" listener="#{makeBean.onPageLoad}" />
+	</ui:define>
+	<ui:define name="content">
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Inquiry Details</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmAssignModels">
+
+					<p:panel style="border-bottom:5px solid #404d6f;">
+
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+							layout="grid">
+
+							<p:outputLabel value="Select Type" for="console"></p:outputLabel>
+
+							<p:selectOneRadio id="console"
+								value="#{commonSisuSeriyaInquiryBackingBean.console}"
+								unselectable="true">
+								<p:ajax
+									listener="#{commonSisuSeriyaInquiryBackingBean.onInfoPanelChange}"
+									update="@form" />
+								<f:selectItem itemLabel="Route Information"
+									itemValue="routeInfo" />
+								<f:selectItem itemLabel="Service Information"
+									itemValue="serviceInfo" />
+							</p:selectOneRadio>
+
+
+						</p:panelGrid>
+					</p:panel>
+
+					<p:panel
+						rendered="#{commonSisuSeriyaInquiryBackingBean.showRouteInfoDropdownMenu}"
+						style="border-bottom:5px solid #404d6f;">
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+							layout="grid">
+
+							<p:panelGrid>
+								<p:outputLabel value="Via"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="viaId1" tabindex="1" style="width:89%; "
+									disabled="false"
+									value="#{commonSisuSeriyaInquiryBackingBean.selectedViaValue}"
+									effect="fold" filter="true" filterMatchMode="contains">
+									<p:ajax
+										listener="#{commonSisuSeriyaInquiryBackingBean.onViaChange}"
+										update="serviceNoId" />
+									<f:selectItem itemLabel="--Select Vehicle No.--" itemValue="" />
+									<f:selectItems
+										value="#{commonSisuSeriyaInquiryBackingBean.viaValueList}"
+										var="viaValueList" itemValue="#{viaValueList.via}"
+										itemLabel="#{viaValueList.via}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+						<br></br>
+						<center>
+
+							<p:commandButton value="Search"
+								action="#{commonSisuSeriyaInquiryBackingBean.searchRouteInfo}"
+								update="@form" process="@form" class="mainActionbtn"></p:commandButton>
+
+							<p:commandButton value="Clear" update="@form" process="@form"
+								action="#{commonSisuSeriyaInquiryBackingBean.clearRouteInfo}"
+								class="mainActionbtn"></p:commandButton>
+						</center>
+						<br></br>
+
+
+					</p:panel>
+
+
+
+					<p:panel
+						rendered="#{commonSisuSeriyaInquiryBackingBean.showServiceInfoDropdownMenu}"
+						style="border-bottom:5px solid #404d6f;">
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+							layout="grid">
+
+							<p:panelGrid>
+								<p:outputLabel value="Vehicle No."></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="vehicleNoId1" tabindex="1"
+									style="width:89%; " disabled="false"
+									value="#{commonSisuSeriyaInquiryBackingBean.selectedVehicleNo}"
+									effect="fold" filter="true" filterMatchMode="contains">
+									<p:ajax
+										listener="#{commonSisuSeriyaInquiryBackingBean.onVehicleNoChange}"
+										update="serviceNoId" />
+									<f:selectItem itemLabel="--Select Vehicle No.--" itemValue="" />
+									<f:selectItems
+										value="#{commonSisuSeriyaInquiryBackingBean.vehicleNoList}"
+										var="vehicleNoList" itemValue="#{vehicleNoList.busRegNo}"
+										itemLabel="#{vehicleNoList.busRegNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Owner Name"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="ownerNameId1" tabindex="1"
+									style="width:89%; " disabled="false"
+									value="#{commonSisuSeriyaInquiryBackingBean.selectedOwnerName}"
+									effect="fold" filter="true" filterMatchMode="contains">
+									<p:ajax
+										listener="#{commonSisuSeriyaInquiryBackingBean.onOwnerNameChange}"
+										update="ownerNameId1,serviceNoId" />
+									<f:selectItem itemLabel="--Select Owner Name--" itemValue="" />
+									<f:selectItems
+										value="#{commonSisuSeriyaInquiryBackingBean.ownerNameList}"
+										var="ownerNameList"
+										itemValue="#{ownerNameList.nameOfOperator}"
+										itemLabel="#{ownerNameList.nameOfOperator}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Service No."></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="serviceNoId" tabindex="1"
+									style="width:89%; "
+									disabled="#{commonSisuSeriyaInquiryBackingBean.disabledServiceNoMenu}"
+									value="#{commonSisuSeriyaInquiryBackingBean.selectedServiceNo}"
+									effect="fold" filter="true" filterMatchMode="contains">
+									<p:ajax
+										listener="#{commonSisuSeriyaInquiryBackingBean.onServiceNoChange}"
+										update="vehicleNoId1" />
+									<f:selectItem itemLabel="--Select Service No.--" itemValue="" />
+									<f:selectItems
+										value="#{commonSisuSeriyaInquiryBackingBean.serviceNoList}"
+										var="serviceNoList"
+										itemValue="#{serviceNoList.serviceAgreementNo}"
+										itemLabel="#{serviceNoList.serviceAgreementNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+						</p:panelGrid>
+
+						<br></br>
+						<center>
+
+							<p:commandButton value="Search"
+								action="#{commonSisuSeriyaInquiryBackingBean.searchServiceInfo}"
+								update="@form" process="@form" class="mainActionbtn"></p:commandButton>
+
+							<p:commandButton value="Clear" update="@form" process="@form"
+								action="#{commonSisuSeriyaInquiryBackingBean.clearServiceInfo}"
+								class="mainActionbtn"></p:commandButton>
+						</center>
+						<br></br>
+					</p:panel>
+
+					<p:panel
+						rendered="#{commonSisuSeriyaInquiryBackingBean.showRouteInfoDetails}">
+						<p:dataTable id="viaListTable" var="e" styleClass="myTable-two"
+							rows="10"
+							value="#{commonSisuSeriyaInquiryBackingBean.viaDataList}"
+							paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="2,3" resizableColumns="false"
+							liveResize="true" rowIndexVar="index" sortBy="#{e.requestNo}"
+							sortOrder="descending" emptyMessage="No records are available">
+
+							<p:column headerText="Request No." style="text-align: left;">
+								<h:outputText value="#{e.requestNo}" />
+							</p:column>
+
+							<p:column headerText="Owner Name" style="text-align: left;">
+								<h:outputText value="#{e.nameOfOperator}" />
+							</p:column>
+
+							<p:column headerText="Origin" style="text-align: left;">
+								<h:outputText value="#{e.originDes}" />
+							</p:column>
+
+							<p:column headerText="Destination" style="text-align: left;">
+								<h:outputText value="#{e.destinationDes}" />
+							</p:column>
+
+
+							<p:column headerText="Via" style="text-align: left;">
+								<h:outputText value="#{e.via}" />
+							</p:column>
+
+							<p:column headerText="No. Of Passengers"
+								style="text-align: left;">
+								<h:outputText value="#{e.noOfPassengers}" />
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+
+					<p:panel
+						rendered="#{commonSisuSeriyaInquiryBackingBean.showServiceInfoDetails}">
+						<p:dataTable id="serviceListTable" var="e"
+							styleClass="myTable-two" rows="10"
+							value="#{commonSisuSeriyaInquiryBackingBean.serviceDataList}"
+							paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="2,3" resizableColumns="false"
+							liveResize="true" rowIndexVar="index"
+							sortBy="#{e.serviceAgreementNo}" sortOrder="descending"
+							emptyMessage="No records are available">
+
+							<p:column headerText="Service No." style="text-align: left;">
+								<h:outputText value="#{e.serviceAgreementNo}" />
+							</p:column>
+
+							<p:column headerText="Owner Name" style="text-align: left;">
+								<h:outputText value="#{e.nameOfOperator}" />
+							</p:column>
+
+							<p:column headerText="Bus Reg No." style="text-align: left;">
+								<h:outputText value="#{e.busRegNo}" />
+							</p:column>
+
+							<p:column headerText="Service End Date" style="text-align: left;">
+								<h:outputText value="#{e.serviceEndDateVal}" />
+							</p:column>
+
+
+							<p:column headerText="Service Start Date"
+								style="text-align: left;">
+								<h:outputText value="#{e.serviceStartDateVal}" />
+							</p:column>
+
+							<p:column headerText="Status" style="text-align: left;">
+								<h:outputText value="#{e.statusDes}" />
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+
+
+
+
+
+				</h:form>
+			</div>
+		</div>
+
+
+
+
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{inquiryAdmin.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Info" width="30%" severity="info" widgetVar="successMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{inquiryAdmin.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Alert" width="30%" severity="info" widgetVar="alertMSG"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAlert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="#{inquiryAdmin.alertMSG}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmAlert" onclick="PF('alertMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{inquiryDetails.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

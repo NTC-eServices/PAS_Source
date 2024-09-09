@@ -1,0 +1,484 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 1%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Maintain Training Schedule</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmMaintainSchedule">
+					<br></br>
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-5,ui-grid-col-2"
+						layout="grid">
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Schedule Code"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText maxlength="5" style="width:40%"
+								value="#{maintainTrainingScheduleBean.trainingScheduleDTO.scheduleCode}"
+								readonly="true"></p:inputText>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Year"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText
+								value="#{maintainTrainingScheduleBean.trainingScheduleDTO.yearN}"
+								maxlength="4" style="width:20%">
+								<p:keyFilter regEx="/[0-9_\.\s\'\-]/i" />
+							</p:inputText>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Month"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="typeOfMonthSelect" tabindex="1"
+								style="width:40%; "
+								value="#{maintainTrainingScheduleBean.strSelectedMonth}"
+								effect="fold" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="-- Select Month --" itemValue="" />
+								<f:selectItems value="#{maintainTrainingScheduleBean.monthList}"
+									var="type" itemValue="#{type.code}"
+									itemLabel="#{type.description}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Schedule Training Date"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:calendar id="dateOftraining" tabindex="21" mindate="today"
+								value="#{maintainTrainingScheduleBean.trainingScheduleDTO.trainingDate}"
+								style="width:40px;height:18px;" navigator="true" locale="en_US"
+								showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+								yearRange="c-100:c+100" readonlyInput="true"></p:calendar>
+
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Start Time"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:calendar
+								value="#{maintainTrainingScheduleBean.trainingScheduleDTO.startTimeN}"
+								maxlength="5" inputStyle="width:40%" pattern="HH:mm"
+								timeOnly="true" />
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="End Time"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:calendar
+								value="#{maintainTrainingScheduleBean.trainingScheduleDTO.endTimeN}"
+								maxlength="5" inputStyle="width:40%" pattern="HH:mm"
+								timeOnly="true" />
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Type of Training"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="typeOfTrainingselect" tabindex="1"
+								style="width:50%; "
+								value="#{maintainTrainingScheduleBean.strSelectedType}"
+								effect="fold" filter="true" filterMatchMode="contains">
+								<f:selectItem itemLabel="-- Select Training Type --"
+									itemValue="" />
+								<f:selectItems
+									value="#{maintainTrainingScheduleBean.trainingTypeList}"
+									var="type" itemValue="#{type.code}"
+									itemLabel="#{type.description}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Location"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText maxlength="100" style="width:80%"
+								value="#{maintainTrainingScheduleBean.trainingScheduleDTO.location}"
+								onkeyup="this.value = this.value.toUpperCase();"
+								onblur="this.value = this.value.toUpperCase();"></p:inputText>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="No. of Trainees"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText
+								value="#{maintainTrainingScheduleBean.trainingScheduleDTO.noofTrainees}"
+								maxlength="5" style="width:20%">
+								<p:keyFilter regEx="/[0-9_\.\s\'\-]/i" />
+							</p:inputText>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Status"
+								rendered="#{maintainTrainingScheduleBean.disableUpdateMode}"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="console" style="width:36%"
+								rendered="#{maintainTrainingScheduleBean.disableUpdateMode}"
+								value="#{maintainTrainingScheduleBean.trainingScheduleDTO.staus}">
+								<f:selectItem itemLabel="Active" itemValue="A" />
+								<f:selectItem itemLabel="Inactive" itemValue="I" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+					</p:panelGrid>
+
+					<p:panel>
+						<center>
+							<p:panelGrid columns="6">
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid>
+									<h:commandButton id="cmdbtnUpdate" value="Update"
+										update="grouptable,typeOfMonthSelect,typeOfTrainingselect"
+										style="width:100px" ajax="false" styleClass="mainLinkButton"
+										action="#{maintainTrainingScheduleBean.update}"
+										rendered="#{maintainTrainingScheduleBean.disableUpdateMode}">
+									</h:commandButton>
+									<h:commandButton id="cmdbtnAdd" value="Save"
+										update="grouptable" style="width:100px" ajax="false"
+										styleClass="mainLinkButton"
+										rendered="#{maintainTrainingScheduleBean.disableSaveMode}"
+										action="#{maintainTrainingScheduleBean.add}">
+									</h:commandButton>
+								</p:panelGrid>
+								<p:panelGrid>
+									<h:commandButton id="cmdbtnCancel" value="Clear" update="@form"
+										style="width:100px" ajax="false" styleClass="mainLinkButton"
+										actionListener="#{maintainTrainingScheduleBean.clearAction}">
+									</h:commandButton>
+
+								</p:panelGrid>
+
+
+							</p:panelGrid>
+						</center>
+					</p:panel>
+
+
+					<p:panel id="panelOne">
+						<br></br>
+						<center>
+							<p:dataTable var="actiontable" paginator="true" update="@form"
+								selection="#{maintainTrainingScheduleBean.strSelectedScheduleCode}"
+								rowKey="#{actiontable.scheduleCode}" selectionMode="single"
+								rows="10" id="dtaction"
+								value="#{maintainTrainingScheduleBean.scheduleList}"
+								style="width:100%"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="10,20,50,100" resizableColumns="false"
+								liveResize="false" rowIndexVar="index">
+								<p:column headerText="" style="text-align:center;width:5%">
+									<f:facet name=" header">
+										<h:outputText value="index" />
+									</f:facet>
+									<h:outputText value="#{index + 1}"></h:outputText>
+								</p:column>
+								<p:column headerText="" style="text-align:left;width:18%"
+									visible="false">
+									<h:outputText style="text-align:left;"
+										value="#{actiontable.staus}" />
+								</p:column>
+								<p:column headerText="Schedule Code"
+									style="text-align:left;width:18%">
+									<h:outputText style="text-align:left;"
+										value="#{actiontable.scheduleCode}" />
+								</p:column>
+								<p:column headerText="Year" style="text-align:left;width:10%">
+									<h:outputText style="text-align:left;"
+										value="#{actiontable.yearN}" />
+								</p:column>
+								<p:column headerText="Month" style="text-align:left;width:12%">
+									<h:outputText style="text-align:left;"
+										value="#{actiontable.monthDesc}">
+									</h:outputText>
+								</p:column>
+								<p:column headerText="Date" style="text-align:left;width:15%">
+									<h:outputText style="text-align:left;"
+										value="#{actiontable.strtrainingDate}" pattern="dd/MM/yyyy" />
+								</p:column>
+								<p:column headerText="Start Time"
+									style="text-align:left;width:10%">
+									<h:outputText style="text-align:left;"
+										value="#{actiontable.startTime}" pattern="HH:MM" />
+								</p:column>
+								<p:column headerText="End Time"
+									style="text-align:left;width:10%">
+									<h:outputText style="text-align:left;"
+										value="#{actiontable.endTime}" />
+								</p:column>
+								<p:column headerText="Type of Training"
+									style="text-align:left;width:15%">
+									<h:outputText style="text-align:left;"
+										value="#{actiontable.typeDesc}" />
+								</p:column>
+								<p:column headerText="Location"
+									style="text-align:left;width:15%">
+									<h:outputText style="text-align:left;"
+										value="#{actiontable.location}" />
+								</p:column>
+								<p:column headerText="No. of Trainees"
+									style="text-align:center;width:10%">
+									<h:outputText style="text-align:center;"
+										value="#{actiontable.noofTrainees}" />
+								</p:column>
+								<p:column headerText="" style="width:10%;text-align:center">
+									<p:commandLink id="cmdbtnEdit"
+										action="#{maintainTrainingScheduleBean.editAction}"
+										update="frmMaintainSchedule" ajax="false">
+										<f:setPropertyActionListener value="#{actiontable}"
+											target="#{maintainTrainingScheduleBean.strSelectedScheduleCode}" />
+										<p:graphicImage library="images" name="edit.png"
+											style="width:24px;height:24px;" title="edit"></p:graphicImage>
+
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</center>
+						<br></br>
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+
+		<p:dialog styleClass="" id="SaveSuccess" global="true" modal="true"
+			header="Success" width="30%" severity="info" widgetVar="SaveSuccess"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="Successfully Saved."></p:outputLabel>
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSve" value="Close"
+						onclick="PF('SaveSuccess').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="ErrorMsg" global="true" modal="true"
+			header="Error Message" width="30%" severity="info" widgetVar="Error"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{maintainTrainingScheduleBean.errormsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmError" value="Close" onclick="PF('frmError').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>

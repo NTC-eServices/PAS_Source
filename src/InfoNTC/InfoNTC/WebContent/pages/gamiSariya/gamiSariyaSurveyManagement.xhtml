@@ -1,0 +1,1358 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+q
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+#Dob {
+	width: 80% !important;
+}
+
+.calendarClass input {
+	width: 73% !important;
+}
+
+.numField .ui-inputfield {
+	width: 89% !important;
+	font-weight: bold;
+	text-align: right;
+}
+
+.footer {
+	height: 20px;
+	background-color: #07295b;
+	text-align: center;
+	colour: #84063A;
+	color: #777373;
+}
+
+.ui-datatable-scrollable .ui-datatable-scrollable-header {
+	min-height: 20px;
+}
+
+.ui-datatable-scrollable-body {
+	height: 125px !important;
+}
+</style>
+
+		<div class="mainDiv">
+			<!-- header -->
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Survey Management</h1>
+
+			<div style="width: 95%;" class="subDiv">
+
+				<h:form id="frm-serveyManagement">
+					<!-- panel 01 Start-->
+					<p:panel id="pnl-search">
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-4"
+							layout="grid">
+
+							<!-- _Survey No.-->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel>Survey No.</p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-surveyNo" style="width:80%;"
+									filter="true" filterMatchMode="contains"
+									value="#{gsSurveyManagementBean.surveyDTO.surveyNo}">
+									<p:ajax listener="#{gsSurveyManagementBean.onSurveyNoChange}"
+										process="@form" update="@form" />
+
+									<f:selectItem itemLabel="-- Select Survey No. --" itemValue="" />
+									<f:selectItems
+										value="#{gsSurveyManagementBean.drpdSurveyNoList}"
+										var="surveyNoList" itemLabel="#{surveyNoList.surveyNo}"
+										itemValue="#{surveyNoList.surveyNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<!-- _Survey Type -->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel>Survey Type</p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="txt-surveyType" style="width:89%;height:18px;"
+									maxlength="50" readonly="true"
+									value="#{gsSurveyManagementBean.surveyDTO.surveyTypeDescription}"
+									onkeyup="this.value=this.value.toUpperCase();">
+								</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<!-- _Survey Method -->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel>Survey Method</p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText id="txt-surveyMethod"
+									style="width:89%;height:18px;" maxlength="50" readonly="true"
+									value="#{gsSurveyManagementBean.surveyDTO.surveyMethodDescription}"
+									onkeyup="this.value=this.value.toUpperCase();">
+								</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+						</p:panelGrid>
+						<center>
+							<p:panel>
+								<!-- Search button -->
+								<p:commandButton styleClass="mainActionbtn" value="Search"
+									process="@form" update="@form"
+									action="#{gsSurveyManagementBean.btnSearch}"></p:commandButton>
+								<!-- Clear button -->
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									process="@form" update="@form"
+									action="#{gsSurveyManagementBean.btnClear}">
+								</p:commandButton>
+							</p:panel>
+						</center>
+					</p:panel>
+
+					<!-- Start tab view section -->
+					<p:tabView id="tabviewId"
+						activeIndex="#{gsSurveyManagementBean.activeTabIndex}"
+						rendered="#{gsSurveyManagementBean.renderTabView}">
+						<p:ajax event="tabChange" listener="#{gsSurveyManagementBean.loadLocations}" update="@form"/>
+
+						<!-- ***********************************      Tab 01       ******************************************************************* -->
+						<p:tab title="Assign Survey Location And Team">
+
+							<!-- panel 01 Start-->
+							<p:panel>
+
+								<p:panelGrid columns="4" style="margin-bottom:5px;"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<!-- _Location -->
+									<p:panelGrid>
+										<p:outputLabel value="Location"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:selectOneMenu id="drpd-location" style="width:80%;"
+										effect="fold" filter="true" filterMatchMode="contains"
+										value="#{gsSurveyManagementBean.surveyDTO.location}">
+										<f:selectItem itemLabel="-- Select Location --" itemValue="" />
+										<f:selectItems
+											value="#{gsSurveyManagementBean.drpdLocationList}"
+											var="locationList" itemValue="#{locationList.code}"
+											itemLabel="#{locationList.location}" />
+									</p:selectOneMenu>
+									<p:outputLabel></p:outputLabel>
+									<p:outputLabel></p:outputLabel>
+
+									<!-- _Start Date -->
+									<p:panelGrid>
+										<p:outputLabel value="Start Date"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<div style="width: 100%">
+											<p:calendar id="cld-startDate" styleClass="calendarClass"
+												value="#{gsSurveyManagementBean.surveyDTO.startDate}"
+												readonlyInput="true" mindate="today" yearRange="c-100:c+100"
+												navigator="true" locale="en_US" showOn="button"
+												process="@form" update="@form" pattern="dd/MM/yyyy"
+												placeholder="DD/MM/YYYY" mask="true">
+												<!-- readonlyInput="true" -->
+											</p:calendar>
+										</div>
+									</p:panelGrid>
+
+									<!-- _End Date -->
+									<p:panelGrid>
+										<p:outputLabel value="End Date"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<div style="width: 100%">
+											<p:calendar id="cld-endDate" styleClass="calendarClass"
+												value="#{gsSurveyManagementBean.surveyDTO.endDate}"
+												readonlyInput="true" mindate="today" yearRange="c-100:c+100"
+												navigator="true" locale="en_US" showOn="button"
+												pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY" mask="true">
+
+											</p:calendar>
+										</div>
+									</p:panelGrid>
+
+									<!-- _Start Time -->
+									<p:panelGrid>
+										<p:outputLabel value="Start Time"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<div style="width: 50%">
+											<p:calendar id="cld-startTime" styleClass="calendarClass"
+												value="#{gsSurveyManagementBean.surveyDTO.startTime}"
+												pattern="HH:mm" timeOnly="true" placeholder="HH:MM"
+												mask="true" />
+										</div>
+									</p:panelGrid>
+
+									<!-- _End Time -->
+									<p:panelGrid>
+										<p:outputLabel value="End Time"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<div style="width: 50%">
+											<p:calendar id="cld-endTime" styleClass="calendarClass"
+												value="#{gsSurveyManagementBean.surveyDTO.endTime}"
+												pattern="HH:mm" timeOnly="true" placeholder="HH:MM"
+												mask="true" />
+										</div>
+
+									</p:panelGrid>
+
+								</p:panelGrid>
+
+								<!-- Add Button : Save Location And Time -->
+								<p:panelGrid style="margin-bottom:5px;">
+									<center>
+										<p:commandButton styleClass="mainActionbtn" value="Add"
+											action="#{gsSurveyManagementBean.btnTab01AddLocationDet}"
+											id="cmd-addLocationTime" process="@form" update="@form"></p:commandButton>
+									</center>
+								</p:panelGrid>
+
+								<!-- _table Location And Time -->
+								<p:dataTable id="tbl-locationAndTime"
+									value="#{gsSurveyManagementBean.tblLocationDet}"
+									var="locationAndTimeTable" selectionMode="single"
+									selection="#{gsSurveyManagementBean.surveyLocationTeamDTO.locationSeqNo}"
+									rowKey="#{locationAndTimeTable.locationSeqNo}"
+									resizableColumns="false" liveResize="true" rowIndexVar="index"
+									emptyMessage="No Records Available">
+
+									<p:ajax event="rowSelect"
+										listener="#{gsSurveyManagementBean.onLocationRowSelect}"
+										process="@form" update="@form" />
+									<p:ajax event="rowUnselect"
+										listener="#{gsSurveyManagementBean.onLocationRowUnSelect}" />
+
+									<p:column headerText="Location"
+										style="text-align:left;width:30%">
+										<h:outputText value="#{locationAndTimeTable.location}"></h:outputText>
+									</p:column>
+									<p:column headerText="Start Date"
+										style="text-align:left;width:15%">
+										<h:outputText value="#{locationAndTimeTable.strStartDate}"></h:outputText>
+									</p:column>
+									<p:column headerText="Start Time"
+										style="text-align:left;width:10%">
+										<h:outputText value="#{locationAndTimeTable.strStartTime}"></h:outputText>
+									</p:column>
+									<p:column headerText="End Date"
+										style="text-align:left;width:15%">
+										<h:outputText value="#{locationAndTimeTable.strEndDate}"></h:outputText>
+									</p:column>
+									<p:column headerText="End Time"
+										style="text-align:left;width:10%">
+										<h:outputText value="#{locationAndTimeTable.strEndTime}"></h:outputText>
+									</p:column>
+									<p:column headerText="" style="text-align:center;width:10%">
+
+										<p:commandLink
+											action="${gsSurveyManagementBean.delete_tbl_LocationTimeRaw(locationAndTimeTable.locationSeqNo)}"
+											process="@form" update="@form">
+
+											<p:graphicImage library="images" name="delete.png"
+												style="text-align:center;width:24px;height:24px;"
+												title="delete"></p:graphicImage>
+										</p:commandLink>
+									</p:column>
+
+								</p:dataTable>
+
+								<br></br>
+								<br></br>
+								<p:outputLabel
+									value="Please select a location to add team details."
+									style="width:100%;height:18px;font-weight:bold"></p:outputLabel>
+								<p:outputLabel></p:outputLabel>
+								<p:outputLabel></p:outputLabel>
+								<p:outputLabel></p:outputLabel>
+							</p:panel>
+
+
+							<br></br>
+							<!-- panel 02 End-->
+							<p:panel id="pnl-teamDetails"
+								rendered="#{gsSurveyManagementBean.renderTeamDetails}">
+								<h1
+									style="margin-bottom: 2%; text-align: center; color: #404d6f; background-color: #ffffff !important;"
+									class="common_form_header">Team Details</h1>
+
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<!-- _Organization -->
+									<p:panelGrid>
+										<p:outputLabel value="Organization"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:selectOneMenu id="drpd-organization" style="width:80%;"
+										effect="fold" filter="true" filterMatchMode="contains"
+										value="#{gsSurveyManagementBean.surveyLocationTeamDTO.organization}">
+										<f:selectItem itemLabel="-- Select Organization --"
+											itemValue="" />
+										<f:selectItems
+											value="#{gsSurveyManagementBean.drpdOrganizationList}"
+											var="organizationList"
+											itemValue="#{organizationList.organisationCode}"
+											itemLabel="#{organizationList.organisationDescription}" />
+										<p:ajax
+											listener="#{gsSurveyManagementBean.onOrganizationChange}"
+											update="drpd-userId,txt-fullName" />
+									</p:selectOneMenu>
+
+									<!-- _User Id -->
+									<p:panelGrid>
+										<p:outputLabel value="User Id"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:selectOneMenu id="drpd-userId" style="width:80%;"
+										disabled="#{gsSurveyManagementBean.disableUserId}"
+										effect="fold" filter="true" filterMatchMode="contains"
+										value="#{gsSurveyManagementBean.surveyLocationTeamDTO.userId}">
+
+										<p:ajax listener="#{gsSurveyManagementBean.onUserIdChange}"
+											update="txt-fullName,txt-nic" />
+
+										<f:selectItem itemLabel="-- Select User Id --" itemValue="" />
+										<f:selectItems
+											value="#{gsSurveyManagementBean.drpdUserIdList}"
+											var="userIdList" itemValue="#{userIdList.userId}"
+											itemLabel="#{userIdList.userId}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+									<!-- _Name -->
+									<p:panelGrid>
+										<p:outputLabel value="Full Name."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText id="txt-fullName" style="width:97%;height:18px;"
+										readonly="#{!gsSurveyManagementBean.disableUserId}"
+										maxlength="50"
+										value="#{gsSurveyManagementBean.surveyLocationTeamDTO.fullName}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+								</p:panelGrid>
+
+								<p:panelGrid columns="4" style="margin-bottom:5px;"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+									<!-- _Nic No -->
+									<p:panelGrid>
+										<p:outputLabel value="Nic No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputText style="width:89%;height:18px;" maxlength="12"
+										id="txt-nic"
+										value="#{gsSurveyManagementBean.surveyLocationTeamDTO.nic}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+
+									<!-- _Resposibities -->
+									<p:panelGrid>
+										<p:outputLabel value="Resposibilities"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:selectOneMenu id="drpd-resposibilities" style="width:80%;"
+										effect="fold" filter="true" filterMatchMode="contains"
+										value="#{gsSurveyManagementBean.surveyLocationTeamDTO.responsibilities}">
+										<f:selectItem itemLabel="-- Select Resposibities --"
+											itemValue="" />
+										<f:selectItems
+											value="#{gsSurveyManagementBean.drpdResponsibilitiesList}"
+											var="responsibilitiesList"
+											itemValue="#{responsibilitiesList.resposibilitiesCode}"
+											itemLabel="#{responsibilitiesList.resposibilitiesDescription}" />
+									</p:selectOneMenu>
+
+									<!-- _Bank -->
+									<p:outputLabel>Bank</p:outputLabel>
+									<p:selectOneMenu id="drpd-bank" style="width:80%;"
+										effect="fold" filter="true" filterMatchMode="contains"
+										value="#{gsSurveyManagementBean.surveyLocationTeamDTO.bank}">
+										<p:ajax listener="#{gsSurveyManagementBean.onBankChange}"
+											update="drpd-branch" />
+										<f:selectItem itemLabel="-- Select Bank --" itemValue="" />
+										<f:selectItems value="#{gsSurveyManagementBean.drpdBankList}"
+											var="bankList" itemValue="#{bankList.bankCode}"
+											itemLabel="#{bankList.bankDescription}" />
+									</p:selectOneMenu>
+
+									<!-- _Brach -->
+									<p:outputLabel>Branch</p:outputLabel>
+									<p:selectOneMenu id="drpd-branch" style="width:80%;"
+										effect="fold" filter="true" filterMatchMode="contains"
+										value="#{gsSurveyManagementBean.surveyLocationTeamDTO.branch}">
+										<f:selectItem itemLabel="-- Select Branch --" itemValue="" />
+										<f:selectItems
+											value="#{gsSurveyManagementBean.drpdBankBranchList}"
+											var="bankBranchList" itemValue="#{bankBranchList.branchCode}"
+											itemLabel="#{bankBranchList.branchDescription}" />
+									</p:selectOneMenu>
+
+									<!-- _Account No -->
+									<p:outputLabel>Account No.</p:outputLabel>
+									<p:inputText style="width:89%;height:18px;" maxlength="50"
+										value="#{gsSurveyManagementBean.surveyLocationTeamDTO.accountNo}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+									<p:outputLabel></p:outputLabel>
+									<p:outputLabel></p:outputLabel>
+
+								</p:panelGrid>
+
+								<!-- Add Button : Save Team Details -->
+								<p:panelGrid style="margin-bottom:5px;">
+									<center>
+										<p:commandButton styleClass="mainActionbtn" value="Add"
+											action="#{gsSurveyManagementBean.btnAddTeamByLocation}"
+											id="cmd-addTeamDetails" process="@form" update="@form"></p:commandButton>
+									</center>
+								</p:panelGrid>
+
+								<!-- _Table team details -->
+								<p:dataTable id="tbl-teamDetials" var="teamDetailsTableList"
+									rows="5" paginator="true"
+									value="#{gsSurveyManagementBean.drpdTeamDetailsTableList}"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15" resizableColumns="false"
+									liveResize="true" rowIndexVar="index"
+									emptyMessage="No Records Available">
+
+									<p:column headerText="Organization"
+										style="text-align:left;width:20%">
+										<h:outputText value="#{teamDetailsTableList.organization}"></h:outputText>
+									</p:column>
+
+									<p:column headerText="User Id."
+										style="text-align:left;width:15%">
+										<h:outputText value="#{teamDetailsTableList.userId}"></h:outputText>
+									</p:column>
+
+									<p:column headerText="Name" style="text-align:left;width:20%">
+										<h:outputText value="#{teamDetailsTableList.fullName}"></h:outputText>
+									</p:column>
+
+									<p:column headerText="NIC No."
+										style="text-align:left;width:15%">
+										<h:outputText value="#{teamDetailsTableList.nic}"></h:outputText>
+									</p:column>
+
+									<p:column headerText="Responsibility"
+										style="text-align:left;width:25%">
+										<h:outputText
+											value="#{teamDetailsTableList.resposibilitiesDescription}"></h:outputText>
+									</p:column>
+
+									<p:column headerText="" style="text-align:center;width:10%">
+										<center>
+											<p:commandLink
+												action="${gsSurveyManagementBean.delete_tbl_TeamDetialsRaw(teamDetailsTableList.memberSeqNo)}"
+												update="@form" process="@form">
+
+												<p:graphicImage library="images" name="delete.png"
+													style="text-align:center;width:24px;height:24px;"
+													title="delete"></p:graphicImage>
+											</p:commandLink>
+										</center>
+									</p:column>
+								</p:dataTable>
+
+								<p:panelGrid>
+								</p:panelGrid>
+							</p:panel>
+
+						</p:tab>
+
+						<!-- Tab 02 -->
+						<p:tab title="Allocate Cost Estimation">
+							<p:panel>
+								<p:panelGrid columns="4"
+									disabled="#{gsSurveyManagementBean.disableCostEstimationSave}"
+									columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-4"
+									layout="grid">
+
+									<!-- _Code -->
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel>Cost Type</p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="drpd-code" style="width:90%;"
+											disabled="#{gsSurveyManagementBean.disableCostEstimationAdd}"
+											effect="fold"
+											value="#{gsSurveyManagementBean.surveyLocationTeamDTO.selectedCostCode}">
+											<f:selectItem itemLabel="-- Select --" itemValue="" />
+											<f:selectItems
+												value="#{gsSurveyManagementBean.drpdCostCodeList}"
+												var="costCodeList" itemValue="#{costCodeList.costCode}"
+												itemLabel="#{costCodeList.costCode} - #{costCodeList.costCodeDescription}" />
+											<p:ajax listener="#{gsSurveyManagementBean.onCostTypeChange}"
+												update="txt-codeDescription" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+									<!-- _Description -->
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel>Description</p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="txt-codeDescription"
+											style="width:100%;height:18px;" maxlength="50"
+											disabled="#{gsSurveyManagementBean.disableCostEstimationAdd}"
+											readonly="true"
+											value="#{gsSurveyManagementBean.surveyLocationTeamDTO.costCodeDescription}"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<!-- _Amount Rs. -->
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel>Amount Rs.</p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputNumber id="amountId"
+											inputStyle="text-align: right;width:99%" minValue="0"
+											value="#{gsSurveyManagementBean.surveyLocationTeamDTO.amount}"
+											disabled="#{gsSurveyManagementBean.disableCostEstimationAdd}"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<f:convertNumber pattern="##,###.00" />
+										</p:inputNumber>
+
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+								</p:panelGrid>
+								<!-- Add cost estimation button-->
+								<p:panelGrid style="margin-top:5px; margin-bottom:5px;">
+									<center>
+										<p:commandButton styleClass="mainActionbtn" value="Add"
+											action="#{gsSurveyManagementBean.addCostEstimation}"
+											disabled="#{gsSurveyManagementBean.disableCostEstimationAdd}"
+											id="cmd-addAllocateCostEstimate" process="@form"
+											update="@form"></p:commandButton>
+									</center>
+								</p:panelGrid>
+
+								<center>
+
+									<!-- _Table cost estimation -->
+									<p:dataTable var="costEstimateTableList" update="@form"
+										style="width:98%;" id="tbl-allocateCostEstimate"
+										value="#{gsSurveyManagementBean.tblCostEstimateList}"
+										resizableColumns="false" liveResize="false">
+
+										<p:column headerText="Cost Type"
+											style="text-align:left;width:15%">
+											<h:outputText style="text-align:left;"
+												value="#{costEstimateTableList.costCode}" />
+										</p:column>
+										<p:column headerText="Description"
+											style="text-align:left;width:35%">
+											<h:outputText style="text-align:left;"
+												value="#{costEstimateTableList.costCodeDescription}" />
+										</p:column>
+
+										<p:column headerText="Amount Rs."
+											style="text-align:right;width:15%">
+											<h:outputText style="text-align:right;font-weight:bold"
+												value="#{costEstimateTableList.amount}">
+												<f:convertNumber pattern="##,###.00" />
+											</h:outputText>
+										</p:column>
+
+										<p:column headerText="" style="width:7%">
+											<p:commandLink
+												disabled="#{gsSurveyManagementBean.disableCostEstimationAdd}"
+												action="${gsSurveyManagementBean.delete_tbl_CostEstimateRaw(costEstimateTableList.costCodeSeqNo)}"
+												update="tbl-allocateCostEstimate" process="@form">
+												<f:ajax render="paymentDetails" />
+												<p:graphicImage library="images" name="delete.png"
+													style="width:24px;height:24px;" title="delete"></p:graphicImage>
+											</p:commandLink>
+										</p:column>
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="2" style="text-align:right"
+													footerText="Total Fee Rs." />
+												<p:column style="text-align:right; font-size: 15px;">
+													<f:facet name="footer">
+														<h:outputText
+															value="#{gsSurveyManagementBean.surveyLocationTeamDTO.totalAmount}">
+															<f:convertNumber pattern="##,###.00" />
+														</h:outputText>
+													</f:facet>
+												</p:column>
+											</p:row>
+										</p:columnGroup>
+									</p:dataTable>
+								</center>
+
+								<center>
+									<p:panel>
+										<!-- Save button -->
+										<p:commandButton styleClass="mainActionbtn" value="Save"
+											disabled="#{gsSurveyManagementBean.disableCostEstimationSave}"
+											update="@form"
+											action="#{gsSurveyManagementBean.updateCostEstimateTask}"></p:commandButton>
+
+									</p:panel>
+								</center>
+
+							</p:panel>
+						</p:tab>
+
+						<!-- tab 03 -->
+
+						<p:tab title="Grant Approval-Cost Estimation">
+							<p:panel>
+
+								<center>
+									<!-- _Table cost estimation 2-->
+									<p:dataTable var="costEstimateTableList" update="@form"
+										style="width:98%;" id="tbl-approveCostEstimation"
+										value="#{gsSurveyManagementBean.tblCostEstimateList}"
+										resizableColumns="false" liveResize="false">
+
+										<p:column headerText="Cost Type"
+											style="text-align:left;width:15%">
+											<h:outputText style="text-align:left;"
+												value="#{costEstimateTableList.costCode}" />
+										</p:column>
+										<p:column headerText="Description"
+											style="text-align:left;width:35%">
+											<h:outputText style="text-align:left;"
+												value="#{costEstimateTableList.costCodeDescription}" />
+										</p:column>
+
+										<p:column headerText="Amount Rs."
+											style="text-align:right;width:15%">
+											<h:outputText style="text-align:right;font-weight:bold"
+												value="#{costEstimateTableList.amount}">
+												<f:convertNumber pattern="##,###.00" />
+											</h:outputText>
+										</p:column>
+
+										<p:column headerText="" style="width:7%">
+											<p:commandLink
+												action="${gsSurveyManagementBean.delete_tbl_CostEstimateRaw(costEstimateTableList.costCodeSeqNo)}"
+												update="@form" process="@form"
+												disabled="#{gsSurveyManagementBean.approvedEstimation}">
+												<f:ajax render="paymentDetails" />
+												<p:graphicImage library="images" name="delete.png"
+													style="width:24px;height:24px;" title="delete"></p:graphicImage>
+											</p:commandLink>
+										</p:column>
+										<p:columnGroup type="footer">
+											<p:row>
+												<p:column colspan="2" style="text-align:right"
+													footerText="Total Fee Rs." />
+												<p:column style="text-align:right; font-size: 15px;">
+													<f:facet name="footer">
+														<h:outputText
+															value="#{gsSurveyManagementBean.surveyLocationTeamDTO.totalAmount}">
+															<f:convertNumber pattern="##,###.00" />
+														</h:outputText>
+													</f:facet>
+												</p:column>
+
+											</p:row>
+										</p:columnGroup>
+									</p:dataTable>
+								</center>
+
+								<br></br>
+								<br></br>
+
+								<p:panelGrid columns="2"
+									columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+									<!-- _Special remarks -->
+									<p:panelGrid>
+										<p:outputLabel value="Special Remarks"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:inputTextarea style="width:70%" maxlength="200" rows="3"
+										disabled="#{gsSurveyManagementBean.approvedEstimation}"
+										counter="display" counterTemplate="{0} characters remaining."
+										value="#{gsSurveyManagementBean.surveyLocationTeamDTO.specialRemark}" />
+									<br></br>
+									<h:outputText id="display" />
+								</p:panelGrid>
+
+								<br></br>
+								<br></br>
+
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+									layout="grid">
+
+									<p:panelGrid></p:panelGrid>
+									<!-- Approve button -->
+									<p:commandButton styleClass="mainLinkButton" style="width:100%"
+										disabled="#{gsSurveyManagementBean.approvedEstimation}"
+										value="Approve" process="@form" update="@form"
+										action="#{gsSurveyManagementBean.btnTab02ApproveCostEstimation}"></p:commandButton>
+									<!-- Reject button -->
+									<p:commandButton styleClass="mainLinkButton" style="width:100%"
+										disabled="#{gsSurveyManagementBean.approvedEstimation}"
+										value="Reject" update="@form" process="@form"
+										action="#{gsSurveyManagementBean.btnTab02RejectCostEstimation}">
+									</p:commandButton>
+									<p:panelGrid></p:panelGrid>
+								</p:panelGrid>
+
+							</p:panel>
+						</p:tab>
+
+						<!-- tab 04 -->
+						<p:tab title="Advanced Payment Voucher" rendered="true">
+							<br></br>
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+								layout="grid">
+								<p:panelGrid>
+									<p:outputLabel value="Transaction Type"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="transactionType" style="width:68%"
+										disabled="true"
+										value="#{gsSurveyManagementBean.paymentVoucherDTO.transactionCode}"
+										filter="true" filterMatchMode="contains" tabindex="1">
+
+										<f:selectItem itemLabel="--Gami Seriya Survey--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{gsSurveyManagementBean.drpdTransactionTypeList}"
+											var="transactionTypeList"
+											itemValue="#{transactionTypeList.code}"
+											itemLabel="#{transactionTypeList.description}" />
+
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Unit"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="unit" style="width:68%"
+										value="#{gsSurveyManagementBean.paymentVoucherDTO.unitCode}"
+										filter="true" filterMatchMode="contains" tabindex="1">
+
+										<f:selectItem itemLabel="--Select Unit--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{gsSurveyManagementBean.drpdUnitList}"
+											var="unitList" itemValue="#{unitList.code}"
+											itemLabel="#{unitList.description}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Department"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+
+									<p:selectOneMenu id="department" style="width:68%"
+										value="#{gsSurveyManagementBean.paymentVoucherDTO.departmentCode}"
+										filter="true" filterMatchMode="contains" tabindex="1">
+
+										<f:selectItem itemLabel="--Select Department--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{gsSurveyManagementBean.drpdDeparmentList}"
+											var="deparmentList" itemValue="#{deparmentList.code}"
+											itemLabel="#{deparmentList.description}" />
+
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Voucher No." style="text-align: left;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+
+									<p:inputText id="voucherNo"
+										onkeyup="this.value=this.value.toUpperCase();"
+										style="width:66%; color:red;font-weight: bold;" maxlength="12"
+										readonly="true"
+										value="#{gsSurveyManagementBean.paymentVoucherDTO.voucherNo}">
+									</p:inputText>
+								</p:panelGrid>
+
+							</p:panelGrid>
+							<br></br>
+							<br></br>
+
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-5,ui-grid-col-2"
+								layout="grid">
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Date"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText value="#{gsSurveyManagementBean.date1}"
+										style="width:30%" disabled="true" />
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Details of Service or Items Provided"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputTextarea style="width:70%" maxlength="200" rows="3"
+										counter="d" counterTemplate="{0} characters remaining."
+										value="#{gsSurveyManagementBean.advancedPaymentDTO.serviceDetails}" />
+									<br />
+									<h:outputText id="d" />
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="No.of Units/Rate"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputNumber style="width:30%" padControl="false"
+										inputStyle="text-align: right" id="txtUnit"
+										value="#{gsSurveyManagementBean.advancedPaymentDTO.noofUnits}">
+										<p:ajax
+											listener="#{gsSurveyManagementBean.noOfUnitValidation}"
+											update="txtUnit" />
+									</p:inputNumber>
+									<p:keyFilter regEx="/[\d]/i" />
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+									styleClass="internalPanel"
+									columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid">
+
+									<p:panelGrid styleClass="internalPanel">
+										<p:outputLabel value="Amount"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;text-align:left"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:outputLabel value="Rs." styleClass="internalInput"
+										style="text-align:right;margin: auto;padding-right:0px;"></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputNumber style="width:30%" inputStyle="text-align: right"
+										id="txtAmount"
+										value="#{gsSurveyManagementBean.advancedPaymentDTO.amount}">
+
+										<p:ajax
+											listener="#{gsSurveyManagementBean.totalBusFareValidation}"
+											update="txtAmount" />
+									</p:inputNumber>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+							</p:panelGrid>
+							<br></br>
+							<center>
+								<p:commandButton id="cmdbtnAdd" value="Add"
+									disabled="#{gsSurveyManagementBean.generatebtn}"
+									action="#{gsSurveyManagementBean.addNewChargeDetails}"
+									class="mainActionbtn" update="@form" process="@form">
+								</p:commandButton>
+
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									update="@form" process="@form" id="cmdbtnClear"
+									action="#{gsSurveyManagementBean.clearEnteredVal}"></p:commandButton>
+							</center>
+							<br></br>
+							<center>
+								<p:dataTable var="advancedPaymenttable" update="@form"
+									style="width:98%;" id="dtPayment"
+									value="#{gsSurveyManagementBean.paymentDetails}"
+									resizableColumns="false" liveResize="false">
+
+									<p:column headerText="Date" style="text-align:left;width:10%">
+										<h:outputText style="text-align:left;"
+											value="#{advancedPaymenttable.date}" />
+									</p:column>
+									<p:column headerText="Details of Service or Items Provided"
+										style="text-align:left;width:35%">
+										<h:outputText style="text-align:left;"
+											value="#{advancedPaymenttable.serviceDetails}" />
+									</p:column>
+									<p:column headerText="No. of Unit/ Rate"
+										style="text-align:right;width:10%">
+										<h:outputText style="text-align:right;"
+											value="#{advancedPaymenttable.noofUnits}" />
+									</p:column>
+									<p:column headerText="Amount Rs."
+										style="text-align:right;width:10%">
+										<h:outputText style="text-align:right;"
+											value="#{advancedPaymenttable.amount}">
+											<f:convertNumber pattern="##,###.00" />
+										</h:outputText>
+									</p:column>
+
+									<p:column headerText="" style="width:7%">
+										<p:commandLink
+											action="${gsSurveyManagementBean.delete(advancedPaymenttable.serviceDetails)}"
+											update="@form" process="@form"
+											disabled="#{gsSurveyManagementBean.generatebtn}">
+											<f:ajax render="paymentDetails" />
+											<p:graphicImage library="images" name="delete.png"
+												style="width:24px;height:24px;" title="delete"></p:graphicImage>
+										</p:commandLink>
+									</p:column>
+									<p:columnGroup type="footer">
+										<p:row>
+											<p:column colspan="3" style="text-align:right"
+												footerText="Total Fee Rs." />
+											<p:column style="text-align:right">
+												<f:facet name="footer">
+													<h:outputText value="#{gsSurveyManagementBean.totalfee}">
+														<f:convertNumber pattern="##,###.00" />
+													</h:outputText>
+												</f:facet>
+											</p:column>
+										</p:row>
+									</p:columnGroup>
+								</p:dataTable>
+							</center>
+							<br />
+							<center>
+								<p:commandButton id="cmdbtnGenerateVou" value="Generate Voucher"
+									class="mainActionbtn" ajax="false" update="@form"
+									style="width:auto;" process="@form"
+									disabled="#{gsSurveyManagementBean.generatebtn}"
+									actionListener="#{gsSurveyManagementBean.generateVoucher}">
+								</p:commandButton>
+
+
+								<p:commandButton value="Print" ajax="false" id="print"
+									styleClass="mainActionbtn"
+									actionListener="#{gsSurveyManagementBean.printVoucher}"
+									disabled="#{gsSurveyManagementBean.printbtn}"
+									onclick="PrimeFaces.monitorDownload(start, stop);"
+									oncomplete="PF('genReport').hide();"
+									update="@form cmdbtnGenerateVou">
+
+									<f:attribute name="value"
+										value="#{gsSurveyManagementBean.paymentVoucherDTO.voucherNo}"></f:attribute>
+									<p:fileDownload value="#{gsSurveyManagementBean.files}" />
+								</p:commandButton>
+
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									update="@form" process="@form" id="cmdbtnMainClear"
+									action="#{gsSurveyManagementBean.clearMain}"></p:commandButton>
+							</center>
+							<br />
+						</p:tab>
+
+
+						<!-- tab 05 -->
+						<p:tab title="Add New Location" rendered="true">
+							<br></br>
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+								layout="grid">
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="#{locationBean.codeLabel}"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText maxlength="5" style="width:120px"
+										value="#{locationBean.codeDescriptionDTO.code}"
+										disabled="#{locationBean.codeDescriptionDTO.searchedRecord}"
+										onkeyup="this.value = this.value.toUpperCase();"
+										onblur="this.value = this.value.toUpperCase();">
+										<p:keyFilter regEx="/[a-z0-9_]/i" />
+
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel
+										value="#{locationBean.description_english_Label}"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText maxlength="100" style="width:100%"
+										value="#{locationBean.codeDescriptionDTO.description_english}"
+										onkeyup="this.value = this.value.toUpperCase();"
+										onblur="this.value = this.value.toUpperCase();">
+
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel
+										value="#{locationBean.description_sinhala_Label}"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText maxlength="100" style="width:100%"
+										value="#{locationBean.codeDescriptionDTO.description_sinhala}"
+										onkeyup="this.value = this.value.toUpperCase();"
+										onblur="this.value = this.value.toUpperCase();">
+
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="#{locationBean.description_tamil_Label}"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText maxlength="100" style="width:100%"
+										value="#{locationBean.codeDescriptionDTO.description_tamil}"
+										onkeyup="this.value = this.value.toUpperCase();"
+										onblur="this.value = this.value.toUpperCase();">
+
+									</p:inputText>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel for="status"
+										value="#{msg['reference.page.status']}" />
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneRadio style="font-size:12px !important" id="status"
+										value="#{locationBean.codeDescriptionDTO.status}">
+										<f:selectItem
+											itemLabel="#{msg['reference.page.status.active']}"
+											itemValue="A" />
+										<f:selectItem
+											itemLabel="#{msg['reference.page.status.inactive']}"
+											itemValue="I" />
+									</p:selectOneRadio>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<br></br>
+							</p:panelGrid>
+							<center>
+								<p:commandButton value="Save"
+									action="#{locationBean.saveRecord}" update="@form"
+									class="mainActionbtn"></p:commandButton>
+								<p:commandButton value="Clear"
+									action="#{locationBean.clearForm}" update="@form"
+									class="mainActionbtn"></p:commandButton>
+							</center>
+
+							<br></br>
+						</p:tab>
+
+						
+					</p:tabView>
+				</h:form>
+			</div>
+		</div>
+
+		<!-- Display required field field error massage -->
+		<p:dialog styleClass="" id="frm_Tender" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlmissing']}" width="30%"
+			severity="info" widgetVar="requiredField" closeOnEscape="true"
+			resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{gsSurveyManagementBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frm_Tender"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<!-- Display alert massage -->
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Information" width="30%" severity="info"
+			widgetVar="alertMessage" closeOnEscape="true" resizable="false">
+			<h:form id="frmAlert">
+				<p:panelGrid columns="3" style="margin-top:3%"
+					columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-9"
+					layout="grid">
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<div></div>
+						<div></div>
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel style="margin-left:15%"
+							value="#{gsSurveyManagementBean.alertMsg}"></p:outputLabel>
+
+						<p:panelGrid columns="2" style="margin-top:3%"
+							columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+							<center>
+								<p:commandButton style="margin-top:10px;margin-bottom:10px"
+									process="frmAlert"
+									value="#{msg['um.employeeprofile.dlmissingclose']}"
+									onclick="PF('alertMSG').hide()">
+								</p:commandButton>
+							</center>
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+					</p:panelGrid>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		<!-- Display success massage -->
+		<p:dialog styleClass="" id="successMessage" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="Successfully Saved."></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+		<!-- Display delete massage -->
+		<p:dialog styleClass="" id="deleteMessage" global="true" modal="true"
+			header="Delete" width="30%" severity="info" widgetVar="deleteMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmDelete">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="Successfully Deleted."></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmDelete"
+						onclick="PF('deleteMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

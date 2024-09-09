@@ -1,0 +1,488 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+#Dob {
+	width: 80% !important;
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Print Offer Letter</h1>
+
+			<div style="width: 95%;" class="subDiv">
+
+				<h:form id="formOne">
+
+					<!-- Tab 01 : First row  -->
+					<p:panel>
+
+						<!-- Tab 01 > panel 01 : Bus details -->
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+
+							<!-- Tab 01 > panel 01 : row 01 -->
+							<p:outputLabel>Tender Reference No.<p:outputLabel
+									value="*" style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+							<p:selectOneMenu id="tenderNo" style="width:170px"
+								value="#{printOfferLetterBean.tenderDTO.tenderRefNo}"
+								effect="fold">
+
+
+								<p:ajax listener="#{printOfferLetterBean.ajaxFillData}"
+									update="@form" process="tenderNo" />
+
+								<f:selectItem itemLabel="--Tender Reference No.--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{printOfferLetterBean.getTenderRefNoList}" var="d"
+									itemValue="#{d.tenderRefNo}" itemLabel="#{d.tenderRefNo}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Tender Description</p:outputLabel>
+
+							<p:inputTextarea rows="3" style="width:100%" readonly="true"
+								onkeyup="this.value=this.value.toUpperCase();"
+								value="#{printOfferLetterBean.tenderDTO.tenderDes}" />
+						</p:panelGrid>
+
+						<br />
+						<!-- Tab 01 > panel 01 : Buttons -->
+						<center>
+							<p:panel>
+								<!-- Search button -->
+								<p:commandButton styleClass="mainActionbtn" value="Search"
+									update="@form,frmAlert,frmError,frmsuccess"
+									action="#{printOfferLetterBean.searchRoutes}"></p:commandButton>
+								<!-- Clear button -->
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									update="@form,frmAlert,frmError,frmsuccess"
+									action="#{printOfferLetterBean.clearAll}"></p:commandButton>
+
+							</p:panel>
+						</center>
+
+						<br />
+
+						<p:panel>
+
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+								layout="grid">
+
+
+								<p:outputLabel>Route No.<p:outputLabel value="*"
+										style="color:red;"></p:outputLabel>
+								</p:outputLabel>
+								<p:selectOneMenu id="routeNo" style="width:170px"
+									disabled="#{printOfferLetterBean.disableSecondGrid}"
+									value="#{printOfferLetterBean.tenderDTO.routeNo}" effect="fold">
+
+
+									<p:ajax listener="#{printOfferLetterBean.ajaxFillRouteData}"
+										update="@form" process="routeNo" />
+
+									<f:selectItem itemLabel="--Route No.--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{printOfferLetterBean.getRouteNoList}"
+										var="d" itemValue="#{d.routeNo}" itemLabel="#{d.routeNo}" />
+								</p:selectOneMenu>
+
+
+								<p:outputLabel> Departure<p:outputLabel value=""
+										style="color:red;"></p:outputLabel>
+								</p:outputLabel>
+								<p:inputText style="width:100%;height:18px;" maxlength="50"
+									disabled="#{printOfferLetterBean.disableSecondGrid}"
+									readonly="true" onkeyup="this.value=this.value.toUpperCase();"
+									value="#{printOfferLetterBean.tenderDTO.departure}">
+								</p:inputText>
+
+								<p:outputLabel>Serial No.<p:outputLabel value=""
+										style="color:red;"></p:outputLabel>
+								</p:outputLabel>
+								<p:inputText style="width:100%;height:18px;" maxlength="50"
+									disabled="#{printOfferLetterBean.disableSecondGrid}"
+									readonly="true" onkeyup="this.value=this.value.toUpperCase();"
+									value="#{printOfferLetterBean.tenderDTO.slNumber}">
+								</p:inputText>
+
+
+								<p:outputLabel>Arrival<p:outputLabel value=""
+										style="color:red;"></p:outputLabel>
+								</p:outputLabel>
+								<p:inputText style="width:100%;height:18px;" maxlength="50"
+									disabled="#{printOfferLetterBean.disableSecondGrid}"
+									readonly="true" onkeyup="this.value=this.value.toUpperCase();"
+									value="#{printOfferLetterBean.tenderDTO.arrival}">
+								</p:inputText>
+
+							</p:panelGrid>
+
+							<center>
+								<p:panel>
+									<!-- Search button -->
+									<p:commandButton styleClass="mainActionbtn" value="Search"
+										update="@form,frmAlert,frmError,frmsuccess"
+										disabled="#{printOfferLetterBean.disableSearchData}"
+										action="#{printOfferLetterBean.serachData}"></p:commandButton>
+									<!-- Clear button -->
+									<p:commandButton styleClass="mainActionbtn" value="Clear"
+										update="@form,frmAlert,frmError,frmsuccess"
+										disabled="#{printOfferLetterBean.disableClearTwo}"
+										action="#{printOfferLetterBean.clearTwo}"></p:commandButton>
+
+								</p:panel>
+							</center>
+
+							<h:panelGrid>
+								<p:dataTable id="abc" tableStyle="width:auto" var="d"
+									value="#{printOfferLetterBean.printList}" rows="5"
+									paginator="true" sortOrder="ascending"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15"
+									selection="#{printOfferLetterBean.selectDTO}"
+									selectionMode="single" rowKey="#{d.tenderAppNo}"
+									rowIndexVar="index"
+									emptyMessage="No tender details are available">
+
+
+									<p:ajax event="rowSelect" update="@form"
+										listener="#{printOfferLetterBean.selectRow}" process="@form" />
+
+									<p:column headerText="Route No." style="text-align: left;"
+										visible="false">
+										<h:outputText value="#{d.routeNo}" />
+									</p:column>
+									<p:column headerText="Tender Ref No." style="text-align: left;"
+										visible="true">
+										<h:outputText value="#{d.tenderRefNo}" />
+									</p:column>
+
+									<p:column headerText="Departure" style="text-align: left;"
+										visible="false">
+										<h:outputText value="" />
+									</p:column>
+									<p:column headerText="Arrival" style="text-align: left;"
+										visible="false">
+										<h:outputText value="" />
+									</p:column>
+									<p:column headerText="Effective Routes"
+										style="text-align: left;">
+										<h:outputText value="#{d.effectiveRoutes}" />
+									</p:column>
+									<p:column headerText="Application No."
+										style="text-align: left;">
+										<h:outputText value="#{d.tenderAppNo}" />
+									</p:column>
+									<p:column headerText="Name" style="text-align: left;">
+										<h:outputText value="#{d.applicantName}" />
+									</p:column>
+									<p:column headerText="Bid Price" style="text-align: left;">
+										<h:outputText value="#{d.bidPrice}" />
+									</p:column>
+									<p:column headerText="TH Price" style="text-align: left;">
+										<h:outputText value="#{d.treasureHolderPrice}" />
+									</p:column>
+									<p:column headerText="TH Price %" style="text-align: left;">
+										<h:outputText value="#{d.treasureHolderPricePercentage}" />
+									</p:column>
+									<p:column headerText="No. Of Permits" style="text-align: left;">
+										<h:outputText value="#{d.noOfPermits}" />
+									</p:column>
+									<p:column headerText="Special Remarks"
+										style="text-align: left;">
+										<h:outputText value="#{d.remark}" />
+									</p:column>
+
+									<p:column headerText="Status" style="text-align: left;">
+										<h:outputText value="#{d.tenderApplicationStatus}" />
+									</p:column>
+
+									<p:column headerText="Offer Letter Count"
+										style="text-align: left;">
+										<h:outputText value="#{d.letterCountString}" />
+									</p:column>
+
+								</p:dataTable>
+							</h:panelGrid>
+
+						</p:panel>
+					</p:panel>
+
+					<br />
+					<center>
+
+
+						<p:commandButton styleClass="mainLinkButton"
+							value="Print Offer Letter"
+							disabled="#{printOfferLetterBean.disablePrintOfferLetter}"
+							update="@form,frmAlert,frmError,frmsuccess"
+							action="#{printOfferLetterBean.printOfferLetter}"></p:commandButton>
+
+						<p:commandButton styleClass="mainLinkButton"
+							value="Print Checklist"
+							disabled="#{printOfferLetterBean.disablePrintCheckList}"
+							update="@form,frmAlert,frmError,frmsuccess"
+							action="#{printOfferLetterBean.printCheckList}"></p:commandButton>
+
+						<p:commandButton styleClass="mainLinkButton"
+							value="Print Envelope"
+							disabled="#{printOfferLetterBean.disablePrintEnvelope}"
+							update="@form,frmAlert,frmError,frmsuccess"
+							action="#{printOfferLetterBean.printEnvelope}"></p:commandButton>
+
+						<p:commandButton styleClass="mainLinkButton" value="Board Approve"
+							update="@form,frmAlert,frmError,frmsuccess"
+							disabled="#{printOfferLetterBean.disableBoardApprove}"
+							action="#{printOfferLetterBean.boardApproval}"></p:commandButton>
+
+						<p:commandButton styleClass="mainLinkButton" value="Cancel"
+							update="@form,frmAlert,frmError,frmsuccess"
+							disabled="#{printOfferLetterBean.disableCancel}"
+							action="#{printOfferLetterBean.clearThree}"></p:commandButton>
+
+					</center>
+
+				</h:form>
+				<br></br>
+
+			</div>
+		</div>
+
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{printOfferLetterBean.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{printOfferLetterBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Alert" width="30%" severity="info" widgetVar="alertMSG"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAlert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="#{printOfferLetterBean.alertMSG}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmAlert" onclick="PF('alertMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

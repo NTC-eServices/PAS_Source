@@ -1,0 +1,1397 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+	
+<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,   #bbb5b5);
+}
+
+.ui-g-6{
+background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,   #bbb5b5);
+}
+.ui-g{
+background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,   #bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+.addBtn{
+	font-weight: bold;
+	background: #141845 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 70px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-datatable-scrollable .ui-datatable-scrollable-header {
+	min-height: 20px;
+}
+
+.ui-datatable-scrollable-body {
+	height: 125px !important;
+}
+
+.editbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 25px !important;
+	width: 50px;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+</style>
+	
+	<div class="mainDiv">
+			<h1 style="margin-top: 0%; text-align: center; color: #ffffff ;background-color: #404d6f !important; "
+				class="common_form_header">Initiate Combine Time Table Generator</h1>
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmcombineTimeTable">
+				<p:panel id="panel01">
+				<p:panelGrid id="shwDetail" columns="4" columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3" layout="grid">
+					
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Route No." ></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="routeNo" style="width:50%"  value="#{initiateCombineTimeTableGeneratorBean.selectedRouteNo}" >
+									<f:selectItem itemLabel="-- Select --" itemValue="" />
+									<f:selectItems
+											value="#{initiateCombineTimeTableGeneratorBean.routeList}"
+											var="routefordropdownList"
+											itemValue="#{routefordropdownList.routeNo}"
+											itemLabel="#{routefordropdownList.routeNo}" />
+											<p:ajax listener="#{initiateCombineTimeTableGeneratorBean.generateOriginAndDestination}"
+										update="@form" />
+											
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+					
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Origin" ></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText value="#{initiateCombineTimeTableGeneratorBean.routeDTO.origin}" disabled="true" />
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Destination" ></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText value="#{initiateCombineTimeTableGeneratorBean.routeDTO.destination}" disabled="true" />
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Category" ></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="drpd-preferredLanguage" effect="fold"
+									 value="#{initiateCombineTimeTableGeneratorBean.selectedCategory}">
+								<f:selectItem itemLabel="-- Select --" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{initiateCombineTimeTableGeneratorBean.categoryList}"
+									var="d" itemValue="#{d.tempBusCategoryCode}"
+									itemLabel="#{d.tempBusCategory}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Group" ></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="group" value="#{initiateCombineTimeTableGeneratorBean.selectedGroup}" style="width:125px"  >
+					            <f:selectItem itemLabel="1" itemValue="1" />
+					            <f:selectItem itemLabel="2" itemValue="2" />
+					            <f:selectItem itemLabel="3" itemValue="3" />
+					        </p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:commandButton style="margin-left:50%;margin-top:5%;" styleClass="mainActionbtn"  value="Search" 
+							action="#{initiateCombineTimeTableGeneratorBean.searchBtnAction}" update="midPointsOtoDNormal, midPointsOtoDExpress, 
+							midPointsOtoDLuxury, midPointsOtoDSemiLuxury, midPointsOtoDSuperLuxury , midPointsDtoONormal, midPointsDtoOExpress, 
+							midPointsDtoODLuxury, midPointsDtoOSemiLuxury, midPointsDtoOSuperLuxury" 
+							process="@form"></p:commandButton>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:commandButton styleClass="mainActionbtn" style="margin-top:4%;" value="Clear" action="#{initiateCombineTimeTableGeneratorBean.clearBtnAction}" ></p:commandButton>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+					
+					
+					</p:panelGrid>
+			 </p:panel>
+
+				<p:panelGrid id="shwTableDetail" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid" >
+				
+						<p:dataTable id="midPointsOtoDNormal" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsNormalList}" 
+							rows="10"
+	                 paginator="true"
+	                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15" 
+						 rendered="#{initiateCombineTimeTableGeneratorBean.normal}" >          
+					        <f:facet name="header">
+					            Origin to Destination - <h:outputLabel style="color:#2771e4;"> NORMAL </h:outputLabel>
+					        </f:facet>          
+					        <p:columns headerText="" value="#{initiateCombineTimeTableGeneratorBean.columnsNormal}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputText value="#{column.header}" />
+					            </f:facet>
+					            <h:outputText value="#{car[column.property]}" />
+					        </p:columns>
+					    </p:dataTable>
+					
+						<p:dataTable id="midPointsDtoONormal" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsNormalDtoO}"  
+						rows="10"
+	                 paginator="true"
+	                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15" 
+						 rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+				        <f:facet name="header">
+				            Destination to Origin - <h:outputLabel style="color:#2771e4;"> NORMAL </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsNormalDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				   	 </p:dataTable>
+				   	 
+				   	 <p:dataTable id="midPointsOtoDExpress" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsExpress}" 
+						 style="margin-top:3%;" 
+						rows="10"
+	                 paginator="true"
+	                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15" 
+						 rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+				        <f:facet name="header">
+				            Origin to Destination - <h:outputLabel style="color:#2771e4;"> EXEPRESS WAY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsExpress}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsDtoOExpress" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsExpressDtoO}" 
+				     style="margin-top:3%;"
+				     rows="10"
+	                 paginator="true"
+	                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15" 
+					 rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+				        <f:facet name="header">
+				            Destination to Origin - <h:outputLabel style="color:#2771e4;"> EXEPRESS WAY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsExpressDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+					
+					<p:dataTable id="midPointsOtoDLuxury" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsLuxury}" 
+						 style="margin-top:3%;" 
+						rows="10"
+	                 paginator="true"
+	                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15" 
+						 rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+				        <f:facet name="header">
+				            Origin to Destination - <h:outputLabel style="color:#2771e4;"> LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsLuxury}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+					
+					<p:dataTable id="midPointsDtoODLuxury" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsLuxuryDtoO}" 
+							 style="margin-top:3%;" 
+							 rows="10"
+	                 paginator="true"
+	                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15" 
+							  rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+				        <f:facet name="header">
+				           Destination to Origin - <h:outputLabel style="color:#2771e4;"> LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsOtoDSemiLuxury" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsSemiLuxury}" 
+				    	 style="margin-top:3%;" 
+				    	 rows="10"
+	                 paginator="true"
+	                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15" 
+				    	  rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+				        <f:facet name="header">
+				            Origin to Destination - <h:outputLabel style="color:#2771e4;"> SEMI-LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsSemiLuxury}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsDtoOSemiLuxury" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsSemiLuxuryDtoO}" 
+						 style="margin-top:3%;" 
+						 rows="10"
+	                 paginator="true"
+	                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15" 
+						  rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+				        <f:facet name="header">
+				            Destination to Origin - <h:outputLabel style="color:#2771e4;"> SEMI-LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsOtoDSuperLuxury" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsSuperLuxury}" 
+				    	 style="margin-top:3%;" 
+						rows="10"
+	                 paginator="true"
+	                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15" 
+						 rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+				        <f:facet name="header">
+				             Origin to Destination - <h:outputLabel style="color:#2771e4;"> SUPER LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsSuperLuxury}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsDtoOSuperLuxury" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointsSuperLuxuryDtoO}" 
+							 style="margin-top:3%;" 
+							 rows="10"
+			                 paginator="true"
+			                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			                 rowsPerPageTemplate="5,10,15" 
+							 rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+				        <f:facet name="header">
+				            Destination to Origin - <h:outputLabel style="color:#2771e4;"> SUPER LUXURY </h:outputLabel> 
+				        </f:facet>          
+				        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				 </p:panelGrid>
+
+				<!-- <p:panelGrid id="shwDetail2" columns="4" columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3" layout="grid" style="margin-top:2%;" rendered="#{initiateCombineTimeTableGeneratorBean.similarRoutesData}">
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid >
+						<p:outputLabel value="Similar Routes" ></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectCheckboxMenu id="multipleRoutes" value="#{initiateCombineTimeTableGeneratorBean.selectedRoutes}" label="Cities" multiple="true"
+                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px" >
+				            <f:selectItems 
+										value="#{initiateCombineTimeTableGeneratorBean.similarRoutesList}"
+										var="routefordropdownList"
+										itemValue="#{routefordropdownList.routeNo}"
+										itemLabel="#{routefordropdownList.routeDes} - #{routefordropdownList.routeNo}" />
+							<p:ajax listener="#{initiateCombineTimeTableGeneratorBean.onSimilarRoutedSelect}"
+										update="@form" />
+				        </p:selectCheckboxMenu>        				
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:commandButton styleClass="mainActionbtn" value="Search" action="#{initiateCombineTimeTableGeneratorBean.searchOnSelectSimilarRoutes}" 
+						 update="routeAccPnl:table1Nor, routeAccPnl:table1Ex, routeAccPnl:table1Lux, routeAccPnl:table1SemiLux, routeAccPnl:table1SuperLux, 
+						 		routeAccPnl:table2Nor, routeAccPnl:table2Ex, routeAccPnl:table2Lux, routeAccPnl:table2SemiLux, routeAccPnl:table2SuperLux, 
+						 		routeAccPnl:table3Nor, routeAccPnl:table3Ex, routeAccPnl:table3Lux, routeAccPnl:table3SemiLux, routeAccPnl:table3SuperLux, 
+						 		routeAccPnl:table4Nor, routeAccPnl:table4Ex, routeAccPnl:table4Lux, routeAccPnl:table4SemiLux, routeAccPnl:table4SuperLux,
+						 		routeAccPnl:table5Nor, routeAccPnl:table5Ex, routeAccPnl:table5Lux, routeAccPnl:table5SemiLux, routeAccPnl:table5SuperLux,
+						 		 routeAccPnl:similarRouteOneTb" process="@this,routeAccPnl:similarRouteOneTb, 
+						 		 routeAccPnl:table1NorDtoO, routeAccPnl:table1ExDtoO, routeAccPnl:table1LuxDtoO, routeAccPnl:table1SemiLuxDtoO, routeAccPnl:table1SuperLuxDtoO,
+						 		 routeAccPnl:table2NorDtoO, routeAccPnl:table2ExDtoO, routeAccPnl:table2LuxDtoO, routeAccPnl:table2SemiLuxDtoO, routeAccPnl:table2SuperLuxDtoO,
+						 		 routeAccPnl:table3NorDtoO, routeAccPnl:table3ExDtoO, routeAccPnl:table3LuxDtoO, routeAccPnl:table3SemiLuxDtoO, routeAccPnl:table3SuperLuxDtoO,
+						 		 routeAccPnl:table4NorDtoO, routeAccPnl:table4ExDtoO, routeAccPnl:table4LuxDtoO, routeAccPnl:table4SemiLuxDtoO, routeAccPnl:table4SuperLuxDtoO,
+						 		 routeAccPnl:table5NorDtoO, routeAccPnl:table5ExDtoO, routeAccPnl:table5LuxDtoO, routeAccPnl:table5SemiLuxDtoO, routeAccPnl:table5SuperLuxDtoO"></p:commandButton>
+					</p:panelGrid>
+				</p:panelGrid>	 -->
+				
+				<!-- <p:accordionPanel id="routeAccPnl" activeIndex="-1">
+			        <p:tab id="similarRouteOneTb" title="Route - #{initiateCombineTimeTableGeneratorBean.similarRouteOne}" rendered="#{initiateCombineTimeTableGeneratorBean.similarRouteOneRender}"   >
+			        	<p:panelGrid id="shwTableDetailRouteOneTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+				        	   <p:dataTable id="table1Nor" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneNormal}" 
+								 scrollable="true" scrollHeight="100%" scrollWidth="90%" style="margin-top:3%;" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneNormal}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+								</p:dataTable>
+				        		<p:dataTable id="table1NorDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneNormalDtoO}" 
+									scrollable="true" scrollHeight="100%" scrollWidth="90%" style="margin-top:3%;" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneNormalDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        
+								</p:dataTable>
+			        	
+					        	<p:dataTable id="table1Ex" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneExpress}" 
+									 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}" 
+									 > 
+									    
+								        <f:facet name="header">
+								             Origin to Destination - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneExpress}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								       
+								</p:dataTable>
+								<p:dataTable id="table1ExDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneExpressDtoO}" 
+									 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneExpressDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								       
+								</p:dataTable>
+								
+			        			<p:dataTable id="table1Lux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneLuxury}"  style="margin-top:3%;" 
+									scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+								        <f:facet name="header">
+								             Origin to Destination - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneLuxury}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        
+								</p:dataTable>
+								<p:dataTable id="table1LuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneLuxuryDtoO}"  style="margin-top:3%;" 
+									scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        
+								</p:dataTable>
+								
+								<p:dataTable id="table1SemiLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneSemiLuxury}" 
+									style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+								        <f:facet name="header">
+								             Origin to Destination - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneSemiLuxury}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        
+								</p:dataTable>
+								<p:dataTable id="table1SemiLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneSemiLuxuryDtoO}" 
+									style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        
+								</p:dataTable>
+						
+								<p:dataTable id="table1SuperLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneSuperLuxury}"  
+									style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+								        <f:facet name="header">
+								             Origin to Destination - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneSuperLuxury}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        
+								</p:dataTable>
+								<p:dataTable id="table1SuperLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblOneSuperLuxuryDtoO}"  
+									style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblOneSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        
+								</p:dataTable>
+			        	</p:panelGrid>			
+			        </p:tab>
+			        
+			        <p:tab id="similarRouteTwoTb" title="Route - #{initiateCombineTimeTableGeneratorBean.similarRouteTwo}" rendered="#{initiateCombineTimeTableGeneratorBean.similarRouteTwoRender}" >
+			        	<p:panelGrid id="shwTableDetailRouteTwoTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+			        		<p:dataTable id="table2Nor" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoNormal}" 
+					        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+								        <f:facet name="header" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">
+								             Origin to Destination - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoNormal}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        
+							</p:dataTable>
+							<p:dataTable id="table2NorDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoNormalDtoO}" 
+					        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+								        <f:facet name="header" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">
+								             Destination to Origin - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoNormalDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								         
+							</p:dataTable>
+							
+							<p:dataTable id="table2Ex" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoExpress}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+						        <f:facet name="header">
+						             Origin to Destination - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoExpress}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						         
+							</p:dataTable>
+							<p:dataTable id="table2ExDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoExpressDtoO}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoExpressDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         
+							</p:dataTable>
+							
+							<p:dataTable id="table2Lux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoLuxury}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         
+							</p:dataTable>
+							<p:dataTable id="table2LuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoLuxuryDtoO}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         
+							</p:dataTable>
+							
+							<p:dataTable id="table2SemiLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoSemiLuxury}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoSemiLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         
+							</p:dataTable>
+							<p:dataTable id="table2SemiLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoSemiLuxuryDtoO}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         
+							</p:dataTable>
+							
+							<p:dataTable id="table2SuperLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoSuperLuxury}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoSuperLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         
+							</p:dataTable>
+							<p:dataTable id="table2SuperLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblTwoSuperLuxuryDtoO}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblTwoSuperLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         
+							</p:dataTable>
+							
+			        	</p:panelGrid>
+			        </p:tab>
+		        
+		        	<p:tab id="similarRouteThreeTb" title="Route - #{initiateCombineTimeTableGeneratorBean.similarRouteThree}"  rendered="#{initiateCombineTimeTableGeneratorBean.similarRouteThreeRender}"  >
+			        	<p:panelGrid id="shwTableDetailRouteThreeTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+				        	<p:dataTable id="table3Nor" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeNormal}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeNormal}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         
+							</p:dataTable>
+							<p:dataTable id="table3NorDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeNormalDtoO}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeNormalDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							
+							<p:dataTable id="table3Ex" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeExpress}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeExpress}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table3ExDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeExpressDtoO}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeExpressDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+			        	
+				        	<p:dataTable id="table3Lux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeLuxury}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table3LuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeLuxuryDtoO}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							
+							<p:dataTable id="table3SemiLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeSemiLuxury}" 
+							 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+						        <f:facet name="header">
+						             Origin to Destination - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeSemiLuxury}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						        
+						</p:dataTable>
+						<p:dataTable id="table3SemiLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeSemiLuxuryDtoO}" 
+							 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+						        <f:facet name="header">
+						             Destination to Origin - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						        
+						</p:dataTable>
+						
+						<p:dataTable id="table3SuperLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeSuperLuxury}" 
+							style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+						        <f:facet name="header">
+						             Origin to Destination - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeSuperLuxury}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						       
+						</p:dataTable>
+						<p:dataTable id="table3SuperLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblThreeSuperLuxuryDtoO}" 
+							style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+						        <f:facet name="header">
+						             Destination to Origin - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblThreeSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						        
+						</p:dataTable>
+			         </p:panelGrid>
+			        </p:tab>
+		        
+		        	<p:tab id="similarRouteFourTb" title="Route - #{initiateCombineTimeTableGeneratorBean.similarRouteFour}" rendered="#{initiateCombineTimeTableGeneratorBean.similarRouteFourRender}" >
+			        	<p:panelGrid id="shwTableDetailRouteFourTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+			        		<p:dataTable id="table4Nor" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourNormal}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+							        <f:facet name="header" >
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourNormal}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table4NorDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourNormalDtoO}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+							        <f:facet name="header" >
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourNormalDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							
+							<p:dataTable id="table4Ex" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourExpress}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourExpress}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table4ExDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourExpressDtoO}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourExpressDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							       
+							</p:dataTable>
+						
+							<p:dataTable id="table4Lux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourLuxury}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table4LuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourLuxuryDtoO}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+							        <f:facet name="header">
+							            Destination to Origin - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							
+							<p:dataTable id="table4SemiLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourSemiLuxury}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourSemiLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table4SemiLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourSemiLuxuryDtoO}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							       
+							</p:dataTable>
+							
+							<p:dataTable id="table4SuperLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourSuperLuxury}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourSuperLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table4SuperLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFourSuperLuxuryDtoO}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFourSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+			        	</p:panelGrid>
+			        </p:tab>
+		        	
+		       		<p:tab id="similarRouteFiveTb" title="Route - #{initiateCombineTimeTableGeneratorBean.similarRouteFive}"  rendered="#{initiateCombineTimeTableGeneratorBean.similarRouteFiveRender}"  >
+			        	<p:panelGrid id="shwTableDetailRouteFiveTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+			        		<p:dataTable id="table5Nor" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveNormal}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+							        <f:facet name="header" >
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiveNormal}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table5NorDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveNormalDtoO}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.normal}">          
+							        <f:facet name="header" >
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiveNormalDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							
+				        	<p:dataTable id="table5Ex" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveExpress}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiveExpress}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table5ExDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveExpressDtoO}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.express}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiveExpressDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							
+							<p:dataTable id="table5Lux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveLuxury}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiverLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table5LuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveLuxuryDtoO}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.luxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiverLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							
+							<p:dataTable id="table5SemiLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveSemiLuxury}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiveSemiLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+							<p:dataTable id="table5SemiLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveSemiLuxuryDtoO}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiveSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							       
+							</p:dataTable>
+							
+							<p:dataTable id="table5SuperLux" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveSuperLuxury}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiveSuperLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+								<p:dataTable id="table5SuperLuxDtoO" var="car" value="#{initiateCombineTimeTableGeneratorBean.midPointTblFiveSuperLuxuryDtoO}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{initiateCombineTimeTableGeneratorBean.superLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#2771e4;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{initiateCombineTimeTableGeneratorBean.columnsTblFiveSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        
+							</p:dataTable>
+			        	</p:panelGrid>
+			        </p:tab>
+		       	
+		        </p:accordionPanel> -->
+								
+				
+				</h:form>
+
+		<!-- <p:dialog header="Edit Midpoints" id="dlgEditMidpoints" widgetVar="dlgEditMidpoints" minHeight="40">
+		 <h:form>
+		   <table>
+			   	<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint1}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender1}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint1}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender1}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint2}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender2}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint2}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender2}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint3}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender3}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint3}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender3}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint4}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender4}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint4}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender4}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint5}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender5}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint5}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender5}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint6}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender6}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint6}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender6}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint7}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender7}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint7}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender7}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint8}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender8}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint8}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender8}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint9}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender9}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint9}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender9}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint10}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender10}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint10}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender10}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint11}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender11}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint11}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender11}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint12}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender12}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint12}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender12}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint13}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender13}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint13}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender13}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint14}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender14}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint14}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender14}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint15}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender15}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint15}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender15}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint16}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender16}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint16}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender16}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint17}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender17}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint17}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender17}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint18}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender18}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint18}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender18}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint9}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender9}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint9}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender9}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint20}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender20}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint20}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender20}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint21}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender21}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint21}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender21}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint22}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender22}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint22}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender22}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint23}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender23}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint23}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender23}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint24}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender24}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint24}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender24}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint25}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender25}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint25}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender25}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint26}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender26}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint26}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender26}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint27}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender27}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint27}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender27}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint28}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender28}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint28}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender28}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint29}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender29}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint29}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender29}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint30}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender30}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint30}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender30}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint31}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender31}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint31}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender31}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint32}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender32}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint32}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender32}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint33}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender33}" /></td>
+					<td><p:inputMask  value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint33}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender33}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint34}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender34}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint34}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender34}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint35}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender35}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint35}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender35}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint36}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender36}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint36}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender36}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint37}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender37}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint37}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender37}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint38}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender38}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint38}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender38}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint39}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender39}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint39}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender39}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.midPoint40}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender40}" /></td>
+					<td><p:inputMask value="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpoint40}" rendered="#{initiateCombineTimeTableGeneratorBean.editMidpointDTO.newMidpointRender40}" mask="99:99"/></td>
+				</tr>
+		   </table>
+		   
+		    <p:commandButton title="Save" process="@all" action="#{initiateCombineTimeTableGeneratorBean.saveEditsButtonAction}"  styleClass="editbtn" style="overflow:visible" >
+            </p:commandButton>
+		   </h:form>
+		</p:dialog>		 -->		
+				
+			</div>
+	</div>
+	
+	</ui:define>
+</ui:composition>

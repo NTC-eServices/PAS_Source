@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2021-04-05T10:13:14 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InvestigationReport" pageWidth="595" pageHeight="842" columnWidth="538" leftMargin="37" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="4f6b44a2-6c54-4c61-811b-4561f9b960f6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC_Dev.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<subDataset name="countOfSuspendDriverCOnductor" uuid="ab713616-7242-4d1d-ab69-915d9f3bdac4">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC_Dev.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(suspend_ref_no ) from public.nt_t_suspend_master
+where suspend_status ='A'
+and suspend_current_status ='DA'
+and suspend_category in('C','D')
+and to_char(created_date,'yyyy-MM-dd')>= $P{P_Start_Date} 
+and to_char(created_date,'yyyy-MM-dd')<=  $P{P_End_Date}]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+	</subDataset>
+	<subDataset name="CountOfSuspendPermits" uuid="5f5d7044-9bec-499e-ad9e-d18c5441e13b">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC_Dev.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(suspend_ref_no ) from public.nt_t_suspend_master
+where suspend_status ='A'
+and suspend_current_status ='DA'
+and suspend_category in('P')
+and to_char(created_date,'yyyy-MM-dd')>= $P{P_Start_Date} 
+and to_char(created_date,'yyyy-MM-dd')<=  $P{P_End_Date}]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+	</subDataset>
+	<parameter name="P_Start_Date" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2019-01-31"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_End_Date" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2019-12-31"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_Offence" class="java.lang.String"/>
+	<parameter name="P_year" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2019"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select inv_offence_type_code ,
+case when inv_complete_offence_count is null then '-' else inv_complete_offence_count end as inv_complete_offence_count,
+case when inv_closed_offence_count is null then '-' else inv_closed_offence_count end as inv_closed_offence_count,
+inv_ammount ,
+cast( inv_complete_offence_count  as int) as complteOffence,
+cast( inv_closed_offence_count  as int) as closedOffence
+from  public.nt_temp_investigation_report
+order by inv_offence_type_code]]>
+	</queryString>
+	<field name="inv_offence_type_code" class="java.lang.String"/>
+	<field name="inv_complete_offence_count" class="java.lang.String"/>
+	<field name="inv_closed_offence_count" class="java.lang.String"/>
+	<field name="inv_ammount" class="java.math.BigDecimal"/>
+	<field name="complteoffence" class="java.lang.Integer"/>
+	<field name="closedoffence" class="java.lang.Integer"/>
+	<variable name="inv_ammount1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{inv_ammount}]]></variableExpression>
+	</variable>
+	<variable name="complteoffence1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{complteoffence}]]></variableExpression>
+	</variable>
+	<variable name="closedoffence1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{closedoffence}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="500" height="30" isPrintWhenDetailOverflows="true" uuid="f4463b02-2935-4228-b443-e9b1788391d4">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="Iskoola Pota" size="14" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Start_Date}+" සිට " +$P{P_End_Date}  +" කාලසීමාවට අදාල "+"\n" +"කොන්දේසි කඩකිරීම්"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="61" isPrintWhenDetailOverflows="true" uuid="00d6659a-f027-41c2-a9e3-bcf4fb96f272"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[OFFENCES]]></text>
+			</staticText>
+			<textField pattern="yyyy">
+				<reportElement x="110" y="0" width="124" height="61" isPrintWhenDetailOverflows="true" uuid="ad6d093d-9bae-438d-b433-5dfce89902da"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_year} + " වර්ශය තුළ ලද කොන්දේසි කඩකිරීම් ප්‍රමාණය​"]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy">
+				<reportElement x="234" y="0" width="266" height="30" isPrintWhenDetailOverflows="true" uuid="c05517b8-286f-4ce2-8716-48cbc191ba40"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_year} + "  වර්ශය තුළ අවසන් කරන ලද  සියළුම  කොන්දේසි කඩකිරීම් ප්‍රමාණය හා පරිපාලන ගාස්තු​"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="234" y="31" width="140" height="30" isPrintWhenDetailOverflows="true" uuid="ffb2dbda-9f17-410f-b03f-a4a7869e0a6a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota"/>
+				</textElement>
+				<text><![CDATA[කඩකිරීම් ප්‍රමාණය   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="31" width="126" height="30" isPrintWhenDetailOverflows="true" uuid="6daafcac-10f2-4aca-ae15-738c9b62b35a"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota"/>
+				</textElement>
+				<text><![CDATA[පරිපාලන ගාස්තු]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="500" height="20" uuid="3e8c4e7a-2586-4802-af99-79f336c7b480"/>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="110" height="20" uuid="61753aef-27ec-48dc-91f9-dc3321950ac6"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{inv_offence_type_code}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="110" y="0" width="124" height="20" uuid="f755a9e4-1cfb-498e-aa20-955bd6620def"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{inv_complete_offence_count}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="234" y="0" width="140" height="20" uuid="1168b1f8-203d-4cca-9774-f48b648a06f6"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{inv_closed_offence_count}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="374" y="0" width="126" height="20" uuid="8ee50b87-bba0-47fb-8b55-5e30b175c62f"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{inv_ammount}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="170" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="20" isPrintWhenDetailOverflows="true" uuid="1b13c6ba-4fb9-4a46-a59e-1573e85146a8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="280" height="20" isPrintWhenDetailOverflows="true" uuid="dc400c03-e059-477c-9d4b-78ea36ccaf15">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[පුහුණුවට යොමු කරන ලද ප්‍රමාණය​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="450" height="20" isPrintWhenDetailOverflows="true" uuid="3ac59386-241b-47cd-a07b-c910840b7bdc">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[සහකාර අධ්‍යක්‍ෂ (තත්ව ආරක්‍ෂණ  හා බාහිර  සම්බන්ධතා)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="125" width="450" height="20" isPrintWhenDetailOverflows="true" uuid="77b19e43-fa3d-4f1a-b21e-004f4fcfbd55">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[ජාතික  ගමනාගමන  කොමිෂන්  සභාව​]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="374" y="0" width="126" height="20" uuid="80908278-7359-4268-9e72-7330158f8ce8"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{inv_ammount1}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement positionType="Float" x="280" y="30" width="90" height="20" uuid="2971da11-b636-433b-abe7-9701e146b51f"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="CountOfSuspendPermits" uuid="a37dae99-7a90-4eb8-93b0-5594708b5a1c">
+						<datasetParameter name="P_Start_Date">
+							<datasetParameterExpression><![CDATA[$P{P_Start_Date}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="P_End_Date">
+							<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="90">
+						<textField>
+							<reportElement positionType="Float" x="0" y="0" width="90" height="20" isPrintWhenDetailOverflows="true" uuid="437f2953-0a44-4866-be75-31c6dab0bd4e"/>
+							<textElement>
+								<font fontName="Iskoola Pota"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="280" y="50" width="90" height="20" uuid="8aea4bb4-7925-4fcb-a857-1e043d9f8c56"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="countOfSuspendDriverCOnductor" uuid="9839909e-8240-4812-9c05-03c729c8f3b9">
+						<datasetParameter name="P_End_Date">
+							<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="P_Start_Date">
+							<datasetParameterExpression><![CDATA[$P{P_Start_Date}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="90">
+						<textField>
+							<reportElement positionType="Float" x="0" y="0" width="90" height="20" isPrintWhenDetailOverflows="true" uuid="079d974e-0ee3-476d-ad44-f3d41d9490a2"/>
+							<textElement>
+								<font fontName="Iskoola Pota"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField pattern=" dd-MM-yyyy">
+				<reportElement x="0" y="139" width="100" height="20" uuid="32f44ba0-7033-4d61-b976-5430dbd6a549"/>
+				<textElement>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="280" height="20" isPrintWhenDetailOverflows="true" uuid="b0882206-5aca-4bf4-81c9-a634c8409f09">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[මගී සේවා  අවසරපත්‍ර අත්හිටුවන  ලද ප්‍රමාණය​ - ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="280" height="20" isPrintWhenDetailOverflows="true" uuid="3978e194-16fc-4119-aafc-5fa8d1666609">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[මගී සේවා  අවසරපත්‍ර අත්හිටුවන  ලද ප්‍රමාණය​ - ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="0" width="124" height="20" uuid="567d1ed0-663b-4048-8bf5-665b96c75d68"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{complteoffence1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="234" y="0" width="140" height="20" uuid="857c3652-95ad-4fa8-bb99-76667e2b1e46"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{closedoffence1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

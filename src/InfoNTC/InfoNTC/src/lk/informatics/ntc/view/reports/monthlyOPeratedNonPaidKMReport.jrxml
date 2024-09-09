@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthlyOPeratedKMReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="56397351-ab21-4252-b2ea-2acf9a0c90ee">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="231"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="762"/>
+	<subDataset name="KM" uuid="e709c72b-02c7-4149-8dde-1cf90fe2d491">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_distance" class="java.lang.Integer"/>
+		<parameter name="P_service_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select lss_no_of_turns,lss_school_req_running_days,lss_month,lss_service_no,lss_school_req_running_days*lss_no_of_turns* $P{P_distance}  as val
+from nt_m_log_sheet_summary inner join nt_m_log_sheets 
+on nt_m_log_sheets.los_seq = nt_m_log_sheet_summary.lss_log_sheet_master_seq inner join nt_m_sisu_permit_hol_service_info
+on nt_m_sisu_permit_hol_service_info.sps_service_ref_no = nt_m_log_sheets.los_std_service_ref_no 
+where sps_service_no is not null
+and lss_service_no is not null
+and lss_service_no= $P{P_service_no} 
+group by lss_service_no,lss_no_of_turns,lss_school_req_running_days,lss_month]]>
+		</queryString>
+		<field name="lss_no_of_turns" class="java.math.BigDecimal"/>
+		<field name="lss_school_req_running_days" class="java.math.BigDecimal"/>
+		<field name="lss_month" class="java.lang.String"/>
+		<field name="lss_service_no" class="java.lang.String"/>
+		<field name="val" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="getProvince" uuid="74a7b0c2-9a5f-4fff-8559-a608ee0f2b79">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Provonce_code" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select * from nt_r_province where code = $P{P_Provonce_code}]]>
+		</queryString>
+		<field name="code" class="java.lang.String"/>
+		<field name="description" class="java.lang.String"/>
+		<field name="description_si" class="java.lang.String"/>
+		<field name="description_ta" class="java.lang.String"/>
+		<field name="active" class="java.lang.String"/>
+		<field name="created_by" class="java.lang.String"/>
+		<field name="created_date" class="java.sql.Timestamp"/>
+		<field name="modified_by" class="java.lang.String"/>
+		<field name="modified_date" class="java.sql.Timestamp"/>
+	</subDataset>
+	<subDataset name="getDistrict" uuid="f30e4d95-cc4d-4b2b-b327-37734e213888">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_district_code" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select * from nt_r_district where code=  $P{P_district_code}]]>
+		</queryString>
+		<field name="code" class="java.lang.String"/>
+		<field name="description" class="java.lang.String"/>
+		<field name="description_si" class="java.lang.String"/>
+		<field name="description_ta" class="java.lang.String"/>
+		<field name="active" class="java.lang.String"/>
+		<field name="created_by" class="java.lang.String"/>
+		<field name="created_date" class="java.sql.Timestamp"/>
+		<field name="modified_by" class="java.lang.String"/>
+		<field name="modified_date" class="java.sql.Timestamp"/>
+		<field name="province_code" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_start_date" class="java.lang.String"/>
+	<parameter name="P_end_date" class="java.lang.String"/>
+	<parameter name="P_province_code" class="java.lang.String"/>
+	<parameter name="P_district_code" class="java.lang.String"/>
+	<parameter name="P_is_sltb" class="java.lang.String"/>
+	<parameter name="P_national_logo" class="java.lang.String"/>
+	<parameter name="P_ntc_logo" class="java.lang.String"/>
+	<parameter name="P_start_month_value" class="java.lang.Integer"/>
+	<parameter name="P_selected_year" class="java.lang.String"/>
+	<parameter name="P_end_month_value" class="java.lang.Integer"/>
+	<parameter name="P_date_range" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select distinct nt_m_sisu_permit_hol_service_info.sps_service_ref_no,
+nt_m_sisu_permit_hol_service_info.sps_operator_name,nt_m_sisu_permit_hol_service_info.sps_origin,
+nt_m_sisu_permit_hol_service_info.sps_destination,lss_service_no,nt_m_sisu_permit_hol_service_info.sps_distance,
+(SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 1 AND $P{P_end_month_value} >= 1 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'JANUARY'))) as JAN,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 2 AND $P{P_end_month_value} >= 2 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and(lss_year =$P{P_selected_year} ) and
+  (lss_month = 'FEBRUARY'))) as FEB,
+  (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 3 AND $P{P_end_month_value} >= 3 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and(lss_year =$P{P_selected_year} ) and
+  (lss_month = 'MARCH'))) as MAR,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 4 AND $P{P_end_month_value} >= 4 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'APRIL'))) as APR,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 5 AND $P{P_end_month_value} >= 5 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'MAY'))) as MAY,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 6 AND $P{P_end_month_value} >= 6 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'JUNE'))) as JUN,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 7 AND $P{P_end_month_value} >= 7THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'JULY'))) as JUL,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 8 AND $P{P_end_month_value} >= 8 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'AUGUST'))) as AUG,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 9 AND $P{P_end_month_value} >= 9 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'SEPTEMBER'))) as SEP,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 10 AND $P{P_end_month_value} >= 10 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'OCTOBER'))) as OCT,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 11 AND $P{P_end_month_value} >= 11 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'NOVEMBER'))) as NOV,
+ (SELECT 
+            CASE 
+                WHEN $P{P_start_month_value} <= 12 AND $P{P_end_month_value} >= 12 THEN sum(lss_no_of_turns* CAST(coalesce(sps_distance, '0') as decimal))
+                ELSE 0
+            END
+from public.nt_m_log_sheet_summary
+where ((lss_service_no =sps_service_no) and (lss_year =$P{P_selected_year} ) and
+  (lss_month = 'DECEMBER'))) as DEC
+from nt_m_log_sheet_summary inner join nt_m_log_sheets 
+on nt_m_log_sheets.los_seq = nt_m_log_sheet_summary.lss_log_sheet_master_seq inner join nt_m_sisu_permit_hol_service_info
+on nt_m_sisu_permit_hol_service_info.sps_service_ref_no = nt_m_log_sheets.los_std_service_ref_no 
+inner join nt_t_sm_bulk_payment on nt_t_sm_bulk_payment.sbpt_log_summary_seq = nt_m_log_sheet_summary.lss_seq 
+inner join nt_m_sm_bulk_payment on nt_m_sm_bulk_payment.sbp_voucher_no = nt_t_sm_bulk_payment.sbpt_voucher_no 
+where sps_service_no is not null
+and lss_year = $P{P_selected_year}
+and EXTRACT(MONTH FROM TO_DATE(lss_month, 'Month')) BETWEEN $P{P_start_month_value} AND $P{P_end_month_value}
+and is_sltb =case when   $P{P_is_sltb} is null then is_sltb else  $P{P_is_sltb} end
+and lss_service_no is not null
+and nt_m_sisu_permit_hol_service_info.sps_status not in('I')
+and sps_province =  case when  $P{P_province_code}     is null then sps_province else  $P{P_province_code}   end
+and sps_district_code = case when  $P{P_district_code}    is null then sps_district_code else  $P{P_district_code}   end
+and sbp_is_dg_approval is null 
+order by nt_m_sisu_permit_hol_service_info.sps_operator_name]]>
+	</queryString>
+	<field name="sps_service_ref_no" class="java.lang.String"/>
+	<field name="sps_operator_name" class="java.lang.String"/>
+	<field name="sps_origin" class="java.lang.String"/>
+	<field name="sps_destination" class="java.lang.String"/>
+	<field name="lss_service_no" class="java.lang.String"/>
+	<field name="sps_distance" class="java.lang.String"/>
+	<field name="jan" class="java.math.BigDecimal"/>
+	<field name="feb" class="java.math.BigDecimal"/>
+	<field name="mar" class="java.math.BigDecimal"/>
+	<field name="apr" class="java.math.BigDecimal"/>
+	<field name="may" class="java.math.BigDecimal"/>
+	<field name="jun" class="java.math.BigDecimal"/>
+	<field name="jul" class="java.math.BigDecimal"/>
+	<field name="aug" class="java.math.BigDecimal"/>
+	<field name="sep" class="java.math.BigDecimal"/>
+	<field name="oct" class="java.math.BigDecimal"/>
+	<field name="nov" class="java.math.BigDecimal"/>
+	<field name="dec" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="177" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="120" width="100" height="18" uuid="7422fa2a-59ff-4f1c-8c6f-cfe12982ce73">
+					<printWhenExpression><![CDATA[$P{P_province_code}.equals( null ) || $P{P_province_code}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[Province  : All]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="100" height="18" uuid="c9ebcce1-8c79-4cbd-b443-3d3ef6b3c91e">
+					<printWhenExpression><![CDATA[$P{P_district_code}.equals( null ) || $P{P_district_code}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[District     : All]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="0" y="120" width="550" height="20" uuid="e9849aa2-0bca-453f-95f9-a48359063651"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="getProvince" uuid="23d1bb48-1aaa-4672-9a75-3002a91a03c4">
+						<datasetParameter name="P_Provonce_code">
+							<datasetParameterExpression><![CDATA[$P{P_province_code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="550">
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="550" height="20" isPrintWhenDetailOverflows="true" uuid="0755f10c-40d8-4789-b21a-41c06705f4b3"/>
+							<textElement verticalAlignment="Middle">
+								<font size="10" isBold="false"/>
+								<paragraph leftIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[!$F{description}.isEmpty()?  "Province :  "+$F{description}:"Province : All "]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="0" y="138" width="550" height="20" uuid="7cb698eb-9aa8-455b-8c9c-a7e6157c5857"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="getDistrict" uuid="ca0a1d19-5f41-462b-8b96-0e934b3b96ac">
+						<datasetParameter name="P_district_code">
+							<datasetParameterExpression><![CDATA[$P{P_district_code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="550">
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="550" height="20" isPrintWhenDetailOverflows="true" uuid="ec4c1e4f-f4f4-43cb-8995-435a91e246d4"/>
+							<textElement verticalAlignment="Middle">
+								<font size="10" isBold="false"/>
+								<paragraph leftIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{description}.isEmpty()?"District : All ":  "District :  "+$F{description}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="157" width="551" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="edc1f4f8-9703-4848-814b-96d213e55f3c">
+					<printWhenExpression><![CDATA[!$P{P_is_sltb}.equals( null )]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_is_sltb}!=null && $P{P_is_sltb}.equals( "N" )?"Private Buses": "SLTB"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="82" width="220" height="19" uuid="0118671a-8e1e-411d-b44b-1a4678de9641"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Year : " + $P{P_selected_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="101" width="380" height="19" uuid="df670b91-3c42-432e-8cff-5ece8795e5ae"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{P_date_range}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="702" y="82" width="100" height="19" uuid="a619af90-d6f5-4e5e-a0f5-f0c14acf3996"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="802" height="30" uuid="153087dc-e358-446f-95b9-9a32b988a337"/>
+				<textElement textAlignment="Center">
+					<font size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sisu Sariya - Monthly Operated Kilometers Report  -  Non Paid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="30" uuid="d6218db6-f075-4efa-ba3e-cb0c4d4bd6e9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="22" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[NATIONAL TRANSPORT COMMISSION]]></text>
+			</staticText>
+			<image>
+				<reportElement x="80" y="0" width="50" height="50" uuid="99a96608-e0c2-4dc2-aa6c-a27f99d51456">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_national_logo}+"nationalLogo.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="673" y="0" width="60" height="50" uuid="1c4909c8-6b03-48a7-880e-682c91543a64">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_ntc_logo}+"ntclogo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-1" y="0" width="801" height="40" backcolor="#F0EDED" uuid="6528f44c-f133-4432-ab76-e18d1b6311e4">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="40" uuid="d932569c-f79f-4656-a7e0-c987805e7e4f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Owner]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="0" width="60" height="40" uuid="785df934-223c-42af-8cb7-81693919875a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Service Ref. No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="57" height="40" uuid="d5d51b41-da95-4241-a90d-2f2b298bf788"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Service Agreement No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="0" width="62" height="40" uuid="0bceb8d6-4358-4ee0-a2fe-c2022aa06225"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[From]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="0" width="72" height="40" uuid="ebaf5022-4f0c-4cee-9d80-f07681c4541d"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[To]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="0" width="44" height="40" uuid="d3126bab-1f8c-4ef4-a853-304060b85f8d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Jan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="0" width="40" height="40" uuid="77d6715d-f835-4500-8556-36666d79d037">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Feb]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="0" width="40" height="40" uuid="cb3e22dd-5c33-46a2-894d-744a7def017d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Mar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="0" width="39" height="40" uuid="ff26754b-4f81-42f0-b219-a8711c77c0c0">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Apr]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="495" y="0" width="41" height="40" uuid="65457766-dd06-464c-9218-6c1126379450">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[May]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="536" y="0" width="38" height="40" uuid="54047962-794a-485a-897c-e4744c5b6bd8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Jun]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="574" y="0" width="38" height="40" uuid="534e40a8-17fd-4bb6-96d3-e2825d3bf4b7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Jul]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="612" y="0" width="41" height="40" uuid="292b8092-bd7a-4d5a-91d6-61040962acec">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Aug]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="653" y="0" width="40" height="40" uuid="e952c085-ef80-4b14-832b-742e73860826">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Sep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="733" y="0" width="40" height="40" uuid="5bc532a5-2881-41fb-8a54-078cddd5fcb9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Nov]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="773" y="0" width="26" height="40" uuid="874de0c0-44ce-4dd0-a323-646aa7c0c144">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Dec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="693" y="0" width="40" height="40" uuid="ed2739dc-39ce-405c-a032-31a0b68891d6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Oct]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="799" height="16" uuid="b33debbc-2a7c-425e-83c2-46125bfeda00"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="80" height="16" isPrintWhenDetailOverflows="true" uuid="d999cd81-a654-4acc-898f-39a5a69e77fb"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sps_operator_name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="81" y="0" width="60" height="16" isPrintWhenDetailOverflows="true" uuid="53a61aeb-744d-4e8a-aa56-44a958c65666"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sps_service_ref_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="141" y="0" width="57" height="16" isPrintWhenDetailOverflows="true" uuid="49d2de49-5a32-4682-8934-7f71eacd0a36"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{lss_service_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="198" y="0" width="62" height="16" isPrintWhenDetailOverflows="true" uuid="3f8e3438-a800-41cd-8ccd-3ce7ca77fb10"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sps_origin}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="260" y="0" width="72" height="16" isPrintWhenDetailOverflows="true" uuid="3f65940c-a481-4bb2-97b0-c3b0696152b1"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sps_destination}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="332" y="0" width="44" height="16" isPrintWhenDetailOverflows="true" uuid="e994ace0-3e55-4201-8ad8-450b893ab24c">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{jan}.equals( null )?"0.00":$F{jan}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="376" y="0" width="40" height="16" isPrintWhenDetailOverflows="true" uuid="2afa28b5-5729-4d1b-8c3c-374bf1f76fc8">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{feb}.equals( null )?"0.00":$F{feb}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="416" y="0" width="40" height="16" isPrintWhenDetailOverflows="true" uuid="6aae2c69-3cba-4e49-9e4a-89d03eaded66"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mar}.equals( null )?"0.00":$F{mar}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="456" y="0" width="39" height="16" isPrintWhenDetailOverflows="true" uuid="664f95e8-f972-47c9-82e4-fb65af8fd2d7">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{apr}.equals( null )?"0.00":$F{apr}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="495" y="0" width="41" height="16" isPrintWhenDetailOverflows="true" uuid="3ec4c48a-2839-419f-90c5-ef20361bd924">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{may}.equals( null )?"0.00":$F{may}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="536" y="0" width="38" height="16" isPrintWhenDetailOverflows="true" uuid="aa519a8a-22af-4a78-a27b-90aa9dddeaa2">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{jun}.equals( null )?"0.00":$F{jun}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="574" y="0" width="38" height="16" isPrintWhenDetailOverflows="true" uuid="9819967a-fc77-492d-a728-8f22f7855739">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{jul}.equals( null )?"0.00":$F{jul}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="612" y="0" width="41" height="16" isPrintWhenDetailOverflows="true" uuid="9d245739-42b0-406f-ae79-0f23e1d53867"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{aug}.equals( null )?"0.00":$F{aug}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="653" y="0" width="40" height="16" isPrintWhenDetailOverflows="true" uuid="3b1c9b97-04ab-47a7-82ba-655a77bd9c33">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sep}.equals( null )?"0.00":$F{sep}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="693" y="0" width="40" height="16" isPrintWhenDetailOverflows="true" uuid="cb4a1f0c-caf1-47b4-a9f3-658909b22062">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{oct}.equals( null )?"0.00":$F{oct}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="733" y="0" width="40" height="16" isPrintWhenDetailOverflows="true" uuid="13b0d4e6-8c14-49fe-bbb9-27a1cb0d8984">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nov}.equals( null )?"0.00":$F{nov}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="773" y="0" width="26" height="16" isPrintWhenDetailOverflows="true" uuid="eb3bde7a-3128-43c2-b379-88b4ba016a53"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+						<paragraph leftIndent="0" rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dec}.equals( null )?"0.00":$F{dec}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="800" height="20" uuid="888d9b9d-9391-4afa-a195-a52449b6fa0e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

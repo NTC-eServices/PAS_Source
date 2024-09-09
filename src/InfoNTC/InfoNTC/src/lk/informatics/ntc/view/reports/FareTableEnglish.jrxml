@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-07-02T15:57:16 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FareTableSinhala" language="groovy" columnCount="3" pageWidth="595" pageHeight="842" columnWidth="185" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bf9f1774-43e8-4be7-bbb3-175cdf164765">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="approveDate" uuid="47f92353-d87e-40f8-9d50-f91d9fcc3965">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="P_Amenmend_date" class="java.lang.String"/>
+	<parameter name="P_ntc_logo" class="java.lang.String"/>
+	<parameter name="P_national_logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.tfc_stage,a.tfc_normal_current_fee as current_Fee,a.tfc_normal_round_fee as new_fee,
+--TO_CHAR(b.mfc_approved_by_date ,'d MMM yyyy') as approve ,
+b.mfc_re_ammendment_date as approve, b.mfc_cost_change_presentage as percentage,
+(select nt_t_fee_circle.tfc_normal_round_fee from nt_t_fee_circle where tfc_stage ='1') as minfee
+from  public.nt_t_fee_circle a 
+inner join public.nt_m_fee_circle_master b on b.mfc_fare_reference_no=a.tfc_fare_reference_no
+where b.mfc_re_ammendment_date= $P{P_Amenmend_date} 
+and a.tfc_stage not in (0)
+order by a.tfc_stage]]>
+	</queryString>
+	<field name="tfc_stage" class="java.lang.Integer"/>
+	<field name="current_fee" class="java.math.BigDecimal"/>
+	<field name="new_fee" class="java.math.BigDecimal"/>
+	<field name="approve" class="java.lang.String"/>
+	<field name="percentage" class="java.lang.Double"/>
+	<field name="minfee" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="231" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="-3" y="72" width="575" height="23" uuid="dfe441e1-1b3a-40c4-af05-f682a19d0cac"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="18" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Interim Bus Fares Revision "+$P{P_Amenmend_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-20" y="27" width="595" height="30" uuid="8935b2d2-1c7a-4310-ab3e-d915be028ce5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="26" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+			<image scaleImage="RealSize" hAlign="Center">
+				<reportElement x="-8" y="0" width="80" height="67" uuid="a1bcb739-8b5e-48e2-a89b-52925ea65920"/>
+				<imageExpression><![CDATA[$P{P_national_logo}+"nationalLogo.png"]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" hAlign="Center" vAlign="Middle">
+				<reportElement x="482" y="-2" width="80" height="67" uuid="413d0bf7-ae33-4557-8ab5-49880d41d307">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_ntc_logo}+"ntclogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="-20" y="0" width="595" height="30" uuid="100f8660-8276-4c05-beb8-141429e9f855"/>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="22" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[NATIONAL TRANSPORT COMMISSION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="61" width="572" height="19" uuid="d5028dff-b4c6-4f82-92ba-a0b6bf996807"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SPECIAL NOTICE !]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="0" y="149" width="560" height="30" uuid="93d53bdb-2d32-4bcb-8f2d-88ccca118685"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="approveDate" uuid="7d68eac9-22b6-460f-99bb-31384125e172">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="560"/>
+				</jr:list>
+			</componentElement>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="116" width="560" height="75" isPrintWhenDetailOverflows="true" uuid="47ac8083-9148-4f28-b532-0b448ed70164"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA["Upon the Cabinet Approval granted on " + $F{approve} + " the bus fare has been increased from" + $F{percentage} + " and the minimum bus fare to be Rs. " +$F{minfee}+" since " + $F{approve} +" . Accordingly full fare in respect of approved Inter Provincial" +" (Normal, Semi Luxury, Luxury and Super Luxury) Services implemented by the Sri Lanka Transport Board and Private Passenger" +" Transport Services and the Fare Table depicting 350 Normal Fare Stages are given below for the information of Passengers, Owners, Crew, Authorities and the General Public."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="190" width="560" height="15" isPrintWhenDetailOverflows="true" uuid="e9898eba-8f81-421a-87ea-5bcce17b2836"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Sterm action will be taken against any operator who changes fare in excess of the approved fare.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="211" width="560" height="20" isPrintWhenDetailOverflows="true" uuid="62b0a4fa-f176-46a3-832f-62a0c3784d36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Normal Service Bus Fare Structure ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="3" width="50" height="30" uuid="a1038634-eeb3-4f45-9fe8-c534891dcb01">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Fare Stage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="3" width="70" height="30" uuid="95e49e09-5709-4019-b4c9-94bd17e71459">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Present Stage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="3" width="60" height="30" uuid="0be7d31c-7c19-4240-8e86-169b9480e258">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[New Fare]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="-1" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="b43195bb-eecf-42bf-837a-3d048f945735"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tfc_stage}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="-1" width="70" height="20" isPrintWhenDetailOverflows="true" uuid="b657e8c4-4dcb-461e-b6a8-3a8c90b39a95"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{current_fee}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="121" y="-1" width="59" height="20" isPrintWhenDetailOverflows="true" uuid="2cd1ff0d-e44f-4ddb-bca5-5ae6d81feb92"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{new_fee}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

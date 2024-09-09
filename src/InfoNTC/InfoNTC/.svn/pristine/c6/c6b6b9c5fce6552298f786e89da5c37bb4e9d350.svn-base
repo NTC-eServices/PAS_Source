@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2020-08-04T11:13:17 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="paymentReportForSubsidyNisi" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="c69dd201-c28f-452f-a598-5648246af876">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<subDataset name="GamiData" uuid="e7ebf6f1-1591-4ccc-b8d0-295f83ffc581">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_service_No" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select  gps_account_no,gps_bank_name_code,gps_branch_code,b.description as bankDes,c.description as branchDes,gps_operator_name
+from  public.nt_m_gami_permit_hol_service_info
+inner join public.nt_m_log_sheet_summary a on a.lss_service_no=public.nt_m_gami_permit_hol_service_info.gps_service_no
+inner join public.nt_r_bank b on b.code=public.nt_m_gami_permit_hol_service_info.gps_bank_name_code
+inner join public.nt_r_branch c on c.code=public.nt_m_gami_permit_hol_service_info.gps_branch_code
+where b.active='A'
+and c.active='A'
+and gps_service_no= $P{P_service_No}]]>
+		</queryString>
+		<field name="gps_account_no" class="java.lang.String"/>
+		<field name="gps_bank_name_code" class="java.lang.String"/>
+		<field name="gps_branch_code" class="java.lang.String"/>
+		<field name="bankdes" class="java.lang.String"/>
+		<field name="branchdes" class="java.lang.String"/>
+		<field name="gps_operator_name" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_bulk_seq" class="java.lang.Long"/>
+	<parameter name="P_logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select lss_month,a.lss_subsidy_amt,c.nri_bank_name,c.nri_branch,c.nri_operator_name,c.nri_account_no,b.sbpt_voucher_amount as lss_paid_amt,d.sbp_is_dg_approval_date
+from public.nt_m_log_sheet_summary a
+inner join public.nt_t_sm_bulk_payment b on b.sbpt_log_summary_seq=a.lss_seq 
+inner join public.nt_m_nri_requester_info c on c.nri_service_agreement_no= a.lss_service_no
+inner join public.nt_m_sm_bulk_payment d on d.sbp_seq=b.sbpt_bulk_payment_m_seq
+where b.sbpt_bulk_payment_m_seq =   $P{P_bulk_seq}]]>
+	</queryString>
+	<field name="lss_month" class="java.lang.String"/>
+	<field name="lss_subsidy_amt" class="java.math.BigDecimal"/>
+	<field name="nri_bank_name" class="java.lang.String"/>
+	<field name="nri_branch" class="java.lang.String"/>
+	<field name="nri_operator_name" class="java.lang.String"/>
+	<field name="nri_account_no" class="java.lang.String"/>
+	<field name="lss_paid_amt" class="java.math.BigDecimal"/>
+	<field name="sbp_is_dg_approval_date" class="java.sql.Timestamp"/>
+	<variable name="total" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{lss_paid_amt}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="77" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="351" height="70" uuid="fc897f57-2595-44e2-aa3b-4c62a5a4d385">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_logo}+"header_logo_new.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="799" height="20" backcolor="#F0EDED" uuid="a1619ab3-9c8d-4917-bf8f-f86b2368623e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="20" uuid="a8a96205-a5f6-4450-8342-7ef06f46a1df"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[BANK CODE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="60" height="20" uuid="0c83c087-cef4-49fc-a100-72cfe98014ab"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[DBRANCH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="50" height="20" uuid="ee392ac0-c00f-4141-9b9e-9cc6f5015473"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[DUP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="80" height="20" uuid="afd97c49-b6b2-4f18-8fd7-f1b4f5d29028"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[DAC NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="0" width="90" height="20" uuid="98a39283-ceff-4fdf-b0b0-302eff246e5e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="0"/>
+				</textElement>
+				<text><![CDATA[DAC NAME 	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="0" width="69" height="20" uuid="40c6811d-5cd7-44f5-8139-5e239c14e409"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[TRANCCODE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="0" width="69" height="20" uuid="0a1a51f2-0491-4544-8a4f-3ed898ea0bbf"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[CDCODE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="489" y="0" width="100" height="20" uuid="39ef9c21-f8ae-46cc-bb81-9af5216579bd"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[AMOUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="590" y="0" width="40" height="20" uuid="f74a67dc-c4dc-4c5c-a494-1a1e353e19bc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[PART1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="0" width="60" height="20" uuid="7bd82012-f85e-45a8-87b0-85834ad2c987"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[REF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="0" width="60" height="20" uuid="519bda36-31a8-40cf-8a07-4e86dd2b879c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[VLDATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="750" y="0" width="50" height="20" uuid="9d22e415-fc8b-4898-8911-b20e5fe61c2a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[BLANK]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="20" isPrintWhenDetailOverflows="true" uuid="b43709b4-7dfd-4074-a7bf-10f578673754"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+					<paragraph firstLineIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nri_bank_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="70" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="c0bc0e28-4367-49d9-97fb-959049ea2616"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+					<paragraph firstLineIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nri_branch}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="130" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="ea41fccd-2954-4157-8447-66d1fa000a95"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+					<paragraph firstLineIndent="5"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="180" y="0" width="80" height="20" isPrintWhenDetailOverflows="true" uuid="345118db-468d-4193-8db6-1e6c986f8c7c"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+					<paragraph firstLineIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nri_account_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="260" y="0" width="90" height="20" isPrintWhenDetailOverflows="true" uuid="c1d93832-7730-4e5e-ba95-e7a2365674a1"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+					<paragraph firstLineIndent="0" leftIndent="5" rightIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nri_operator_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="350" y="0" width="70" height="20" isPrintWhenDetailOverflows="true" uuid="8ab93c43-96fc-4ecd-a166-2dcea6fe43f3"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+					<paragraph firstLineIndent="0" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["23"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="420" y="0" width="69" height="20" isPrintWhenDetailOverflows="true" uuid="d8e7731d-33f7-4143-9960-2da9a26797a8"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+					<paragraph firstLineIndent="0" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="####" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="489" y="0" width="100" height="20" isPrintWhenDetailOverflows="true" uuid="1c764528-71a4-456f-a60d-ed73d4f442b6"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+					<paragraph firstLineIndent="0" leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lss_paid_amt}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="590" y="0" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="56ad406d-a78a-463d-87fa-de5fb6a1e9f4"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+					<paragraph firstLineIndent="0" rightIndent="5"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="630" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="0982cd01-599f-4dfb-98b8-728c1988dbcb"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+					<paragraph firstLineIndent="0" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nisi Sariya"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="MM/d/yy" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="690" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="1a634598-275b-459a-b6d9-d87b4460bab6"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+					<paragraph firstLineIndent="0" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sbp_is_dg_approval_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="750" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="7b5dd814-312b-4dad-8cde-973b95e6d5d4"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+					<paragraph firstLineIndent="0" rightIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lss_month}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20">
+			<textField pattern="####">
+				<reportElement x="489" y="0" width="100" height="20" uuid="ba2403bb-b703-4dc3-95be-5e0d95e7a20d"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="0" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

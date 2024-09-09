@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-06-20T14:33:22 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fareTableReport" columnCount="4" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="200" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e7a8c033-b723-4280-b8e1-501e28007baf">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW_DATAADAPTER.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="P_Amenmend_date" class="java.lang.String"/>
+	<parameter name="P_logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.tfc_stage,a.tfc_normal_current_fee as current_Fee,a.tfc_normal_round_fee as new_fee,
+TO_CHAR(b.mfc_approved_by_date ,'d MMM yyyy') as approve ,b.mfc_cost_change_presentage as percentage
+from  public.nt_t_fee_circle a 
+inner join public.nt_m_fee_circle_master b on b.mfc_fare_reference_no=a.tfc_fare_reference_no
+where b.mfc_re_ammendment_date= $P{P_Amenmend_date}  and a.tfc_stage not in ('0')
+order by a.tfc_stage 
+
+
+]]>
+	</queryString>
+	<field name="tfc_stage" class="java.lang.Integer"/>
+	<field name="current_fee" class="java.math.BigDecimal"/>
+	<field name="new_fee" class="java.math.BigDecimal"/>
+	<field name="approve" class="java.lang.String"/>
+	<field name="percentage" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="133" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="94" width="810" height="34" uuid="3d2d2395-f7d8-4e18-aa2d-f1b314f80fd5"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Upon the Cabinet Approval granted on                            the bus fare has been increased from         % and the minimum bus fare to be Rs.12.00 since midnight of 22nd May 2018. Accordingly full fare in respect of approved Inter Provincial (Normal, Semi Luxury, Luxury and Super Luxury) Services implemented by the Sri Lanka Transport Board and Private Passenger Transport Services and the Fare Table depicting 350 Normal Fare Stages are given below for the information of Passengers, Owners, Crew, Authorities and the General Public.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="57" width="100" height="19" uuid="0a1cdb9e-d37b-473e-a46e-bcb43462a9f9"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[SPECIAL NOTICE!]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="76" width="250" height="18" uuid="99b5947f-856b-46bc-901b-24686663dcb4"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Interim Bus Fares Revision ]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" hAlign="Center">
+				<reportElement x="159" y="-12" width="500" height="66" uuid="f1d7681b-bfe7-4008-b8c9-16961905c194">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<imageExpression><![CDATA[$P{P_logo}+"header_logo_new.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="466" y="76" width="150" height="18" isPrintWhenDetailOverflows="true" uuid="20089f0a-9943-4306-8fdc-c2f99ad46191">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Amenmend_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="94" width="70" height="16" uuid="4317d4c5-7ad8-4594-9069-12848eeb0974"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{approve}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="94" width="16" height="30" isPrintWhenDetailOverflows="true" uuid="29973b1a-83b0-4d70-8d5f-fbfc041d087f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percentage}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40">
+			<staticText>
+				<reportElement x="320" y="20" width="174" height="20" uuid="e6b67050-fbd2-42c2-a4d4-2d818fcc0109"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Normal Service Bus Fare Structure ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="21" uuid="97134058-483f-496a-abe0-e7056d53b97e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fare Stage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="0" width="70" height="21" uuid="71d652aa-3052-4619-9fbe-d4d0bc251e3f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Present Stage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="60" height="21" uuid="1037e259-9c94-4ec0-833f-1d7c629147ec"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[New Fare]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="0" y="0" width="60" height="20" uuid="7ad7a9d9-ccaf-4f3b-a580-4982fb9449e1"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{current_fee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="70" height="20" uuid="ee8e7a00-fb53-4984-970a-d821474c43b1"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{current_fee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="-1" width="60" height="21" uuid="c5d0fa00-5f26-4e97-95e7-3b2d88bfe718"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{new_fee}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

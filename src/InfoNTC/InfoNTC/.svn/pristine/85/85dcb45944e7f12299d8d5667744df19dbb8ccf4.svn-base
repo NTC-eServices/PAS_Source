@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-07-03T14:29:40 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sisuSariyaFares" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d0ac3f13-e17e-44ef-badd-38acf74d9325">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<subDataset name="Year" uuid="9cc19848-f899-430c-91b6-79a3d3a8099e">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="P_year" class="java.lang.String"/>
+	<parameter name="P_ntc_logo" class="java.lang.String"/>
+	<parameter name="P_national_logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select b.tfc_stage, b.tfc_normal_round_fee,b.tfc_half_adjuested,b.tfc_quarter_adjuested,
+substring(a.mfc_re_ammendment_date,1,4) as year
+from nt_t_fee_circle b inner join nt_m_fee_circle_master a on a.mfc_fare_reference_no=b.tfc_fare_reference_no
+and a.mfc_status = 'A'
+and b.tfc_stage !=0
+where substring(a.mfc_re_ammendment_date,1,4) =  $P{P_year} 
+order by tfc_stage]]>
+	</queryString>
+	<field name="tfc_stage" class="java.lang.Integer"/>
+	<field name="tfc_normal_round_fee" class="java.math.BigDecimal"/>
+	<field name="tfc_half_adjuested" class="java.math.BigDecimal"/>
+	<field name="tfc_quarter_adjuested" class="java.math.BigDecimal"/>
+	<field name="year" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="124" splitType="Stretch">
+			<image scaleImage="RealSize" hAlign="Center">
+				<reportElement x="-8" y="0" width="80" height="67" uuid="5b5710af-cf78-443c-afe6-a507360c50b0"/>
+				<imageExpression><![CDATA[$P{P_national_logo}+"nationalLogo.png"]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" hAlign="Center" vAlign="Middle">
+				<reportElement x="482" y="-2" width="80" height="67" uuid="5150605c-0df0-407b-9afd-7ce59a4d611d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_ntc_logo}+"ntclogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="-20" y="0" width="595" height="30" uuid="1e5901b0-7c6e-4834-a4c3-96d9cff45d8f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="22" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[NATIONAL TRANSPORT COMMISSION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="29" width="595" height="30" uuid="85d93b38-65e1-4ae6-be24-9c9ebc9ac6a9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="26" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="92" width="560" height="30" uuid="ab9cfa38-cf85-47f9-a908-3efaaf2e7a07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Annual Bus Fare Revision " + $F{year} + "  - Special Service Charges for Sisu Sariya"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement x="197" y="-7" width="72" height="30" backcolor="#F5EEED" uuid="312b0f23-e4b7-4fa2-bd1d-d035e51bbac7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="127" y="-7" width="71" height="30" backcolor="#F5EEED" uuid="2d0b7bac-98da-4463-86c6-4ca691f88f62"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="56" y="-7" width="71" height="30" backcolor="#F5EEED" uuid="5340d996-a5f9-4710-8d9f-46690a8773ac">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="6" y="-7" width="50" height="30" backcolor="#F5EEED" uuid="7866dfb5-2812-43d7-8f42-63697b4d4f56"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="7" y="-5" width="48" height="30" uuid="0b34dca3-7c7e-4a47-b29a-bfe42605ce7d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Stage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="-7" width="71" height="30" uuid="3155397a-b395-4ce9-b896-35b11fc5237a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Normal Fare]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="-7" width="71" height="30" uuid="272189c2-74f8-42c5-99da-e7b48d18e8b6"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1/2 Fare]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="-7" width="71" height="30" uuid="f36cac86-4192-4b14-b53c-35b81cf82c29">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1/4 Fare]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="6" y="-28" width="50" height="25" uuid="0e219ea1-f159-4d68-bc6b-5f309eeb0291">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tfc_stage}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="56" y="-28" width="71" height="25" uuid="c9ff362a-24e9-4f78-afa0-999f6d3330f3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tfc_normal_round_fee}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="127" y="-28" width="71" height="25" uuid="ce786408-af04-4d1d-ae45-ede1e7963435">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tfc_half_adjuested}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="198" y="-28" width="71" height="25" uuid="9b7ecc5d-0036-43b9-b3a2-d0c815dedac8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tfc_quarter_adjuested}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-09-02T12:16:38 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AmmenmendtToServiceTypeCommitte" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd76f107-c7a0-4b8c-b505-7acf31c925ef">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="ForOLdAppNoDataSet" uuid="c4f47b94-d876-48ce-93a3-36a241ee49e7">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_old_app_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select a.pm_route_no,a.pm_service_type,c.rou_service_origine,c.rou_service_destination,c.rou_via,
+d.description
+from public.nt_t_pm_application a
+inner join public.nt_r_route c on a.pm_route_no=c.rou_number
+inner join public.nt_r_service_types d on d.code=a.pm_service_type
+where a.pm_application_no= $P{P_old_app_no}]]>
+		</queryString>
+		<field name="pm_route_no" class="java.lang.String"/>
+		<field name="pm_service_type" class="java.lang.String"/>
+		<field name="rou_service_origine" class="java.lang.String"/>
+		<field name="rou_service_destination" class="java.lang.String"/>
+		<field name="rou_via" class="java.lang.String"/>
+		<field name="description" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_LOGO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.amd_application_no,a.amd_created_date,a.amd_permit_no,a.amd_existing_busno,
+b.pmo_full_name,b.pmo_address1,b.pmo_address2,b.pmo_address3,b.pmo_city,
+c.pm_permit_expire_date,c.pm_old_application_no,c.pm_route_no,d.description,a.amd_remarks,
+e.trr_via as req_vianew,e.trr_origin as req_originnew,e.trr_destination as req_destinew
+,f.rou_service_origine as req_origin_notnew ,f.rou_service_destination as req_desti_notnew,f.rou_via as req_via_notnew,g.description as req_sevice_notnew
+from public.nt_m_amendments a
+left outer join public.nt_t_pm_vehi_owner b on b.pmo_application_no=a.amd_application_no
+left outer join public.nt_t_pm_application c on c.pm_application_no=a.amd_application_no
+left outer join public.nt_r_service_types d on d.code=c.pm_service_type
+left outer join public.nt_temp_route_request e on e.trr_application_no=c.pm_application_no
+left outer join public.nt_r_route f on c.pm_route_no=f.rou_number
+left outer join public.nt_r_service_types g on g.code=c.pm_service_type
+where a.amd_status !='C'
+and a.amd_trn_type ='21']]>
+	</queryString>
+	<field name="amd_application_no" class="java.lang.String"/>
+	<field name="amd_created_date" class="java.sql.Timestamp"/>
+	<field name="amd_permit_no" class="java.lang.String"/>
+	<field name="amd_existing_busno" class="java.lang.String"/>
+	<field name="pmo_full_name" class="java.lang.String"/>
+	<field name="pmo_address1" class="java.lang.String"/>
+	<field name="pmo_address2" class="java.lang.String"/>
+	<field name="pmo_address3" class="java.lang.String"/>
+	<field name="pmo_city" class="java.lang.String"/>
+	<field name="pm_permit_expire_date" class="java.lang.String"/>
+	<field name="pm_old_application_no" class="java.lang.String"/>
+	<field name="pm_route_no" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="amd_remarks" class="java.lang.String"/>
+	<field name="req_vianew" class="java.lang.String"/>
+	<field name="req_originnew" class="java.lang.String"/>
+	<field name="req_destinew" class="java.lang.String"/>
+	<field name="req_origin_notnew" class="java.lang.String"/>
+	<field name="req_desti_notnew" class="java.lang.String"/>
+	<field name="req_via_notnew" class="java.lang.String"/>
+	<field name="req_sevice_notnew" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="50" width="394" height="30" uuid="c9d36db4-3470-4582-a338-d8ddbb382e1b"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="16" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Amendments To Service Type Committee Report ]]></text>
+			</staticText>
+			<image scaleImage="RealSize" hAlign="Left" vAlign="Middle">
+				<reportElement x="0" y="0" width="802" height="50" uuid="0602c28e-73b4-455f-a497-e93b66478643"/>
+				<imageExpression><![CDATA[$P{P_LOGO}+"header_logo_new.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="630" y="60" width="170" height="30" uuid="2f1d8a5b-9046-4421-b953-fd16bf377692"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="593" y="60" width="100" height="30" uuid="c54f992d-88b4-4679-9ad1-8afd1403f76d"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="10" width="30" height="37" isPrintWhenDetailOverflows="true" uuid="2a0f5458-08c3-4c02-a1d4-7332e17bc7b1"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="10" width="89" height="37" isPrintWhenDetailOverflows="true" uuid="dba1dcc8-c397-4eb0-be9a-5c648e1be34e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Request Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="119" y="10" width="60" height="37" isPrintWhenDetailOverflows="true" uuid="fcb70e47-6115-46e1-b8c9-8711c451a4d8"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Recived Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="179" y="10" width="50" height="37" isPrintWhenDetailOverflows="true" uuid="e6bc1e50-2dca-4950-bc90-8a6fb0f8f98a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[NTC Number ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="10" width="50" height="37" isPrintWhenDetailOverflows="true" uuid="b259537d-4bec-4f17-b222-5a7bb3552f22"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Bus Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="10" width="90" height="37" isPrintWhenDetailOverflows="true" uuid="a9596599-02eb-49a7-926b-8990c0264a73"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Owner Name And Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="10" width="51" height="37" isPrintWhenDetailOverflows="true" uuid="c2e3cd8f-35a2-4bd6-a656-c34d77529900"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Permit Valid Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="10" width="59" height="37" isPrintWhenDetailOverflows="true" uuid="062a03b1-4215-464b-a8dd-04fefaac488c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Current Route]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="10" width="41" height="37" isPrintWhenDetailOverflows="true" uuid="e70795cf-95e8-4436-86e3-c9af82e752d9"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Route Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="10" width="60" height="37" isPrintWhenDetailOverflows="true" uuid="1cb9205d-b447-432c-8ba8-db774d64282e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Service Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="10" width="39" height="37" isPrintWhenDetailOverflows="true" uuid="a35aab5a-a106-43d1-a5dd-ab57b2c9c8f4"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Requested Route]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="619" y="10" width="60" height="37" isPrintWhenDetailOverflows="true" uuid="39c09545-07cc-4674-b7f4-7d81594b9968"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Requested Service]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="732" y="10" width="60" height="37" isPrintWhenDetailOverflows="true" uuid="7ca477c5-e687-4601-867f-bac046696436"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Committe Confirmation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="680" y="10" width="52" height="37" isPrintWhenDetailOverflows="true" uuid="2fb25018-3d84-4e18-92d1-d00e1f5bafce"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="792" height="40" uuid="6a079b9b-6404-43be-bfed-a770a872cc86"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="89" height="40" isPrintWhenDetailOverflows="true" uuid="7c7b412c-da86-4eea-bdfa-0c69678d3aab"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amd_application_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="MM/dd/yyyy" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="119" y="0" width="60" height="40" isPrintWhenDetailOverflows="true" uuid="68abda7a-97fa-40de-a175-f79c05b86a04"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amd_created_date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="179" y="0" width="50" height="40" isPrintWhenDetailOverflows="true" uuid="d262a214-4fd1-47e6-a350-278f2030cd09"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amd_permit_no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="229" y="0" width="50" height="40" isPrintWhenDetailOverflows="true" uuid="c5fa20a7-641a-4d5e-9c88-d5c0f9283f5e"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amd_existing_busno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="369" y="0" width="51" height="40" isPrintWhenDetailOverflows="true" uuid="baf3055f-630c-4468-9019-84048e040be4"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pm_permit_expire_date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="30" height="40" isPrintWhenDetailOverflows="true" uuid="08f7e091-2963-4836-bb52-c256b0ce34d3"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="480" y="0" width="40" height="40" isPrintWhenDetailOverflows="true" uuid="4ebbaa12-ecb3-43e5-9a9a-86f50cc93950"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="ForOLdAppNoDataSet" uuid="7c72c203-773f-4c62-bcef-267f232eac8d">
+							<datasetParameter name="P_old_app_no">
+								<datasetParameterExpression><![CDATA[$F{pm_old_application_no}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="40" width="40">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="40" height="40" isPrintWhenDetailOverflows="true" uuid="ff111bc2-d92e-404f-8af9-a3c2c56d8518"/>
+								<box>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement>
+									<font size="8"/>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{pm_route_no}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="420" y="0" width="60" height="40" uuid="f51ea1f7-f308-4f13-a808-c6f41e976943"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="ForOLdAppNoDataSet" uuid="0b45103f-6317-4988-9e55-1a0478b661ad">
+							<datasetParameter name="P_old_app_no">
+								<datasetParameterExpression><![CDATA[$F{pm_old_application_no}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="40" width="60">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="60" height="40" isPrintWhenDetailOverflows="true" uuid="25502c1a-7002-4b69-93f3-ba23c830ee13"/>
+								<box>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement>
+									<font size="8"/>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{rou_service_origine}+ " to  "+$F{rou_service_destination}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="520" y="0" width="60" height="40" uuid="7ee23330-2e65-4d6e-aa29-76a4dfe09112"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="ForOLdAppNoDataSet" uuid="35c0f7a0-fcce-4c6d-a4c2-38e5e9599056">
+							<datasetParameter name="P_old_app_no">
+								<datasetParameterExpression><![CDATA[$F{pm_old_application_no}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="40" width="60">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="40" uuid="ed9f6b4c-b45e-40f7-9650-909fc3cefdc7"/>
+								<box>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+								</box>
+								<textElement>
+									<font size="8"/>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="580" y="0" width="39" height="40" isPrintWhenDetailOverflows="true" uuid="77e7ca0e-f6f4-4972-b22c-71fce7db02bb"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pm_route_no}.equals( "NEW")?$F{req_originnew} +"to "+$F{req_destinew}:$F{req_origin_notnew}+" to "+$F{req_desti_notnew}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="619" y="0" width="61" height="40" isPrintWhenDetailOverflows="true" uuid="474d3934-3c03-4a2f-bd6c-167162614928"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amd_application_no}.equals( "NEW" )?$F{description}:$F{req_sevice_notnew}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="732" y="0" width="60" height="40" uuid="63d8b852-79af-48ff-8f18-a5c8766fcf02"/>
+					<box>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="279" y="0" width="89" height="10" isPrintWhenDetailOverflows="true" uuid="dcbb8116-2c53-4f70-8055-f4a37e43d583"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pmo_full_name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="279" y="10" width="90" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="74a818f4-f23a-4976-9a4f-e78da5a6b804"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pmo_address1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="279" y="20" width="90" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="6029b48c-c7ac-4411-aaaa-81e9c1aa202a"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pmo_address2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="279" y="30" width="89" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="e9540dd7-7f47-4182-9102-dcc19ae5439f"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pmo_address3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="680" y="0" width="52" height="40" isPrintWhenDetailOverflows="true" uuid="32e78745-e808-49b3-b049-c0dbfeb45eda"/>
+					<box>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amd_remarks}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="479" y="-1" width="1" height="42" isPrintWhenDetailOverflows="true" uuid="26cf235f-af4d-4513-b9d5-df562b05ef58">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+				</line>
+				<line>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="520" y="-1" width="1" height="42" isPrintWhenDetailOverflows="true" uuid="6a55b909-b4c3-467f-8167-2b21ffc46c2b">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+				</line>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="708" y="0" width="83" height="30" uuid="0e0cb154-261d-4182-807c-26d81da39ef5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

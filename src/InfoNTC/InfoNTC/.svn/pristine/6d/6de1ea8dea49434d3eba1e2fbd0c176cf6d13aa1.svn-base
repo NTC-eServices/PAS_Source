@@ -1,0 +1,239 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-input {
+	margin-top: -20px;
+}
+
+.mainButton:hover {
+	background-image: linear-gradient(to bottom, #fff59d, #ff8f00)
+		!important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Temporary Hold</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmTemporaryHold">
+
+					<div style="width: 100%;">
+						<br></br>
+						<p:panelGrid columns="4" style="margin-top: 1%;"
+							columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+							layout="grid">
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Permit No." for="applicationNo"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="permitNo" tabindex="1" style="width:70%; "
+									disabled="false"
+									value="#{temporaryHoldBackingBean.selectedPermitNo}"
+									effect="fold" filter="true" filterMatchMode="contains">
+									<p:ajax update="frmTemporaryHold"
+										listener="#{temporaryHoldBackingBean.onPermitNoChange}" />
+									<f:selectItem itemLabel="--Select Permit No.--" itemValue="" />
+									<f:selectItems value="#{temporaryHoldBackingBean.permitNoList}"
+										var="permitNoList" itemValue="#{permitNoList.permitNo}"
+										itemLabel="#{permitNoList.permitNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Application No." for="applicationNo"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="applicationNo" style="width:70%"
+									disabled="#{temporaryHoldBackingBean.disableApplicationNoDropdown}"
+									value="#{temporaryHoldBackingBean.selectedApplicationNo}"
+									effect="fold" filter="true" filterMatchMode="contains">
+									<p:ajax update="frmTemporaryHold"
+										listener="#{temporaryHoldBackingBean.onApplicationNoChange}" />
+									<f:selectItem itemLabel="-- Select Application No. --"
+										itemValue="" noSelectionOption="true" />
+									<f:selectItems
+										value="#{temporaryHoldBackingBean.applicationNoList}" var="a"
+										itemValue="#{a.applicationNo}" itemLabel="#{a.applicationNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+						</p:panelGrid>
+
+						<br></br>
+						<div class="ui-g">
+							<div class="ui-g-12"
+								style="text-align: center; background-color: #e1bee7; background-image: linear-gradient(to bottom, #f3e5f5, #e1bee7)">
+
+								<p:commandButton id="temporaryHoldBtn" styleClass="mainButton"
+									disabled="#{temporaryHoldBackingBean.disableHoldBtn}"
+									update="frmTemporaryHold"
+									style="margin:3%;border-radius: 16px;height: 110px;width:30%;background: #ffa726; background-image: linear-gradient(to bottom,#fff9c4,#ffa726);font-size: large; font-weight: bold;"
+									value="Temporary Hold"
+									action="#{temporaryHoldBackingBean.temporaryHoldBtnAction}">
+								</p:commandButton>
+								<p:commandButton id="removeTemporaryHoldBtn"
+									styleClass="mainButton"
+									disabled="#{temporaryHoldBackingBean.disableRemoveHoldBtn}"
+									update="frmTemporaryHold"
+									style="margin:3%;border-radius: 16px;height: 110px;width:30%;background: #ffa726; background-image: linear-gradient(to bottom,#fff9c4,#ffa726);font-size: large; font-weight: bold;"
+									value="Remove Temporary Hold"
+									action="#{temporaryHoldBackingBean.removeTemporaryHoldBtnAction}">
+								</p:commandButton>
+								<br></br>
+								<p:commandButton id="cmdbtnClearPage" value="Clear"
+									class="mainActionbtn" update="frmTemporaryHold"
+									action="#{temporaryHoldBackingBean.clearBtnAction}">
+								</p:commandButton>
+
+							</div>
+						</div>
+						<div></div>
+					</div>
+
+					<br></br>
+				</h:form>
+
+			</div>
+		</div>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{temporaryHoldBackingBean.successMessage}"></p:outputLabel>
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{temporaryHoldBackingBean.errorMessage}"></p:outputLabel>
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

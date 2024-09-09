@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2021-05-06T09:06:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NormalFareTableEnglish" language="groovy" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="bf9f1774-43e8-4be7-bbb3-175cdf164765">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC_Dev.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="exampleDataset" uuid="b25cf8ee-8975-4069-9f21-b8bcea705a1b">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Route" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select  a.rs_stage,a.rs_station ,b.midpoint_name,b.midpoint_name_sin,b.midpoint_name_tamil,a.rs_route_no
+from public.nt_m_route_station a
+inner join public.nt_r_station b on a.rs_station=b.code
+where a.rs_route_no=$P{P_Route} 
+and a.rs_stage =1]]>
+		</queryString>
+		<field name="rs_stage" class="java.math.BigDecimal"/>
+		<field name="rs_station" class="java.lang.String"/>
+		<field name="midpoint_name" class="java.lang.String"/>
+		<field name="midpoint_name_sin" class="java.lang.String"/>
+		<field name="midpoint_name_tamil" class="java.lang.String"/>
+		<field name="rs_route_no" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="RouteDetails" uuid="a45b8fae-58f2-44da-8947-8aa6ef018aa7">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_route" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select rou_service_origine,rou_service_destination,rou_via,rou_description,rou_number,
+rou_service_origine_sin,rou_service_destination_sin,rou_via_sin
+from public.nt_r_route
+where rou_number=$P{P_route}]]>
+		</queryString>
+		<field name="rou_service_origine" class="java.lang.String"/>
+		<field name="rou_service_destination" class="java.lang.String"/>
+		<field name="rou_via" class="java.lang.String"/>
+		<field name="rou_description" class="java.lang.String"/>
+		<field name="rou_number" class="java.lang.String"/>
+		<field name="rou_service_origine_sin" class="java.lang.String"/>
+		<field name="rou_service_destination_sin" class="java.lang.String"/>
+		<field name="rou_via_sin" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="exampleDataset2" uuid="08bcedb3-c9b3-4571-bd75-5c7970548922">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Route" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select  a.rs_stage,a.rs_station ,b.midpoint_name,b.midpoint_name_sin,b.midpoint_name_tamil,a.rs_route_no
+from public.nt_m_route_station a
+inner join public.nt_r_station b on a.rs_station=b.code
+where a.rs_route_no=$P{P_Route} 
+and a.rs_stage =5]]>
+		</queryString>
+		<field name="rs_stage" class="java.math.BigDecimal"/>
+		<field name="rs_station" class="java.lang.String"/>
+		<field name="midpoint_name" class="java.lang.String"/>
+		<field name="midpoint_name_sin" class="java.lang.String"/>
+		<field name="midpoint_name_tamil" class="java.lang.String"/>
+		<field name="rs_route_no" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_national_logo" class="java.lang.String"/>
+	<parameter name="P_Route_No" class="java.lang.String"/>
+	<parameter name="P_satge1" class="java.lang.String"/>
+	<parameter name="P_stage2" class="java.lang.String"/>
+	<parameter name="P_Stage1_des" class="java.lang.String"/>
+	<parameter name="P_stage2_des" class="java.lang.String"/>
+	<parameter name="P_remainVal" class="java.lang.String"/>
+	<parameter name="P_fare" class="java.lang.String"/>
+	<parameter name="P_ntc_logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.rs_stage , a.rs_station ,a.rs_route_no,b.midpoint_name,b.midpoint_name_sin,b.midpoint_name_tamil,
+c.tfc_normal_round_fee,d.mfc_re_ammendment_date,r.rou_service_origine_sin,r.rou_service_destination_sin,r.rou_via_sin
+from public.nt_m_route_station a
+inner join public.nt_r_station b on a.rs_station=b.code
+inner join public.nt_t_fee_circle c on a.rs_stage=c.tfc_stage
+inner join public.nt_m_fee_circle_master d on d.mfc_fare_reference_no=c.tfc_fare_reference_no and d.mfc_status='A'
+inner join public.nt_r_route r on r.rou_number=a.rs_route_no
+where a.rs_route_no= $P{P_Route_No} 
+order by a.rs_stage]]>
+	</queryString>
+	<field name="rs_stage" class="java.math.BigDecimal"/>
+	<field name="rs_station" class="java.lang.String"/>
+	<field name="rs_route_no" class="java.lang.String"/>
+	<field name="midpoint_name" class="java.lang.String"/>
+	<field name="midpoint_name_sin" class="java.lang.String"/>
+	<field name="midpoint_name_tamil" class="java.lang.String"/>
+	<field name="tfc_normal_round_fee" class="java.math.BigDecimal"/>
+	<field name="mfc_re_ammendment_date" class="java.lang.String"/>
+	<field name="rou_service_origine_sin" class="java.lang.String"/>
+	<field name="rou_service_destination_sin" class="java.lang.String"/>
+	<field name="rou_via_sin" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="118">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="92" width="553" height="26" backcolor="#DADEE5" uuid="e78a0aa1-b5cb-4f7f-8ef7-538574931265">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="92" width="554" height="26" isPrintWhenDetailOverflows="true" backcolor="#DADEE5" uuid="2aab30c7-8ecd-4d61-9afb-2ce2dba6d3a5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="Iskoola Pota" size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["උදා:  "+"("+$P{P_satge1}+")"+$P{P_Stage1_des}+" සිට "+"("+$P{P_stage2}+")"+$P{P_stage2_des}+" හෝ "+ "("+$P{P_stage2}+") "+$P{P_stage2_des} +" සිට​ "+"("+$P{P_satge1}+")"+$P{P_Stage1_des}+ "\n" +" ගාස්තුව  "  +$P{P_stage2}+"-"+$P{P_satge1}+" = "+$P{P_remainVal}+" අනු අංක "+$P{P_remainVal}+ " ට අදාල ගාස්තුව​  "+$P{P_fare}+"කි."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="43" y="-20" width="459" height="52" isPrintWhenDetailOverflows="true" uuid="2fd4798b-a173-4d0b-9f7c-f513364ef8de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="17" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" hAlign="Center">
+				<reportElement x="0" y="-4" width="53" height="60" uuid="a2a31fda-c716-424e-974a-ea7b2ddd5a95">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_national_logo}+"nationalLogo.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="480" y="-4" width="62" height="65" uuid="d5c019ba-19a2-4b49-9de7-526a9ff7f6fe">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{P_ntc_logo}+"ntclogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="65" width="542" height="52" isPrintWhenDetailOverflows="true" uuid="df797181-6ca5-4988-a21a-62d0e8ce45b9"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="9"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[ගමනාරම්භයට හා ගමනාන්තයට අදාල  ගාස්තු අවස්ථා අංක අතර වෙනස​(එකකින් අනෙක අඩු කිරිමෙන්) ලබා ගන්න​. එම පිලිතුරු අංකය ඉදිරියෙන් ඇති ගාස්තුව බලන්න​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="48" width="250" height="20" isPrintWhenDetailOverflows="true" uuid="8f749e1d-e099-44ae-a539-1a60794c4688">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="10" isBold="true" isUnderline="true"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<text><![CDATA[ඔබට අවශ්‍ය බස් ගාස්තුව දැන ගැනීමට​]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="53" y="20" width="427" height="29" uuid="79c7656d-7fde-496b-983e-4a4357ff256c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="Iskoola Pota" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["මාර්ග අංක : " +$F{rs_route_no}+" "+$F{rou_service_origine_sin}+ "-"+$F{rou_service_destination_sin}+"\n" +
+"<style size='11'>"+$F{rou_via_sin} +"  හරහා"+"</style>"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="34" height="31" isPrintWhenDetailOverflows="true" uuid="6cd21873-bac8-4479-be3b-441625526ecb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="9" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[ගාස්තු අවස්ථා]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="35" y="0" width="34" height="31" uuid="95e49e09-5709-4019-b4c9-94bd17e71459">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Iskoola Pota" size="9" isBold="false"/>
+					<paragraph leftIndent="0" rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[ගාස්තුව]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="70" y="0" width="205" height="31" uuid="0be7d31c-7c19-4240-8e86-169b9480e258">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ගාස්තු අවස්ථාව​]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Prevent">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="34" height="14" isPrintWhenDetailOverflows="true" uuid="b43195bb-eecf-42bf-837a-3d048f945735">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineColor="#E0DEDE"/>
+					<leftPen lineWidth="0.0" lineColor="#E0DEDE"/>
+					<bottomPen lineWidth="1.0" lineColor="#E0DEDE"/>
+					<rightPen lineWidth="1.0" lineColor="#E0DEDE"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rs_stage}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="35" y="0" width="35" height="14" isPrintWhenDetailOverflows="true" uuid="b657e8c4-4dcb-461e-b6a8-3a8c90b39a95"/>
+				<box>
+					<topPen lineColor="#E0DEDE"/>
+					<leftPen lineColor="#E0DEDE"/>
+					<bottomPen lineWidth="1.0" lineColor="#E0DEDE"/>
+					<rightPen lineWidth="1.0" lineColor="#E0DEDE"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Iskoola Pota" size="9"/>
+					<paragraph leftIndent="0" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tfc_normal_round_fee}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="70" y="0" width="205" height="14" isPrintWhenDetailOverflows="true" uuid="2cd1ff0d-e44f-4ddb-bca5-5ae6d81feb92">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineColor="#E0DEDE"/>
+					<leftPen lineColor="#E0DEDE"/>
+					<bottomPen lineWidth="1.0" lineColor="#E0DEDE"/>
+					<rightPen lineWidth="0.0" lineColor="#E0DEDE"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="10"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{midpoint_name_sin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="57">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="0" width="250" height="37" isPrintWhenDetailOverflows="true" uuid="3ed3ea9e-ec7e-4d77-9d0d-eee951b2ce29">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Iskoola Pota" size="9" isBold="false"/>
+					<paragraph firstLineIndent="0" leftIndent="5" spacingBefore="3"/>
+				</textElement>
+				<text><![CDATA[සභාපති,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="16" width="250" height="19" isPrintWhenDetailOverflows="true" uuid="4f3b145c-c9e2-4a63-9bd2-a032924bf4b3">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="8" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="25" width="250" height="20" isPrintWhenDetailOverflows="true" uuid="2e87f19f-70b4-443d-9545-ba47bbb3c265">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="9" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[241, උද්‍යාන පාර , කොළඹ 05.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="37" width="250" height="19" isPrintWhenDetailOverflows="true" uuid="73002258-0f31-4ea2-b63f-25a433b10105">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="8" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ක්‍ෂනික ඇමතුම් : 1955   ෆැක්ස්  :0112503725]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="275" y="0" width="250" height="34" isPrintWhenDetailOverflows="true" uuid="347e2f92-8d39-4c85-a48c-2376e697abca">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="9" isBold="false"/>
+					<paragraph firstLineIndent="0" leftIndent="5" rightIndent="2" spacingBefore="3"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව විසින් අනුමත විෂමතා ඉවත්කළ සාමාන්‍ය සේවා බස් ගාස්තු සටහන​]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="275" y="29" width="250" height="26" isPrintWhenDetailOverflows="true" uuid="554420bf-8fbf-4d61-a29a-705db00fb120">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="9" isBold="true" isItalic="true" isUnderline="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ගාස්තු සංශෝදිත දිනය​  "+$F{mfc_re_ammendment_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

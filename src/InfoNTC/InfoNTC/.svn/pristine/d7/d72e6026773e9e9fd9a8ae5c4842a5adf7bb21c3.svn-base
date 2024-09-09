@@ -1,0 +1,701 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn1 {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 180px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+.calendarClass input {
+	width: 62% !important
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Offence Management</h1>
+
+			<div style="width: 95%;" class="subDiv">
+
+				<h:form id="frmOffenceMang">
+					<br />
+
+					<p:panel>
+						<p:panelGrid id="searchPanel" columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Offence Mode"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu value="#{offenceManagementBackingBean.mode}"
+									tabindex="1" style="width:calc(60% - 18px);"
+									disabled="#{offenceManagementBackingBean.editMode == 'true'}">
+									<p:ajax update="offenceCodeId" />
+									<f:selectItem itemValue="C" itemLabel="Create New"></f:selectItem>
+									<f:selectItem itemValue="S" itemLabel="Search"></f:selectItem>
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Offence Code"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:outputPanel id="offenceCodeId">
+								<p:panelGrid
+									rendered="#{offenceManagementBackingBean.mode == 'S'}">
+									<p:selectOneMenu tabindex="1" style="width:84%; "
+										value="#{offenceManagementBackingBean.offenceMangDTO.offenceCode}"
+										effect="fold" filter="true" filterMatchMode="contains">
+										<p:ajax
+											listener="#{offenceManagementBackingBean.onOffenceCodeChange}"
+											update="desID,desSinId,desTamilID,addButtId,dataTableOne" />
+										<f:selectItem itemLabel=" " itemValue="" />
+										<f:selectItems
+											value="#{offenceManagementBackingBean.offenceCodeList}"
+											var="offenceCodeListVar"
+											itemValue="#{offenceCodeListVar.offenceCode}"
+											itemLabel="#{offenceCodeListVar.offenceCode}" />
+
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+								<p:inputText
+									value="#{offenceManagementBackingBean.offenceMangDTO.offenceCode}"
+									disabled="#{offenceManagementBackingBean.editMode == 'true'}"
+									maxlength="20" tabindex="1"
+									style="text-transform:uppercase; width:94%;"
+									rendered="#{offenceManagementBackingBean.mode != 'S'}">
+									
+								</p:inputText>
+							</p:outputPanel>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Offence Description"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:94%;height:18px;" id="desID"
+									value="#{offenceManagementBackingBean.offenceMangDTO.offenceDes}">
+									
+									</p:inputText>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Offence Description (Sinhala)"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:94%;height:18px;" id="desSinId"
+									value="#{offenceManagementBackingBean.offenceMangDTO.offenceDesSin}"></p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Offence Description Tamil"></p:outputLabel>
+
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText style="width:94%;height:18px;" id="desTamilID"
+									value="#{offenceManagementBackingBean.offenceMangDTO.offenceDesTamil}"></p:inputText>
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Status"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="statusId" tabindex="1" style="width:84%; "
+									value="#{offenceManagementBackingBean.offenceMangDTO.offenceCodeStatus}"
+									effect="fold" filter="true" filterMatchMode="contains">
+
+									<f:selectItem itemValue="A" itemLabel="Active"></f:selectItem>
+									<f:selectItem itemValue="I" itemLabel="Inactive"></f:selectItem>
+
+								</p:selectOneMenu>
+
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+
+						<center>
+
+
+							<p:commandButton value="Add" styleClass="mainActionbtn"
+								id="addButtId"
+								actionListener="#{offenceManagementBackingBean.addButAction}"
+								disabled="#{offenceManagementBackingBean.addbuttDisable}"
+								update="frmOffenceMang" process="frmOffenceMang">
+
+
+							</p:commandButton>
+
+
+
+							<p:commandButton styleClass="mainActionbtn" value="Clear"
+								process="@all"
+								action="#{offenceManagementBackingBean.clearButAction}"
+								id="clear" update="frmOffenceMang"></p:commandButton>
+
+						</center>
+
+						<br></br>
+						<p:panel style="border-bottom:5px solid #404d6f;" />
+					</p:panel>
+					<br></br>
+					<p:panel>
+
+						<p:dataTable id="dataTableOne" var="p" rows="5" paginator="true"
+							value="#{offenceManagementBackingBean.offenceCodeDetails}"
+							selection="#{offenceManagementBackingBean.selectDTO}"
+							selectionMode="single" rowKey="#{p.offenceCode}"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15" resizableColumns="false"
+							liveResize="true" tableStyle="width:100%;font-size:12px;"
+							rowIndexVar="index" styleClass="myTable"
+							emptyMessage="No Data Available">
+
+
+							<p:column headerText="Offence Code" style="text-align: left;"
+								width="8%">
+								<h:outputText value="#{p.offenceCode}" />
+							</p:column>
+
+							<p:column headerText="Offence Description"
+								style="text-align: left;" width="20%">
+								<h:outputText value="#{p.offenceDes}" />
+							</p:column>
+
+							<p:column headerText="Offence Description (Sinhala)" width="15%"
+								style="text-align: left;">
+								<h:outputText value="#{p.offenceDesSin}" />
+							</p:column>
+
+							<p:column headerText="Offence Description (Tamil)" width="15%"
+								style="text-align: left;">
+								<h:outputText value="#{p.offenceDesTamil}" />
+							</p:column>
+
+							<p:column headerText="Status" width="5%"
+								style="text-align: left;" visible="true">
+								<h:outputText value="#{p.offenceCodeStatus}" />
+							</p:column>
+
+
+
+
+							<p:column headerText="" width="5%">
+								<p:commandLink
+									action="#{offenceManagementBackingBean.editButAction()}"
+									update="@form">
+
+									<f:setPropertyActionListener value="#{p}"
+										target="#{offenceManagementBackingBean.selectDTO}" />
+
+									<p:graphicImage library="images" name="edit.png"
+										style="width:24px;height:24px;" title="edit"></p:graphicImage>
+								</p:commandLink>
+							</p:column>
+
+							<p:column headerText="" width="5%">
+								<p:commandLink
+									action="#{offenceManagementBackingBean.deleteButAction()}"
+									update="frmOffenceMang">
+
+									<f:setPropertyActionListener value="#{p}"
+										target="#{offenceManagementBackingBean.selectDTO}" />
+
+									<p:graphicImage library="images" name="add.png"
+										style="width:24px;height:24px;" title="add"></p:graphicImage>
+								</p:commandLink>
+							</p:column>
+
+						</p:dataTable>
+
+
+
+					</p:panel>
+					<p:panel rendered="#{offenceManagementBackingBean.addOffenDet}">
+						<p:panelGrid id="searchPanel2" columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="No.of Attempt"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="noOfAttemptId" tabindex="1"
+									disabled="#{offenceManagementBackingBean.noOfAttemptDisable}"
+									style="width:70%; "
+									value="#{offenceManagementBackingBean.offenceMangDTO.noOfAttempts}"
+									effect="fold" filter="true" filterMatchMode="contains">
+
+									<f:selectItem itemLabel="-- Select  Attempt--" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{offenceManagementBackingBean.attempsList}"
+										var="noOfAttemptList"
+										itemValue="#{noOfAttemptList.noOfAttempts}"
+										itemLabel="#{noOfAttemptList.noOfAttemptsDes}" />
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Public Complain"></p:outputLabel>
+
+								<p:selectBooleanCheckbox
+									value="#{offenceManagementBackingBean.offenceMangDTO.publicComplain}"
+									id="publicComplainID" style="padding-left:25px;" />
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Investigation"></p:outputLabel>
+
+								<p:selectBooleanCheckbox
+									value="#{offenceManagementBackingBean.offenceMangDTO.investigation}"
+									id="investigationID" style="padding-left:25px;" />
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Amount"></p:outputLabel>
+
+								<p:selectBooleanCheckbox
+									value="#{offenceManagementBackingBean.offenceMangDTO.amount}"
+									id="amountID" style="padding-left:75px;" />
+							</p:panelGrid>
+
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Action YES"></p:outputLabel>
+								<p:selectBooleanCheckbox
+									value="#{offenceManagementBackingBean.offenceMangDTO.action}"
+									id="actionID" style="padding-left:33px;" />
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="No. of Dermit Points "></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputNumber style="width:94%;height:18px;" id="noOfDermitID"
+									maxlength="10"
+									value="#{offenceManagementBackingBean.offenceMangDTO.noOfDermitPoints}"></p:inputNumber>
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Charge Amount"></p:outputLabel>
+
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputNumber style="width:94%;height:18px;"
+									id="chargeAmountID"
+									value="#{offenceManagementBackingBean.offenceMangDTO.chargeAmount}"></p:inputNumber>
+							</p:panelGrid>
+
+
+
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Action"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputTextarea style="width:100%;height:18px;"
+									id="actionTxtID"
+									value="#{offenceManagementBackingBean.offenceMangDTO.actionTxt}"></p:inputTextarea>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Status"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="statusId2" tabindex="1" style="width:84%; "
+									value="#{offenceManagementBackingBean.offenceMangDTO.status}"
+									effect="fold" filter="true" filterMatchMode="contains">
+
+									<f:selectItem itemValue="A" itemLabel="Active"></f:selectItem>
+									<f:selectItem itemValue="I" itemLabel="Inactive"></f:selectItem>
+
+								</p:selectOneMenu>
+
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+
+						<center>
+
+
+							<p:commandButton value="Add" styleClass="mainActionbtn"
+								id="addButtId1"
+								actionListener="#{offenceManagementBackingBean.addButActionSecond}"
+								disabled="#{offenceManagementBackingBean.addbuttDisable1}"
+								update="@form" process="@all">
+
+
+							</p:commandButton>
+
+
+
+							<p:commandButton styleClass="mainActionbtn" value="Clear"
+								process="@all"
+								action="#{offenceManagementBackingBean.clearButAction1}"
+								id="clear1" update="@form"></p:commandButton>
+
+						</center>
+
+						<br></br>
+						<p:panel style="border-bottom:5px solid #404d6f;" />
+
+
+						<p:panel>
+
+							<p:dataTable id="dataTableOne2" var="p1" rows="5"
+								paginator="true"
+								value="#{offenceManagementBackingBean.offenceDetailsshowSecondGrid}"
+								rowKey="#{p.offenceCode}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15" resizableColumns="false"
+								liveResize="true" tableStyle="width:100%;font-size:12px;"
+								rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No Data Available">
+
+
+
+								<p:column headerText="No. of Attemps" style="text-align: left;"
+									width="9%">
+									<h:outputText value="#{p1.noOfAttemptsDes}"
+										style="font-size:90%;" />
+								</p:column>
+
+								<p:column headerText="Is Payment Allowed"
+									style="text-align: left;" width="9%">
+									<h:outputText value="#{p1.isAmountAllowed}"
+										style="font-size:90%;" />
+								</p:column>
+
+								<p:column headerText="Action(Yes/No)" width="10%"
+									style="text-align: left;">
+									<h:outputText value="#{p1.isActionAllowed}"
+										style="font-size:90%;" />
+								</p:column>
+
+								<p:column headerText="Charge(Rs.)" width="15%"
+									style="text-align: right;">
+
+									<h:outputText value="#{p1.chargeAmount}" style="font-size:90%;">
+										<f:convertNumber pattern="###,###.00" />
+									</h:outputText>
+								</p:column>
+
+								<p:column headerText="Action" width="15%"
+									style="text-align: left;" visible="true">
+									<h:outputText value="#{p1.actionTxt}" style="font-size:90%;" />
+								</p:column>
+								<p:column headerText="Dermit Points" width="15%"
+									style="text-align: center;" visible="true">
+									<h:outputText value="#{p1.noOfDermitPoints}"
+										style="font-size:90%;" />
+								</p:column>
+								<p:column headerText="Status" width="10%"
+									style="text-align: left;" visible="true">
+									<h:outputText value="#{p1.status}" style="font-size:90%;" />
+								</p:column>
+
+
+
+
+								<p:column headerText="" width="5%">
+									<p:commandLink
+										action="#{offenceManagementBackingBean.editButActionSecond()}"
+										update="@form">
+
+										<f:setPropertyActionListener value="#{p1}"
+											target="#{offenceManagementBackingBean.selectDTOEdit}" />
+
+										<p:graphicImage library="images" name="edit.png"
+											style="width:24px;height:24px;" title="edit"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+
+
+							</p:dataTable>
+
+
+
+						</p:panel>
+
+					</p:panel>
+
+				</h:form>
+
+
+			</div>
+
+		</div>
+
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{offenceManagementBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="successSve" global="true" modal="true"
+			header="Success" width="30%" severity="info" widgetVar="successSve"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{offenceManagementBackingBean.sucessMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1"
+						style="margin-top:10px;margin-bottom:10px" process="frmsuccessSve"
+						value="OK" onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

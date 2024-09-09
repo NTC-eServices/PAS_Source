@@ -1,0 +1,1072 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.mainCalculateButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 40px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.ui-scrollpanel p {
+	width: 500px;
+	font-size: 16px;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-g-6 {
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-g {
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone th span.ui-column-title {
+	display: none !important;
+	height: 0px;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.addBtn {
+	font-weight: bold;
+	background: #141845 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 70px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.colNoOfBuses {
+	background-color: #d1cdcd;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Route Schedule Generator</h1>
+			<div style="width: 95%;" class="subDiv">
+
+				<h:form id="mainfrm">
+
+
+
+					<p:panel>
+
+						<p:panelGrid id="shwDetail" columns="5" style="margin-top:5px"
+							columnClasses="ui-grid-col-1,ui-grid-col-4,ui-grid-col-6,ui-grid-col-6,ui-grid-col-6"
+							layout="grid">
+
+							<!-- 01 -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Route No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="routeNo" style="width:70%" effect="fold"
+									filter="true" filterMatchMode="contains" tabindex="1"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.routeNo}">
+									<f:selectItem itemLabel="-- Select Route No.--" itemValue="" />
+									<f:selectItems
+										value="#{routeScheduleGeneratorBean.busRouteList}" var="d"
+										itemLabel="#{d.routeNo} #{d.des}" itemValue="#{d.routeNo}" />
+
+									<p:ajax update="@form"
+										listener="#{routeScheduleGeneratorBean.ajaxFillbusCategory}" />
+
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Bus Category"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="buscategory" style="width:70%"
+									effect="fold" filter="true" filterMatchMode="contains"
+									tabindex="1"
+									disabled="#{routeScheduleGeneratorBean.disableBusCategory}"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.busCategory}">
+
+
+									<f:selectItem itemLabel="-- Bus Category --" itemValue="" />
+									<f:selectItems
+										value="#{routeScheduleGeneratorBean.busCategoryList}" var="d"
+										itemLabel="#{d.busCategoryDes}" itemValue="#{d.busCategory}" />
+
+
+									<p:ajax update="@form"
+										listener="#{routeScheduleGeneratorBean.ajaxFillRouteDetails}" />
+
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+
+							<!-- 02 -->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Group No."></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="groupNo" style="width:70%" effect="fold"
+									disabled="#{routeScheduleGeneratorBean.disableGroupNo}"
+									filter="true" filterMatchMode="contains" tabindex="1"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.groupNo}">
+									<f:selectItem itemLabel="-- Group No. --" itemValue="" />
+									<f:selectItems
+										value="#{routeScheduleGeneratorBean.groupNoList}" var="d"
+										itemLabel="#{d.groupNo}" itemValue="#{d.groupNo}" />
+
+									<p:ajax listener="#{routeScheduleGeneratorBean.ajaxSetGroupNo}" />
+
+								</p:selectOneMenu>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:outputLabel value="Swap Origin and Destination"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectBooleanButton id="swapButton"
+									disabled="#{routeScheduleGeneratorBean.disabledSwap}"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.swapEnds}"
+									onLabel="Yes" offLabel="No" onIcon="pi pi-check"
+									offIcon="pi pi-times" style="width:60px">
+									<p:ajax update="@form"
+										listener="#{routeScheduleGeneratorBean.ajaxSwapOriginDestination}" />
+								</p:selectBooleanButton>
+							</p:panelGrid>
+
+							<!-- 03 -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Origin"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true" id="originid"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.origin}" />
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Destination"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText onkeyup="this.value=this.value.toUpperCase();"
+									readonly="true" id="destinationId"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.destination}" />
+							</p:panelGrid>
+
+							<!-- 04 -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="No. of Total Buses on Route"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText readonly="true"
+									value="#{routeScheduleGeneratorBean.noOfBuses}"></p:inputText>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<h:outputLabel value="No. of Trips for the Route" />
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText readonly="true"
+									value="#{routeScheduleGeneratorBean.noOfTrips}"></p:inputText>
+							</p:panelGrid>
+
+						</p:panelGrid>
+					</p:panel>
+
+					<p:panel>
+						<center>
+							<p:commandButton value="Search" styleClass="mainActionbtn"
+								action="#{routeScheduleGeneratorBean.searchAction}"
+								update="@form,frmError,frmcomfirm,originDestinationDate,dateRangePnl"></p:commandButton>
+
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								action="#{routeScheduleGeneratorBean.clearOne}" update="@form"></p:commandButton>
+						</center>
+
+					</p:panel>
+
+					<p:panel>
+
+						<p:panelGrid columns="3" style="border-bottom:3px solid #404d6f;"
+							columnClasses="ui-grid-col-1,ui-grid-col-11" layout="grid"
+							id="originDestinationDate">
+
+							<!-- Panel 02- 01 for origin and destination -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid
+								rendered="#{routeScheduleGeneratorBean.originDataVisible}">
+								<h1>Origin</h1>
+							</p:panelGrid>
+
+							<p:panelGrid
+								rendered="#{routeScheduleGeneratorBean.destinationDataVisible}">
+								<h1>Destination</h1>
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+						<br />
+
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid">
+
+							<!-- Panel 02- 02 -01 -->
+
+							<p:panelGrid>
+								<p:outputLabel value="No. of leaves"
+									rendered="#{routeScheduleGeneratorBean.originDataVisible}"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText readonly="true"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.noOfLeavesOrigin}"
+									rendered="#{routeScheduleGeneratorBean.originDataVisible}"></p:inputText>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="No. of leaves"
+									rendered="#{routeScheduleGeneratorBean.destinationDataVisible}"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText readonly="true"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.noOfLeavesDestination}"
+									rendered="#{routeScheduleGeneratorBean.destinationDataVisible}"></p:inputText>
+							</p:panelGrid>
+
+							<!-- Panel 02- 02 -02 -->
+
+							<p:panelGrid>
+								<p:outputLabel value="No. of buses (Without SLTB and ETC)"
+									rendered="#{routeScheduleGeneratorBean.originDataVisible}"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText readonly="true"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.noOfBusesOrigin}"
+									rendered="#{routeScheduleGeneratorBean.originDataVisible}"></p:inputText>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="No. of buses  (Without SLTB and ETC)"
+									rendered="#{routeScheduleGeneratorBean.destinationDataVisible}"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText readonly="true"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.noOfBusesDestination}"
+									rendered="#{routeScheduleGeneratorBean.destinationDataVisible}"></p:inputText>
+							</p:panelGrid>
+
+							<!-- Panel 02- 02 -03 -->
+
+							<p:panelGrid>
+								<p:outputLabel
+									value="No. of trips(Including Buses From Destination)"
+									rendered="#{routeScheduleGeneratorBean.originDataVisible}"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText readonly="true"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.noOfTripsOrigin}"
+									rendered="#{routeScheduleGeneratorBean.originDataVisible}"></p:inputText>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel
+									value="No. of trips (Including Buses From Origin)"
+									rendered="#{routeScheduleGeneratorBean.destinationDataVisible}"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:inputText readonly="true"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.noOfTripsDestination}"
+									rendered="#{routeScheduleGeneratorBean.destinationDataVisible}"></p:inputText>
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+					<p:panel id="dateRangePnl">
+
+						<p:panelGrid columns="3" style="border-bottom:3px solid #404d6f;"
+							columnClasses="ui-grid-col-1,ui-grid-col-10,ui-grid-col-12"
+							layout="grid">
+
+							<!-- Panel 03- 01 for Date Range -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<h1>Time Table Date Range</h1>
+							</p:panelGrid>
+
+							<p:panelGrid
+								rendered="#{routeScheduleGeneratorBean.lastPanelDateVisible}">
+								<h1>Last Panel Date Range</h1>
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+						<br />
+
+						<p:panelGrid columns="5"
+							columnClasses="ui-grid-col-1,ui-grid-col-4,ui-grid-col-6,ui-grid-col-6,ui-grid-col-6"
+							layout="grid">
+
+							<!-- Panel 03- 02 -01 -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Start Date"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:calendar id="startDate" styleClass="calendarClass"
+									navigator="true" inputStyle="width:100%%" locale="en_US"
+									readonlyInput="true"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.startDate}"
+									showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+									yearRange="c-100:c+100">
+
+									<p:ajax event="dateSelect"
+										listener="#{routeScheduleGeneratorBean.ajaxStartDateExpireDateValidator}"
+										update="@form,frmError" />
+
+								</p:calendar>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="Start Date"
+									rendered="#{routeScheduleGeneratorBean.lastPanelDateVisible}"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:calendar id="laststartDate" styleClass="calendarClass"
+									disabled="true" navigator="true" inputStyle="width:100%%"
+									readonly="true"
+									value="#{routeScheduleGeneratorBean.lastPanelStartDateNew}"
+									showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+									mindate="today" yearRange="c-100:c+100"
+									rendered="#{routeScheduleGeneratorBean.lastPanelDateVisible}"></p:calendar>
+							</p:panelGrid>
+
+							<!-- Panel 03- 02 -02 -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="End Date"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:calendar id="endDate" styleClass="calendarClass"
+									readonlyInput="true" navigator="true" inputStyle="width:100%%"
+									locale="en_US"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.endDate}"
+									showOn="button" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+									yearRange="c-100:c+100">
+
+									<p:ajax event="dateSelect"
+										listener="#{routeScheduleGeneratorBean.ajaxEndDateExpireDateValidator}"
+										update="@form,frmError" />
+
+								</p:calendar>
+							</p:panelGrid>
+
+
+							<p:panelGrid>
+								<p:outputLabel value="End Date"
+									rendered="#{routeScheduleGeneratorBean.lastPanelDateVisible}"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:calendar id="lastendDate"
+									value="#{routeScheduleGeneratorBean.routeScheduleDTO.lastPanelEndDate}"
+									showOn="button"
+									rendered="#{routeScheduleGeneratorBean.lastPanelDateVisible}"
+									pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+									readonlyInput="true"
+									mindate="#{routeScheduleGeneratorBean.routeScheduleDTO.lastPanelStartDate}"
+									yearRange="c-100:c+100" />
+							</p:panelGrid>
+
+
+						</p:panelGrid>
+					</p:panel>
+
+
+					<p:panel
+						rendered="#{!routeScheduleGeneratorBean.lastPanelDateVisible}">
+
+						<p:panelGrid columns="3" style="border-bottom:3px solid #404d6f;"
+							columnClasses="ui-grid-col-1,ui-grid-col-10,ui-grid-col-12"
+							layout="grid">
+
+							<!-- Panel 03- 01 for Date Range -->
+
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<h1>Leave Position Manage</h1>
+							</p:panelGrid>
+
+							<p:panelGrid>
+							</p:panelGrid>
+
+
+
+
+						</p:panelGrid>
+
+						<br />
+
+						<p:panelGrid columns="5"
+							columnClasses="ui-grid-col-3,ui-grid-col-6,ui-grid-col-1,ui-grid-col-3,ui-grid-col-6"
+							layout="grid">
+
+							<!-- Panel 03- 02 -01 -->
+
+							<p:panelGrid>
+								<h:outputLabel value="Leave Position" />
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectCheckboxMenu id="multiple"
+									disabled="#{routeScheduleGeneratorBean.disabledleavePositionList}"
+									value="#{routeScheduleGeneratorBean.leavePositionList}"
+									label="Cities" multiple="true" filter="true" style="width:100%"
+									filterMatchMode="startsWith" panelStyle="width:16%">
+
+									<f:selectItems
+										value="#{routeScheduleGeneratorBean.selectLeavePositionList}"
+										var="d" itemLabel="#{d.leavePosition}"
+										itemValue="#{d.leavePosition}" />
+
+								</p:selectCheckboxMenu>
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+
+							<p:panelGrid>
+								<h:outputLabel value="Leave Position For Other side" />
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectCheckboxMenu id="multipleNS"
+									disabled="#{routeScheduleGeneratorBean.twoDay}"
+									value="#{routeScheduleGeneratorBean.leavePositionListTwoDay}"
+									label="Cities" multiple="true" filter="true" style="width:100%"
+									filterMatchMode="startsWith" panelStyle="width:16%">
+
+									
+
+									<f:selectItems
+										value="#{routeScheduleGeneratorBean.selectLeavePositionList}"
+										var="d" itemLabel="#{d.leavePosition}"
+										itemValue="#{d.leavePosition}" />
+
+								</p:selectCheckboxMenu>
+							</p:panelGrid>
+
+
+						</p:panelGrid>
+					</p:panel>
+
+					<p:panel id="buttonPanelTwo">
+						<center>
+
+							<p:commandButton styleClass="mainCalculateButton"
+								disabled="#{routeScheduleGeneratorBean.disabledNoramlRotation}"
+								style="width:25%" value="Normal Rotation"
+								update="@form,frmError"
+								action="#{routeScheduleGeneratorBean.noramlRotation}">
+							</p:commandButton>
+
+							<p:commandButton styleClass="mainCalculateButton"
+								disabled="#{routeScheduleGeneratorBean.disabledZigzagRotation}"
+								style="width:25%" value="Zigzag Rotation"
+								update="@form,frmError"
+								action="#{routeScheduleGeneratorBean.zigzagRotation}">
+							</p:commandButton>
+						</center>
+
+					</p:panel>
+
+					<p:panel id="rotationPanel">
+						<center>
+							<p:dataTable id="buses" var="x"
+								rendered="#{routeScheduleGeneratorBean.renderTableOne}"
+								tableStyle="width:auto;font-size:12px;"
+								value="#{routeScheduleGeneratorBean.busForRouteList}"
+								rowIndexVar="index" styleClass="myTable" >
+		
+								<p:column headerText="#" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.tripId}" />
+								</p:column>
+								
+								<p:columns value="#{routeScheduleGeneratorBean.columns}" var="c"
+									headerText="#{c.header}" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.busNoList[c.property]}" />
+								</p:columns>
+
+							</p:dataTable>
+						</center>
+					</p:panel>
+
+					<p:panel id="leaveRotationPanel">
+						<center>
+							<p:dataTable id="laves" var="x" rowKey="#{x.tripId}"
+								selection="#{routeScheduleGeneratorBean.selectedleaveForRouteList}"
+								rendered="#{routeScheduleGeneratorBean.renderTableTwo}"
+								tableStyle="width:auto;font-size:12px;"
+								value="#{routeScheduleGeneratorBean.leaveForRouteList}"
+								rowIndexVar="index" emptyMessage="No Leaves are available"
+								styleClass="myTable">
+
+								<p:column selectionMode="multiple"
+									style="padding: 5px 20px 5px 20px;"
+									headerText="Applicable for Report" visible="true" />
+
+								<p:column headerText="#" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.tripId}" />
+								</p:column>
+								
+								<p:columns value="#{routeScheduleGeneratorBean.columnsLeaves}"
+									var="c" headerText="#{c.header}"
+									style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.leaveBusNoList[c.property]}" />
+
+								</p:columns>
+
+							</p:dataTable>
+						</center>
+					</p:panel>
+
+					<p:panel id="twoDayRotationPanel">
+						<center>
+							<p:dataTable id="bus" var="x"
+								tableStyle="width:auto;font-size:12px;"
+								value="#{routeScheduleGeneratorBean.busForRouteListForTwoDay}"
+								rendered="#{routeScheduleGeneratorBean.renderTableThree}"
+								rowIndexVar="index" styleClass="myTable">
+
+								<p:column headerText="#" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.tripId}" />
+								</p:column>
+								
+								<p:columns value="#{routeScheduleGeneratorBean.columns}" var="c"
+									headerText="#{c.header}" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.busNoList[c.property]}" />
+								</p:columns>
+
+							</p:dataTable>
+						</center>
+					</p:panel>
+					
+					<p:panel id="leaveRotationPanelTD">
+						<center>
+							<p:dataTable id="lavesTD" var="x" 
+								rowKey="#{x.tripId}"
+								selection="#{routeScheduleGeneratorBean.selectedleaveForRouteListNextSide}"
+								rendered="#{routeScheduleGeneratorBean.renderLeave}"
+								tableStyle="width:auto;font-size:12px;"
+								value="#{routeScheduleGeneratorBean.leaveBusTemp}"
+								rowIndexVar="index" emptyMessage="No Leaves are available"
+								styleClass="myTable">
+
+								<p:column selectionMode="multiple"
+									style="padding: 5px 20px 5px 20px;"
+									headerText="Applicable for Report" visible="true" />
+									
+								<p:column headerText="#" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.tripId}" />
+								</p:column>
+								
+								<p:columns value="#{routeScheduleGeneratorBean.columnsLeaves}"
+									var="c" headerText="#{c.header}"
+									style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.leaveBusNoList[c.property]}" />
+
+								</p:columns>
+
+							</p:dataTable>
+						</center>
+					</p:panel>
+
+					<p:panel id="buttonPanelThree">
+						<center>
+							<p:commandButton value="Save" styleClass="mainActionbtn"
+								disabled="#{routeScheduleGeneratorBean.disabledSave}"
+								action="#{routeScheduleGeneratorBean.saveAction}"
+								update="@form,frmError,frmsuccess"></p:commandButton>
+
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								disabled="#{routeScheduleGeneratorBean.disabledClear}"
+								action="#{routeScheduleGeneratorBean.clearOne}"
+								update="@form,frmError"></p:commandButton>
+
+							
+						</center>
+`					</p:panel>
+
+	</p:panel>
+
+				</h:form>
+
+			</div>
+
+		</div>
+
+
+
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{routeScheduleGeneratorBean.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Success" width="30%" severity="info"
+			widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="#{routeScheduleGeneratorBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Alert" width="30%" severity="info" widgetVar="alertMSG"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAlert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="#{routeScheduleGeneratorBean.alertMSG}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmAlert" onclick="PF('alertMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="comfirmMSG" global="true" modal="true"
+			header="Confirmation" width="30%" severity="info"
+			widgetVar="comfirmMSG" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmcomfirm">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="Route Schedule already generated for the selected route. Do you want to edit?"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="Yes" process="frmcomfirm"
+						update="frmsuccess,frmError,frmcomfirm,frmeditschedule"
+						action="#{routeScheduleGeneratorBean.editRouteScheduleData}">
+					</p:commandButton>
+
+					<p:commandButton
+						style="margin-top:10px;margin-bottom:10px;margin-left:10px"
+						value="No" process="frmcomfirm" onclick="PF('comfirmMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+	<!-- Edited by Dhananjika.D -->
+	
+		<p:dialog id="editRouteSchedule" global="true" modal="true"
+			closable="true" header="Edit Route Schedule" width="98%" height="90vh"
+			severity="info" widgetVar="editRouteScheduleVAR" closeOnEscape="true"
+			resizable="false">
+
+			<h:form id="frmeditschedule">
+				<center>
+					<p:panelGrid columns="5"
+						columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,,ui-grid-col-2"
+						layout="grid">
+
+						<p:outputLabel value="Date Range"></p:outputLabel>
+						<p:selectOneMenu id="dateRange"
+							value="#{routeScheduleGeneratorBean.selectedDateRange}"
+							effect="fold">
+							<f:selectItem itemLabel="Select a Date Range" itemValue="" />
+							<f:selectItems value="#{routeScheduleGeneratorBean.dateList}" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Search" styleClass="mainActionbtn"
+							action="#{routeScheduleGeneratorBean.searchForEdit}"
+							update="buses,busesLeave,busesD,busesDleave"></p:commandButton>
+					</p:panelGrid>
+
+					<p:panelGrid columns="1" styleClass="ui-noborder">
+
+						<p:panel>
+						<!-- Origin table -->
+							<p:dataTable id="buses" var="x" emptyMessage="No Data Found"
+								tableStyle="width:auto;font-size:12px;" paginator="true"
+								value="#{routeScheduleGeneratorBean.editBusForRouteList}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="70,140" rowIndexVar="index"
+								styleClass="myTable" editable="true" editMode="cell">
+								
+								<p:column headerText="#" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.tripId}" />
+								</p:column>
+								
+								<p:columns value="#{routeScheduleGeneratorBean.editColumns}"
+									var="c" headerText="#{c.header}" style="padding: 5px 20px 5px 20px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{x.busNoList[c.property]}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{x.busNoList[c.property]}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:columns>
+
+							</p:dataTable>
+							<br></br>
+						
+						<!-- Origin leave table -->
+							<p:dataTable id="busesLeave" var="x" emptyMessage="No Data Found"
+								tableStyle="width:auto;font-size:12px;" paginator="true"
+								value="#{routeScheduleGeneratorBean.editBusForRouteListLeave}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="70,140" rowIndexVar="index"
+								styleClass="myTable" editable="true" editMode="cell">
+								
+								<p:column headerText="#" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.tripId}" />
+								</p:column>
+								
+								<p:columns value="#{routeScheduleGeneratorBean.editColumns}"
+									var="c" headerText="#{c.header}" style="padding: 5px 20px 5px 20px;">
+
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{x.leaveBusNoList[c.property]}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{x.leaveBusNoList[c.property]}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:columns>
+
+							</p:dataTable>
+							<br></br>
+						
+						<!-- Destination table -->
+							<p:dataTable id="busesD" var="x" emptyMessage="No Data Found"
+								tableStyle="width:auto;font-size:12px;" paginator="true"
+								value="#{routeScheduleGeneratorBean.editBusForRouteListTwoDay}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="70,140" rowIndexVar="index"
+								styleClass="myTable" editable="true" editMode="cell">
+								
+								<p:column headerText="#" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.tripId}" />
+								</p:column>
+
+								<p:columns value="#{routeScheduleGeneratorBean.editColumns}"
+									var="c" headerText="#{c.header}" style="padding: 5px 20px 5px 20px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{x.busNoList[c.property]}"/>
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{x.busNoList[c.property]}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:columns>
+
+							</p:dataTable>
+							<br></br>
+						
+						<!-- Destination leave table -->
+							<p:dataTable id="busesDleave" var="x" emptyMessage="No Data Found"
+								tableStyle="width:auto;font-size:12px;" paginator="true"
+								value="#{routeScheduleGeneratorBean.editBusForRouteListTwoDayLeave}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="70,140" rowIndexVar="index"
+								styleClass="myTable" editable="true" editMode="cell">
+								
+								<p:column headerText="#" style="padding: 5px 20px 5px 20px;">
+									<h:outputText value="#{x.tripId}" />
+								</p:column>
+
+								<p:columns value="#{routeScheduleGeneratorBean.editColumns}"
+									var="c" headerText="#{c.header}" style="padding: 5px 20px 5px 20px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{x.leaveBusNoList[c.property]}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{x.leaveBusNoList[c.property]}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:columns>
+
+							</p:dataTable>
+							
+						</p:panel>
+					</p:panelGrid>
+
+
+					<p:commandButton value="Save"
+						update="buses,editRouteSchedule"
+						actionListener="#{routeScheduleGeneratorBean.saveEditedData}"
+						process="@form,frmsuccess" styleClass="mainActionbtn">
+					</p:commandButton>
+
+					<p:commandButton value="Clear"
+						update="buses,editRouteSchedule"
+						action="#{routeScheduleGeneratorBean.clearEditDate}"
+						styleClass="mainActionbtn">
+					</p:commandButton>
+
+					<p:panelGrid>
+						<!-- for edit end  -->
+					</p:panelGrid>
+					<br></br>
+
+					<!-- <p:commandButton value="Save"
+						action="#{routeScheduleGeneratorBean.saveEditRouteScheduleDate}"
+						class="btn btn-primary btn-lg btn-block"
+						style="width:80px; margin-top:1px;height:30px;font-size: 12px !important; border: 1px solid #FFFFFF; 
+						color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;">
+					</p:commandButton> -->
+
+
+					<p:commandButton value="Close"
+						onclick="PF('editRouteScheduleVAR').hide()"
+						class="btn btn-primary btn-lg btn-block"
+						style="width:80px; margin-top:1px;height:30px;font-size: 12px !important; border: 1px solid #FFFFFF; 
+						color: white;background:#6A9DED;text-shadow: 2px 2px 5px blue !important;letter-spacing: 1px !important;border-radius:7px;">
+					</p:commandButton>
+				</center>
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

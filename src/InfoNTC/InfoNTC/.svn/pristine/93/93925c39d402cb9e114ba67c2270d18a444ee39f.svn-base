@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-01-09T09:59:49 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="backlogTransactionViewReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4bbd7022-6728-4434-bd7f-2a8dec898bc2">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="P_APP_no" class="java.lang.String"/>
+	<parameter name="P_Permit_No" class="java.lang.String"/>
+	<parameter name="P_Vehi_No" class="java.lang.String"/>
+	<parameter name="P_User_Id" class="java.lang.String"/>
+	<parameter name="P_LOGO_PATH" class="java.lang.String"/>
+	<parameter name="P_Start_Date" class="java.lang.String"/>
+	<parameter name="P_End_Date" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.pm_is_backlog_app, a.pm_valid_to, a.pm_application_no,a.pm_permit_no, a.pm_vehicle_regno,TO_CHAR(a.pm_created_date,'dd/MM/yyyy') as date, a.pm_created_by,
+pm_permit_expire_date,nt_t_pm_vehi_owner.pmo_full_name
+FROM public.nt_t_pm_application a
+left outer join  public.nt_t_pm_vehi_owner on a.pm_vehicle_regno = public.nt_t_pm_vehi_owner.pmo_vehicle_regno
+where  a.pm_is_backlog_app='Y' and pm_application_no not like '%PAP%'and
+a.pm_created_by=case when $P{P_User_Id}  is null then a.pm_created_by else $P{P_User_Id} end
+and a.pm_permit_no= case when  $P{P_Permit_No}  is null then a.pm_permit_no else  $P{P_Permit_No}  end 
+and a.pm_application_no= case  when  $P{P_APP_no}  is null then a.pm_application_no else $P{P_APP_no}   end 
+and a.pm_vehicle_regno  =case when  $P{P_Vehi_No}  is null then a.pm_vehicle_regno else  $P{P_Vehi_No}  end
+and to_char(A.pm_created_date,'yyyy-MM-dd')>=case when  $P{P_Start_Date}   is null then to_char(A.pm_created_date,'yyyy-MM-dd') else $P{P_Start_Date}  end
+and to_char(A.pm_created_date,'yyyy-MM-dd')<=case when   $P{P_End_Date}   is null then to_char(A.pm_created_date,'yyyy-MM-dd') else   $P{P_End_Date}  end
+order by a.pm_application_no]]>
+	</queryString>
+	<field name="pm_is_backlog_app" class="java.lang.String"/>
+	<field name="pm_valid_to" class="java.lang.String"/>
+	<field name="pm_application_no" class="java.lang.String"/>
+	<field name="pm_permit_no" class="java.lang.String"/>
+	<field name="pm_vehicle_regno" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="pm_created_by" class="java.lang.String"/>
+	<field name="pm_permit_expire_date" class="java.lang.String"/>
+	<field name="pmo_full_name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="167" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="66" width="800" height="43" isPrintWhenDetailOverflows="true" uuid="a45b168a-8c22-4126-a4c1-48606a9f8469"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Backlog Transaction View Report]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="310" height="62" uuid="8c428080-1b9a-447d-9923-fb452830bccf"/>
+				<imageExpression><![CDATA[$P{P_LOGO_PATH}+"header_logo_new.png"]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="125" width="800" height="30" uuid="e92e16b3-fa09-4786-a2c4-d778f74b2d04"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Start_Date}.equals( null )?" ": "From : "+ $P{P_Start_Date} + "  To :  "+$P{P_End_Date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="101" height="30" uuid="f8b9d1f3-a9a7-474e-aa2a-da36810c5fc6"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement markup="none">
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Application No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="0" width="89" height="30" uuid="4c015ec1-ecf0-4f03-a7e1-89567f618296"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Permit No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="0" width="90" height="30" uuid="71fe905c-bbf9-4a4e-a038-c63fa2aa8579"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Vehicle No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="170" height="30" uuid="382035ba-5312-41ef-8e87-49a9e3e5a117"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Owner Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="104" height="30" uuid="4b3bf460-593c-4519-a7ed-958a740f18e3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[End of the Permit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="554" y="0" width="96" height="30" uuid="54017f31-16ee-4051-9f3a-db8fac6d96b9"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Permit Expire Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="0" width="66" height="30" uuid="7d54bbbf-6838-4564-8192-95764c11f2f8"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Create User]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="716" y="0" width="84" height="30" uuid="4982a974-1de7-4f88-8e34-d56c485405ee"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Create Date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="101" y="0" width="89" height="30" uuid="db77b0be-0bd7-45eb-a562-700aac5cab14"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_permit_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="90" height="30" uuid="758c6aca-bafd-42e1-826b-cde8a9f7051e"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_vehicle_regno}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="0" width="170" height="30" uuid="8d4bd57f-64b9-4c3d-8c17-2c65c0ce324c"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_full_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="650" y="0" width="66" height="30" uuid="3696329f-8d68-4f80-97de-e246b1a8484a"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_created_by}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="554" y="0" width="96" height="30" uuid="30f1f0d9-31a6-46ea-9b70-c04246253ff6"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_permit_expire_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="101" height="30" uuid="94fec484-1cd3-4486-84a4-1c431bb91a4a"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_application_no}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="716" y="0" width="84" height="30" uuid="5f362aa3-26b1-4fb8-80ba-ab42a81034d7"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement x="450" y="0" width="104" height="30" uuid="6e43aee3-c276-4f66-bf3a-adcc84f9c703"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pm_valid_to}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="41">
+			<line>
+				<reportElement x="0" y="25" width="350" height="1" uuid="0ea85853-13ad-4538-bb94-7a159611055c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="356" y="16" width="90" height="18" isPrintWhenDetailOverflows="true" uuid="8156dcf8-7156-4365-9388-dbfe7e67a603"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[End of Report]]></text>
+			</staticText>
+			<line>
+				<reportElement x="420" y="25" width="380" height="1" uuid="f80bdea0-ce1a-485a-8dc3-0c2646f7e9ff"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="800" height="16" isPrintWhenDetailOverflows="true" uuid="77ea5b80-59e3-48c0-9331-9e02fb87a658"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total Of Applications:  "+$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<noData>
+		<band height="30">
+			<textField>
+				<reportElement x="0" y="0" width="800" height="30" uuid="4201eb9d-a2c7-4fec-9b49-29b3d7588d56"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NO DATA"]]></textFieldExpression>
+			</textField>
+		</band>
+	</noData>
+</jasperReport>

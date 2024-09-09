@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RevenueCollectionReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d84d317f-01cd-4dfe-a82b-d2b939af4d98">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<parameter name="P_Rev_Current_User" class="java.lang.String"/>
+	<parameter name="P_Rev_Start_Date" class="java.lang.String"/>
+	<parameter name="P_Rev_End_Date" class="java.lang.String"/>
+	<parameter name="P_Rev_Transaction_Type_Code" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select distinct
+		c.pm_application_no as applicationNo,
+		a.vod_permitno as permitNo,
+		c.pm_vehicle_regno as vehicleNo,
+		a.vod_voucher_no as voucherNo,
+		a.vod_created_date as voucherDate,
+		b.rec_receipt_no as receiptNo,
+		b.rep_created_date as receiptDateTime,
+		b.rep_created_by as receiptUser,
+		b.rec_total_fee as totalPayment,
+		d.description as transactionType,
+		d.code
+		
+from public.nt_t_voucher_details a 
+	 inner join public.nt_t_receipt b on b.rec_voucher_no = a.vod_voucher_no
+	 inner join public.nt_t_pm_application c on b.rec_application_no = c.pm_application_no 
+	 inner join public.nt_r_transaction_type d on c.pm_tran_type = d.code
+	 
+where 
+	d.code =   case when  $P{P_Rev_Transaction_Type_Code} is null then c.pm_tran_type else  $P{P_Rev_Transaction_Type_Code} end
+	and	to_char(b.rep_created_date,'yyyy-MM-dd')>=case when   $P{P_Rev_Start_Date}    is null then to_char(b.rep_created_date,'yyyy-MM-dd') else $P{P_Rev_Start_Date} end
+	and to_char(b.rep_created_date,'yyyy-MM-dd')<=case when   $P{P_Rev_End_Date}   is null then to_char(b.rep_created_date,'yyyy-MM-dd') else $P{P_Rev_End_Date} end]]>
+	</queryString>
+	<field name="applicationno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="applicationno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_pm_application"/>
+	</field>
+	<field name="permitno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="permitno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_voucher_details"/>
+	</field>
+	<field name="vehicleno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicleno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_pm_application"/>
+	</field>
+	<field name="voucherno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="voucherno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_voucher_details"/>
+	</field>
+	<field name="voucherdate" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="voucherdate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_voucher_details"/>
+	</field>
+	<field name="receiptno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="receiptno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_receipt"/>
+	</field>
+	<field name="receiptdatetime" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="receiptdatetime"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_receipt"/>
+	</field>
+	<field name="receiptuser" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="receiptuser"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_receipt"/>
+	</field>
+	<field name="totalpayment" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="totalpayment"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_t_receipt"/>
+	</field>
+	<field name="transactiontype" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="transactiontype"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_r_transaction_type"/>
+	</field>
+	<field name="code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nt_r_transaction_type"/>
+	</field>
+	<variable name="V_total_amount" class="java.math.BigDecimal" resetType="Group" resetGroup="Group2" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalpayment}]]></variableExpression>
+	</variable>
+	<variable name="V_grand_total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalpayment}]]></variableExpression>
+	</variable>
+	<variable name="V_Total_Apps_Count" class="java.lang.Integer" resetType="Group" resetGroup="Group2" calculation="Count">
+		<variableExpression><![CDATA[$F{vehicleno}]]></variableExpression>
+	</variable>
+	<variable name="appCountOnGroup" class="java.lang.Integer" resetType="Group" resetGroup="Group2" incrementType="Group" incrementGroup="Group2" calculation="Count">
+		<variableExpression><![CDATA[$F{applicationno}]]></variableExpression>
+	</variable>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{transactiontype}]]></groupExpression>
+		<groupHeader>
+			<band height="49">
+				<rectangle>
+					<reportElement x="0" y="20" width="802" height="29" backcolor="#F0F0F0" uuid="aadcea7f-bbae-4f8f-8068-d93aba652063"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="159" y="20" width="70" height="29" uuid="0132a8f7-3562-4890-b3a9-b490964d041c"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Vehicle No.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="229" y="20" width="81" height="29" uuid="10e11818-6b26-41c9-9e82-e695853a4e3d"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Voucher No.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="310" y="20" width="100" height="29" uuid="e833d549-e6cc-4bc1-9f8f-6aa96c2db8e5"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Voucher Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="410" y="20" width="69" height="29" uuid="12e68246-494f-4fd4-aee5-676e69b005c3"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Receipt No.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="479" y="20" width="121" height="29" uuid="c0d0b12c-4f90-46a5-bf76-f6892712a639"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Receipt Date & Time]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="600" y="20" width="80" height="29" uuid="6e83198b-e459-4ab0-9d3f-8716aa68ac88"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Receipt User]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="20" width="89" height="29" uuid="f423dc25-53a0-4774-82ad-393ef71e1469"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Application No.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="89" y="20" width="70" height="29" uuid="c3a4a7f8-2624-4ebc-b81e-3be231dcccc0"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Permit No.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="680" y="20" width="122" height="29" uuid="01e0443a-79c5-471c-8cbc-85676739e448"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Total Payment]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="3" y="0" width="97" height="20" uuid="d765b636-486d-42c0-b6fa-070119a35f7c"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Transaction Type :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="100" y="0" width="282" height="20" uuid="d76a53bc-5628-445a-85cc-171ade3d7147"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transactiontype}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="38">
+				<textField>
+					<reportElement x="410" y="0" width="167" height="20" uuid="56d2528a-88db-4c9a-8a4c-664f52f600e3"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total Applications : "+$V{Group2_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="599" y="0" width="80" height="20" uuid="c211e290-2d34-4db5-956e-9b5bbd4017dc"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Amount]]></text>
+				</staticText>
+				<textField pattern="###,###,###.00">
+					<reportElement x="680" y="-1" width="122" height="21" uuid="ec774f63-6dbb-4b03-9e86-f34db372a5e5">
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<paragraph rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{V_total_amount}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="131" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="46" width="801" height="31" uuid="5360eb27-00a3-49d8-af67-39f53e61a907"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revenue Collection Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="619" y="2" width="41" height="19" uuid="46af4aba-0a01-499a-8a77-4c895bdc11c1"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[User :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="577" y="24" width="83" height="20" uuid="e26c67b3-7ad2-4831-940c-1d169efce441"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Created Date :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="660" y="24" width="140" height="20" uuid="2f1937c7-20eb-4ec2-b45f-158a0f3f32a1"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="2" width="140" height="18" uuid="e0d47410-7bac-42da-89ca-b353448dbda9"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Rev_Current_User}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="106" width="130" height="20" uuid="dcd74b50-353f-4b3d-856d-20bef7fef484"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Rev_End_Date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="106" width="105" height="21" uuid="f4915a77-a36d-4d6a-8f3a-f2b8a54ffea5"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Receipt End Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="81" width="108" height="22" uuid="6e36d914-71ee-4e8e-9b99-e781f0ce1000"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Receipt Start Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="81" width="130" height="22" uuid="4a79bd54-1915-46a3-b273-6b4ade2e659e"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Rev_Start_Date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="89" height="20" uuid="c956ac4e-2b07-4748-8142-cef3783f7ff7">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{applicationno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="89" y="0" width="70" height="20" uuid="08cd41a1-7017-4d37-bd19-f844b1f17006">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{permitno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="159" y="0" width="70" height="20" uuid="8be1804b-350d-438e-b185-5a23efdfd0fd">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehicleno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="229" y="0" width="81" height="20" uuid="8e728650-0696-4229-afda-f9de59153a56">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{voucherno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="310" y="0" width="100" height="20" uuid="bd88709b-c7df-4eff-bde1-cb2cf520584b">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{voucherdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="410" y="0" width="69" height="20" uuid="46f8d18b-5571-4320-a226-321954663d73">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receiptno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="479" y="0" width="121" height="20" uuid="177633f9-d021-45c7-879a-0c2bbc5dedbf">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receiptdatetime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="600" y="0" width="80" height="20" uuid="f62ac396-871a-4588-8a4c-efaf2aa257f4">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receiptuser}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###,###.00">
+				<reportElement stretchType="RelativeToTallestObject" x="680" y="0" width="122" height="20" uuid="d49ab30c-becb-47c5-a497-76dfc5af5271">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalpayment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="41">
+			<textField>
+				<reportElement x="410" y="0" width="167" height="20" uuid="869e529d-2dc9-4137-9e7f-0fb3c332bd91"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total Applications : "+$V{V_Total_Apps_Count}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="599" y="0" width="81" height="20" uuid="15ce496e-da98-4aae-9f30-88fe46359adf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total]]></text>
+			</staticText>
+			<textField pattern="###,###,###.00">
+				<reportElement x="681" y="0" width="121" height="20" uuid="53fa0455-81ee-4c9e-b5f5-54c94fee8976">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{V_grand_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<noData>
+		<band height="58">
+			<textField>
+				<reportElement x="-1" y="11" width="800" height="29" uuid="fe93b907-3b74-424a-b426-76bcecd8d3ed"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["No Data"]]></textFieldExpression>
+			</textField>
+		</band>
+	</noData>
+</jasperReport>

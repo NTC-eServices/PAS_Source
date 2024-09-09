@@ -1,0 +1,400 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	document margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn1 {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 200px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn1:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+#Dob {
+	width: 80% !important;
+}
+
+.calendarClass input {
+	width: 65% !important;
+}
+</style>
+
+		<!-- Main form -->
+		<div class="mainDiv" style="height: 500px;">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Windscreen Label Printing</h1>
+
+			<div
+				style="height: 450px; border-radius: 50px; border-left-style: solid; background-color: #7b8295; margin-top: 0px; margin-left: 5px; margin-right: 5px;">
+				<br></br>
+				<div
+					style="width: 90%; margin-top: 1px; height: 420px; border-radius: 20px; border-top-left-radius: 20px;"
+					class="subDiv">
+					<!-- search panel start -->
+					<h:form id="searchForm">
+
+
+						<!-- Search Fields -->
+						<p:panel>
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+								layout="grid">
+								<p:panelGrid></p:panelGrid>
+								<!-- _Tender Reference No -->
+								<p:outputLabel>Bus Registration No.</p:outputLabel>
+								<p:selectOneMenu id="busNoId" tabindex="1" style="width:62%; "
+									value="#{windsCreenPrintBackingBean.windscreenDTO.busNo}"
+									effect="fold" filter="true" filterMatchMode="contains">
+									<p:ajax listener="#{windsCreenPrintBackingBean.fillPermitNo}"
+										update="permitNoId" />
+									<f:selectItem itemLabel="--Select Bus No.--" itemValue="" />
+									<f:selectItems
+										value="#{windsCreenPrintBackingBean.busNumbersList}"
+										var="filterBusNoList" itemValue="#{filterBusNoList.busNo}"
+										itemLabel="#{filterBusNoList.busNo}" />
+								</p:selectOneMenu>
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<!-- Permit  No. -->
+
+								<p:outputLabel>Permit No.</p:outputLabel>
+								<p:inputText style="width:68%" id="permitNoId" readonly="true"
+									value="#{windsCreenPrintBackingBean.windscreenDTO.permitNo}">
+								</p:inputText>
+
+
+
+							</p:panelGrid>
+
+							<!-- Search panel buttons -->
+							<center>
+								<p:panel>
+									<!-- _Search -->
+									<p:commandButton styleClass="mainActionbtn" value="Search"
+										ajax="true" update="@form" process="@form"
+										action="#{windsCreenPrintBackingBean.searchDetails}"></p:commandButton>
+
+									<!-- _Clear -->
+									<p:commandButton styleClass="mainActionbtn" value="Clear"
+										ajax="true" update="@form" process="@form"
+										action="#{windsCreenPrintBackingBean.clearAll}"></p:commandButton>
+
+								</p:panel>
+							</center>
+						</p:panel>
+
+						<!-- search panel end -->
+						<p:panel>
+
+							<p:panelGrid columns="5"
+								columnClasses="ui-grid-col-1,ui-grid-col-1,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3"
+								layout="grid">
+								<p:panel></p:panel>
+								<p:outputLabel>Route No.</p:outputLabel>
+
+								<p:inputText style="width:100%" id="routeNoID" readonly="true"
+									value="#{windsCreenPrintBackingBean.windscreenDTO.routeNo}">
+								</p:inputText>
+
+
+								<p:outputLabel style="padding-left:45px;"> Application No.</p:outputLabel>
+
+								<p:inputText style="width:100%" id="appNoID" readonly="true"
+									value="#{windsCreenPrintBackingBean.windscreenDTO.applicationNo}">
+								</p:inputText>
+
+								<p:panel></p:panel>
+								<p:outputLabel>Origin</p:outputLabel>
+								<p:inputText style="width:100%" id="originID" readonly="true"
+									value="#{windsCreenPrintBackingBean.windscreenDTO.origin}">
+								</p:inputText>
+
+
+								<p:outputLabel style="padding-left:45px;">Service Type</p:outputLabel>
+								<p:inputText style="width:100%" id="serviceTypeID"
+									readonly="true"
+									value="#{windsCreenPrintBackingBean.windscreenDTO.serviceType}">
+								</p:inputText>
+
+								<p:panel></p:panel>
+								<p:outputLabel>Destination</p:outputLabel>
+								<p:inputText style="width:100%" id="destinationID"
+									readonly="true"
+									value="#{windsCreenPrintBackingBean.windscreenDTO.destination}">
+								</p:inputText>
+
+
+								<p:outputLabel style="padding-left:45px;">Validity</p:outputLabel>
+								<p:inputText style="width:100%" id="validtyDateID"
+									readonly="true"
+									value="#{windsCreenPrintBackingBean.windscreenDTO.expiryDate}">
+								</p:inputText>
+
+							</p:panelGrid>
+
+							<p:panelGrid columns="3"
+								columnClasses="ui-grid-col-1,ui-grid-col-1,ui-grid-col-9"
+								layout="grid">
+								<p:panel></p:panel>
+								<p:outputLabel>Via</p:outputLabel>
+								<p:inputTextarea style="width:88.5%" id="viaID" readonly="true"
+									value="#{windsCreenPrintBackingBean.windscreenDTO.via}">
+								</p:inputTextarea>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<center>
+
+
+									<p:commandButton value="Generate Windscreen Label"
+										styleClass="mainActionbtn1"
+										actionListener="#{windsCreenPrintBackingBean.printWindscreenLable}"
+										oncomplete="window.open('/InfoNTC/showUpload?reportName=WindscreenLabel')" update="@form"
+										ajax="true">
+										<f:attribute name="vehicelNo"
+											value="#{windsCreenPrintBackingBean.windscreenDTO.busNo}"></f:attribute>
+
+
+
+									</p:commandButton>
+
+								</center>
+							</p:panelGrid>
+
+						</p:panel>
+					</h:form>
+				</div>
+			</div>
+			<p:dialog id="errorMsge" global="true" modal="true" header="Error"
+				width="30%" severity="info" widgetVar="errorMsge"
+				closeOnEscape="true" resizable="false">
+
+				<h:form id="frmError">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+							<p:outputLabel value="#{windsCreenPrintBackingBean.errorMsg}"></p:outputLabel>
+
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							value="OK" process="frmError" onclick="PF('errorMsge').hide()">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="successMSG" global="true" modal="true" header="Success"
+				width="30%" severity="info" widgetVar="successMessage"
+				closeOnEscape="true" resizable="false">
+
+				<h:form id="frmsuccess">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+							<p:outputLabel
+								value="#{windsCreenPrintBackingBean.successMessage}"></p:outputLabel>
+
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							value="OK" process="frmsuccess"
+							onclick="PF('successMessage').hide()">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>

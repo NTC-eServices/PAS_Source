@@ -1,0 +1,1109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.nopadd .ui-panelgrid-cell {
+	padding: 4px 0px !important;
+}
+
+.sm-padding .ui-panelgrid-cell {
+	padding-top: 4px !important;
+	padding-bottom: 4px !important;
+}
+
+.ui-slider-horizontal {
+	background: #b3d9ff !important;
+	height: 5px !important;
+	padding-top: 2px !important;
+	margin-top: 12px;
+}
+
+.ui-slider-handle {
+	background: #5589d2 !important;
+	border-radius: 10px !important;
+}
+
+.ui-overlaypanel-close {
+	width: 25px !important;
+	height: 25px !important;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 20px;
+}
+
+.ui-icon-closethick {
+	font-size: 18px !important;
+	text-indent: 5px !important;
+	margin-top: 2px !important;
+}
+
+.overlay .ui-icon {
+	overflow: visible !important;
+}
+</style>
+
+
+		<div class="mainDiv">
+
+
+			<div style="margin-top: 0%;" class="common_form_header">
+				<h1 style="color: #ffffff; text-align: center; font-weight: bold">Initiate
+					Complaint Request</h1>
+
+			</div>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmInitiateComplaint" style="background-color :#f1f1f1;">
+
+					<p:spacer height="5px"></p:spacer>
+
+					<div class="ui-widget-content ui-grid ui-grid-responsive">
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-3"></div>
+							<div class="ui-grid-col-2">
+								<p:outputLabel value="Complaint Type"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-2">
+								<p:selectOneMenu
+									value="#{complaintInitiationBackingBean.complainType}"
+									valueChangeListener="#{complaintInitiationBackingBean.onComplaintTypeChange}"
+									tabindex="1" style="width:calc(100% - 18px);">
+									<p:ajax update="idCIFNo, frmInitiateComplaint" />
+									<f:selectItem itemValue="C" itemLabel="Complaint"></f:selectItem>
+									<f:selectItem itemValue="I" itemLabel="Inquiry"></f:selectItem>
+									<f:selectItem itemValue="F" itemLabel="Fatal Accident"></f:selectItem>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row" style="display: none">
+							<div class="ui-grid-col-3"></div>
+							<div class="ui-grid-col-2">
+								<p:outputLabel value="Complaint No"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-2">
+								<p:inputText id="idCIFNo"
+									value="#{complaintInitiationBackingBean.complaintNo}"
+									disabled="true"></p:inputText>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-3"></div>
+							<div class="ui-grid-col-2">
+								<p:outputLabel value="Permit Authorities"></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-2">
+								<p:selectOneMenu
+									value="#{complaintInitiationBackingBean.permitAuthority}"
+									valueChangeListener="#{complaintInitiationBackingBean.onPermitAuthorityChange}"
+									tabindex="1" style="width:calc(100% - 18px);">
+									<p:ajax
+										update="frmInitiateComplaint:panelbusDetail, idVehicle,idPermit, frmInitiateComplaint" />
+									<f:selectItem itemValue="NTC" itemLabel="NTC"></f:selectItem>
+									<f:selectItem itemValue="PTA" itemLabel="PTA"></f:selectItem>
+									<f:selectItem itemValue="CTB" itemLabel="CTB"></f:selectItem>
+									<f:selectItem itemValue="OTHER" itemLabel="Other"></f:selectItem>
+									<f:selectItem itemValue="TP" itemLabel="Temporary Permit"></f:selectItem>
+
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-3"></div>
+							<div class="ui-grid-col-2">
+								<p:outputLabel value="Vehicle No."></p:outputLabel>
+								<p:outputLabel value=" *" style="color:#ff0000;"
+									rendered="#{complaintInitiationBackingBean.complainType != 'I' or complaintInitiationBackingBean.permitAuthority == 'NTC' }"></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-2">
+								<p:outputPanel id="idVehicle">
+									<p:inputText
+										value="#{complaintInitiationBackingBean.vehicleNo}"
+										tabindex="1" style="text-transform:uppercase; width:100%;"
+										rendered="#{complaintInitiationBackingBean.permitAuthority == 'OTHER' 
+										|| complaintInitiationBackingBean.permitAuthority == 'CTB' || complaintInitiationBackingBean.permitAuthority == 'PTA'}">
+										
+									</p:inputText>
+									<p:autoComplete
+										value="#{complaintInitiationBackingBean.vehicleNo}"
+										completeMethod="#{complaintInitiationBackingBean.completeVehicleNo}"
+										rendered="#{complaintInitiationBackingBean.permitAuthority == 'NTC' || complaintInitiationBackingBean.permitAuthority == 'TP'}"
+										size="18" onkeyup="this.value=this.value.toUpperCase();"
+										forceSelection="true" scrollHeight="500">
+										<p:ajax event="itemSelect"
+											listener="#{complaintInitiationBackingBean.onVehicleNoChange}"
+											update="frmInitiateComplaint:panelbusDetail, idPermit" />
+									</p:autoComplete>
+								</p:outputPanel>
+							</div>
+						</div>
+
+						<div class="rowpadding ui-grid-row">
+							<div class="ui-grid-col-3"></div>
+							<div class="ui-grid-col-2">
+								<p:outputLabel value="Permit No."></p:outputLabel>
+							</div>
+							<div class="ui-grid-col-2">
+								<p:inputText value="#{complaintInitiationBackingBean.permitNo}"
+									tabindex="1" style="text-transform:uppercase; width:100%;"
+									rendered="#{complaintInitiationBackingBean.permitAuthority == 'OTHER' 
+										|| complaintInitiationBackingBean.permitAuthority == 'CTB' || complaintInitiationBackingBean.permitAuthority == 'PTA'}">
+																
+								</p:inputText>
+
+								<p:autoComplete id="idPermit"
+									value="#{complaintInitiationBackingBean.permitNo}"
+									completeMethod="#{complaintInitiationBackingBean.completePermitNo}"
+									size="18" onkeyup="this.value=this.value.toUpperCase();"
+									forceSelection="true" scrollHeight="500"
+									rendered="#{complaintInitiationBackingBean.permitAuthority == 'NTC' || complaintInitiationBackingBean.permitAuthority == 'TP'}">
+									<p:ajax event="itemSelect"
+										listener="#{complaintInitiationBackingBean.onPermitNoChange}"
+										update="frmInitiateComplaint:panelbusDetail, idVehicle" />
+								</p:autoComplete>
+							</div>
+						</div>
+
+
+						<h:panelGroup rendered="true">
+
+							<div class="ui-grid-row">
+								<div class="gridspadding ui-grid-col-7 sm-padding">
+									<p:panel id="panelComplaintDetail" header="Initiate Details"
+										style="border:1px solid #b1cbef">
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-4, ui-grid-col-8">
+											<p:outputPanel>
+												<p:outputLabel value="Priority Order"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+
+											<p:selectOneMenu
+												value="#{complaintInitiationBackingBean.priorityOrder}"
+												style="width:calc(100% - 18px);" effect="fold" filter="true"
+												filterMatchMode="contains">
+
+												<f:selectItem itemLabel="-- Select Priority Order --"
+													itemValue="" />
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.priorityOrderList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}" />
+											</p:selectOneMenu>
+
+
+
+
+											<p:outputPanel>
+												<p:outputLabel value="Severity"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+
+
+											<p:selectOneMenu
+												value="#{complaintInitiationBackingBean.severity}"
+												style="width:calc(100% - 18px);" effect="fold" filter="true"
+												filterMatchMode="contains">
+
+												<f:selectItem itemLabel="-- Select Severity --" itemValue="" />
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.severityList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}" />
+											</p:selectOneMenu>
+
+
+
+
+
+
+											<p:outputPanel>
+												<p:outputLabel value="Event Place"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.eventPlace}"
+												tabindex="1" style="width:100%">
+												
+												<p:ajax />
+											</p:inputText>
+
+											<p:outputPanel>
+												<p:outputLabel value="Event Date &amp; Time"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:calendar
+												value="#{complaintInitiationBackingBean.eventDateTime}"
+												tabindex="1" pattern="yyyy-MM-dd HH:mm:ss"
+												converterMessage="Format must be: yyyy-MM-dd HH:mm:ss"
+												inputStyle="width:100%">
+												<p:ajax event="dateSelect"
+													listener="#{complaintInitiationBackingBean.eventDateTimeSelect}" />
+											</p:calendar>
+
+											<p:outputPanel>
+												<p:outputLabel value="Complaint Media"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<p:selectOneMenu
+												value="#{complaintInitiationBackingBean.complaintMedia}"
+												tabindex="1" style="width:calc(100% - 18px);">
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.complainMediaList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+
+											<p:outputLabel value="Has Written Proof"></p:outputLabel>
+											<p:panelGrid columns="2">
+												<p:selectBooleanCheckbox
+													value="#{complaintInitiationBackingBean.writtenProof}"
+													tabindex="1" style="margin:0px">
+
+												</p:selectBooleanCheckbox>
+
+											</p:panelGrid>
+
+											<p:outputLabel value="Complainer Participation"></p:outputLabel>
+											<p:panelGrid columns="2">
+												<p:selectBooleanCheckbox
+													value="#{complaintInitiationBackingBean.complainerParticipation}"
+													tabindex="1">
+													<!-- <p:ajax update="panelComplainer" /> -->
+												</p:selectBooleanCheckbox>
+											</p:panelGrid>
+
+											<p:outputLabel value="Details of the Complaint"></p:outputLabel>
+											<p:inputTextarea
+												value="#{complaintInitiationBackingBean.complaintDetail}"
+												tabindex="1" style="width:100%; max-height:100px" rows="8">
+												
+												</p:inputTextarea>
+
+										</p:panelGrid>
+
+										<p:commandButton id="commitedOffenceBtn"
+											value="Committed Offences" style="height:30px" tabindex="1"></p:commandButton>
+										<p:overlayPanel id="committedOffencePanel"
+											for="commitedOffenceBtn" hideEffect="fade" style="width:70%"
+											dismissable="false" showCloseIcon="true" styleClass="overlay">
+											<p:dataTable var="offence"
+												value="#{complaintInitiationBackingBean.committedOffencesList}"
+												emptyMessage="" paginator="true" rows="5"
+												rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												reflow="true">
+												<p:column rendered="false">
+													<h:outputText value="#{offence.code}" />
+												</p:column>
+												<p:column headerText="Applicable (Yes/No)" width="70"
+													style="text-align:center">
+													<p:selectBooleanCheckbox value="#{offence.applicable}">
+														<p:ajax />
+													</p:selectBooleanCheckbox>
+												</p:column>
+												<p:column headerText="Offence">
+													<h:outputText value="#{offence.description}" />
+												</p:column>
+												<p:column headerText="Remarks">
+													<p:inputText value="#{offence.remark}" style="width:90%">
+														<p:ajax />
+													
+													</p:inputText>
+												</p:column>
+											</p:dataTable>
+
+											<p:spacer height="10px"></p:spacer>
+											<p:panelGrid layout="grid" columns="2"
+												columnClasses="ui-grid-col-3, ui-grid-col-8">
+												<p:outputLabel value="Other"></p:outputLabel>
+												<p:inputTextarea
+													value="#{complaintInitiationBackingBean.commitedOffenceOther}"
+													style="width:100%">
+												
+													<p:ajax />
+												</p:inputTextarea>
+											</p:panelGrid>
+										</p:overlayPanel>
+									</p:panel>
+								</div>
+
+								<div class="gridspadding ui-grid-col-5">
+									<p:panel id="panelbusDetail" header="Bus Details"
+										style="border:1px solid #b1cbef">
+										<p:panelGrid columns="2" layout="grid"
+											columnClasses="ui-grid-col-3, ui-grid-col-9">
+
+											<p:outputLabel value="Vehicle No."
+												rendered="#{complaintInitiationBackingBean.permitAuthority == 'NTC' || complaintInitiationBackingBean.permitAuthority == 'TP'}"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.vehicleNumber}"
+												rendered="#{complaintInitiationBackingBean.permitAuthority == 'NTC' || complaintInitiationBackingBean.permitAuthority == 'TP'}"
+												style="width:100%" disabled="true">
+												
+												<p:ajax />
+											</p:inputText>
+											<p:outputLabel value="Permit No."
+												rendered="#{complaintInitiationBackingBean.permitAuthority == 'NTC' || complaintInitiationBackingBean.permitAuthority == 'TP'}"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.permitNumber}"
+												rendered="#{complaintInitiationBackingBean.permitAuthority == 'NTC' || complaintInitiationBackingBean.permitAuthority == 'TP'}"
+												style="width:100%" disabled="true">
+												<p:ajax />
+												
+											</p:inputText>
+
+
+											<p:outputLabel value="Route No."></p:outputLabel>
+
+											<p:selectOneMenu
+												value="#{complaintInitiationBackingBean.routeNo}"
+												style="width:calc(100% - 18px);" autoWidth="false"
+												effect="fold" filter="true" filterMatchMode="contains"
+												rendered="#{complaintInitiationBackingBean.permitAuthority == 'NTC' || complaintInitiationBackingBean.permitAuthority == 'TP'}"
+												disabled="true">
+												<p:ajax />
+												<f:selectItem itemLabel="-- Select Route --" itemValue="" />
+												<f:selectItems
+													value="#{terminalPaymentBackingBean.routeList}"
+													var="routeList"
+													itemLabel="#{routeList.routeNo}&#160;:&#160;#{routeList.startFrom}-#{routeList.endAt}"
+													itemValue="#{routeList.routeNo}" />
+											</p:selectOneMenu>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.routeNo}"
+												style="width:100%"
+												rendered="#{complaintInitiationBackingBean.permitAuthority == 'OTHER' 
+										|| complaintInitiationBackingBean.permitAuthority == 'CTB' || complaintInitiationBackingBean.permitAuthority == 'PTA'}">
+												<p:ajax />
+												
+											</p:inputText>
+
+											<p:outputLabel value="Province">
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputLabel>
+
+											<p:selectOneMenu
+												value="#{complaintInitiationBackingBean.province}"
+												style="width:calc(100% - 18px);"
+												disabled="#{complaintInitiationBackingBean.permitAuthority == 'NTC'}">
+												<p:ajax />
+												<f:selectItem itemLabel="-- Select Province --" itemValue="" />
+												<f:selectItems
+													value="#{complaintInitiationBackingBean.provincelList}"
+													var="p" itemValue="#{p.code}" itemLabel="#{p.description}"></f:selectItems>
+											</p:selectOneMenu>
+
+											<p:outputLabel value="Origin"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.originDesc}"
+												style="width:100%;"
+												disabled="#{complaintInitiationBackingBean.permitAuthority == 'NTC'}">
+												
+												<p:ajax />
+											</p:inputText>
+
+											<p:outputLabel value="Destination"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.destinationDesc}"
+												style="width:100%;"
+												disabled="#{complaintInitiationBackingBean.permitAuthority == 'NTC'}">
+												<p:ajax />
+									
+											</p:inputText>
+
+											<p:outputLabel value="Depot"></p:outputLabel>
+											<p:inputText value="#{complaintInitiationBackingBean.depot}"
+												style="width:100%;">
+												<p:ajax />
+												
+											</p:inputText>
+											<p:outputLabel value="Service Type"
+												rendered="#{complaintInitiationBackingBean.permitAuthority == 'NTC' || complaintInitiationBackingBean.permitAuthority == 'TP'}"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.serviceDescription}"
+												rendered="#{complaintInitiationBackingBean.permitAuthority == 'NTC' || complaintInitiationBackingBean.permitAuthority == 'TP'}"
+												style="width:100%" disabled="true">
+												<p:ajax />
+											
+											</p:inputText>
+										</p:panelGrid>
+									</p:panel>
+								</div>
+
+							</div>
+
+							<div class="ui-grid-row">
+
+								<div class="gridspadding ui-grid-col-12">
+									<p:panel id="panelComplainer" header="Complainer Details"
+										style="border:1px solid #b1cbef;">
+
+										<p:panelGrid columns="4" layout="grid"
+											columnClasses="ui-grid-col-1, ui-grid-col-3, ui-grid-col-10, ui-grid-col-4">
+											<h:panelGroup />
+											<p:outputLabel value=""></p:outputLabel>
+											<p:outputPanel>
+												<p:outputLabel value="Name of the Complainer"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"></p:outputLabel>
+											</p:outputPanel>
+											<h:panelGroup />
+
+											<h:panelGroup />
+											<p:outputLabel value="In English" style="font-size:12px"></p:outputLabel>
+											<p:inputText value="#{complaintInitiationBackingBean.name}"
+												style="width:100%">
+												<p:ajax />
+												
+											</p:inputText>
+											<h:panelGroup />
+
+											<h:panelGroup />
+											<p:outputLabel value="In Sinhala" style="font-size:12px"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.name_si}"
+												style="width:100%">
+												<p:ajax />
+											</p:inputText>
+											<h:panelGroup />
+
+											<h:panelGroup />
+											<p:outputLabel value="In Tamil" style="font-size:12px"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.name_ta}"
+												style="width:100%">
+												<p:ajax />
+											</p:inputText>
+											<h:panelGroup />
+										</p:panelGrid>
+
+										<p:spacer height="10"></p:spacer>
+
+										<p:panelGrid columns="6" layout="grid"
+											columnClasses="ui-grid-col-1, ui-grid-col-3, ui-grid-col-5, ui-grid-col-5, ui-grid-col-3, ui-grid-col-1">
+											<h:panelGroup />
+											<p:outputLabel value=""></p:outputLabel>
+											<p:outputPanel>
+												<p:outputLabel value="Address 1"></p:outputLabel>
+												<p:outputLabel value=" *" style="color:#ff0000;"
+													rendered="#{complaintInitiationBackingBean.complainerParticipation}"></p:outputLabel>
+											</p:outputPanel>
+											<p:outputLabel value="Address Line 2"></p:outputLabel>
+											<p:outputLabel value="City"></p:outputLabel>
+											<h:panelGroup />
+
+											<h:panelGroup />
+											<p:outputLabel value="In English" style="font-size:12px"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.address1}"
+												style="width:100%">
+												
+												<p:ajax />
+											</p:inputText>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.address2}"
+												style="width:100%">
+												<p:ajax />
+											
+											</p:inputText>
+											<p:inputText value="#{complaintInitiationBackingBean.city}"
+												style="width:100%">
+												<p:ajax />
+												
+											</p:inputText>
+											<h:panelGroup />
+
+											<h:panelGroup />
+											<p:outputLabel value="In Sinhala" style="font-size:12px"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.address1_si}"
+												style="width:100%">
+												<p:ajax />
+											</p:inputText>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.address2_si}"
+												style="width:100%">
+												<p:ajax />
+											</p:inputText>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.city_si}"
+												style="width:100%">
+												<p:ajax />
+											</p:inputText>
+											<h:panelGroup />
+
+											<h:panelGroup />
+											<p:outputLabel value="In Tamil" style="font-size:12px"></p:outputLabel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.address1_ta}"
+												style="width:100%">
+												<p:ajax />
+											</p:inputText>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.address2_ta}"
+												style="width:100%">
+												<p:ajax />
+											</p:inputText>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.city_ta}"
+												style="width:100%">
+												<p:ajax />
+											</p:inputText>
+											<h:panelGroup />
+										</p:panelGrid>
+
+										<p:spacer height="10"></p:spacer>
+
+										<p:panelGrid columns="6" layout="grid"
+											columnClasses="ui-grid-col-1, ui-grid-col-3, ui-grid-col-5, ui-grid-col-3,ui-grid-col-5, ui-grid-col-1">
+											<h:panelGroup />
+											<p:outputPanel id="idContact1">
+												<p:outputLabel value="Contact No. 1"></p:outputLabel>
+												
+											</p:outputPanel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.contact1}"
+												maxlength="10">
+												<p:ajax />
+												<p:keyFilter regEx="/[-+()0-9]+/"></p:keyFilter>
+											</p:inputText>
+											<p:outputPanel id="idContact2">
+												<p:outputLabel value="Contact No. 2"></p:outputLabel>
+												
+											</p:outputPanel>
+											<p:inputText
+												value="#{complaintInitiationBackingBean.contact2}"
+												maxlength="10">
+												<p:ajax />
+												<p:keyFilter regEx="/[-+()0-9]+/"></p:keyFilter>
+											</p:inputText>
+											<h:panelGroup />
+										</p:panelGrid>
+
+									</p:panel>
+								</div>
+							</div>
+
+
+							<p:spacer height="10px"></p:spacer>
+
+							<center>
+								<p:commandButton id="btnSubmit" value="Save"
+									styleClass="mainActionbtn"
+									actionListener="#{complaintInitiationBackingBean.submitComplaint}"
+									update="frmInitiateComplaint, frmSuccess">
+								</p:commandButton>
+
+								<p:commandButton id="btnClear" value="Clear"
+									styleClass="mainActionbtn"
+									actionListener="#{complaintInitiationBackingBean.clearView}"
+									process="frmInitiateComplaint" update="frmInitiateComplaint">
+								</p:commandButton>
+
+								<p:commandButton styleClass="mainActionbtn"
+									value="Document Management" update="uploadDocumentsDialog"
+									tabindex="34" process="frmInitiateComplaint" style="width:18%"
+									action="#{complaintInitiationBackingBean.documentManagement}"
+									rendered="false"></p:commandButton>
+								
+							</center>
+
+							<p:spacer height="10px"></p:spacer>
+
+						</h:panelGroup>
+
+					</div>
+				</h:form>
+			</div>
+
+
+			<p:dialog id="idCommittedOffence" global="true" modal="true"
+				header="Commited Offences" width="40%" height="50%"
+				widgetVar="committedOffenceDialog" resizable="false">
+				<h:form id="frmOffence">
+
+
+					<p:dataTable var="offence"
+						value="#{complaintInitiationBackingBean.committedOffencesList}"
+						paginator="true" rows="5" rowsPerPageTemplate="5,10,15"
+						paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+						<p:column rendered="false">
+							<h:outputText value="#{offence.code}" />
+						</p:column>
+						<p:column headerText="Applicable (Yes/No)" width="70">
+							<p:selectBooleanCheckbox value="#{offence.applicable}" />
+						</p:column>
+						<p:column headerText="Offence">
+							<h:outputText value="#{offence.description}" />
+						</p:column>
+						<p:column headerText="Remarks">
+							<p:inputText value="#{offence.remark}" />
+						</p:column>
+					</p:dataTable>
+
+					<p:spacer height="10px"></p:spacer>
+					<p:panelGrid layout="grid" columns="2"
+						columnClasses="ui-grid-col-3, ui-grid-col-8">
+						<p:outputLabel value="Other"></p:outputLabel>
+						<p:inputTextarea
+							value="#{complaintInitiationBackingBean.commitedOffenceOther}"
+							style="width:100%; max-width:100%"></p:inputTextarea>
+					</p:panelGrid>
+
+					<center>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							styleClass="mainActionbtn"
+							action="#{complaintInitiationBackingBean.submitCommitedOffenceDialog}"
+							process="frmOffence" value="Save"
+							oncomplete="PF('committedOffenceDialog').hide()">
+						</p:commandButton>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							styleClass="mainActionbtn" process="frmOffence" value="Clear"
+							action="#{complaintInitiationBackingBean.clearCommitedOffence}"
+							update="frmOffence">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="dialogError" global="true" modal="true" header="Error"
+				width="30%" severity="info" widgetVar="errorDialog"
+				closeOnEscape="true" resizable="false">
+				<h:form id="frmError">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+							<p:outputLabel value="#{complaintInitiationBackingBean.errorMsg}"></p:outputLabel>
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							process="frmError" value="OK" onclick="PF('errorDialog').hide()">
+						</p:commandButton>
+
+					</center>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="dialogSuccessRef" global="true" modal="true"
+				header="Success" width="30%" severity="info"
+				widgetVar="successDialog" closeOnEscape="true" resizable="false">
+				<h:form id="frmSuccess" style="margin-bottom: 34px;">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+							<p:outputLabel
+								value="Complaint Request is Recorded Successfully."></p:outputLabel>
+						</p:panelGrid>
+						<br></br> <br></br>
+						<p:outputLabel
+							value="Reference No. -  #{complaintInitiationBackingBean.complaintNo}"
+							style="font-size:22px; font-weight:bold"></p:outputLabel>
+					</center>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="uploadDocumentsDialog" global="true" modal="true"
+				header="Upload Documents" width="80%" height="400px" severity="info"
+				widgetVar="uploadDocument" closeOnEscape="true" resizable="false"
+				style="postion: absolute;">
+
+
+				<h:form id="frmdoc">
+
+					<p:tabView>
+						<p:tab title="Upload Documents">
+
+							<p:accordionPanel>
+								<p:growl id="msgs" showDetail="false" />
+								<p:tab title="Mandatory Documents">
+
+
+									<h:panelGrid>
+										<p:dataTable id="abc" tableStyle="width:auto"
+											var="docMandatory"
+											value="#{complaintInitiationBackingBean.mandatoryList}"
+											rows="5" paginator="true" sortOrder="ascending"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15">
+
+											<p:column headerText="Code"
+												style="width: 100px; text-align: left;">
+												<h:outputText value="#{docMandatory.doc_Code}" />
+											</p:column>
+											<p:column headerText="Description"
+												style="width: 300px;text-align: left;">
+												<h:outputText value="#{docMandatory.add_Doc_Description}" />
+											</p:column>
+											<p:column headerText="File Path"
+												style="width: 300px;text-align: left;">
+
+												<h:outputText value="#{docMandatory.uploadFilePath}" />
+											</p:column>
+
+											<p:column style="width: 150px !important;">
+
+
+												<p:fileUpload
+													fileUploadListener="#{documentManagementBean.saveGrievanceMandatoryUploadDocuments}"
+													mode="advanced" dragDropSupport="false" multiple="true"
+													auto="true" showButtons="false" update="@form"
+													fileLimit="1" accept=".pdf,.jpg,.jpeg,.png"
+													allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640">
+													
+
+													<f:attribute name="uploadedObj" value="#{docMandatory}" />
+
+												</p:fileUpload>
+
+											</p:column>
+
+										</p:dataTable>
+									</h:panelGrid>
+
+								</p:tab>
+							</p:accordionPanel>
+
+							<br></br>
+							<br></br>
+
+							<p:accordionPanel>
+								<p:growl id="msgse" showDetail="false" />
+								<p:tab title="Optional Documents">
+
+
+									<h:panelGrid>
+										<p:dataTable id="abcd" tableStyle="width:auto"
+											var="docOptional"
+											value="#{complaintInitiationBackingBean.optionalList}"
+											rows="5" paginator="true" sortOrder="ascending"
+											scrollable="true" scrollHeight="100%" liveResize="true"
+											liveScroll="true"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15">
+
+
+
+											<p:column headerText="Code"
+												style="width: 100px;text-align: left;">
+												<h:outputText value="#{docOptional.doc_Code}" />
+											</p:column>
+											<p:column headerText="Description"
+												style="width: 300px;text-align: left;">
+												<h:outputText value="#{docOptional.add_Doc_Description}" />
+											</p:column>
+											<p:column headerText="File Path"
+												style="width: 300px;text-align: left;">
+												<h:outputText value="#{docOptional.uploadOptionalFilePath}" />
+											</p:column>
+
+											<p:column style="width: 150px;">
+												<p:fileUpload
+													fileUploadListener="#{documentManagementBean.saveGrievanceOptionalUploadDocuments}"
+													mode="advanced" dragDropSupport="false" multiple="true"
+													auto="true" showButtons="false" update="@form"
+													fileLimit="1" accept=".pdf,.jpg,.jpeg,.png"
+													allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640"
+													fileLimitMessage="Please Upload Only One Document">
+													
+
+													<f:attribute name="uploadedOptionalObj"
+														value="#{docOptional}" />
+
+												</p:fileUpload>
+
+											</p:column>
+										</p:dataTable>
+									</h:panelGrid>
+								</p:tab>
+							</p:accordionPanel>
+
+						</p:tab>
+
+						<p:tab title="Upload History">
+
+
+							<p:accordionPanel multiple="true">
+								<p:growl showDetail="false" />
+								<p:tab title="Grievances Management (Documents)" closable="true">
+
+
+									<p:accordionPanel id="dkfj">
+										<p:growl id="NP" showDetail="false" />
+										<p:tab title="Mandatory Documents">
+
+
+											<h:panelGrid>
+												<p:dataTable id="mandatoryNP" tableStyle="width:auto"
+													var="docMandatory"
+													value="#{sessionBackingBean.sisuSariyaMandatoryDocumentList}"
+													rows="5" paginator="true" sortOrder="ascending"
+													paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+													rowsPerPageTemplate="5,10,15">
+
+													<p:column headerText="Code"
+														style="width: 100px;text-align: left;">
+														<h:outputText value="#{docMandatory.doc_Code}" />
+													</p:column>
+													<p:column headerText="Description"
+														style="width: 300px;text-align: left;">
+														<h:outputText value="#{docMandatory.add_Doc_Description}" />
+													</p:column>
+													<p:column headerText="File Name"
+														style="width: 200px;text-align: left;">
+
+														<h:outputText value="#{docMandatory.documentName}" />
+													</p:column>
+
+													<p:column headerText="" style="width: 75px;">
+
+														<p:commandLink
+															actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+															oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+															<p:graphicImage library="images" name="view.png"
+																style="width:20px;height:20px;" title="view"></p:graphicImage>
+															<f:attribute name="documentMandatory"
+																value="#{docMandatory}" />
+														</p:commandLink>
+
+
+
+													</p:column>
+
+
+												</p:dataTable>
+											</h:panelGrid>
+
+										</p:tab>
+									</p:accordionPanel>
+
+									<br></br>
+									<br></br>
+
+									<p:accordionPanel>
+
+										<p:growl showDetail="false" />
+
+										<p:tab title="Optional Documents">
+
+											<h:panelGrid>
+												<p:dataTable id="optionalNP" tableStyle="width:auto"
+													var="docOptional"
+													value="#{sessionBackingBean.sisuSariyaOptionalDocumentList}"
+													rows="5" paginator="true" sortOrder="ascending"
+													scrollHeight="100%" liveResize="true" liveScroll="true"
+													paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+													rowsPerPageTemplate="5,10,15">
+
+													<p:column headerText="Code"
+														style="width: 100px;text-align: left;">
+														<h:outputText value="#{docOptional.doc_Code}" />
+													</p:column>
+													<p:column headerText="Description"
+														style="width: 300px;text-align: left;">
+														<h:outputText value="#{docOptional.add_Doc_Description}" />
+													</p:column>
+													<p:column headerText="File Name"
+														style="width: 200px;text-align: left;">
+														<h:outputText value="#{docOptional.documentName}" />
+													</p:column>
+
+													<p:column headerText="" style="width: 75px;">
+
+														<p:commandLink
+															actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+															oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+															<p:graphicImage library="images" name="view.png"
+																style="width:20px;height:20px;" title="view"></p:graphicImage>
+															<f:attribute name="documentOptional"
+																value="#{docOptional}" />
+														</p:commandLink>
+
+													</p:column>
+
+
+												</p:dataTable>
+											</h:panelGrid>
+										</p:tab>
+
+									</p:accordionPanel>
+
+								</p:tab>
+								<br></br>
+							</p:accordionPanel>
+						</p:tab>
+					</p:tabView>
+
+
+
+				</h:form>
+			</p:dialog>
+
+
+
+
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>

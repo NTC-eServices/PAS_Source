@@ -1,0 +1,404 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<!-- Internal CSS Part -->
+
+		<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+/* padding: 7px 25px 7px 25px !important; */
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+#Dob {
+	width: 80% !important;
+}
+
+.calendarClass input {
+	width: 79% !important;
+}
+
+.numField .ui-inputfield {
+	width: 89% !important;
+	font-weight: bold;
+	text-align: right;
+}
+
+.footer {
+	height: 20px;
+	background-color: #07295b;
+	/* padding: .7em 1.5em 0em 1.5em; */
+	text-align: center;
+	colour: #84063A;
+	color: #777373;
+}
+
+.ui-datatable-scrollable .ui-datatable-scrollable-header {
+	min-height: 20px;
+}
+
+.ui-datatable-scrollable-body {
+	height: 125px !important;
+}
+
+.genReqNumButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	text-decoration: none !important;
+	color: white !important;
+	border-radius: 5px !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default {
+	text-shadow: none;
+}
+
+.ui-accordion .ui-accordion-header {
+	cursor: pointer;
+	position: relative;
+	margin-top: 1px;
+	min-height: 0;
+	padding: .5em .5em .5em 2.2em;
+	background-color: cornflowerblue;
+}
+</style>
+
+		<div class="mainDiv">
+
+			<!-- header -->
+
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Revenue Collection Report</h1>
+
+			<div style="width: 95%;" class="subDiv">
+
+				<h:form id="revenueCollectionReportForm">
+
+					<p:panel id="pnl-search">
+
+
+						<!-- Input Details part -->
+
+
+						<p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+							layout="grid">
+							<h1
+								style="margin-bottom: 2%; text-align: left; color: #000000; margine-top: 3%">
+								Revenue Collection Report</h1>
+
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-4,ui-grid-col-2,ui-grid-col-3,ui-grid-col-3"
+								layout="grid">
+
+								<!-- Transaction Type -->
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Transaction Type "></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="transactionTypeId" style="width:75%"
+										filter="true"
+										value="#{revenueCollectionReportBackingBean.revenueCollectionDTO.typeCode}"
+										filterMatchMode="contains" tabindex="1" effect="fold">
+
+										<f:selectItem itemLabel=" --All-- " itemValue="" />
+
+										<f:selectItems
+											value="#{revenueCollectionReportBackingBean.transactionTypesList}"
+											var="typeList" itemValue="#{typeList.typeCode}"
+											itemLabel="#{typeList.typeDes}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<!-- Receipt Start Date -->
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Receipt Start Date "></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:calendar id="receiptStartDate" style="height:18px;"
+										maxdate="today" navigator="true" showOn="button"
+										locale="en_US" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+										yearRange="c-100:c+100" readonlyInput="true"
+										disabled="#{backlogTransaction.disableStartDateField}"
+										value="#{revenueCollectionReportBackingBean.revenueCollectionDTO.startDate}">
+									</p:calendar>
+								</p:panelGrid>
+								<p:panelGrid>
+								</p:panelGrid>
+
+
+								<!-- Receipt End Date -->
+
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid>
+									<p:outputLabel value="Receipt End Date "></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:calendar id="receiptEndDate" style="height:18px;"
+										maxdate="today" navigator="true" showOn="button"
+										locale="en_US" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY"
+										yearRange="c-100:c+100" readonlyInput="true"
+										disabled="#{backlogTransaction.disableStartDateField}"
+										value="#{revenueCollectionReportBackingBean.revenueCollectionDTO.endDate}">
+									</p:calendar>
+								</p:panelGrid>
+								<p:panelGrid>
+								</p:panelGrid>
+
+							</p:panelGrid>
+
+
+							<!-- Button Panel -->
+
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+								layout="grid" style="margin-top:2%;margin-bottom:2%;">
+
+								<!-- Clear Button -->
+
+								<p:panelGrid></p:panelGrid>
+
+								<p:commandButton id="clearBtn" styleClass="mainLinkButton"
+									style="width:100%" value="Clear" process="@all"
+									update="revenueCollectionReportForm"
+									action="#{revenueCollectionReportBackingBean.clearBtnAction}">
+
+								</p:commandButton>
+
+								<!-- Generate Report -->
+
+								<p:commandButton id="generateReportBtn"
+									styleClass="mainLinkButton" style="width:100%"
+									value="Generate Report" process="@all"
+									update="revenueCollectionReportForm"
+									action="#{revenueCollectionReportBackingBean.generateBtnAction}"
+									rendered="#{revenueCollectionReportBackingBean.generateBtncheck}">
+
+
+								</p:commandButton>
+
+								<!-- Print Report -->
+
+								<p:commandButton id="printReportBtn" styleClass="mainLinkButton"
+									style="width:100%" value="Print Report" process="@all"
+									update="revenueCollectionReportForm"
+									action="#{revenueCollectionReportBackingBean.printBtnAction}"
+									oncomplete="window.open('/InfoNTC/showUpload?reportName=Revenue Collection Report')"
+									rendered="#{revenueCollectionReportBackingBean.printBtncheck}">
+
+
+								</p:commandButton>
+
+							</p:panelGrid>
+
+
+						</p:panelGrid>
+
+					</p:panel>
+
+				</h:form>
+
+			</div>
+		</div>
+
+		<!-- Error Dialog -->
+
+		<p:dialog styleClass="" id="errorMessage" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errStatus"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="#{revenueCollectionReportBackingBean.errorStatus}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errStatus').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>

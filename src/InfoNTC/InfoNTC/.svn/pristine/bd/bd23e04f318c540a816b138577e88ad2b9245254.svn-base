@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-06-25T10:32:10 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TenderApplication" pageWidth="600" pageHeight="350" orientation="Landscape" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e213a9fc-7d43-4804-8ba5-0184fd0657b6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW_DATAADAPTER.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="P_TENDER_APP" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="reference_No" class="java.lang.String"/>
+	<parameter name="applicant_Name" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="idNo" class="java.lang.String"/>
+	<parameter name="contactNo" class="java.lang.String"/>
+	<parameter name="receiptNo" class="java.lang.String"/>
+	<parameter name="receivedPerson" class="java.lang.String"/>
+	<parameter name="receivedIdType" class="java.lang.String"/>
+	<parameter name="receivedIdNumber" class="java.lang.String"/>
+	<parameter name="LOGO_PATH" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select rec_receipt_no
+from nt_t_receipt
+where rec_application_no=$P{P_TENDER_APP}]]>
+	</queryString>
+	<field name="rec_receipt_no" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement x="-30" y="60" width="600" height="38" isPrintWhenDetailOverflows="true" uuid="56edba11-47f8-4554-9f32-e616f36ca07b"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Issue Tender Application Report]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="-12" width="300" height="72" isPrintWhenDetailOverflows="true" uuid="316e8934-fcf4-4052-bcf2-7b9ee4c37083"/>
+				<imageExpression><![CDATA[$P{LOGO_PATH}+"header_logo_new.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="132" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="401" y="10" width="120" height="15" isPrintWhenDetailOverflows="true" uuid="749f624d-5eed-402c-a29e-940498b75f43">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{P_TENDER_APP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="12" width="110" height="15" isPrintWhenDetailOverflows="true" uuid="757608d0-fa9a-4b9e-9186-843f1cd29c0d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Tender Reference No :-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="27" width="110" height="15" isPrintWhenDetailOverflows="true" uuid="e57791f7-db51-4bb6-bc56-15e1a61864ca">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Application Name       :-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="110" height="15" isPrintWhenDetailOverflows="true" uuid="f1a02b68-0e64-4e35-9467-8f2dc30f4e66">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[ID No.                         :-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="110" height="15" isPrintWhenDetailOverflows="true" uuid="1d34f52c-c3ce-4065-9925-cf4d019ca170">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Contact No.                :-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="72" width="110" height="15" isPrintWhenDetailOverflows="true" uuid="073ffc40-7776-4d0e-ab80-5883e41714bf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Receipt No                 :-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="87" width="160" height="15" isPrintWhenDetailOverflows="true" uuid="9c798ef5-c85c-40b8-a781-6cb9d2656914">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Application Received Person      :-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="102" width="160" height="15" isPrintWhenDetailOverflows="true" uuid="421b9d7d-5a2b-4468-9498-8bcc8fc55bb5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Received Person      ID Type      :-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="117" width="67" height="15" isPrintWhenDetailOverflows="true" uuid="f3d0b4b6-2d31-4a4a-ae52-27bf3ade19ab">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[ID Number :-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="10" width="75" height="15" isPrintWhenDetailOverflows="true" uuid="ba450c93-ff7a-4912-b6bd-0a6e6a525abd">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Application No :-]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="110" y="12" width="123" height="15" isPrintWhenDetailOverflows="true" uuid="9e3f2814-8b35-45a5-b5c1-00cbf628c326">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{reference_No}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="132" y="27" width="168" height="15" isPrintWhenDetailOverflows="true" uuid="eb0de4ff-e247-4149-90c4-0d428f418a34">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{applicant_Name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="110" y="27" width="24" height="15" isPrintWhenDetailOverflows="true" uuid="ba5d340b-6c05-469d-b784-44460fb31c65">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="110" y="42" width="148" height="15" isPrintWhenDetailOverflows="true" uuid="967e5272-2637-4b08-bd9c-c76bd2bf05bf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{idNo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="110" y="57" width="123" height="15" isPrintWhenDetailOverflows="true" uuid="6892ef4a-fc2d-44d2-beb7-6ec2b03fe22b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{contactNo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="160" y="87" width="307" height="15" isPrintWhenDetailOverflows="true" uuid="35dcf8dc-ad09-4191-9d87-e43b9cdbf389">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{receivedPerson}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="160" y="102" width="207" height="15" isPrintWhenDetailOverflows="true" uuid="801c580b-708c-41a3-92b4-ad96e3755b04">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{receivedIdType}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="160" y="117" width="207" height="15" isPrintWhenDetailOverflows="true" uuid="06f5baf0-1110-4256-b283-34e8210adcde"/>
+				<textFieldExpression><![CDATA[$P{receivedIdNumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="110" y="72" width="148" height="15" isPrintWhenDetailOverflows="true" uuid="7183c3d1-894d-48ca-80eb-264f4d54b17f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{rec_receipt_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

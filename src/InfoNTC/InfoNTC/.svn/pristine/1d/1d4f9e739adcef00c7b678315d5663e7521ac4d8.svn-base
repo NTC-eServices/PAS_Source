@@ -1,0 +1,837 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<style>
+.dateTimeField input {
+	width: 100px;
+}
+
+.dateTimeField img {
+	vertical-align: right;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-input {
+	margin-top: -20px;
+}
+</style>
+
+
+
+		<h:form id="form">
+			<div class="mainDiv">
+				<h1
+					style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+					class="common_form_header">Sisu Sariya Voucher Creation</h1>
+				<div style="width: 90%;" class="subDiv">
+
+
+					<p:panel id="panelOne">
+
+						<p:panelGrid columns="4" style="margin-left:50px"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-4,ui-grid-col-2"
+							layout="grid">
+
+							<!-- Request No. Filed Start -->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Request No."></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:selectOneMenu id="reqNo" style="width:68%"
+									value="#{sisuSeriyaVoucherCreationBean.sisuSeriyaDTO.requestNo}"
+									filter="true" filterMatchMode="contains" tabindex="1"
+									placeholder="-- All --">
+									<p:ajax
+										listener="#{sisuSeriyaVoucherCreationBean.fillServiceRefNo}"
+										update="refNo,drpd-operatorDepoName" />
+									<f:selectItem itemLabel="-- Select Request No.--" itemValue="" />
+									<f:selectItems
+										value="#{sisuSeriyaVoucherCreationBean.getRequestNoList}"
+										var="e" itemLabel="#{e.requestNo}" itemValue="#{e.requestNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<!-- Request No. Filed End -->
+							<!-- Service Reference No Filed Start -->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Service Reference No."
+									style="text-align: left;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+
+								<p:selectOneMenu id="refNo" style="width:68%"
+									onkeyup="this.value=this.value.toUpperCase();"
+									value="#{sisuSeriyaVoucherCreationBean.sisuSeriyaDTO.serviceRefNo}"
+									filter="true" filterMatchMode="contains" tabindex="1"
+									placeholder="-- All --">
+									<p:ajax
+										listener="#{sisuSeriyaVoucherCreationBean.fillServiceNo}"
+										update="ServiceNo,drpd-operatorDepoName" />
+									<f:selectItem itemLabel="-- Select Reference No. --"
+										itemValue="" />
+									<f:selectItems
+										value="#{sisuSeriyaVoucherCreationBean.getServiceReferenceNoList}"
+										var="d" itemLabel="#{d.serviceRefNo}"
+										itemValue="#{d.serviceRefNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<!-- Service Reference No Filed End -->
+
+
+							<!-- Service  No Filed Start -->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Service  No./Service Agreement No." style="text-align: left;"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+
+								<p:selectOneMenu id="ServiceNo" style="width:68%"
+									onkeyup="this.value=this.value.toUpperCase();"
+									value="#{sisuSeriyaVoucherCreationBean.sisuSeriyaDTO.serviceNo}"
+									filter="true" filterMatchMode="contains" tabindex="1"
+									placeholder="-- All --">
+
+									<f:selectItem itemLabel="-- Select Service No. --" itemValue="" />
+									<f:selectItems
+										value="#{sisuSeriyaVoucherCreationBean.getServiceNoList}"
+										var="d" itemLabel="#{d.serviceNo}" itemValue="#{d.serviceNo}" />
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<!-- Service  No Filed End -->
+
+
+							<!-- Request Start Date Filed Start -->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Request Start Date"></p:outputLabel>
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:calendar id="startDate" styleClass="dateTimeField"
+									navigator="true" showOn="button"
+									value="#{sisuSeriyaVoucherCreationBean.sisuSeriyaDTO.requestStartDate}"
+									pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+									<p:ajax event="dateSelect"
+										listener="#{sisuSeriyaVoucherCreationBean.onRequestStartDateChange}"
+										update="@form" />
+								</p:calendar>
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<!-- Request Start Date Filed End -->
+
+							<!-- Request End Date Filed Start -->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel value="Request End Date"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:panelGrid>
+								<p:calendar id="endDate" styleClass="dateTimeField"
+									navigator="true" showOn="button"
+									value="#{sisuSeriyaVoucherCreationBean.sisuSeriyaDTO.requestEndDate}"
+									pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+									<p:ajax event="dateSelect"
+										listener="#{sisuSeriyaVoucherCreationBean.onRequestEndDateChange}"
+										update="@form" />
+								</p:calendar>
+
+							</p:panelGrid>
+
+							<p:panelGrid></p:panelGrid>
+							<!--Request End Date Filed End -->
+
+							<!-- Operator/Depo Name Start -->
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+								<p:outputLabel>Operator/Depo Name</p:outputLabel>
+
+							</p:panelGrid>
+							<p:panelGrid>
+								<p:selectOneMenu id="drpd-operatorDepoName" style="width:68%;"
+									effect="fold"
+									value="#{sisuSeriyaVoucherCreationBean.sisuSeriyaDTO.nameOfOperator}"
+									filter="true" filterMatchMode="contains">
+									<f:selectItem itemLabel="-- Select Operator/Depo Name --"
+										itemValue="" />
+									<f:selectItems
+										value="#{sisuSeriyaVoucherCreationBean.drpdOperatorDepoNameList}"
+										var="list" itemValue="#{list.nameOfOperator}"
+										itemLabel="#{list.nameOfOperator}" />
+								</p:selectOneMenu>
+
+							</p:panelGrid>
+							<p:panelGrid></p:panelGrid>
+							<!-- Operator/Depo Name End -->
+
+						</p:panelGrid>
+
+						<center>
+							<p:commandButton value="Search" styleClass="mainActionbtn"
+								id="cmdBtnSearch"
+								action="#{sisuSeriyaVoucherCreationBean.search}"
+								update="frmsuccess,frmError,frmAlert,@form" />
+
+							<p:commandButton value="Clear" styleClass="mainActionbtn"
+								action="#{sisuSeriyaVoucherCreationBean.clearOne}"
+								update="frmsuccess,frmError,frmAlert,@form" />
+
+						</center>
+					</p:panel>
+
+					<!--Data Table -->
+					<p:panel id="panelTwo">
+						<center>
+							<p:dataTable id="dataTable" var="p" rows="5" paginator="true"
+								value="#{sisuSeriyaVoucherCreationBean.sisuSeriyaList}"
+								selection="#{sisuSeriyaVoucherCreationBean.selectDTO}"
+								selectionMode="single" rowKey="#{p.serviceRefNo}"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="10,20" resizableColumns="false"
+								liveResize="true" tableStyle="width:100%;font-size:12px;"
+								sortBy="#{p.serviceNo}" sortOrder="ascending"
+								rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No data available.">
+
+								<p:ajax event="rowSelect"
+									listener="#{sisuSeriyaVoucherCreationBean.selectRow}"
+									update="@form" process="@form" />
+
+
+								<p:column headerText="Request No." style="text-align:left;">
+									<h:outputText value="#{p.requestNo}" />
+								</p:column>
+
+								<p:column headerText="Service Ref No." width="15%"
+									style="text-align:left;">
+									<h:outputText value="#{p.serviceRefNo}" />
+								</p:column>
+
+								<p:column headerText="Service  No./Service Agreement No." style="text-align:left;">
+									<h:outputText value="#{p.serviceNo}" />
+								</p:column>
+
+								<p:column headerText="Operator/Depo Name" width="20%"
+									style="text-align:left;">
+									<h:outputText value="#{p.nameOfOperator}" />
+								</p:column>
+
+								<p:column headerText="Expiry Date" style="text-align:left;">
+									<h:outputText value="#{p.serviceEndDateVal}" />
+								</p:column>
+
+								<p:column headerText="Status" style="text-align:left;">
+									<h:outputText value="#{p.status}" />
+								</p:column>
+
+								<p:column headerText="" style="width:24px;height:24px;">
+									<p:commandLink action="#{sisuSeriyaVoucherCreationBean.view()}"
+										update="frmsuccess,frmError,frmAlert,@form">
+
+										<f:setPropertyActionListener value="#{p}"
+											target="#{sisuSeriyaVoucherCreationBean.viewDTO}" />
+
+										<p:graphicImage library="images" name="view1.png"
+											style="width:24px;height:24px;" title="view"></p:graphicImage>
+									</p:commandLink>
+								</p:column>
+
+							</p:dataTable>
+						</center>
+					</p:panel>
+					<p:panel id="btnPanel">
+						<center>
+
+							<p:commandButton value="Create Voucher"
+								rendered="#{sisuSeriyaVoucherCreationBean.renderVoucherButton}"
+								styleClass="mainActionbtn" style="width:20%"
+								action="#{sisuSeriyaVoucherCreationBean.createVoucher}"
+								update="frmError,frmsuccess,frmAlert,@form"
+								disabled="#{sisuSeriyaVoucherCreationBean.disabledCreateVoucher}" />
+						</center>
+					</p:panel>
+
+				</div>
+			</div>
+
+		</h:form>
+
+
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="#{sisuSeriyaVoucherCreationBean.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Info" width="30%" severity="info" widgetVar="successMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="#{sisuSeriyaVoucherCreationBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Alert" width="30%" severity="info" widgetVar="alertMSG"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAlert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="#{sisuSeriyaVoucherCreationBean.alertMSG}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmAlert" onclick="PF('alertMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+		<p:dialog styleClass="" id="generateVoucherDialog" global="true"
+			closable="false" modal="true" header="Create Payment Voucher"
+			width="80%" severity="info" widgetVar="generateVoucher"
+			closeOnEscape="true" resizable="false" style="postion: absolute;">
+
+			<h:form id="frmGenerateVoucher">
+
+				<p:panel id="panelOne">
+
+					<p:panelGrid columns="4" style="margin-left:115px"
+						columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+						layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Transaction Type"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+
+							<p:inputText id="transactionType" style="width:68%"
+								value="#{sisuSeriyaVoucherCreationBean.sisuSeriyaDTO.transactionDescription}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								readonly="true" />
+
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Department"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="department" style="width:68%"
+								value="#{createPaymentVoucher.paymentVoucherDTO.departmentCode}"
+								filter="true" filterMatchMode="contains" tabindex="1">
+
+								<f:selectItem itemLabel="--Select Department--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{createPaymentVoucher.deaprtmentList}"
+									var="d" itemLabel="#{d.deaprtmentDiscription}"
+									itemValue="#{d.departmentCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Service No." style="text-align: left;"></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText id="serviceNo" readonly="true"
+								value="#{sisuSeriyaVoucherCreationBean.sisuSeriyaDTO.serviceNo}"
+								onkeyup="this.value=this.value.toUpperCase();" style="width:66%"
+								maxlength="12" placeholder="-- Enter Service No.--">
+							</p:inputText>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Voucher No." style="text-align: left;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+
+							<p:inputText id="voucherNo"
+								onkeyup="this.value=this.value.toUpperCase();"
+								style="width:66%; color:red;font-weight: bold;" maxlength="12"
+								readonly="true" value="#{createPaymentVoucher.value}">
+							</p:inputText>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Date"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText value="#{createPaymentVoucher.date1}"
+								style="width:66%" disabled="true" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+
+				</p:panel>
+
+				<center>
+					<p:commandButton value="Search" styleClass="mainActionbtn"
+						id="cmdBtnSearch" oncomplete="rc"
+						action="#{createPaymentVoucher.searchSisuSariyaVoucher}"
+						process="@all"
+						update="mainTable,rePrint,addbutton,clearButton,generateButton,voucherNo,@form"
+						style="width:20%" />
+
+					<p:remoteCommand name="rc" update="voucherNo" />
+				</center>
+
+
+				<p:panel id="panelTwo">
+
+					<p:panelGrid columns="4" style="margin-left:115px"
+						columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+						layout="grid">
+
+
+						<!--  ************************************************************************************************ -->
+						<p:panelGrid>
+							<p:outputLabel value="Charge Type"></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+
+							<p:selectOneMenu id="chargeType" style="width:68%"
+								disabled="#{createPaymentVoucher.disableChargeType}"
+								value="#{createPaymentVoucher.paymentVoucherDTO.chargeDescription}"
+								filter="true" filterMatchMode="contains" tabindex="1">
+								<f:selectItem itemLabel="--Select Charge Type--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{createPaymentVoucher.chargeTypeList}" />
+
+
+								<p:ajax listener="#{createPaymentVoucher.ajaxFilterAcountNo}"
+									update="accountNo"></p:ajax>
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Account No."></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+
+							<p:selectOneMenu id="accountNo" style="width:68%"
+								disabled="#{createPaymentVoucher.disableAccountNo}"
+								value="#{createPaymentVoucher.paymentVoucherDTO.accountNO}"
+								filter="true" filterMatchMode="contains" tabindex="1">
+
+								<f:selectItem itemLabel="--Select Account No.--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{createPaymentVoucher.accountNoList}" />
+
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+
+						<!--  ************************************************************************************************ -->
+
+						<p:panelGrid columns="2" style="padding:0px;margin:0px;"
+							styleClass="internalPanel"
+							columnClasses="ui-grid-col-11,ui-grid-col-1" layout="grid">
+
+							<p:panelGrid styleClass="internalPanel">
+								<p:outputLabel value="Amount"></p:outputLabel>
+								<p:outputLabel value="*" style="color:red;text-align:left"></p:outputLabel>
+							</p:panelGrid>
+
+							<p:outputLabel value="Rs." styleClass="internalInput"
+								style="text-align:right;margin: auto;padding-right:0px;"></p:outputLabel>
+
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputNumber id="amount"
+								disabled="#{createPaymentVoucher.disableAmount}"
+								value="#{createPaymentVoucher.paymentVoucherDTO.amount}"
+								minValue="0" style="width:66%" inputStyle="text-align: right"
+								maxlength="12">
+							</p:inputNumber>
+						</p:panelGrid>
+
+
+
+						<p:panelGrid>
+							<p:outputLabel value="Skip Voucher"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectBooleanCheckbox
+								value="#{createPaymentVoucher.skipChargeTypes}"
+								disabled="#{createPaymentVoucher.disabledskipChargeTypes}">
+								<p:ajax update="@form"
+									listener="#{createPaymentVoucher.ajaxSkipChargeTypes}" />
+							</p:selectBooleanCheckbox>
+						</p:panelGrid>
+
+
+						<!--  ************************************************************************************************ -->
+
+					</p:panelGrid>
+
+				</p:panel>
+				<p:panel>
+					<center>
+
+						<p:commandButton value="Add" styleClass="mainActionbtn"
+							action="#{createPaymentVoucher.addNewCharge}"
+							disabled="#{createPaymentVoucher.disableAdd}" id="addbutton"
+							update="mainTable,frmError,panelTwo, @form" process="@all">
+							<f:setPropertyActionListener value="#{true}"
+								target="#{createPaymentVoucher.disableAdd}" />
+						</p:commandButton>
+
+						<p:commandButton value="Clear" styleClass="mainActionbtn"
+							id="clearButton" action="#{createPaymentVoucher.clearTwo}"
+							update="panelTwo, @form"
+							disabled="#{createPaymentVoucher.disableClearTwo}">
+
+							<f:setPropertyActionListener value="#{true}"
+								target="#{createPaymentVoucher.disableClearTwo}" />
+
+						</p:commandButton>
+
+					</center>
+				</p:panel>
+
+
+
+				<p:panel>
+					<center>
+						<p:dataTable var="e"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,20" rows="3" paginator="true"
+							resizableColumns="false" liveResize="true"
+							tableStyle="width:95%;font-size:12px;"
+							value="#{createPaymentVoucher.voucherDetails}" id="mainTable"
+							rowKey="e.chargeDescription" style="width:95%;">
+
+							<p:column headerText="Charge Type" style="text-align:left">
+								<h:outputText value="#{e.chargeDescription}"
+									style="text-align:left;" />
+							</p:column>
+
+							<p:column headerText="Account No." style="text-align:left">
+								<h:outputText value="#{e.accountNO}" style="text-align:left;" />
+							</p:column>
+
+							<p:column style="text-align:right">
+
+								<f:facet name="header">
+									<h:outputText value="Amount (Rs.)" style="text-align:right" />
+
+								</f:facet>
+
+								<h:outputText value="#{e.amount}" style="text-align:right;">
+									<f:convertNumber pattern="##,###.00" />
+								</h:outputText>
+							</p:column>
+
+
+
+							<p:column width="9%">
+								<center>
+									<p:commandLink action="${createPaymentVoucher.edit()}"
+										disabled="${createPaymentVoucher.disabledEdit}"
+										update="@form,mainTable">
+
+										<f:setPropertyActionListener value="#{e}"
+											target="${createPaymentVoucher.selectDTO}" />
+										<p:graphicImage library="images" name="edit.png"
+											style="width:24px;height:24px;" title="edit"></p:graphicImage>
+									</p:commandLink>
+								</center>
+
+							</p:column>
+
+							<p:column width="9%">
+								<center>
+									<p:commandLink
+										action="${createPaymentVoucher.delete(e.chargeDescription)}"
+										disabled="${createPaymentVoucher.disabledDelete}"
+										update="mainTable">
+
+										<f:ajax render="voucherDetails" />
+										<p:graphicImage library="images" name="delete.png"
+											style="width:24px;height:24px;" title="delete"></p:graphicImage>
+									</p:commandLink>
+								</center>
+
+							</p:column>
+
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="3" style="text-align:right"
+										footerText="Total Fee (Rs.)" />
+
+									<p:column style="text-align:right">
+										<f:facet name="footer">
+											<h:outputText value="#{createPaymentVoucher.totalfee}">
+												<f:convertNumber pattern="##,###.00" />
+											</h:outputText>
+										</f:facet>
+									</p:column>
+									<p:column footerText="" />
+								</p:row>
+							</p:columnGroup>
+
+						</p:dataTable>
+					</center>
+				</p:panel>
+
+
+
+				<p:panel id="lastPanel">
+					<center>
+
+
+						<p:commandButton value="Re-Print" styleClass="mainActionbtn"
+							id="rePrint" disabled="#{createPaymentVoucher.disableRePrint}"
+							actionListener="#{createPaymentVoucher.rePrint}" update="@form"
+							onclick="PrimeFaces.monitorDownload(start, stop);"
+							oncomplete="PF('genReport').hide();">
+							<f:attribute name="value" value="#{createPaymentVoucher.value}"></f:attribute>
+							<p:fileDownload value="#{createPaymentVoucher.files}" />
+						</p:commandButton>
+
+						<p:commandButton value="Generate Voucher" id="generateButton"
+							styleClass="mainActionbtn" style="width:180px"
+							action="#{createPaymentVoucher.generateVoucher}"
+							update="frmError,frmsuccess,rePrint,addbutton,voucherNo,generateButton,print,@form"
+							disabled="#{createPaymentVoucher.disableGenarate}" />
+
+
+						<p:commandButton value="Print" id="print"
+							styleClass="mainActionbtn"
+							actionListener="#{createPaymentVoucher.downloadFile}"
+							onclick="PrimeFaces.monitorDownload(start, stop);"
+							oncomplete="PF('genReport').hide();" update="@form"
+							disabled="#{createPaymentVoucher.disablePrint}">
+							<f:attribute name="value" value="#{createPaymentVoucher.value}"></f:attribute>
+							<p:fileDownload value="#{createPaymentVoucher.files}" />
+						</p:commandButton>
+
+
+
+						<p:commandButton value="Clear" styleClass="mainActionbtn"
+							action="#{createPaymentVoucher.clearThree}"
+							update="mainTable,panelTwo,panelOne,rePrint, @form" />
+
+						<p:commandButton value="Close" styleClass="mainActionbtn"
+							action="#{createPaymentVoucher.closeTenderDialogBox}"
+							update="mainTable,panelTwo,panelOne,rePrint, @form" />
+
+					</center>
+
+				</p:panel>
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

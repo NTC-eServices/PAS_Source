@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2020-04-08T17:36:35 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BlackListedLetter" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="75a39b53-b3f9-4687-8685-abc2943b3bff">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="P_driver_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select    distinct dcr_full_name_sin  from public.nt_t_driver_conductor_registration where dcr_driver_conductor_id= $P{P_driver_id}]]>
+	</queryString>
+	<field name="dcr_full_name_sin" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="141" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="160" height="30" uuid="3a423cfa-af14-4ba5-a058-098cc0d7d34f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ජාගකොස​/ /තආබාසමබපැ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="96" width="340" height="30" uuid="2adc3199-ee07-4410-a774-9c614cabf779"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Iskoola Pota" size="14" isBold="true" isUnderline="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[රියදුරු/කොන්දොස්තර නැවත පුහුණු පාඨමාලාව​​]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="60" width="429" height="30" uuid="7cd41bce-fae3-4c22-ba10-d828e73172bc">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dcr_full_name_sin}+"  මහතා,"]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy">
+				<reportElement x="280" y="101" width="60" height="30" uuid="561e23b1-f382-4c42-b550-4a938878c5e0"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy.MM.dd">
+				<reportElement x="415" y="15" width="127" height="30" uuid="93593eb0-3226-47a4-8169-9c109e8f0023"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="361" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="20" width="550" height="40" uuid="6d095cfe-9f6f-4045-a2f9-78d7bdafea04"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ජාතික ගමනාගමන කොමිෂන් සභාව විසින් සංවිධානය කරනු ලබන එක් දින රියදුරු/කොන්දොස්තර නැවත පුහුණු පාඨමාලාව පිළිිබඳ විස්තර පහත දැක්වේ."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="133" width="550" height="17" uuid="98815f32-fcac-409b-a608-913fcd549117"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ඔබ විසින් නැවත පුහුණුව සඳහා ලියාපදිංචි වීමේදී ගෙවන ලද රු.3000.00 ට අදාල ලදුපත ද එදිනට ඉදිරිපත් කළ යුතුයි."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="58" width="550" height="22" uuid="b31c13a9-1bcb-4838-93a3-8069d232fb9b"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ස්ථානය​  : ජාතික ගමනාගමන කොමිෂන් සභාව, 241, උද්‍යාන පාර​, කොළඹ 05"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="76" width="550" height="22" uuid="56b76559-c86a-408e-adcd-350390acbad4"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["දිනය       : "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="96" width="550" height="22" uuid="45c00240-53c1-46df-afb5-9c9485a81f9b"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["වේලාව   :"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="150" width="550" height="60" uuid="c551e683-ef92-4578-a670-264b0c96cf9c"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["පුහුණුව සඳහා පැමිණීමේදි රැවුල සහ කොණ්ඩය පිළිවෙලට කපා, කොළරයක් සහිත තනි සුදු කමීසයකින් සැරසී (ටී ෂර්ට් හැර​) සහභාගි විය යුතුය​. උදේ, දිවා ආහාර සහ සවස තේ පැන් ජාතික ගමනාගමන කොමිෂන් සභාව විසින් සපයනු ලැබේ."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="209" width="550" height="41" uuid="0809fbc5-da8c-46af-a542-cf69b9e83338"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isUnderline="true"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["මෙම පුහුණු පාඨමාලාව ඔබගේ සහභාගි වීම තහවුරු කිරීම සඳහා, මෙම ලිපිය ලැබුණ වහාම 0112578372 හෝ 1955 යන දුරකථන අංකයන් අමතා ඒ බව දැනුම් දෙන්න​."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="247" width="550" height="41" uuid="fb1c9c7d-6f88-423b-97cc-f23948103ad5"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isUnderline="true"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["නියමිත දින පුහුණුවට සහභාගි වීමට අපොහොසත් වුවහොත්, ඒ වෙනුවට නැවත අවස්ථාවක් ලබා දීමට නොහැකි අතර, මුදල් ගෙවා නැවත ලියාපදිංචි වීමට සිදුවන බව වැඩිදුරටත් දන්වා සිටිමි."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="304" width="550" height="37" uuid="54474cca-8878-4b97-bb8a-c9708b860581"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="0.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["පුහුණුව සාර්ථකව නිම කරනු ලබන රියදුරු/කොන්දොස්තර මහත්වරුන් සදහා හැදුනුම්පත නැවත ලබාදීමට කටයුතු යොදා ඇත​."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="36" width="280" height="20" uuid="5a30ff83-a58c-40cc-825c-ab7b26e0b067"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ඒකක ප්‍රධානී,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="78" width="280" height="20" uuid="bd70a091-a037-45f5-99ad-fb6aff3771e6"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="55" width="280" height="20" uuid="b869b3a9-f4b6-4191-a649-04e3bb191804"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[රියදුරු/කොන්දොස්තර පුහුණු ඒකකය​.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

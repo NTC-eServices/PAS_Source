@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link type="image/x-icon"
+			href="#{facesContext.externalContext.requestContextPath}/resources/icons/favicon.ico"
+			rel="shortcut icon" />
+		<link type="image/x-icon"
+			href="#{facesContext.externalContext.requestContextPath}/resources/icons/favicon.ico"
+			rel="icon" />
+	</f:facet>
+
+	<title>National Transport Commission</title>
+	<h:outputScript name="js/nanoscroller.js" library="theme-layout" />
+	<h:outputScript name="js/layout.js" library="theme-layout" />
+
+	<style>
+.mainDiv {
+	width: 99%;
+	height: auto;
+	margin: 10px;
+}
+
+.ui-carousel .ui-carousel-button {
+	display: none;
+}
+
+.ui-carousel .ui-carousel-page-link {
+	display: none;
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 20px;
+	background-color: #07295b;
+	/* padding: .7em 1.5em 0em 1.5em; */
+	text-align: center;
+	color: #777373;
+}
+
+.ui-widget-content {
+	border: none;
+}
+
+.ui-widget-header {
+	background: #000000;
+	font-weight: normal;
+	text-align: center;
+}
+
+.ui-state-default {
+	background: #000000;
+}
+
+.ui-datatable thead th {
+	text-align: left;
+	font-size: 2.00em;
+	padding: 10px 10px !important;
+	color: #FFFFFF;
+	font-weight: normal;
+}
+
+.ui-datatable .ui-datatable-header {
+	background-color: #000000;
+}
+
+.ui-g-3 {
+	display: none !important;
+}
+
+.ui-hidden-container {
+	border: none !important;
+}
+
+.ui-panelgrid, .ui-panelgrid-cell {
+	border: none !important;
+	text-align: center;
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td,
+	.ui-datatable tfoot th {
+	border: none !important;
+	background-color: #ffffff !important;
+}
+
+.ui-carousel-header {
+	background-color: #07295b !important;
+	font-size: 1.50rem !important;
+	padding: 5px 10px !important;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 25px;
+}
+
+#headder-counter {
+	text-align: left;
+	color: #41385f;
+	font-size: 3.8rem;
+	padding: 10px 10px;
+	margin: auto;
+	border-radius: 20px;
+	background-image: linear-gradient(to right, #ffffff, #ebe5ff, #d9caff, #c8b0ff, #b994ff);
+}
+
+.ui-hidden-container {
+	background-color: #FFFFFF !important;
+	height: 40px !important;
+}
+
+.next-numbers {
+	font-size: 1.50rem !important;
+	text-align: center !important;
+}
+</style>
+</h:head>
+
+<h:body styleClass="main-body">
+
+	<!-- Main div of the page -->
+	<div class="mainDiv">
+
+		<h:form id="counterMainDisplay">
+			<!-- Set time to update components -->
+			<p:poll interval="3"
+				listener="#{displayQueueNumber.updateCounterTable}"
+				update='nextNumberTable,nextNumberTable2' />
+			<p:poll interval="3" listener="#{displayQueueNumber.called}"
+				update='calledNumbers' />
+			<p:poll interval="3"
+				listener="#{displayQueueNumber.permenantlySkipedNumbers}"
+				update='skipedNumbers' />
+			<!-- Heading Section -->
+
+			<p:panel>
+
+				<div class="ui-g">
+
+					<div class="ui-g-4">
+
+						<!--  no-repeat center bottom; -webkit-background-size: cover; -moz-background-size: cover  -o-background-size: cover; background-size: cover;" -->
+						<div
+							style="background: url(../../resources/images/loginHeader.jpg) no-repeat center; margin-left: auto; margin-right: auto; width: 100%; height: 100%">
+						</div>
+
+					</div>
+					<div class="ui-g-8">
+						<div id="headder-counter">
+							<h:outputText value="Counter Details" />
+						</div>
+					</div>
+
+				</div>
+
+
+				<div class="ui-g" style="border: 0px !important">
+					<div class="ui-g-4" style="border: 0px !important">
+						<p:dataTable id="nextNumberTable" var="panel2"
+							value="#{displayQueueNumber.panel1}"
+							style="ui-datatable thead th:text-align:center ;background-color:#ffffff;border:0px !important">
+							<!-- Table headings -->
+							<p:columnGroup type="header"
+								style=" background-color: #000000 !important;padding: 10px 10px !important;font-size:5.00rem !important;text-align:center !important;">
+								<p:row>
+									<p:column rowspan="1" headerText="Counter"
+										style="text-align: center !important;" />
+									<p:column colspan="1" headerText="Current No." />
+								</p:row>
+							</p:columnGroup>
+
+							<!-- Set table columns -->
+
+							<!-- counterId -->
+							<p:column
+								style="color: #41385f !important; font-size: 2.02rem !important;text-align: center !important;">
+								<h:outputText id="next-numbers"
+									style="background-image:linear-gradient(#8e99a1, #d3d3d3);border-radius: 15px;padding:0px 10px !important;width:30%;margin:auto;"
+									value="#{panel2.counterId}" />
+							</p:column>
+							<!-- counterCurrentNo -->
+							<p:column
+								style="color: #41385f !important; font-size: 2.02rem !important;text-align: left !important;">
+								<h:outputText
+									style="background-image:linear-gradient(#8e99a1, #d3d3d3);border-radius: 15px;padding:0px 10px !important;"
+									value="#{panel2.counterCurrentNo}" />
+							</p:column>
+						</p:dataTable>
+					</div>
+					<div class="ui-g-8" style="border: 0px !important">
+
+						<p:dataTable id="nextNumberTable2" var="panel2"
+							value="#{displayQueueNumber.panel2}"
+							style="ui-datatable thead th:text-align:center ;background-color:#ffffff;border:0px !important">
+							<!-- Table headings -->
+							<p:columnGroup type="header"
+								style=" background-color: #000000 !important;padding: 10px 10px !important;font-size:5.00rem !important;text-align:center !important;">
+								<p:row>
+									<p:column colspan="2" headerText="Counter Name" />
+									<p:column colspan="3" headerText="Next Numbers" />
+									<p:column colspan="2" headerText="Skiped Numbers" />
+								</p:row>
+							</p:columnGroup>
+
+							<!-- Set table columns -->
+							<!-- counterName -->
+							<p:column
+								style="font-size:  1.50rem !important;text-align: left !important;"
+								colspan="2">
+								<h:outputText style="text-align: center !important;"
+									value="#{panel2.counterName}" />
+							</p:column>
+							<!-- Next Numbers -->
+							<!-- Next Numbers label 01 -->
+							<p:column class="next-numbers">
+								<h:outputText id="tbl-counterDetails-nextNumbers"
+									value="#{panel2.queueNo1}" />
+							</p:column>
+							<!-- Next Numbers label 02 -->
+							<p:column class="next-numbers">
+								<h:outputText value="#{panel2.queueNo2}" />
+							</p:column>
+							<!-- Next Numbers label 03 -->
+							<p:column class="next-numbers">
+								<h:outputText value="#{panel2.queueNo3}" />
+							</p:column>
+							<!-- Next Numbers label 04 -->
+							<p:column class="next-numbers">
+								<h:outputText value="#{panel2.queueNo4}" />
+							</p:column>
+							<!-- Next Numbers label 05 -->
+							<p:column class="next-numbers">
+								<h:outputText value="#{panel2.queueNo5}" />
+							</p:column>
+
+						</p:dataTable>
+					</div>
+
+				</div>
+
+
+
+				<!-- Display panel 3 -->
+				<div class="ui-g">
+					<p:panelGrid>
+						<p:carousel id="calledNumbers"
+							value="#{displayQueueNumber.calledNumbers}"
+							headerText="Called Numbers" var="display" effect="slide"
+							style="width:99.5%;height:60px;border:none;color:#994d00 ;background-color:#e1e1d0"
+							numVisible="#{displayQueueNumber.calledNumbersValue}">
+
+							<p:panelGrid columns="2" style="width:100%;height:100%;">
+								<h:outputText
+									style=" text-align: center !important;background-color:#e1e1d0;border-radius: 15px; color: #41385f !important ;padding:0px 10px !important ;font-size: 2.02rem !important;"
+									value="#{display.queueNo1}" />
+							</p:panelGrid>
+
+						</p:carousel>
+					</p:panelGrid>
+					<br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
+					<br></br>
+					<p:panelGrid style="margin-top:80px">
+						<p:carousel id="skipedNumbers"
+							value="#{displayQueueNumber.permenantlySkipedNo}"
+							headerText="Permanently Skiped Numbers" var="display"
+							effect="slide"
+							style="width:99.5%;height:60px;border:none;color:#994d00 ;background-color:#e1e1d0"
+							numVisible="#{displayQueueNumber.calledNumbersValue}">
+
+							<p:panelGrid columns="2" style="width:100%;height:100%;">
+								<h:outputText
+									style=" text-align: center !important;background-color:#e1e1d0;border-radius: 15px; color: #41385f !important ;padding:0px 10px !important ;font-size: 2.02rem !important;"
+									value="#{display.queueNo1}" />
+							</p:panelGrid>
+
+						</p:carousel>
+					</p:panelGrid>
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+					<p:panelGrid style="margin-top:40px">
+
+						<p:panelGrid columns="3"
+							columnClasses="ui-grid-col-1,ui-grid-col-9,ui-grid-col-1"
+							layout="grid">
+							<p:panelGrid></p:panelGrid>
+							<p:panelGrid>
+
+								<p:galleria value="#{displayQueueNumber.images}" var="image"
+									panelWidth="1300" panelHeight="275">
+									<p:graphicImage name="/images/display/#{image}" />
+								</p:galleria>
+							</p:panelGrid>
+
+
+							<p:panelGrid></p:panelGrid>
+						</p:panelGrid>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+
+
+			<!-- Footer Section -->
+			<div class="footer">
+				<span>Copyright © 2018 Informatics International Ltd.</span>
+			</div>
+
+		</h:form>
+	</div>
+
+
+</h:body>
+
+</html>

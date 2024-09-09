@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-05-08T16:40:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RegulationOfPermitsLocalGoverment" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9f28177-9e2a-4f80-a1eb-3b61afc65adc">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="P_Permit_No" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select pmo_vehicle_regno,pmo_full_name_sinhala,pmo_address1_sinhala,pmo_address2_sinhala,pmo_permit_no,pmo_address3_sinhala from nt_t_pm_vehi_owner
+where pmo_application_no=  $P{P_Permit_No}]]>
+	</queryString>
+	<field name="pmo_vehicle_regno" class="java.lang.String"/>
+	<field name="pmo_full_name_sinhala" class="java.lang.String"/>
+	<field name="pmo_address1_sinhala" class="java.lang.String"/>
+	<field name="pmo_address2_sinhala" class="java.lang.String"/>
+	<field name="pmo_permit_no" class="java.lang.String"/>
+	<field name="pmo_address3_sinhala" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="190" splitType="Stretch">
+			<textField pattern=" yyyy-MM-dd">
+				<reportElement x="350" y="70" width="201" height="30" uuid="a039634c-31ff-4e7b-974d-bd158a770f01">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="" x="0" y="130" width="550" height="20" isRemoveLineWhenBlank="true" uuid="fd1ce941-3642-4144-8b91-2819a7a3a34c"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address1_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="150" width="551" height="20" isRemoveLineWhenBlank="true" uuid="3915cbc2-8dee-4565-93be-eacbfe43d304"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address2_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="170" width="551" height="20" isRemoveLineWhenBlank="true" uuid="68019297-c914-4341-9d18-af2245e355ae"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address3_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="70" width="221" height="30" uuid="791b3140-ca7a-4261-8fae-77564bd3c1a1"/>
+				<textFieldExpression><![CDATA[$F{pmo_permit_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="292" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="30" uuid="7c535932-8694-4c5c-bd97-7d5cc63e7be0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[අන්තර් පළාත් මගී සේවා අවසරපත්‍ වල අයිතිය විධිමත් කිරීම අංක​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="150" width="190" height="15" uuid="c232a8d7-3ff5-49e6-86b7-ea35e7049644">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[අධ්‍යක්‍ෂක ,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="165" width="190" height="15" uuid="a64e43ba-33c9-459d-bcec-7db5da5a04cb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[(ධාවන හා සේවා අධීක්‍ෂණ​)වෙනුවට​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="190" height="15" uuid="cbe7f4d3-331f-4ea6-892c-31bc3061f2e3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="-1" y="30" width="552" height="80" uuid="93ca1fe5-b4a1-493b-ad9e-cecacdd19444"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="17.0" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ඉහත අංක දරන මගී සේවා අවසරපත්‍රයේ අයිතිය සංශෝධනය සදහා ඔබ විසින් ඉදිරිපත් කරන ලද අයදුම්පත්‍රයට අධ්‍යක්‍ෂක මණ්ඩල අනුමැතිය ලැබී ඇත​. එම මගී සේවා අවසර පත්‍රය ඔබගෙ නමින්  අයිතිය විධිමත් කිරීමෙ ඉදිරි කටයුතු කිරීම සඳහා ඔබගෙ ඡායාරූප අත්සන් කර සහතික කළ යුතුය​.එබැවින් "+ $F{pmo_full_name_sinhala} +"  ඒ සඳහා..................................දිනට පෙර ජාතික ගමනාගමන කොමිෂන් සභාව වෙත  පැමිණෙන ලෙස දන්වමි."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

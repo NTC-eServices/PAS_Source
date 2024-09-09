@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-07-01T10:49:38 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SisusariyaPrintServiceAggrement" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="7307354b-6736-4898-9423-94afdbfb10ec">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="P_service_no" class="java.lang.String"/>
+	<parameter name="P_loginUser" class="java.lang.String"/>
+	<parameter name="P_logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select distinct sps_request_no, sps_service_ref_no,sps_service_no,
+sps_service_end_date ,sps_status, sps_operator_name from public.nt_m_sisu_permit_hol_service_info 
+inner join public.nt_m_sisu_requestor_info on nt_m_sisu_requestor_info.sri_request_no = nt_m_sisu_permit_hol_service_info.sps_request_no 
+inner join public.nt_t_subsidy_task_det on nt_t_subsidy_task_det.tsd_service_no=nt_m_sisu_permit_hol_service_info.sps_service_no
+where sps_service_no= $P{P_service_no}   and sps_status='A']]>
+	</queryString>
+	<field name="sps_request_no" class="java.lang.String"/>
+	<field name="sps_service_ref_no" class="java.lang.String"/>
+	<field name="sps_service_no" class="java.lang.String"/>
+	<field name="sps_service_end_date" class="java.sql.Timestamp"/>
+	<field name="sps_status" class="java.lang.String"/>
+	<field name="sps_operator_name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="99" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="310" height="50" uuid="249e2a90-fcce-46ae-861c-fd3d45a7c0b3"/>
+				<imageExpression><![CDATA[$P{P_logo}+"header_logo_new.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="60" width="550" height="31" uuid="c64fd9ec-ec67-49d6-81c3-c25a263554d0"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SisuSariya Service Agreement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="100" height="30" uuid="2b3c1392-d723-4dd6-b510-dd2485460d01"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Date : ]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="450" y="0" width="104" height="30" uuid="92fdd939-8fc8-4841-b90c-7878185f99ca"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="9" width="100" height="30" uuid="3e2c0db0-370b-43d6-9284-f37762887974"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Service  Reference Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="9" width="100" height="30" uuid="a33c3a1c-ee66-44e7-af43-a0522ae1767f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Service Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="9" width="240" height="30" uuid="4bd46ff5-be90-4571-8056-4abadc945be5"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Name of Operator]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="9" width="114" height="30" uuid="40cf2cc8-15dd-444d-b538-6bca66a79106"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Expire Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="554" height="9" uuid="dd822318-cb9b-436e-af70-ccfa97751bbb"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="100" height="30" isPrintWhenDetailOverflows="true" uuid="ad6aa797-da0d-4147-b41c-56790b54ed25"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sps_service_ref_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="100" height="30" isPrintWhenDetailOverflows="true" uuid="c329cad8-a7cc-4f06-a6a0-6c22a913e96b"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sps_service_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="200" y="0" width="240" height="30" isPrintWhenDetailOverflows="true" uuid="a081861e-b363-430b-946c-703332d1c70a"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sps_operator_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="440" y="0" width="114" height="30" isPrintWhenDetailOverflows="true" uuid="945035a6-9df5-4f70-9342-3712ff2b9a6c"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sps_service_end_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="40"/>
+	</columnFooter>
+</jasperReport>

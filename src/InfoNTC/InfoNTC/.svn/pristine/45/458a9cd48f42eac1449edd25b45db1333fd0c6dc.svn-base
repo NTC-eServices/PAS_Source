@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+   
+    
+  <application>
+   <action-listener>org.primefaces.application.DialogActionListener</action-listener>
+    <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+    <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
+  </application>
+
+     <application>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>si</supported-locale>
+            <supported-locale>ta</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>lk.informatics.ntc.view.messages.Messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+		
+	</application>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		 <navigation-case>
+				<from-outcome>welcomePage</from-outcome>
+				<to-view-id>/pages/home/welcomePage.xhtml</to-view-id>
+				<redirect></redirect>
+		 </navigation-case>	
+    </navigation-rule>
+    
+    <navigation-rule>
+		<from-view-id></from-view-id>
+		 <navigation-case>
+				<from-outcome>changePassword</from-outcome>
+				<to-view-id>/pages/home/changePassword.xhtml</to-view-id>
+				<redirect></redirect>
+		 </navigation-case>	
+    </navigation-rule>
+    
+    
+	<navigation-rule>
+	    	<from-view-id>/login.xhtml</from-view-id>
+	    	<navigation-case>
+				<from-outcome>login</from-outcome>
+				<to-view-id>/login.xhtml?faces-redirect=true</to-view-id>
+				<redirect />
+			</navigation-case>
+	</navigation-rule>
+	
+	
+
+</faces-config>

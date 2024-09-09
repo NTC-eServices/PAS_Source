@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-11-27T23:24:48 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemovedBusInformLetter" language="groovy" pageWidth="595" pageHeight="842" columnWidth="540" leftMargin="35" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="582ce421-6199-4a7e-bf67-54b9a7fb7662">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="P_permit_no" class="java.lang.String"/>
+	<parameter name="P_bus_no" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select pmo_full_name_sinhala,pmo_address1_sinhala,pmo_address2_sinhala,a.rbd_bus_no,
+pmo_address3_sinhala,pmo_city_sinhala,to_char(a.rbd_created_date,'dd/MM/yyyy') as removedDate
+from public.nt_t_pm_vehi_owner 
+inner join public.nt_t_removed_bus_details a 
+on a.rbd_modified_bus_no=public.nt_t_pm_vehi_owner .pmo_vehicle_regno
+where pmo_vehicle_regno= $P{P_bus_no} 
+and pmo_permit_no= $P{P_permit_no}]]>
+	</queryString>
+	<field name="pmo_full_name_sinhala" class="java.lang.String"/>
+	<field name="pmo_address1_sinhala" class="java.lang.String"/>
+	<field name="pmo_address2_sinhala" class="java.lang.String"/>
+	<field name="rbd_bus_no" class="java.lang.String"/>
+	<field name="pmo_address3_sinhala" class="java.lang.String"/>
+	<field name="pmo_city_sinhala" class="java.lang.String"/>
+	<field name="removeddate" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<pageHeader>
+		<band height="112"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="410" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="235" width="550" height="44" isPrintWhenDetailOverflows="true" uuid="53f792db-95fc-4702-a128-4ed958f9503d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="15" isBold="false" isUnderline="false"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="16.0" leftIndent="25"/>
+				</textElement>
+				<text><![CDATA[ඔබගේ ඉහත අංක දරණ බස් රථයෙ හිමිකාරීත්වය දැනට ඔබ සතුව  නොමැති බවට මෝටර් රථ ප්‍රවාහන  කොමසාරිස් කාර්‍යාලයේ දත්ත මගින්  සනාථ කරගෙන ඇත​.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement positionType="Float" x="380" y="-2" width="163" height="20" isPrintWhenDetailOverflows="true" uuid="232862b1-16d8-435d-8198-a1cc7e7fe4e7"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="324" width="550" height="86" isPrintWhenDetailOverflows="true" uuid="1a3c080d-1564-4ad6-8003-1554b26d6e65">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="15" isBold="false" isUnderline="false"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="16.0" leftIndent="25"/>
+				</textElement>
+				<text><![CDATA[එසේම  මෙම මගී  සේවා   අවසරපත්‍රයට  අදාල පොත  හා  ලේබලය  ජාතික ගමනාගමන  කොමිෂන් සභාව  වෙත භාර දී නොමැති නම් එම පොත හා  ලේබලය මෙම ලිපියේ  සදහන් දින සිට දින 14ක්  ඇතුලත ජාතික ගමනාගමන  කොමිෂන් සභාව  වෙත භාරදීමට කටයුතු කරන මෙන් වැඩි දුරටත් දන්වා සිටිමි.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="60" y="0" width="310" height="25" uuid="02eeee9d-376d-474c-9cdd-4fc6fbf81791"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ජාගකොස​ : අවසරපත්‍ර අංකය​  "+$P{P_permit_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="96" width="549" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="6c20191b-d078-440c-9757-0b9b79266e8d"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_full_name_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="1" y="110" width="549" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="109c405c-3c18-48e5-8e31-0e6deff8c2ea"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address1_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="140" width="549" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="557b64b5-11a2-4c2c-9201-1bf0351eab9f"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address3_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="1" y="126" width="549" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="b94ac391-09af-4e22-ab03-36112ca3af80"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_address2_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="153" width="549" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="182bf426-fd2c-4a99-b486-2e37c2a1cab8"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pmo_city_sinhala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="200" width="536" height="25" uuid="6952c6b6-b072-41b5-ae31-cc82681efe18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="14" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["අංක  "+$F{rbd_bus_no} +" දරණ බස්‍ රථය මගී සේවාවෙන් ඉවත් කිරීම​."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="280" width="550" height="44" uuid="ad79f9f8-db6e-4664-a7a3-c7151389dfa6"/>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="14" isBold="false" isItalic="false" isUnderline="false"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="13.0" leftIndent="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA["කරුණු එසේ හෙයින්  "+$F{removeddate}+"   දින සිට ඉහත බස් රථය  "+$P{P_permit_no}+ "  දරණ මගී සේවා අවසරපත්‍රයෙන්   "+ "   ඉවත් කර ඇති බව  ඔබ වෙත කාරුණිකව දන්වමි."]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="280">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="93" width="320" height="20" isPrintWhenDetailOverflows="true" uuid="6c39fe65-d19e-4cc3-beb5-9b89828a6296">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="14"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="77" width="320" height="23" isPrintWhenDetailOverflows="true" uuid="bdc1e27a-9154-4627-af1a-931ce225f296">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="14"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<text><![CDATA[අධ්‍යක්ෂක(ධාවන හා සේවා අධීක්ෂණ​)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="60" width="190" height="15" isPrintWhenDetailOverflows="true" uuid="88aa2190-43c0-4d86-b55a-e320c35835e2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12"/>
+					<paragraph leftIndent="25"/>
+				</textElement>
+				<text><![CDATA[.............................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="0" width="550" height="44" isPrintWhenDetailOverflows="true" uuid="0da52976-b5e6-4d27-adcb-aeca97729ecf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Iskoola Pota" size="15" isBold="false" isUnderline="false"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="16.0" leftIndent="25"/>
+				</textElement>
+				<text><![CDATA[දැනටමත් පොත හා ලේබලය ජාතික ගමනාගමන කොමිෂන්  සභාව වෙත  භාර දී ඇත්නම්  මෙම ලිපිය  නොසලකා හරින්න​.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

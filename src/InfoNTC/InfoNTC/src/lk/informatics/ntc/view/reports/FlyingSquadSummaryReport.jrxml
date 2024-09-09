@@ -1,0 +1,1232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2020-08-06T11:17:51 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FlyingSquadSummaryReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="543" leftMargin="32" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" isIgnorePagination="true" uuid="6fc1fe4f-0221-4129-b6f4-7468684951da">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="CountVehicleNumbers" uuid="10c38d3f-2f9d-4b12-a2b5-b451726b39be">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT * FROM public.nt_m_temp_team_hours]]>
+		</queryString>
+		<field name="group_name" class="java.lang.String"/>
+		<field name="tot_hours" class="java.math.BigDecimal"/>
+		<field name="tot_hours_cum" class="java.math.BigDecimal"/>
+		<field name="inspected_vehi_count" class="java.math.BigDecimal"/>
+		<field name="inspected_vehi_count_cum" class="java.math.BigDecimal"/>
+		<variable name="total" class="java.lang.Number" calculation="Sum">
+			<variableExpression><![CDATA[$F{inspected_vehi_count}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="CountVehicleNumbersSisu" uuid="8ad2bd75-5db0-4c6e-89ac-ebdfca657af9">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(inv_det_vehicle_no) ,G2.group_name
+from public.nt_t_flying_investigation_log_det V
+inner join public.nt_t_flying_investigation_master G on G.inv_refno=V.inv_det_ref_no
+inner join public.nt_r_group G2 on G2.code= G.inv_group_cd
+where inv_det_delete is null and inv_service_category ='S'
+and to_char(inv_created_date ,'yyyy-MM-dd')>=  $P{P_Start_Date} 
+and to_char(inv_created_date ,'yyyy-MM-dd')<=  $P{P_End_Date}
+group by G2.group_name order by G2.group_name]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+		<field name="group_name" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="CountVehicleNumbersGami" uuid="feca141f-22b2-49ab-ad06-0c11e67242d7">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(inv_det_vehicle_no) ,G2.group_name
+from public.nt_t_flying_investigation_log_det V
+inner join public.nt_t_flying_investigation_master G on G.inv_refno=V.inv_det_ref_no
+inner join public.nt_r_group G2 on G2.code= G.inv_group_cd
+where inv_det_delete is null and inv_service_category ='G'
+and to_char(inv_created_date ,'yyyy-MM-dd')>=  $P{P_Start_Date} 
+and to_char(inv_created_date ,'yyyy-MM-dd')<=  $P{P_End_Date}
+group by G2.group_name order by G2.group_name]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+		<field name="group_name" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="CountVehicleNumbersNisi" uuid="295dcd28-6dcc-416f-92b6-bbc0371c0892">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(inv_det_vehicle_no) ,G2.group_name
+from public.nt_t_flying_investigation_log_det V
+inner join public.nt_t_flying_investigation_master G on G.inv_refno=V.inv_det_ref_no
+inner join public.nt_r_group G2 on G2.code= G.inv_group_cd
+where inv_det_delete is null and inv_service_category ='N'
+and to_char(inv_created_date ,'yyyy-MM-dd')>=  $P{P_Start_Date} 
+and to_char(inv_created_date ,'yyyy-MM-dd')<=  $P{P_End_Date}
+group by G2.group_name order by G2.group_name]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+		<field name="group_name" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="CumalativeVehcleCount" uuid="d3196391-943c-44da-a782-dcf3fbe581e8">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT *FROM public.nt_m_temp_team_hours]]>
+		</queryString>
+		<field name="group_name" class="java.lang.String"/>
+		<field name="tot_hours" class="java.math.BigDecimal"/>
+		<field name="tot_hours_cum" class="java.math.BigDecimal"/>
+		<field name="inspected_vehi_count" class="java.math.BigDecimal"/>
+		<field name="inspected_vehi_count_cum" class="java.math.BigDecimal"/>
+		<variable name="totVehiCum" class="java.lang.Number" calculation="Sum">
+			<variableExpression><![CDATA[$F{inspected_vehi_count_cum}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="CumalativeVehicleCountSisu" uuid="148ae4e8-8ed3-4ef6-bf50-ff4fbeca5bbd">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(inv_det_vehicle_no) ,G2.group_name
+from public.nt_t_flying_investigation_log_det V
+inner join public.nt_t_flying_investigation_master G on G.inv_refno=V.inv_det_ref_no
+inner join public.nt_r_group G2 on G2.code= G.inv_group_cd
+where inv_det_delete is null and inv_service_category ='S'
+and to_char(inv_created_date ,'yyyy-MM-dd')>=  $P{P_Start_Date} 
+and to_char(inv_created_date ,'yyyy-MM-dd')<=  $P{P_End_Date}
+group by G2.group_name order by G2.group_name]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+		<field name="group_name" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="CumalativeVehicleCountNisi" uuid="60f7c30f-b3db-4315-8a0a-0ee1873abfc8">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(inv_det_vehicle_no) ,G2.group_name
+from public.nt_t_flying_investigation_log_det V
+inner join public.nt_t_flying_investigation_master G on G.inv_refno=V.inv_det_ref_no
+inner join public.nt_r_group G2 on G2.code= G.inv_group_cd
+where inv_det_delete is null and inv_service_category ='N'
+and to_char(inv_created_date ,'yyyy-MM-dd')>=  $P{P_Start_Date} 
+and to_char(inv_created_date ,'yyyy-MM-dd')<=  $P{P_End_Date}
+group by G2.group_name order by G2.group_name]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+		<field name="group_name" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="SumVehiclNumbers" uuid="6c941413-a1c2-4df6-a50b-9ec96ee8e2a3">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT sum(inspected_vehi_count) FROM public.nt_m_temp_team_hours]]>
+		</queryString>
+		<field name="sum" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="SumCumalativeVehiCount" uuid="95a1f78b-63ce-4309-b0e0-4cae6fe8de8b">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT sum(inspected_vehi_count_cum) FROM public.nt_m_temp_team_hours]]>
+		</queryString>
+		<field name="sum" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="TotalProjectsCount" uuid="4c182c96-f80c-4e5f-9ff9-b9284ad644fd">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(inv_det_vehicle_no)
+from public.nt_t_flying_investigation_log_det V
+inner join public.nt_t_flying_investigation_master G on G.inv_refno=V.inv_det_ref_no
+inner join public.nt_r_group G2 on G2.code= G.inv_group_cd
+where inv_det_delete is null and inv_service_category in ('S','N')
+and to_char(inv_created_date ,'yyyy-MM-dd')>=  $P{P_Start_Date} 
+and to_char(inv_created_date ,'yyyy-MM-dd')<=  $P{P_End_Date}]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+	</subDataset>
+	<subDataset name="CumaltiveTotProjectsCount" uuid="c0f79cb3-8cb2-4c2a-9558-7d7a71798db0">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Start_Date" class="java.lang.String"/>
+		<parameter name="P_End_Date" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(inv_det_vehicle_no) 
+from public.nt_t_flying_investigation_log_det V
+inner join public.nt_t_flying_investigation_master G on G.inv_refno=V.inv_det_ref_no
+inner join public.nt_r_group G2 on G2.code= G.inv_group_cd
+where inv_det_delete is null and inv_service_category in ('N','S')
+and to_char(inv_created_date ,'yyyy-MM-dd')>=  $P{P_Start_Date} 
+and to_char(inv_created_date ,'yyyy-MM-dd')<=  $P{P_End_Date}]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+	</subDataset>
+	<parameter name="P_End_Date" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-07-28"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_image" class="java.lang.String"/>
+	<parameter name="P_Start_Date" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-01-01"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_month" class="java.lang.String"/>
+	<parameter name="P_cumalative_S_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-01-01"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_cumalative_E_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-07-28"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM public.nt_m_temp_team_hours]]>
+	</queryString>
+	<field name="group_name" class="java.lang.String"/>
+	<field name="tot_hours" class="java.math.BigDecimal"/>
+	<field name="tot_hours_cum" class="java.math.BigDecimal"/>
+	<variable name="tothours1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{tot_hours}]]></variableExpression>
+	</variable>
+	<variable name="tot_hours1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{tot_hours}]]></variableExpression>
+	</variable>
+	<variable name="tot_hours_cum1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{tot_hours_cum}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="74">
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="2" y="0" width="498" height="70" uuid="e51df2b6-26b6-4142-b24c-2439a374af56"/>
+				<imageExpression><![CDATA[$P{P_image}+"header_logo_new.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement x="138" y="0" width="128" height="20" uuid="c1ea2227-7f37-4069-bc24-1aec8326ea4c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Progress Report as at ]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="259" y="2" width="100" height="20" uuid="bb254b12-1a71-4f53-abb5-48f7f0809d05"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="21" width="500" height="28" uuid="a0305a58-0dee-4359-9fc9-4df85588b789"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Flying Squad & Service Monitoring Unit]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="105" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="30" uuid="816abead-4796-410a-9d87-6fb5d10a7c7e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tasks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="210" height="30" uuid="46f12704-39ba-4059-9436-72355fb0dbfe">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Monthly Progress]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="210" height="30" uuid="63c961ce-9889-4d6a-a585-2f9d4b8f3e6b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="70" height="30" uuid="d43b8eda-492b-4570-8370-60bc888c6e48"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Assigning flying squad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="30" width="210" height="30" uuid="96949286-4a05-4341-a6ee-1953fb56a327"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Team Duty Hrs.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="30" width="210" height="30" uuid="c5c76106-86d7-409f-9068-e6dd73911ec3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Team Duty Hrs.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="60" width="111" height="45" uuid="b67221e1-3f8d-4440-99e1-390e4ccbe0b9"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" rotation="Left">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Team]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="60" width="60" height="45" uuid="bc953a14-c780-4023-a5c3-6a380cda9d2c"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" rotation="Left">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Flying squad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="60" width="111" height="45" uuid="2185f259-6016-438c-95f4-ab27399d2dc9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" rotation="Left">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Team]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="60" width="60" height="45" uuid="e8e4ddd3-2b5d-4b16-b68c-b99b953be3ca"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" rotation="Left">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Flying squad]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="281" y="0" width="209" height="30" uuid="0cc4ba83-6231-478c-9fdb-b0ee79fc6455"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cumulative for the End of the Month of "+$P{P_month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="70" height="45" uuid="626645af-8c98-40f7-9782-43241dfdd762"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="490" height="20" uuid="35efcabf-c81e-4a15-a721-e4e3b3de8acb"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="70" y="0" width="111" height="20" uuid="69e8eaad-a359-4062-b57d-ece4518f7792"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{group_name}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="181" y="0" width="99" height="20" uuid="e0d402d6-80e9-45ff-a1f7-11e96ba8ec9e"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tot_hours}==0?" " :$F{tot_hours}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="280" y="0" width="111" height="20" uuid="637009d4-3e57-40f8-9bed-1647cac849cd"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{group_name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="392" y="0" width="98" height="20" uuid="cd00394b-c3d4-41ad-8986-9f43d126a765"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tot_hours_cum}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="310">
+			<staticText>
+				<reportElement x="70" y="0" width="111" height="20" uuid="8ada2496-08d5-4b08-a457-b43d24e878ef"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="391" y="0" width="99" height="20" uuid="3f76e1ce-192d-4bbc-b271-4c7a69bfc313"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_hours_cum1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="181" y="0" width="99" height="20" uuid="8287d320-e76a-4e8e-a365-24b5ac1a94db"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_hours1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="281" y="0" width="110" height="20" uuid="7ab06a92-9998-483e-9dc9-30f70dc2e58c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="20" uuid="5413815a-33a1-4c6d-a72a-4a97b8ddc80f"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<frame>
+				<reportElement positionType="Float" x="70" y="23" width="210" height="287" uuid="05d88d0a-1c2f-49ce-b085-4dbbbcc39287"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement positionType="Float" x="1" y="3" width="200" height="17" uuid="3a8f1a1c-f9d2-4c11-adef-68187b637770">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font size="9" isBold="true" isUnderline="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[No. of Buses Inspected]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="1" y="66" width="200" height="19" uuid="ea10f957-3014-4785-8f90-7fc20ad8d412">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="9" isBold="true" isUnderline="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[No. of Buses Inspected of Projects]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="1" y="23" width="198" height="20" uuid="48fdbce8-c39a-4845-abbf-ea8d30c9c6d3">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="CountVehicleNumbers" uuid="087141c9-089d-4517-8fdf-fd71a2680275">
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_Start_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="20" width="198">
+							<frame>
+								<reportElement positionType="Float" x="0" y="0" width="198" height="20" uuid="1fc012e5-f52e-4cb1-9546-0709a6f60745"/>
+								<textField>
+									<reportElement positionType="Float" x="0" y="0" width="110" height="20" uuid="ad6c0a68-30c1-4511-a9c0-2d34a7f8e278"/>
+									<box>
+										<leftPen lineWidth="0.0"/>
+									</box>
+									<textElement>
+										<font size="9"/>
+										<paragraph leftIndent="5"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{group_name}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="110" y="0" width="88" height="20" uuid="9af6d11e-43ec-4b9d-a0ba-b47c6d7b4413"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{inspected_vehi_count}==null?" ":$F{inspected_vehi_count}]]></textFieldExpression>
+								</textField>
+							</frame>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="88" width="100" height="45" uuid="83064a95-7082-4e46-ac1f-ae0565198e98"/>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Sisu Sariya]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="104" width="100" height="30" uuid="948533e2-609c-48d8-9662-b7e90c765dc4">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Nisi Sariya]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="1" y="48" width="100" height="14" uuid="c41334e9-99d1-4e7f-984e-de796bd7e804"/>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement positionType="Float" x="111" y="48" width="87" height="14" uuid="242524b1-ba13-4cbf-9818-f30a6fd7fd66"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="SumVehiclNumbers" uuid="a793df1b-7e92-4c7e-b9eb-d393736fedeb">
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_Start_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="14" width="87">
+							<textField isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="87" height="14" uuid="20decd8f-1d09-495f-aedf-11048ef793bf"/>
+								<box>
+									<topPen lineWidth="1.0"/>
+									<bottomPen lineWidth="2.0"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sum}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement positionType="Float" x="110" y="86" width="91" height="30" uuid="0e35893b-766e-446d-acd2-446eb90b15f5">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="CountVehicleNumbersSisu" uuid="2b823c28-548d-4006-afab-d16a5e893a68">
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_Start_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="30" width="91">
+							<frame>
+								<reportElement positionType="Float" x="0" y="0" width="91" height="30" uuid="2c8162e0-d4b9-438d-bba6-cbe70f16fb56"/>
+								<textField>
+									<reportElement positionType="Float" x="0" y="0" width="91" height="30" uuid="0397e6fe-3d7a-4c1c-a3b9-493478defec7"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{count}==null?0:$F{count}]]></textFieldExpression>
+								</textField>
+							</frame>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement positionType="Float" x="110" y="104" width="89" height="30" uuid="cbfae155-2c32-4fc2-b785-32674557511c"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="CountVehicleNumbersNisi" uuid="266260ea-3465-4eb9-8c75-c199dc7380f5">
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_Start_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="30" width="89">
+							<frame>
+								<reportElement positionType="Float" x="0" y="0" width="89" height="30" uuid="b942535f-8f35-4bf3-9e59-750960eaa5e7"/>
+								<textField>
+									<reportElement positionType="Float" x="0" y="0" width="89" height="30" uuid="666fa325-5117-482f-a126-51999a940bd2"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{count}==null?0:$F{count}]]></textFieldExpression>
+								</textField>
+							</frame>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement positionType="Float" x="1" y="125" width="100" height="37" uuid="0b09f1ff-d408-4423-b200-64384eb6cde5"/>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement positionType="Float" x="111" y="125" width="87" height="14" uuid="962e4527-a2a5-4238-b709-e176645af972"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="TotalProjectsCount" uuid="ca17044a-2a4c-44e8-ab60-fa544a20b747">
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_Start_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="14" width="87">
+							<textField isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="87" height="14" uuid="6581cee9-2c50-400b-af5c-ccf3e6a7c365"/>
+								<box>
+									<topPen lineWidth="1.0"/>
+									<bottomPen lineWidth="2.0"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="280" y="23" width="210" height="287" uuid="0034a1a3-8af4-43c0-885c-52846e7ff4ec"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="66" width="200" height="19" uuid="393bb3aa-cd9d-4984-8d94-2f64599d04e9"/>
+					<textElement textAlignment="Left">
+						<font size="9" isBold="true" isUnderline="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Total No. of Buses Inspected of Projects]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="3" width="200" height="17" uuid="ea3b70fb-3548-4de8-9fdd-46aefcaeb4bc"/>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font size="9" isBold="true" isUnderline="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Total No. of Buses Inspected]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="1" y="23" width="199" height="20" uuid="30ad7132-2c46-4c01-8046-a1dd5d4213eb">
+						<property name="com.jaspersoft.studio.unit.CONTENTS.height" value="pixel"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="CumalativeVehcleCount" uuid="c2337241-3269-4ce5-84d5-842df6c1a230">
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_cumalative_S_date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="20" width="199">
+							<frame>
+								<reportElement positionType="Float" x="0" y="0" width="199" height="20" uuid="e48d4add-61a5-4935-b38e-ae31d3f9579e"/>
+								<textField>
+									<reportElement positionType="Float" x="0" y="0" width="110" height="20" uuid="b9075232-79fa-42f3-bf67-80858efeeb81"/>
+									<box>
+										<leftPen lineWidth="0.0"/>
+									</box>
+									<textElement>
+										<font size="9"/>
+										<paragraph leftIndent="5"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{group_name}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="110" y="0" width="89" height="20" uuid="f29b1fce-b84a-4967-803b-e42b78704209"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{inspected_vehi_count_cum}==null?" " :$F{inspected_vehi_count_cum}]]></textFieldExpression>
+								</textField>
+							</frame>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement positionType="Float" x="2" y="48" width="98" height="15" uuid="ef04569e-190f-4b93-b410-d35351679ef1"/>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement positionType="Float" x="106" y="49" width="98" height="15" uuid="1c8d4802-9aef-4642-8a42-55ced6635a83"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="SumCumalativeVehiCount" uuid="d5d56629-686f-476c-a5c8-db1e4738f333">
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_cumalative_S_date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="15" width="98">
+							<textField isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="98" height="15" uuid="77652ff6-08d2-4170-a5c9-fb68151650a3"/>
+								<box>
+									<topPen lineWidth="1.0"/>
+									<bottomPen lineWidth="2.0"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sum}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="88" width="100" height="45" uuid="10e043f6-b6d0-423c-a8da-410ceefbf471">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Sisu Sariya]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="104" width="100" height="30" uuid="14170fc1-64e8-4c53-ab58-dd75afe930da"/>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Nisi Sariya]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement positionType="Float" x="107" y="89" width="97" height="32" uuid="d7eca5de-cd29-40c2-aa54-966baa5b05a1">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="CumalativeVehicleCountSisu" uuid="14d8429f-7a17-4732-b62f-518663c88ace">
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_cumalative_S_date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="32" width="97">
+							<frame>
+								<reportElement positionType="Float" x="0" y="0" width="97" height="32" uuid="9bebaed5-6149-4296-abeb-d9051e5164ac">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textField>
+									<reportElement positionType="Float" x="0" y="0" width="97" height="32" uuid="1200782a-60eb-4154-b081-844064e2b508"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{count}==null?0:$F{count}]]></textFieldExpression>
+								</textField>
+							</frame>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement positionType="Float" x="104" y="105" width="102" height="30" uuid="bbef3bda-edda-4ad4-9ea5-9500dc993085"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="CumalativeVehicleCountNisi" uuid="0e4a8cdb-1496-43be-9220-f7add14d34c0">
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_cumalative_S_date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="30" width="102">
+							<frame>
+								<reportElement positionType="Float" x="0" y="0" width="102" height="30" uuid="ed76e894-c1d7-4509-9ae5-9aa99393d940"/>
+								<textField>
+									<reportElement positionType="Float" x="0" y="0" width="102" height="30" uuid="b8b66448-d073-45de-8713-2d5a3ee392ac"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+								</textField>
+							</frame>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement positionType="Float" x="1" y="125" width="89" height="15" uuid="47503143-a9a4-44cd-878f-e2226bc8255d"/>
+					<box>
+						<leftPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement positionType="Float" x="107" y="125" width="98" height="15" uuid="65e5246b-3f08-4994-8995-abfe6f8ba15a"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="CumaltiveTotProjectsCount" uuid="37e81ada-4c98-4012-b169-36550d1f0e67">
+							<datasetParameter name="P_End_Date">
+								<datasetParameterExpression><![CDATA[$P{P_End_Date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="P_Start_Date">
+								<datasetParameterExpression><![CDATA[$P{P_cumalative_S_date}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="15" width="98">
+							<textField isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="98" height="15" uuid="1ac3fdb9-6bc8-443b-8191-036a50b0aee8"/>
+								<box>
+									<topPen lineWidth="1.0"/>
+									<bottomPen lineWidth="2.0"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+			</frame>
+			<staticText>
+				<reportElement x="0" y="20" width="70" height="290" uuid="fb17378c-4771-4426-8838-c8ed6596add7"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<lastPageFooter>
+		<band height="240">
+			<staticText>
+				<reportElement x="0" y="0" width="490" height="20" uuid="6c656a29-aca9-4742-b061-cde49ee47f93"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Comments- Unit Head]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="70" height="45" uuid="cd759499-2b4b-4b09-9eb7-8ebbb909a44f"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Additional Recources, If required.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="20" width="200" height="45" uuid="c6a539c1-122e-4a8e-b0ed-f38ec613e825"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Recources Requirement as at present]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="20" width="50" height="45" uuid="53f98c27-2d30-4681-80e0-0366727a85d6"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="20" width="50" height="45" uuid="204306aa-262c-4d84-89eb-9d6803b44b8c"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="20" width="120" height="45" uuid="86bfb607-a54c-4c5b-ad26-f51e8a1cf64a"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Reasons for Additional Recources, If required.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="65" width="440" height="20" uuid="0b529d93-5018-476b-b7c1-d3b2ed87dc72"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Comments- Director]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="65" width="50" height="20" uuid="c4e4ddfa-aafa-4137-b910-10d4aa6f0dd0"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="85" width="440" height="55" uuid="05fa71b8-3f93-4a1f-a696-fd9ddadc1fbc">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="85" width="50" height="55" uuid="e08fa22c-c1d2-4c12-ad22-a97cab025af2"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="440" height="20" uuid="fa1905e9-0dbd-4188-ad11-5dcea23f7a48"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Comments- DG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="140" width="50" height="20" uuid="abc3cae0-28f2-4900-a101-3a7d023cded3"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="440" height="30" uuid="82c7f936-4c4f-43a1-b5f5-593a7eaab090"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="160" width="50" height="30" uuid="5a96bf71-131d-46fd-89a9-43c118383e2c"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="190" width="440" height="20" uuid="140e9aac-57e6-4801-9a5c-ddf95a0260d9"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Comments- Chairman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="190" width="50" height="20" uuid="be85406d-327a-4c77-b73f-5c7454185cb2"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="210" width="440" height="30" uuid="9c8e6889-aecd-443e-80f0-250ea1438957">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="210" width="50" height="30" uuid="ff2336af-deff-4276-9226-ed91794fd013"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" rotation="None">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

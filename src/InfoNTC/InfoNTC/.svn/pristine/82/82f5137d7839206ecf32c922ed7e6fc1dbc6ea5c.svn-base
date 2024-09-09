@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-12-18T15:58:54 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="debitVoucherForDriverConductor" language="groovy" columnCount="2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="401" leftMargin="20" rightMargin="20" topMargin="12" bottomMargin="20" isFloatColumnFooter="true" uuid="55eb195e-17f7-4a79-831e-0d4f1a2b70b7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="nameandtenderNo" uuid="e3852237-6be2-4c40-a658-5bf49753100a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="voucher_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select distinct dcr_driver_conductor_id,dcr_name_with_initials
+from public.nt_t_driver_conductor_registration a
+inner join  public.nt_m_driver_conduc_payment_voucher b
+on b.dcv_driver_conduc_id_no= a.dcr_driver_conductor_id
+where b.dcv_voucher_no= $P{voucher_no}]]>
+		</queryString>
+		<field name="dcr_driver_conductor_id" class="java.lang.String"/>
+		<field name="dcr_name_with_initials" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="sumOfAmmount" uuid="325cc0b6-e537-4ada-90c1-f507b9d2168d">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Voucher" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select sum (dcvd_amount) from public.nt_t_driver_conduc_payment_voucher  where dcvd_voucher_no= $P{P_Voucher}]]>
+		</queryString>
+		<field name="sum" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="P_Parameter" class="java.lang.String">
+		<defaultValueExpression><![CDATA["DCV1900002"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select dcvd_amount,dcvd_account_no,dcvd_charge_type,dcvd_application_no,dcvd_voucher_no ,a.description,a.description_si,a.description_ta
+from public.nt_t_driver_conduc_payment_voucher 
+inner join  nt_r_charge_type a on a.code=public.nt_t_driver_conduc_payment_voucher.dcvd_charge_type
+where dcvd_voucher_no= $P{P_Parameter}]]>
+	</queryString>
+	<field name="dcvd_amount" class="java.math.BigDecimal"/>
+	<field name="dcvd_account_no" class="java.lang.String"/>
+	<field name="dcvd_charge_type" class="java.lang.String"/>
+	<field name="dcvd_application_no" class="java.lang.String"/>
+	<field name="dcvd_voucher_no" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="description_si" class="java.lang.String"/>
+	<field name="description_ta" class="java.lang.String"/>
+	<variable name="vod_amount1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{dcvd_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="96" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="800" height="28" uuid="b8c02559-c134-4f1e-b0d3-9df3b42e9b65">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NATIONAL TRANSPORT COMMISSION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="110" height="19" isPrintWhenDetailOverflows="true" uuid="9352b1bc-cad6-4c29-8eea-331c6fd1c0ab">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name  ]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="122" y="76" width="678" height="20" uuid="39ed00f7-ffca-47b9-a8ee-b49e6fe7aaeb"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="nameandtenderNo" uuid="e909c5d0-d78f-4d6b-9362-186bca4ef998">
+						<datasetParameter name="voucher_no">
+							<datasetParameterExpression><![CDATA[$P{P_Parameter}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="678">
+						<textField isStretchWithOverflow="true">
+							<reportElement x="0" y="0" width="678" height="20" uuid="1e22192a-8ac0-453a-84bc-ab9c49ec2cae"/>
+							<textElement textAlignment="Left" verticalAlignment="Top">
+								<font size="11" isBold="true"/>
+								<paragraph leftIndent="0" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{dcr_driver_conductor_id}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="18" width="780" height="30" uuid="219df6b8-5e3e-498d-b7d4-6e30d61b078d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debit Voucher    ]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement stretchType="ContainerHeight" x="122" y="56" width="678" height="19" isPrintWhenDetailOverflows="true" uuid="44ec4d71-96dc-4fee-9632-3634437b7684"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="nameandtenderNo" uuid="e2cec3f7-d65e-4c55-911a-675c0fcdef13">
+						<datasetParameter name="voucher_no">
+							<datasetParameterExpression><![CDATA[$P{P_Parameter}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="19" width="678">
+						<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+							<reportElement stretchType="ContainerHeight" x="0" y="0" width="678" height="19" isPrintWhenDetailOverflows="true" uuid="bc73bb44-7aee-416f-a88e-bcd239af4040">
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							</reportElement>
+							<textElement>
+								<font size="11" isBold="true"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{dcr_name_with_initials}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="75" width="110" height="19" isPrintWhenDetailOverflows="true" uuid="296cf546-4798-498a-8cd2-29374d3ccebe">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Driver/Conductor ID ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="56" width="12" height="19" isPrintWhenDetailOverflows="true" uuid="2bebd34b-a223-4d5e-bccc-224a30b1e8b2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="75" width="12" height="19" isPrintWhenDetailOverflows="true" uuid="e8510bcd-afcb-4194-b418-3a668c47fbf7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="200" height="20" uuid="502a8b6e-345d-47fe-96ee-8bb5911b622e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Reason For Charge]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="201" y="0" width="115" height="20" uuid="8fb5b52b-dac0-4cce-987d-6190e3473ad5"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Account No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="316" y="0" width="84" height="20" uuid="5109298e-4ff8-4192-98ec-08e4ea124a40"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Amount(Rs.)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="200" height="25" isPrintWhenDetailOverflows="true" uuid="f4e0d048-0ddd-42c6-8bce-c9558c47c144"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="201" y="0" width="115" height="25" isPrintWhenDetailOverflows="true" uuid="030d7e31-f518-4ad2-977a-f35627f61a60">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dcvd_account_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="316" y="0" width="84" height="25" isPrintWhenDetailOverflows="true" uuid="e0fe8a66-0179-4665-abdb-536266bdfd94"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dcvd_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="175" y="1" width="141" height="30" uuid="1eebb78b-9ba2-4dad-9315-8e85c0c31d21"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="316" y="1" width="84" height="30" uuid="cb077aa4-ad80-441e-a779-35f04c0c792a"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="sumOfAmmount" uuid="720b63b0-74dd-40eb-8e06-2b8526c4fbbe">
+						<datasetParameter name="P_Voucher">
+							<datasetParameterExpression><![CDATA[$P{P_Parameter}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="84">
+						<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="84" height="30" uuid="2433f1c9-f6d6-4e3f-8520-ff459b5f0a5f"/>
+							<box>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Right">
+								<font isBold="true"/>
+								<paragraph rightIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{sum}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="64" width="175" height="16" uuid="8ac262be-55c4-49f6-9d15-53f0b3c60d69">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Voucher No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="570" y="64" width="230" height="16" uuid="fa1330ea-75eb-48f0-a219-32699b597e76">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="48" width="220" height="18" uuid="9cc42514-6fd4-4927-8ca6-7e0312688376"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[......................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="64" width="190" height="16" uuid="4b708a01-c3b0-42c6-b3e7-a5511537d7e4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Director]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="43" width="190" height="18" uuid="a00b008b-844d-4e33-bbaa-923381626eea">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="570" y="41" width="229" height="18" uuid="112c72a7-a4a9-418e-b1cd-79fad3e04144">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[................................................................................]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="45" width="175" height="34" isPrintWhenDetailOverflows="true" uuid="6f7c7819-2c31-462d-920b-984bcfe8e88a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Parameter}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="570" y="40" width="230" height="22" uuid="bd814083-57a6-48ab-b6fe-477e8aa6d230"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

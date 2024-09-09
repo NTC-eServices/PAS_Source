@@ -1,0 +1,840 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+#frmviewRouteMaintenance:j_idt81 {
+	background-color: blue !important;
+	font-weight: bold;
+}
+</style>
+		<h:panelGroup layout="block" id="page">
+
+			<div class="mainDiv">
+				<h1
+					style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+					class="common_form_header">Vehicle Inspection</h1>
+
+				<div style="width: 95%;" class="subDiv">
+
+					<h:form id="field">
+
+						<p:dialog closable="false" header="Select Counter"
+							visible="#{vehicleBackingBean.localcheckcounter}"
+							widgetVar="dlg2" modal="true" height="120" width="420"
+							resizable="false" update="@all">
+
+							<br> </br>
+
+							<p:panelGrid columns="2" id="dialoggrid"
+								columnClasses="ui-grid-col-5,ui-grid-col-5">
+
+								<p:panelGrid>
+
+									<p:outputLabel value="Select Counter No. :- "></p:outputLabel>
+
+								</p:panelGrid>
+
+
+								<p:panelGrid>
+									<p:selectOneMenu style="width:171px" id="counter"
+										value="#{vehicleBackingBean.commonDTO.counterId}">
+										<p:ajax listener="#{vehicleBackingBean.onCounterSelect}"
+											onClose="#{vehicleBackingBean.handleClose}">
+										</p:ajax>
+										<f:selectItem itemLabel="--Select Counter--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{vehicleBackingBean.counterList}"
+											var="counterList" itemLabel="#{counterList.counter}"
+											itemValue="#{counterList.counterId}" />
+
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<center>
+									<p:panel>
+										<p:commandButton id="Exit" value="Exit"
+											action="#{vehicleBackingBean.handleClose}"
+											class="mainActionbtn" ajax="true" update="@all">
+										</p:commandButton>
+									</p:panel>
+								</center>
+
+							</p:panelGrid>
+
+						</p:dialog>
+
+						<p:panel>
+							<p:panelGrid columns="4"
+								columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+								layout="grid">
+
+
+								<p:outputLabel value="Permit No."></p:outputLabel>
+
+								<p:inputText id="permitno" style="width:100%"
+									onkeyup="this.value=this.value.toUpperCase();" readonly="true"
+									value="#{vehicleBackingBean.vehicleDTO.permitNo}">
+								</p:inputText>
+
+
+
+								<p:panelGrid>
+									<p:outputLabel value="Queue No."></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:inputText value="#{vehicleBackingBean.vehicleDTO.queueNo}"
+									readonly="#{vehicleBackingBean.disableQueueNo || vehicleBackingBean.vehicleDTO.backlogApp}"
+									onkeyup="this.value=this.value.toUpperCase();" id="queue"
+									style="width:100%">
+								</p:inputText>
+								<p:outputLabel value="Counter No.">
+								</p:outputLabel>
+								<p:inputText style="width:100%;height:18px;" maxlength="50"
+									value="#{sessionBackingBean.counterId}" readonly="true"
+									onkeyup="this.value=this.value.toUpperCase();">
+								</p:inputText>
+
+								<p:panelGrid>
+									<p:outputLabel value="Vehicle No."></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText id="vehicle" style="width:100%" readonly="true"
+										maxlength="10" onkeyup="this.value=this.value.toUpperCase();"
+										value="#{vehicleBackingBean.vehicleDTO.vehicleNo}">
+									</p:inputText>
+								</p:panelGrid>
+							</p:panelGrid>
+
+							<center>
+								<p:panel>
+									<p:commandButton id="cmdbtnSearch" value="Search"
+										action="#{vehicleBackingBean.searchAction}"
+										disabled="#{vehicleBackingBean.callnext}"
+										class="mainActionbtn" ajax="true" update="page,save">
+									</p:commandButton>
+
+
+									<p:commandButton id="cmdbtnNext" value="Call Next"
+										class="mainActionbtn"
+										action="#{vehicleBackingBean.nextAction}"
+										update="page,save,cmdbtnSkip"
+										disabled="#{vehicleBackingBean.callnext}">
+									</p:commandButton>
+
+									<p:commandButton id="cmdbtnSkip" value="Skip"
+										class="mainActionbtn" ajax="false" update="save,frmsuccess"
+										action="#{vehicleBackingBean.skipAction}"
+										disabled="#{vehicleBackingBean.skip}">
+									</p:commandButton>
+
+									<p:commandButton value="Cancel"
+										action="#{vehicleBackingBean.clearAction}"
+										class="mainActionbtn" ajax="true"
+										update="page,save,cmdbtnNext">
+
+									</p:commandButton>
+								</p:panel>
+							</center>
+						</p:panel>
+
+
+						<div style="width: 90%;" class="subDiv">
+							<br> </br>
+							<p:panelGrid columns="2" id="bla2"
+								columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+
+								<p:panelGrid>
+									<p:outputLabel value="Permit Owner Name"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:inputText onkeyup="this.value=this.value.toUpperCase();"
+										readonly="#{vehicleBackingBean.vehicleDTO.backlogApp}"
+										value="#{vehicleBackingBean.vehicleDTO.permitOwner}"
+										id="ownername" style="width:100%">
+									</p:inputText>
+								</p:panelGrid>
+
+
+
+
+
+
+
+								<p:panelGrid>
+									<p:outputLabel value="NIC / Registration No."></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:inputText id="nic" style="width:100%" maxlength="12"
+										readonly="#{vehicleBackingBean.vehicleDTO.backlogApp}"
+										onkeyup="this.value=this.value.toUpperCase();"
+										value="#{vehicleBackingBean.vehicleDTO.nicreg}">
+									</p:inputText>
+								</p:panelGrid>
+
+
+
+
+
+
+
+								<p:panelGrid>
+									<p:outputLabel value="Make"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+
+
+
+								<p:panelGrid>
+
+									<p:selectOneMenu id="make" style="width:95%"
+										disabled="#{vehicleBackingBean.vehicleDTO.backlogApp}"
+										onkeyup="this.value=this.value.toUpperCase();"
+										value="#{vehicleBackingBean.vehicleDTO.makeTypeCode}">
+										<p:ajax listener="#{vehicleBackingBean.onMakeTypeChange}"
+											update="Model" />
+										<f:selectItem itemLabel="--Select Make--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{vehicleBackingBean.makelist}"
+											var="makelist" itemLabel="#{makelist.makeDescription}"
+											itemValue="#{makelist.makeTypeCode}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Model"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:selectOneMenu id="Model" style="width:95%"
+										disabled="#{vehicleBackingBean.vehicleDTO.backlogApp}"
+										onkeyup="this.value=this.value.toUpperCase();"
+										value="#{vehicleBackingBean.vehicleDTO.modelTypeCode}">
+										<f:selectItem itemLabel="--Select Model--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{vehicleBackingBean.modellist}"
+											var="modellist" itemLabel="#{modellist.modelDescription}"
+											itemValue="#{modellist.modelTypeCode}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+
+
+								<p:panelGrid>
+									<p:outputLabel value="Route No."></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+
+									<p:selectOneMenu id="routeNo" style="width:95%"
+										onkeyup="this.value=this.value.toUpperCase();"
+										disabled="#{vehicleBackingBean.vehicleDTO.backlogApp}"
+										value="#{vehicleBackingBean.vehicleDTO.routeNo}">
+										<p:ajax listener="#{vehicleBackingBean.onRouteChange}"
+											update="route,txtOrigin,txtDestination,txtVia,routeFlag" />
+										<f:selectItem itemLabel="--Select Route No.--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{vehicleBackingBean.routelist}"
+											var="routelist" itemLabel="#{routelist.routeNo}"
+											itemValue="#{routelist.routeNo}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<p:outputLabel value="Swap Origin and Destination"></p:outputLabel>
+
+
+								<p:selectBooleanButton id="routeFlag"
+									value="#{vehicleBackingBean.routeFlag}" onLabel="Yes"
+									offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"
+									style="width:60px"
+									disabled="#{vehicleBackingBean.vehicleDTO.backlogApp}">
+									<p:ajax listener="#{vehicleBackingBean.routeFlagListener}"
+										update="txtOrigin,txtDestination" />
+								</p:selectBooleanButton>
+
+								<p:outputLabel
+									value="#{msg['common.backlog.tbpermitinfo.origin']}"></p:outputLabel>
+								<p:inputText style="width:100%;height:18px;" id="txtOrigin"
+									value="#{vehicleBackingBean.permitDTO.origin}" readonly="true"
+									onkeyup="this.value=this.value.toUpperCase();">
+								</p:inputText>
+
+								<p:outputLabel
+									value="#{msg['common.backlog.tbpermitinfo.destination']}"></p:outputLabel>
+								<p:inputText style="width:100%;height:18px;" id="txtDestination"
+									value="#{vehicleBackingBean.permitDTO.destination}"
+									readonly="true" onkeyup="this.value=this.value.toUpperCase();">
+								</p:inputText>
+
+								<p:outputLabel value="#{msg['common.backlog.tbpermitinfo.via']}"></p:outputLabel>
+								<p:panelGrid>
+									<p:inputTextarea style="width:100%;height:18px;" id="txtVia"
+										readonly="true" rows="3"
+										value="#{vehicleBackingBean.permitDTO.via}"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputTextarea>
+								</p:panelGrid>
+
+
+
+
+								<p:panelGrid>
+									<p:outputLabel value="Route Details"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:inputText id="route" style="width:100%"
+										onkeyup="this.value=this.value.toUpperCase();"
+										value="#{vehicleBackingBean.vehicleDTO.routeDetails}"
+										readonly="true">
+									</p:inputText>
+
+								</p:panelGrid>
+
+
+
+								<p:panelGrid>
+									<p:outputLabel value="Manufacture Year"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:inputText id="Man" style="width:100%"
+										onkeyup="this.value=this.value.toUpperCase();"
+										value="#{vehicleBackingBean.vehicleDTO.manyear}"
+										readonly="#{not empty vehicleBackingBean.vehicleDTO.manyear}"
+										padControl="false" maxlength="4" maxValue="9999">
+										<p:keyFilter regEx="/[\d]/i" />
+										<p:ajax update="Man"
+											listener="#{vehicleBackingBean.manufactureYearRegistrationYearValidator}" />
+
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+
+									<p:outputLabel value="Service Type"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="service" style="width:95%"
+										onkeyup="this.value=this.value.toUpperCase();"
+										disabled="#{vehicleBackingBean.vehicleDTO.backlogApp}"
+										value="#{vehicleBackingBean.vehicleDTO.serviceTypeCode}">
+
+										<f:selectItem itemLabel="--Select Service Type--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{vehicleBackingBean.servicelist}"
+											var="servicelist"
+											itemLabel="#{servicelist.serviceTypeDescription}"
+											itemValue="#{servicelist.serviceTypeCode}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+
+
+								<p:panelGrid>
+									<p:outputLabel value="Chassis No."></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText id="chass" style="width:100%" maxlength="20"
+										onkeyup="this.value=this.value.toUpperCase();"
+										readonly="#{not empty vehicleBackingBean.vehicleDTO.chassisNo}"
+										value="#{vehicleBackingBean.vehicleDTO.chassisNo}">
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Application No."></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText id="application"
+										style="width:100%;color:red;font-weight: bold;"
+										onkeyup="this.value=this.value.toUpperCase();" readonly="true"
+										value="#{vehicleBackingBean.vehicleDTO.applicationNo}">
+									</p:inputText>
+								</p:panelGrid>
+
+
+							</p:panelGrid>
+							<p:panel>
+
+
+								<p:dataTable id="abc" var="vehicle"
+									value="#{vehicleBackingBean.dataList}" tableStyle="100%">
+									<p:column headerText="#">
+										<h:outputText value="#{vehicle.actionPointSeqNo}" />
+									</p:column>
+
+									<p:column headerText="Section">
+										<h:outputText value="#{vehicle.section}" />
+									</p:column>
+
+									<p:column headerText="Description"
+										style="width:30%;word-break: break-word">
+										<h:outputText value="#{vehicle.description}" />
+									</p:column>
+
+									<p:column headerText="Remark"
+										style="width:30%;vertical-align: top;">
+										<p:inputTextarea style="width:90%;margin: auto;"
+											maxlength="100" value="#{vehicle.remark}" />
+									</p:column>
+
+
+									<p:column headerText="Exists"
+										style="width:8%;vertical-align: top;">
+
+										<h:selectBooleanCheckbox value="#{vehicle.exists}" />
+
+									</p:column>
+								</p:dataTable>
+
+							</p:panel>
+
+						</div>
+
+
+
+						<br> </br>
+						<div style="width: 90%;" class="subDiv">
+							<p:panelGrid columns="2"
+								columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+
+
+								<p:panelGrid>
+									<h:outputText
+										value="If any issue in the Inspection Report on section 1 and 2 require correct
+			and next inspection date on or before">
+									</h:outputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+
+									<p:calendar id="cal1_2"
+										value="#{vehicleBackingBean.vehicleDTO.calender1}"
+										mindate="today" yearRange="c-100:c+100" navigator="true"
+										locale="en_US" showOn="button" disabledInput="true"
+										pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+
+									</p:calendar>
+
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<h:outputText
+										value="If any issue in the Inspection Report on section 3 require correct
+			and next inspection date on or before">
+
+									</h:outputText>
+									<br> </br>
+								</p:panelGrid>
+								<p:panelGrid>
+
+									<p:calendar id="cal3"
+										value="#{vehicleBackingBean.vehicleDTO.calender2}"
+										mindate="today" yearRange="c-100:c+100" navigator="true"
+										locale="en_US" showOn="button" disabledInput="true"
+										pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY">
+
+									</p:calendar>
+								</p:panelGrid>
+
+
+							</p:panelGrid>
+
+							<p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+								layout="grid">
+
+
+								<h:outputText value="Final Remark ">
+								</h:outputText>
+								<p:panelGrid>
+									<p:inputTextarea
+										value="#{vehicleBackingBean.vehicleDTO.finalRemark}" rows="6"
+										cols="33" style="width:100%" maxlength="1000" />
+								</p:panelGrid>
+
+							</p:panelGrid>
+							<center>
+								<p:panel
+									rendered="#{!vehicleBackingBean.inspectionForAmendment}">
+									<p:commandButton id="save"
+										rendered="#{!vehicleBackingBean.reinspection}"
+										value="#{msg['vehicle.inspection.save.btn']}"
+										actionListener="#{vehicleBackingBean.saveAction}"
+										disabled="#{vehicleBackingBean.disableSave}" ajax="true"
+										update="page" class="mainActionbtn">
+									</p:commandButton>
+									<p:commandButton id="reinspection"
+										rendered="#{vehicleBackingBean.reinspection}"
+										value="#{msg['vehicle.inspection.save.btn']}"
+										actionListener="#{vehicleBackingBean.saveReinspectionOne}"
+										disabled="#{vehicleBackingBean.disableSave}" ajax="true"
+										update="page" class="mainActionbtn">
+									</p:commandButton>
+
+
+									<p:commandButton id="cancel" value="Cancel"
+										action="#{vehicleBackingBean.clearAction}"
+										class="mainActionbtn" ajax="true"
+										update="page,save,cmdbtnNext">
+
+									</p:commandButton>
+									<p:commandButton id="uploadphotos" value="Upload Photos"
+										action="#{vehicleBackingBean.uploadAction}"
+										class="mainActionbtn" ajax="true" update="field"
+										disabled="#{vehicleBackingBean.upload}" style="width:115px">
+									</p:commandButton>
+									<p:commandButton id="skipuploadphotos" value="Skip Inspection"
+										action="#{vehicleBackingBean.skipPhotoUpload}"
+										class="mainActionbtn" ajax="true" update="field,frmsuccess"
+										disabled="#{vehicleBackingBean.disableSave}"
+										style="width:115px">
+									</p:commandButton>
+									<!-- <p:commandButton value="Print" ajax="false"  disabled="#{vehicleBackingBean.printReport}" style="width:115px" class="mainActionbtn" 
+			                                        actionListener="#{printInspectionReportBackingBean.printActButtonAction}"
+			                                        onclick="PrimeFaces.monitorDownload(start, stop);" oncomplete="PF('genReport').hide();" >
+			                                        <f:attribute name="appNo" value="#{vehicleBackingBean.vehicleDTO.applicationNo}"></f:attribute>
+			                                        <p:fileDownload value="#{printInspectionReportBackingBean.files}" />
+			                          </p:commandButton> -->
+									<p:commandButton value="Print"
+										disabled="#{vehicleBackingBean.printReport}"
+										style="width:115px" class="mainActionbtn"
+										actionListener="#{printInspectionReportBackingBean.printActButtonAction}"
+										oncomplete="window.open('/InfoNTC/showUpload?reportName=VehicleInspection')">
+										<f:attribute name="appNo"
+											value="#{vehicleBackingBean.vehicleDTO.applicationNo}"></f:attribute>
+									</p:commandButton>
+
+								</p:panel>
+
+
+								<p:panel rendered="#{vehicleBackingBean.inspectionForAmendment}">
+									<p:commandButton id="save2"
+										rendered="#{!vehicleBackingBean.reinspection}"
+										value="#{msg['vehicle.inspection.save.btn']}"
+										actionListener="#{vehicleBackingBean.saveInspectionForAmendment}"
+										disabled="#{vehicleBackingBean.disableSave}" ajax="true"
+										update="page" class="mainActionbtn">
+									</p:commandButton>
+									<p:commandButton id="reinspection2"
+										rendered="#{vehicleBackingBean.reinspection}"
+										value="#{msg['vehicle.inspection.save.btn']}"
+										actionListener="#{vehicleBackingBean.saveReinspection}"
+										disabled="#{vehicleBackingBean.disableSave}" ajax="true"
+										update="page" class="mainActionbtn">
+									</p:commandButton>
+
+
+									<p:commandButton id="cancel2" value="Cancel"
+										action="#{vehicleBackingBean.clearAction}"
+										class="mainActionbtn" ajax="true"
+										update="page,save,cmdbtnNext">
+
+									</p:commandButton>
+									<p:commandButton id="uploadphotos2" value="Upload Photos"
+										action="#{vehicleBackingBean.uploadAction}"
+										class="mainActionbtn" ajax="true" update="field"
+										disabled="#{vehicleBackingBean.upload}" style="width:115px">
+									</p:commandButton>
+
+									<p:commandButton value="Print"
+										disabled="#{vehicleBackingBean.printReport}"
+										style="width:115px" class="mainActionbtn"
+										actionListener="#{printInspectionReportBackingBean.printActButtonAction}"
+										oncomplete="window.open('/InfoNTC/showUpload?reportName=VehicleInspection')">
+										<f:attribute name="appNo"
+											value="#{vehicleBackingBean.vehicleDTO.applicationNo}"></f:attribute>
+									</p:commandButton>
+
+								</p:panel>
+
+							</center>
+						</div>
+
+					</h:form>
+				</div>
+				<br> </br>
+			</div>
+
+			<p:dialog styleClass="" id="queueError" global="true" modal="true"
+				header="Error" width="30%" severity="info" widgetVar="queueError"
+				closeOnEscape="true" resizable="false">
+				<h:form id="queueField">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+							<p:outputLabel value="#{vehicleBackingBean.errorMsg}"></p:outputLabel>
+
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							process="queueField" value="OK" onclick="PF('queueError').hide()">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+
+
+
+
+			<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+				header="Error" width="30%" severity="info" widgetVar="requiredField"
+				closeOnEscape="true" resizable="false">
+				<h:form id="frmrequiredField">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+							<p:outputLabel value="#{vehicleBackingBean.errorMsg}"></p:outputLabel>
+
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							process="frmrequiredField" value="OK"
+							onclick="PF('requiredField').hide()">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+
+
+
+			<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+				header="Success" width="30%" severity="info"
+				widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+				<h:form id="frmsuccess">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+							<p:outputLabel value="#{vehicleBackingBean.successMSG}"></p:outputLabel>
+
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							value="OK" process="frmsuccess"
+							onclick="PF('successMessage').hide()">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog styleClass="" id="validator" global="true" modal="true"
+				header="Alert" width="30%" severity="info" widgetVar="valid"
+				closeOnEscape="true" resizable="false">
+
+				<h:form id="frmValidator">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+							<p:outputLabel value="#{vehicleBackingBean.errorMsg}"></p:outputLabel>
+
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							value="OK" process="frmValidator" onclick="PF('valid').hide()">
+						</p:commandButton>
+					</center>
+				</h:form>
+			</p:dialog>
+
+
+
+			<p:dialog styleClass="" id="fillfields" global="true" modal="true"
+				header="Alert" width="30%" severity="info" widgetVar="fill"
+				closeOnEscape="true" resizable="false">
+
+				<h:form id="xx">
+					<center>
+						<p:panelGrid columns="2" styleClass="ui-noborder">
+							<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+							<p:outputLabel value="#{vehicleBackingBean.errorMsg}"></p:outputLabel>
+
+						</p:panelGrid>
+						<br></br>
+						<p:commandButton style="margin-top:10px;margin-bottom:10px"
+							value="OK" process="xx" onclick="PF('fill').hide()">
+						</p:commandButton>
+					</center>
+				</h:form>
+
+			</p:dialog>
+
+
+		</h:panelGroup>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,2750 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<style>
+.dateTimeField input {
+	width: 100px;
+}
+
+.dateTimeField img {
+	vertical-align: right;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-input {
+	margin-top: -20px;
+}
+
+.ui-inputfield ui-widget ui-state-default ui-corner-all {
+	width: 10%;
+}
+</style>
+
+		<h:form id="form">
+
+
+			<div class="mainDiv">
+				<p:panel id="pnldetails">
+
+					<h1
+						style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+						class="common_form_header">Generate Receipt</h1>
+
+					<br></br>
+					<br></br>
+					<div style="width: 96%;" class="subDiv">
+						<p:panel id="panelOne">
+							<br></br>
+							<p:panelGrid columns="6"
+								columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-1,ui-grid-col-3"
+								layout="grid">
+
+								<p:panelGrid>
+									<p:outputLabel value="Voucher No."></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:selectOneMenu id="voucherNo" style="width:85%"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.voucherNo}"
+										filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax
+											listener="#{generateReceiptBackingBean.onVoucherChange}"
+											update="panelOne,dataTable" />
+										<f:selectItem itemLabel="--Select Voucher No.--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{generateReceiptBackingBean.voucherNoList}" var="v"
+											itemLabel="#{v.voucherNo}" itemValue="#{v.voucherNo}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Reference No."></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:selectOneMenu id="applicationNo" style="width:85%"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.applicationNo}"
+										filter="true" filterMatchMode="contains" tabindex="1">
+
+										<f:selectItem itemLabel="--Select Reference No.--"
+											itemValue="" noSelectionOption="true" />
+										<f:selectItems
+											value="#{generateReceiptBackingBean.applicationNo}" var="a"
+											itemLabel="#{a.applicationNo}" itemValue="#{a.applicationNo}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Date"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:calendar placeholder="--Enter Date--"
+										inputStyle="width:85%;" id="datepicker"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.searchDate}"
+										pattern="dd-MM-yyyy" mask="true" />
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Transaction Type "></p:outputLabel>
+									<!-- 											<p:outputLabel value="*" style="color:red;"></p:outputLabel> -->
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:inputText id="transactionType"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.transactionDescription}"
+										onkeyup="this.value=this.value.toUpperCase();"
+										style="width:85%" maxlength="12" readonly="true"
+										placeholder="">
+									</p:inputText>
+									<h:inputHidden id="transactionCode"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.transactionCode}" />
+
+
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Department "></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText id="department"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.departmentDescription}"
+										onkeyup="this.value=this.value.toUpperCase();"
+										style="width:85%" maxlength="12" readonly="true"
+										placeholder="">
+									</p:inputText>
+									<h:inputHidden id="departmentCode"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.departmentCode}" />
+
+
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Unit"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:selectOneMenu id="unit" style="width:85%"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.unitCode}"
+										filter="true" filterMatchMode="contains" tabindex="1">
+
+										<f:selectItem itemLabel="--Select Unit--" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{generateReceiptBackingBean.unitList}"
+											itemLabel="#{u.unitDiscription}" itemValue="#{u.unitCode}"
+											var="u" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<!-- 			********************************************************************************************* -->
+
+								<p:panelGrid>
+									<p:outputLabel value="Permit No."></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:inputText id="permitNo"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.permitNo}"
+										onkeyup="this.value=this.value.toUpperCase();"
+										style="width:85%" maxlength="12"
+										placeholder="--Enter Permit No.--">
+										
+									</p:inputText>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Receipt No."></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText id="receiptNo"
+										value="#{generateReceiptBackingBean.generateReceiptDTO.receiptNo}"
+										onkeyup="this.value=this.value.toUpperCase();"
+										style="width:85%" maxlength="12" readonly="true"
+										placeholder="">
+									</p:inputText>
+
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<!-- <p:outputLabel value="Queue No."></p:outputLabel> -->
+								</p:panelGrid>
+								<p:panelGrid>
+
+								</p:panelGrid>
+
+								<!-- 			********************************************************************************************* -->
+							</p:panelGrid>
+							<br />
+							<center>
+								<p:commandButton value="Search" styleClass="mainActionbtn"
+									id="cmdBtnSearch" action="#{generateReceiptBackingBean.search}"
+									update="dataTable" />
+
+								<p:commandButton value="Clear" styleClass="mainActionbtn"
+									id="btnClearAll" update="form"
+									action="#{generateReceiptBackingBean.clear}"></p:commandButton>
+							</center>
+						</p:panel>
+						<p:panel id="panelTwo">
+
+							<center>
+								<p:dataTable id="dataTable" var="p" rows="5" paginator="true"
+									value="#{generateReceiptBackingBean.generateReceiptList}"
+									rowKey="#{p.applicationNo}"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,20" resizableColumns="false"
+									liveResize="true" tableStyle="width:100%;font-size:12px;"
+									rowIndexVar="index" styleClass="myTable"
+									emptyMessage="No records available.">
+
+									<p:column headerText="Voucher No./Advance Payment No. "
+										sortBy="#{p.voucherNo}">
+										<center>
+											<h:outputText value="#{p.voucherNo}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Transaction Type"
+										style="width:15%;word-wrap: break-word;">
+										<center>
+											<h:outputText value="#{p.transactionDescription}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Department"
+										style="width:15%;word-wrap: break-word;">
+										<center>
+											<h:outputText value="#{p.departmentDescription}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Reference No." style="width:15%">
+										<center>
+											<h:outputText value="#{p.applicationNo}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Status" style="width:10%">
+										<center>
+											<h:outputText value="#{p.approveStatus}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Date" style="width:10%">
+										<center>
+											<h:outputText value="#{p.paymentDate}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Total Amount(Rs.)"
+										style="text-align:right;width:15%">
+										<center>
+											<h:outputText value="#{p.totalAmount}" style="float:right">
+												<f:convertNumber type="currency" currencySymbol="" />
+											</h:outputText>
+										</center>
+									</p:column>
+
+									<p:column headerText="Generate Receipt" style="width:8%">
+										<center>
+											<p:commandLink id="cmdbtnViewReceipt"
+												action="#{generateReceiptBackingBean.view}">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{generateReceiptBackingBean.selectedRow}" />
+												<p:graphicImage library="images" name="receipt.png"
+													style="width:22px;height:22px;" title="Generate Receipt"></p:graphicImage>
+											</p:commandLink>
+										</center>
+									</p:column>
+
+								</p:dataTable>
+							</center>
+							<br></br>
+						</p:panel>
+					</div>
+					<br></br>
+					<br></br>
+					<p:panel style="border:5px solid #bed6f8; margin:0px;">
+						<p:panel
+							style="margin-top: 1px; margin-right: 1px; margin-left: 1px; background-color: #bed6f8 !important;">
+							<h2 style="text-align: center;">Generate Receipt For
+								Driver/Conductor Training</h2>
+						</p:panel>
+						<!--********************************************************** Start Driver Conductor Receipt Generator *************************************************************** -->
+						<div style="width: 96%;" class="subDiv2">
+							<p:panel id="panelOneDC">
+								<p:panelGrid columns="6"
+									columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-2"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Voucher No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="voucherNoDC" style="width:85%"
+											value="#{generateReceiptBackingBean.driverConductorReceiptDTO.voucher}"
+											filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax
+												listener="#{generateReceiptBackingBean.onDriverConductorVoucherChange}"
+												update="applicationNoDC,txtNICNo,traningTypeDC,dCId,receiptNoDC" />
+											<f:selectItem itemLabel="--Select Voucher No.--" itemValue=""
+												noSelectionOption="true" />
+											<f:selectItems
+												value="#{generateReceiptBackingBean.driverConductorVoucherNoList}"
+												var="v" itemLabel="#{v.voucher}" itemValue="#{v.voucher}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Application No."></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="applicationNoDC" style="width:85%"
+											value="#{generateReceiptBackingBean.driverConductorReceiptDTO.appNo}"
+											filter="true" filterMatchMode="contains" tabindex="1">
+											<p:ajax
+												listener="#{generateReceiptBackingBean.onDriverConductorApplicationChange}"
+												update="voucherNoDC,txtNICNo,traningTypeDC,dCId,receiptNoDC" />
+											<f:selectItem itemLabel="--Select Application No.--"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItems
+												value="#{generateReceiptBackingBean.driverConductorapplicationNoList}"
+												var="a" itemLabel="#{a.appNo}" itemValue="#{a.appNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="NIC Number"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="txtNICNo"
+											value="#{generateReceiptBackingBean.driverConductorReceiptDTO.nic}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:100%" readonly="true" placeholder="">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Training Type "></p:outputLabel>
+									
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="traningTypeDC"
+											value="#{generateReceiptBackingBean.driverConductorReceiptDTO.trainingTYpeDes}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:95.5%" maxlength="12" readonly="true"
+											placeholder="">
+										</p:inputText>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Driver/Conductor ID"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="dCId" style="width:85%"
+											value="#{generateReceiptBackingBean.driverConductorReceiptDTO.driverConductorId}"
+											filter="true" filterMatchMode="contains" tabindex="1">
+											<p:ajax
+												listener="#{generateReceiptBackingBean.onDriverConductorDcIdChange}"
+												update="voucherNoDC,txtNICNo,traningTypeDC,applicationNoDC,receiptNoDC" />
+											<f:selectItem itemLabel="--Select Driver/Conductor ID .--"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItems
+												value="#{generateReceiptBackingBean.driverConductorDcIdList}"
+												var="a" itemLabel="#{a.driverConductorId}"
+												itemValue="#{a.driverConductorId}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Receipt No. "></p:outputLabel>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="receiptNoDC"
+											value="#{generateReceiptBackingBean.driverConductorReceiptDTO.receiptNo}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:95.5%" maxlength="12" readonly="true"
+											placeholder="">
+										</p:inputText>
+
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+
+
+
+								</p:panelGrid>
+								<br />
+								<center>
+									<p:commandButton value="Search" styleClass="mainActionbtn"
+										id="cmdBtnSearchDC" update="dataTableDC"
+										action="#{generateReceiptBackingBean.searchDataForDriceConductor}" />
+
+									<p:commandButton value="Clear" styleClass="mainActionbtn"
+										id="btnClearAlDCl" update="form"
+										action="#{generateReceiptBackingBean.clearForDriceConductor}"></p:commandButton>
+								</center>
+							</p:panel>
+						</div>
+
+						<p:panel id="panelTwoN">
+
+							<center>
+								<p:dataTable id="dataTableDC" var="p" rows="5" paginator="true"
+									value="#{generateReceiptBackingBean.generateReceiptListForDriverConductor}"
+									rowKey="#{p.voucher}"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,20" resizableColumns="false"
+									liveResize="true" tableStyle="width:100%;font-size:12px;"
+									rowIndexVar="index" styleClass="myTable"
+									emptyMessage="No records available.">
+
+									<p:column headerText="Voucher No. " sortBy="#{p.voucherNo}"
+										style="width:15%;text-align:left">
+										<center>
+											<h:outputText style="float:left;" value="#{p.voucher}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Training Type"
+										style="width:15%;word-wrap: break-word;">
+										<center>
+											<h:outputText value="#{p.trainingTYpeDes}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Application No."
+										style="width:15%;word-wrap: break-word;">
+										<center>
+											<h:outputText value="#{p.appNo}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Driver/Conductor Id" style="width:15%">
+										<center>
+											<h:outputText value="#{p.driverConductorId}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Status" style="width:10%">
+										<center>
+											<h:outputText value="#{p.approveStatus}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Date" style="width:10%" rendered="false">
+										<center>
+											<h:outputText value="#{p.driverConductorId}" />
+										</center>
+									</p:column>
+
+
+									<p:column headerText="Generate Receipt" style="width:8%">
+										<center>
+											<p:commandLink id="cmdbtnViewReceipt"
+												action="#{generateReceiptBackingBean.viewDriverConductorRe}">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{generateReceiptBackingBean.selectedRowDriverConductor}" />
+												<p:graphicImage library="images" name="receipt.png"
+													style="width:22px;height:22px;" title="Generate Receipt"></p:graphicImage>
+											</p:commandLink>
+										</center>
+									</p:column>
+
+								</p:dataTable>
+							</center>
+
+						</p:panel>
+						<!--********************************************************** End Driver Conductor Receipt Generator *************************************************************** -->
+					</p:panel>
+					<!-- For grievance -->
+					<p:panel style="border:5px solid #bed6f8; margin:0px;">
+						<p:panel
+							style="margin-top: 1px; margin-right: 1px; margin-left: 1px; background-color: #bed6f8 !important;">
+							<h2 style="text-align: center;">Generate Receipt For
+								Grievance Management</h2>
+						</p:panel>
+						<!--********************************************************** Start Grievance Receipt Generator *************************************************************** -->
+						<div style="width: 96%;" class="subDiv2">
+							<p:panel id="panelOneGr">
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Voucher No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="voucherNoGr" style="width:85%"
+											value="#{generateReceiptBackingBean.grievanceReceiptDTO.voucherNo}"
+											filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax
+												listener="#{generateReceiptBackingBean.onGrievanceVoucherChange}"
+												update="complaintNoGr,vehiNoGr,receiptNoGr" />
+											<f:selectItem itemLabel="--Select Voucher No.--" itemValue=""
+												noSelectionOption="true" />
+											<f:selectItems
+												value="#{generateReceiptBackingBean.approvedVoucherNoList}"
+												var="v" itemLabel="#{v}" itemValue="#{v}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Complaint No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="complaintNoGr" style="width:85%"
+											value="#{generateReceiptBackingBean.grievanceReceiptDTO.complaintNo}"
+											filter="true" filterMatchMode="contains" tabindex="1">
+											<p:ajax
+												listener="#{generateReceiptBackingBean.onGrievanceComplaintChange}"
+												update="vehiNoGr,voucherNoGr,receiptNoGr" />
+											<f:selectItem itemLabel="--Select Complaint No.--"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItems
+												value="#{generateReceiptBackingBean.complaintNoList}"
+												var="a" itemLabel="#{a}" itemValue="#{a}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Receipt No. "></p:outputLabel>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="receiptNoGr"
+											value="#{generateReceiptBackingBean.grievanceReceiptDTO.receiptNoForGr}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:95.5%" maxlength="12" readonly="true"
+											placeholder="">
+										</p:inputText>
+
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Vehicle No."></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="vehiNoGr"
+											value="#{generateReceiptBackingBean.grievanceReceiptDTO.vehicleNo}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:100%" readonly="true" placeholder="">
+										</p:inputText>
+									</p:panelGrid>
+
+
+
+
+									<p:panelGrid></p:panelGrid>
+
+
+
+
+								</p:panelGrid>
+								<br />
+								<center>
+									<p:commandButton value="Search" styleClass="mainActionbtn"
+										id="cmdBtnSearchGr" update="dataTableGr"
+										action="#{generateReceiptBackingBean.searchDataForGrievance}" />
+
+									<p:commandButton value="Clear" styleClass="mainActionbtn"
+										id="btnClearAllGr" update="form"
+										action="#{generateReceiptBackingBean.clearForGrievance}"></p:commandButton>
+								</center>
+							</p:panel>
+						</div>
+
+
+						<!-- Grievance Data Table -->
+						<p:panel id="panelTwoGr">
+
+							<center>
+								<p:dataTable id="dataTableGr" var="p" rows="5" paginator="true"
+									value="#{generateReceiptBackingBean.generateReceiptListForGrievance}"
+									rowKey="#{p.voucherNo}"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,20" resizableColumns="false"
+									liveResize="true" tableStyle="width:100%;font-size:12px;"
+									rowIndexVar="index" styleClass="myTable"
+									emptyMessage="No records available.">
+
+									<p:column headerText="Voucher No. " sortBy="#{p.voucherNo}"
+										style="width:15%;">
+										<center>
+											<h:outputText value="#{p.voucherNo}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Complaint No." style="width:15%;">
+										<center>
+											<h:outputText value="#{p.complaintNo}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Vehicle No."
+										style="width:15%;word-wrap: break-word;">
+										<center>
+											<h:outputText value="#{p.vehicleNo}" />
+										</center>
+									</p:column>
+
+
+									<p:column headerText="Status" style="width:10%">
+										<center>
+											<h:outputText value="#{p.voucherApprovedStatus}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Date" style="width:10%" rendered="false">
+										<center>
+											<h:outputText value="#{p.driverConductorId}" />
+										</center>
+									</p:column>
+
+
+									<p:column headerText="Generate Receipt" style="width:8%">
+										<center>
+											<p:commandLink id="cmdbtnViewReceiptGr"
+												action="#{generateReceiptBackingBean.viewGrievanceReciept}">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{generateReceiptBackingBean.selectedRowGrievance}" />
+												<p:graphicImage library="images" name="receipt.png"
+													style="width:22px;height:22px;" title="Generate Receipt"></p:graphicImage>
+											</p:commandLink>
+										</center>
+									</p:column>
+
+								</p:dataTable>
+							</center>
+
+						</p:panel>
+						<!-- Grievance Data Table End -->
+					</p:panel>
+
+
+					<!-- end -->
+
+
+
+					<!-- For Investigation -->
+					<p:panel style="border:5px solid #bed6f8; margin:0px;">
+						<p:panel
+							style="margin-top: 1px; margin-right: 1px; margin-left: 1px; background-color: #bed6f8 !important;">
+							<h2 style="text-align: center;">Generate Receipt For
+								Investigation</h2>
+						</p:panel>
+						<!--********************************************************** Start Investigation Receipt Generator *************************************************************** -->
+						<div style="width: 96%;" class="subDiv2">
+							<p:panel id="panelOneInves">
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Voucher No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="voucherNoInves" style="width:85%"
+											value="#{generateReceiptBackingBean.manageInvestigation.voucherNo}"
+											filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax
+												listener="#{generateReceiptBackingBean.onInvestiVoucherChange}"
+												update="complaintNoInves,vehiNoInves,receiptNoInves" />
+											<f:selectItem itemLabel="--Select Voucher No.--" itemValue=""
+												noSelectionOption="true" />
+											<f:selectItems
+												value="#{generateReceiptBackingBean.approvedVoucherForInves}"
+												var="v" itemLabel="#{v.voucherNo}"
+												itemValue="#{v.voucherNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Charge Reff. No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="complaintNoInves" style="width:85%"
+											value="#{generateReceiptBackingBean.manageInvestigation.invReferenceNo}"
+											filter="true" filterMatchMode="contains" tabindex="1">
+											<p:ajax
+												listener="#{generateReceiptBackingBean.onInvestiComplaintChange}"
+												update="vehiNoInves,voucherNoInves,receiptNoInves" />
+											<f:selectItem itemLabel="--Select Charge Ref. No.--"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItems
+												value="#{generateReceiptBackingBean.chargeRefNoList}"
+												var="a" itemLabel="#{a.invReferenceNo}"
+												itemValue="#{a.invReferenceNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Receipt No. "></p:outputLabel>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="receiptNoInves"
+											value="#{generateReceiptBackingBean.manageInvestigation.receiptNoForInves}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:95.5%" maxlength="12" readonly="true"
+											placeholder="">
+										</p:inputText>
+
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Vehicle No."></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="vehiNoInves"
+											value="#{generateReceiptBackingBean.manageInvestigation.vehicleNo}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:100%" readonly="true" placeholder="">
+										</p:inputText>
+									</p:panelGrid>
+
+
+
+
+									<p:panelGrid></p:panelGrid>
+
+
+
+
+								</p:panelGrid>
+								<br />
+								<center>
+									<p:commandButton value="Search" styleClass="mainActionbtn"
+										id="cmdBtnSearchInves" update="dataTableInves"
+										action="#{generateReceiptBackingBean.searchDataForInves}" />
+
+									<p:commandButton value="Clear" styleClass="mainActionbtn"
+										id="btnClearAllInves" update="form"
+										action="#{generateReceiptBackingBean.clearForInves}"></p:commandButton>
+								</center>
+							</p:panel>
+						</div>
+
+
+						<!-- Investigation Data Table -->
+						<p:panel id="panelTwoInves">
+
+							<center>
+								<p:dataTable id="dataTableInves" var="p" rows="5"
+									paginator="true"
+									value="#{generateReceiptBackingBean.generateReceiptListForInves}"
+									rowKey="#{p.voucherNo}"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,20" resizableColumns="false"
+									liveResize="true" tableStyle="width:100%;font-size:12px;"
+									rowIndexVar="index" styleClass="myTable"
+									emptyMessage="No records available.">
+
+									<p:column headerText="Voucher No. " sortBy="#{p.voucherNo}"
+										style="width:15%;">
+										<center>
+											<h:outputText value="#{p.voucherNo}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Charge Reff. No." style="width:15%;">
+										<center>
+											<h:outputText value="#{p.invReferenceNo}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Vehicle No."
+										style="width:15%;word-wrap: break-word;">
+										<center>
+											<h:outputText value="#{p.vehicleNo}" />
+										</center>
+									</p:column>
+
+
+									<p:column headerText="Status" style="width:10%">
+										<center>
+											<h:outputText value="#{p.voucherApprovedStatus}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Date" style="width:10%" rendered="false">
+										<center>
+											<h:outputText value="#{p.driverConductorId}" />
+										</center>
+									</p:column>
+						
+
+									<p:column headerText="Generate Receipt" style="width:8%">
+										<center>
+											<p:commandLink id="cmdbtnViewReceiptInves"
+												action="#{generateReceiptBackingBean.viewInvesReciept}">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{generateReceiptBackingBean.selectedRowInves}" />
+												<p:graphicImage library="images" name="receipt.png"
+													style="width:22px;height:22px;" title="Generate Receipt"></p:graphicImage>
+											</p:commandLink>
+										</center>
+									</p:column>
+
+								</p:dataTable>
+							</center>
+
+						</p:panel>
+						<!-- Investigation Data Table End -->
+					</p:panel>
+
+
+					<!-- end -->
+
+					<!-- For SIM Registration -->
+					<p:panel style="border:5px solid #bed6f8; margin:0px;">
+						<p:panel
+							style="margin-top: 1px; margin-right: 1px; margin-left: 1px; background-color: #bed6f8 !important;">
+							<h2 style="text-align: center;">Generate Receipt For SIM
+								Registration</h2>
+						</p:panel>
+						<!--********************************************************** Start SIM Registration Receipt Generator *************************************************************** -->
+						<div style="width: 96%;" class="subDiv2">
+							<p:panel id="panelOneSimReg">
+								<p:panelGrid columns="4"
+									columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-3"
+									layout="grid">
+
+									<p:panelGrid>
+										<p:outputLabel value="Voucher No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="voucherNoSimReg" style="width:85%"
+											value="#{generateReceiptBackingBean.simregDTO.vouNo}"
+											filter="true" filterMatchMode="contains" tabindex="1">
+`									<p:ajax listener="#{generateReceiptBackingBean.onVouChange}"
+												update="simRegNoId,receiptNoSimReg,permitNoId" />
+											<f:selectItem itemLabel="--Select Voucher No.--" itemValue=""
+												noSelectionOption="true" />
+											<f:selectItems
+												value="#{generateReceiptBackingBean.approvedVoucherForSimReg}"
+												var="v" itemLabel="#{v.vouNo}" itemValue="#{v.vouNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="SIM Reg. No."></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="simRegNoId" style="width:85%"
+											value="#{generateReceiptBackingBean.simregDTO.simRegNo}"
+											filter="true" filterMatchMode="contains" tabindex="1">
+											<p:ajax
+												listener="#{generateReceiptBackingBean.onSimNoChange}"
+												update="voucherNoSimReg,receiptNoSimReg,permitNoId" />
+											<f:selectItem itemLabel="--Select SIM No..--" itemValue=""
+												noSelectionOption="true" />
+											<f:selectItems
+												value="#{generateReceiptBackingBean.approvedVoucherForSimReg}"
+												var="a" itemLabel="#{a.simRegNo}" itemValue="#{a.simRegNo}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Receipt No. "></p:outputLabel>
+
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="receiptNoSimReg"
+											value="#{generateReceiptBackingBean.simregDTO.receiptNo}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											style="width:95.5%" maxlength="12" readonly="true"
+											placeholder="">
+										</p:inputText>
+
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Permit No."></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:inputText id="permitNoId" style="width:95.5%"
+											maxlength="12" readonly="true"
+											value="#{generateReceiptBackingBean.simregDTO.permitNo}">
+										</p:inputText>
+
+
+									</p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+
+
+								</p:panelGrid>
+								<br />
+								<center>
+									<p:commandButton value="Search" styleClass="mainActionbtn"
+										id="cmdBtnSearchSimReg" update="dataTableSimReg"
+										action="#{generateReceiptBackingBean.searchDataForSimReg}" />
+
+									<p:commandButton value="Clear" styleClass="mainActionbtn"
+										id="btnClearAllSimReg" update="form"
+										action="#{generateReceiptBackingBean.clearForSimReg}"></p:commandButton>
+								</center>
+							</p:panel>
+						</div>
+
+
+						<!-- Investigation Data Table -->
+						<p:panel id="panelTwoSimReg">
+
+							<center>
+								<p:dataTable id="dataTableSimReg" var="p" rows="5"
+									paginator="true"
+									value="#{generateReceiptBackingBean.generateReceiptListForSimReg}"
+									rowKey="#{p.vouNo}"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,20" resizableColumns="false"
+									liveResize="true" tableStyle="width:100%;font-size:12px;"
+									rowIndexVar="index" styleClass="myTable"
+									emptyMessage="No records available.">
+
+									<p:column headerText="Voucher No. " sortBy="#{p.vouNo}"
+										style="width:15%;">
+										<center>
+											<h:outputText value="#{p.vouNo}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="SIM Reg. No." style="width:15%;">
+										<center>
+											<h:outputText value="#{p.simRegNo}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Permit No."
+										style="width:15%;word-wrap: break-word;">
+										<center>
+											<h:outputText value="#{p.permitNo}" />
+										</center>
+									</p:column>
+
+
+									<p:column headerText="Status" style="width:10%">
+										<center>
+											<h:outputText value="#{p.emiStatus}" />
+										</center>
+									</p:column>
+
+									<p:column headerText="Date" style="width:10%" rendered="false">
+										<center>
+											<h:outputText value="#{p.emiStatus}" />
+										</center>
+									</p:column>
+
+
+									<p:column headerText="Generate Receipt" style="width:8%">
+										<center>
+											<p:commandLink id="cmdbtnViewReceiptSimReg"
+												action="#{generateReceiptBackingBean.viewSimRegReciept}">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{generateReceiptBackingBean.selectedRowSimReg}" />
+												<p:graphicImage library="images" name="receipt.png"
+													style="width:22px;height:22px;" title="Generate Receipt"></p:graphicImage>
+											</p:commandLink>
+										</center>
+									</p:column>
+
+								</p:dataTable>
+							</center>
+
+						</p:panel>
+						<!-- SIM Registration Data Table End -->
+					</p:panel>
+
+
+					<!-- end -->
+
+
+				</p:panel>
+			</div>
+
+		</h:form>
+
+		<p:dialog id="errorMSG" global="true" modal="true" header="Error"
+			width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{generateReceiptBackingBean.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="successMSG" global="true" modal="true" header="Success"
+			width="30%" severity="info" widgetVar="successMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="#{generateReceiptBackingBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="infoMSG" global="true" modal="true" header="Alert"
+			width="30%" severity="info" widgetVar="infoMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmInfo">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{generateReceiptBackingBean.infoMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmInfo" onclick="PF('infoMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+		<p:dialog header=" Receipt " widgetVar="voucherDialog" modal="true"
+			id="dialogVoucher" resizable="false" height="100%" width="80%">
+			<h:form id="frmVoucher">
+				<p:panel id="panelOne">
+
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Transaction Type"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRow.transactionDescription}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Receipt No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="vpReceiptNo"
+								value="#{generateReceiptBackingBean.selectedRow.receiptNo}"
+								style="width:90%;font-weight: bold;color: red;" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Voucher No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRow.voucherNo}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Date"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText value="#{generateReceiptBackingBean.date1}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Payment Mode "></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRow.paymentModeCode}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledPaymentMode}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onPaymentModeChange}"
+									update="panelOne" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.paymentModeList}" var="d"
+									itemLabel="#{d.paymentModeDescription}"
+									itemValue="#{d.paymentModeCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Bank Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplay}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="bank" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRow.bankCode}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBank}">
+
+								<p:ajax listener="#{generateReceiptBackingBean.onBankChange}"
+									update="branch" />
+								<f:selectItem itemLabel="--Select Bank Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.bankNameList}" var="d"
+									itemLabel="#{d.bankDescription}" itemValue="#{d.bankCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Deposit to Bank"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectBooleanCheckbox
+								disabled="#{generateReceiptBackingBean.disabledDepositToBank}"
+								value="#{generateReceiptBackingBean.selectedRow.depositToBank}">
+								<p:ajax listener="#{generateReceiptBackingBean.ifDepositToBank}"
+									update="panelOne" />
+							</p:selectBooleanCheckbox>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Branch Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplay}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="branch" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRow.branchCode}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBank}">
+
+								<f:selectItem itemLabel="--Select Branch Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.branchNameList}" var="d"
+									itemLabel="#{d.branchDescription}" itemValue="#{d.branchCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Cheque No./ Bank Receipt No.">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredchequeReceiptNoDisplay}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="chequeBankReceiptNo"
+								onkeyup="this.value = this.value.toUpperCase();"
+								onblur="this.value = this.value.toUpperCase();"
+								disabled="#{generateReceiptBackingBean.disabledChequeBankReceiptNo}"
+								value="#{generateReceiptBackingBean.selectedRow.chequeOrBankReceipt}"
+								style="width:90%" maxlength="20">
+							
+							</p:inputText>
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+
+				<p:panel id="panelTwo">
+
+					<center>
+						<p:dataTable id="dataTable" var="p"
+							value="#{generateReceiptBackingBean.voucherDetailsList}"
+							sortBy="#{1}" resizableColumns="false" liveResize="true"
+							tableStyle="width:100%" styleClass="myTable"
+							emptyMessage="No records available." rows="5" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+							<p:column headerText="Charge Type" style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.chargeDescription}" />
+							</p:column>
+
+							<p:column headerText="Account No." style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.accountNO}" />
+							</p:column>
+
+							<p:column headerText="Amount(Rs.)"
+								style="text-align:right;margin-right:10%">
+								<h:outputText style="float:right;" value="#{p.amount}">
+									<f:convertNumber type="currency" currencySymbol="" />
+								</h:outputText>
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="2" style="text-align:right"
+										footerText="Total Fee (Rs.)" />
+
+									<p:column style="text-align:right">
+										<f:facet name="footer">
+											<h:outputText style="float:right;"
+												value="#{generateReceiptBackingBean.selectedRow.totalAmount}">
+												<f:convertNumber type="currency" currencySymbol="" />
+											</h:outputText>
+										</f:facet>
+									</p:column>
+
+								</p:row>
+							</p:columnGroup>
+
+						</p:dataTable>
+					</center>
+				</p:panel>
+				<p:panel id="panelThree">
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Special Remark"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								disabled="#{generateReceiptBackingBean.disabledPaymentMode}"
+								value="#{generateReceiptBackingBean.selectedRow.remarks}"
+								style="width:90%" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<center>
+					<p:commandButton value="Generate Receipt"
+						action="#{generateReceiptBackingBean.generateReceipt}"
+						update="frmVoucher,panelOne,form" rendered="false"
+						disabled="#{generateReceiptBackingBean.disableGenarate}"
+						styleClass="mainActionbtn" id="btnGenerateVP" style="width:15%" />
+
+					<p:commandButton value="Print"
+						update="frmVoucher, btnPrintVP,panelOne,form"
+						actionListener="#{generateReceiptBackingBean.generateReceipt}"
+						disabled="#{generateReceiptBackingBean.disablePrint}"
+						styleClass="mainActionbtn" id="btnPrintVP" style="width:15%">
+
+					</p:commandButton>
+					<!-- <p:remoteCommand name="updateformV" update="frmVoucher btnPrintVP" ajax="true"/> -->
+
+					<p:commandButton value="Re-Print"
+						actionListener="#{generateReceiptBackingBean.rePrint}"
+						oncomplete="window.open('/InfoNTC/showUpload?reportName=Receipt')"
+						disabled="#{generateReceiptBackingBean.disableReprint}"
+						styleClass="mainActionbtn" id="btnReprintVP" style="width:15%">
+						<f:attribute name="value"
+							value="#{generateReceiptBackingBean.valueForPrint}"></f:attribute>
+					</p:commandButton>
+					<p:commandButton value="Cancel" styleClass="mainActionbtn"
+						style="width:15%" id="btnCancel" update="form"
+						onclick="PF('voucherDialog').hide()" />
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog header=" Receipt " widgetVar="advancedPaymentDialog"
+			modal="true" id="dialogAdvancedPayment" resizable="false"
+			height="100%" width="80%">
+			<h:form id="frmAdvancedPayment">
+				<p:panel id="panelOne">
+
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Transaction Type"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRow.transactionDescription}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Receipt No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="apReceiptNo"
+								value="#{generateReceiptBackingBean.selectedRow.receiptNo}"
+								style="width:90%;font-weight: bold;color: red;" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Voucher No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRow.voucherNo}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Date"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText value="#{generateReceiptBackingBean.date1}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Payment Mode"></p:outputLabel>
+							<p:outputLabel value=" *" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRow.paymentModeCode}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledPaymentMode}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onPaymentModeChange}"
+									update="panelOne" />
+
+								<f:selectItems
+									value="#{generateReceiptBackingBean.paymentModeList}" var="d"
+									itemLabel="#{d.paymentModeDescription}"
+									itemValue="#{d.paymentModeCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Bank Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplay}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="bank" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRow.bankCode}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBank}">
+
+								<p:ajax listener="#{generateReceiptBackingBean.onBankChange}"
+									update="branch" />
+								<f:selectItem itemLabel="--Select Bank Name--" itemValue=""
+									noSelectionOption="true" />
+
+								<f:selectItems
+									value="#{generateReceiptBackingBean.bankNameList}" var="d"
+									itemLabel="#{d.bankDescription}" itemValue="#{d.bankCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Deposit to Bank"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectBooleanCheckbox
+								disabled="#{generateReceiptBackingBean.disabledDepositToBank}"
+								value="#{generateReceiptBackingBean.selectedRow.depositToBank}">
+								<p:ajax listener="#{generateReceiptBackingBean.ifDepositToBank}"
+									update="panelOne" />
+							</p:selectBooleanCheckbox>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Branch Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplay}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="branch" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRow.branchCode}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBank}">
+
+								<f:selectItem itemLabel="--Select Branch Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.branchNameList}" var="d"
+									itemLabel="#{d.branchDescription}" itemValue="#{d.branchCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Cheque No./ Bank Receipt No.">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredchequeReceiptNoDisplay}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="chequeBankReceiptNo"
+								onkeyup="this.value = this.value.toUpperCase();"
+								onblur="this.value = this.value.toUpperCase();"
+								disabled="#{generateReceiptBackingBean.disabledChequeBankReceiptNo}"
+								value="#{generateReceiptBackingBean.selectedRow.chequeOrBankReceipt}"
+								style="width:90%" maxlength="20">
+								
+							</p:inputText>
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+
+				<p:panel id="panelTwo">
+
+					<center>
+						<p:dataTable id="dataTable" var="p"
+							value="#{generateReceiptBackingBean.advancedPaymentDetailsList}"
+							resizableColumns="false" liveResize="true"
+							tableStyle="width:100%" sortBy="#{p.cratedDate}"
+							styleClass="myTable" emptyMessage="No records available."
+							rows="5" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+							<p:column style="width:10%;text-align:left" headerText="Date">
+								<h:outputText value="#{p.cratedDate}" style="float:left">
+									<f:convertDateTime pattern="MM/dd/yyyy" />
+								</h:outputText>
+							</p:column>
+
+							<p:column style="width:50%;text-align:left;"
+								headerText="Details of Services or Items Provided">
+								<h:outputText value="#{p.serviceDetails}" />
+							</p:column>
+
+							<p:column style="width:20%" headerText="No. of Unit/Rate">
+								<center>
+									<h:outputText value="#{p.noofUnits}" />
+								</center>
+							</p:column>
+
+							<p:column style="width:20%;text-align:right;margin-right:10%"
+								headerText="Amount(Rs.)">
+								<h:outputText style="float:right;" value="#{p.amount}">
+									<f:convertNumber type="currency" currencySymbol="" />
+								</h:outputText>
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="3" style="text-align:right"
+										footerText="Total Fee (Rs.)" />
+
+									<p:column style="text-align:right">
+										<f:facet name="footer">
+											<h:outputText style="float:right;"
+												value="#{generateReceiptBackingBean.selectedRow.totalAmount}">
+												<f:convertNumber type="currency" currencySymbol="" />
+											</h:outputText>
+										</f:facet>
+									</p:column>
+
+								</p:row>
+							</p:columnGroup>
+
+
+
+						</p:dataTable>
+					</center>
+				</p:panel>
+				<p:panel id="panelThree">
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Special Remark"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								disabled="#{generateReceiptBackingBean.disabledPaymentMode}"
+								value="#{generateReceiptBackingBean.selectedRow.remarks}"
+								style="width:90%" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<center>
+					<p:commandButton value="Generate Receipt"
+						action="#{generateReceiptBackingBean.generateReceipt}"
+						update="frmAdvancedPayment,form" rendered="false"
+						disabled="#{generateReceiptBackingBean.disableGenarate}"
+						styleClass="mainActionbtn" id="btnGenerateAP" style="width:15%" />
+					<p:commandButton value="Print"
+						update="frmAdvancedPayment, btnPrintAP,form"
+						actionListener="#{generateReceiptBackingBean.generateReceipt}"
+						disabled="#{generateReceiptBackingBean.disablePrint}"
+						styleClass="mainActionbtn" id="btnPrintAP" style="width:15%">
+
+					</p:commandButton>
+
+					<p:commandButton value="Re-Print"
+						actionListener="#{generateReceiptBackingBean.rePrint}"
+						oncomplete="window.open('/InfoNTC/showUpload?reportName=Receipt')"
+						disabled="#{generateReceiptBackingBean.disableReprint}"
+						styleClass="mainActionbtn" id="btnReprintAP" style="width:15%">
+						<f:attribute name="value"
+							value="#{generateReceiptBackingBean.valueForPrint}"></f:attribute>
+					</p:commandButton>
+					<p:commandButton value="Cancel" styleClass="mainActionbtn"
+						style="width:15%" id="btnCancel"
+						onclick="PF('advancedPaymentDialog').hide()" />
+				</center>
+			</h:form>
+		</p:dialog>
+		<!-- Receipt For Driver Conductor   -->
+		<p:dialog header=" Receipt "
+			widgetVar="voucherDialogForDriverConductor" modal="true"
+			id="dialogVoucherDc" resizable="false" height="100%" width="80%">
+			<h:form id="frmVoucherDc">
+				<p:panel id="panelOne">
+
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Training Type"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRowDriverConductor.trainingTYpeDes}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Receipt No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="vpReceiptNo"
+								value="#{generateReceiptBackingBean.selectedRowDriverConductor.receiptNo}"
+								style="width:90%;font-weight: bold;color: red;" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Voucher No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRowDriverConductor.voucher}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Date"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText value="#{generateReceiptBackingBean.date1}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Payment Mode "></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowDriverConductor.paymentModeCodeForDC}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledPaymentModeDC}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onPaymentModeChangeDriverConductor}"
+									update="panelOne" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.paymentModeList}" var="d"
+									itemLabel="#{d.paymentModeDescription}"
+									itemValue="#{d.paymentModeCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Bank Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplayDC}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="bank" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowDriverConductor.bankCodeForDC}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBankDC}">
+
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onBankChangeForDriverConductor}"
+									update="branch" />
+								<f:selectItem itemLabel="--Select Bank Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.bankNameList}" var="d"
+									itemLabel="#{d.bankDescription}" itemValue="#{d.bankCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Deposit to Bank"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectBooleanCheckbox
+								disabled="#{generateReceiptBackingBean.disabledDepositToBankDC}"
+								value="#{generateReceiptBackingBean.selectedRowDriverConductor.depositToBankForDC}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.ifDepositToBankForDriverConductor}"
+									update="panelOne" />
+							</p:selectBooleanCheckbox>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Branch Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplayDC}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="branch" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowDriverConductor.branchCodeForDC}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBankDC}">
+
+								<f:selectItem itemLabel="--Select Branch Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.branchNameList}" var="d"
+									itemLabel="#{d.branchDescription}" itemValue="#{d.branchCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Cheque No./ Bank Receipt No.">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredchequeReceiptNoDisplayDC}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="chequeBankReceiptNo"
+								onkeyup="this.value = this.value.toUpperCase();"
+								onblur="this.value = this.value.toUpperCase();"
+								disabled="#{generateReceiptBackingBean.disabledChequeBankReceiptNoDC}"
+								value="#{generateReceiptBackingBean.selectedRowDriverConductor.chequeOrBankReceipt}"
+								style="width:90%" maxlength="20">
+							
+							</p:inputText>
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+
+				<p:panel id="panelTwo">
+
+					<center>
+						<p:dataTable id="dataTable" var="p"
+							value="#{generateReceiptBackingBean.voucherDetailsListForDC}"
+							sortBy="#{1}" resizableColumns="false" liveResize="true"
+							tableStyle="width:100%" styleClass="myTable"
+							emptyMessage="No records available." rows="5" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+							<p:column headerText="Charge Type" style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.chargeTypeDes}" />
+							</p:column>
+
+							<p:column headerText="Account No." style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.accountNO}" />
+							</p:column>
+
+							<p:column headerText="Amount(Rs.)"
+								style="text-align:right;margin-right:10%">
+								<h:outputText style="float:right;" value="#{p.ammount}">
+									<f:convertNumber type="currency" currencySymbol="" />
+								</h:outputText>
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="2" style="text-align:right"
+										footerText="Total Fee (Rs.)" />
+
+									<p:column style="text-align:right">
+										<f:facet name="footer">
+											<h:outputText style="float:right;"
+												value="#{generateReceiptBackingBean.selectedRowDriverConductor.totalAmount}">
+												<f:convertNumber type="currency" currencySymbol="" />
+											</h:outputText>
+										</f:facet>
+									</p:column>
+
+								</p:row>
+							</p:columnGroup>
+
+
+
+						</p:dataTable>
+					</center>
+				</p:panel>
+				<p:panel id="panelThree">
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Special Remark"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								disabled="#{generateReceiptBackingBean.disabledPaymentMode}"
+								value="#{generateReceiptBackingBean.selectedRowDriverConductor.receiptRemarks}"
+								style="width:90%" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<center>
+
+
+					<p:commandButton value="Print"
+						update="frmVoucherDc, btnPrintVP,panelOne,form,panelTwo"
+						actionListener="#{generateReceiptBackingBean.generateReceiptForDriverConduc}"
+						disabled="#{generateReceiptBackingBean.disablePrintDC}"
+						styleClass="mainActionbtn" id="btnPrintVP" style="width:15%">
+
+					</p:commandButton>
+					<!-- <p:remoteCommand name="updateformV" update="frmVoucher btnPrintVP" ajax="true"/> -->
+
+					<p:commandButton value="Re-Print"
+						actionListener="#{generateReceiptBackingBean.rePrintForDriverConductor}"
+						oncomplete="window.open('/InfoNTC/showUpload?reportName=Receipt')"
+						disabled="#{generateReceiptBackingBean.disableReprintDC}"
+						styleClass="mainActionbtn" id="btnReprintVP" style="width:15%">
+						<f:attribute name="value"
+							value="#{generateReceiptBackingBean.valueForPrint}"></f:attribute>
+					</p:commandButton>
+					<p:commandButton value="Cancel" styleClass="mainActionbtn"
+						style="width:15%" id="btnCancel" update="form"
+						onclick="PF('voucherDialogForDriverConductor').hide()" />
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<!-- Receipt Driver Conductor ENd -->
+
+		<!-- Receipt Grievance Management -->
+
+		<p:dialog header=" Receipt " widgetVar="voucherDialogForGrievance"
+			modal="true" id="dialogVoucherGr" resizable="false" height="100%"
+			width="80%">
+			<h:form id="frmVoucherGr">
+				<p:panel id="panelOne">
+
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Complaint No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRowGrievance.complaintNo}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Receipt No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="vpReceiptNoGr"
+								value="#{generateReceiptBackingBean.selectedRowGrievance.receiptNoForGr}"
+								style="width:90%;font-weight: bold;color: red;" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Voucher No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRowGrievance.voucherNo}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Date"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText value="#{generateReceiptBackingBean.date1}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Payment Mode "></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowGrievance.paymentModeCodeForGr}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledPaymentModeInves}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onPaymentModeChangeGrievance}"
+									update="panelOne" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.paymentModeList}" var="d"
+									itemLabel="#{d.paymentModeDescription}"
+									itemValue="#{d.paymentModeCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Bank Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplayGr}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="bank" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowGrievance.bankCodeForGr}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBankGr}">
+
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onBankChangeForGrievance}"
+									update="branch" />
+								<f:selectItem itemLabel="--Select Bank Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.bankNameList}" var="d"
+									itemLabel="#{d.bankDescription}" itemValue="#{d.bankCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Deposit to Bank"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectBooleanCheckbox
+								disabled="#{generateReceiptBackingBean.disabledDepositToBankInves}"
+								value="#{generateReceiptBackingBean.selectedRowGrievance.depositToBankForGr}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.ifDepositToBankForGrievance}"
+									update="panelOne" />
+							</p:selectBooleanCheckbox>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Branch Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplayGr}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="branch" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowGrievance.branchCodeForGr}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBankGr}">
+
+								<f:selectItem itemLabel="--Select Branch Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.branchNameList}" var="d"
+									itemLabel="#{d.branchDescription}" itemValue="#{d.branchCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Cheque No./ Bank Receipt No.">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredchequeReceiptNoDisplayInves}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="chequeBankReceiptNo"
+								onkeyup="this.value = this.value.toUpperCase();"
+								onblur="this.value = this.value.toUpperCase();"
+								disabled="#{generateReceiptBackingBean.disabledChequeBankReceiptNoInves}"
+								value="#{generateReceiptBackingBean.selectedRowGrievance.chequeOrBankReceipt}"
+								style="width:90%" maxlength="20">
+							
+							</p:inputText>
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+
+				<p:panel id="panelTwo">
+
+					<center>
+						<p:dataTable id="dataTable" var="p"
+							value="#{generateReceiptBackingBean.voucherDetailsListForGr}"
+							sortBy="#{1}" resizableColumns="false" liveResize="true"
+							tableStyle="width:100%" styleClass="myTable"
+							emptyMessage="No records available." rows="5" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+							<p:column headerText="Offence code" style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.offenceCode}" />
+							</p:column>
+
+							<p:column headerText="Offence Description"
+								style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.offenceDes}" />
+							</p:column>
+
+							<p:column headerText="Account No." style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.accountNO}" />
+							</p:column>
+
+							<p:column headerText="Amount(Rs.)"
+								style="text-align:right;margin-right:10%">
+								<h:outputText style="float:right;" value="#{p.ammount}">
+									<f:convertNumber type="currency" currencySymbol="" />
+								</h:outputText>
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="2" style="text-align:right"
+										footerText="Total Fee (Rs.)" />
+
+									<p:column style="text-align:right">
+										<f:facet name="footer">
+											<h:outputText style="float:right;"
+												value="#{generateReceiptBackingBean.selectedRowGrievance.totalAmount}">
+												<f:convertNumber type="currency" currencySymbol="" />
+											</h:outputText>
+										</f:facet>
+									</p:column>
+
+								</p:row>
+							</p:columnGroup>
+
+
+
+						</p:dataTable>
+					</center>
+				</p:panel>
+				<p:panel id="panelThree">
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Special Remark"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								disabled="#{generateReceiptBackingBean.disabledPaymentMode}"
+								value="#{generateReceiptBackingBean.selectedRowGrievance.receiptRemarks}"
+								style="width:90%" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<center>
+
+
+					<p:commandButton value="Print"
+						update="frmVoucherGr, btnPrintVP,panelOne,form,panelTwo,vpReceiptNoGr"
+						actionListener="#{generateReceiptBackingBean.generateReceiptForGrievance}"
+						disabled="#{generateReceiptBackingBean.disablePrintGr}"
+						styleClass="mainActionbtn" id="btnPrintVP" style="width:15%">
+
+					</p:commandButton>
+					<!-- <p:remoteCommand name="updateformV" update="frmVoucher btnPrintVP" ajax="true"/> -->
+
+					<p:commandButton value="Re-Print"
+						actionListener="#{generateReceiptBackingBean.rePrintForGrievance}"
+						oncomplete="window.open('/InfoNTC/showUpload?reportName=Receipt')"
+						disabled="#{generateReceiptBackingBean.disableReprintGr}"
+						styleClass="mainActionbtn" id="btnReprintVP" style="width:15%">
+						<f:attribute name="value"
+							value="#{generateReceiptBackingBean.valueForPrint}"></f:attribute>
+					</p:commandButton>
+					<p:commandButton value="Cancel" styleClass="mainActionbtn"
+						style="width:15%" id="btnCancel" update="form"
+						onclick="PF('voucherDialogForGrievancer').hide()" />
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<!-- Receipt Grievance Managment End -->
+
+
+
+		<!-- Receipt Investigation Management -->
+
+		<p:dialog header=" Receipt " widgetVar="voucherDialogForInves"
+			modal="true" id="dialogVoucherInves" resizable="false" height="100%"
+			width="80%">
+			<h:form id="frmVoucherInves">
+				<p:panel id="panelOne">
+
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Charge Reff. No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRowInves.invReferenceNo}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Receipt No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="vpReceiptNoInves"
+								value="#{generateReceiptBackingBean.selectedRowInves.receiptNoForInves}"
+								style="width:90%;font-weight: bold;color: red;" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Voucher No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRowInves.voucherNo}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Date"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText value="#{generateReceiptBackingBean.date1}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Payment Mode "></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowInves.paymentModeCodeForGrInves}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledPaymentModeInves}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onPaymentModeChangeInves}"
+									update="panelOne" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.paymentModeList}" var="d"
+									itemLabel="#{d.paymentModeDescription}"
+									itemValue="#{d.paymentModeCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Bank Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplayInves}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="bank" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowInves.bankCodeForInves}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBankInves}">
+
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onBankChangeForInves}"
+									update="branch" />
+								<f:selectItem itemLabel="--Select Bank Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.bankNameList}" var="d"
+									itemLabel="#{d.bankDescription}" itemValue="#{d.bankCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Deposit to Bank"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectBooleanCheckbox
+								disabled="#{generateReceiptBackingBean.disabledDepositToBankInves}"
+								value="#{generateReceiptBackingBean.selectedRowInves.depositToBankForInves}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.ifDepositToBankForInves}"
+									update="panelOne" />
+							</p:selectBooleanCheckbox>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Branch Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplayInves}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="branch" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowInves.branchCodeForInves}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBankInves}">
+
+								<f:selectItem itemLabel="--Select Branch Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.branchNameList}" var="d"
+									itemLabel="#{d.branchDescription}" itemValue="#{d.branchCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Cheque No./ Bank Receipt No.">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredchequeReceiptNoDisplayInves}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="chequeBankReceiptNo"
+								onkeyup="this.value = this.value.toUpperCase();"
+								onblur="this.value = this.value.toUpperCase();"
+								disabled="#{generateReceiptBackingBean.disabledChequeBankReceiptNoInves}"
+								value="#{generateReceiptBackingBean.selectedRowInves.chequeOrBankReceipt}"
+								style="width:90%" maxlength="20">
+							
+							</p:inputText>
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+
+				<p:panel id="panelTwo">
+
+					<center>
+						<p:dataTable id="dataTable" var="p"
+							value="#{generateReceiptBackingBean.voucherDetailsListForInves}"
+							sortBy="#{1}" resizableColumns="false" liveResize="true"
+							tableStyle="width:100%" styleClass="myTable"
+							emptyMessage="No records available." rows="5" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+							<p:column headerText="Offence Description"
+								style="text-align:left">
+								<h:outputText style="float:left;"
+									value="#{p.offenceDescription}" />
+							</p:column>
+							<p:column headerText="Driver ID" style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.driverId}" />
+							</p:column>
+							<p:column headerText="Conductor ID" style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.conductorId}" />
+							</p:column>
+
+
+
+							<p:column headerText="Account No." style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.vouAccount}" />
+							</p:column>
+
+							<p:column headerText="Amount(Rs.)"
+								style="text-align:right;margin-right:10%">
+								<h:outputText style="float:right;" value="#{p.vouAmmount}">
+									<f:convertNumber type="currency" currencySymbol="" />
+								</h:outputText>
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="2" style="text-align:right"
+										footerText="Late Payment Fee (Rs.)" />
+
+									<p:column style="text-align:right">
+										<f:facet name="footer">
+											<h:outputText style="float:right;"
+												value="#{generateReceiptBackingBean.latePaymentFee}">
+												<f:convertNumber type="currency" currencySymbol="" />
+											</h:outputText>
+										</f:facet>
+									</p:column>
+
+								</p:row>
+							
+							
+								<p:row>
+									<p:column colspan="2" style="text-align:right"
+										footerText="Total Fee (Rs.)" />
+
+									<p:column style="text-align:right">
+										<f:facet name="footer">
+											<h:outputText style="float:right;"
+												value="#{generateReceiptBackingBean.selectedRowInves.totalAmount}">
+												<f:convertNumber type="currency" currencySymbol="" />
+											</h:outputText>
+										</f:facet>
+									</p:column>
+
+								</p:row>
+							</p:columnGroup>
+
+
+
+						</p:dataTable>
+					</center>
+				</p:panel>
+				<p:panel id="panelThree">
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Special Remark"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								disabled="#{generateReceiptBackingBean.disabledPaymentMode}"
+								value="#{generateReceiptBackingBean.selectedRowInves.receiptRemarks}"
+								style="width:90%" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<center>
+
+
+					<p:commandButton value="Print"
+						update="frmVoucherInves, btnPrintVP,panelOne,form,panelTwo,vpReceiptNoInves"
+						actionListener="#{generateReceiptBackingBean.generateReceiptForInves}"
+						disabled="#{generateReceiptBackingBean.disablePrintInves}"
+						styleClass="mainActionbtn" id="btnPrintVP" style="width:15%">
+
+					</p:commandButton>
+					<!-- <p:remoteCommand name="updateformV" update="frmVoucher btnPrintVP" ajax="true"/> -->
+
+					<p:commandButton value="Re-Print"
+						actionListener="#{generateReceiptBackingBean.rePrintForInvesti}"
+						oncomplete="window.open('/InfoNTC/showUpload?reportName=Receipt')"
+						disabled="#{generateReceiptBackingBean.disableReprintInves}"
+						styleClass="mainActionbtn" id="btnReprintVP" style="width:15%">
+						<f:attribute name="value"
+							value="#{generateReceiptBackingBean.valueForPrint}"></f:attribute>
+					</p:commandButton>
+					<p:commandButton value="Cancel" styleClass="mainActionbtn"
+						style="width:15%" id="btnCancel" update="form"
+						onclick="PF('voucherDialogForInves').hide()" />
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<!-- Receipt Investigation Managment End -->
+
+
+
+
+
+		<!-- Receipt SIM Registration Management -->
+
+		<p:dialog header=" Receipt " widgetVar="voucherDialogForSimReg"
+			modal="true" id="dialogVoucherSimReg" resizable="false" height="100%"
+			width="80%">
+			<h:form id="frmVoucherSimReg">
+				<p:panel id="panelOne">
+
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+						layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Sim Reg. No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRowSimReg.simRegNo}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Receipt No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="vpReceiptNoSimReg"
+								value="#{generateReceiptBackingBean.selectedRowSimReg.receiptNo}"
+								style="width:90%;font-weight: bold;color: red;" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Voucher No."></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								value="#{generateReceiptBackingBean.selectedRowSimReg.vouNo}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Date"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText value="#{generateReceiptBackingBean.date1}"
+								style="width:90%" readonly="true" />
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Payment Mode "></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowSimReg.paymentModeCodeForSimReg}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledPaymentModeSimReg}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onPaymentModeChangeSimReg}"
+									update="panelOne" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.paymentModeList}" var="d"
+									itemLabel="#{d.paymentModeDescription}"
+									itemValue="#{d.paymentModeCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Bank Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplaySimReg}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="bank" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowSimReg.bankCodeForSimReg}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBankSimReg}">
+
+								<p:ajax
+									listener="#{generateReceiptBackingBean.onBankChangeForSimReg}"
+									update="branch" />
+								<f:selectItem itemLabel="--Select Bank Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.bankNameList}" var="d"
+									itemLabel="#{d.bankDescription}" itemValue="#{d.bankCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Deposit to Bank"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectBooleanCheckbox
+								disabled="#{generateReceiptBackingBean.disabledDepositToBankSimReg}"
+								value="#{generateReceiptBackingBean.selectedRowSimReg.depositToBankForSimReg}">
+								<p:ajax
+									listener="#{generateReceiptBackingBean.ifDepositToBankForSimReg}"
+									update="panelOne" />
+							</p:selectBooleanCheckbox>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Branch Name">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredBankDisplaySimReg}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:selectOneMenu id="branch" style="width:85%"
+								value="#{generateReceiptBackingBean.selectedRowSimReg.branchCodeForSimReg}"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								disabled="#{generateReceiptBackingBean.disabledBankSimReg}">
+
+								<f:selectItem itemLabel="--Select Branch Name--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{generateReceiptBackingBean.branchNameList}" var="d"
+									itemLabel="#{d.branchDescription}" itemValue="#{d.branchCode}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:outputLabel value="Cheque No./ Bank Receipt No.">
+								<p:outputLabel value=" *"
+									rendered="#{generateReceiptBackingBean.requiredchequeReceiptNoDisplaySimReg}"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText id="chequeBankReceiptNo"
+								onkeyup="this.value = this.value.toUpperCase();"
+								onblur="this.value = this.value.toUpperCase();"
+								disabled="#{generateReceiptBackingBean.disabledChequeBankReceiptNoSimReg}"
+								value="#{generateReceiptBackingBean.selectedRowSimReg.chequeOrBankReceipt}"
+								style="width:90%" maxlength="20">
+							
+							</p:inputText>
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+
+				<p:panel id="panelTwo">
+
+					<center>
+						<p:dataTable id="dataTable" var="p"
+							value="#{generateReceiptBackingBean.voucherDetailsListForSimReg}"
+							sortBy="#{1}" resizableColumns="false" liveResize="true"
+							tableStyle="width:100%" styleClass="myTable"
+							emptyMessage="No records available." rows="5" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+							<p:column headerText="SIM Reg. No." style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.simRegNo}" />
+							</p:column>
+							<p:column headerText="SIM No." style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.simNo}" />
+							</p:column>
+							<p:column headerText="SIM Renewal No." style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.simRenewalNo}" />
+							</p:column>
+
+
+
+							<p:column headerText="Account No." style="text-align:left">
+								<h:outputText style="float:left;" value="#{p.vouAccountNo}" />
+							</p:column>
+
+							<p:column headerText="Amount(Rs.)"
+								style="text-align:right;margin-right:10%">
+								<h:outputText style="float:right;" value="#{p.vouAmmount}">
+									<f:convertNumber type="currency" currencySymbol="" />
+								</h:outputText>
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="2" style="text-align:right"
+										footerText="Total Fee (Rs.)" />
+
+									<p:column style="text-align:right">
+										<f:facet name="footer">
+											<h:outputText style="float:right;"
+												value="#{generateReceiptBackingBean.selectedRowSimReg.totalAmount}">
+												<f:convertNumber type="currency" currencySymbol="" />
+											</h:outputText>
+										</f:facet>
+									</p:column>
+
+								</p:row>
+							</p:columnGroup>
+
+
+
+						</p:dataTable>
+					</center>
+				</p:panel>
+				<p:panel id="panelThree">
+					<p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+						<p:panelGrid>
+							<p:outputLabel value="Special Remark"></p:outputLabel>
+						</p:panelGrid>
+
+						<p:panelGrid>
+							<p:inputText
+								disabled="#{generateReceiptBackingBean.disabledPaymentMode}"
+								value="#{generateReceiptBackingBean.selectedRowSimReg.receiptRemarks}"
+								style="width:90%" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<center>
+
+
+					<p:commandButton value="Print"
+						update="frmVoucherInves, btnPrintVP,panelOne,form,panelTwo,vpReceiptNoSimReg"
+						actionListener="#{generateReceiptBackingBean.generateReceiptForSimReg}"
+						disabled="#{generateReceiptBackingBean.disablePrintSimReg}"
+						styleClass="mainActionbtn" id="btnPrintVP" style="width:15%">
+
+					</p:commandButton>
+					<!-- <p:remoteCommand name="updateformV" update="frmVoucher btnPrintVP" ajax="true"/> -->
+
+					<p:commandButton value="Re-Print"
+						actionListener="#{generateReceiptBackingBean.rePrintForSimReg}"
+						oncomplete="window.open('/InfoNTC/showUpload?reportName=Receipt')"
+						update="frmVoucherInves, btnPrintVP,panelOne,form,panelTwo,vpReceiptNoSimReg"
+						disabled="#{generateReceiptBackingBean.disableReprintSimReg}"
+						styleClass="mainActionbtn" id="btnReprintVP" style="width:15%">
+						<f:attribute name="value"
+							value="#{generateReceiptBackingBean.valueForPrint}"></f:attribute>
+					</p:commandButton>
+					<p:commandButton value="Cancel" styleClass="mainActionbtn"
+						style="width:15%" id="btnCancel" update="form"
+						onclick="PF('voucherDialogForSimReg').hide()" />
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<!-- Receipt SIM Registration End -->
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,1067 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-g-6 {
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-g {
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone th span.ui-column-title {
+	display: none !important;
+	height: 0px;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.addBtn {
+	font-weight: bold;
+	background: #141845 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 70px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.editRow {
+	background-color: #fca752 !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+
+.ui-datatable-scrollable-theadclone {
+	display: none;
+}
+</style>
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Set Up Mid Points Based On The
+				Schedule</h1>
+
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmpanelGenerator">
+
+					<p:panelGrid id="shwDetail" columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+						layout="grid">
+
+						<!-- Row 1 start -->
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Route No."></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="routeNo" style="width:70%" effect="fold"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								value="#{setUpMidPointsBackingBean.selectedRouteNumber}">
+
+								<f:selectItem itemLabel="-- Select Route No --" itemValue="" />
+								<f:selectItems
+									value="#{setUpMidPointsBackingBean.routeNumbersWithNames}"
+									var="d" itemLabel="#{d.routeNo}" itemValue="#{d.routeNo}" />
+
+								<p:ajax
+									listener="#{setUpMidPointsBackingBean.generateOriginAndDestination}"
+									update="a av" />
+								<!-- Should add a update -->
+
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<!-- Row 1 end -->
+
+						<!-- Row 2 start -->
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Service Type"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="buscategory" style="width:70%" effect="fold"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								value="#{setUpMidPointsBackingBean.selectedServiceType}">
+
+								<f:selectItem itemLabel="-- Select Service Type --" itemValue="" />
+								<f:selectItems value="#{setUpMidPointsBackingBean.serviceType}"
+									var="d" itemLabel="#{d.serviceType}" itemValue="#{d.code}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<!-- Row 2 end -->
+						
+						<!-- Row 3 start -->
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Group No"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="groupId" style="width:70%" effect="fold"
+								filter="true" filterMatchMode="contains" tabindex="1"
+								value="#{setUpMidPointsBackingBean.groupNo}">
+								<!-- Should create Bean & change value-->
+								<f:selectItem itemLabel="-- Select Group No --" itemValue="" />
+								<f:selectItem itemLabel="Group 01" itemValue="1" />
+								<f:selectItem itemLabel="Group 02" itemValue="2" />
+								<f:selectItem itemLabel="Group 03" itemValue="3" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						<!-- Row 3 end -->
+						
+					</p:panelGrid>
+					<p:panel>
+						<center>
+							<p:commandButton styleClass="mainActionbtn" value="Search"
+								action="#{setUpMidPointsBackingBean.search}"
+								update="@form,frmError">
+							</p:commandButton>
+
+							<p:commandButton styleClass="mainActionbtn" value="Clear"
+								action="#{setUpMidPointsBackingBean.clearAction}"
+								update="@form,frmError">
+							</p:commandButton>
+
+						</center>
+
+					</p:panel>
+
+					<p:panelGrid id="shwOrgDes" columns="4"
+						rendered="#{not empty setUpMidPointsBackingBean.routeDTO.origin}"
+						columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+						layout="grid">
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel style="margin-left:55%" value="Origin:"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel style="margin-left:40%"
+								value="#{setUpMidPointsBackingBean.routeDTO.origin.toUpperCase()}" />
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel style="margin-left:55%" value="Destination:"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel style="margin-left:40%"
+								value="#{setUpMidPointsBackingBean.routeDTO.destination.toUpperCase()}" />
+
+						</p:panelGrid>
+					</p:panelGrid>
+
+
+					<p:panel
+						rendered="#{not empty setUpMidPointsBackingBean.orgToDesMidPointList or not empty setUpMidPointsBackingBean.desToOrgMidPointList}">
+
+
+
+						<!-- Time table start -->
+
+
+
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+
+
+
+							<!-- origin table start -->
+							<p:dataTable id="originTableGroupOne"
+								value="#{setUpMidPointsBackingBean.orgToDesMidPointList}"
+								var="p" editable="true" editMode="cell" tableStyle="width:100%"
+								rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No records available" rowKey="#{p.seq}"
+								selection="#{setUpMidPointsBackingBean.selectedOrgToDesMidPointList}">
+
+								<f:facet name="header">Origin To Destination</f:facet>
+
+								<p:column headerText="Mid-Point" style="text-align:center;"
+									visible="true">
+									<h:outputText style="text-align:center;" visible="true"
+										value="#{p.midPointName}" />
+								</p:column>
+
+								<p:column selectionMode="multiple" style="text-align:center;"
+									headerText="Applicable for Time Table" visible="true" />
+
+								<p:column style="text-align:center;" headerText="Time Taken">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{p.timeTaken}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{p.timeTaken}" style="width:100%"
+												placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+							</p:dataTable>
+							<!-- origin table end -->
+
+
+							<p:dataTable id="destinationTableGroupOne"
+								value="#{setUpMidPointsBackingBean.desToOrgMidPointList}"
+								var="d" editable="true" editMode="cell" tableStyle="width:100%"
+								rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No records available" rowKey="#{d.seq}"
+								selection="#{setUpMidPointsBackingBean.selectedDesToOrgMidPointList}">
+
+								<f:facet name="header">Destination To Origin</f:facet>
+
+								<p:column headerText="Mid-Point" style="text-align:center;"
+									visible="true">
+									<h:outputText style="text-align:center;" visible="true"
+										value="#{d.midPointName}" />
+								</p:column>
+
+								<p:column selectionMode="multiple" style="text-align:center;"
+									headerText="Applicable for Time Table" visible="true" />
+
+								<p:column style="text-align:center;" headerText="Time Taken">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{d.timeTaken}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{d.timeTaken}" style="width:100%"
+												placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+							</p:dataTable>
+
+
+							<!-- destination table start 								
+							<p:dataTable id="destinationTableGroupOne"
+								value="#{setUpMidPointsBackingBean.desToOrgMidPointList}"
+								var="p" editable="true" editMode="cell" tableStyle="width:100%"
+								rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No records available" rowKey="#{p.seq}"
+								selection="#{setUpMidPointsBackingBean.selectedDesToOrgMidPointList}">
+
+								<f:facet name="header">Origin To Destination</f:facet>
+
+								<p:column headerText="Mid-Point" style="text-align:center;"
+									visible="true">
+									<h:outputText style="text-align:center;" visible="true"
+										value="#{p.midPointName}" />
+								</p:column>
+
+								<p:column selectionMode="multiple" style="text-align:center;"
+									headerText="Applicable for Time Table" visible="true" />
+
+								<p:column style="text-align:center;" headerText="Time Taken">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{p.timeTaken}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{p.timeTaken}" style="width:100%"
+												placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+							</p:dataTable>
+							
+							-->
+							<!-- destination table end -->
+
+
+
+						</p:panelGrid>
+					</p:panel>
+					<p:panel
+						rendered="#{not empty setUpMidPointsBackingBean.orgToDesMidPointList or not empty setUpMidPointsBackingBean.desToOrgMidPointList}"
+						id="i">
+						<center>
+							<p:commandButton value="Save" styleClass="mainActionbtn"
+								action="#{setUpMidPointsBackingBean.saveCheckedRows}"
+								disabled="#{not setUpMidPointsBackingBean.saveClicked}"
+								id="saveButton" update="@form,frmError"></p:commandButton>
+
+							<p:commandButton value="Generate Time Slots"
+								styleClass="mainActionbtn" style="width:auto;"
+								action="#{setUpMidPointsBackingBean.generateTimeSlots}"
+								id="generateButton"
+								disabled="#{setUpMidPointsBackingBean.saveClicked}"
+								update="@form,frmError"></p:commandButton>
+						</center>
+					</p:panel>
+					<p:panel
+						rendered="#{not empty setUpMidPointsBackingBean.busDetailsList}"
+						id="od">
+						<h1
+							style="margin-top: 0%; margin-bottom: 3%; text-align: center; color: #000800; font-weight: bold; background-color: #00B95C !important;">
+							Origin To Destination</h1>
+						<div style="width: 95%;" class="subDiv">
+
+							<p:dataTable id="a"
+								value="#{setUpMidPointsBackingBean.busDetailsList}"
+								var="details" editable="true" editMode="cell"
+								rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No records available" rowKey="#{details.seq}"
+								selection="#{setUpMidPointsBackingBean.selectedOrgToDesBusDetailsList}"
+								lazy="true" paginator="true" rows="100"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="100,200,300">
+
+
+
+								<p:column style="padding:1px;" headerText="Abbreviation"
+									id="abbOri">
+									<h:outputText style="width:70%" value="#{details.abbreviation}" />
+								</p:column>
+
+								<p:column headerText="Permit No." exportable="false"
+									id="permitOri">
+									<h:outputText style="width:70%" value="#{details.permitNo}" />
+								</p:column>
+
+								<p:column headerText="Bus No." exportable="false" id="busOri">
+									<h:outputText style="width:70%" value="#{details.busNo}" />
+								</p:column>
+
+								<p:column style="padding:1px;"
+									headerText="#{setUpMidPointsBackingBean.routeDTO.origin.toUpperCase()}"
+									visible="#{setUpMidPointsBackingBean.visibleColumn}" id="ori">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{details.startTime}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{details.startTime}" style="width:100%"
+												placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:columns value="#{setUpMidPointsBackingBean.generatedColumns}"
+									var="genCol" columnIndexVar="colIndex" id="midOri">
+									<f:facet name="header">
+										<h:outputText value="#{genCol.headerText.toUpperCase()}" />
+									</f:facet>
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{details.takenTime[colIndex]}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{details.takenTime[colIndex]}"
+												style="width:100%" placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:columns>
+
+								<p:column
+									headerText="#{setUpMidPointsBackingBean.routeDTO.destination.toUpperCase()}"
+									visible="#{setUpMidPointsBackingBean.visibleColumn}" id="des">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{details.endTime}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{details.endTime}" style="width:100%"
+												placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column selectionMode="multiple" style="text-align:center;"
+									headerText="Fix Bus" visible="true" exportable="false" />
+
+							</p:dataTable>
+
+
+							<p:panelGrid id="b" columns="1" layout="grid">
+								<p:panelGrid>
+									<center>
+										<p:commandButton style="position:cenger" value="Save"
+											styleClass="mainActionbtn"
+											disabled="#{setUpMidPointsBackingBean.saveButton}"
+											action="#{setUpMidPointsBackingBean.saveAction('O')}"
+											update="a errorMSG successMSG"></p:commandButton>
+
+										<p:commandButton value="Print" ajax="false"
+											styleClass="mainActionbtn" style="width:auto;"
+											id="panelGenerateButton"
+											rendered="#{not setUpMidPointsBackingBean.saveClicked}"
+											disabled="#{setUpMidPointsBackingBean.disableButton}"
+											update="@form">
+											<p:dataExporter type="xls" target="a av"
+												fileName="SetUpMidPointOriginToDestination" />
+										</p:commandButton>
+
+									</center>
+								</p:panelGrid>
+							</p:panelGrid>
+
+
+						</div>
+					</p:panel>
+
+					<br></br>
+					<p:panel
+						rendered="#{not empty setUpMidPointsBackingBean.busDetailsListDesToOrg}"
+						id="do">
+						<h1
+							style="margin-top: 0%; margin-bottom: 3%; text-align: center; color: #000800; font-weight: bold; background-color: #00B95C !important;">
+							Destination To Origin</h1>
+
+						<div style="width: 95%;" class="subDiv">
+
+							<p:dataTable id="av"
+								value="#{setUpMidPointsBackingBean.busDetailsListDesToOrg}"
+								var="detailslist" editable="true" editMode="cell"
+								rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No records available" rowKey="#{detailslist.seq}"
+								selection="#{setUpMidPointsBackingBean.selectedDesToOrgBusDetailsList}"
+								lazy="true" paginator="true" rows="100"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="100,200,300">
+
+								<p:column style="padding:1px;" headerText="Abbreviation"
+									id="abbDes">
+									<h:outputText style="width:70%"
+										value="#{detailslist.abbreviation}" />
+								</p:column>
+
+								<p:column headerText="Permit No." exportable="false">
+									<h:outputText style="width:70%" value="#{detailslist.permitNo}" />
+								</p:column>
+
+								<p:column headerText="Bus No." exportable="false">
+									<h:outputText style="width:70%" value="#{detailslist.busNo}" />
+								</p:column>
+
+								<p:column style="padding:1px;"
+									headerText="#{setUpMidPointsBackingBean.routeDTO.destination.toUpperCase()}"
+									visible="#{setUpMidPointsBackingBean.visibleColumn}"
+									id="desOri">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{detailslist.startTime}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{detailslist.startTime}"
+												style="width:100%" placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:columns
+									value="#{setUpMidPointsBackingBean.generatedColumns2}"
+									var="genCol" columnIndexVar="colIndex" id="midDes">
+									<f:facet name="header">
+										<h:outputText value="#{genCol.headerText.toUpperCase()}" />
+									</f:facet>
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{detailslist.takenTime[colIndex]}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{detailslist.takenTime[colIndex]}"
+												style="width:100%" placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:columns>
+
+								<p:column
+									headerText="#{setUpMidPointsBackingBean.routeDTO.origin.toUpperCase()}"
+									visible="#{setUpMidPointsBackingBean.visibleColumn}"
+									id="desDes">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{detailslist.endTime}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{detailslist.endTime}"
+												style="width:100%" placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column selectionMode="multiple" style="text-align:center;"
+									headerText="Fix Bus" visible="true" exportable="false" />
+
+							</p:dataTable>
+
+							<p:panelGrid id="bd" columns="1" layout="grid">
+								<p:panelGrid>
+									<center>
+										<p:commandButton style="position:cenger" value="Save"
+											styleClass="mainActionbtn"
+											disabled="#{setUpMidPointsBackingBean.saveButton}"
+											action="#{setUpMidPointsBackingBean.saveAction('D')}"
+											update="av errorMSG successMSG"></p:commandButton>
+
+										<p:commandButton value="Print" ajax="false"
+											styleClass="mainActionbtn" style="width:auto;"
+											rendered="#{not setUpMidPointsBackingBean.saveClicked}"
+											disabled="#{setUpMidPointsBackingBean.disableButton}"
+											update="@form">
+											<p:dataExporter type="xls" target="av"
+												fileName="SetUpMidPointDestinationToOrigin" />
+										</p:commandButton>
+
+
+									</center>
+								</p:panelGrid>
+							</p:panelGrid>
+						</div>
+					</p:panel>
+					<p:panel>
+						<center>
+							<p:commandButton value="Generate Report" ajax="false"
+								styleClass="mainActionbtn" style="width:auto;"
+								rendered="#{not setUpMidPointsBackingBean.print}"
+								disabled="#{setUpMidPointsBackingBean.disableButton}"
+								update="@form">
+								<p:dataExporter type="xls" target="table1"
+									fileName="SetUpMidPoint" />
+							</p:commandButton>
+						</center>
+					</p:panel>
+					<p:panel style="display: none;">
+					
+						<p:dataTable id="table1"
+								value="#{setUpMidPointsBackingBean.combineList}"
+								var="details" editable="true" editMode="cell"
+								rowIndexVar="index" styleClass="myTable"
+								emptyMessage="No records available" 
+								lazy="true" paginator="true" rows="100"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="100,200,300">
+
+								<p:column style="padding:1px;" headerText="Abbreviation"
+									id="abbOri">
+									<h:outputText style="width:70%" value="#{details.abbreviation}" />
+								</p:column>
+
+								<p:column style="padding:1px;"
+									headerText="#{setUpMidPointsBackingBean.routeDTO.origin.toUpperCase()}"
+									visible="#{setUpMidPointsBackingBean.visibleColumn}" id="ori">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{details.startTime}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{details.startTime}" style="width:100%"
+												placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:columns value="#{setUpMidPointsBackingBean.generatedColumns}"
+									var="genCol" columnIndexVar="colIndex" id="midOri">
+									<f:facet name="header">
+										<h:outputText value="#{genCol.headerText.toUpperCase()}" />
+									</f:facet>
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{details.takenTime[colIndex]}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{details.takenTime[colIndex]}"
+												style="width:100%" placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:columns>
+
+								<p:column
+									headerText="#{setUpMidPointsBackingBean.routeDTO.destination.toUpperCase()}"
+									visible="#{setUpMidPointsBackingBean.visibleColumn}" id="des">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{details.endTime}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{details.endTime}" style="width:100%"
+												placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+								<p:column style="padding:1px;" headerText="                 ">
+									<h:outputText style="width:70%" />
+								</p:column>
+								
+								<p:column style="padding:1px;" headerText="Abbreviation"
+									id="abbDes">
+									<h:outputText style="width:70%"
+										value="#{details.abbreviationDestination}" />
+								</p:column>
+								
+								<p:column style="padding:1px;"
+									headerText="#{setUpMidPointsBackingBean.routeDTO.destination.toUpperCase()}"
+									visible="#{setUpMidPointsBackingBean.visibleColumn}"
+									id="desOri">
+										<h:outputText value="#{details.startTimeDestination}" />
+								</p:column>
+								
+								<p:columns value="#{setUpMidPointsBackingBean.generatedColumns2}"
+									var="genCol" columnIndexVar="colIndex" >
+									<f:facet name="header">
+										<h:outputText value="#{genCol.headerText.toUpperCase()}" />
+									</f:facet>
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{details.takenTimeDestination[colIndex]}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{details.takenTimeDestination[colIndex]}"
+												style="width:100%" placeholder="HH:mm">
+												<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+											</p:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:columns>
+								
+								<p:column
+									headerText="#{setUpMidPointsBackingBean.routeDTO.origin.toUpperCase()}"
+									visible="#{setUpMidPointsBackingBean.visibleColumn}"
+									id="desDes">
+										<h:outputText value="#{details.endTimeDestination}" />
+								</p:column>
+
+							</p:dataTable>
+							
+					</p:panel>
+					<!-- <p:dataTable id="s"
+						value="#{setUpMidPointsBackingBean.selectedAllOrgToDesBusDetailsList}"
+						var="details" rowIndexVar="index" styleClass="myTable"
+						emptyMessage="No records available" lazy="true" paginator="true"
+						rows="10"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,20,30" style="display: none;">
+
+
+						<p:column style="padding:1px;" headerText="Abbreviation">
+							<h:outputText style="width:70%" value="#{details.abbreviation}" />
+						</p:column>
+
+						<p:column headerText="Permit No." exportable="false">
+							<h:outputText style="width:70%" value="#{details.permitNo}" />
+						</p:column>
+
+						<p:column headerText="Bus No." exportable="false">
+							<h:outputText style="width:70%" value="#{details.busNo}" />
+						</p:column>
+
+						<p:column style="padding:1px;"
+							headerText="#{setUpMidPointsBackingBean.routeDTO.origin.toUpperCase()}"
+							visible="#{setUpMidPointsBackingBean.visibleColumn}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{details.startTime}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{details.startTime}" style="width:100%"
+										placeholder="HH:mm">
+										<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+									</p:inputText>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:columns value="#{setUpMidPointsBackingBean.generatedColumns}"
+							var="genCol" columnIndexVar="colIndex">
+							<f:facet name="header">
+								<h:outputText value="#{genCol.headerText.toUpperCase()}" />
+							</f:facet>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{details.takenTime[colIndex]}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{details.takenTime[colIndex]}"
+										style="width:100%" placeholder="HH:mm">
+										<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+									</p:inputText>
+								</f:facet>
+							</p:cellEditor>
+						</p:columns>
+
+						<p:column
+							headerText="#{setUpMidPointsBackingBean.routeDTO.destination.toUpperCase()}"
+							visible="#{setUpMidPointsBackingBean.visibleColumn}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{details.endTime}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{details.endTime}" style="width:100%"
+										placeholder="HH:mm">
+										<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+									</p:inputText>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column selectionMode="multiple" style="text-align:center;"
+							headerText="Fix Bus" visible="true" exportable="false" />
+
+					</p:dataTable>
+
+					<p:dataTable id="sv"
+						value="#{setUpMidPointsBackingBean.selectedAllDesToOrgBusDetailsList}"
+						var="detailslist" editable="true" editMode="cell"
+						rowIndexVar="index" styleClass="myTable"
+						emptyMessage="No records available" lazy="true" paginator="true"
+						rows="10"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,20,30" style="display: none;">
+
+						<p:column style="padding:1px;" headerText="Abbreviation">
+							<h:outputText style="width:70%"
+								value="#{detailslist.abbreviation}" />
+						</p:column>
+
+						<p:column headerText="Permit No." exportable="false">
+							<h:outputText style="width:70%" value="#{detailslist.permitNo}" />
+						</p:column>
+
+						<p:column headerText="Bus No." exportable="false">
+							<h:outputText style="width:70%" value="#{detailslist.busNo}" />
+						</p:column>
+
+						<p:column style="padding:1px;"
+							headerText="#{setUpMidPointsBackingBean.routeDTO.destination.toUpperCase()}"
+							visible="#{setUpMidPointsBackingBean.visibleColumn}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{detailslist.startTime}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{detailslist.startTime}"
+										style="width:100%" placeholder="HH:mm">
+										<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+									</p:inputText>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:columns value="#{setUpMidPointsBackingBean.generatedColumns2}"
+							var="genCol" columnIndexVar="colIndex">
+							<f:facet name="header">
+								<h:outputText value="#{genCol.headerText.toUpperCase()}" />
+							</f:facet>
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{detailslist.takenTime[colIndex]}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{detailslist.takenTime[colIndex]}"
+										style="width:100%" placeholder="HH:mm">
+										<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+									</p:inputText>
+								</f:facet>
+							</p:cellEditor>
+						</p:columns>
+
+						<p:column
+							headerText="#{setUpMidPointsBackingBean.routeDTO.origin.toUpperCase()}"
+							visible="#{setUpMidPointsBackingBean.visibleColumn}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{detailslist.endTime}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{detailslist.endTime}" style="width:100%"
+										placeholder="HH:mm">
+										<f:validateRegex pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+									</p:inputText>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column selectionMode="multiple" style="text-align:center;"
+							headerText="Fix Bus" visible="true" exportable="false" />
+
+					</p:dataTable> -->
+
+
+					<br></br>
+				</h:form>
+			</div>
+		</div>
+
+
+		<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="errorMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmError">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{setUpMidPointsBackingBean.errorMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmError" onclick="PF('errorMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+			header="Info" width="30%" severity="info" widgetVar="successMessage"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmsuccess">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+						<p:outputLabel value="#{setUpMidPointsBackingBean.successMessage}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmsuccess"
+						onclick="PF('successMessage').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="alertMessage" global="true" modal="true"
+			header="Alert" width="30%" severity="info" widgetVar="alertMSG"
+			closeOnEscape="true" resizable="false">
+
+			<h:form id="frmAlert">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel value="#{setUpMidPointsBackingBean.alertMSG}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="OK" process="frmAlert" onclick="PF('alertMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>
+
+
+
+
+

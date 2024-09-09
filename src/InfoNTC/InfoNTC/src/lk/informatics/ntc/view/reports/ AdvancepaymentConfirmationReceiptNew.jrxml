@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-09-26T10:26:06 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="paymentConfirmationReceiptNew" language="groovy" columnCount="2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="401" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="55eb195e-17f7-4a79-831e-0d4f1a2b70b7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+	<subDataset name="nameandtenderNo" uuid="e3852237-6be2-4c40-a658-5bf49753100a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="voucher_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select o.pmo_full_name,a.pm_vehicle_regno,v.pav_voucher_no
+from public.nt_m_payment_voucher v inner join nt_t_pm_application a 
+on a.pm_application_no = v.pav_application_no inner join nt_t_pm_vehi_owner o
+on a.pm_application_no = o.pmo_application_no
+where v.pav_voucher_no= $P{voucher_no}]]>
+		</queryString>
+		<field name="pmo_full_name" class="java.lang.String"/>
+		<field name="pm_vehicle_regno" class="java.lang.String"/>
+		<field name="pav_voucher_no" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_Voucher_No" class="java.lang.String">
+		<defaultValueExpression><![CDATA["VRN1800007"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select b.pav_permit_no,b.pav_payment_type,a.apd_amount,a.apd_details_of_service,b.pav_voucher_no
+from public.nt_t_advance_payment_det a, public.nt_m_payment_voucher b
+where b.pav_payment_type='AP'
+and b.pav_voucher_no=a.apd_voucher_no
+and b.pav_voucher_no= $P{P_Voucher_No}]]>
+	</queryString>
+	<field name="pav_permit_no" class="java.lang.String"/>
+	<field name="pav_payment_type" class="java.lang.String"/>
+	<field name="apd_amount" class="java.math.BigDecimal"/>
+	<field name="apd_details_of_service" class="java.lang.String"/>
+	<field name="pav_voucher_no" class="java.lang.String"/>
+	<variable name="apd_amount1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{apd_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="26" width="800" height="20" uuid="b8c02559-c134-4f1e-b0d3-9df3b42e9b65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NATIONAL TRANSPORT COMMISSION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="46" width="800" height="20" uuid="4e90df25-1e12-4089-b3f3-40efef56f5fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payement voucher]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="540" y="0" width="260" height="20" isPrintWhenDetailOverflows="true" uuid="afca7bcf-2010-43eb-86d2-ea42dcbe27c4"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pav_permit_no}.isEmpty()?" ":"NTC No : "+$F{pav_permit_no}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="0" y="66" width="539" height="23" uuid="44ec4d71-96dc-4fee-9632-3634437b7684"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="nameandtenderNo" uuid="e2cec3f7-d65e-4c55-911a-675c0fcdef13">
+						<datasetParameter name="voucher_no">
+							<datasetParameterExpression><![CDATA[$P{P_Voucher_No}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="23" width="539">
+						<textField isStretchWithOverflow="true" pattern="###,###,###,###.00" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="539" height="23" isPrintWhenDetailOverflows="true" uuid="bc73bb44-7aee-416f-a88e-bcd239af4040"/>
+							<textFieldExpression><![CDATA[$F{pmo_full_name}.equals( null )?" " :"Name - "+$F{pmo_full_name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="570" y="66" width="229" height="23" uuid="39ed00f7-ffca-47b9-a8ee-b49e6fe7aaeb"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="nameandtenderNo" uuid="e909c5d0-d78f-4d6b-9362-186bca4ef998">
+						<datasetParameter name="voucher_no">
+							<datasetParameterExpression><![CDATA[$P{P_Voucher_No}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="23" width="229">
+						<textField>
+							<reportElement x="0" y="0" width="229" height="23" uuid="1e22192a-8ac0-453a-84bc-ab9c49ec2cae"/>
+							<textElement textAlignment="Right" verticalAlignment="Top">
+								<font isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Tender/Vehicle No.  : "+$F{pm_vehicle_regno}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="200" height="20" uuid="502a8b6e-345d-47fe-96ee-8bb5911b622e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Reason For Charge]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="200" y="0" width="100" height="20" uuid="3c686f34-1957-43cf-8340-0fc924458755"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Fee(Rs.)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="200" height="20" uuid="f4a013e9-0165-48d0-9b47-f266c869ea2d"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apd_details_of_service}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###,###,###.00">
+				<reportElement x="200" y="0" width="100" height="20" uuid="3f505aee-d25f-43d9-b9a6-d4dc24b07715"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apd_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="63" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="0" width="40" height="20" isPrintInFirstWholeBand="true" uuid="bbfb680e-28b4-4769-a2be-8e6fef060f93">
+					<printWhenExpression><![CDATA[$V{COLUMN_COUNT}==19?( new Boolean($V{COLUMN_NUMBER}==2)): (new Boolean($V{COLUMN_NUMBER}==1))]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="28" width="60" height="18" uuid="8ac262be-55c4-49f6-9d15-53f0b3c60d69">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Voucher No.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="41" width="100" height="16" uuid="fa1330ea-75eb-48f0-a219-32699b597e76">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="29" width="120" height="18" uuid="9cc42514-6fd4-4927-8ca6-7e0312688376"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[..........................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="41" width="190" height="18" uuid="4b708a01-c3b0-42c6-b3e7-a5511537d7e4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none"/>
+				<text><![CDATA[Director]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="23" width="190" height="18" uuid="a00b008b-844d-4e33-bbaa-923381626eea">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="699" y="23" width="100" height="18" uuid="112c72a7-a4a9-418e-b1cd-79fad3e04144">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[...............................................]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="60" y="26" width="140" height="31" isPrintWhenDetailOverflows="true" uuid="6f7c7819-2c31-462d-920b-984bcfe8e88a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{P_Voucher_No}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="700" y="21" width="100" height="22" uuid="bd814083-57a6-48ab-b6fe-477e8aa6d230"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###,###,###.00">
+				<reportElement x="200" y="0" width="100" height="20" uuid="f4589c4a-d0ec-4369-8a0d-c33ef5fd5d40">
+					<printWhenExpression><![CDATA[$V{COLUMN_COUNT}==19?( new Boolean($V{COLUMN_NUMBER}==2)): (new Boolean($V{COLUMN_NUMBER}==1))]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{apd_amount1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

@@ -1,0 +1,569 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+#Dob {
+	width: 80% !important;
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h1
+				style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+				class="common_form_header">Edit Initiate Survey Process</h1>
+
+			<div style="width: 95%;" class="subDiv">
+
+
+
+				<h:form id="frmSurveyProcess">
+
+
+					<p:panel>
+
+
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+
+
+							<p:outputLabel>Survey Request No.<p:outputLabel
+									value="*" style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+
+
+							<p:selectOneMenu id="surveyReqNo" style="width:185px"
+								value="#{editInitiateSurveyProcessBackingBean.selectrequestNo}"
+								disabled="#{editInitiateSurveyProcessBackingBean.dissableReqSurNO}"
+								effect="fold" filter="true" filterMatchMode="contains"
+								tabindex="1">
+								<p:ajax
+									listener="#{editInitiateSurveyProcessBackingBean.fillSurveyNo}"
+									update="surveyNo,reqDate" />
+
+								<f:selectItem itemLabel="--Select Survey Request No.--"
+									itemValue="" noSelectionOption="true" />
+								<f:selectItems
+									value="#{editInitiateSurveyProcessBackingBean.surveyRequestNoList}"
+									var="surveyRequestNoList"
+									itemLabel="#{surveyRequestNoList.requestNo}"
+									itemValue="#{surveyRequestNoList.requestNo}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Survey No.<p:outputLabel value="*"
+									style="color:red;"></p:outputLabel>
+							</p:outputLabel>
+
+
+							<p:selectOneMenu id="surveyNo" style="width:185px"
+								value="#{editInitiateSurveyProcessBackingBean.selectSurveyNo}"
+								disabled="#{editInitiateSurveyProcessBackingBean.dissableSurNO}"
+								effect="fold" filter="true" filterMatchMode="contains"
+								tabindex="1">
+								<p:ajax
+									listener="#{editInitiateSurveyProcessBackingBean.fillSurveyReqNo}"
+									update="surveyReqNo,reqDate" />
+
+								<f:selectItem itemLabel="--Select Surevey  No.--" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{editInitiateSurveyProcessBackingBean.surveyNoList}"
+									var="surveyNoList" itemLabel="#{surveyNoList.surveyNo}"
+									itemValue="#{surveyNoList.surveyNo}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>Request Date</p:outputLabel>
+
+
+							<p:inputText style="width:200px" id="reqDate"
+								value="#{editInitiateSurveyProcessBackingBean.selectRequestDate}"
+								readonly="true"></p:inputText>
+
+
+						</p:panelGrid>
+						<br />
+
+						<center>
+							<p:panel style="border-bottom:5px solid #404d6f;">
+								<!-- 								Search button -->
+								<p:commandButton styleClass="mainActionbtn" value="Search"
+									ajax="false" update="@all"
+									action="#{editInitiateSurveyProcessBackingBean.searchDetail}"></p:commandButton>
+								<!-- 								Clear button -->
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									ajax="false" update="@all"
+									action="#{editInitiateSurveyProcessBackingBean.clearSearchDetail}"></p:commandButton>
+							</p:panel>
+						</center>
+						<br />
+
+
+
+
+
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-3,ui-grid-col-4" layout="grid">
+
+							<!-- Tab 01 > panel 02 : row 01 -->
+							<p:outputLabel>Organization</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								id="organization"
+								value="#{editInitiateSurveyProcessBackingBean.selectOrganization}"
+								readonly="true">
+							</p:inputText>
+
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel></p:outputLabel>
+
+							<p:outputLabel>Department</p:outputLabel>
+
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								id="dept"
+								value="#{editInitiateSurveyProcessBackingBean.selectDepartmrnt}"
+								readonly="true">
+							</p:inputText>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+
+
+							<p:outputLabel>Request Type</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								id="reqType"
+								value="#{editInitiateSurveyProcessBackingBean.selectRequestType}"
+								readonly="true">
+							</p:inputText>
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+
+
+							<p:outputLabel>Route Available</p:outputLabel>
+							<p:selectBooleanCheckbox
+								value="#{editInitiateSurveyProcessBackingBean.selectRouteAvailable}"
+								disabled="true" readonly="true" />
+
+							<p:outputPanel></p:outputPanel>
+							<p:outputLabel></p:outputLabel>
+							<br />
+
+							<p:outputPanel></p:outputPanel>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+
+						</p:panelGrid>
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid">
+
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>
+								<b>Existing Route</b>
+							</p:outputLabel>
+							<p:outputLabel></p:outputLabel>
+							<p:outputLabel>
+								<b>New Route</b>
+							</p:outputLabel>
+
+
+
+
+							<p:outputLabel>Route No.</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								value="#{editInitiateSurveyProcessBackingBean.selectRouteNo}"
+								id="RouteNO" readonly="true">
+							</p:inputText>
+							<p:outputLabel>Route No.</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								value="#{editInitiateSurveyProcessBackingBean.selectRouteNoNew}"
+								id="RouteNONew" readonly="true">
+							</p:inputText>
+							<p:outputLabel>Origin</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								id="origin"
+								value="#{editInitiateSurveyProcessBackingBean.selecteOrigin}"
+								onkeyup="this.value=this.value.toUpperCase();" readonly="true">
+							</p:inputText>
+
+							<p:outputLabel>Origin</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								id="newOrg"
+								value="#{editInitiateSurveyProcessBackingBean.selecteOriginNew}"
+								onkeyup="this.value=this.value.toUpperCase();" readonly="true">
+							</p:inputText>
+							<p:outputLabel>Destination</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								id="destination"
+								value="#{editInitiateSurveyProcessBackingBean.selectDestination}"
+								onkeyup="this.value=this.value.toUpperCase();" readonly="true">
+							</p:inputText>
+
+
+
+							<p:outputLabel>Destination</p:outputLabel>
+							<p:inputText style="width:100%;height:18px;" maxlength="50"
+								id="destinationNew"
+								value="#{editInitiateSurveyProcessBackingBean.selectDestinationNew}"
+								onkeyup="this.value=this.value.toUpperCase();" readonly="true">
+							</p:inputText>
+
+							<p:outputLabel>Via</p:outputLabel>
+							<p:inputTextarea
+								value="#{editInitiateSurveyProcessBackingBean.selectVia}"
+								id="viaId" rows="4" style="width:100%;" readonly="true" />
+
+
+							<p:outputLabel>Via</p:outputLabel>
+							<p:inputTextarea rows="4" style="width:100%;"
+								value="#{editInitiateSurveyProcessBackingBean.selectViaNew}"
+								id="viaIdNew" readonly="true" />
+
+							<p:outputLabel>Service Type</p:outputLabel>
+							<p:inputTextarea rows="4" style="width:100%;"
+								value="#{editInitiateSurveyProcessBackingBean.selectServiceType}"
+								id="serviceType" readonly="true" />
+
+							<p:outputLabel>Total Bus Fare (Rs.)</p:outputLabel>
+							<p:inputNumber maxlength="10" readonly="true"
+								inputStyle="text-align: right;width:100%;"
+								value="#{editInitiateSurveyProcessBackingBean.showDataDTO.busFare}">
+							</p:inputNumber>
+
+
+						</p:panelGrid>
+						<panel> <p:panelGrid columns="2"
+							columnClasses="ui-grid-col-3,ui-grid-col-9" layout="grid">
+
+
+
+
+
+							<p:outputLabel>Reason for Survey</p:outputLabel>
+							<p:inputTextarea rows="5" style="width:100%" readonly="true"
+								id="reason"
+								value="#{editInitiateSurveyProcessBackingBean.selectSurveyReason}" />
+						</p:panelGrid> </panel>
+					</p:panel>
+					<p:panel style="border-bottom:5px solid #404d6f;">
+					</p:panel>
+				</h:form>
+
+
+
+
+
+				<br />
+
+				<h:form id="frmButtons">
+
+					<!-- Panel : Buttons -->
+					<panel> <p:panelGrid columns="4"
+						columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3"
+						layout="grid">
+
+						<p:outputLabel></p:outputLabel>
+
+
+
+						<p:outputLabel>Survey Type<p:outputLabel value="*"
+								style="color:red;"></p:outputLabel>
+						</p:outputLabel>
+
+
+						<p:selectOneMenu id="surveyType" style="width:170px"
+							value="#{editInitiateSurveyProcessBackingBean.selectSurveyType}"
+							effect="fold">
+
+
+							<f:selectItem itemLabel="--Select Survey Type.--" itemValue=""
+								noSelectionOption="false" />
+							<f:selectItems
+								value="#{editInitiateSurveyProcessBackingBean.surveyTypeList}"
+								var="surveyTypeList"
+								itemValue="#{surveyTypeList.surveyTypeCode}"
+								itemLabel="#{surveyTypeList.surveyTypeDescription}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel></p:outputLabel>
+						<p:outputLabel></p:outputLabel>
+						<p:outputLabel>Survey Method <p:outputLabel
+								value="*" style="color:red;"></p:outputLabel>
+						</p:outputLabel>
+
+						<p:selectOneMenu id="surveyMethod" style="width:170px"
+							value="#{editInitiateSurveyProcessBackingBean.selectSurveyMethod}"
+							effect="fold">
+
+
+							<f:selectItem itemLabel="--Select Survey Method.--" itemValue=""
+								noSelectionOption="false" />
+							<f:selectItems
+								value="#{editInitiateSurveyProcessBackingBean.surveyMethodList}"
+								var="surveyMethodList"
+								itemValue="#{surveyMethodList.surveyMethodCode}"
+								itemLabel="#{surveyMethodList.surveyMethodDescription}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel></p:outputLabel>
+						<p:outputLabel></p:outputLabel>
+						<p:outputLabel value="Remark" for="remark">
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:outputLabel>
+
+
+
+						<p:inputTextarea rows="5" counter="display" maxlength="100"
+							counterTemplate="{0} characters remaining." id="remark"
+							style="width:65%"
+							value="#{editInitiateSurveyProcessBackingBean.selectremarks}"
+							onkeyup="this.value=this.value.toUpperCase();" >
+							
+							</p:inputTextarea>
+						<h:outputText id="display" />
+
+
+					</p:panelGrid> </panel>
+
+
+					<br></br>
+					<center>
+						<p:commandButton styleClass="mainLinkButton" value="Save"
+							ajax="false" update="@all"
+							action="#{editInitiateSurveyProcessBackingBean.save}"></p:commandButton>
+
+
+						<p:commandButton styleClass="mainLinkButton" value="Clear"
+							ajax="false" update="@all"
+							action="#{editInitiateSurveyProcessBackingBean.clearSurDet}"></p:commandButton>
+
+					</center>
+
+					<br></br>
+
+
+				</h:form>
+				<p:dialog styleClass="" id="errorMSG" global="true" modal="true"
+					header="Error" width="30%" severity="info" widgetVar="errorMessage"
+					closeOnEscape="true" resizable="false">
+
+					<h:form id="frmError">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+
+								<p:outputLabel
+									value="#{editInitiateSurveyProcessBackingBean.errorMessage}"></p:outputLabel>
+
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								value="OK" process="frmError"
+								onclick="PF('errorMessage').hide()">
+							</p:commandButton>
+						</center>
+					</h:form>
+				</p:dialog>
+
+				<p:dialog styleClass="" id="successMSG" global="true" modal="true"
+					header="Success" width="30%" severity="info"
+					widgetVar="successMessage" closeOnEscape="true" resizable="false">
+
+					<h:form id="frmsuccess">
+						<center>
+							<p:panelGrid columns="2" styleClass="ui-noborder">
+								<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+
+								<p:outputLabel
+									value="#{editInitiateSurveyProcessBackingBean.successMessage}"></p:outputLabel>
+
+							</p:panelGrid>
+							<br></br>
+							<p:commandButton style="margin-top:10px;margin-bottom:10px"
+								value="OK" process="frmsuccess"
+								onclick="PF('successMessage').hide()">
+							</p:commandButton>
+						</center>
+					</h:form>
+				</p:dialog>
+
+			</div>
+		</div>
+
+
+
+
+
+	</ui:define>
+</ui:composition>

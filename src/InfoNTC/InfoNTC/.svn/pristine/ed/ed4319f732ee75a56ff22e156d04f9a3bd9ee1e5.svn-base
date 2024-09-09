@@ -1,0 +1,1359 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+
+		<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,
+		#bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn1 {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 180px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.internalPanel .ui-panelgrid-cell {
+	padding: 5px 0px;
+}
+
+.internalInput .ui-panelgrid-cell {
+	padding: 0px;
+}
+
+.calendarClass input {
+	width: 78% !important
+}
+</style>
+
+
+		<div class="mainDiv">
+			<h:form id="mainxx">
+				<h1
+					style="margin-top: 0%; text-align: center; color: #ffffff; background-color: #404d6f !important;"
+					class="common_form_header">Request For Gami Sariya</h1>
+
+				<div style="width: 95%;" class="subDiv">
+
+
+
+					<p:tabView id="tabviewId"
+						activeIndex="#{requestForGamiSeriyaBackingBean.activeIndex}">
+
+						<p:tab title="Requestor Information" id="tbReqInfo">
+
+							<p:panel>
+								<p:panelGrid id="searchPanel" columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-3,ui-grid-col-4"
+									layout="grid">
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Request No." for="requestNoId"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputText style="width:93%;height:18px; color:red;"
+											readonly="true" id="requestNoId"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO.requestNo}"></p:inputText>
+
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Prefered Language" for="prefLang"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="prefLang" tabindex="1"
+											style="width:84%; "
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO.preferedLanguage}"
+											effect="fold" filter="true" filterMatchMode="contains">
+
+											<f:selectItem itemLabel="-- Select Language --" itemValue="" />
+											<f:selectItem itemLabel="ENGLISH" itemValue="ENG" />
+											<f:selectItem itemLabel="SINHALA" itemValue="SIN" />
+											<f:selectItem itemLabel="TAMIL" itemValue="TAM" />
+
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value=" Request Date" for="dateId"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:calendar id="dateId" inputStyle="width:88%" tabindex="2"
+											styleClass="calendarClass"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO.requestDate}"
+											yearRange="c-100:c+100" navigator="true"
+											placeholder="DD/MM/YYYY" locale="en_US" showOn="button"
+											pattern="dd/MM/yyyy" />
+
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+
+									<p:panelGrid></p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Requestor Type." for="reqType"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:selectOneMenu id="reqType" tabindex="3" style="width:84%; "
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO.requestortype}"
+											effect="fold" filter="true" filterMatchMode="contains">
+											<f:selectItem itemLabel="-- Select Requestor Type --"
+												itemValue="" />
+											<f:selectItems
+												value="#{requestForGamiSeriyaBackingBean.requestorTypeList}"
+												var="filterApplalicationNoList"
+												itemValue="#{filterApplalicationNoList.requestorCode}"
+												itemLabel="#{filterApplalicationNoList.requestortype}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<p:panelGrid></p:panelGrid>
+								</p:panelGrid>
+								<br></br>
+								<p:panelGrid columns="3"
+									columnClasses="ui-grid-col-3,ui-grid-col-5,ui-grid-col-4"
+									layout="grid">
+									<p:panelGrid></p:panelGrid>
+									<p:commandButton styleClass="mainActionbtn" value="Clear"
+										style="width:100%"
+										actionListener="#{requestForGamiSeriyaBackingBean.clearRequestInfo}"
+										id="btn-clearRequestInfo" process="@all" update="@form"></p:commandButton>
+									<p:panelGrid></p:panelGrid>
+								</p:panelGrid>
+								<p:panel style="border-bottom:5px solid #404d6f;" />
+							</p:panel>
+
+
+
+							<br></br>
+
+							<p:panelGrid id="shwDetail" columns="4"
+								columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-3,ui-grid-col-3"
+								layout="grid">
+								<p:panelGrid>
+									<p:outputLabel value="Requestor Information"
+										style="color:blue;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid></p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="ID No." for="idNo"></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText style="width:71%;height:18px;" tabindex="4"
+										maxlength="11"
+										value="#{requestForGamiSeriyaBackingBean.gamiDTO.idNo}"
+										id="idNo" onkeyup="this.value=this.value.toUpperCase();">
+
+										<p:ajax
+											listener="#{requestForGamiSeriyaBackingBean.getRequesterInfoByNicNo}"
+											process="@form" update="@form" />
+                                       
+									</p:inputText>
+									<p:message for="idNo" display="icon" />
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Telephone No." for="telNo"></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+
+
+									<p:inputText style="width:95%;height:18px;" tabindex="5"
+										onkeyup="this.value=this.value.toUpperCase();"
+										value="#{requestForGamiSeriyaBackingBean.gamiDTO.telephoneNo}"
+										id="telNo" maxlength="10">
+
+										<p:keyFilter regEx="/[\d\-\.]/" />
+									</p:inputText>
+
+
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Mobile No." for="mobNo"></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText id="mobNo" style="width:71%;height:18px;"
+										tabindex="6" onkeyup="this.value=this.value.toUpperCase();"
+										maxlength="10"
+										value="#{requestForGamiSeriyaBackingBean.gamiDTO.mobileNo}">
+										<p:keyFilter regEx="/[\d\-\.]/" />
+									</p:inputText>
+
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="E-mail" for="email"></p:outputLabel>
+
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText id="email" style="width:95%;height:18px;"
+										tabindex="7"
+										value="#{requestForGamiSeriyaBackingBean.gamiDTO.email}">
+										<p:ajax
+											listener="#{requestForGamiSeriyaBackingBean.validateEmail}"
+											process="@form" update="@form" />
+											<f:validateRegex
+											pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+									</p:inputText>
+								</p:panelGrid>
+							</p:panelGrid>
+
+							<p:panelGrid columns="2"
+								columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">
+								<p:panelGrid>
+									<p:outputLabel value="Name in Full" for="name"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+								<p:panelGrid>
+									<p:inputText style="width:99%;height:18px;" tabindex="8"
+										maxlength="50"
+										value="#{requestForGamiSeriyaBackingBean.gamiDTO.nameinFull}"
+										id="name" onkeyup="this.value=this.value.toUpperCase();">
+                                      
+									</p:inputText>
+
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:outputLabel value="Name in Full (Sinhala)" for="nameSinhala"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:inputText style="width:99%;height:18px;" tabindex="9"
+										maxlength="50"
+										value="#{requestForGamiSeriyaBackingBean.gamiDTO.nameinFullSinhala}"
+										id="nameSinhala"
+										onkeyup="this.value=this.value.toUpperCase();">
+									</p:inputText>
+								</p:panelGrid>
+
+
+								<p:panelGrid>
+									<p:outputLabel value="Name in Full (Tamil)" for="nameTamil"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:panelGrid>
+									<p:inputText style="width:99%;height:18px;" tabindex="10"
+										value="#{requestForGamiSeriyaBackingBean.gamiDTO.nameinFullTamil}"
+										onkeyup="this.value=this.value.toUpperCase();" maxlength="50"
+										id="nameTamil">
+									</p:inputText>
+
+								</p:panelGrid>
+							</p:panelGrid>
+
+							<p:panelGrid columns="4" style="margin-top: 1%;margin-bottom:1%"
+								columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3"
+								layout="grid">
+
+
+								<p:outputLabel value="Address in" style="font-weight: bold;"></p:outputLabel>
+								<p:outputLabel value="Address Line 1" style="font-weight: bold;"></p:outputLabel>
+								<p:outputLabel value="Address Line 2" style="font-weight: bold;"></p:outputLabel>
+								<p:outputLabel value="City" style="font-weight: bold;"></p:outputLabel>
+
+
+								<p:panelGrid>
+									<p:outputLabel value="English"></p:outputLabel>
+									<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+								</p:panelGrid>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="11"
+									value="#{requestForGamiSeriyaBackingBean.gamiDTO.address1}"
+									maxlength="10" id="address1"
+									onkeyup="this.value=this.value.toUpperCase();">
+								
+								</p:inputText>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="12"
+									value="#{requestForGamiSeriyaBackingBean.gamiDTO.address2}"
+									onkeyup="this.value=this.value.toUpperCase();" id="address2">
+								
+								</p:inputText>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="13"
+									value="#{requestForGamiSeriyaBackingBean.gamiDTO.city}"
+									onkeyup="this.value=this.value.toUpperCase();" id="city">
+								
+								</p:inputText>
+
+
+								<p:outputLabel value="Sinhala">
+								</p:outputLabel>
+
+
+								<p:inputText style="width:95%;height:18px;" tabindex="13"
+									value="#{requestForGamiSeriyaBackingBean.gamiDTO.address1sinhala}"
+									id="address1Sinhala"
+									onkeyup="this.value=this.value.toUpperCase();">
+								</p:inputText>
+								<p:inputText style="width:95%;height:18px;" tabindex="14"
+									value="#{requestForGamiSeriyaBackingBean.gamiDTO.address2Sinhala}"
+									onkeyup="this.value=this.value.toUpperCase();"
+									id="address2Sinhala">
+								</p:inputText>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="15"
+									value="#{requestForGamiSeriyaBackingBean.gamiDTO.citySinhala}"
+									onkeyup="this.value=this.value.toUpperCase();" id="citySinhala">
+								</p:inputText>
+
+
+								<p:outputLabel value="Tamil">
+								</p:outputLabel>
+
+								<p:inputText style="width:95%;height:18px;" tabindex="16"
+									value="#{requestForGamiSeriyaBackingBean.gamiDTO.address1Tamil}"
+									onkeyup="this.value=this.value.toUpperCase();"
+									id="address1Tamil"></p:inputText>
+
+
+
+								<p:inputText style="width:95%;height:18px;" tabindex="17"
+									onkeyup="this.value=this.value.toUpperCase();"
+									value="#{requestForGamiSeriyaBackingBean.gamiDTO.address2Tamil}"
+									id="address2Tamil"></p:inputText>
+
+
+								<p:inputText style="width:95%;height:18px;" tabindex="18"
+									value="#{requestForGamiSeriyaBackingBean.gamiDTO.cityTamil}"
+									onkeyup="this.value=this.value.toUpperCase();" id="cityTamil"></p:inputText>
+
+							</p:panelGrid>
+
+							<br></br>
+							<p:panelGrid columns="4" style="margin-top: 1%;margin-bottom:1%"
+								columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+								layout="grid">
+								<p:panelGrid></p:panelGrid>
+								<p:commandButton styleClass="mainActionbtn" value="Save"
+									process="@all" style="width:100%" tabindex="19"
+									actionListener="#{requestForGamiSeriyaBackingBean.save}"
+									disabled="#{requestForGamiSeriyaBackingBean.saveCheck}"
+									id="cmdbtnOwnerSave" update=":mainxx"></p:commandButton>
+
+								<p:commandButton styleClass="mainActionbtn" value="Clear"
+									style="width:100%"
+									actionListener="#{requestForGamiSeriyaBackingBean.clearRequestorInfo}"
+									tabindex="20" id="cmdbtnOwnerClear" process="@all"
+									update="@form"></p:commandButton>
+								<p:panelGrid></p:panelGrid>
+							</p:panelGrid>
+						</p:tab>
+
+						<p:tab title="Request Route Information" id="reqRouteInfo"
+							disabled="#{requestForGamiSeriyaBackingBean.tabCheck}">
+
+
+							<p:panel>
+								<p:panelGrid id="shwDetail3" columns="4"
+									columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+									layout="grid">
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Origin" for="orginRouteInfo"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="1"
+											maxlength="50"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.origin}"
+											id="orginRouteInfo"
+											onkeyup="this.value=this.value.toUpperCase();">
+                                        
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Destination" for="destiRouteInfo"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="7"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.destination}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											id="destiRouteInfo">
+										
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Origin(Sinhala)"
+											for="originSinRouteInfo"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="2"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.originSinhala}"
+											id="originSinRouteInfo"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+
+
+										<p:outputLabel value="Destination(Sinhala)"
+											for="destiSinRouteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+
+										<p:inputText style="width:95%;height:18px;" tabindex="8"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.destinationSinhala}"
+											id="destiSinRouteInfo"
+											onkeyup="this.value=this.value.toUpperCase();"></p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Origin(Tamil)" for="originTamiRouteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="3"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.destinationTamil}"
+											id="originTamiRouteInfo"
+											onkeyup="this.value=this.value.toUpperCase();">
+										</p:inputText>
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Destination (Tamil)"
+											for="destiTamRouteInfo"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="9"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.destinationTamil}"
+											onkeyup="this.value=this.value.toUpperCase();"
+											id="destiTamRouteInfo">
+										</p:inputText>
+
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Via" for="viaRoteInfo"></p:outputLabel>
+										<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText style="width:95%;height:18px;" tabindex="4"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.via}"
+											id="viaRoteInfo"
+											onkeyup="this.value=this.value.toUpperCase();">
+										
+											</p:inputText>
+
+									</p:panelGrid>
+
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Province " for="provinceScl"></p:outputLabel>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:selectOneMenu id="provinceScl" tabindex="10"
+											style="width:84%; "
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.province}"
+											effect="fold" filter="true" filterMatchMode="contains">
+
+											<f:selectItem itemLabel="-- Select Province --" itemValue="" />
+											<f:selectItems
+												value="#{requestForGamiSeriyaBackingBean.provinceList}"
+												var="filterApplalicationNoList"
+												itemValue="#{filterApplalicationNoList.description}"
+												itemLabel="#{filterApplalicationNoList.description}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+
+
+									<p:panelGrid>
+										<p:outputLabel value="Via (Sinhala)" for="viaSinRoutInfo"></p:outputLabel>
+
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="viaSinRoutInfo" tabindex="5"
+											style="width:95%;height:18px;"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.viaSinhala}"></p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Total Length(KM)" for="totLength"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="totLength" tabindex="11"
+											style="width:75%;height:18px;text-align:right"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.totalLength}"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:keyFilter regEx="/[\d\-\.]/" />
+										</p:inputText>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:outputLabel value="Via(Tamil)" for="viaTamRouteInfo2"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="viaTamRouteInfo2" tabindex="6"
+											style="width:95%;height:18px;"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.viaTamil}"
+											onkeyup="this.value=this.value.toUpperCase();"></p:inputText>
+									</p:panelGrid>
+
+									<p:panelGrid>
+										<p:outputLabel value="Unserved Portion (KM)"
+											for="unserPotionKm"></p:outputLabel>
+									</p:panelGrid>
+									<p:panelGrid>
+										<p:inputText id="unserPotionKm" tabindex="12"
+											style="width:75%;height:18px; text-align:right;"
+											value="#{requestForGamiSeriyaBackingBean.gamiDTO2.unservedPotion}"
+											onkeyup="this.value=this.value.toUpperCase();">
+											<p:keyFilter regEx="/[\d\-\.]/" />
+										</p:inputText>
+
+									</p:panelGrid>
+
+								</p:panelGrid>
+								<br></br>
+								<center>
+
+									<p:commandButton styleClass="mainActionbtn" value="Add"
+										action="#{requestForGamiSeriyaBackingBean.add}" update="@form"
+										ajax="true" tabindex="13">
+									</p:commandButton>
+									<p:commandButton styleClass="mainActionbtn" value="Clear"
+										update="@form" process="@form" tabindex="14"
+										action="#{requestForGamiSeriyaBackingBean.clear2}"></p:commandButton>
+
+
+								</center>
+
+							</p:panel>
+							<p:panel>
+
+								<center>
+
+									<p:dataTable id="e" var="table"
+										value="#{requestForGamiSeriyaBackingBean.tableList}" rows="5"
+										paginator="true" width="98%"
+										selection="#{requestForGamiSeriyaBackingBean.selectedRow}"
+										rowKey="#{table.seqNo}" selectionMode="single"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										tableStyle="width:auto" rowsPerPageTemplate="10,20"
+										resizableColumns="false" liveResize="true" rowIndexVar="index"
+										styleClass="myTable" emptyMessage="No records are available">
+
+										<p:ajax event="rowSelect"
+											listener="#{requestForGamiSeriyaBackingBean.onRowSelect}"
+											update="@form" />
+										<p:column headerText="" style="text-align:center;width:3%">
+											<f:facet name=" header">
+												<h:outputText value="index" />
+											</f:facet>
+											<h:outputText value="#{index + 1}"></h:outputText>
+										</p:column>
+										<p:column headerText="Seq No." style="text-align:left;"
+											visible="false">
+											<h:outputText style="text-align:left;width:5%"
+												value="#{table.seqNo}" visible="false" />
+										</p:column>
+										<p:column headerText="Origin" style="text-align:left;"
+											visible="true">
+											<h:outputText style="text-align:left;width:15%"
+												value="#{table.origin}" visible="true" />
+										</p:column>
+										<p:column headerText="Destination" style="text-align:left;">
+											<h:outputText style="width:15%;text-align:left;"
+												value="#{table.destination}" />
+										</p:column>
+
+										<p:column headerText="Via" style="text-align:left;">
+											<h:outputText style="width:20%;text-align:left;"
+												value="#{table.via}" />
+										</p:column>
+										<p:column headerText="Province" style="text-align:left;">
+											<h:outputText style="text-align:left;width:20%"
+												value="#{table.province}" />
+										</p:column>
+										<p:column headerText="Total Length(KM)"
+											style="text-align:right;">
+											<h:outputText style="text-align:left;width:10%"
+												value="#{table.totalLength}" />
+										</p:column>
+										<p:column headerText="Unserved Portion (KM)"
+											style="text-align:right;">
+											<h:outputText style="text-align:left;width:10%"
+												value="#{table.unservedPotion}" />
+										</p:column>
+
+										<p:column style="">
+											<center>
+												<p:commandLink
+													action="${requestForGamiSeriyaBackingBean.delete()}"
+													update="@form" process="@form">
+
+													<f:setPropertyActionListener value="#{table}"
+														target="#{requestForGamiSeriyaBackingBean.selectedRow}" />
+
+
+													<p:graphicImage library="images" name="delete.png"
+														style="width:24px;height:24px;" title="delete"></p:graphicImage>
+												</p:commandLink>
+											</center>
+
+										</p:column>
+
+
+									</p:dataTable>
+								</center>
+
+							</p:panel>
+
+							<br></br>
+							<center>
+
+
+								<p:commandButton styleClass="mainActionbtn1" tabindex="17"
+									action="#{requestForGamiSeriyaBackingBean.documentManagement}"
+									value="Document Managment" update="uploadDocumentsDialog"></p:commandButton>
+								<p:commandButton styleClass="mainActionbtn1" tabindex="18"
+									value="Generate Letter-PRPTA" update="@form"></p:commandButton>
+
+
+
+							</center>
+
+						</p:tab>
+
+
+					</p:tabView>
+				</div>
+			</h:form>
+		</div>
+		<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Error" width="30%" severity="info" widgetVar="requiredField"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{requestForGamiSeriyaBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK"
+						onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog styleClass="" id="successSve" global="true" modal="true"
+			header="Success" width="30%" severity="info" widgetVar="successSve"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{requestForGamiSeriyaBackingBean.sucessMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1"
+						style="margin-top:10px;margin-bottom:10px" process="frmsuccessSve"
+						update="@form" value="OK" onclick="PF('successSve').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+		<p:dialog styleClass="" id="warning" global="true" modal="true"
+			header="Info" width="30%" severity="info" widgetVar="warning"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmWarning">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning_24.png"></p:graphicImage>
+						<p:outputLabel
+							value="#{logsheetMaintenanceBackingBean.warningMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1"
+						style="margin-top:10px;margin-bottom:10px" process="frmWarning"
+						update="@form" value="OK" onclick="PF('warning').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+
+
+		<p:dialog
+			styleClass="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+			id="uploadDocumentsDialog" global="true" modal="true"
+			header="Upload Documents" width="80%" height="400px" severity="info"
+			widgetVar="uploadDocument" closeOnEscape="true" resizable="false"
+			style="postion: absolute;">
+
+
+			<h:form id="frmdoc">
+
+				<p:tabView>
+					<p:tab title="Upload Documents">
+
+						<p:accordionPanel>
+							<p:growl id="msgs" showDetail="false" />
+							<p:tab title="Mandatory Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abc" tableStyle="width:auto"
+										var="docMandatory"
+										value="#{requestForGamiSeriyaBackingBean.mandatoryList}"
+										rows="5" paginator="true" sortOrder="ascending"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docMandatory.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docMandatory.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+
+											<h:outputText value="#{docMandatory.uploadFilePath}" />
+										</p:column>
+
+										<p:column
+											headerText="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+											style="width: 150px !important;">
+
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveGamiSariyaMandatoryUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640">
+												
+
+												<f:attribute name="uploadedObj" value="#{docMandatory}" />
+
+											</p:fileUpload>
+
+										</p:column>
+
+									</p:dataTable>
+								</h:panelGrid>
+
+							</p:tab>
+						</p:accordionPanel>
+
+						<br></br>
+						<br></br>
+
+						<p:accordionPanel>
+							<p:growl id="msgse" showDetail="false" />
+							<p:tab title="Optional Documents">
+
+
+								<h:panelGrid>
+									<p:dataTable id="abcd" tableStyle="width:auto"
+										var="docOptional"
+										value="#{requestForGamiSeriyaBackingBean.optionalList}"
+										rows="5" paginator="true" sortOrder="ascending"
+										scrollable="true" scrollHeight="100%" liveResize="true"
+										liveScroll="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+
+
+										<p:column headerText="Code" style="width: 100px;">
+											<h:outputText value="#{docOptional.doc_Code}" />
+										</p:column>
+										<p:column headerText="Description" style="width: 300px;">
+											<h:outputText value="#{docOptional.add_Doc_Description}" />
+										</p:column>
+										<p:column headerText="File Path" style="width: 300px;">
+											<h:outputText value="#{docOptional.uploadOptionalFilePath}" />
+										</p:column>
+
+										<p:column
+											headerText="#{editPermitIssuanceBackingBean.strSelectedTitle}"
+											style="width: 150px;">
+											<p:fileUpload
+												fileUploadListener="#{documentManagementBean.saveGamiSariyaOptionalUploadDocuments}"
+												mode="advanced" dragDropSupport="false" multiple="true"
+												auto="true" showButtons="false" update="@form" fileLimit="1"
+												accept=".pdf,.jpg,.jpeg,.png"
+												allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" sizeLimit="15728640"
+												fileLimitMessage="Please Upload Only One Document">
+												
+
+												<f:attribute name="uploadedOptionalObj"
+													value="#{docOptional}" />
+
+
+
+											</p:fileUpload>
+
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+
+					</p:tab>
+
+					<p:tab title="Upload History">
+
+
+						<p:accordionPanel multiple="true">
+							<p:growl showDetail="false" />
+							<p:tab title="Gami Sariya - Request No.(Documents)"
+								closable="true">
+
+
+								<p:accordionPanel id="dkfj">
+									<p:growl id="NP" showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable id="mandatoryNP" tableStyle="width:auto"
+												var="docMandatory"
+												value="#{sessionBackingBean.sisuSariyaMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable id="optionalNP" tableStyle="width:auto"
+												var="docOptional"
+												value="#{sessionBackingBean.sisuSariyaOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+							<br></br>
+
+							<p:tab title="Gami Sariya - Survey Request No.(Documents)"
+								closable="true">
+
+
+								<p:accordionPanel>
+									<p:growl showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docMandatory"
+												value="#{sessionBackingBean.sisuSariyaServiceRefMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docOptional"
+												value="#{sessionBackingBean.sisuSariyaServiceRefOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+							<br></br>
+
+							<p:tab title="Gami Sariya - Survey No.(Documents)"
+								closable="true">
+
+
+								<p:accordionPanel>
+									<p:growl showDetail="false" />
+									<p:tab title="Mandatory Documents">
+
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docMandatory"
+												value="#{sessionBackingBean.sisuSariyaServiceMandatoryDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docMandatory.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docMandatory.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+
+													<h:outputText value="#{docMandatory.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewMandatoryUploadDocs}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentMandatory"
+															value="#{docMandatory}" />
+													</p:commandLink>
+
+
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+
+									</p:tab>
+								</p:accordionPanel>
+
+								<br></br>
+								<br></br>
+
+								<p:accordionPanel>
+
+									<p:growl showDetail="false" />
+
+									<p:tab title="Optional Documents">
+
+										<h:panelGrid>
+											<p:dataTable tableStyle="width:auto" var="docOptional"
+												value="#{sessionBackingBean.sisuSariyaServiceOptionalDocumentList}"
+												rows="5" paginator="true" sortOrder="ascending"
+												scrollHeight="100%" liveResize="true" liveScroll="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+
+												<p:column headerText="Code" style="width: 100px;">
+													<h:outputText value="#{docOptional.doc_Code}" />
+												</p:column>
+												<p:column headerText="Description" style="width: 300px;">
+													<h:outputText value="#{docOptional.add_Doc_Description}" />
+												</p:column>
+												<p:column headerText="File Name" style="width: 200px;">
+													<h:outputText value="#{docOptional.documentName}" />
+												</p:column>
+
+												<p:column headerText="" style="width: 75px;">
+
+
+													<p:commandLink
+														actionListener="#{documentManagementBean.viewUploadedOptionalDocAction}"
+														oncomplete="window.open('/InfoNTC/showUpload?reportName=Upload Document')">
+														<p:graphicImage library="images" name="view.png"
+															style="width:20px;height:20px;" title="view"></p:graphicImage>
+														<f:attribute name="documentOptional"
+															value="#{docOptional}" />
+													</p:commandLink>
+
+												</p:column>
+
+
+											</p:dataTable>
+										</h:panelGrid>
+									</p:tab>
+
+								</p:accordionPanel>
+
+							</p:tab>
+
+
+						</p:accordionPanel>
+					</p:tab>
+				</p:tabView>
+
+			</h:form>
+		</p:dialog>
+
+		<p:dialog styleClass="" id="successSveUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlsuccess']}"
+			width="30%" severity="info" widgetVar="successSveUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSveUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.successMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSveUploadDoc"
+						value="#{msg['um.employeeprofile.dlsuccessclose']}"
+						onclick="PF('successSveUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog styleClass="" id="requiredFieldUploadDoc" global="true"
+			modal="true" header="#{msg['um.employeeprofile.dlmissing']}"
+			width="30%" severity="info" widgetVar="requiredFieldUploadDoc"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmrequiredFieldUploadDoc">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{documentManagementBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredFieldUploadDoc"
+						value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('requiredFieldUploadDoc').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

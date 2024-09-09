@@ -1,0 +1,788 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+	
+<style>
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,   #bbb5b5);
+}
+
+.ui-g-6{
+background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,   #bbb5b5);
+}
+.ui-g{
+background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,   #bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+.addBtn{
+	font-weight: bold;
+	background: #141845 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 70px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+</style>
+	
+	<div class="mainDiv">
+			<h1 style="margin-top: 0%; text-align: center; color: #ffffff ;background-color: #404d6f !important; "
+				class="common_form_header">#{msg['timetable.heading']}</h1>
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmpanelGenerator">
+				<p:panel id="panel01">
+				<p:panelGrid id="shwDetail" columns="4" columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3" layout="grid">
+					
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Reference No." style=""></p:outputLabel>
+						
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText readonly="true" style="width:90%;height:18px;color:red;font-weight: bold;" value="#{panelGeneratorBackingBean.panelGeneratorDTO.refNo}"></p:inputText>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Route No." ></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectOneMenu id="routeNo" style="width:50%" effect="fold"
+								filter="true" filterMatchMode="contains" tabindex="1"  
+						value="#{panelGeneratorBackingBean.panelGeneratorDTO.routeNo}" 
+						disabled="#{panelGeneratorBackingBean.disablepanel1}">
+										<f:selectItem itemLabel="-- Select --" itemValue="" />
+								<f:selectItems
+										value="#{panelGeneratorBackingBean.routefordropdownList}"
+										var="routefordropdownList"
+										itemValue="#{routefordropdownList.code}"
+										itemLabel="#{routefordropdownList.code}" />
+										<p:ajax listener="#{panelGeneratorBackingBean.generateOriginAndDestination}"
+									update="@form" />
+										
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Origin" ></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText style="width:90%;height:18px;" id="origin" readonly="true" value="#{panelGeneratorBackingBean.panelGeneratorDTO.origin}" disabled="#{panelGeneratorBackingBean.disablepanel1}">
+						</p:inputText>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Destination" ></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:inputText  readonly="true" style="width:90%;height:18px;" id="destination" value="#{panelGeneratorBackingBean.panelGeneratorDTO.destination}" disabled="#{panelGeneratorBackingBean.disablepanel1}">
+						</p:inputText>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Bus Category" ></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectOneMenu id="buscategory" style="width:50%"  value="#{panelGeneratorBackingBean.panelGeneratorDTO.busCategory}" disabled="#{panelGeneratorBackingBean.disablepanel1}">
+								
+									<!-- disabled="#{employeeProfileBackingBean.viewMode}"-->
+									<f:selectItem itemLabel="-- Select --" itemValue="" />
+									<f:selectItem itemLabel="NORMAL" itemValue="001" />
+									<f:selectItem itemLabel="LUXURY" itemValue="002" />
+									<f:selectItem itemLabel="SUPER LUXURY" itemValue="003" />
+									<f:selectItem itemLabel="SEMI-LUXURY" itemValue="004" />
+									<f:selectItem itemLabel="EXPRESSWAY BUS" itemValue="EB" />
+			
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="No. of Time Tables per Week" ></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectOneMenu id="timetables" style="width:50%" value="#{panelGeneratorBackingBean.panelGeneratorDTO.noOfTimeTables}" disabled="#{panelGeneratorBackingBean.disablepanel1}">
+						<f:selectItem itemLabel="--Select No.--" itemValue="" noSelectionOption="true"/>
+								<f:selectItem itemLabel="01" itemValue="1" />
+								<f:selectItem itemLabel="02" itemValue="2" />
+								<f:selectItem itemLabel="03" itemValue="3" />		
+										
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Status" ></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectOneMenu  style="width:40%" value="#{panelGeneratorBackingBean.panelGeneratorDTO.panel1Status}"  disabled="#{panelGeneratorBackingBean.disablepanel1}">
+									<f:selectItem itemLabel="--Select Status--" itemValue="" noSelectionOption="true"/>
+								<f:selectItem itemLabel="Active" itemValue="A" />
+								<f:selectItem itemLabel="Inactive" itemValue="I" />
+								
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+						<p:panelGrid></p:panelGrid>
+					<p:panelGrid >
+					<p:commandButton style="margin-left:75%" styleClass="mainActionbtn"  value="Generate" action="#{panelGeneratorBackingBean.savePanel1}" update="@form" disabled="#{panelGeneratorBackingBean.disablepanel1}"></p:commandButton>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:commandButton style="margin-left:10%" value="Clear" styleClass="mainActionbtn" action="#{panelGeneratorBackingBean.clearPanel1}"  update="@form" disabled="#{panelGeneratorBackingBean.disablepanel1}"></p:commandButton>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					</p:panelGrid>
+					</p:panel>
+					
+					<p:panel id="panel02" rendered="#{panelGeneratorBackingBean.groupPanel}">
+					<p:panelGrid columns="4" columnClasses="ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-3" layout="grid">
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Select Group" ></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectOneMenu id="group" style="width:50%"  value="#{panelGeneratorBackingBean.panelGeneratorDTO.selectGroup}" disabled="#{panelGeneratorBackingBean.disablepanel2}">
+						
+							<f:selectItem itemLabel="--Select No.--" itemValue="" noSelectionOption="true"/>
+								<f:selectItem itemLabel="1" itemValue="1" />
+								<f:selectItem itemLabel="2" itemValue="2" />
+								<f:selectItem itemLabel="3" itemValue="3" />	
+								
+								<p:ajax listener="#{panelGeneratorBackingBean.checkDates}"
+									update="@form" />					
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Days" ></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid >
+						<p:panelGrid>
+						<!-- <p:selectBooleanCheckbox id="monday" itemLabel="Mon" value="#{panelGeneratorBackingBean.clickMonday}"  >
+				
+								<f:attribute name="day" value="Monday" />
+  								<p:ajax event="change" listener="#{panelGeneratorBackingBean.checkDay}" />	
+						</p:selectBooleanCheckbox> -->
+						
+						<p:selectBooleanCheckbox id="monday" itemLabel="Mon" value="#{panelGeneratorBackingBean.clickMonday}" disabled="#{panelGeneratorBackingBean.disablepanel2}">
+					     	<p:ajax listener="#{panelGeneratorBackingBean.checkMonday}"
+									update="monday,tuesday,wednesday,thursday,friday,saturday,sunday" />
+					    
+					</p:selectBooleanCheckbox>
+						 
+					<p:selectBooleanCheckbox id="tuesday" itemLabel="Tue" value="#{panelGeneratorBackingBean.clickTuesday}" disabled="#{panelGeneratorBackingBean.disablepanel2}">
+					     	<p:ajax listener="#{panelGeneratorBackingBean.checkTuesday}"
+									update="monday,tuesday,wednesday,thursday,friday,saturday,sunday" />
+					    
+					</p:selectBooleanCheckbox>
+					
+					
+						<p:selectBooleanCheckbox id="wednesday" itemLabel="Wed" value="#{panelGeneratorBackingBean.clickWednesday}" disabled="#{panelGeneratorBackingBean.disablepanel2}">
+					     	<p:ajax listener="#{panelGeneratorBackingBean.checkWednesday}"
+									update="monday,tuesday,wednesday,thursday,friday,saturday,sunday" />
+					    
+					</p:selectBooleanCheckbox>
+					
+						
+						<p:selectBooleanCheckbox id="thursday" itemLabel="Thu" value="#{panelGeneratorBackingBean.clickThursday}" disabled="#{panelGeneratorBackingBean.disablepanel2}">
+					     	<p:ajax listener="#{panelGeneratorBackingBean.checkThursday}"
+									update="monday,tuesday,wednesday,thursday,friday,saturday,sunday" />
+					    
+					</p:selectBooleanCheckbox>
+						 			
+						
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					<p:panelGrid>
+		<br></br>
+						<p:selectBooleanCheckbox id="friday" itemLabel="Fri" value="#{panelGeneratorBackingBean.clickFriday}" disabled="#{panelGeneratorBackingBean.disablepanel2}">
+					     	<p:ajax listener="#{panelGeneratorBackingBean.checkFriday}"
+									update="monday,tuesday,wednesday,thursday,friday,saturday,sunday" />
+					    
+					</p:selectBooleanCheckbox>
+					
+						<p:selectBooleanCheckbox id="saturday" itemLabel="Sat" value="#{panelGeneratorBackingBean.clickSaturday}" disabled="#{panelGeneratorBackingBean.disablepanel2}">
+					     	<p:ajax listener="#{panelGeneratorBackingBean.checkSaturday}"
+									update="monday,tuesday,wednesday,thursday,friday,saturday,sunday" />
+					    
+					</p:selectBooleanCheckbox>
+					
+						<p:selectBooleanCheckbox id="sunday" itemLabel="Sun" value="#{panelGeneratorBackingBean.clickSunday}" disabled="#{panelGeneratorBackingBean.disablepanel2}">
+					     	<p:ajax listener="#{panelGeneratorBackingBean.checkSunday}"
+									update="monday,tuesday,wednesday,thursday,friday,saturday,sunday" />
+					    
+					</p:selectBooleanCheckbox>
+						</p:panelGrid>
+						
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="Status" ></p:outputLabel>
+						<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectOneMenu id="status" style="width:40%" value="#{panelGeneratorBackingBean.panelGeneratorDTO.panel2Status}"  disabled="#{panelGeneratorBackingBean.disablepanel2}">
+									<f:selectItem itemLabel="--Select Status--" itemValue="" noSelectionOption="true"/>
+								<f:selectItem itemLabel="Active" itemValue="A" />
+								<f:selectItem itemLabel="Inactive" itemValue="I" />
+								
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid >
+					<p:commandButton  style="margin-left:75%" styleClass="mainActionbtn" value="Add" action="#{panelGeneratorBackingBean.addPanel2}" disabled="#{panelGeneratorBackingBean.addBtn}" update="@form"></p:commandButton>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:commandButton style="margin-left:10%" value="Clear" action="#{panelGeneratorBackingBean.clearPanel2}" styleClass="mainActionbtn" update="@form"></p:commandButton>
+					</p:panelGrid>
+					<p:panelGrid></p:panelGrid>
+					
+					
+				</p:panelGrid>
+				</p:panel>
+				
+				<br></br>
+			<div class="ui-g" >
+    <div class="ui-g-6" >
+    <p:panel style="font-size:15px;font-weight:bold;" rendered="#{panelGeneratorBackingBean.tabelPanel}">
+    Origin to Destination
+    
+    
+    <p:tabView>
+    	<p:tab title="Group1">
+    	
+    	
+    		<p:panelGrid id="group1Details" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid" >
+    			<p:panelGrid>
+    				<p:outputLabel value="Start Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group01_OD_StartTime}" disabled="#{panelGeneratorBackingBean.group1}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gst11"/>
+    				
+    			</p:panelGrid>
+    		
+    		
+    		<p:panelGrid>
+    				<p:outputLabel value="End Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group01_OD_EndTime}" disabled="#{panelGeneratorBackingBean.group1}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm"  id="gst12"/>
+    			
+    			
+    			</p:panelGrid>
+    		
+    		
+    		<p:panelGrid>
+    					<p:commandButton value="Save" styleClass="mainActionbtn" actionListener="#{panelGeneratorBackingBean.saveGroup01_OriginToDestination}" disabled="#{panelGeneratorBackingBean.group1}"></p:commandButton>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    				<p:commandButton value="Clear" styleClass="mainActionbtn" actionListener="#{panelGeneratorBackingBean.clearGroup01_OriginToDestination}" disabled="#{panelGeneratorBackingBean.group1}" update="gst11 gst12"></p:commandButton>
+    			</p:panelGrid>
+    		</p:panelGrid>
+    		
+    		
+    	 </p:tab>
+    	<p:tab title="Group2" >
+    		<p:panelGrid id="group2SDetails" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+    			<p:panelGrid>
+    				<p:outputLabel value="Start Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group02_OD_StartTime}" disabled="#{panelGeneratorBackingBean.group2}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gst21"/>
+    			
+    			</p:panelGrid>
+    		
+    		
+    		<p:panelGrid>
+    				<p:outputLabel value="End Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group02_OD_EndTime}" disabled="#{panelGeneratorBackingBean.group2}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gst22"/>
+    				
+    			</p:panelGrid>
+    		
+    		<p:panelGrid>
+    					<p:commandButton value="Save" styleClass="mainActionbtn" actionListener="#{panelGeneratorBackingBean.saveGroup02_OriginToDestination}" disabled="#{panelGeneratorBackingBean.group2}"></p:commandButton>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    				<p:commandButton value="Clear" styleClass="mainActionbtn" disabled="#{panelGeneratorBackingBean.group2}" actionListener="#{panelGeneratorBackingBean.clearGroup02_OriginToDestination}" update="gst21 gst22"></p:commandButton>
+    			</p:panelGrid>
+    		</p:panelGrid>
+    		
+    		
+    	
+    	</p:tab>
+    	
+    	<p:tab title="Group3" disabled="false">
+    		<p:panelGrid id="group3SDetails" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+    			<p:panelGrid>
+    				<p:outputLabel value="Start Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group03_OD_StartTime}" disabled="#{panelGeneratorBackingBean.group3}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gst31"/>
+    				
+    			</p:panelGrid>
+    		
+    		
+    		<p:panelGrid>
+    				<p:outputLabel value="End Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group03_OD_EndTime}" disabled="#{panelGeneratorBackingBean.group3}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gst32"/>
+    			
+    			</p:panelGrid>
+    		
+    	
+    		
+    		<p:panelGrid>
+    					<p:commandButton value="Save" styleClass="mainActionbtn" actionListener="#{panelGeneratorBackingBean.saveGroup03_OriginToDestination}" disabled="#{panelGeneratorBackingBean.group3}"></p:commandButton>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    				<p:commandButton value="Clear" styleClass="mainActionbtn" disabled="#{panelGeneratorBackingBean.group3}" actionListener="#{panelGeneratorBackingBean.clearGroup03_OriginToDestination}" update="gst31 gst32"></p:commandButton>
+    			</p:panelGrid>
+    		</p:panelGrid>
+    		
+    		
+    	</p:tab>
+    </p:tabView>
+    </p:panel>
+    
+    <p:panelGrid></p:panelGrid>
+    
+    
+    
+    
+    
+    </div>
+    <div class="ui-g-6" >  
+    <p:panel style="font-size:15px;font-weight:bold;" rendered="#{panelGeneratorBackingBean.tabelPanel}">
+    Destination to Origin
+    
+    
+    <p:tabView>
+    	<p:tab title="Group1">
+    	
+    		<p:panelGrid id="group1Details" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+    			<p:panelGrid>
+    				<p:outputLabel value="Start Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group01_DO_StartTime}" disabled="#{panelGeneratorBackingBean.group1}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gdst11"/>
+    	
+    			</p:panelGrid>
+    		
+    		
+    		<p:panelGrid>
+    				<p:outputLabel value="End Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group01_DO_EndTime}" disabled="#{panelGeneratorBackingBean.group1}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gdst12"/>
+    				
+    			</p:panelGrid>
+    		
+    
+    		<p:panelGrid>
+    					<p:commandButton value="Save" styleClass="mainActionbtn" actionListener="#{panelGeneratorBackingBean.saveGroup01_DestinationToOrigin}" disabled="#{panelGeneratorBackingBean.group1}"></p:commandButton>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    				<p:commandButton value="Clear" styleClass="mainActionbtn" disabled="#{panelGeneratorBackingBean.group1}" actionListener="#{panelGeneratorBackingBean.clearGroup01_DestinationToOrigin}" update="gdst11 gdst12"></p:commandButton>
+    			</p:panelGrid>
+    		</p:panelGrid>
+    		
+    		
+    		
+    		
+    	 </p:tab>
+    	<p:tab title="Group2" >
+    		<p:panelGrid id="group2SDetails" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+    			<p:panelGrid>
+    				<p:outputLabel value="Start Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group02_DO_StartTime}" disabled="#{panelGeneratorBackingBean.group2}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gdst21"/>
+    				
+    			</p:panelGrid>
+    		
+    		
+    		<p:panelGrid>
+    				<p:outputLabel value="End Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group02_DO_EndTime}" disabled="#{panelGeneratorBackingBean.group2}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gdst22"/>
+    				
+    			</p:panelGrid>
+    		
+ 
+    		<p:panelGrid>
+    					<p:commandButton value="Save" styleClass="mainActionbtn" actionListener="#{panelGeneratorBackingBean.saveGroup02_DestinationToOrigin}" disabled="#{panelGeneratorBackingBean.group2}"></p:commandButton>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    				<p:commandButton value="Clear" styleClass="mainActionbtn" disabled="#{panelGeneratorBackingBean.group2}"
+    				actionListener="#{panelGeneratorBackingBean.clearGroup02_DestinationToOrigin}" update="gdst21 gdst22"></p:commandButton>
+    			</p:panelGrid>
+    		</p:panelGrid>
+    		
+    		
+    		
+    	</p:tab>
+    	
+    	<p:tab title="Group3">
+    		<p:panelGrid id="group3SDetails" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+    			<p:panelGrid>
+    				<p:outputLabel value="Start Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group03_DO_StartTime}" disabled="#{panelGeneratorBackingBean.group3}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gdst31"/>
+    				
+    			</p:panelGrid>
+    		
+    		
+    		<p:panelGrid>
+    				<p:outputLabel value="End Date and Time :"></p:outputLabel>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    			<p:calendar  value="#{panelGeneratorBackingBean.panelGeneratorDTO.group03_DO_EndTime}" disabled="#{panelGeneratorBackingBean.group3}"
+				inputStyle="width:100%" pattern="dd/MM/yyyy HH:mm" id="gdst32"/>
+    				
+    			</p:panelGrid>
+    		
+    	
+    		<p:panelGrid>
+    					<p:commandButton value="Save" styleClass="mainActionbtn" actionListener="#{panelGeneratorBackingBean.saveGroup03_DestinationToOrigin}" disabled="#{panelGeneratorBackingBean.group3}"></p:commandButton>
+    			</p:panelGrid>
+    			
+    			<p:panelGrid>
+    				<p:commandButton value="Clear" styleClass="mainActionbtn" disabled="#{panelGeneratorBackingBean.group3}"
+    				actionListener="#{panelGeneratorBackingBean.clearGroup03_DestinationToOrigin}" update="gdst31 gdst32"></p:commandButton>
+    			</p:panelGrid>
+    		</p:panelGrid>
+    		
+    		
+    		
+    	</p:tab>
+    </p:tabView>
+    </p:panel>
+    
+    </div>
+	</div>
+	
+				<br></br>
+<!-- 		<p:panel rendered="#{panelGeneratorBackingBean.tabelPanel}"> -->
+    		<center>
+    			<p:commandButton value="Save" styleClass="mainActionbtn" actionListener="#{panelGeneratorBackingBean.mainSave}" 
+    				rendered="#{panelGeneratorBackingBean.tabelPanel}" update="@form" disabled="#{panelGeneratorBackingBean.disablePanel}"></p:commandButton>
+    			
+    			<p:commandButton value="Clear" styleClass="mainActionbtn" actionListener="#{panelGeneratorBackingBean.mainClear}" rendered="#{panelGeneratorBackingBean.tabelPanel}" update="@form"></p:commandButton>
+    		</center>
+<!-- `		</p:panel> -->
+				</h:form>
+			</div>
+	</div>
+	<p:dialog styleClass="" id="requiredField" global="true" modal="true"
+			header="Missing Required Field" width="30%" severity="info"
+			widgetVar="requiredField" closeOnEscape="true" resizable="false" >
+			<h:form id="frmrequiredField"  >
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="error-24.png"></p:graphicImage>
+						<p:outputLabel value="#{panelGeneratorBackingBean.errorMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmrequiredField" value="OK" update="frmpanelGenerator:monday"
+						 onclick="PF('requiredField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+	
+		<p:dialog  styleClass="" id="successSve" global="true" modal="true"
+			header="Success" width="30%" severity="info" widgetVar="successSve"
+			closeOnEscape="true" resizable="false">
+			<h:form id="frmsuccessSve" >
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="success-24.png"></p:graphicImage>
+						<p:outputLabel value="#{panelGeneratorBackingBean.sucessMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton tabindex="1" style="margin-top:10px;margin-bottom:10px"
+						process="frmsuccessSve" value="OK" 
+						onclick="PF('successSve').hide()" >
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog styleClass="" id="warningField" global="true" modal="true"
+			header="#{msg['um.employeeprofile.dlwarning']}" width="30%" severity="info"
+			widgetVar="warningField" closeOnEscape="true" resizable="false">
+			<h:form id="frmwarningField">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+						<p:outputLabel value="#{panelGeneratorBackingBean.warningMsg}"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						process="frmwarningField" value="#{msg['um.employeeprofile.dlmissingclose']}"
+						onclick="PF('warningField').hide()">
+					</p:commandButton>
+
+				</center>
+			</h:form>
+		</p:dialog>	
+	
+	<!-- Added by dhananjika.d 22/03/2024 - To confirm user to inactive ref no  -->	
+	
+		<p:dialog styleClass="" id="comfirmMSG" global="true" modal="true"
+			header="Confirmation" width="30%" severity="info"
+			widgetVar="comfirmMSG" closeOnEscape="true" resizable="false">
+
+			<h:form id="frmcomfirm">
+				<center>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:graphicImage library="images" name="warning.png"></p:graphicImage>
+
+						<p:outputLabel
+							value="Already generated a reference no for the selected route. Do you want to Inactive?"></p:outputLabel>
+
+					</p:panelGrid>
+					<br></br>
+					<p:commandButton style="margin-top:10px;margin-bottom:10px"
+						value="Yes" process="frmcomfirm"
+						update="frmsuccessSve,frmrequiredField,frmpanelGenerator"
+						action="#{panelGeneratorBackingBean.inactiveData}">
+					</p:commandButton>
+
+					<p:commandButton
+						style="margin-top:10px;margin-bottom:10px;margin-left:10px"
+						value="No" process="frmcomfirm" onclick="PF('comfirmMSG').hide()">
+					</p:commandButton>
+				</center>
+			</h:form>
+		</p:dialog>
+		
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,1965 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+	
+<style>
+.ui-datatable-scrollable-theadclone {
+	visibility: collapse;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em .4em .4em 1em;
+	position: relative;
+	background: #07295b !important;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	background-color: #f1f1f1;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+	background-position: 0 0 !important;
+	background-image: none !important;
+}
+
+.colorHighlight {
+	background: yellow !important;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-hidden-container .ui-draggable
+	{
+	width: 50%;
+}
+
+.firstColumn {
+	width: 100%;
+}
+
+.secondColumn {
+	width: 100%;
+}
+
+.dashboardNRResendDocRecord {
+	background-color: #16e5d7 !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	color: #07295b;
+}
+
+.mainDiv {
+	width: 99%;
+	height: auto;
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	border-top: solid;
+	border-color: #07295b;
+	border-width: 1px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*background-image: linear-gradient(to right bottom, #d9ddfa, #ccd4fb, #bdcafc, #aec2fe,
+		#9cb9ff);*/
+	background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,   #bbb5b5);
+}
+
+.ui-g-6{
+background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,   #bbb5b5);
+}
+.ui-g{
+background-image: linear-gradient(to right bottom, #f1f1f1, #dfdfe4, #f1f1f1, #e9eaeb,   #bbb5b5);
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	color: #07295b;
+}
+
+.mainLinkButton {
+	font-weight: bold;
+	background: #2571fa !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.mainLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.otherLinkButton {
+	font-weight: bold;
+	background: #296807 !important;
+	text-align: center;
+	padding: 7px 25px 7px 25px !important;
+	height: 35px !important;
+	text-decoration: none !important;
+	color: white !important;
+	white-space: nowrap !important;
+	border-radius: 5px !important;
+}
+
+.otherLinkButton:hover {
+	background: #fba026 !important;
+}
+
+.mainActionbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+.addBtn{
+	font-weight: bold;
+	background: #141845 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 70px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+.mainActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.OthActionbtn {
+	font-weight: bold;
+	background: #296807 !important;
+	height: 30px !important;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	width: 80px;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+	margin-bottom: 5px;
+}
+
+.OthActionbtn:hover {
+	background: #fba026 !important;
+}
+
+.subDiv {
+	margin: 0 auto;
+	background: rgb(254, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, rgba(254, 255, 255, 1) 0%,
+		rgba(210, 235, 249, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff',
+		endColorstr='#d2ebf9', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.ui-datatable-scrollable .ui-datatable-scrollable-header {
+	min-height: 20px;
+}
+
+.ui-datatable-scrollable-body {
+	height: 125px !important;
+}
+
+.editbtn {
+	font-weight: bold;
+	background: #2571fa !important;
+	height: 25px !important;
+	width: 50px;
+	border-radius: 5px !important;
+	color: white !important;
+	text-align: center;
+	white-space: nowrap !important;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+
+.ui-tabs .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem {
+    background-color: #bcd0ef;
+}
+
+.ui-tabs .ui-tabs-nav li {
+        background-color: #bcd0ef;
+        border: 1px solid #6985c4!important;
+    }
+    .ui-tabs.ui-tabs-top .ui-tabs-nav li {
+        border-bottom-color: #6985c4!important;
+    }
+    .ui-tabs.ui-tabs-bottom .ui-tabs-nav li {
+        border-top-color: #6985c4!important;
+    }
+    .ui-tabs.ui-tabs-left .ui-tabs-nav li {
+        border-right-color: #6985c4!important;
+    }
+    .ui-tabs.ui-tabs-right .ui-tabs-nav li {
+        border-left-color: #6985c4!important;
+    }
+    
+    .ui-accordion .ui-accordion-content{
+    	 background-color: #6985c4!important;
+    }
+    
+     .rowcolor {
+        background-color: #fca752 !important;
+        background-image: none !important;
+        color: #000000 !important;
+    }
+    
+    .old {
+        background-color: #fca752 !important;
+        background-image: none !important;
+        color: #000000 !important;
+    }
+</style>
+	
+	<div class="mainDiv">
+			<h1 style="margin-top: 0%; text-align: center; color: #ffffff ;background-color: #404d6f !important; "
+				class="common_form_header">Route Verification</h1>
+			<div style="width: 95%;" class="subDiv">
+				<h:form id="frmcombineTimeTable">
+				<p:panel id="panel01">
+				<p:panelGrid id="shwDetail" columns="4" columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3" layout="grid">
+					
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Route No." ></p:outputLabel>
+							<p:outputLabel value="*" style="color:red;"></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="routeNo" style="width:50%"  value="#{routeVerificationBean.selectedRouteNo}" >
+									<f:selectItem itemLabel="-- Select --" itemValue="" />
+									<f:selectItems
+											value="#{routeVerificationBean.routeList}"
+											var="routefordropdownList"
+											itemValue="#{routefordropdownList.routeNo}"
+											itemLabel="#{routefordropdownList.routeNo}" />
+											<p:ajax listener="#{routeVerificationBean.generateOriginAndDestination}"
+										update="@form" />
+											
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+					
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Origin" ></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText value="#{routeVerificationBean.routeDTO.origin}" disabled="true" />
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Destination" ></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:inputText value="#{routeVerificationBean.routeDTO.destination}" disabled="true" />
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Category" ></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="drpd-preferredLanguage" effect="fold"
+									 value="#{routeVerificationBean.selectedCategory}">
+								<f:selectItem itemLabel="-- Select --" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{routeVerificationBean.categoryList}"
+									var="d" itemValue="#{d.tempBusCategoryCode}"
+									itemLabel="#{d.tempBusCategory}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid>
+						</p:panelGrid>
+												
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:outputLabel value="Group" ></p:outputLabel>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:selectOneMenu id="group" value="#{routeVerificationBean.selectedGroup}" style="width:125px"  >
+					            <f:selectItem itemLabel="1" itemValue="1" />
+					            <f:selectItem itemLabel="2" itemValue="2" />
+					            <f:selectItem itemLabel="3" itemValue="3" />
+					        </p:selectOneMenu>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+						
+						<p:panelGrid></p:panelGrid>
+						<p:panelGrid>
+							<p:commandButton style="margin-left:50%;margin-top:5%;" styleClass="mainActionbtn"  value="Search" 
+							action="#{routeVerificationBean.searchBtnAction}" update="midPointsOtoDNormal, midPointsOtoDExpress, 
+							midPointsOtoDLuxury, midPointsOtoDSemiLuxury, midPointsOtoDSuperLuxury , midPointsDtoONormal, midPointsDtoOExpress, 
+							midPointsDtoODLuxury, midPointsDtoOSemiLuxury, midPointsDtoOSuperLuxury, multipleRoutes" 
+							process="@form"></p:commandButton>
+						</p:panelGrid>
+						<p:panelGrid>
+							<p:commandButton styleClass="mainActionbtn" style="margin-top:4%;" value="Clear" action="#{routeVerificationBean.clearBtnAction}" ></p:commandButton>
+						</p:panelGrid>
+						<p:panelGrid></p:panelGrid>
+					
+					
+					</p:panelGrid>
+			 </p:panel>
+
+				<p:panelGrid id="shwTableDetail" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+				
+				     <p:dataTable id="midPointsOtoDNormal" var="car" rendered="#{routeVerificationBean.normal}"
+							value="#{routeVerificationBean.midPointsNormal}" scrollable="true" scrollWidth="90%" rowStyleClass="#{car[column.property] ? 'old' : null}">
+				        <f:facet name="header">
+				            Origin to Destination - <h:outputLabel style="color:#2771e4;"> NORMAL </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsNormal}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputLabel value="#{column.header}"  />
+				            </f:facet>
+				            <h:outputLabel value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+									   	 
+				   	 <p:dataTable id="midPointsDtoONormal" var="car" rendered="#{routeVerificationBean.normal}"
+							value="#{routeVerificationBean.midPointsNormalDtoO}" scrollable="true" scrollWidth="90%" rowStyleClass="#{car[column.property] ? 'old' : null}">
+				        <f:facet name="header">
+				            Destination to Origin - <h:outputLabel style="color:#2771e4;"> NORMAL </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsNormalDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputLabel value="#{column.header}"  />
+				            </f:facet>
+				            <h:outputLabel value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				   	 
+				   	 <p:dataTable id="midPointsOtoDExpress" var="car" value="#{routeVerificationBean.midPointsExpress}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+						 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+				        <f:facet name="header">
+				            Origin to Destination - <h:outputLabel style="color:#2771e4;"> EXEPRESS WAY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsExpress}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsDtoOExpress" var="car" value="#{routeVerificationBean.midPointsExpressDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}"  
+				     style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+				        <f:facet name="header">
+				            Destination to Origin - <h:outputLabel style="color:#2771e4;"> EXEPRESS WAY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsExpressDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+					
+					<p:dataTable id="midPointsOtoDLuxury" var="car" value="#{routeVerificationBean.midPointsLuxury}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+						 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+				        <f:facet name="header">
+				            Origin to Destination - <h:outputLabel style="color:#2771e4;"> LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsLuxury}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+					
+					<p:dataTable id="midPointsDtoODLuxury" var="car" value="#{routeVerificationBean.midPointsLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+							 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+				        <f:facet name="header">
+				           Destination to Origin - <h:outputLabel style="color:#2771e4;"> LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsOtoDSemiLuxury" var="car" value="#{routeVerificationBean.midPointsSemiLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+				    	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+				        <f:facet name="header">
+				            Origin to Destination - <h:outputLabel style="color:#2771e4;"> SEMI-LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsSemiLuxury}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsDtoOSemiLuxury" var="car" value="#{routeVerificationBean.midPointsSemiLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+						 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+				        <f:facet name="header">
+				            Destination to Origin - <h:outputLabel style="color:#2771e4;"> SEMI-LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsOtoDSuperLuxury" var="car" value="#{routeVerificationBean.midPointsSuperLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+				    	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+				        <f:facet name="header">
+				             Origin to Destination - <h:outputLabel style="color:#2771e4;"> SUPER LUXURY </h:outputLabel>
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsSuperLuxury}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				    <p:dataTable id="midPointsDtoOSuperLuxury" var="car" value="#{routeVerificationBean.midPointsSuperLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+							 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+				        <f:facet name="header">
+				            Destination to Origin - <h:outputLabel style="color:#2771e4;"> SUPER LUXURY </h:outputLabel> 
+				        </f:facet>          
+				        <p:columns value="#{routeVerificationBean.columnsSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+				            <f:facet name="header">
+				                <h:outputText value="#{column.header}" />
+				            </f:facet>
+				            <h:outputText value="#{car[column.property]}" />
+				        </p:columns>
+				    </p:dataTable>
+				    
+				 </p:panelGrid>
+
+				<p:panelGrid id="shwDetail2" columns="4" columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-4,ui-grid-col-3" layout="grid" style="margin-top:2%;margin-bottom:3%;background-color: transparent !important;" rendered="#{routeVerificationBean.similarRoutesData}">
+					<p:panelGrid></p:panelGrid>
+					<p:panelGrid >
+						<p:outputLabel value="Routes" ></p:outputLabel>
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:selectCheckboxMenu id="multipleRoutes" value="#{routeVerificationBean.selectedRoutes}" label="Cities" multiple="true"
+                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px" >
+				            <f:selectItems 
+										value="#{routeVerificationBean.similarViaList}"
+										var="routefordropdownList"
+										itemValue="#{routefordropdownList.routeNo}"
+										itemLabel="#{routefordropdownList.routeDes} - #{routefordropdownList.routeNo}" />
+							<p:ajax listener="#{routeVerificationBean.onSimilarRoutedSelect}"
+										update="@form" />
+				        </p:selectCheckboxMenu>        				
+					</p:panelGrid>
+					<p:panelGrid>
+						<p:commandButton styleClass="mainActionbtn" value="Search" action="#{routeVerificationBean.searchOnSelectSimilarRoutes}" 
+						 update="routeAccPnl:table1Nor, routeAccPnl:table1Ex, routeAccPnl:table1Lux, routeAccPnl:table1SemiLux, routeAccPnl:table1SuperLux, 
+						 		routeAccPnl:table2Nor, routeAccPnl:table2Ex, routeAccPnl:table2Lux, routeAccPnl:table2SemiLux, routeAccPnl:table2SuperLux, 
+						 		routeAccPnl:table3Nor, routeAccPnl:table3Ex, routeAccPnl:table3Lux, routeAccPnl:table3SemiLux, routeAccPnl:table3SuperLux, 
+						 		routeAccPnl:table4Nor, routeAccPnl:table4Ex, routeAccPnl:table4Lux, routeAccPnl:table4SemiLux, routeAccPnl:table4SuperLux,
+						 		routeAccPnl:table5Nor, routeAccPnl:table5Ex, routeAccPnl:table5Lux, routeAccPnl:table5SemiLux, routeAccPnl:table5SuperLux,
+						 		 routeAccPnl:similarRouteOneTb" process="@this,routeAccPnl:similarRouteOneTb, 
+						 		 routeAccPnl:table1NorDtoO, routeAccPnl:table1ExDtoO, routeAccPnl:table1LuxDtoO, routeAccPnl:table1SemiLuxDtoO, routeAccPnl:table1SuperLuxDtoO,
+						 		 routeAccPnl:table2NorDtoO, routeAccPnl:table2ExDtoO, routeAccPnl:table2LuxDtoO, routeAccPnl:table2SemiLuxDtoO, routeAccPnl:table2SuperLuxDtoO,
+						 		 routeAccPnl:table3NorDtoO, routeAccPnl:table3ExDtoO, routeAccPnl:table3LuxDtoO, routeAccPnl:table3SemiLuxDtoO, routeAccPnl:table3SuperLuxDtoO,
+						 		 routeAccPnl:table4NorDtoO, routeAccPnl:table4ExDtoO, routeAccPnl:table4LuxDtoO, routeAccPnl:table4SemiLuxDtoO, routeAccPnl:table4SuperLuxDtoO,
+						 		 routeAccPnl:table5NorDtoO, routeAccPnl:table5ExDtoO, routeAccPnl:table5LuxDtoO, routeAccPnl:table5SemiLuxDtoO, routeAccPnl:table5SuperLuxDtoO"></p:commandButton>
+					</p:panelGrid>
+				</p:panelGrid>	
+				
+				<p:accordionPanel id="routeAccPnl" activeIndex="-1" >
+					<p:tab id="searchedDataTb" title="Route - #{routeVerificationBean.selectedRouteNo}"   >
+						<p:panelGrid id="shwTableSearchedDetail" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+					     <p:dataTable id="midPointsOtoDNormalSearchedData" var="car" rendered="#{routeVerificationBean.normal}"
+								value="#{routeVerificationBean.midPointsNormal}" scrollable="true" scrollWidth="90%" rowStyleClass="#{car[column.property] ? 'old' : null}">
+					        <f:facet name="header">
+					            Origin to Destination - <h:outputLabel style="color:#2771e4;"> NORMAL </h:outputLabel>
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsNormal}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputLabel value="#{column.header}"  />
+					            </f:facet>
+					            <h:outputLabel value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="O" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+										   	 
+					   	 <p:dataTable id="midPointsDtoONormalSearchedData" var="car" rendered="#{routeVerificationBean.normal}"
+								value="#{routeVerificationBean.midPointsNormalDtoO}" scrollable="true" scrollWidth="90%" rowStyleClass="#{car[column.property] ? 'old' : null}">
+					        <f:facet name="header">
+					            Destination to Origin - <h:outputLabel style="color:#2771e4;"> NORMAL </h:outputLabel>
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsNormalDtoO}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputLabel value="#{column.header}"  />
+					            </f:facet>
+					            <h:outputLabel value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="D" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+					   	 
+					   	 <p:dataTable id="midPointsOtoDExpressSearchedData" var="car" value="#{routeVerificationBean.midPointsExpress}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+							 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+					        <f:facet name="header">
+					            Origin to Destination - <h:outputLabel style="color:#2771e4;"> EXEPRESS WAY </h:outputLabel>
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsExpress}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputText value="#{column.header}" />
+					            </f:facet>
+					            <h:outputText value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="O" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+					    
+					    <p:dataTable id="midPointsDtoOExpressSearchedData" var="car" value="#{routeVerificationBean.midPointsExpressDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}"  
+					     style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+					        <f:facet name="header">
+					            Destination to Origin - <h:outputLabel style="color:#2771e4;"> EXEPRESS WAY </h:outputLabel>
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsExpressDtoO}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputText value="#{column.header}" />
+					            </f:facet>
+					            <h:outputText value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="D" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+						
+						<p:dataTable id="midPointsOtoDLuxurySearchedData" var="car" value="#{routeVerificationBean.midPointsLuxury}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+							 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+					        <f:facet name="header">
+					            Origin to Destination - <h:outputLabel style="color:#2771e4;"> LUXURY </h:outputLabel>
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsLuxury}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputText value="#{column.header}" />
+					            </f:facet>
+					            <h:outputText value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="O" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+						
+						<p:dataTable id="midPointsDtoODLuxurySearchedData" var="car" value="#{routeVerificationBean.midPointsLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+					        <f:facet name="header">
+					           Destination to Origin - <h:outputLabel style="color:#2771e4;"> LUXURY </h:outputLabel>
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputText value="#{column.header}" />
+					            </f:facet>
+					            <h:outputText value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="D" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+					    
+					    <p:dataTable id="midPointsOtoDSemiLuxurySearchedData" var="car" value="#{routeVerificationBean.midPointsSemiLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+					    	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+					        <f:facet name="header">
+					            Origin to Destination - <h:outputLabel style="color:#2771e4;"> SEMI-LUXURY </h:outputLabel>
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsSemiLuxury}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputText value="#{column.header}" />
+					            </f:facet>
+					            <h:outputText value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="O" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+					    
+					    <p:dataTable id="midPointsDtoOSemiLuxurySearchedData" var="car" value="#{routeVerificationBean.midPointsSemiLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+							 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+					        <f:facet name="header">
+					            Destination to Origin - <h:outputLabel style="color:#2771e4;"> SEMI-LUXURY </h:outputLabel>
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputText value="#{column.header}" />
+					            </f:facet>
+					            <h:outputText value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="D" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+					    
+					    <p:dataTable id="midPointsOtoDSuperLuxurySearchedData" var="car" value="#{routeVerificationBean.midPointsSuperLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+					    	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+					        <f:facet name="header">
+					             Origin to Destination - <h:outputLabel style="color:#2771e4;"> SUPER LUXURY </h:outputLabel>
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsSuperLuxury}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputText value="#{column.header}" />
+					            </f:facet>
+					            <h:outputText value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="O" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+					    
+					    <p:dataTable id="midPointsDtoOSuperLuxurySearchedData" var="car" value="#{routeVerificationBean.midPointsSuperLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+					        <f:facet name="header">
+					            Destination to Origin - <h:outputLabel style="color:#2771e4;"> SUPER LUXURY </h:outputLabel> 
+					        </f:facet>          
+					        <p:columns value="#{routeVerificationBean.columnsSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+					            <f:facet name="header">
+					                <h:outputText value="#{column.header}" />
+					            </f:facet>
+					            <h:outputText value="#{car[column.property]}" />
+					        </p:columns>
+					        <p:column style="text-align: center;overflow:visible" >
+								 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+									update="dlgEditMidpoints">
+									<f:param name="routeNumber" value="#{routeVerificationBean.selectedRouteNo}" />
+									<f:param name="tripType" value="D" />
+									<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								</p:commandButton>
+							</p:column>
+					    </p:dataTable>
+					    
+					 </p:panelGrid>
+					</p:tab>
+			        <p:tab id="similarRouteOneTb" title="Route - #{routeVerificationBean.similarRouteOne}" rendered="#{routeVerificationBean.similarRouteOneRender}"  >
+			        	<p:panelGrid id="shwTableDetailRouteOneTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid" >
+				        	   <p:dataTable id="table1Nor" var="car" value="#{routeVerificationBean.midPointTblOneNormal}"  rowStyleClass="#{car[column.property] ? 'old' : null}"
+								 scrollable="true" scrollHeight="100%" scrollWidth="90%" style="margin-top:3%;" rendered="#{routeVerificationBean.normal}">          
+							        <f:facet name="header" >
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblOneNormal}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+										 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+									</p:column> 
+								</p:dataTable>
+				        		<p:dataTable id="table1NorDtoO" var="car" value="#{routeVerificationBean.midPointTblOneNormalDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}"
+									scrollable="true" scrollHeight="100%" scrollWidth="90%" style="margin-top:3%;" rendered="#{routeVerificationBean.normal}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblOneNormalDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;overflow:visible" >
+										 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+									</p:column>
+								</p:dataTable>
+			        	
+					        	<p:dataTable id="table1Ex" var="car" value="#{routeVerificationBean.midPointTblOneExpress}"   rowStyleClass="#{car[column.property] ? 'old' : null}"
+									 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}" > 
+									    
+								        <f:facet name="header">
+								             Origin to Destination - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblOneExpress}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;" >
+								            <!--  <p:commandButton value="Edit" rendered="#{!empty car[column.property]}" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+								             	update="dlgEditMidpoints" process="@all">
+								             	<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+								             	<f:param name="tripType" value="O" />
+								                <f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								            </p:commandButton> -->
+								            
+								            <p:commandButton value="Edit" styleClass="editbtn"  process="@all" update="dlgEditMidpoints" action="#{routeVerificationBean.editButtonAction}" >
+								            	<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+								             	<f:param name="tripType" value="O" />
+								                <f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								            </p:commandButton>
+								            
+								        </p:column>
+								</p:dataTable>
+								<p:dataTable id="table1ExDtoO" var="car" value="#{routeVerificationBean.midPointTblOneExpressDtoO}"   rowStyleClass="#{car[column.property] ? 'old' : null}"
+									 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblOneExpressDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;" >
+											 <!-- <p:commandButton value="Edit"   action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints" >
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton> -->
+											
+											 <p:commandButton value="Edit" styleClass="editbtn"  process="@all" update="dlgEditMidpoints" action="#{routeVerificationBean.editButtonAction}" >
+								            	<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+								             	<f:param name="tripType" value="D" />
+								                <f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+								            </p:commandButton>
+											
+									  </p:column>
+								</p:dataTable>
+								
+			        			<p:dataTable id="table1Lux" var="car" value="#{routeVerificationBean.midPointTblOneLuxury}"  style="margin-top:3%;"   rowStyleClass="#{car[column.property] ? 'old' : null}" 
+									scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+								        <f:facet name="header">
+								             Origin to Destination - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblOneLuxury}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+								</p:dataTable>
+								<p:dataTable id="table1LuxDtoO" var="car" value="#{routeVerificationBean.midPointTblOneLuxuryDtoO}"  style="margin-top:3%;"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+									scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblOneLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+								</p:dataTable>
+								
+								<p:dataTable id="table1SemiLux" var="car" value="#{routeVerificationBean.midPointTblOneSemiLuxury}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+									style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+								        <f:facet name="header">
+								             Origin to Destination - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblOneSemiLuxury}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+								</p:dataTable>
+								<p:dataTable id="table1SemiLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblOneSemiLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+									style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblOneSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+								</p:dataTable>
+						
+								<p:dataTable id="table1SuperLux" var="car" value="#{routeVerificationBean.midPointTblOneSuperLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}"  
+									style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+								        <f:facet name="header">
+								             Origin to Destination - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblOneSuperLuxury}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;overflow:visible"  >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+								</p:dataTable>
+								<p:dataTable id="table1SuperLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblOneSuperLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}"  
+									style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+								        <f:facet name="header">
+								             Destination to Origin - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblOneSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteOne}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+								</p:dataTable>
+			        	</p:panelGrid>			
+			        </p:tab>
+			        
+			        <p:tab id="similarRouteTwoTb" title="Route - #{routeVerificationBean.similarRouteTwo}" rendered="#{routeVerificationBean.similarRouteTwoRender}" >
+			        	<p:panelGrid id="shwTableDetailRouteTwoTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+			        		<p:dataTable id="table2Nor" var="car" value="#{routeVerificationBean.midPointTblTwoNormal}"  rowStyleClass="#{car[column.property] ? 'old' : null}"
+					        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.normal}">          
+								        <f:facet name="header" rendered="#{routeVerificationBean.normal}">
+								             Origin to Destination - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblTwoNormal}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							<p:dataTable id="table2NorDtoO" var="car" value="#{routeVerificationBean.midPointTblTwoNormalDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+					        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.normal}">          
+								        <f:facet name="header" rendered="#{routeVerificationBean.normal}">
+								             Destination to Origin - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+								        </f:facet>          
+								        <p:columns value="#{routeVerificationBean.columnsTblTwoNormalDtoO}" var="column" columnIndexVar="colIndex" >
+								            <f:facet name="header">
+								                <h:outputText value="#{column.header}" />
+								            </f:facet>
+								            <h:outputText value="#{car[column.property]}" />
+								        </p:columns>
+								         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table2Ex" var="car" value="#{routeVerificationBean.midPointTblTwoExpress}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+						        <f:facet name="header">
+						             Origin to Destination - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{routeVerificationBean.columnsTblTwoExpress}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+								</p:column>
+							</p:dataTable>
+							<p:dataTable id="table2ExDtoO" var="car" value="#{routeVerificationBean.midPointTblTwoExpressDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblTwoExpressDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table2Lux" var="car" value="#{routeVerificationBean.midPointTblTwoLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblTwoLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							<p:dataTable id="table2LuxDtoO" var="car" value="#{routeVerificationBean.midPointTblTwoLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblTwoLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table2SemiLux" var="car" value="#{routeVerificationBean.midPointTblTwoSemiLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblTwoSemiLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							<p:dataTable id="table2SemiLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblTwoSemiLuxuryDtoO}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblTwoSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table2SuperLux" var="car" value="#{routeVerificationBean.midPointTblTwoSuperLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}"
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblTwoSuperLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							<p:dataTable id="table2SuperLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblTwoSuperLuxuryDtoO}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblTwoSuperLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteTwo}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							
+			        	</p:panelGrid>
+			        </p:tab>
+		        
+		        	<p:tab id="similarRouteThreeTb" title="Route - #{routeVerificationBean.similarRouteThree}"  rendered="#{routeVerificationBean.similarRouteThreeRender}"  >
+			        	<p:panelGrid id="shwTableDetailRouteThreeTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+				        	<p:dataTable id="table3Nor" var="car" value="#{routeVerificationBean.midPointTblThreeNormal}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.normal}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblThreeNormal}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							         <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							<p:dataTable id="table3NorDtoO" var="car" value="#{routeVerificationBean.midPointTblThreeNormalDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.normal}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblThreeNormalDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table3Ex" var="car" value="#{routeVerificationBean.midPointTblThreeExpress}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblThreeExpress}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							<p:dataTable id="table3ExDtoO" var="car" value="#{routeVerificationBean.midPointTblThreeExpressDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblThreeExpressDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+												<f:param name="tripType" value="D" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+			        	
+				        	<p:dataTable id="table3Lux" var="car" value="#{routeVerificationBean.midPointTblThreeLuxury}"   rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblThreeLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+											 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+												update="dlgEditMidpoints">
+												<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+												<f:param name="tripType" value="O" />
+												<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+											</p:commandButton>
+									  </p:column>
+							</p:dataTable>
+							<p:dataTable id="table3LuxDtoO" var="car" value="#{routeVerificationBean.midPointTblThreeLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblThreeLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+										 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+								  </p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table3SemiLux" var="car" value="#{routeVerificationBean.midPointTblThreeSemiLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+							 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+						        <f:facet name="header">
+						             Origin to Destination - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{routeVerificationBean.columnsTblThreeSemiLuxury}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						        <p:column style="text-align: center;overflow:visible" >
+									 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+										update="dlgEditMidpoints">
+										<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+										<f:param name="tripType" value="O" />
+										<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+									</p:commandButton>
+							  </p:column>
+						</p:dataTable>
+						<p:dataTable id="table3SemiLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblThreeSemiLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+							 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+						        <f:facet name="header">
+						             Destination to Origin - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{routeVerificationBean.columnsTblThreeSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						        <p:column style="text-align: center;overflow:visible" >
+										 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+								 </p:column>
+						</p:dataTable>
+						
+						<p:dataTable id="table3SuperLux" var="car" value="#{routeVerificationBean.midPointTblThreeSuperLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+							style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+						        <f:facet name="header">
+						             Origin to Destination - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{routeVerificationBean.columnsTblThreeSuperLuxury}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						        <p:column style="text-align: center;overflow:visible" >
+									 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+										update="dlgEditMidpoints">
+										<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+										<f:param name="tripType" value="O" />
+										<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+									</p:commandButton>
+							  </p:column>
+						</p:dataTable>
+						<p:dataTable id="table3SuperLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblThreeSuperLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+							style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+						        <f:facet name="header">
+						             Destination to Origin - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+						        </f:facet>          
+						        <p:columns value="#{routeVerificationBean.columnsTblThreeSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+						            <f:facet name="header">
+						                <h:outputText value="#{column.header}" />
+						            </f:facet>
+						            <h:outputText value="#{car[column.property]}" />
+						        </p:columns>
+						        <p:column style="text-align: center;overflow:visible" >
+									 <p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+										update="dlgEditMidpoints">
+										<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteThree}" />
+										<f:param name="tripType" value="D" />
+										<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+									</p:commandButton>
+							  </p:column>
+						</p:dataTable>
+			         </p:panelGrid>
+			        </p:tab>
+		        
+		        	<p:tab id="similarRouteFourTb" title="Route - #{routeVerificationBean.similarRouteFour}" rendered="#{routeVerificationBean.similarRouteFourRender}" >
+			        	<p:panelGrid id="shwTableDetailRouteFourTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+			        		<p:dataTable id="table4Nor" var="car" value="#{routeVerificationBean.midPointTblFourNormal}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.normal}">          
+							        <f:facet name="header" >
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourNormal}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							<p:dataTable id="table4NorDtoO" var="car" value="#{routeVerificationBean.midPointTblFourNormalDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.normal}">          
+							        <f:facet name="header" >
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourNormalDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table4Ex" var="car" value="#{routeVerificationBean.midPointTblFourExpress}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourExpress}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							<p:dataTable id="table4ExDtoO" var="car" value="#{routeVerificationBean.midPointTblFourExpressDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourExpressDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+						
+							<p:dataTable id="table4Lux" var="car" value="#{routeVerificationBean.midPointTblFourLuxury}"   rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							<p:dataTable id="table4LuxDtoO" var="car" value="#{routeVerificationBean.midPointTblFourLuxuryDtoO}" rowStyleClass="#{car[column.property] ? 'old' : null}"  
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+							        <f:facet name="header">
+							            Destination to Origin - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table4SemiLux" var="car" value="#{routeVerificationBean.midPointTblFourSemiLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}"
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourSemiLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							<p:dataTable id="table4SemiLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblFourSemiLuxuryDtoO}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table4SuperLux" var="car" value="#{routeVerificationBean.midPointTblFourSuperLuxury}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourSuperLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							<p:dataTable id="table4SuperLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblFourSuperLuxuryDtoO}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFourSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFour}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+			        	</p:panelGrid>
+			        </p:tab>
+		        	
+		       		<p:tab id="similarRouteFiveTb" title="Route - #{routeVerificationBean.similarRouteFive}"  rendered="#{routeVerificationBean.similarRouteFiveRender}"  >
+			        	<p:panelGrid id="shwTableDetailRouteFiveTb" columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid">
+			        		<p:dataTable id="table5Nor" var="car" value="#{routeVerificationBean.midPointTblFiveNormal}"  rowStyleClass="#{car[column.property] ? 'old' : null}"
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.normal}">          
+							        <f:facet name="header" >
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiveNormal}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							<p:dataTable id="table5NorDtoO" var="car" value="#{routeVerificationBean.midPointTblFiveNormalDtoO}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+				        	 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.normal}">          
+							        <f:facet name="header" >
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">NORMAL</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiveNormalDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							
+				        	<p:dataTable id="table5Ex" var="car" value="#{routeVerificationBean.midPointTblFiveExpress}"  rowStyleClass="#{car[column.property] ? 'old' : null}"
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiveExpress}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							<p:dataTable id="table5ExDtoO" var="car" value="#{routeVerificationBean.midPointTblFiveExpressDtoO}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.express}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">EXPRESS WAY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiveExpressDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table5Lux" var="car" value="#{routeVerificationBean.midPointTblFiveLuxury}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiverLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							<p:dataTable id="table5LuxDtoO" var="car" value="#{routeVerificationBean.midPointTblFiveLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.luxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiverLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table5SemiLux" var="car" value="#{routeVerificationBean.midPointTblFiveSemiLuxury}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiveSemiLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							<p:dataTable id="table5SemiLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblFiveSemiLuxuryDtoO}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								 style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.semiLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">SEMI-LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiveSemiLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+							
+							<p:dataTable id="table5SuperLux" var="car" value="#{routeVerificationBean.midPointTblFiveSuperLuxury}" rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+							        <f:facet name="header">
+							             Origin to Destination - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiveSuperLuxury}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="O" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+								<p:dataTable id="table5SuperLuxDtoO" var="car" value="#{routeVerificationBean.midPointTblFiveSuperLuxuryDtoO}"  rowStyleClass="#{car[column.property] ? 'old' : null}" 
+								style="margin-top:3%;" scrollable="true" scrollHeight="100%" scrollWidth="90%" rendered="#{routeVerificationBean.superLuxury}">          
+							        <f:facet name="header">
+							             Destination to Origin - <h:outputLabel style="color:#181de1;">SUPER LUXURY</h:outputLabel>
+							        </f:facet>          
+							        <p:columns value="#{routeVerificationBean.columnsTblFiveSuperLuxuryDtoO}" var="column" columnIndexVar="colIndex" >
+							            <f:facet name="header">
+							                <h:outputText value="#{column.header}" />
+							            </f:facet>
+							            <h:outputText value="#{car[column.property]}" />
+							        </p:columns>
+							        <p:column style="text-align: center;overflow:visible" >
+									 	<p:commandButton value="Edit" action="#{routeVerificationBean.editButtonAction}"  styleClass="editbtn" style="overflow:visible" 
+											update="dlgEditMidpoints">
+											<f:param name="routeNumber" value="#{routeVerificationBean.similarRouteFive}" />
+											<f:param name="tripType" value="D" />
+											<f:setPropertyActionListener value="#{car}" target="#{routeVerificationBean.selectedMidPoint}" />
+										</p:commandButton>
+							  		</p:column>
+							</p:dataTable>
+			        	</p:panelGrid>
+			        </p:tab>
+		       	
+		        </p:accordionPanel>
+								
+				
+				</h:form>
+
+		<p:dialog header="Edit Midpoints" id="dlgEditMidpoints" widgetVar="dlgEditMidpoints" minHeight="40">
+		 <h:form>
+		   <table>
+			   	<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint1}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender1}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint1}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender1}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint2}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender2}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint2}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender2}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint3}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender3}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint3}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender3}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint4}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender4}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint4}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender4}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint5}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender5}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint5}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender5}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint6}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender6}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint6}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender6}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint7}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender7}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint7}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender7}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint8}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender8}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint8}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender8}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint9}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender9}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint9}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender9}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint10}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender10}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint10}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender10}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint11}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender11}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint11}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender11}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint12}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender12}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint12}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender12}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint13}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender13}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint13}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender13}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint14}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender14}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint14}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender14}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint15}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender15}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint15}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender15}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint16}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender16}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint16}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender16}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint17}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender17}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint17}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender17}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint18}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender18}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint18}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender18}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint9}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender9}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint9}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender9}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint20}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender20}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint20}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender20}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint21}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender21}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint21}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender21}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint22}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender22}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint22}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender22}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint23}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender23}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint23}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender23}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint24}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender24}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint24}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender24}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint25}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender25}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint25}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender25}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint26}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender26}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint26}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender26}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint27}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender27}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint27}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender27}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint28}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender28}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint28}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender28}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint29}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender29}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint29}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender29}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint30}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender30}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint30}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender30}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint31}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender31}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint31}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender31}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint32}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender32}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint32}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender32}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint33}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender33}" /></td>
+					<td><p:inputMask  value="#{routeVerificationBean.editMidpointDTO.newMidpoint33}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender33}" mask="99:99" /></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint34}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender34}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint34}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender34}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint35}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender35}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint35}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender35}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint36}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender36}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint36}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender36}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint37}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender37}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint37}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender37}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint38}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender38}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint38}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender38}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint39}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender39}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint39}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender39}" mask="99:99"/></td>
+				</tr>
+				<tr>
+					<td><p:outputLabel value="#{routeVerificationBean.editMidpointDTO.midPoint40}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender40}" /></td>
+					<td><p:inputMask value="#{routeVerificationBean.editMidpointDTO.newMidpoint40}" rendered="#{routeVerificationBean.editMidpointDTO.newMidpointRender40}" mask="99:99"/></td>
+				</tr>
+		   </table>
+		   <center>
+		   	<p:commandButton title="Save" process="@all" action="#{routeVerificationBean.saveEditsButtonAction}"  styleClass="editbtn" style="overflow:visible" >
+            </p:commandButton>
+		   </center>
+		   </h:form>
+		</p:dialog>				
+				
+			</div>
+	</div>
+	
+	</ui:define>
+</ui:composition>

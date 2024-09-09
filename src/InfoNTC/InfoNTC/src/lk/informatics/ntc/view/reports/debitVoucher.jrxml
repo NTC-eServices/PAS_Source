@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2022-02-21T13:30:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="debitVoucher" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="812" leftMargin="10" rightMargin="20" topMargin="12" bottomMargin="20" isFloatColumnFooter="true" uuid="55eb195e-17f7-4a79-831e-0d4f1a2b70b7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NTC.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<subDataset name="nameandtenderNo" uuid="e3852237-6be2-4c40-a658-5bf49753100a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="voucher_no" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select o.pmo_full_name,a.pm_vehicle_regno
+from nt_m_payment_voucher v inner join nt_t_pm_application a 
+on a.pm_application_no = v.pav_application_no inner join nt_t_pm_vehi_owner o
+on a.pm_application_no = o.pmo_application_no
+where v.pav_voucher_no= $P{voucher_no}]]>
+		</queryString>
+		<field name="pmo_full_name" class="java.lang.String"/>
+		<field name="pm_vehicle_regno" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="sumOfAmmount" uuid="325cc0b6-e537-4ada-90c1-f507b9d2168d">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_Voucher" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select sum (vod_amount) from public.nt_t_voucher_details where vod_voucher_no= $P{P_Voucher}]]>
+		</queryString>
+		<field name="sum" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="prmitNo" uuid="628f65c4-270f-4ad0-919a-843fa9b1a5be">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ntcDataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P-voucher" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select distinct vod_permitno from public.nt_t_voucher_details where vod_voucher_no= $P{P-voucher}]]>
+		</queryString>
+		<field name="vod_permitno" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="NameAddressAndPermitNoForSisu" uuid="7bd533d4-7f3c-4ae0-a18d-03d1047ffe52">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW_DATAADAPTERUAT.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="P_app_No" class="java.lang.String">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<queryString>
+			<![CDATA[select sps_seq ,sps_operator_name ,sps_add1 ,sps_add2 ,sps_city ,sps_permit_no ,sps_bus_no 
+from public.nt_m_sisu_permit_hol_service_info where sps_service_ref_no = $P{P_app_No}   order by sps_seq desc limit 1]]>
+		</queryString>
+		<field name="sps_seq" class="java.lang.Long"/>
+		<field name="sps_operator_name" class="java.lang.String"/>
+		<field name="sps_add1" class="java.lang.String"/>
+		<field name="sps_add2" class="java.lang.String"/>
+		<field name="sps_city" class="java.lang.String"/>
+		<field name="sps_permit_no" class="java.lang.String"/>
+		<field name="sps_bus_no" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="P_Parameter" class="java.lang.String">
+		<defaultValueExpression><![CDATA["VRN1800020"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[with c as (select vod_amount,vod_account_no,vod_charge_code,vod_permitno,vod_voucher_no ,d.pav_application_no
+from public.nt_t_voucher_details
+inner join public.nt_m_payment_voucher d on d.pav_voucher_no=public.nt_t_voucher_details.vod_voucher_no
+where vod_voucher_no= $P{P_Parameter})
+select c.vod_amount,c.vod_account_no,c.vod_permitno,c.vod_permitno , a.description ,a.description_si,a.description_ta,c.pav_application_no
+from c
+inner  join nt_r_charge_type a on a.code = c.vod_charge_code
+order by a.order_seq;]]>
+	</queryString>
+	<field name="vod_amount" class="java.math.BigDecimal"/>
+	<field name="vod_account_no" class="java.lang.String"/>
+	<field name="vod_permitno" class="java.lang.String"/>
+	<field name="COLUMN_4" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="description_si" class="java.lang.String"/>
+	<field name="description_ta" class="java.lang.String"/>
+	<field name="pav_application_no" class="java.lang.String"/>
+	<variable name="vod_amount1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{vod_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="176" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="40" width="800" height="23" uuid="b8c02559-c134-4f1e-b0d3-9df3b42e9b65">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NATIONAL TRANSPORT COMMISSION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="80" width="180" height="15" uuid="4e90df25-1e12-4089-b3f3-40efef56f5fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[බැර කිරීමේ වවුචරය​      /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="104" width="53" height="19" isPrintWhenDetailOverflows="true" uuid="9352b1bc-cad6-4c29-8eea-331c6fd1c0ab"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Name/]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="103" y="97" width="682" height="27" isPrintWhenDetailOverflows="true" uuid="44ec4d71-96dc-4fee-9632-3634437b7684"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="nameandtenderNo" uuid="e2cec3f7-d65e-4c55-911a-675c0fcdef13">
+						<datasetParameter name="voucher_no">
+							<datasetParameterExpression><![CDATA[$P{P_Parameter}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="27" width="682">
+						<textField isStretchWithOverflow="true" pattern="">
+							<reportElement x="0" y="0" width="660" height="27" isPrintWhenDetailOverflows="true" uuid="bc73bb44-7aee-416f-a88e-bcd239af4040"/>
+							<textElement verticalAlignment="Bottom">
+								<font size="11"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{pmo_full_name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="176" y="125" width="554" height="24" uuid="39ed00f7-ffca-47b9-a8ee-b49e6fe7aaeb"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="nameandtenderNo" uuid="e909c5d0-d78f-4d6b-9362-186bca4ef998">
+						<datasetParameter name="voucher_no">
+							<datasetParameterExpression><![CDATA[$P{P_Parameter}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="24" width="554">
+						<textField isStretchWithOverflow="true">
+							<reportElement x="0" y="0" width="554" height="24" uuid="1e22192a-8ac0-453a-84bc-ab9c49ec2cae"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="12" isBold="false"/>
+								<paragraph leftIndent="35" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA["/ Tender/Vehicle No.  /"+$F{pm_vehicle_regno}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="26" width="800" height="26" uuid="4cd31233-fa69-4fc4-97f3-f8afd0a7d6d1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Iskoola Pota" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ජාතික ගමනාගමන කොමිෂන් සභාව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="54" width="800" height="25" uuid="89e350fb-5924-4f9e-800d-dc2100e0dc29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Latha" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[தேசிய போக்குவரத்து  ஆணைக்குமு ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="70" width="389" height="24" uuid="219df6b8-5e3e-498d-b7d4-6e30d61b078d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Debit Voucher    /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="387" y="81" width="232" height="15" uuid="ee009108-eec5-4a1c-98b0-e6c94ff8aa1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Latha" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[பொறுப்பளிக்கும் பற்றுச்சீட்டு]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="708" y="3" width="102" height="30" uuid="5d74e093-5a00-4c3c-a31f-24f000c8fba1"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="prmitNo" uuid="bda604dc-6d78-42ae-898a-776c9745c828">
+						<datasetParameter name="P-voucher">
+							<datasetParameterExpression><![CDATA[$P{P_Parameter}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="102">
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="102" height="30" uuid="0fcd167e-08ce-4027-99f1-9312b718c29f"/>
+							<textElement textAlignment="Right">
+								<font fontName="Latha" size="11"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{vod_permitno}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="501" y="2" width="73" height="24" uuid="9865dbbb-0729-4bfe-86be-42f5952aa595"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ ජ​.ග​.කො.ස​ /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="572" y="3" width="118" height="24" isPrintWhenDetailOverflows="true" uuid="7a51b402-817e-41f9-adfd-1ddaf35aa3d8"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NTC No. /  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="105" width="50" height="18" uuid="c5144dae-0302-4336-9af5-1ff32c7df063"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[නම​ /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="106" width="41" height="18" uuid="fcf9bce4-90af-40c9-a380-5cd2b24b293e">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Latha" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ பெயர்:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="123" width="110" height="24" uuid="4f32572a-05d5-40d8-9123-0d7ae292a38c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ටෙනඩර් /වාහන අංකය​ /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="125" width="80" height="25" uuid="4406d2aa-1c3d-4ced-8592-6a9427d1765e">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Latha" size="9"/>
+				</textElement>
+				<text><![CDATA[டென்ர் / வாகன​ இல​ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="616" y="3" width="100" height="30" uuid="f228f601-5ebb-4925-8e76-d7d5fe955e95"/>
+				<textElement>
+					<font fontName="Latha"/>
+				</textElement>
+				<text><![CDATA[தே.போ.ஆ .இல​  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="89" height="24" isPrintWhenDetailOverflows="true" uuid="ee607b39-0366-483a-b55d-ec20205b99d3"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Application No.  :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="83" y="-1" width="344" height="25" uuid="86f3f30e-85bd-4a80-85e1-64897e826624"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pav_application_no}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="107" y="96" width="682" height="27" isPrintWhenDetailOverflows="true" uuid="6e4abfe7-c624-4208-addb-df7f44f6d7f0"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="NameAddressAndPermitNoForSisu" uuid="f8da8f4f-c5eb-47b1-9061-5e41f93648e1">
+						<datasetParameter name="P_app_No">
+							<datasetParameterExpression><![CDATA[$F{pav_application_no}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="27" width="682">
+						<textField isStretchWithOverflow="true" pattern="">
+							<reportElement x="0" y="0" width="660" height="27" isPrintWhenDetailOverflows="true" uuid="9c585daf-cf09-4c2e-964b-9905c9ee5a56"/>
+							<textElement verticalAlignment="Bottom">
+								<font size="11"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{sps_operator_name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="708" y="3" width="102" height="27" isPrintWhenDetailOverflows="true" uuid="bef19503-6ba4-4f00-9900-b68f59abe642"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="NameAddressAndPermitNoForSisu" uuid="5edbab80-c321-4c4c-901c-1589ed008f3b">
+						<datasetParameter name="P_app_No">
+							<datasetParameterExpression><![CDATA[$F{pav_application_no}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="27" width="102">
+						<textField isStretchWithOverflow="true" pattern="">
+							<reportElement x="0" y="0" width="102" height="27" isPrintWhenDetailOverflows="true" uuid="c8674e16-ab16-4b61-a9e0-9c1678921637"/>
+							<textElement verticalAlignment="Top">
+								<font size="11"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{sps_permit_no}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="221" y="128" width="102" height="27" isPrintWhenDetailOverflows="true" uuid="95485e73-7996-4995-9568-4f637b43cf23"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="NameAddressAndPermitNoForSisu" uuid="52acb555-e610-4ff9-b657-dcd4874f796a">
+						<datasetParameter name="P_app_No">
+							<datasetParameterExpression><![CDATA[$F{pav_application_no}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="27" width="102">
+						<textField isStretchWithOverflow="true" pattern="">
+							<reportElement x="0" y="0" width="102" height="27" isPrintWhenDetailOverflows="true" uuid="3eb45352-5df0-4a02-9a96-0ba5ad9e51a6"/>
+							<textElement verticalAlignment="Top">
+								<font size="11"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{sps_bus_no}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="8" y="149" width="778" height="27" isPrintWhenDetailOverflows="true" uuid="b82609ec-c230-4536-a164-d18099f97f38"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="NameAddressAndPermitNoForSisu" uuid="e28f681a-1ced-4124-9af4-7abafb2cb31a">
+						<datasetParameter name="P_app_No">
+							<datasetParameterExpression><![CDATA[$F{pav_application_no}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="27" width="778">
+						<textField isStretchWithOverflow="true" pattern="">
+							<reportElement x="0" y="0" width="778" height="27" isPrintWhenDetailOverflows="true" uuid="255c5042-4feb-4202-b107-6bf935e47647"/>
+							<textElement verticalAlignment="Top">
+								<font size="11"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Adders - " +$F{sps_add1}+" , "+$F{sps_add2}+" , "+$F{sps_city}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="11" y="15" width="284" height="15" isPrintWhenDetailOverflows="true" uuid="502a8b6e-345d-47fe-96ee-8bb5911b622e"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Reason For Charge]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="295" y="0" width="61" height="16" uuid="33a2b914-aa84-47bf-a479-8e4da236c5b4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="11" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[ගිණුම් අංකය​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="357" y="0" width="70" height="15" uuid="3c686f34-1957-43cf-8340-0fc924458755">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Iskoola Pota" size="11" isBold="false"/>
+					<paragraph leftIndent="5" rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[මුදල රු.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="0" width="284" height="15" uuid="b1dc7e9a-94ef-44c9-ac74-ceafcfbf9659"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="11" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[අය කරන කරුණු]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="30" width="284" height="17" uuid="48df8787-18f0-4284-ba51-522a106881a7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Latha" size="9" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[அறவிடும் காரணம்]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="295" y="16" width="61" height="14" isPrintWhenDetailOverflows="true" uuid="8fb5b52b-dac0-4cce-987d-6190e3473ad5"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Account No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="295" y="30" width="61" height="17" uuid="9e02fd18-463b-437f-97e8-9067c1e8037d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Latha" size="9" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[கணக்கு இல​.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="357" y="15" width="70" height="15" isPrintWhenDetailOverflows="true" uuid="5109298e-4ff8-4192-98ec-08e4ea124a40"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+					<paragraph leftIndent="0" rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Amount(Rs.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="357" y="30" width="70" height="17" uuid="b494b670-5d58-4c0e-ba3d-3bcb3a9f7e5f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Latha" size="9" isBold="false"/>
+					<paragraph leftIndent="0" rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[தொகை ரூ.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="11" y="0" width="89" height="31" isPrintWhenDetailOverflows="true" uuid="f4e0d048-0ddd-42c6-8bce-c9558c47c144">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description} +" /"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="295" y="0" width="61" height="31" isPrintWhenDetailOverflows="true" uuid="030d7e31-f518-4ad2-977a-f35627f61a60">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vod_account_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="357" y="0" width="70" height="31" isPrintWhenDetailOverflows="true" uuid="e0fe8a66-0179-4665-abdb-536266bdfd94"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vod_amount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="94" height="31" isPrintWhenDetailOverflows="true" uuid="09bcfaf0-3b47-4111-a2ea-edb83e350390">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Iskoola Pota" size="9"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description_si}.equals( null )?" ":$F{description_si}+"/"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="194" y="0" width="101" height="31" isPrintWhenDetailOverflows="true" uuid="66a14fe6-ac9b-43c0-af37-eea6e10fa927">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Latha" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description_ta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement x="221" y="0" width="63" height="21" uuid="48592511-0acd-4d04-91cb-2f2c81d29106"/>
+				<textElement>
+					<font fontName="Iskoola Pota"/>
+				</textElement>
+				<text><![CDATA[මුළු එකතුව​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="1" width="44" height="20" uuid="bae78e8e-5077-4cd4-aa47-d5179101e21a"/>
+				<textElement>
+					<font fontName="Latha" size="8"/>
+				</textElement>
+				<text><![CDATA[மொத்தம்]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="1" width="100" height="20" uuid="7f4f636b-a7e9-4fdf-9ef1-287228742886"/>
+				<text><![CDATA[/ Total/]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="356" y="0" width="71" height="20" uuid="284df84e-640b-485d-b2fe-28ce0cad302b"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="sumOfAmmount" uuid="8386a756-e9fb-46f1-a063-c850c5d7b321">
+						<datasetParameter name="P_Voucher">
+							<datasetParameterExpression><![CDATA[$P{P_Parameter}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="71">
+						<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="71" height="20" uuid="117eba2b-1587-400e-8cdb-4e37ffe75547"/>
+							<box>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Right">
+								<paragraph rightIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{sum}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="11" y="42" width="60" height="14" uuid="a066b9c8-2397-45e7-b1a2-76a62b698e05"/>
+				<textElement>
+					<font fontName="Iskoola Pota" size="9"/>
+				</textElement>
+				<text><![CDATA[රිසිට්පත් අංකය​ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="42" width="77" height="14" uuid="8ac262be-55c4-49f6-9d15-53f0b3c60d69">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[/ ReceiptNo./]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="42" width="77" height="14" uuid="e7655626-5ff5-48b4-b18b-2b313e52d62e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Latha" size="6"/>
+				</textElement>
+				<text><![CDATA[பற்றுச்சீட்டு  இல​.:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="178" y="39" width="100" height="33" uuid="6f7c7819-2c31-462d-920b-984bcfe8e88a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_Parameter}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="178" y="42" width="120" height="18" uuid="9cc42514-6fd4-4927-8ca6-7e0312688376"/>
+				<textElement verticalAlignment="Top"/>
+				<text><![CDATA[..........................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="37" width="190" height="18" uuid="a00b008b-844d-4e33-bbaa-923381626eea">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="357" y="55" width="90" height="18" uuid="ec14a65b-f82e-4e02-9bb6-562b6f8c6f05">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Iskoola Pota" size="9"/>
+				</textElement>
+				<text><![CDATA[අධ්‍යක්ෂක​ /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="44" width="50" height="29" uuid="4b708a01-c3b0-42c6-b3e7-a5511537d7e4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Director]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="56" width="100" height="14" uuid="f70f3190-9c5b-48ac-9a9e-af146aeba6de"/>
+				<textElement>
+					<font fontName="Latha" size="6"/>
+				</textElement>
+				<text><![CDATA[ / இயக்குனர்]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="671" y="54" width="44" height="16" uuid="fa1330ea-75eb-48f0-a219-32699b597e76">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[/Date/ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="620" y="36" width="151" height="18" uuid="112c72a7-a4a9-418e-b1cd-79fad3e04144">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[................................................................................]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="571" y="36" width="230" height="20" uuid="bd814083-57a6-48ab-b6fe-477e8aa6d230"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="627" y="57" width="50" height="16" uuid="b869e215-764f-49d4-8201-b4856d88b9b5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Iskoola Pota" size="9"/>
+				</textElement>
+				<text><![CDATA[දිනය​]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="705" y="55" width="100" height="16" uuid="4362287b-5528-4234-978a-0bb07d9f5406"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Latha" size="7"/>
+				</textElement>
+				<text><![CDATA[திகதி]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>
